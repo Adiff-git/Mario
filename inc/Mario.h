@@ -7,9 +7,15 @@
 #include "GameClock.h"
 #include "ResrcManager.h"
 #include <list>
+#include "Fireball.h"
+
+// Removed unnecessary include of GameWorld.h
+class Fireball; // Forward declaration
+
 enum MarioState {
     SMALL = 0,
     BIG,
+    FIRE
 };
 
 class Mario : public Object {
@@ -18,39 +24,45 @@ class Mario : public Object {
         float accelerationX;
         float maxSpeedX;
         float SpeedY;// for Jumping
-       
+        bool isDucking;
+        //std::list<Fireball*> fireballs
         MarioState marioState;
         MarioState AdditionalState;
 
         void Update() override;
-        void UpdateCollisionProbes() override;
-        void UpdateStateAndPhysic() override;
+        
+        std::list<Fireball*>fireballs;
+        
     
     public:
         Mario(Vector2 pos, int lives,MarioState form);
-        Mario();
+        Mario(); // Ensure default constructor exists
         ~Mario() override;
 
         void jump();
         void moveLeft();
         void moveRight();
         void stopMoving();
-
         void Duck();
-
         void changeToBig();
         void changeToSmall();
+        void changetoFire();
 
         void draw() override;
-
+        void HandleInput();
 
         // Setters
         void SetLives(int lives);
         void SetSprite(Texture2D sprite);
-        void SetState(MarioState state);
+        void SetState(ObjectState state);
 
         // Getters
         int GetLives() const;
+        bool GetIsDucking() const;
+        std::list<Fireball*> *GetFireballs();
 
-        void HandleInput();
+        void UpdateCollisionProbes() override;
+        void UpdateStateAndPhysic() override;
+
+        
 };

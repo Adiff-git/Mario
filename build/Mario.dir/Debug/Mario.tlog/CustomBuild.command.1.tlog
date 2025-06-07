@@ -1,0 +1,10 @@
+^D:\DOWNLOADS\REF\GIA\MARIO\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/Downloads/Ref/Gia/Mario -BD:/Downloads/Ref/Gia/Mario/build --check-stamp-file D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

@@ -17,18 +17,60 @@ events:
       - "CMakeLists.txt:3 (project)"
     message: |
       Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
-      Compiler: C:/msys64/ucrt64/bin/gcc.exe 
+      Compiler:  
       Build flags: 
       Id flags:  
       
       The output was:
       0
+      MSBuild version 17.11.9+a69bbaaf5 for .NET Framework
+      Build started 07/06/2025 9:38:30 CH.
+      
+      Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\3.31.5\\CompilerIdC\\CompilerIdC.vcxproj" on node 1 (default targets).
+      PrepareForBuild:
+        Creating directory "Debug\\".
+        Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+        Creating directory "Debug\\CompilerIdC.tlog\\".
+      InitializeBuildStatus:
+        Creating "Debug\\CompilerIdC.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+        Touching "Debug\\CompilerIdC.tlog\\unsuccessfulbuild".
+      VcpkgTripletSelection:
+        Using triplet "x64-windows" from "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\"
+        Using normalized configuration "Release"
+      ClCompile:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\CL.exe /c /I"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\include" /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc143.pdb" /external:W0 /Gd /TC /FC /errorReport:queue CMakeCCompilerId.c
+        CMakeCCompilerId.c
+      Link:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\lib" /LIBPATH:"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\lib\\manual-link" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\lib\\*.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdC.lib" /MACHINE:X64 Debug\\CMakeCCompilerId.obj
+        CompilerIdC.vcxproj -> D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\3.31.5\\CompilerIdC\\CompilerIdC.exe
+      AppLocalFromInstalled:
+        pwsh.exe -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\HP\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\3.31.5\\CompilerIdC\\CompilerIdC.exe" "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\bin" "Debug\\CompilerIdC.tlog\\CompilerIdC.write.1u.tlog" "Debug\\vcpkg.applocal.log"
+        'pwsh.exe' is not recognized as an internal or external command,
+        operable program or batch file.
+        The command "pwsh.exe -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\HP\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\3.31.5\\CompilerIdC\\CompilerIdC.exe" "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\bin" "Debug\\CompilerIdC.tlog\\CompilerIdC.write.1u.tlog" "Debug\\vcpkg.applocal.log"" exited with code 9009.
+        "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\HP\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\3.31.5\\CompilerIdC\\CompilerIdC.exe" "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\bin" "Debug\\CompilerIdC.tlog\\CompilerIdC.write.1u.tlog" "Debug\\vcpkg.applocal.log"
+      PostBuildEvent:
+        for %%i in (cl.exe) do @echo CMAKE_C_COMPILER=%%~$PATH:i
+        :VCEnd
+        CMAKE_C_COMPILER=C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\Hostx64\\x64\\cl.exe
+      FinalizeBuildStatus:
+        Deleting file "Debug\\CompilerIdC.tlog\\unsuccessfulbuild".
+        Touching "Debug\\CompilerIdC.tlog\\CompilerIdC.lastbuildstate".
+      Done Building Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\3.31.5\\CompilerIdC\\CompilerIdC.vcxproj" (default targets).
+      
+      Build succeeded.
+          0 Warning(s)
+          0 Error(s)
+      
+      Time Elapsed 00:00:03.56
       
       
-      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
       
-      The C compiler identification is GNU, found in:
-        D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/3.31.5/CompilerIdC/a.exe
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.vcxproj"
+      
+      The C compiler identification is MSVC, found in:
+        D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/3.31.5/CompilerIdC/CompilerIdC.exe
       
   -
     kind: "message-v1"
@@ -39,18 +81,60 @@ events:
       - "CMakeLists.txt:3 (project)"
     message: |
       Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
-      Compiler: C:/msys64/ucrt64/bin/g++.exe 
+      Compiler:  
       Build flags: 
       Id flags:  
       
       The output was:
       0
+      MSBuild version 17.11.9+a69bbaaf5 for .NET Framework
+      Build started 07/06/2025 9:38:34 CH.
+      
+      Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\3.31.5\\CompilerIdCXX\\CompilerIdCXX.vcxproj" on node 1 (default targets).
+      PrepareForBuild:
+        Creating directory "Debug\\".
+        Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+        Creating directory "Debug\\CompilerIdCXX.tlog\\".
+      InitializeBuildStatus:
+        Creating "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+        Touching "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild".
+      VcpkgTripletSelection:
+        Using triplet "x64-windows" from "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\"
+        Using normalized configuration "Release"
+      ClCompile:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\CL.exe /c /I"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\include" /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc143.pdb" /external:W0 /Gd /TP /FC /errorReport:queue CMakeCXXCompilerId.cpp
+        CMakeCXXCompilerId.cpp
+      Link:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\lib" /LIBPATH:"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\lib\\manual-link" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\lib\\*.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdCXX.lib" /MACHINE:X64 Debug\\CMakeCXXCompilerId.obj
+        CompilerIdCXX.vcxproj -> D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\3.31.5\\CompilerIdCXX\\CompilerIdCXX.exe
+      AppLocalFromInstalled:
+        pwsh.exe -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\HP\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\3.31.5\\CompilerIdCXX\\CompilerIdCXX.exe" "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\bin" "Debug\\CompilerIdCXX.tlog\\CompilerIdCXX.write.1u.tlog" "Debug\\vcpkg.applocal.log"
+        'pwsh.exe' is not recognized as an internal or external command,
+        operable program or batch file.
+        The command "pwsh.exe -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\HP\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\3.31.5\\CompilerIdCXX\\CompilerIdCXX.exe" "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\bin" "Debug\\CompilerIdCXX.tlog\\CompilerIdCXX.write.1u.tlog" "Debug\\vcpkg.applocal.log"" exited with code 9009.
+        "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\HP\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\3.31.5\\CompilerIdCXX\\CompilerIdCXX.exe" "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\bin" "Debug\\CompilerIdCXX.tlog\\CompilerIdCXX.write.1u.tlog" "Debug\\vcpkg.applocal.log"
+      PostBuildEvent:
+        for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
+        :VCEnd
+        CMAKE_CXX_COMPILER=C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\Hostx64\\x64\\cl.exe
+      FinalizeBuildStatus:
+        Deleting file "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild".
+        Touching "Debug\\CompilerIdCXX.tlog\\CompilerIdCXX.lastbuildstate".
+      Done Building Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\3.31.5\\CompilerIdCXX\\CompilerIdCXX.vcxproj" (default targets).
+      
+      Build succeeded.
+          0 Warning(s)
+          0 Error(s)
+      
+      Time Elapsed 00:00:01.74
       
       
-      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.exe"
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
       
-      The CXX compiler identification is GNU, found in:
-        D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/3.31.5/CompilerIdCXX/a.exe
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.vcxproj"
+      
+      The CXX compiler identification is MSVC, found in:
+        D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/3.31.5/CompilerIdCXX/CompilerIdCXX.exe
       
   -
     kind: "try_compile-v1"
@@ -61,100 +145,61 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-ua2nvw"
-      binary: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-ua2nvw"
+      source: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-xf3mmk"
+      binary: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-xf3mmk"
     cmakeVariables:
-      CMAKE_C_FLAGS: ""
-      CMAKE_C_FLAGS_DEBUG: "-g"
-      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
     buildResult:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-ua2nvw'
+        Change Dir: 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-xf3mmk'
         
-        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/msys64/ucrt64/bin/mingw32-make.exe -f Makefile cmTC_354ad/fast
-        C:/msys64/ucrt64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_354ad.dir\\build.make CMakeFiles/cmTC_354ad.dir/build
-        mingw32-make[1]: Entering directory 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-ua2nvw'
-        Building C object CMakeFiles/cmTC_354ad.dir/CMakeCCompilerABI.c.obj
-        C:\\msys64\\ucrt64\\bin\\gcc.exe   -v -o CMakeFiles\\cmTC_354ad.dir\\CMakeCCompilerABI.c.obj -c "C:\\Program Files\\CMake\\share\\cmake-3.31\\Modules\\CMakeCCompilerABI.c"
-        Using built-in specs.
-        COLLECT_GCC=C:\\msys64\\ucrt64\\bin\\gcc.exe
-        Target: x86_64-w64-mingw32
-        Configured with: ../gcc-14.2.0/configure --prefix=/ucrt64 --with-local-prefix=/ucrt64/local --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 --with-native-system-header-dir=/ucrt64/include --libexecdir=/ucrt64/lib --enable-bootstrap --enable-checking=release --with-arch=nocona --with-tune=generic --enable-languages=c,lto,c++,fortran,ada,objc,obj-c++,rust,jit --enable-shared --enable-static --enable-libatomic --enable-threads=posix --enable-graphite --enable-fully-dynamic-string --enable-libstdcxx-filesystem-ts --enable-libstdcxx-time --disable-libstdcxx-pch --enable-lto --enable-libgomp --disable-libssp --disable-multilib --disable-rpath --disable-win32-registry --disable-nls --disable-werror --disable-symvers --with-libiconv --with-system-zlib --with-gmp=/ucrt64 --with-mpfr=/ucrt64 --with-mpc=/ucrt64 --with-isl=/ucrt64 --with-pkgversion='Rev2, Built by MSYS2 project' --with-bugurl=https://github.com/msys2/MINGW-packages/issues --with-gnu-as --with-gnu-ld --disable-libstdcxx-debug --enable-plugin --with-boot-ldflags=-static-libstdc++ --with-stage1-ldflags=-static-libstdc++
-        Thread model: posix
-        Supported LTO compression algorithms: zlib zstd
-        gcc version 14.2.0 (Rev2, Built by MSYS2 project) 
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_354ad.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_354ad.dir\\'
-         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/cc1.exe -quiet -v -iprefix C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/ -D_REENTRANT C:\\Program Files\\CMake\\share\\cmake-3.31\\Modules\\CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles\\cmTC_354ad.dir\\ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=nocona -version -o C:\\Users\\HP\\AppData\\Local\\Temp\\ccLV8pk4.s
-        GNU C17 (Rev2, Built by MSYS2 project) version 14.2.0 (x86_64-w64-mingw32)
-        	compiled by GNU C version 14.2.0, GMP version 6.3.0, MPFR version 4.2.1, MPC version 1.3.1, isl version isl-0.27-GMP
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_84243.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.11.9+a69bbaaf5 for .NET Framework
+        Build started 07/06/2025 9:38:36 CH.
         
-        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
-        ignoring nonexistent directory "C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/include"
-        ignoring duplicate directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/14.2.0/include"
-        ignoring nonexistent directory "D:/a/msys64/ucrt64/include"
-        ignoring nonexistent directory "/ucrt64/include"
-        ignoring duplicate directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/14.2.0/include-fixed"
-        ignoring nonexistent directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/include"
-        ignoring nonexistent directory "D:/a/msys64/ucrt64/include"
-        #include "..." search starts here:
-        #include <...> search starts here:
-         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/include
-         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../include
-         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/include-fixed
-        End of search list.
-        Compiler executable checksum: bfed5edf6a89cec0a35941200a765959
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_354ad.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_354ad.dir\\'
-         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles\\cmTC_354ad.dir\\CMakeCCompilerABI.c.obj C:\\Users\\HP\\AppData\\Local\\Temp\\ccLV8pk4.s
-        GNU assembler version 2.44 (x86_64-w64-mingw32) using BFD version (GNU Binutils) 2.44
-        COMPILER_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/;C:/msys64/ucrt64/bin/../lib/gcc/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/
-        LIBRARY_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/;C:/msys64/ucrt64/bin/../lib/gcc/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_354ad.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_354ad.dir\\CMakeCCompilerABI.c.'
-        Linking C executable cmTC_354ad.exe
-        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_354ad.dir\\link.txt --verbose=1
-        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_354ad.dir/objects.a
-        C:\\msys64\\ucrt64\\bin\\ar.exe qc CMakeFiles\\cmTC_354ad.dir/objects.a @CMakeFiles\\cmTC_354ad.dir\\objects1.rsp
-        C:\\msys64\\ucrt64\\bin\\gcc.exe  -v -Wl,-v -Wl,--whole-archive CMakeFiles\\cmTC_354ad.dir/objects.a -Wl,--no-whole-archive -o cmTC_354ad.exe -Wl,--out-implib,libcmTC_354ad.dll.a -Wl,--major-image-version,0,--minor-image-version,0
-        Using built-in specs.
-        COLLECT_GCC=C:\\msys64\\ucrt64\\bin\\gcc.exe
-        COLLECT_LTO_WRAPPER=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe
-        Target: x86_64-w64-mingw32
-        Configured with: ../gcc-14.2.0/configure --prefix=/ucrt64 --with-local-prefix=/ucrt64/local --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 --with-native-system-header-dir=/ucrt64/include --libexecdir=/ucrt64/lib --enable-bootstrap --enable-checking=release --with-arch=nocona --with-tune=generic --enable-languages=c,lto,c++,fortran,ada,objc,obj-c++,rust,jit --enable-shared --enable-static --enable-libatomic --enable-threads=posix --enable-graphite --enable-fully-dynamic-string --enable-libstdcxx-filesystem-ts --enable-libstdcxx-time --disable-libstdcxx-pch --enable-lto --enable-libgomp --disable-libssp --disable-multilib --disable-rpath --disable-win32-registry --disable-nls --disable-werror --disable-symvers --with-libiconv --with-system-zlib --with-gmp=/ucrt64 --with-mpfr=/ucrt64 --with-mpc=/ucrt64 --with-isl=/ucrt64 --with-pkgversion='Rev2, Built by MSYS2 project' --with-bugurl=https://github.com/msys2/MINGW-packages/issues --with-gnu-as --with-gnu-ld --disable-libstdcxx-debug --enable-plugin --with-boot-ldflags=-static-libstdc++ --with-stage1-ldflags=-static-libstdc++
-        Thread model: posix
-        Supported LTO compression algorithms: zlib zstd
-        gcc version 14.2.0 (Rev2, Built by MSYS2 project) 
-        COMPILER_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/;C:/msys64/ucrt64/bin/../lib/gcc/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/
-        LIBRARY_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/;C:/msys64/ucrt64/bin/../lib/gcc/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_354ad.exe' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_354ad.'
-         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/collect2.exe -plugin C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/liblto_plugin.dll -plugin-opt=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\HP\\AppData\\Local\\Temp\\ccWIK6Pb.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_354ad.exe C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/crt2.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0 -LC:/msys64/ucrt64/bin/../lib/gcc -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../.. -v --whole-archive CMakeFiles\\cmTC_354ad.dir/objects.a --no-whole-archive --out-implib libcmTC_354ad.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/default-manifest.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o
-        collect2 version 14.2.0
-        C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/liblto_plugin.dll -plugin-opt=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\HP\\AppData\\Local\\Temp\\ccWIK6Pb.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_354ad.exe C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/crt2.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0 -LC:/msys64/ucrt64/bin/../lib/gcc -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../.. -v --whole-archive CMakeFiles\\cmTC_354ad.dir/objects.a --no-whole-archive --out-implib libcmTC_354ad.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/default-manifest.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o
-        GNU ld (GNU Binutils) 2.44
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_354ad.exe' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_354ad.'
-        mingw32-make[1]: Leaving directory 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-ua2nvw'
+        Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xf3mmk\\cmTC_84243.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_84243.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xf3mmk\\Debug\\".
+          Creating directory "cmTC_84243.dir\\Debug\\cmTC_84243.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_84243.dir\\Debug\\cmTC_84243.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_84243.dir\\Debug\\cmTC_84243.tlog\\unsuccessfulbuild".
+        VcpkgTripletSelection:
+          Using triplet "x64-windows" from "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\"
+          Using normalized configuration "Debug"
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\CL.exe /c /I"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_84243.dir\\Debug\\\\" /Fd"cmTC_84243.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.31\\Modules\\CMakeCCompilerABI.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.41.34123 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /I"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_84243.dir\\Debug\\\\" /Fd"cmTC_84243.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.31\\Modules\\CMakeCCompilerABI.c"
+          CMakeCCompilerABI.c
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xf3mmk\\Debug\\cmTC_84243.exe" /INCREMENTAL /ILK:"cmTC_84243.dir\\Debug\\cmTC_84243.ilk" /NOLOGO /LIBPATH:"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\lib" /LIBPATH:"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\lib\\manual-link" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\lib\\*.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-xf3mmk/Debug/cmTC_84243.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-xf3mmk/Debug/cmTC_84243.lib" /MACHINE:X64  /machine:x64 cmTC_84243.dir\\Debug\\CMakeCCompilerABI.obj
+          cmTC_84243.vcxproj -> D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xf3mmk\\Debug\\cmTC_84243.exe
+        AppLocalFromInstalled:
+          pwsh.exe -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\HP\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xf3mmk\\Debug\\cmTC_84243.exe" "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_84243.dir\\Debug\\cmTC_84243.tlog\\cmTC_84243.write.1u.tlog" "cmTC_84243.dir\\Debug\\vcpkg.applocal.log"
+          'pwsh.exe' is not recognized as an internal or external command,
+          operable program or batch file.
+          The command "pwsh.exe -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\HP\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xf3mmk\\Debug\\cmTC_84243.exe" "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_84243.dir\\Debug\\cmTC_84243.tlog\\cmTC_84243.write.1u.tlog" "cmTC_84243.dir\\Debug\\vcpkg.applocal.log"" exited with code 9009.
+          "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\HP\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xf3mmk\\Debug\\cmTC_84243.exe" "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_84243.dir\\Debug\\cmTC_84243.tlog\\cmTC_84243.write.1u.tlog" "cmTC_84243.dir\\Debug\\vcpkg.applocal.log"
+        FinalizeBuildStatus:
+          Deleting file "cmTC_84243.dir\\Debug\\cmTC_84243.tlog\\unsuccessfulbuild".
+          Touching "cmTC_84243.dir\\Debug\\cmTC_84243.tlog\\cmTC_84243.lastbuildstate".
+        Done Building Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xf3mmk\\cmTC_84243.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:01.63
         
       exitCode: 0
-  -
-    kind: "message-v1"
-    backtrace:
-      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:182 (message)"
-      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
-      - "CMakeLists.txt:3 (project)"
-    message: |
-      Parsed C implicit include dir info: rv=done
-        found start of include info
-        found start of implicit include info
-          add: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/include]
-          add: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../include]
-          add: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/include-fixed]
-        end of search list found
-        collapse include dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/include] ==> [C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include]
-        collapse include dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../include] ==> [C:/msys64/ucrt64/include]
-        collapse include dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/include-fixed] ==> [C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include-fixed]
-        implicit include dirs: [C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include;C:/msys64/ucrt64/include;C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include-fixed]
-      
-      
   -
     kind: "message-v1"
     backtrace:
@@ -163,163 +208,12 @@ events:
       - "CMakeLists.txt:3 (project)"
     message: |
       Parsed C implicit link information:
-        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
-        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?))("|,| |$)]
-        ignore line: [Change Dir: 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-ua2nvw']
-        ignore line: []
-        ignore line: [Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/msys64/ucrt64/bin/mingw32-make.exe -f Makefile cmTC_354ad/fast]
-        ignore line: [C:/msys64/ucrt64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_354ad.dir\\build.make CMakeFiles/cmTC_354ad.dir/build]
-        ignore line: [mingw32-make[1]: Entering directory 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-ua2nvw']
-        ignore line: [Building C object CMakeFiles/cmTC_354ad.dir/CMakeCCompilerABI.c.obj]
-        ignore line: [C:\\msys64\\ucrt64\\bin\\gcc.exe   -v -o CMakeFiles\\cmTC_354ad.dir\\CMakeCCompilerABI.c.obj -c "C:\\Program Files\\CMake\\share\\cmake-3.31\\Modules\\CMakeCCompilerABI.c"]
-        ignore line: [Using built-in specs.]
-        ignore line: [COLLECT_GCC=C:\\msys64\\ucrt64\\bin\\gcc.exe]
-        ignore line: [Target: x86_64-w64-mingw32]
-        ignore line: [Configured with: ../gcc-14.2.0/configure --prefix=/ucrt64 --with-local-prefix=/ucrt64/local --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 --with-native-system-header-dir=/ucrt64/include --libexecdir=/ucrt64/lib --enable-bootstrap --enable-checking=release --with-arch=nocona --with-tune=generic --enable-languages=c,lto,c++,fortran,ada,objc,obj-c++,rust,jit --enable-shared --enable-static --enable-libatomic --enable-threads=posix --enable-graphite --enable-fully-dynamic-string --enable-libstdcxx-filesystem-ts --enable-libstdcxx-time --disable-libstdcxx-pch --enable-lto --enable-libgomp --disable-libssp --disable-multilib --disable-rpath --disable-win32-registry --disable-nls --disable-werror --disable-symvers --with-libiconv --with-system-zlib --with-gmp=/ucrt64 --with-mpfr=/ucrt64 --with-mpc=/ucrt64 --with-isl=/ucrt64 --with-pkgversion='Rev2, Built by MSYS2 project' --with-bugurl=https://github.com/msys2/MINGW-packages/issues --with-gnu-as --with-gnu-ld --disable-libstdcxx-debug --enable-plugin --with-boot-ldflags=-static-libstdc++ --with-stage1-ldflags=-static-libstdc++]
-        ignore line: [Thread model: posix]
-        ignore line: [Supported LTO compression algorithms: zlib zstd]
-        ignore line: [gcc version 14.2.0 (Rev2  Built by MSYS2 project) ]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_354ad.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_354ad.dir\\']
-        ignore line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/cc1.exe -quiet -v -iprefix C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/ -D_REENTRANT C:\\Program Files\\CMake\\share\\cmake-3.31\\Modules\\CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles\\cmTC_354ad.dir\\ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=nocona -version -o C:\\Users\\HP\\AppData\\Local\\Temp\\ccLV8pk4.s]
-        ignore line: [GNU C17 (Rev2  Built by MSYS2 project) version 14.2.0 (x86_64-w64-mingw32)]
-        ignore line: [	compiled by GNU C version 14.2.0  GMP version 6.3.0  MPFR version 4.2.1  MPC version 1.3.1  isl version isl-0.27-GMP]
-        ignore line: []
-        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
-        ignore line: [ignoring nonexistent directory "C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/include"]
-        ignore line: [ignoring duplicate directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/14.2.0/include"]
-        ignore line: [ignoring nonexistent directory "D:/a/msys64/ucrt64/include"]
-        ignore line: [ignoring nonexistent directory "/ucrt64/include"]
-        ignore line: [ignoring duplicate directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/14.2.0/include-fixed"]
-        ignore line: [ignoring nonexistent directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/include"]
-        ignore line: [ignoring nonexistent directory "D:/a/msys64/ucrt64/include"]
-        ignore line: [#include "..." search starts here:]
-        ignore line: [#include <...> search starts here:]
-        ignore line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/include]
-        ignore line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../include]
-        ignore line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/include-fixed]
-        ignore line: [End of search list.]
-        ignore line: [Compiler executable checksum: bfed5edf6a89cec0a35941200a765959]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_354ad.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_354ad.dir\\']
-        ignore line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles\\cmTC_354ad.dir\\CMakeCCompilerABI.c.obj C:\\Users\\HP\\AppData\\Local\\Temp\\ccLV8pk4.s]
-        ignore line: [GNU assembler version 2.44 (x86_64-w64-mingw32) using BFD version (GNU Binutils) 2.44]
-        ignore line: [COMPILER_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/]
-        ignore line: [LIBRARY_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib/]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_354ad.dir\\CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_354ad.dir\\CMakeCCompilerABI.c.']
-        ignore line: [Linking C executable cmTC_354ad.exe]
-        ignore line: ["C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_354ad.dir\\link.txt --verbose=1]
-        ignore line: ["C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_354ad.dir/objects.a]
-        ignore line: [C:\\msys64\\ucrt64\\bin\\ar.exe qc CMakeFiles\\cmTC_354ad.dir/objects.a @CMakeFiles\\cmTC_354ad.dir\\objects1.rsp]
-        ignore line: [C:\\msys64\\ucrt64\\bin\\gcc.exe  -v -Wl -v -Wl --whole-archive CMakeFiles\\cmTC_354ad.dir/objects.a -Wl --no-whole-archive -o cmTC_354ad.exe -Wl --out-implib libcmTC_354ad.dll.a -Wl --major-image-version 0 --minor-image-version 0]
-        ignore line: [Using built-in specs.]
-        ignore line: [COLLECT_GCC=C:\\msys64\\ucrt64\\bin\\gcc.exe]
-        ignore line: [COLLECT_LTO_WRAPPER=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe]
-        ignore line: [Target: x86_64-w64-mingw32]
-        ignore line: [Configured with: ../gcc-14.2.0/configure --prefix=/ucrt64 --with-local-prefix=/ucrt64/local --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 --with-native-system-header-dir=/ucrt64/include --libexecdir=/ucrt64/lib --enable-bootstrap --enable-checking=release --with-arch=nocona --with-tune=generic --enable-languages=c,lto,c++,fortran,ada,objc,obj-c++,rust,jit --enable-shared --enable-static --enable-libatomic --enable-threads=posix --enable-graphite --enable-fully-dynamic-string --enable-libstdcxx-filesystem-ts --enable-libstdcxx-time --disable-libstdcxx-pch --enable-lto --enable-libgomp --disable-libssp --disable-multilib --disable-rpath --disable-win32-registry --disable-nls --disable-werror --disable-symvers --with-libiconv --with-system-zlib --with-gmp=/ucrt64 --with-mpfr=/ucrt64 --with-mpc=/ucrt64 --with-isl=/ucrt64 --with-pkgversion='Rev2, Built by MSYS2 project' --with-bugurl=https://github.com/msys2/MINGW-packages/issues --with-gnu-as --with-gnu-ld --disable-libstdcxx-debug --enable-plugin --with-boot-ldflags=-static-libstdc++ --with-stage1-ldflags=-static-libstdc++]
-        ignore line: [Thread model: posix]
-        ignore line: [Supported LTO compression algorithms: zlib zstd]
-        ignore line: [gcc version 14.2.0 (Rev2  Built by MSYS2 project) ]
-        ignore line: [COMPILER_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/]
-        ignore line: [LIBRARY_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib/]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_354ad.exe' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_354ad.']
-        link line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/collect2.exe -plugin C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/liblto_plugin.dll -plugin-opt=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\HP\\AppData\\Local\\Temp\\ccWIK6Pb.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_354ad.exe C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/crt2.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0 -LC:/msys64/ucrt64/bin/../lib/gcc -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../.. -v --whole-archive CMakeFiles\\cmTC_354ad.dir/objects.a --no-whole-archive --out-implib libcmTC_354ad.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/default-manifest.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o]
-          arg [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/collect2.exe] ==> ignore
-          arg [-plugin] ==> ignore
-          arg [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/liblto_plugin.dll] ==> ignore
-          arg [-plugin-opt=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe] ==> ignore
-          arg [-plugin-opt=-fresolution=C:\\Users\\HP\\AppData\\Local\\Temp\\ccWIK6Pb.res] ==> ignore
-          arg [-plugin-opt=-pass-through=-lmingw32] ==> ignore
-          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
-          arg [-plugin-opt=-pass-through=-lgcc_eh] ==> ignore
-          arg [-plugin-opt=-pass-through=-lmingwex] ==> ignore
-          arg [-plugin-opt=-pass-through=-lmsvcrt] ==> ignore
-          arg [-plugin-opt=-pass-through=-lkernel32] ==> ignore
-          arg [-plugin-opt=-pass-through=-lpthread] ==> ignore
-          arg [-plugin-opt=-pass-through=-ladvapi32] ==> ignore
-          arg [-plugin-opt=-pass-through=-lshell32] ==> ignore
-          arg [-plugin-opt=-pass-through=-luser32] ==> ignore
-          arg [-plugin-opt=-pass-through=-lkernel32] ==> ignore
-          arg [-plugin-opt=-pass-through=-lmingw32] ==> ignore
-          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
-          arg [-plugin-opt=-pass-through=-lgcc_eh] ==> ignore
-          arg [-plugin-opt=-pass-through=-lmingwex] ==> ignore
-          arg [-plugin-opt=-pass-through=-lmsvcrt] ==> ignore
-          arg [-plugin-opt=-pass-through=-lkernel32] ==> ignore
-          arg [-m] ==> ignore
-          arg [i386pep] ==> ignore
-          arg [-Bdynamic] ==> search dynamic
-          arg [-o] ==> ignore
-          arg [cmTC_354ad.exe] ==> ignore
-          arg [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/crt2.o] ==> obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/crt2.o]
-          arg [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o] ==> obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o]
-          arg [-LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0] ==> dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0]
-          arg [-LC:/msys64/ucrt64/bin/../lib/gcc] ==> dir [C:/msys64/ucrt64/bin/../lib/gcc]
-          arg [-LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib] ==> dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib]
-          arg [-LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib] ==> dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib]
-          arg [-LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib] ==> dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib]
-          arg [-LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../..] ==> dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../..]
-          arg [-v] ==> ignore
-          arg [--whole-archive] ==> ignore
-          arg [CMakeFiles\\cmTC_354ad.dir/objects.a] ==> ignore
-          arg [--no-whole-archive] ==> ignore
-          arg [--out-implib] ==> ignore
-          arg [libcmTC_354ad.dll.a] ==> ignore
-          arg [--major-image-version] ==> ignore
-          arg [0] ==> ignore
-          arg [--minor-image-version] ==> ignore
-          arg [0] ==> ignore
-          arg [-lmingw32] ==> lib [mingw32]
-          arg [-lgcc] ==> lib [gcc]
-          arg [-lgcc_eh] ==> lib [gcc_eh]
-          arg [-lmingwex] ==> lib [mingwex]
-          arg [-lmsvcrt] ==> lib [msvcrt]
-          arg [-lkernel32] ==> lib [kernel32]
-          arg [-lpthread] ==> lib [pthread]
-          arg [-ladvapi32] ==> lib [advapi32]
-          arg [-lshell32] ==> lib [shell32]
-          arg [-luser32] ==> lib [user32]
-          arg [-lkernel32] ==> lib [kernel32]
-          arg [-lmingw32] ==> lib [mingw32]
-          arg [-lgcc] ==> lib [gcc]
-          arg [-lgcc_eh] ==> lib [gcc_eh]
-          arg [-lmingwex] ==> lib [mingwex]
-          arg [-lmsvcrt] ==> lib [msvcrt]
-          arg [-lkernel32] ==> lib [kernel32]
-          arg [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/default-manifest.o] ==> obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/default-manifest.o]
-          arg [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o] ==> obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o]
-        ignore line: [collect2 version 14.2.0]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/liblto_plugin.dll -plugin-opt=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\HP\\AppData\\Local\\Temp\\ccWIK6Pb.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_354ad.exe C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/crt2.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0 -LC:/msys64/ucrt64/bin/../lib/gcc -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../.. -v --whole-archive CMakeFiles\\cmTC_354ad.dir/objects.a --no-whole-archive --out-implib libcmTC_354ad.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/default-manifest.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o]
-        linker tool for 'C': C:/msys64/ucrt64/x86_64-w64-mingw32/bin/ld.exe
-        remove lib [gcc_eh]
-        remove lib [msvcrt]
-        remove lib [gcc_eh]
-        remove lib [msvcrt]
-        collapse obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/crt2.o] ==> [C:/msys64/ucrt64/lib/crt2.o]
-        collapse obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o] ==> [C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o]
-        collapse obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/default-manifest.o] ==> [C:/msys64/ucrt64/lib/default-manifest.o]
-        collapse obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o] ==> [C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o]
-        collapse library dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0] ==> [C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0]
-        collapse library dir [C:/msys64/ucrt64/bin/../lib/gcc] ==> [C:/msys64/ucrt64/lib/gcc]
-        collapse library dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib] ==> [C:/msys64/ucrt64/x86_64-w64-mingw32/lib]
-        collapse library dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib] ==> [C:/msys64/ucrt64/lib]
-        collapse library dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib] ==> [C:/msys64/ucrt64/x86_64-w64-mingw32/lib]
-        collapse library dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../..] ==> [C:/msys64/ucrt64/lib]
-        implicit libs: [mingw32;gcc;mingwex;kernel32;pthread;advapi32;shell32;user32;kernel32;mingw32;gcc;mingwex;kernel32]
-        implicit objs: [C:/msys64/ucrt64/lib/crt2.o;C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o;C:/msys64/ucrt64/lib/default-manifest.o;C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o]
-        implicit dirs: [C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0;C:/msys64/ucrt64/lib/gcc;C:/msys64/ucrt64/x86_64-w64-mingw32/lib;C:/msys64/ucrt64/lib]
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
+        linker tool for 'C': C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.41.34120/bin/HostX64/x64/link.exe
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: []
         implicit fwks: []
       
       
@@ -331,8 +225,9 @@ events:
       - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
       - "CMakeLists.txt:3 (project)"
     message: |
-      Running the C compiler's linker: "C:/msys64/ucrt64/x86_64-w64-mingw32/bin/ld.exe" "-v"
-      GNU ld (GNU Binutils) 2.44
+      Running the C compiler's linker: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.41.34120/bin/HostX64/x64/link.exe" "-v"
+      Microsoft (R) Incremental Linker Version 14.41.34123.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
   -
     kind: "try_compile-v1"
     backtrace:
@@ -342,113 +237,62 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-rxyqij"
-      binary: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-rxyqij"
+      source: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-tp8knj"
+      binary: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-tp8knj"
     cmakeVariables:
-      CMAKE_CXX_FLAGS: ""
-      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
       CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
-      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
     buildResult:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-rxyqij'
+        Change Dir: 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-tp8knj'
         
-        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/msys64/ucrt64/bin/mingw32-make.exe -f Makefile cmTC_258c1/fast
-        C:/msys64/ucrt64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_258c1.dir\\build.make CMakeFiles/cmTC_258c1.dir/build
-        mingw32-make[1]: Entering directory 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-rxyqij'
-        Building CXX object CMakeFiles/cmTC_258c1.dir/CMakeCXXCompilerABI.cpp.obj
-        C:\\msys64\\ucrt64\\bin\\g++.exe   -v -o CMakeFiles\\cmTC_258c1.dir\\CMakeCXXCompilerABI.cpp.obj -c "C:\\Program Files\\CMake\\share\\cmake-3.31\\Modules\\CMakeCXXCompilerABI.cpp"
-        Using built-in specs.
-        COLLECT_GCC=C:\\msys64\\ucrt64\\bin\\g++.exe
-        Target: x86_64-w64-mingw32
-        Configured with: ../gcc-14.2.0/configure --prefix=/ucrt64 --with-local-prefix=/ucrt64/local --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 --with-native-system-header-dir=/ucrt64/include --libexecdir=/ucrt64/lib --enable-bootstrap --enable-checking=release --with-arch=nocona --with-tune=generic --enable-languages=c,lto,c++,fortran,ada,objc,obj-c++,rust,jit --enable-shared --enable-static --enable-libatomic --enable-threads=posix --enable-graphite --enable-fully-dynamic-string --enable-libstdcxx-filesystem-ts --enable-libstdcxx-time --disable-libstdcxx-pch --enable-lto --enable-libgomp --disable-libssp --disable-multilib --disable-rpath --disable-win32-registry --disable-nls --disable-werror --disable-symvers --with-libiconv --with-system-zlib --with-gmp=/ucrt64 --with-mpfr=/ucrt64 --with-mpc=/ucrt64 --with-isl=/ucrt64 --with-pkgversion='Rev2, Built by MSYS2 project' --with-bugurl=https://github.com/msys2/MINGW-packages/issues --with-gnu-as --with-gnu-ld --disable-libstdcxx-debug --enable-plugin --with-boot-ldflags=-static-libstdc++ --with-stage1-ldflags=-static-libstdc++
-        Thread model: posix
-        Supported LTO compression algorithms: zlib zstd
-        gcc version 14.2.0 (Rev2, Built by MSYS2 project) 
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_258c1.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_258c1.dir\\'
-         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/cc1plus.exe -quiet -v -iprefix C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/ -D_REENTRANT C:\\Program Files\\CMake\\share\\cmake-3.31\\Modules\\CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles\\cmTC_258c1.dir\\ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=nocona -version -o C:\\Users\\HP\\AppData\\Local\\Temp\\ccju7b2n.s
-        GNU C++17 (Rev2, Built by MSYS2 project) version 14.2.0 (x86_64-w64-mingw32)
-        	compiled by GNU C version 14.2.0, GMP version 6.3.0, MPFR version 4.2.1, MPC version 1.3.1, isl version isl-0.27-GMP
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_93255.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.11.9+a69bbaaf5 for .NET Framework
+        Build started 07/06/2025 9:38:39 CH.
         
-        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
-        ignoring nonexistent directory "C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/include"
-        ignoring duplicate directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../include/c++/14.2.0"
-        ignoring duplicate directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../include/c++/14.2.0/x86_64-w64-mingw32"
-        ignoring duplicate directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../include/c++/14.2.0/backward"
-        ignoring duplicate directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/14.2.0/include"
-        ignoring nonexistent directory "D:/a/msys64/ucrt64/include"
-        ignoring nonexistent directory "/ucrt64/include"
-        ignoring duplicate directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/14.2.0/include-fixed"
-        ignoring nonexistent directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/include"
-        ignoring nonexistent directory "D:/a/msys64/ucrt64/include"
-        #include "..." search starts here:
-        #include <...> search starts here:
-         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../include/c++/14.2.0
-         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../include/c++/14.2.0/x86_64-w64-mingw32
-         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../include/c++/14.2.0/backward
-         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/include
-         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../include
-         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/include-fixed
-        End of search list.
-        Compiler executable checksum: 0ae76c501e8dc149b84d2c95ded0e2f3
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_258c1.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_258c1.dir\\'
-         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles\\cmTC_258c1.dir\\CMakeCXXCompilerABI.cpp.obj C:\\Users\\HP\\AppData\\Local\\Temp\\ccju7b2n.s
-        GNU assembler version 2.44 (x86_64-w64-mingw32) using BFD version (GNU Binutils) 2.44
-        COMPILER_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/;C:/msys64/ucrt64/bin/../lib/gcc/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/
-        LIBRARY_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/;C:/msys64/ucrt64/bin/../lib/gcc/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_258c1.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_258c1.dir\\CMakeCXXCompilerABI.cpp.'
-        Linking CXX executable cmTC_258c1.exe
-        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_258c1.dir\\link.txt --verbose=1
-        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_258c1.dir/objects.a
-        C:\\msys64\\ucrt64\\bin\\ar.exe qc CMakeFiles\\cmTC_258c1.dir/objects.a @CMakeFiles\\cmTC_258c1.dir\\objects1.rsp
-        C:\\msys64\\ucrt64\\bin\\g++.exe  -v -Wl,-v -Wl,--whole-archive CMakeFiles\\cmTC_258c1.dir/objects.a -Wl,--no-whole-archive -o cmTC_258c1.exe -Wl,--out-implib,libcmTC_258c1.dll.a -Wl,--major-image-version,0,--minor-image-version,0
-        Using built-in specs.
-        COLLECT_GCC=C:\\msys64\\ucrt64\\bin\\g++.exe
-        COLLECT_LTO_WRAPPER=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe
-        Target: x86_64-w64-mingw32
-        Configured with: ../gcc-14.2.0/configure --prefix=/ucrt64 --with-local-prefix=/ucrt64/local --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 --with-native-system-header-dir=/ucrt64/include --libexecdir=/ucrt64/lib --enable-bootstrap --enable-checking=release --with-arch=nocona --with-tune=generic --enable-languages=c,lto,c++,fortran,ada,objc,obj-c++,rust,jit --enable-shared --enable-static --enable-libatomic --enable-threads=posix --enable-graphite --enable-fully-dynamic-string --enable-libstdcxx-filesystem-ts --enable-libstdcxx-time --disable-libstdcxx-pch --enable-lto --enable-libgomp --disable-libssp --disable-multilib --disable-rpath --disable-win32-registry --disable-nls --disable-werror --disable-symvers --with-libiconv --with-system-zlib --with-gmp=/ucrt64 --with-mpfr=/ucrt64 --with-mpc=/ucrt64 --with-isl=/ucrt64 --with-pkgversion='Rev2, Built by MSYS2 project' --with-bugurl=https://github.com/msys2/MINGW-packages/issues --with-gnu-as --with-gnu-ld --disable-libstdcxx-debug --enable-plugin --with-boot-ldflags=-static-libstdc++ --with-stage1-ldflags=-static-libstdc++
-        Thread model: posix
-        Supported LTO compression algorithms: zlib zstd
-        gcc version 14.2.0 (Rev2, Built by MSYS2 project) 
-        COMPILER_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/;C:/msys64/ucrt64/bin/../lib/gcc/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/
-        LIBRARY_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/;C:/msys64/ucrt64/bin/../lib/gcc/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/;C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_258c1.exe' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_258c1.'
-         C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/collect2.exe -plugin C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/liblto_plugin.dll -plugin-opt=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\HP\\AppData\\Local\\Temp\\ccpht40E.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_258c1.exe C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/crt2.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0 -LC:/msys64/ucrt64/bin/../lib/gcc -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../.. -v --whole-archive CMakeFiles\\cmTC_258c1.dir/objects.a --no-whole-archive --out-implib libcmTC_258c1.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/default-manifest.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o
-        collect2 version 14.2.0
-        C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/liblto_plugin.dll -plugin-opt=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\HP\\AppData\\Local\\Temp\\ccpht40E.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_258c1.exe C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/crt2.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0 -LC:/msys64/ucrt64/bin/../lib/gcc -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../.. -v --whole-archive CMakeFiles\\cmTC_258c1.dir/objects.a --no-whole-archive --out-implib libcmTC_258c1.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/default-manifest.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o
-        GNU ld (GNU Binutils) 2.44
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_258c1.exe' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_258c1.'
-        mingw32-make[1]: Leaving directory 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-rxyqij'
+        Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tp8knj\\cmTC_93255.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_93255.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tp8knj\\Debug\\".
+          Creating directory "cmTC_93255.dir\\Debug\\cmTC_93255.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_93255.dir\\Debug\\cmTC_93255.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_93255.dir\\Debug\\cmTC_93255.tlog\\unsuccessfulbuild".
+        VcpkgTripletSelection:
+          Using triplet "x64-windows" from "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\"
+          Using normalized configuration "Debug"
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\CL.exe /c /I"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_93255.dir\\Debug\\\\" /Fd"cmTC_93255.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.31\\Modules\\CMakeCXXCompilerABI.cpp"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.41.34123 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /I"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_93255.dir\\Debug\\\\" /Fd"cmTC_93255.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.31\\Modules\\CMakeCXXCompilerABI.cpp"
+          CMakeCXXCompilerABI.cpp
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tp8knj\\Debug\\cmTC_93255.exe" /INCREMENTAL /ILK:"cmTC_93255.dir\\Debug\\cmTC_93255.ilk" /NOLOGO /LIBPATH:"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\lib" /LIBPATH:"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\lib\\manual-link" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\lib\\*.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-tp8knj/Debug/cmTC_93255.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-tp8knj/Debug/cmTC_93255.lib" /MACHINE:X64  /machine:x64 cmTC_93255.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_93255.vcxproj -> D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tp8knj\\Debug\\cmTC_93255.exe
+        AppLocalFromInstalled:
+          pwsh.exe -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\HP\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tp8knj\\Debug\\cmTC_93255.exe" "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_93255.dir\\Debug\\cmTC_93255.tlog\\cmTC_93255.write.1u.tlog" "cmTC_93255.dir\\Debug\\vcpkg.applocal.log"
+          'pwsh.exe' is not recognized as an internal or external command,
+          operable program or batch file.
+          The command "pwsh.exe -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\HP\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tp8knj\\Debug\\cmTC_93255.exe" "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_93255.dir\\Debug\\cmTC_93255.tlog\\cmTC_93255.write.1u.tlog" "cmTC_93255.dir\\Debug\\vcpkg.applocal.log"" exited with code 9009.
+          "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\HP\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tp8knj\\Debug\\cmTC_93255.exe" "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_93255.dir\\Debug\\cmTC_93255.tlog\\cmTC_93255.write.1u.tlog" "cmTC_93255.dir\\Debug\\vcpkg.applocal.log"
+        FinalizeBuildStatus:
+          Deleting file "cmTC_93255.dir\\Debug\\cmTC_93255.tlog\\unsuccessfulbuild".
+          Touching "cmTC_93255.dir\\Debug\\cmTC_93255.tlog\\cmTC_93255.lastbuildstate".
+        Done Building Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tp8knj\\cmTC_93255.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:01.91
         
       exitCode: 0
-  -
-    kind: "message-v1"
-    backtrace:
-      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:182 (message)"
-      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
-      - "CMakeLists.txt:3 (project)"
-    message: |
-      Parsed CXX implicit include dir info: rv=done
-        found start of include info
-        found start of implicit include info
-          add: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../include/c++/14.2.0]
-          add: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../include/c++/14.2.0/x86_64-w64-mingw32]
-          add: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../include/c++/14.2.0/backward]
-          add: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/include]
-          add: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../include]
-          add: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/include-fixed]
-        end of search list found
-        collapse include dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../include/c++/14.2.0] ==> [C:/msys64/ucrt64/include/c++/14.2.0]
-        collapse include dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../include/c++/14.2.0/x86_64-w64-mingw32] ==> [C:/msys64/ucrt64/include/c++/14.2.0/x86_64-w64-mingw32]
-        collapse include dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../include/c++/14.2.0/backward] ==> [C:/msys64/ucrt64/include/c++/14.2.0/backward]
-        collapse include dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/include] ==> [C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include]
-        collapse include dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../include] ==> [C:/msys64/ucrt64/include]
-        collapse include dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/include-fixed] ==> [C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include-fixed]
-        implicit include dirs: [C:/msys64/ucrt64/include/c++/14.2.0;C:/msys64/ucrt64/include/c++/14.2.0/x86_64-w64-mingw32;C:/msys64/ucrt64/include/c++/14.2.0/backward;C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include;C:/msys64/ucrt64/include;C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include-fixed]
-      
-      
   -
     kind: "message-v1"
     backtrace:
@@ -457,168 +301,12 @@ events:
       - "CMakeLists.txt:3 (project)"
     message: |
       Parsed CXX implicit link information:
-        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
-        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?))("|,| |$)]
-        ignore line: [Change Dir: 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-rxyqij']
-        ignore line: []
-        ignore line: [Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/msys64/ucrt64/bin/mingw32-make.exe -f Makefile cmTC_258c1/fast]
-        ignore line: [C:/msys64/ucrt64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_258c1.dir\\build.make CMakeFiles/cmTC_258c1.dir/build]
-        ignore line: [mingw32-make[1]: Entering directory 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-rxyqij']
-        ignore line: [Building CXX object CMakeFiles/cmTC_258c1.dir/CMakeCXXCompilerABI.cpp.obj]
-        ignore line: [C:\\msys64\\ucrt64\\bin\\g++.exe   -v -o CMakeFiles\\cmTC_258c1.dir\\CMakeCXXCompilerABI.cpp.obj -c "C:\\Program Files\\CMake\\share\\cmake-3.31\\Modules\\CMakeCXXCompilerABI.cpp"]
-        ignore line: [Using built-in specs.]
-        ignore line: [COLLECT_GCC=C:\\msys64\\ucrt64\\bin\\g++.exe]
-        ignore line: [Target: x86_64-w64-mingw32]
-        ignore line: [Configured with: ../gcc-14.2.0/configure --prefix=/ucrt64 --with-local-prefix=/ucrt64/local --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 --with-native-system-header-dir=/ucrt64/include --libexecdir=/ucrt64/lib --enable-bootstrap --enable-checking=release --with-arch=nocona --with-tune=generic --enable-languages=c,lto,c++,fortran,ada,objc,obj-c++,rust,jit --enable-shared --enable-static --enable-libatomic --enable-threads=posix --enable-graphite --enable-fully-dynamic-string --enable-libstdcxx-filesystem-ts --enable-libstdcxx-time --disable-libstdcxx-pch --enable-lto --enable-libgomp --disable-libssp --disable-multilib --disable-rpath --disable-win32-registry --disable-nls --disable-werror --disable-symvers --with-libiconv --with-system-zlib --with-gmp=/ucrt64 --with-mpfr=/ucrt64 --with-mpc=/ucrt64 --with-isl=/ucrt64 --with-pkgversion='Rev2, Built by MSYS2 project' --with-bugurl=https://github.com/msys2/MINGW-packages/issues --with-gnu-as --with-gnu-ld --disable-libstdcxx-debug --enable-plugin --with-boot-ldflags=-static-libstdc++ --with-stage1-ldflags=-static-libstdc++]
-        ignore line: [Thread model: posix]
-        ignore line: [Supported LTO compression algorithms: zlib zstd]
-        ignore line: [gcc version 14.2.0 (Rev2  Built by MSYS2 project) ]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_258c1.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_258c1.dir\\']
-        ignore line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/cc1plus.exe -quiet -v -iprefix C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/ -D_REENTRANT C:\\Program Files\\CMake\\share\\cmake-3.31\\Modules\\CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles\\cmTC_258c1.dir\\ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=nocona -version -o C:\\Users\\HP\\AppData\\Local\\Temp\\ccju7b2n.s]
-        ignore line: [GNU C++17 (Rev2  Built by MSYS2 project) version 14.2.0 (x86_64-w64-mingw32)]
-        ignore line: [	compiled by GNU C version 14.2.0  GMP version 6.3.0  MPFR version 4.2.1  MPC version 1.3.1  isl version isl-0.27-GMP]
-        ignore line: []
-        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
-        ignore line: [ignoring nonexistent directory "C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/include"]
-        ignore line: [ignoring duplicate directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../include/c++/14.2.0"]
-        ignore line: [ignoring duplicate directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../include/c++/14.2.0/x86_64-w64-mingw32"]
-        ignore line: [ignoring duplicate directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../include/c++/14.2.0/backward"]
-        ignore line: [ignoring duplicate directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/14.2.0/include"]
-        ignore line: [ignoring nonexistent directory "D:/a/msys64/ucrt64/include"]
-        ignore line: [ignoring nonexistent directory "/ucrt64/include"]
-        ignore line: [ignoring duplicate directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/14.2.0/include-fixed"]
-        ignore line: [ignoring nonexistent directory "C:/msys64/ucrt64/lib/gcc/../../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/include"]
-        ignore line: [ignoring nonexistent directory "D:/a/msys64/ucrt64/include"]
-        ignore line: [#include "..." search starts here:]
-        ignore line: [#include <...> search starts here:]
-        ignore line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../include/c++/14.2.0]
-        ignore line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../include/c++/14.2.0/x86_64-w64-mingw32]
-        ignore line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../include/c++/14.2.0/backward]
-        ignore line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/include]
-        ignore line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../include]
-        ignore line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/include-fixed]
-        ignore line: [End of search list.]
-        ignore line: [Compiler executable checksum: 0ae76c501e8dc149b84d2c95ded0e2f3]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_258c1.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_258c1.dir\\']
-        ignore line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles\\cmTC_258c1.dir\\CMakeCXXCompilerABI.cpp.obj C:\\Users\\HP\\AppData\\Local\\Temp\\ccju7b2n.s]
-        ignore line: [GNU assembler version 2.44 (x86_64-w64-mingw32) using BFD version (GNU Binutils) 2.44]
-        ignore line: [COMPILER_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/]
-        ignore line: [LIBRARY_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib/]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles\\cmTC_258c1.dir\\CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'CMakeFiles\\cmTC_258c1.dir\\CMakeCXXCompilerABI.cpp.']
-        ignore line: [Linking CXX executable cmTC_258c1.exe]
-        ignore line: ["C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_258c1.dir\\link.txt --verbose=1]
-        ignore line: ["C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_258c1.dir/objects.a]
-        ignore line: [C:\\msys64\\ucrt64\\bin\\ar.exe qc CMakeFiles\\cmTC_258c1.dir/objects.a @CMakeFiles\\cmTC_258c1.dir\\objects1.rsp]
-        ignore line: [C:\\msys64\\ucrt64\\bin\\g++.exe  -v -Wl -v -Wl --whole-archive CMakeFiles\\cmTC_258c1.dir/objects.a -Wl --no-whole-archive -o cmTC_258c1.exe -Wl --out-implib libcmTC_258c1.dll.a -Wl --major-image-version 0 --minor-image-version 0]
-        ignore line: [Using built-in specs.]
-        ignore line: [COLLECT_GCC=C:\\msys64\\ucrt64\\bin\\g++.exe]
-        ignore line: [COLLECT_LTO_WRAPPER=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe]
-        ignore line: [Target: x86_64-w64-mingw32]
-        ignore line: [Configured with: ../gcc-14.2.0/configure --prefix=/ucrt64 --with-local-prefix=/ucrt64/local --build=x86_64-w64-mingw32 --host=x86_64-w64-mingw32 --target=x86_64-w64-mingw32 --with-native-system-header-dir=/ucrt64/include --libexecdir=/ucrt64/lib --enable-bootstrap --enable-checking=release --with-arch=nocona --with-tune=generic --enable-languages=c,lto,c++,fortran,ada,objc,obj-c++,rust,jit --enable-shared --enable-static --enable-libatomic --enable-threads=posix --enable-graphite --enable-fully-dynamic-string --enable-libstdcxx-filesystem-ts --enable-libstdcxx-time --disable-libstdcxx-pch --enable-lto --enable-libgomp --disable-libssp --disable-multilib --disable-rpath --disable-win32-registry --disable-nls --disable-werror --disable-symvers --with-libiconv --with-system-zlib --with-gmp=/ucrt64 --with-mpfr=/ucrt64 --with-mpc=/ucrt64 --with-isl=/ucrt64 --with-pkgversion='Rev2, Built by MSYS2 project' --with-bugurl=https://github.com/msys2/MINGW-packages/issues --with-gnu-as --with-gnu-ld --disable-libstdcxx-debug --enable-plugin --with-boot-ldflags=-static-libstdc++ --with-stage1-ldflags=-static-libstdc++]
-        ignore line: [Thread model: posix]
-        ignore line: [Supported LTO compression algorithms: zlib zstd]
-        ignore line: [gcc version 14.2.0 (Rev2  Built by MSYS2 project) ]
-        ignore line: [COMPILER_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/]
-        ignore line: [LIBRARY_PATH=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib/]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_258c1.exe' '-shared-libgcc' '-mtune=generic' '-march=nocona' '-dumpdir' 'cmTC_258c1.']
-        link line: [ C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/collect2.exe -plugin C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/liblto_plugin.dll -plugin-opt=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\HP\\AppData\\Local\\Temp\\ccpht40E.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_258c1.exe C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/crt2.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0 -LC:/msys64/ucrt64/bin/../lib/gcc -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../.. -v --whole-archive CMakeFiles\\cmTC_258c1.dir/objects.a --no-whole-archive --out-implib libcmTC_258c1.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/default-manifest.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o]
-          arg [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/collect2.exe] ==> ignore
-          arg [-plugin] ==> ignore
-          arg [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/liblto_plugin.dll] ==> ignore
-          arg [-plugin-opt=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe] ==> ignore
-          arg [-plugin-opt=-fresolution=C:\\Users\\HP\\AppData\\Local\\Temp\\ccpht40E.res] ==> ignore
-          arg [-plugin-opt=-pass-through=-lmingw32] ==> ignore
-          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
-          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
-          arg [-plugin-opt=-pass-through=-lmingwex] ==> ignore
-          arg [-plugin-opt=-pass-through=-lmsvcrt] ==> ignore
-          arg [-plugin-opt=-pass-through=-lkernel32] ==> ignore
-          arg [-plugin-opt=-pass-through=-lpthread] ==> ignore
-          arg [-plugin-opt=-pass-through=-ladvapi32] ==> ignore
-          arg [-plugin-opt=-pass-through=-lshell32] ==> ignore
-          arg [-plugin-opt=-pass-through=-luser32] ==> ignore
-          arg [-plugin-opt=-pass-through=-lkernel32] ==> ignore
-          arg [-plugin-opt=-pass-through=-lmingw32] ==> ignore
-          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
-          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
-          arg [-plugin-opt=-pass-through=-lmingwex] ==> ignore
-          arg [-plugin-opt=-pass-through=-lmsvcrt] ==> ignore
-          arg [-plugin-opt=-pass-through=-lkernel32] ==> ignore
-          arg [-m] ==> ignore
-          arg [i386pep] ==> ignore
-          arg [-Bdynamic] ==> search dynamic
-          arg [-o] ==> ignore
-          arg [cmTC_258c1.exe] ==> ignore
-          arg [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/crt2.o] ==> obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/crt2.o]
-          arg [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o] ==> obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o]
-          arg [-LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0] ==> dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0]
-          arg [-LC:/msys64/ucrt64/bin/../lib/gcc] ==> dir [C:/msys64/ucrt64/bin/../lib/gcc]
-          arg [-LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib] ==> dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib]
-          arg [-LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib] ==> dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib]
-          arg [-LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib] ==> dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib]
-          arg [-LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../..] ==> dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../..]
-          arg [-v] ==> ignore
-          arg [--whole-archive] ==> ignore
-          arg [CMakeFiles\\cmTC_258c1.dir/objects.a] ==> ignore
-          arg [--no-whole-archive] ==> ignore
-          arg [--out-implib] ==> ignore
-          arg [libcmTC_258c1.dll.a] ==> ignore
-          arg [--major-image-version] ==> ignore
-          arg [0] ==> ignore
-          arg [--minor-image-version] ==> ignore
-          arg [0] ==> ignore
-          arg [-lstdc++] ==> lib [stdc++]
-          arg [-lmingw32] ==> lib [mingw32]
-          arg [-lgcc_s] ==> lib [gcc_s]
-          arg [-lgcc] ==> lib [gcc]
-          arg [-lmingwex] ==> lib [mingwex]
-          arg [-lmsvcrt] ==> lib [msvcrt]
-          arg [-lkernel32] ==> lib [kernel32]
-          arg [-lpthread] ==> lib [pthread]
-          arg [-ladvapi32] ==> lib [advapi32]
-          arg [-lshell32] ==> lib [shell32]
-          arg [-luser32] ==> lib [user32]
-          arg [-lkernel32] ==> lib [kernel32]
-          arg [-lmingw32] ==> lib [mingw32]
-          arg [-lgcc_s] ==> lib [gcc_s]
-          arg [-lgcc] ==> lib [gcc]
-          arg [-lmingwex] ==> lib [mingwex]
-          arg [-lmsvcrt] ==> lib [msvcrt]
-          arg [-lkernel32] ==> lib [kernel32]
-          arg [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/default-manifest.o] ==> obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/default-manifest.o]
-          arg [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o] ==> obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o]
-        ignore line: [collect2 version 14.2.0]
-        ignore line: [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/liblto_plugin.dll -plugin-opt=C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\HP\\AppData\\Local\\Temp\\ccpht40E.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_258c1.exe C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/crt2.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0 -LC:/msys64/ucrt64/bin/../lib/gcc -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib -LC:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../.. -v --whole-archive CMakeFiles\\cmTC_258c1.dir/objects.a --no-whole-archive --out-implib libcmTC_258c1.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/default-manifest.o C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o]
-        linker tool for 'CXX': C:/msys64/ucrt64/x86_64-w64-mingw32/bin/ld.exe
-        remove lib [msvcrt]
-        remove lib [msvcrt]
-        collapse obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/crt2.o] ==> [C:/msys64/ucrt64/lib/crt2.o]
-        collapse obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o] ==> [C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o]
-        collapse obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib/default-manifest.o] ==> [C:/msys64/ucrt64/lib/default-manifest.o]
-        collapse obj [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o] ==> [C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o]
-        collapse library dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0] ==> [C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0]
-        collapse library dir [C:/msys64/ucrt64/bin/../lib/gcc] ==> [C:/msys64/ucrt64/lib/gcc]
-        collapse library dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib/../lib] ==> [C:/msys64/ucrt64/x86_64-w64-mingw32/lib]
-        collapse library dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../lib] ==> [C:/msys64/ucrt64/lib]
-        collapse library dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../../../x86_64-w64-mingw32/lib] ==> [C:/msys64/ucrt64/x86_64-w64-mingw32/lib]
-        collapse library dir [C:/msys64/ucrt64/bin/../lib/gcc/x86_64-w64-mingw32/14.2.0/../../..] ==> [C:/msys64/ucrt64/lib]
-        implicit libs: [stdc++;mingw32;gcc_s;gcc;mingwex;kernel32;pthread;advapi32;shell32;user32;kernel32;mingw32;gcc_s;gcc;mingwex;kernel32]
-        implicit objs: [C:/msys64/ucrt64/lib/crt2.o;C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/crtbegin.o;C:/msys64/ucrt64/lib/default-manifest.o;C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/crtend.o]
-        implicit dirs: [C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0;C:/msys64/ucrt64/lib/gcc;C:/msys64/ucrt64/x86_64-w64-mingw32/lib;C:/msys64/ucrt64/lib]
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
+        linker tool for 'CXX': C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.41.34120/bin/HostX64/x64/link.exe
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: []
         implicit fwks: []
       
       
@@ -630,8 +318,9 @@ events:
       - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
       - "CMakeLists.txt:3 (project)"
     message: |
-      Running the CXX compiler's linker: "C:/msys64/ucrt64/x86_64-w64-mingw32/bin/ld.exe" "-v"
-      GNU ld (GNU Binutils) 2.44
+      Running the CXX compiler's linker: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.41.34120/bin/HostX64/x64/link.exe" "-v"
+      Microsoft (R) Incremental Linker Version 14.41.34123.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
   -
     kind: "try_compile-v1"
     backtrace:
@@ -644,32 +333,55 @@ events:
     checks:
       - "Performing Test COMPILER_HAS_THOSE_TOGGLES"
     directories:
-      source: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-dc39rp"
-      binary: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-dc39rp"
+      source: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-i7t26g"
+      binary: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-i7t26g"
     cmakeVariables:
-      CMAKE_C_FLAGS: ""
-      CMAKE_C_FLAGS_DEBUG: "-g"
-      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
       CMAKE_MODULE_PATH: "C:/raylib/raylib/cmake"
     buildResult:
       variable: "COMPILER_HAS_THOSE_TOGGLES"
       cached: true
       stdout: |
-        Change Dir: 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-dc39rp'
+        Change Dir: 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-i7t26g'
         
-        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/msys64/ucrt64/bin/mingw32-make.exe -f Makefile cmTC_94b9c/fast
-        C:/msys64/ucrt64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_94b9c.dir\\build.make CMakeFiles/cmTC_94b9c.dir/build
-        mingw32-make[1]: Entering directory 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-dc39rp'
-        Building C object CMakeFiles/cmTC_94b9c.dir/src.c.obj
-        C:\\msys64\\ucrt64\\bin\\gcc.exe -DCOMPILER_HAS_THOSE_TOGGLES  -Werror=pointer-arith -o CMakeFiles\\cmTC_94b9c.dir\\src.c.obj -c D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dc39rp\\src.c
-        Linking C executable cmTC_94b9c.exe
-        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_94b9c.dir\\link.txt --verbose=1
-        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_94b9c.dir/objects.a
-        C:\\msys64\\ucrt64\\bin\\ar.exe qc CMakeFiles\\cmTC_94b9c.dir/objects.a @CMakeFiles\\cmTC_94b9c.dir\\objects1.rsp
-        C:\\msys64\\ucrt64\\bin\\gcc.exe -Wl,--whole-archive CMakeFiles\\cmTC_94b9c.dir/objects.a -Wl,--no-whole-archive -o cmTC_94b9c.exe -Wl,--out-implib,libcmTC_94b9c.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_94b9c.dir\\linkLibs.rsp
-        mingw32-make[1]: Leaving directory 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-dc39rp'
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_9aabb.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.11.9+a69bbaaf5 for .NET Framework
+        Build started 07/06/2025 9:38:42 CH.
         
-      exitCode: 0
+        Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i7t26g\\cmTC_9aabb.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_9aabb.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i7t26g\\Debug\\".
+          Creating directory "cmTC_9aabb.dir\\Debug\\cmTC_9aabb.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_9aabb.dir\\Debug\\cmTC_9aabb.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_9aabb.dir\\Debug\\cmTC_9aabb.tlog\\unsuccessfulbuild".
+        VcpkgTripletSelection:
+          Using triplet "x64-windows" from "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\"
+          Using normalized configuration "Debug"
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\CL.exe /c /I"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D COMPILER_HAS_THOSE_TOGGLES /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_9aabb.dir\\Debug\\\\" /Fd"cmTC_9aabb.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue  -Werror=pointer-arith "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i7t26g\\src.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.41.34123 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /I"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D COMPILER_HAS_THOSE_TOGGLES /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_9aabb.dir\\Debug\\\\" /Fd"cmTC_9aabb.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue  -Werror=pointer-arith "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i7t26g\\src.c"
+        cl : command line  error D8021: invalid numeric argument '/Werror=pointer-arith' [D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i7t26g\\cmTC_9aabb.vcxproj]
+        Done Building Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i7t26g\\cmTC_9aabb.vcxproj" (default targets) -- FAILED.
+        
+        Build FAILED.
+        
+        "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i7t26g\\cmTC_9aabb.vcxproj" (default target) (1) ->
+        (ClCompile target) -> 
+          cl : command line  error D8021: invalid numeric argument '/Werror=pointer-arith' [D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i7t26g\\cmTC_9aabb.vcxproj]
+        
+            0 Warning(s)
+            1 Error(s)
+        
+        Time Elapsed 00:00:00.41
+        
+      exitCode: 1
   -
     kind: "try_compile-v1"
     backtrace:
@@ -681,98 +393,748 @@ events:
     checks:
       - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
     directories:
-      source: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-q09utv"
-      binary: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-q09utv"
+      source: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-dhfia3"
+      binary: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-dhfia3"
     cmakeVariables:
-      CMAKE_C_FLAGS: "-fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith "
-      CMAKE_C_FLAGS_DEBUG: "-g"
-      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
       CMAKE_MODULE_PATH: "C:/raylib/raylib/cmake;C:/raylib/raylib/src/external/glfw/CMake/modules"
     buildResult:
       variable: "CMAKE_HAVE_LIBC_PTHREAD"
       cached: true
       stdout: |
-        Change Dir: 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-q09utv'
+        Change Dir: 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-dhfia3'
         
-        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/msys64/ucrt64/bin/mingw32-make.exe -f Makefile cmTC_74111/fast
-        C:/msys64/ucrt64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_74111.dir\\build.make CMakeFiles/cmTC_74111.dir/build
-        mingw32-make[1]: Entering directory 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-q09utv'
-        Building C object CMakeFiles/cmTC_74111.dir/src.c.obj
-        C:\\msys64\\ucrt64\\bin\\gcc.exe -DCMAKE_HAVE_LIBC_PTHREAD  -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith   -std=gnu99 -o CMakeFiles\\cmTC_74111.dir\\src.c.obj -c D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-q09utv\\src.c
-        Linking C executable cmTC_74111.exe
-        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_74111.dir\\link.txt --verbose=1
-        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_74111.dir/objects.a
-        C:\\msys64\\ucrt64\\bin\\ar.exe qc CMakeFiles\\cmTC_74111.dir/objects.a @CMakeFiles\\cmTC_74111.dir\\objects1.rsp
-        C:\\msys64\\ucrt64\\bin\\gcc.exe -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith   -Wl,--whole-archive CMakeFiles\\cmTC_74111.dir/objects.a -Wl,--no-whole-archive -o cmTC_74111.exe -Wl,--out-implib,libcmTC_74111.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_74111.dir\\linkLibs.rsp
-        mingw32-make[1]: Leaving directory 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-q09utv'
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_ed68f.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.11.9+a69bbaaf5 for .NET Framework
+        Build started 07/06/2025 9:38:43 CH.
         
-      exitCode: 0
+        Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dhfia3\\cmTC_ed68f.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_ed68f.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dhfia3\\Debug\\".
+          Creating directory "cmTC_ed68f.dir\\Debug\\cmTC_ed68f.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_ed68f.dir\\Debug\\cmTC_ed68f.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_ed68f.dir\\Debug\\cmTC_ed68f.tlog\\unsuccessfulbuild".
+        VcpkgTripletSelection:
+          Using triplet "x64-windows" from "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\"
+          Using normalized configuration "Debug"
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\CL.exe /c /I"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_ed68f.dir\\Debug\\\\" /Fd"cmTC_ed68f.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dhfia3\\src.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.41.34123 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /I"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_ed68f.dir\\Debug\\\\" /Fd"cmTC_ed68f.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dhfia3\\src.c"
+          src.c
+        D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dhfia3\\src.c(1,10): error C1083: Cannot open include file: 'pthread.h': No such file or directory [D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dhfia3\\cmTC_ed68f.vcxproj]
+        Done Building Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dhfia3\\cmTC_ed68f.vcxproj" (default targets) -- FAILED.
+        
+        Build FAILED.
+        
+        "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dhfia3\\cmTC_ed68f.vcxproj" (default target) (1) ->
+        (ClCompile target) -> 
+          D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dhfia3\\src.c(1,10): error C1083: Cannot open include file: 'pthread.h': No such file or directory [D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dhfia3\\cmTC_ed68f.vcxproj]
+        
+            0 Warning(s)
+            1 Error(s)
+        
+        Time Elapsed 00:00:00.51
+        
+      exitCode: 1
   -
     kind: "try_compile-v1"
     backtrace:
-      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckIncludeFile.cmake:99 (try_compile)"
-      - "C:/raylib/raylib/src/external/glfw/src/CMakeLists.txt:274 (check_include_file)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckLibraryExists.cmake:78 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/FindThreads.cmake:112 (CHECK_LIBRARY_EXISTS)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/FindThreads.cmake:175 (_threads_check_lib)"
+      - "C:/raylib/raylib/src/external/glfw/CMakeLists.txt:60 (find_package)"
     checks:
-      - "Looking for dinput.h"
+      - "Looking for pthread_create in pthreads"
     directories:
-      source: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-usgsuv"
-      binary: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-usgsuv"
+      source: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-il3rhe"
+      binary: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-il3rhe"
     cmakeVariables:
-      CMAKE_C_FLAGS: "-fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith "
-      CMAKE_C_FLAGS_DEBUG: "-g"
-      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
       CMAKE_MODULE_PATH: "C:/raylib/raylib/cmake;C:/raylib/raylib/src/external/glfw/CMake/modules"
     buildResult:
-      variable: "DINPUT_H_FOUND"
+      variable: "CMAKE_HAVE_PTHREADS_CREATE"
       cached: true
       stdout: |
-        Change Dir: 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-usgsuv'
+        Change Dir: 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-il3rhe'
         
-        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/msys64/ucrt64/bin/mingw32-make.exe -f Makefile cmTC_1589a/fast
-        C:/msys64/ucrt64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_1589a.dir\\build.make CMakeFiles/cmTC_1589a.dir/build
-        mingw32-make[1]: Entering directory 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-usgsuv'
-        Building C object CMakeFiles/cmTC_1589a.dir/CheckIncludeFile.c.obj
-        C:\\msys64\\ucrt64\\bin\\gcc.exe   -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith   -std=gnu99 -o CMakeFiles\\cmTC_1589a.dir\\CheckIncludeFile.c.obj -c D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-usgsuv\\CheckIncludeFile.c
-        Linking C executable cmTC_1589a.exe
-        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_1589a.dir\\link.txt --verbose=1
-        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_1589a.dir/objects.a
-        C:\\msys64\\ucrt64\\bin\\ar.exe qc CMakeFiles\\cmTC_1589a.dir/objects.a @CMakeFiles\\cmTC_1589a.dir\\objects1.rsp
-        C:\\msys64\\ucrt64\\bin\\gcc.exe -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith   -Wl,--whole-archive CMakeFiles\\cmTC_1589a.dir/objects.a -Wl,--no-whole-archive -o cmTC_1589a.exe -Wl,--out-implib,libcmTC_1589a.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_1589a.dir\\linkLibs.rsp
-        mingw32-make[1]: Leaving directory 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-usgsuv'
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_ce937.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.11.9+a69bbaaf5 for .NET Framework
+        Build started 07/06/2025 9:38:43 CH.
         
-      exitCode: 0
+        Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-il3rhe\\cmTC_ce937.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_ce937.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-il3rhe\\Debug\\".
+          Creating directory "cmTC_ce937.dir\\Debug\\cmTC_ce937.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_ce937.dir\\Debug\\cmTC_ce937.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_ce937.dir\\Debug\\cmTC_ce937.tlog\\unsuccessfulbuild".
+        VcpkgTripletSelection:
+          Using triplet "x64-windows" from "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\"
+          Using normalized configuration "Debug"
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\CL.exe /c /I"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_ce937.dir\\Debug\\\\" /Fd"cmTC_ce937.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-il3rhe\\CheckFunctionExists.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.41.34123 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /I"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_ce937.dir\\Debug\\\\" /Fd"cmTC_ce937.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-il3rhe\\CheckFunctionExists.c"
+          CheckFunctionExists.c
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-il3rhe\\Debug\\cmTC_ce937.exe" /INCREMENTAL /ILK:"cmTC_ce937.dir\\Debug\\cmTC_ce937.ilk" /NOLOGO /LIBPATH:"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\lib" /LIBPATH:"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\lib\\manual-link" pthreads.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\lib\\*.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-il3rhe/Debug/cmTC_ce937.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-il3rhe/Debug/cmTC_ce937.lib" /MACHINE:X64  /machine:x64 cmTC_ce937.dir\\Debug\\CheckFunctionExists.obj
+        LINK : fatal error LNK1104: cannot open file 'pthreads.lib' [D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-il3rhe\\cmTC_ce937.vcxproj]
+        Done Building Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-il3rhe\\cmTC_ce937.vcxproj" (default targets) -- FAILED.
+        
+        Build FAILED.
+        
+        "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-il3rhe\\cmTC_ce937.vcxproj" (default target) (1) ->
+        (Link target) -> 
+          LINK : fatal error LNK1104: cannot open file 'pthreads.lib' [D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-il3rhe\\cmTC_ce937.vcxproj]
+        
+            0 Warning(s)
+            1 Error(s)
+        
+        Time Elapsed 00:00:00.62
+        
+      exitCode: 1
   -
     kind: "try_compile-v1"
     backtrace:
-      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckIncludeFile.cmake:99 (try_compile)"
-      - "C:/raylib/raylib/src/external/glfw/src/CMakeLists.txt:275 (check_include_file)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckLibraryExists.cmake:78 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/FindThreads.cmake:112 (CHECK_LIBRARY_EXISTS)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/FindThreads.cmake:176 (_threads_check_lib)"
+      - "C:/raylib/raylib/src/external/glfw/CMakeLists.txt:60 (find_package)"
     checks:
-      - "Looking for xinput.h"
+      - "Looking for pthread_create in pthread"
     directories:
-      source: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-x1vefi"
-      binary: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-x1vefi"
+      source: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-i4sh5n"
+      binary: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-i4sh5n"
     cmakeVariables:
-      CMAKE_C_FLAGS: "-fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith "
-      CMAKE_C_FLAGS_DEBUG: "-g"
-      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
       CMAKE_MODULE_PATH: "C:/raylib/raylib/cmake;C:/raylib/raylib/src/external/glfw/CMake/modules"
     buildResult:
-      variable: "XINPUT_H_FOUND"
+      variable: "CMAKE_HAVE_PTHREAD_CREATE"
       cached: true
       stdout: |
-        Change Dir: 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-x1vefi'
+        Change Dir: 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-i4sh5n'
         
-        Run Build Command(s): "C:/Program Files/CMake/bin/cmake.exe" -E env VERBOSE=1 C:/msys64/ucrt64/bin/mingw32-make.exe -f Makefile cmTC_1e5e8/fast
-        C:/msys64/ucrt64/bin/mingw32-make.exe  -f CMakeFiles\\cmTC_1e5e8.dir\\build.make CMakeFiles/cmTC_1e5e8.dir/build
-        mingw32-make[1]: Entering directory 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-x1vefi'
-        Building C object CMakeFiles/cmTC_1e5e8.dir/CheckIncludeFile.c.obj
-        C:\\msys64\\ucrt64\\bin\\gcc.exe   -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith   -std=gnu99 -o CMakeFiles\\cmTC_1e5e8.dir\\CheckIncludeFile.c.obj -c D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-x1vefi\\CheckIncludeFile.c
-        Linking C executable cmTC_1e5e8.exe
-        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E cmake_link_script CMakeFiles\\cmTC_1e5e8.dir\\link.txt --verbose=1
-        "C:\\Program Files\\CMake\\bin\\cmake.exe" -E rm -f CMakeFiles\\cmTC_1e5e8.dir/objects.a
-        C:\\msys64\\ucrt64\\bin\\ar.exe qc CMakeFiles\\cmTC_1e5e8.dir/objects.a @CMakeFiles\\cmTC_1e5e8.dir\\objects1.rsp
-        C:\\msys64\\ucrt64\\bin\\gcc.exe -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith   -Wl,--whole-archive CMakeFiles\\cmTC_1e5e8.dir/objects.a -Wl,--no-whole-archive -o cmTC_1e5e8.exe -Wl,--out-implib,libcmTC_1e5e8.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\\cmTC_1e5e8.dir\\linkLibs.rsp
-        mingw32-make[1]: Leaving directory 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-x1vefi'
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_8fe13.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.11.9+a69bbaaf5 for .NET Framework
+        Build started 07/06/2025 9:38:44 CH.
+        
+        Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i4sh5n\\cmTC_8fe13.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_8fe13.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i4sh5n\\Debug\\".
+          Creating directory "cmTC_8fe13.dir\\Debug\\cmTC_8fe13.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_8fe13.dir\\Debug\\cmTC_8fe13.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_8fe13.dir\\Debug\\cmTC_8fe13.tlog\\unsuccessfulbuild".
+        VcpkgTripletSelection:
+          Using triplet "x64-windows" from "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\"
+          Using normalized configuration "Debug"
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\CL.exe /c /I"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_8fe13.dir\\Debug\\\\" /Fd"cmTC_8fe13.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i4sh5n\\CheckFunctionExists.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.41.34123 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /I"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_8fe13.dir\\Debug\\\\" /Fd"cmTC_8fe13.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i4sh5n\\CheckFunctionExists.c"
+          CheckFunctionExists.c
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i4sh5n\\Debug\\cmTC_8fe13.exe" /INCREMENTAL /ILK:"cmTC_8fe13.dir\\Debug\\cmTC_8fe13.ilk" /NOLOGO /LIBPATH:"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\lib" /LIBPATH:"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\lib\\manual-link" pthread.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\lib\\*.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-i4sh5n/Debug/cmTC_8fe13.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-i4sh5n/Debug/cmTC_8fe13.lib" /MACHINE:X64  /machine:x64 cmTC_8fe13.dir\\Debug\\CheckFunctionExists.obj
+        LINK : fatal error LNK1104: cannot open file 'pthread.lib' [D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i4sh5n\\cmTC_8fe13.vcxproj]
+        Done Building Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i4sh5n\\cmTC_8fe13.vcxproj" (default targets) -- FAILED.
+        
+        Build FAILED.
+        
+        "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i4sh5n\\cmTC_8fe13.vcxproj" (default target) (1) ->
+        (Link target) -> 
+          LINK : fatal error LNK1104: cannot open file 'pthread.lib' [D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-i4sh5n\\cmTC_8fe13.vcxproj]
+        
+            0 Warning(s)
+            1 Error(s)
+        
+        Time Elapsed 00:00:00.65
+        
+      exitCode: 1
+...
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineSystem.cmake:205 (message)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      The system is: Windows - 10.0.26100 - AMD64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler:  
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      MSBuild version 17.11.9+a69bbaaf5 for .NET Framework
+      Build started 07/06/2025 10:02:02 CH.
+      
+      Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\3.31.5\\CompilerIdC\\CompilerIdC.vcxproj" on node 1 (default targets).
+      PrepareForBuild:
+        Creating directory "Debug\\".
+        Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+        Creating directory "Debug\\CompilerIdC.tlog\\".
+      InitializeBuildStatus:
+        Creating "Debug\\CompilerIdC.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+        Touching "Debug\\CompilerIdC.tlog\\unsuccessfulbuild".
+      VcpkgTripletSelection:
+        Using triplet "x64-windows" from "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\"
+        Using normalized configuration "Release"
+      ClCompile:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\CL.exe /c /I"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\include" /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc143.pdb" /external:W0 /Gd /TC /FC /errorReport:queue CMakeCCompilerId.c
+        CMakeCCompilerId.c
+      Link:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdC.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\lib" /LIBPATH:"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\lib\\manual-link" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\lib\\*.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdC.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdC.lib" /MACHINE:X64 Debug\\CMakeCCompilerId.obj
+        CompilerIdC.vcxproj -> D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\3.31.5\\CompilerIdC\\CompilerIdC.exe
+      AppLocalFromInstalled:
+        pwsh.exe -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\HP\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\3.31.5\\CompilerIdC\\CompilerIdC.exe" "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\bin" "Debug\\CompilerIdC.tlog\\CompilerIdC.write.1u.tlog" "Debug\\vcpkg.applocal.log"
+        'pwsh.exe' is not recognized as an internal or external command,
+        operable program or batch file.
+        The command "pwsh.exe -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\HP\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\3.31.5\\CompilerIdC\\CompilerIdC.exe" "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\bin" "Debug\\CompilerIdC.tlog\\CompilerIdC.write.1u.tlog" "Debug\\vcpkg.applocal.log"" exited with code 9009.
+        "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\HP\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\3.31.5\\CompilerIdC\\CompilerIdC.exe" "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\bin" "Debug\\CompilerIdC.tlog\\CompilerIdC.write.1u.tlog" "Debug\\vcpkg.applocal.log"
+      PostBuildEvent:
+        for %%i in (cl.exe) do @echo CMAKE_C_COMPILER=%%~$PATH:i
+        :VCEnd
+        CMAKE_C_COMPILER=C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\Hostx64\\x64\\cl.exe
+      FinalizeBuildStatus:
+        Deleting file "Debug\\CompilerIdC.tlog\\unsuccessfulbuild".
+        Touching "Debug\\CompilerIdC.tlog\\CompilerIdC.lastbuildstate".
+      Done Building Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\3.31.5\\CompilerIdC\\CompilerIdC.vcxproj" (default targets).
+      
+      Build succeeded.
+          0 Warning(s)
+          0 Error(s)
+      
+      Time Elapsed 00:00:03.15
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.vcxproj"
+      
+      The C compiler identification is MSVC, found in:
+        D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/3.31.5/CompilerIdC/CompilerIdC.exe
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler:  
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      MSBuild version 17.11.9+a69bbaaf5 for .NET Framework
+      Build started 07/06/2025 10:02:06 CH.
+      
+      Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\3.31.5\\CompilerIdCXX\\CompilerIdCXX.vcxproj" on node 1 (default targets).
+      PrepareForBuild:
+        Creating directory "Debug\\".
+        Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+        Creating directory "Debug\\CompilerIdCXX.tlog\\".
+      InitializeBuildStatus:
+        Creating "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+        Touching "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild".
+      VcpkgTripletSelection:
+        Using triplet "x64-windows" from "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\"
+        Using normalized configuration "Release"
+      ClCompile:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\CL.exe /c /I"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\include" /nologo /W0 /WX- /diagnostics:column /Od /D _MBCS /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\\\" /Fd"Debug\\vc143.pdb" /external:W0 /Gd /TP /FC /errorReport:queue CMakeCXXCompilerId.cpp
+        CMakeCXXCompilerId.cpp
+      Link:
+        C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:".\\CompilerIdCXX.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\lib" /LIBPATH:"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\lib\\manual-link" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\lib\\*.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:".\\CompilerIdCXX.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:".\\CompilerIdCXX.lib" /MACHINE:X64 Debug\\CMakeCXXCompilerId.obj
+        CompilerIdCXX.vcxproj -> D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\3.31.5\\CompilerIdCXX\\CompilerIdCXX.exe
+      AppLocalFromInstalled:
+        pwsh.exe -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\HP\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\3.31.5\\CompilerIdCXX\\CompilerIdCXX.exe" "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\bin" "Debug\\CompilerIdCXX.tlog\\CompilerIdCXX.write.1u.tlog" "Debug\\vcpkg.applocal.log"
+        'pwsh.exe' is not recognized as an internal or external command,
+        operable program or batch file.
+        The command "pwsh.exe -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\HP\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\3.31.5\\CompilerIdCXX\\CompilerIdCXX.exe" "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\bin" "Debug\\CompilerIdCXX.tlog\\CompilerIdCXX.write.1u.tlog" "Debug\\vcpkg.applocal.log"" exited with code 9009.
+        "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\HP\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\3.31.5\\CompilerIdCXX\\CompilerIdCXX.exe" "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\bin" "Debug\\CompilerIdCXX.tlog\\CompilerIdCXX.write.1u.tlog" "Debug\\vcpkg.applocal.log"
+      PostBuildEvent:
+        for %%i in (cl.exe) do @echo CMAKE_CXX_COMPILER=%%~$PATH:i
+        :VCEnd
+        CMAKE_CXX_COMPILER=C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\Hostx64\\x64\\cl.exe
+      FinalizeBuildStatus:
+        Deleting file "Debug\\CompilerIdCXX.tlog\\unsuccessfulbuild".
+        Touching "Debug\\CompilerIdCXX.tlog\\CompilerIdCXX.lastbuildstate".
+      Done Building Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\3.31.5\\CompilerIdCXX\\CompilerIdCXX.vcxproj" (default targets).
+      
+      Build succeeded.
+          0 Warning(s)
+          0 Error(s)
+      
+      Time Elapsed 00:00:01.74
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.vcxproj"
+      
+      The CXX compiler identification is MSVC, found in:
+        D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/3.31.5/CompilerIdCXX/CompilerIdCXX.exe
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:74 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-13b841"
+      binary: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-13b841"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-13b841'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_06769.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.11.9+a69bbaaf5 for .NET Framework
+        Build started 07/06/2025 10:02:09 CH.
+        
+        Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-13b841\\cmTC_06769.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_06769.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-13b841\\Debug\\".
+          Creating directory "cmTC_06769.dir\\Debug\\cmTC_06769.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_06769.dir\\Debug\\cmTC_06769.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_06769.dir\\Debug\\cmTC_06769.tlog\\unsuccessfulbuild".
+        VcpkgTripletSelection:
+          Using triplet "x64-windows" from "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\"
+          Using normalized configuration "Debug"
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\CL.exe /c /I"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_06769.dir\\Debug\\\\" /Fd"cmTC_06769.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.31\\Modules\\CMakeCCompilerABI.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.41.34123 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /I"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_06769.dir\\Debug\\\\" /Fd"cmTC_06769.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.31\\Modules\\CMakeCCompilerABI.c"
+          CMakeCCompilerABI.c
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-13b841\\Debug\\cmTC_06769.exe" /INCREMENTAL /ILK:"cmTC_06769.dir\\Debug\\cmTC_06769.ilk" /NOLOGO /LIBPATH:"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\lib" /LIBPATH:"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\lib\\manual-link" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\lib\\*.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-13b841/Debug/cmTC_06769.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-13b841/Debug/cmTC_06769.lib" /MACHINE:X64  /machine:x64 cmTC_06769.dir\\Debug\\CMakeCCompilerABI.obj
+          cmTC_06769.vcxproj -> D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-13b841\\Debug\\cmTC_06769.exe
+        AppLocalFromInstalled:
+          pwsh.exe -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\HP\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-13b841\\Debug\\cmTC_06769.exe" "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_06769.dir\\Debug\\cmTC_06769.tlog\\cmTC_06769.write.1u.tlog" "cmTC_06769.dir\\Debug\\vcpkg.applocal.log"
+          'pwsh.exe' is not recognized as an internal or external command,
+          operable program or batch file.
+          The command "pwsh.exe -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\HP\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-13b841\\Debug\\cmTC_06769.exe" "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_06769.dir\\Debug\\cmTC_06769.tlog\\cmTC_06769.write.1u.tlog" "cmTC_06769.dir\\Debug\\vcpkg.applocal.log"" exited with code 9009.
+          "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\HP\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-13b841\\Debug\\cmTC_06769.exe" "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_06769.dir\\Debug\\cmTC_06769.tlog\\cmTC_06769.write.1u.tlog" "cmTC_06769.dir\\Debug\\vcpkg.applocal.log"
+        FinalizeBuildStatus:
+          Deleting file "cmTC_06769.dir\\Debug\\cmTC_06769.tlog\\unsuccessfulbuild".
+          Touching "cmTC_06769.dir\\Debug\\cmTC_06769.tlog\\cmTC_06769.lastbuildstate".
+        Done Building Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-13b841\\cmTC_06769.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:01.84
         
       exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:218 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
+        linker tool for 'C': C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.41.34120/bin/HostX64/x64/link.exe
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: []
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:255 (cmake_determine_linker_id)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Running the C compiler's linker: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.41.34120/bin/HostX64/x64/link.exe" "-v"
+      Microsoft (R) Incremental Linker Version 14.41.34123.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:74 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-eda92c"
+      binary: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-eda92c"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /GR /EHsc"
+      CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-eda92c'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_51455.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.11.9+a69bbaaf5 for .NET Framework
+        Build started 07/06/2025 10:02:12 CH.
+        
+        Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-eda92c\\cmTC_51455.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_51455.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-eda92c\\Debug\\".
+          Creating directory "cmTC_51455.dir\\Debug\\cmTC_51455.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_51455.dir\\Debug\\cmTC_51455.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_51455.dir\\Debug\\cmTC_51455.tlog\\unsuccessfulbuild".
+        VcpkgTripletSelection:
+          Using triplet "x64-windows" from "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\"
+          Using normalized configuration "Debug"
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\CL.exe /c /I"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_51455.dir\\Debug\\\\" /Fd"cmTC_51455.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.31\\Modules\\CMakeCXXCompilerABI.cpp"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.41.34123 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /I"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_51455.dir\\Debug\\\\" /Fd"cmTC_51455.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-3.31\\Modules\\CMakeCXXCompilerABI.cpp"
+          CMakeCXXCompilerABI.cpp
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-eda92c\\Debug\\cmTC_51455.exe" /INCREMENTAL /ILK:"cmTC_51455.dir\\Debug\\cmTC_51455.ilk" /NOLOGO /LIBPATH:"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\lib" /LIBPATH:"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\lib\\manual-link" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\lib\\*.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-eda92c/Debug/cmTC_51455.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-eda92c/Debug/cmTC_51455.lib" /MACHINE:X64  /machine:x64 cmTC_51455.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_51455.vcxproj -> D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-eda92c\\Debug\\cmTC_51455.exe
+        AppLocalFromInstalled:
+          pwsh.exe -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\HP\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-eda92c\\Debug\\cmTC_51455.exe" "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_51455.dir\\Debug\\cmTC_51455.tlog\\cmTC_51455.write.1u.tlog" "cmTC_51455.dir\\Debug\\vcpkg.applocal.log"
+          'pwsh.exe' is not recognized as an internal or external command,
+          operable program or batch file.
+          The command "pwsh.exe -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\HP\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-eda92c\\Debug\\cmTC_51455.exe" "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_51455.dir\\Debug\\cmTC_51455.tlog\\cmTC_51455.write.1u.tlog" "cmTC_51455.dir\\Debug\\vcpkg.applocal.log"" exited with code 9009.
+          "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -ExecutionPolicy Bypass -noprofile -File "C:\\Users\\HP\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-eda92c\\Debug\\cmTC_51455.exe" "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_51455.dir\\Debug\\cmTC_51455.tlog\\cmTC_51455.write.1u.tlog" "cmTC_51455.dir\\Debug\\vcpkg.applocal.log"
+        FinalizeBuildStatus:
+          Deleting file "cmTC_51455.dir\\Debug\\cmTC_51455.tlog\\unsuccessfulbuild".
+          Touching "cmTC_51455.dir\\Debug\\cmTC_51455.tlog\\cmTC_51455.lastbuildstate".
+        Done Building Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-eda92c\\cmTC_51455.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:01.47
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:218 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
+        linker tool for 'CXX': C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.41.34120/bin/HostX64/x64/link.exe
+        implicit libs: []
+        implicit objs: []
+        implicit dirs: []
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDetermineCompilerABI.cmake:255 (cmake_determine_linker_id)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Running the CXX compiler's linker: "C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.41.34120/bin/HostX64/x64/link.exe" "-v"
+      Microsoft (R) Incremental Linker Version 14.41.34123.0
+      Copyright (C) Microsoft Corporation.  All rights reserved.
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake:56 (cmake_check_compiler_flag)"
+      - "C:/raylib/raylib/cmake/AddIfFlagCompiles.cmake:3 (CHECK_C_COMPILER_FLAG)"
+      - "C:/raylib/raylib/cmake/CompilerFlags.cmake:5 (add_if_flag_compiles)"
+      - "C:/raylib/raylib/CMakeLists.txt:35 (include)"
+    checks:
+      - "Performing Test COMPILER_HAS_THOSE_TOGGLES"
+    directories:
+      source: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-3o2f9u"
+      binary: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-3o2f9u"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/raylib/raylib/cmake"
+    buildResult:
+      variable: "COMPILER_HAS_THOSE_TOGGLES"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-3o2f9u'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_cba52.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.11.9+a69bbaaf5 for .NET Framework
+        Build started 07/06/2025 10:02:14 CH.
+        
+        Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3o2f9u\\cmTC_cba52.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_cba52.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3o2f9u\\Debug\\".
+          Creating directory "cmTC_cba52.dir\\Debug\\cmTC_cba52.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_cba52.dir\\Debug\\cmTC_cba52.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_cba52.dir\\Debug\\cmTC_cba52.tlog\\unsuccessfulbuild".
+        VcpkgTripletSelection:
+          Using triplet "x64-windows" from "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\"
+          Using normalized configuration "Debug"
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\CL.exe /c /I"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D COMPILER_HAS_THOSE_TOGGLES /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_cba52.dir\\Debug\\\\" /Fd"cmTC_cba52.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue  -Werror=pointer-arith "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3o2f9u\\src.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.41.34123 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /I"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D COMPILER_HAS_THOSE_TOGGLES /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_cba52.dir\\Debug\\\\" /Fd"cmTC_cba52.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue  -Werror=pointer-arith "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3o2f9u\\src.c"
+        cl : command line  error D8021: invalid numeric argument '/Werror=pointer-arith' [D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3o2f9u\\cmTC_cba52.vcxproj]
+        Done Building Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3o2f9u\\cmTC_cba52.vcxproj" (default targets) -- FAILED.
+        
+        Build FAILED.
+        
+        "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3o2f9u\\cmTC_cba52.vcxproj" (default target) (1) ->
+        (ClCompile target) -> 
+          cl : command line  error D8021: invalid numeric argument '/Werror=pointer-arith' [D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-3o2f9u\\cmTC_cba52.vcxproj]
+        
+            0 Warning(s)
+            1 Error(s)
+        
+        Time Elapsed 00:00:00.51
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake:108 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCSourceCompiles.cmake:58 (cmake_check_source_compiles)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/FindThreads.cmake:97 (CHECK_C_SOURCE_COMPILES)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/FindThreads.cmake:163 (_threads_check_libc)"
+      - "C:/raylib/raylib/src/external/glfw/CMakeLists.txt:60 (find_package)"
+    checks:
+      - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
+    directories:
+      source: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-ky6uaa"
+      binary: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-ky6uaa"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/raylib/raylib/cmake;C:/raylib/raylib/src/external/glfw/CMake/modules"
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-ky6uaa'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_c801c.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.11.9+a69bbaaf5 for .NET Framework
+        Build started 07/06/2025 10:02:15 CH.
+        
+        Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ky6uaa\\cmTC_c801c.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_c801c.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ky6uaa\\Debug\\".
+          Creating directory "cmTC_c801c.dir\\Debug\\cmTC_c801c.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_c801c.dir\\Debug\\cmTC_c801c.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_c801c.dir\\Debug\\cmTC_c801c.tlog\\unsuccessfulbuild".
+        VcpkgTripletSelection:
+          Using triplet "x64-windows" from "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\"
+          Using normalized configuration "Debug"
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\CL.exe /c /I"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_c801c.dir\\Debug\\\\" /Fd"cmTC_c801c.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ky6uaa\\src.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.41.34123 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /I"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_c801c.dir\\Debug\\\\" /Fd"cmTC_c801c.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ky6uaa\\src.c"
+          src.c
+        D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ky6uaa\\src.c(1,10): error C1083: Cannot open include file: 'pthread.h': No such file or directory [D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ky6uaa\\cmTC_c801c.vcxproj]
+        Done Building Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ky6uaa\\cmTC_c801c.vcxproj" (default targets) -- FAILED.
+        
+        Build FAILED.
+        
+        "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ky6uaa\\cmTC_c801c.vcxproj" (default target) (1) ->
+        (ClCompile target) -> 
+          D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ky6uaa\\src.c(1,10): error C1083: Cannot open include file: 'pthread.h': No such file or directory [D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ky6uaa\\cmTC_c801c.vcxproj]
+        
+            0 Warning(s)
+            1 Error(s)
+        
+        Time Elapsed 00:00:00.42
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckLibraryExists.cmake:78 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/FindThreads.cmake:112 (CHECK_LIBRARY_EXISTS)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/FindThreads.cmake:175 (_threads_check_lib)"
+      - "C:/raylib/raylib/src/external/glfw/CMakeLists.txt:60 (find_package)"
+    checks:
+      - "Looking for pthread_create in pthreads"
+    directories:
+      source: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-7a5d7p"
+      binary: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-7a5d7p"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/raylib/raylib/cmake;C:/raylib/raylib/src/external/glfw/CMake/modules"
+    buildResult:
+      variable: "CMAKE_HAVE_PTHREADS_CREATE"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-7a5d7p'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_02e1a.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.11.9+a69bbaaf5 for .NET Framework
+        Build started 07/06/2025 10:02:16 CH.
+        
+        Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-7a5d7p\\cmTC_02e1a.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_02e1a.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-7a5d7p\\Debug\\".
+          Creating directory "cmTC_02e1a.dir\\Debug\\cmTC_02e1a.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_02e1a.dir\\Debug\\cmTC_02e1a.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_02e1a.dir\\Debug\\cmTC_02e1a.tlog\\unsuccessfulbuild".
+        VcpkgTripletSelection:
+          Using triplet "x64-windows" from "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\"
+          Using normalized configuration "Debug"
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\CL.exe /c /I"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_02e1a.dir\\Debug\\\\" /Fd"cmTC_02e1a.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-7a5d7p\\CheckFunctionExists.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.41.34123 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /I"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_02e1a.dir\\Debug\\\\" /Fd"cmTC_02e1a.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-7a5d7p\\CheckFunctionExists.c"
+          CheckFunctionExists.c
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-7a5d7p\\Debug\\cmTC_02e1a.exe" /INCREMENTAL /ILK:"cmTC_02e1a.dir\\Debug\\cmTC_02e1a.ilk" /NOLOGO /LIBPATH:"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\lib" /LIBPATH:"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\lib\\manual-link" pthreads.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\lib\\*.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-7a5d7p/Debug/cmTC_02e1a.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-7a5d7p/Debug/cmTC_02e1a.lib" /MACHINE:X64  /machine:x64 cmTC_02e1a.dir\\Debug\\CheckFunctionExists.obj
+        LINK : fatal error LNK1104: cannot open file 'pthreads.lib' [D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-7a5d7p\\cmTC_02e1a.vcxproj]
+        Done Building Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-7a5d7p\\cmTC_02e1a.vcxproj" (default targets) -- FAILED.
+        
+        Build FAILED.
+        
+        "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-7a5d7p\\cmTC_02e1a.vcxproj" (default target) (1) ->
+        (Link target) -> 
+          LINK : fatal error LNK1104: cannot open file 'pthreads.lib' [D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-7a5d7p\\cmTC_02e1a.vcxproj]
+        
+            0 Warning(s)
+            1 Error(s)
+        
+        Time Elapsed 00:00:00.82
+        
+      exitCode: 1
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckLibraryExists.cmake:78 (try_compile)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/FindThreads.cmake:112 (CHECK_LIBRARY_EXISTS)"
+      - "C:/Program Files/CMake/share/cmake-3.31/Modules/FindThreads.cmake:176 (_threads_check_lib)"
+      - "C:/raylib/raylib/src/external/glfw/CMakeLists.txt:60 (find_package)"
+    checks:
+      - "Looking for pthread_create in pthread"
+    directories:
+      source: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-twirfi"
+      binary: "D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-twirfi"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/raylib/raylib/cmake;C:/raylib/raylib/src/external/glfw/CMake/modules"
+    buildResult:
+      variable: "CMAKE_HAVE_PTHREAD_CREATE"
+      cached: true
+      stdout: |
+        Change Dir: 'D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-twirfi'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_a3d51.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.11.9+a69bbaaf5 for .NET Framework
+        Build started 07/06/2025 10:02:17 CH.
+        
+        Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-twirfi\\cmTC_a3d51.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_a3d51.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-twirfi\\Debug\\".
+          Creating directory "cmTC_a3d51.dir\\Debug\\cmTC_a3d51.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_a3d51.dir\\Debug\\cmTC_a3d51.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_a3d51.dir\\Debug\\cmTC_a3d51.tlog\\unsuccessfulbuild".
+        VcpkgTripletSelection:
+          Using triplet "x64-windows" from "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\"
+          Using normalized configuration "Debug"
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\CL.exe /c /I"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_a3d51.dir\\Debug\\\\" /Fd"cmTC_a3d51.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-twirfi\\CheckFunctionExists.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.41.34123 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /I"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\include" /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_a3d51.dir\\Debug\\\\" /Fd"cmTC_a3d51.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-twirfi\\CheckFunctionExists.c"
+          CheckFunctionExists.c
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.41.34120\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-twirfi\\Debug\\cmTC_a3d51.exe" /INCREMENTAL /ILK:"cmTC_a3d51.dir\\Debug\\cmTC_a3d51.ilk" /NOLOGO /LIBPATH:"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\lib" /LIBPATH:"C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\lib\\manual-link" pthread.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib "C:\\Users\\HP\\vcpkg\\installed\\x64-windows\\debug\\lib\\*.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-twirfi/Debug/cmTC_a3d51.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/Downloads/Ref/Gia/Mario/build/CMakeFiles/CMakeScratch/TryCompile-twirfi/Debug/cmTC_a3d51.lib" /MACHINE:X64  /machine:x64 cmTC_a3d51.dir\\Debug\\CheckFunctionExists.obj
+        LINK : fatal error LNK1104: cannot open file 'pthread.lib' [D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-twirfi\\cmTC_a3d51.vcxproj]
+        Done Building Project "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-twirfi\\cmTC_a3d51.vcxproj" (default targets) -- FAILED.
+        
+        Build FAILED.
+        
+        "D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-twirfi\\cmTC_a3d51.vcxproj" (default target) (1) ->
+        (Link target) -> 
+          LINK : fatal error LNK1104: cannot open file 'pthread.lib' [D:\\Downloads\\Ref\\Gia\\Mario\\build\\CMakeFiles\\CMakeScratch\\TryCompile-twirfi\\cmTC_a3d51.vcxproj]
+        
+            0 Warning(s)
+            1 Error(s)
+        
+        Time Elapsed 00:00:00.58
+        
+      exitCode: 1
 ...

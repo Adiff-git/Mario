@@ -270,6 +270,30 @@ src/CollisionProbe.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/CollisionProbe.cpp.s
 .PHONY : src/CollisionProbe.cpp.s
 
+src/Fireball.obj: src/Fireball.cpp.obj
+.PHONY : src/Fireball.obj
+
+# target to build an object file
+src/Fireball.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/Fireball.cpp.obj
+.PHONY : src/Fireball.cpp.obj
+
+src/Fireball.i: src/Fireball.cpp.i
+.PHONY : src/Fireball.i
+
+# target to preprocess a source file
+src/Fireball.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/Fireball.cpp.i
+.PHONY : src/Fireball.cpp.i
+
+src/Fireball.s: src/Fireball.cpp.s
+.PHONY : src/Fireball.s
+
+# target to generate assembly for a file
+src/Fireball.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/Fireball.cpp.s
+.PHONY : src/Fireball.cpp.s
+
 src/GameClock.obj: src/GameClock.cpp.obj
 .PHONY : src/GameClock.obj
 
@@ -294,6 +318,54 @@ src/GameClock.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/GameClock.cpp.s
 .PHONY : src/GameClock.cpp.s
 
+src/GameWorld.obj: src/GameWorld.cpp.obj
+.PHONY : src/GameWorld.obj
+
+# target to build an object file
+src/GameWorld.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/GameWorld.cpp.obj
+.PHONY : src/GameWorld.cpp.obj
+
+src/GameWorld.i: src/GameWorld.cpp.i
+.PHONY : src/GameWorld.i
+
+# target to preprocess a source file
+src/GameWorld.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/GameWorld.cpp.i
+.PHONY : src/GameWorld.cpp.i
+
+src/GameWorld.s: src/GameWorld.cpp.s
+.PHONY : src/GameWorld.s
+
+# target to generate assembly for a file
+src/GameWorld.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/GameWorld.cpp.s
+.PHONY : src/GameWorld.cpp.s
+
+src/Map.obj: src/Map.cpp.obj
+.PHONY : src/Map.obj
+
+# target to build an object file
+src/Map.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/Map.cpp.obj
+.PHONY : src/Map.cpp.obj
+
+src/Map.i: src/Map.cpp.i
+.PHONY : src/Map.i
+
+# target to preprocess a source file
+src/Map.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/Map.cpp.i
+.PHONY : src/Map.cpp.i
+
+src/Map.s: src/Map.cpp.s
+.PHONY : src/Map.s
+
+# target to generate assembly for a file
+src/Map.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/Map.cpp.s
+.PHONY : src/Map.cpp.s
+
 src/Mario.obj: src/Mario.cpp.obj
 .PHONY : src/Mario.obj
 
@@ -317,6 +389,30 @@ src/Mario.s: src/Mario.cpp.s
 src/Mario.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/Mario.cpp.s
 .PHONY : src/Mario.cpp.s
+
+src/MediatorCollision.obj: src/MediatorCollision.cpp.obj
+.PHONY : src/MediatorCollision.obj
+
+# target to build an object file
+src/MediatorCollision.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/MediatorCollision.cpp.obj
+.PHONY : src/MediatorCollision.cpp.obj
+
+src/MediatorCollision.i: src/MediatorCollision.cpp.i
+.PHONY : src/MediatorCollision.i
+
+# target to preprocess a source file
+src/MediatorCollision.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/MediatorCollision.cpp.i
+.PHONY : src/MediatorCollision.cpp.i
+
+src/MediatorCollision.s: src/MediatorCollision.cpp.s
+.PHONY : src/MediatorCollision.s
+
+# target to generate assembly for a file
+src/MediatorCollision.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/MediatorCollision.cpp.s
+.PHONY : src/MediatorCollision.cpp.s
 
 src/Object.obj: src/Object.cpp.obj
 .PHONY : src/Object.obj
@@ -366,6 +462,30 @@ src/ResrcManager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/ResrcManager.cpp.s
 .PHONY : src/ResrcManager.cpp.s
 
+src/Tile.obj: src/Tile.cpp.obj
+.PHONY : src/Tile.obj
+
+# target to build an object file
+src/Tile.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/Tile.cpp.obj
+.PHONY : src/Tile.cpp.obj
+
+src/Tile.i: src/Tile.cpp.i
+.PHONY : src/Tile.i
+
+# target to preprocess a source file
+src/Tile.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/Tile.cpp.i
+.PHONY : src/Tile.cpp.i
+
+src/Tile.s: src/Tile.cpp.s
+.PHONY : src/Tile.s
+
+# target to generate assembly for a file
+src/Tile.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/Tile.cpp.s
+.PHONY : src/Tile.cpp.s
+
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
 
@@ -412,18 +532,33 @@ help:
 	@echo ... src/CollisionProbe.obj
 	@echo ... src/CollisionProbe.i
 	@echo ... src/CollisionProbe.s
+	@echo ... src/Fireball.obj
+	@echo ... src/Fireball.i
+	@echo ... src/Fireball.s
 	@echo ... src/GameClock.obj
 	@echo ... src/GameClock.i
 	@echo ... src/GameClock.s
+	@echo ... src/GameWorld.obj
+	@echo ... src/GameWorld.i
+	@echo ... src/GameWorld.s
+	@echo ... src/Map.obj
+	@echo ... src/Map.i
+	@echo ... src/Map.s
 	@echo ... src/Mario.obj
 	@echo ... src/Mario.i
 	@echo ... src/Mario.s
+	@echo ... src/MediatorCollision.obj
+	@echo ... src/MediatorCollision.i
+	@echo ... src/MediatorCollision.s
 	@echo ... src/Object.obj
 	@echo ... src/Object.i
 	@echo ... src/Object.s
 	@echo ... src/ResrcManager.obj
 	@echo ... src/ResrcManager.i
 	@echo ... src/ResrcManager.s
+	@echo ... src/Tile.obj
+	@echo ... src/Tile.i
+	@echo ... src/Tile.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s

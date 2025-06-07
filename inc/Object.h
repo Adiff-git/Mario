@@ -81,13 +81,13 @@ class Object : public Drawable {
         void SetCollisionProbesLeft(CollisionProbe Left );
 
         // Getters
-        Vector2& GetPos();
-        Vector2& GetSize();
+        Vector2 GetPos() const ;
+        Vector2 GetSize() const ;
         float GetAngle() const;
         ObjectState GetState() const;
-        Color& GetColor();
+        Color GetColor() const ;
         Direction GetDirection() const;
-        Vector2& GetVel();
+        Vector2 GetVel() const;
 
         float GetFrameTime() const;
         float GetFrameAcum() const;

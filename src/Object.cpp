@@ -41,19 +41,9 @@ void Object::UpdateCollisionProbes() {
 
 void Object::UpdateStateAndPhysic() {
     // Update the object's state and physics based on its current state
-    switch (state) {
-        case OBJECT_STATE_JUMPING:
-            vel.y -= 0.5f; // Simulate gravity
-            break;
-        case OBJECT_STATE_FALLING:
-            vel.y += 0.5f; // Simulate gravity
-            break;
-        default:
-            break;
-    }
+    pos.x += vel.x * GameClock::getInstance().FIXED_TIME_STEP;
+    pos.y += vel.y * GameClock::getInstance().FIXED_TIME_STEP;
     
-    pos.x += vel.x;
-    pos.y += vel.y;
     UpdateCollisionProbes(); // Update collision probes after moving
 }
 
@@ -140,11 +130,11 @@ void Object::SetCollisionProbesLeft(CollisionProbe Left) {
 }
 
 //Getters
-Vector2& Object::GetPos() {
+Vector2 Object::GetPos() const {
     return pos;
 }
 
-Vector2& Object::GetSize() {
+Vector2 Object::GetSize() const{
     return size;
 }
 
@@ -156,7 +146,7 @@ ObjectState Object::GetState() const {
     return state;
 }
 
-Color& Object::GetColor() {
+Color Object::GetColor() const {
     return color;
 }
 
@@ -164,7 +154,7 @@ Direction Object::GetDirection() const {
     return direction;
 }
 
-Vector2& Object::GetVel() {
+Vector2 Object::GetVel() const{
     return vel;
 }
 

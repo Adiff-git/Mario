@@ -7,15 +7,39 @@
 },
 {
   "directory": "D:/Downloads/Ref/Gia/Mario/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\Fireball.cpp.obj -c D:\\Downloads\\Ref\\Gia\\Mario\\src\\Fireball.cpp",
+  "file": "D:/Downloads/Ref/Gia/Mario/src/Fireball.cpp",
+  "output": "CMakeFiles/Mario.dir/src/Fireball.cpp.obj"
+},
+{
+  "directory": "D:/Downloads/Ref/Gia/Mario/build",
   "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\GameClock.cpp.obj -c D:\\Downloads\\Ref\\Gia\\Mario\\src\\GameClock.cpp",
   "file": "D:/Downloads/Ref/Gia/Mario/src/GameClock.cpp",
   "output": "CMakeFiles/Mario.dir/src/GameClock.cpp.obj"
 },
 {
   "directory": "D:/Downloads/Ref/Gia/Mario/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\GameWorld.cpp.obj -c D:\\Downloads\\Ref\\Gia\\Mario\\src\\GameWorld.cpp",
+  "file": "D:/Downloads/Ref/Gia/Mario/src/GameWorld.cpp",
+  "output": "CMakeFiles/Mario.dir/src/GameWorld.cpp.obj"
+},
+{
+  "directory": "D:/Downloads/Ref/Gia/Mario/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\Map.cpp.obj -c D:\\Downloads\\Ref\\Gia\\Mario\\src\\Map.cpp",
+  "file": "D:/Downloads/Ref/Gia/Mario/src/Map.cpp",
+  "output": "CMakeFiles/Mario.dir/src/Map.cpp.obj"
+},
+{
+  "directory": "D:/Downloads/Ref/Gia/Mario/build",
   "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\Mario.cpp.obj -c D:\\Downloads\\Ref\\Gia\\Mario\\src\\Mario.cpp",
   "file": "D:/Downloads/Ref/Gia/Mario/src/Mario.cpp",
   "output": "CMakeFiles/Mario.dir/src/Mario.cpp.obj"
+},
+{
+  "directory": "D:/Downloads/Ref/Gia/Mario/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\MediatorCollision.cpp.obj -c D:\\Downloads\\Ref\\Gia\\Mario\\src\\MediatorCollision.cpp",
+  "file": "D:/Downloads/Ref/Gia/Mario/src/MediatorCollision.cpp",
+  "output": "CMakeFiles/Mario.dir/src/MediatorCollision.cpp.obj"
 },
 {
   "directory": "D:/Downloads/Ref/Gia/Mario/build",
@@ -28,6 +52,12 @@
   "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\ResrcManager.cpp.obj -c D:\\Downloads\\Ref\\Gia\\Mario\\src\\ResrcManager.cpp",
   "file": "D:/Downloads/Ref/Gia/Mario/src/ResrcManager.cpp",
   "output": "CMakeFiles/Mario.dir/src/ResrcManager.cpp.obj"
+},
+{
+  "directory": "D:/Downloads/Ref/Gia/Mario/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\Tile.cpp.obj -c D:\\Downloads\\Ref\\Gia\\Mario\\src\\Tile.cpp",
+  "file": "D:/Downloads/Ref/Gia/Mario/src/Tile.cpp",
+  "output": "CMakeFiles/Mario.dir/src/Tile.cpp.obj"
 },
 {
   "directory": "D:/Downloads/Ref/Gia/Mario/build",
