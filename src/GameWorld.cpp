@@ -27,7 +27,7 @@ void GameWorld::UpdateWorld()
             CollisionType fireballCollision = fireball->checkCollision(*tile);
             if ( fireballCollision  )
             {
-                mediatorCollision.HandleCollision(fireball.get(), tile);
+                mediatorCollision.HandleCollision(fireball, tile);
             }
         }
     }

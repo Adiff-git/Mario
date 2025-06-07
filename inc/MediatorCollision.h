@@ -5,9 +5,9 @@
 #include "Tile.h"
 #include "Fireball.h"
 
-class Mario; // Forward declaration
-class Tile; // Forward declaration
-class Fireball; // Forward declaration
+// class Mario; // Forward declaration
+// class Tile; // Forward declaration
+// class Fireball; // Forward declaration
 
 class MediatorCollision {
     private:

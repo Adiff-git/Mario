@@ -1,5 +1,5 @@
 #include "Mario.h"
-
+#include "GameWorld.h"
 // full constructor
 Mario::Mario(Vector2 pos, int lives, MarioState form)
     : Object(pos, Vector2{50, 50}, Vector2{0, 0}, WHITE, 0.1f, 4, DIRECTION_RIGHT),
@@ -137,9 +137,10 @@ void Mario::HandleInput()
 }
 
 void Mario::Update() {
-    // UpdateCollisionProbes();
-    // UpdateStateAndPhysic();
-    // HandleInput();
+
+    UpdateStateAndPhysic();
+    UpdateCollisionProbes();
+
     const float deltaTime = GetFrameTime();
     switch(marioState) { // Corrected from MarioState to marioState
         case SMALL:
@@ -354,7 +355,7 @@ void Mario::UpdateStateAndPhysic() {
     vel.y += GameWorld::GetGravity() * deltaTime; // Apply gravity
 
     Object::UpdateStateAndPhysic(); // Call the base class method to handle position updates and collision checks
-    // because Object::UpdateStateAndPhysic() will update the position based on velocity
+    // // because Object::UpdateStateAndPhysic() will update the position based on velocity
 
     // Update fireballs
     for (auto i = fireballs.begin(); i != fireballs.end();)
@@ -375,7 +376,9 @@ void Mario::UpdateStateAndPhysic() {
 
 void Mario::draw() {
     Update();
-    DrawTexture(*sprite, pos.x, pos.y, WHITE);
+    DrawTexture(ResrcManager::GetInstance().getTexture("SMALLMARIO_0_RIGHT"), pos.x, pos.y, WHITE);
+        std::cout << "Mario position: " << pos.x << ", " << pos.y << std::endl;
+    std::cout << "Mario velocity: " << vel.x << ", " << vel.y << std::endl;
     cpN.draw();
     cpS.draw();
     cpE.draw();

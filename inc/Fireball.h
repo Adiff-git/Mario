@@ -3,7 +3,7 @@
 #include "Tile.h"
 #include "ResrcManager.h"
 #include "GameClock.h"
-#include "GameWorld.h"
+
 class Fireball: public Object{
 private:
     Texture2D *sprite;

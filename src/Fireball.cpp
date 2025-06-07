@@ -1,5 +1,5 @@
 #include "Fireball.h"
-
+#include "GameWorld.h"
 
 Fireball::Fireball(Vector2 pos, Direction direction) : Object(pos, Vector2{16,16}, WHITE), distanceLeft(MAX_DISTANCE)
 {

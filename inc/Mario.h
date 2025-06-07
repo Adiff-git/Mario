@@ -1,4 +1,5 @@
 #pragma once
+#include <list>
 
 #include "raylib.h"
 #include "Drawable.h"
@@ -6,12 +7,10 @@
 #include "CollisionProbe.h"
 #include "GameClock.h"
 #include "ResrcManager.h"
-#include <list>
 #include "Fireball.h"
 
 // Removed unnecessary include of GameWorld.h
-class Fireball; // Forward declaration
-
+// class Fireball; // Forward declaration
 enum MarioState {
     SMALL = 0,
     BIG,

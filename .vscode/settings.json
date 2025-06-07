@@ -69,6 +69,19 @@
         "xstring": "cpp",
         "xtr1common": "cpp",
         "xtree": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "*.m": "cpp",
+        "cstdarg": "cpp",
+        "cwctype": "cpp",
+        "deque": "cpp",
+        "fstream": "cpp",
+        "iostream": "cpp",
+        "numbers": "cpp",
+        "queue": "cpp",
+        "random": "cpp",
+        "variant": "cpp",
+        "memory_resource": "cpp",
+        "string_view": "cpp",
+        "text_encoding": "cpp"
     }
 }
