@@ -32,7 +32,6 @@ Object::~Object() {
 }
 
 void Object::UpdateCollisionProbes() {
-    // Update the position of collision probes based on the object's position and size
     cpN.setPos(Vector2{ pos.x + size.x / 2 - 5, pos.y });
     cpS.setPos(Vector2{ pos.x + size.x / 2 - 5, pos.y + size.y - 5 });
     cpE.setPos(Vector2{ pos.x + size.x - 5, pos.y + size.y / 2 - 5 });

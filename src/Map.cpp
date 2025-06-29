@@ -29,7 +29,7 @@ void Map::nextMap()
 void Map::LoadMap(int mapIndex)
 {
     char* map = nullptr;
-    std::string mapFileName = "resources/Map/Map" +std::to_string(mapIndex) + ".json";
+    std::string mapFileName = "resources/maps/map" +std::to_string(mapIndex) + ".json";
     std::ifstream file(mapFileName);
     if (!file) {
         std::cerr << "Could not open json file " << mapFileName << std::endl;

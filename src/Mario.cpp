@@ -377,8 +377,8 @@ void Mario::UpdateStateAndPhysic() {
 void Mario::draw() {
     Update();
     DrawTexture(ResrcManager::GetInstance().getTexture("SMALLMARIO_0_RIGHT"), pos.x, pos.y, WHITE);
-        std::cout << "Mario position: " << pos.x << ", " << pos.y << std::endl;
-    std::cout << "Mario velocity: " << vel.x << ", " << vel.y << std::endl;
+        // std::cout << "Mario position: " << pos.x << ", " << pos.y << std::endl;
+    // std::cout << "Mario velocity: " << vel.x << ", " << vel.y << std::endl;
     cpN.draw();
     cpS.draw();
     cpE.draw();

@@ -68,10 +68,10 @@ void ResrcManager::loadTextures() {
     textures["FIRE_MARIO_VICTORY"] = LoadTexture("resources/images/Object/mario/FireMarioVictory_0.png");
 
     {
-    textures["FIRE_BALL_0_RIGHT"] = LoadTexture("resources/Object/mario/FlowerMarioFireball_0.png");
-    textures["FIRE_BALL_1_RIGHT"] = LoadTexture("resources/Object/mario/FlowerMarioFireball_1.png");
-    textures["FIRE_BALL_2_RIGHT"] = LoadTexture("resources/Object/mario/FlowerMarioFireball_2.png");
-    textures["FIRE_BALL_3_RIGHT"] = LoadTexture("resources/Object/mario/FlowerMarioFireball_3.png");
+    textures["FIRE_BALL_0_RIGHT"] = LoadTexture("resources/images/Object/mario/FlowerMarioFireball_0.png");
+    textures["FIRE_BALL_1_RIGHT"] = LoadTexture("resources/images/Object/mario/FlowerMarioFireball_1.png");
+    textures["FIRE_BALL_2_RIGHT"] = LoadTexture("resources/images/Object/mario/FlowerMarioFireball_2.png");
+    textures["FIRE_BALL_3_RIGHT"] = LoadTexture("resources/images/Object/mario/FlowerMarioFireball_3.png");
     textures["FIRE_BALL_0_LEFT"] = FlipTextureHorizontal(textures["FIRE_BALL_0_RIGHT"]);
     textures["FIRE_BALL_1_LEFT"] = FlipTextureHorizontal(textures["FIRE_BALL_1_RIGHT"]);
     textures["FIRE_BALL_2_LEFT"] = FlipTextureHorizontal(textures["FIRE_BALL_2_RIGHT"]);
@@ -80,6 +80,11 @@ void ResrcManager::loadTextures() {
     //BACKGROUND
     {
     textures["BACKGROUND_0"] = LoadTexture("resources/images/backgrounds/background1.png");
+    }
+    //TILES
+    for (int i = 0; i < 104; ++i) {
+        std::string keyStr = "tile_" + std::to_string(i);
+        textures[keyStr] = LoadTexture(("resources/images/tiles/tile_" + std::to_string(i) + ".png").c_str());
     }
 }
 

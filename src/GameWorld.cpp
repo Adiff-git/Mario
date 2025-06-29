@@ -3,6 +3,8 @@
 
 GameWorld::GameWorld() : player(), interactiveTiles(map.getInteractiveTiles())
 {
+    // Trong GameWorld constructor, thêm:
+    player = Mario(Vector2{100, 100}, 3, SMALL); // Đặt vị trí cụ thể
     map.LoadMap(0);
     camera.offset = Vector2{(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
     camera.target = player.GetPos();
@@ -17,10 +19,14 @@ GameWorld::~GameWorld()
 
 void GameWorld::UpdateWorld()
 {
+    player.UpdateStateAndPhysic();
     for ( auto const &tile : interactiveTiles )
     {
         CollisionType collision = player.checkCollision(*tile);
-        mediatorCollision.HandleCollision(&player, tile);
+        if ( collision )
+        {
+            mediatorCollision.HandleCollision(&player, tile);
+        }
 
         for ( auto &fireball : *player.GetFireballs() )
         {
@@ -31,7 +37,7 @@ void GameWorld::UpdateWorld()
             }
         }
     }
-    player.UpdateStateAndPhysic();
+    
 }
 
 void GameWorld::DrawWorld()
