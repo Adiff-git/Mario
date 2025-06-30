@@ -27,7 +27,7 @@ class CollisionProbe : public Drawable {
 
         void draw() override;
 
-        CollisionType checkCollision( const Rectangle &rect) const;
+        bool checkCollision( const Rectangle &rect) const;
 
         //Getters
         void setPos( Vector2 pos );

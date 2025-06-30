@@ -60,7 +60,7 @@ class Object : public Drawable {
 
         virtual void draw() = 0;
 
-        CollisionType checkCollision(const Object& other) const;
+        CollisionType checkCollisionType(const Object& other) const;
 
         void SetPos(Vector2 Pos);
         void SetSize(Vector2 size);

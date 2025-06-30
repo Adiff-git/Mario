@@ -43,6 +43,7 @@ class Mario : public Object {
         void moveRight();
         void stopMoving();
         void Duck();
+        void fire();
         void changeToBig();
         void changeToSmall();
         void changetoFire();

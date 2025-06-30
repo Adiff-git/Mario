@@ -95,7 +95,7 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
     Tile* isBtile = dynamic_cast<Tile*>(ObjectB);
     if (isAmario && isBtile|| isBmario&& isAtile)
     {
-        CollisionType AtoB = isAmario ? isAmario->checkCollision(*isBtile) : isBmario->checkCollision(*isAtile);
+        CollisionType AtoB = isAmario ? isAmario->checkCollisionType(*isBtile) : isBmario->checkCollisionType(*isAtile);
         if (isAmario)
             HandleMarioWithTile(isAmario, isBtile, AtoB);
         else
@@ -103,7 +103,7 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
     }
     else if (isAfireball && isBtile || isBfireball && isAtile)
     {
-        CollisionType AtoB = isAfireball ? isAfireball->checkCollision(*isBtile) : isBfireball->checkCollision(*isAtile);
+        CollisionType AtoB = isAfireball ? isAfireball->checkCollisionType(*isBtile) : isBfireball->checkCollisionType(*isAtile);
         if (isAfireball)
             HandleFireballWithTile(isAfireball, isBtile, AtoB);
         else

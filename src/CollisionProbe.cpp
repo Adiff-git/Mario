@@ -18,40 +18,14 @@ void CollisionProbe::draw() {
     DrawRectangleV(pos, size, color);
 }
 
-CollisionType CollisionProbe::checkCollision(const Rectangle &rect) const {
+bool CollisionProbe::checkCollision(const Rectangle &rect) const {
     Rectangle probeRect = { pos.x, pos.y, size.x, size.y };
     
     if (CheckCollisionRecs(probeRect, rect)) {
-        // Xác định phương va chạm dựa trên vị trí tương đối
-        
-        // Tính các cạnh và độ xâm nhập
-        float leftPenetration = (rect.x + rect.width) - probeRect.x;                // Bên trái xâm nhập bao nhiêu
-        float rightPenetration = (probeRect.x + probeRect.width) - rect.x;          // Bên phải xâm nhập bao nhiêu
-        float topPenetration = (rect.y + rect.height) - probeRect.y;                // Phía trên xâm nhập bao nhiêu
-        float bottomPenetration = (probeRect.y + probeRect.height) - rect.y;        // Phía dưới xâm nhập bao nhiêu
-        
-        // Tìm hướng va chạm dựa trên độ xâm nhập nhỏ nhất
-        float minPenetration = leftPenetration;
-        CollisionType collisionType = COLLISION_TYPE_WEST;
-        
-        if (rightPenetration < minPenetration) {
-            minPenetration = rightPenetration;
-            collisionType = COLLISION_TYPE_EAST;
-        }
-        
-        if (topPenetration < minPenetration) {
-            minPenetration = topPenetration;
-            collisionType = COLLISION_TYPE_NORTH;
-        }
-        
-        if (bottomPenetration < minPenetration) {
-            collisionType = COLLISION_TYPE_SOUTH;
-        }
-        
-        return collisionType;
+        return true;
     }
     
-    return COLLISION_TYPE_NONE;
+    return false;
 }
 
 void CollisionProbe::setPos(Vector2 pos) {

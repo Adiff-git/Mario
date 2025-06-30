@@ -22,7 +22,7 @@ void GameWorld::UpdateWorld()
     player.UpdateStateAndPhysic();
     for ( auto const &tile : interactiveTiles )
     {
-        CollisionType collision = player.checkCollision(*tile);
+        CollisionType collision = player.checkCollisionType(*tile);
         if ( collision )
         {
             mediatorCollision.HandleCollision(&player, tile);
@@ -30,7 +30,7 @@ void GameWorld::UpdateWorld()
 
         for ( auto &fireball : *player.GetFireballs() )
         {
-            CollisionType fireballCollision = fireball->checkCollision(*tile);
+            CollisionType fireballCollision = fireball->checkCollisionType(*tile);
             if ( fireballCollision  )
             {
                 mediatorCollision.HandleCollision(fireball, tile);
