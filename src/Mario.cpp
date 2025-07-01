@@ -6,7 +6,7 @@ Mario::Mario(Vector2 pos, int lives, MarioState form)
       lives(lives), 
       accelerationX(660.5f), 
       maxSpeedX(500.0f), 
-      SpeedY(100.0f),
+      SpeedY(400.0f),
       marioState(form), 
       AdditionalState(SMALL),
       isDucking(false) 
@@ -31,7 +31,7 @@ Mario::Mario(Vector2 pos, int lives, MarioState form)
 
 }
 
-Mario::Mario() : lives(3), accelerationX(0), maxSpeedX(0), SpeedY(100), isDucking(false), marioState(SMALL), AdditionalState(SMALL) {
+Mario::Mario() : lives(3), accelerationX(0), maxSpeedX(0), SpeedY(400), isDucking(false), marioState(SMALL), AdditionalState(SMALL) {
     // Initialize default Mario state
 }
 
@@ -383,7 +383,7 @@ void Mario::draw() {
     {
         fireball->draw();
     }
-    DrawTexture(ResrcManager::GetInstance().getTexture("SMALLMARIO_0_RIGHT"), pos.x, pos.y, WHITE);
+    DrawTexture(*sprite, pos.x, pos.y, WHITE);
         // std::cout << "Mario position: " << pos.x << ", " << pos.y << std::endl;
     // std::cout << "Mario velocity: " << vel.x << ", " << vel.y << std::endl;
     cpN.draw();
