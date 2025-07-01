@@ -6,7 +6,7 @@ Mario::Mario(Vector2 pos, int lives, MarioState form)
       lives(lives), 
       accelerationX(660.5f), 
       maxSpeedX(500.0f), 
-      SpeedY(400.0f),
+      SpeedY(600.0f),
       marioState(form), 
       AdditionalState(SMALL),
       isDucking(false) 
@@ -31,7 +31,7 @@ Mario::Mario(Vector2 pos, int lives, MarioState form)
 
 }
 
-Mario::Mario() : lives(3), accelerationX(0), maxSpeedX(0), SpeedY(400), isDucking(false), marioState(SMALL), AdditionalState(SMALL) {
+Mario::Mario() : lives(3), accelerationX(0), maxSpeedX(0), SpeedY(600), isDucking(false), marioState(SMALL), AdditionalState(SMALL) {
     // Initialize default Mario state
 }
 
@@ -176,17 +176,17 @@ void Mario::Update() {
 
             if (state == OBJECT_STATE_JUMPING) {
                 if (direction == DIRECTION_RIGHT) {
-                    sprite = &ResrcManager::GetInstance().getTexture("SMALLMARIO_JUMPING_0_RIGHT");
+                    sprite = &ResrcManager::GetInstance().getTexture("SMALLMARIO_JUMPING_RIGHT");
                 } else if (direction == DIRECTION_LEFT) {
-                    sprite = &ResrcManager::GetInstance().getTexture("SMALLMARIO_JUMPING_0_LEFT");
+                    sprite = &ResrcManager::GetInstance().getTexture("SMALLMARIO_JUMPING_LEFT");
                 }
             }
 
             if (state == OBJECT_STATE_FALLING) {
                 if (direction == DIRECTION_RIGHT) {
-                    sprite = &ResrcManager::GetInstance().getTexture("SMALLMARIO_FALLING_0_RIGHT");
+                    sprite = &ResrcManager::GetInstance().getTexture("SMALLMARIO_FALLING_RIGHT");
                 } else if (direction == DIRECTION_LEFT) {
-                    sprite = &ResrcManager::GetInstance().getTexture("SMALLMARIO_FALLING_0_LEFT");
+                    sprite = &ResrcManager::GetInstance().getTexture("SMALLMARIO_FALLING_LEFT");
                 }
             }
             break;
@@ -197,41 +197,45 @@ void Mario::Update() {
                 if (vel.x != 0){
                     if ( direction == DIRECTION_RIGHT) {
                         if(currentFrame == 0) {
-                            sprite = &ResrcManager::GetInstance().getTexture("BIG_MARIO_0_RIGHT");
+                            sprite = &ResrcManager::GetInstance().getTexture("SUPER_MARIO_0_RIGHT");
                         } else if(currentFrame == 1) {
-                            sprite = &ResrcManager::GetInstance().getTexture("BIG_MARIO_1_RIGHT");
+                            sprite = &ResrcManager::GetInstance().getTexture("SUPER_MARIO_1_RIGHT");
+                        } else if(currentFrame == 2) {
+                            sprite = &ResrcManager::GetInstance().getTexture("SUPER_MARIO_2_RIGHT");
                         }
                     }
                     else if ( direction == DIRECTION_LEFT) {
                         if(currentFrame == 0) {
-                            sprite = &ResrcManager::GetInstance().getTexture("BIG_MARIO_0_LEFT");
+                            sprite = &ResrcManager::GetInstance().getTexture("SUPER_MARIO_0_LEFT");
                         } else if(currentFrame == 1) {
-                            sprite = &ResrcManager::GetInstance().getTexture("BIG_MARIO_1_LEFT");
+                            sprite = &ResrcManager::GetInstance().getTexture("SUPER_MARIO_1_LEFT");
+                        } else if(currentFrame == 2) {
+                            sprite = &ResrcManager::GetInstance().getTexture("SUPER_MARIO_2_LEFT");
                         }
                     }
                 }
                 if(vel.x == 0) {
                     if ( direction == DIRECTION_RIGHT) {
-                        sprite = &ResrcManager::GetInstance().getTexture("BIG_MARIO_0_RIGHT");
+                        sprite = &ResrcManager::GetInstance().getTexture("SUPER_MARIO_0_RIGHT");
                     } else if ( direction == DIRECTION_LEFT) {
-                        sprite = &ResrcManager::GetInstance().getTexture("BIG_MARIO_0_LEFT");
+                        sprite = &ResrcManager::GetInstance().getTexture("SUPER_MARIO_0_LEFT");
                     }
                 }
             }
 
             if (state == OBJECT_STATE_JUMPING) {
                 if (direction == DIRECTION_RIGHT) {
-                    sprite = &ResrcManager::GetInstance().getTexture("BIG_MARIO_JUMPING_0_RIGHT");
+                    sprite = &ResrcManager::GetInstance().getTexture("SUPER_MARIO_JUMPING_0_RIGHT");
                 } else if (direction == DIRECTION_LEFT) {
-                    sprite = &ResrcManager::GetInstance().getTexture("BIG_MARIO_JUMPING_0_LEFT");
+                    sprite = &ResrcManager::GetInstance().getTexture("SUPER_MARIO_JUMPING_0_LEFT");
                 }
             }
 
             if (state == OBJECT_STATE_FALLING) {
                 if (direction == DIRECTION_RIGHT) {
-                    sprite = &ResrcManager::GetInstance().getTexture("BIG_MARIO_FALLING_0_RIGHT");
+                    sprite = &ResrcManager::GetInstance().getTexture("SUPER_MARIO_FALLING_0_RIGHT");
                 } else if (direction == DIRECTION_LEFT) {
-                    sprite = &ResrcManager::GetInstance().getTexture("BIG_MARIO_FALLING_0_LEFT");
+                    sprite = &ResrcManager::GetInstance().getTexture("SUPER_MARIO_FALLING_0_LEFT");
                 }
             }
             break;
