@@ -118,7 +118,16 @@
 				7,
 				8,
 				9,
-				10
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19
 			]
 		}
 	],
@@ -126,11 +135,11 @@
 	[
 		{
 			"backtrace" : 2,
-			"id" : "glfw::@0007fcb0029cba81045f"
+			"id" : "raylib::@52310b9926f245239ea7"
 		},
 		{
 			"backtrace" : 2,
-			"id" : "raylib::@52310b9926f245239ea7"
+			"id" : "glfw::@0007fcb0029cba81045f"
 		}
 	],
 	"id" : "Mario::@6890427a1f51a3e7e1df",
@@ -206,7 +215,16 @@
 				7,
 				8,
 				9,
-				10
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19
 			]
 		}
 	],
@@ -215,7 +233,25 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
+			"path" : "src/Coin.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
 			"path" : "src/CollisionProbe.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/CourseClearToken.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/FireFlower.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -239,6 +275,12 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
+			"path" : "src/Item.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
 			"path" : "src/Map.cpp",
 			"sourceGroupIndex" : 0
 		},
@@ -257,7 +299,19 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
+			"path" : "src/Mushroom.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
 			"path" : "src/Object.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/OneUpMushroom.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -269,7 +323,25 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
+			"path" : "src/Start.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/ThreeUpMoon.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
 			"path" : "src/Tile.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/YoshiCoin.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{

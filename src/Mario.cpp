@@ -50,6 +50,14 @@ void Mario::SetState(ObjectState state) {
     this->state = state;
 }
 
+void Mario::setInvincible(bool value) {
+    isInvincible = value;
+}
+
+bool Mario::getInvincible() const {
+    return isInvincible;
+}
+
 void Mario::SetCoins(int c) {
     coins = c;
     NotifyCoinChange();

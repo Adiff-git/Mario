@@ -5,16 +5,25 @@ cmake_policy(SET CMP0009 NEW)
 # SOURCES at CMakeLists.txt:21 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/*.cpp")
 set(OLD_GLOB
+  "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/Coin.cpp"
   "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/CollisionProbe.cpp"
+  "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/CourseClearToken.cpp"
+  "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/FireFlower.cpp"
   "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/Fireball.cpp"
   "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/GameClock.cpp"
   "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/GameWorld.cpp"
+  "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/Item.cpp"
   "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/Map.cpp"
   "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/Mario.cpp"
   "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/MediatorCollision.cpp"
+  "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/Mushroom.cpp"
   "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/Object.cpp"
+  "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/OneUpMushroom.cpp"
   "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/ResrcManager.cpp"
+  "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/Start.cpp"
+  "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/ThreeUpMoon.cpp"
   "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/Tile.cpp"
+  "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/YoshiCoin.cpp"
   "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/main.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")

@@ -1,7 +1,5 @@
 #pragma once
-
 #include "Object.h"
-#include "CollisionType.h"
 #include "Mario.h"
 #include "raylib.h"
 
@@ -11,7 +9,7 @@ protected:
 
 public:
     Item();
-    Item::Item(Vector2 pos, Vector2 dim, Vector2 vel, Color color,
+    Item(Vector2 pos, Vector2 dim, Vector2 vel, Color color,
            float frameTime, int maxFrames, Direction facingDirection,
            int hitsToDie, int earnedPoints);
     virtual ~Item();

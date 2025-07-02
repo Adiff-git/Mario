@@ -1,5 +1,6 @@
 #include "GameWorld.h"
 
+float GameWorld::gravity = 200.0f;
 
 GameWorld::GameWorld() : player(), interactiveTiles(map.getInteractiveTiles())
 {

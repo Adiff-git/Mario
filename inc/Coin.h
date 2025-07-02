@@ -1,10 +1,11 @@
 #include "Item.h"
 #include "ResrcManager.h"
 #include <vector>
+using namespace std;
 
 class Coin : public Item {
 private:
-    std::vector<Texture2D*> coinFrames; 
+    vector<Texture2D*> coinFrames; 
 public:
     Coin(Vector2 pos);
     ~Coin() override = default;

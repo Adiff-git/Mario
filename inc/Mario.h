@@ -12,7 +12,8 @@
 
 // Removed unnecessary include of GameWorld.h
 // class Fireball; // Forward declaration
-enum MarioState {
+enum MarioState
+{
     SMALL = 0,
     BIG,
     FIRE
@@ -21,7 +22,8 @@ enum MarioState {
 #include "Observer.h"
 #include <vector>
 
-class Mario : public Object {
+class Mario : public Object
+{
 private:
     int lives;
     int coins;
@@ -29,11 +31,12 @@ private:
     float maxSpeedX;
     float SpeedY;
     bool isDucking;
+    bool isInvincible = false;
     MarioState marioState;
     MarioState AdditionalState;
-    std::list<Fireball*> fireballs;
+    std::list<Fireball *> fireballs;
 
-    std::vector<Observer*> observers;
+    std::vector<Observer *> observers;
 
     void Update() override;
 
@@ -42,13 +45,12 @@ public:
     Mario();
     ~Mario() override;
 
-    void AddObserver(Observer* ob);
-    void RemoveObserver(Observer* ob);
+    void AddObserver(Observer *ob);
+    void RemoveObserver(Observer *ob);
     void NotifyCoinChange();
 
     void SetCoins(int c);
-    int GetCoins() const;
-
+    void setInvincible(bool value);
     void SetLives(int lives);
     void SetSprite(Texture2D sprite);
     void SetState(ObjectState state);
@@ -66,9 +68,11 @@ public:
     void draw() override;
     void HandleInput();
 
+    int GetCoins() const;
+    bool getInvincible() const;
     int GetLives() const;
     bool GetIsDucking() const;
-    std::list<Fireball*> *GetFireballs();
+    std::list<Fireball *> *GetFireballs();
 
     void UpdateCollisionProbes() override;
     void UpdateStateAndPhysic() override;

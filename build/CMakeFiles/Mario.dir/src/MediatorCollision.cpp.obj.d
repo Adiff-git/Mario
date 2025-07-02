@@ -130,4 +130,11 @@ CMakeFiles/Mario.dir/src/MediatorCollision.cpp.obj: \
  C:/mingw64/include/c++/14.2.0/bits/charconv.h \
  C:/mingw64/include/c++/14.2.0/bits/basic_string.tcc \
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Fireball.h \
- C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Tile.h
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Tile.h \
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Observer.h \
+ C:/mingw64/include/c++/14.2.0/vector \
+ C:/mingw64/include/c++/14.2.0/bits/stl_uninitialized.h \
+ C:/mingw64/include/c++/14.2.0/bits/stl_vector.h \
+ C:/mingw64/include/c++/14.2.0/bits/stl_bvector.h \
+ C:/mingw64/include/c++/14.2.0/bits/vector.tcc \
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Item.h

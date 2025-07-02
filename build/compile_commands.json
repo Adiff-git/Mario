@@ -1,9 +1,27 @@
 [
 {
   "directory": "C:/Users/yennh/Downloads/ProjectCS202/Mario/build",
+  "command": "C:\\mingw64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\Coin.cpp.obj -c C:\\Users\\yennh\\Downloads\\ProjectCS202\\Mario\\src\\Coin.cpp",
+  "file": "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/Coin.cpp",
+  "output": "CMakeFiles/Mario.dir/src/Coin.cpp.obj"
+},
+{
+  "directory": "C:/Users/yennh/Downloads/ProjectCS202/Mario/build",
   "command": "C:\\mingw64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\CollisionProbe.cpp.obj -c C:\\Users\\yennh\\Downloads\\ProjectCS202\\Mario\\src\\CollisionProbe.cpp",
   "file": "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/CollisionProbe.cpp",
   "output": "CMakeFiles/Mario.dir/src/CollisionProbe.cpp.obj"
+},
+{
+  "directory": "C:/Users/yennh/Downloads/ProjectCS202/Mario/build",
+  "command": "C:\\mingw64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\CourseClearToken.cpp.obj -c C:\\Users\\yennh\\Downloads\\ProjectCS202\\Mario\\src\\CourseClearToken.cpp",
+  "file": "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/CourseClearToken.cpp",
+  "output": "CMakeFiles/Mario.dir/src/CourseClearToken.cpp.obj"
+},
+{
+  "directory": "C:/Users/yennh/Downloads/ProjectCS202/Mario/build",
+  "command": "C:\\mingw64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\FireFlower.cpp.obj -c C:\\Users\\yennh\\Downloads\\ProjectCS202\\Mario\\src\\FireFlower.cpp",
+  "file": "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/FireFlower.cpp",
+  "output": "CMakeFiles/Mario.dir/src/FireFlower.cpp.obj"
 },
 {
   "directory": "C:/Users/yennh/Downloads/ProjectCS202/Mario/build",
@@ -25,6 +43,12 @@
 },
 {
   "directory": "C:/Users/yennh/Downloads/ProjectCS202/Mario/build",
+  "command": "C:\\mingw64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\Item.cpp.obj -c C:\\Users\\yennh\\Downloads\\ProjectCS202\\Mario\\src\\Item.cpp",
+  "file": "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/Item.cpp",
+  "output": "CMakeFiles/Mario.dir/src/Item.cpp.obj"
+},
+{
+  "directory": "C:/Users/yennh/Downloads/ProjectCS202/Mario/build",
   "command": "C:\\mingw64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\Map.cpp.obj -c C:\\Users\\yennh\\Downloads\\ProjectCS202\\Mario\\src\\Map.cpp",
   "file": "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/Map.cpp",
   "output": "CMakeFiles/Mario.dir/src/Map.cpp.obj"
@@ -43,9 +67,21 @@
 },
 {
   "directory": "C:/Users/yennh/Downloads/ProjectCS202/Mario/build",
+  "command": "C:\\mingw64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\Mushroom.cpp.obj -c C:\\Users\\yennh\\Downloads\\ProjectCS202\\Mario\\src\\Mushroom.cpp",
+  "file": "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/Mushroom.cpp",
+  "output": "CMakeFiles/Mario.dir/src/Mushroom.cpp.obj"
+},
+{
+  "directory": "C:/Users/yennh/Downloads/ProjectCS202/Mario/build",
   "command": "C:\\mingw64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\Object.cpp.obj -c C:\\Users\\yennh\\Downloads\\ProjectCS202\\Mario\\src\\Object.cpp",
   "file": "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/Object.cpp",
   "output": "CMakeFiles/Mario.dir/src/Object.cpp.obj"
+},
+{
+  "directory": "C:/Users/yennh/Downloads/ProjectCS202/Mario/build",
+  "command": "C:\\mingw64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\OneUpMushroom.cpp.obj -c C:\\Users\\yennh\\Downloads\\ProjectCS202\\Mario\\src\\OneUpMushroom.cpp",
+  "file": "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/OneUpMushroom.cpp",
+  "output": "CMakeFiles/Mario.dir/src/OneUpMushroom.cpp.obj"
 },
 {
   "directory": "C:/Users/yennh/Downloads/ProjectCS202/Mario/build",
@@ -55,9 +91,27 @@
 },
 {
   "directory": "C:/Users/yennh/Downloads/ProjectCS202/Mario/build",
+  "command": "C:\\mingw64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\Start.cpp.obj -c C:\\Users\\yennh\\Downloads\\ProjectCS202\\Mario\\src\\Start.cpp",
+  "file": "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/Start.cpp",
+  "output": "CMakeFiles/Mario.dir/src/Start.cpp.obj"
+},
+{
+  "directory": "C:/Users/yennh/Downloads/ProjectCS202/Mario/build",
+  "command": "C:\\mingw64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\ThreeUpMoon.cpp.obj -c C:\\Users\\yennh\\Downloads\\ProjectCS202\\Mario\\src\\ThreeUpMoon.cpp",
+  "file": "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/ThreeUpMoon.cpp",
+  "output": "CMakeFiles/Mario.dir/src/ThreeUpMoon.cpp.obj"
+},
+{
+  "directory": "C:/Users/yennh/Downloads/ProjectCS202/Mario/build",
   "command": "C:\\mingw64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\Tile.cpp.obj -c C:\\Users\\yennh\\Downloads\\ProjectCS202\\Mario\\src\\Tile.cpp",
   "file": "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/Tile.cpp",
   "output": "CMakeFiles/Mario.dir/src/Tile.cpp.obj"
+},
+{
+  "directory": "C:/Users/yennh/Downloads/ProjectCS202/Mario/build",
+  "command": "C:\\mingw64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\YoshiCoin.cpp.obj -c C:\\Users\\yennh\\Downloads\\ProjectCS202\\Mario\\src\\YoshiCoin.cpp",
+  "file": "C:/Users/yennh/Downloads/ProjectCS202/Mario/src/YoshiCoin.cpp",
+  "output": "CMakeFiles/Mario.dir/src/YoshiCoin.cpp.obj"
 },
 {
   "directory": "C:/Users/yennh/Downloads/ProjectCS202/Mario/build",
