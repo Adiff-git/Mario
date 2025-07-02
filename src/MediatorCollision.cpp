@@ -1,5 +1,10 @@
 #include "MediatorCollision.h"
-
+#include "Enemy.h"
+MediatorCollision::MediatorCollision() {
+    // Thêm Goomba ngay khi khởi tạo
+    Enemy* goomba = new Goomba(Vector2{600, 100}); // Vị trí mặc định
+    enemies.push_back(goomba);
+}
 void MediatorCollision::HandleMarioWithTile(Mario* &mario, Tile * &tile, CollisionType AtoB)
 {
     if (AtoB == COLLISION_TYPE_NONE)
@@ -85,6 +90,7 @@ void MediatorCollision::HandleFireballWithTile(Fireball *&fireball, Tile *&tile,
     }
 }
 void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
+
 {
 
     Mario* isAmario = dynamic_cast<Mario*>(ObjectA);
@@ -110,4 +116,26 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
             HandleFireballWithTile(isBfireball, isAtile, AtoB);
     }
 
+}
+void MediatorCollision::HandleEnemyWithTile(Enemy*& enemy, Tile* tile, CollisionType AtoB) {
+    if (AtoB == COLLISION_TYPE_NONE) return;
+    switch (AtoB) {
+        case COLLISION_TYPE_SOUTH:
+            enemy->SetPos(Vector2{enemy->GetPos().x, tile->GetPos().y - enemy->GetSize().y});
+            enemy->SetState(OBJECT_STATE_ON_GROUND);
+            enemy->SetVel(Vector2{enemy->GetVel().x, 0});
+            break;
+        case COLLISION_TYPE_EAST:
+            enemy->SetPos(Vector2{tile->GetPos().x - enemy->GetSize().x, enemy->GetPos().y});
+            enemy->SetVel(Vector2{-enemy->GetVel().x, enemy->GetVel().y});
+            break;
+        case COLLISION_TYPE_WEST:
+            enemy->SetPos(Vector2{tile->GetPos().x + tile->GetSize().x, enemy->GetPos().y});
+            enemy->SetVel(Vector2{-enemy->GetVel().x, enemy->GetVel().y});
+            break;
+    }
+}
+
+std::vector<Enemy*>& MediatorCollision::GetEnemies() {
+    return enemies;
 }

@@ -8,7 +8,7 @@
 #include "Map.h"
 #include "ResrcManager.h"
 #include "MediatorCollision.h"
-
+#include "Enemy.h"
 
 class GameWorld {
     private:

@@ -86,6 +86,11 @@ void ResrcManager::loadTextures() {
         std::string keyStr = "tile_" + std::to_string(i);
         textures[keyStr] = LoadTexture(("resources/images/tiles/tile_" + std::to_string(i) + ".png").c_str());
     }
+    // Enemy (Goomba)
+    {
+        textures["GOOMBA_0"] = LoadTexture("resources/images/Object/enemy/Goomba_0.png");
+        textures["GOOMBA_1"] = LoadTexture("resources/images/Object/enemy/Goomba_1.png");
+    }
 }
 
 void ResrcManager::loadSounds(){
