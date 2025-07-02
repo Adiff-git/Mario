@@ -195,7 +195,7 @@
 			[
 				{
 					"backtrace" : 7,
-					"path" : "D:/Downloads/Ref/Gia/Mario/inc"
+					"path" : "D:/Mario Proj/Mario/inc"
 				},
 				{
 					"backtrace" : 8,
@@ -207,7 +207,7 @@
 				},
 				{
 					"backtrace" : 9,
-					"path" : "D:/Downloads/Ref/Gia/Mario/build/raylib_build/raylib/external/glfw/src"
+					"path" : "D:/Mario Proj/Mario/build/raylib_build/raylib/external/glfw/src"
 				}
 			],
 			"language" : "C",
