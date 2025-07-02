@@ -4,6 +4,16 @@ Item::Item()
     : Object(), pauseGameOnHit(false) {
 }
 
+Item::Item(Vector2 pos, Vector2 dim, Vector2 vel, Color color,
+           float frameTime, int maxFrames, Direction facingDirection,
+           int hitsToDie, int earnedPoints)
+    : Object(pos, dim, vel, color, frameTime, maxFrames, facingDirection),
+      pauseGameOnHit(false)
+{
+    
+}
+
+
 Item::~Item() {
 }
 

@@ -8,6 +8,7 @@
 #include "GameClock.h"
 #include "ResrcManager.h"
 #include "Fireball.h"
+#include "Observer.h"
 
 // Removed unnecessary include of GameWorld.h
 // class Fireball; // Forward declaration
@@ -17,52 +18,58 @@ enum MarioState {
     FIRE
 };
 
+#include "Observer.h"
+#include <vector>
+
 class Mario : public Object {
-    private:
-        int lives;
-        float accelerationX;
-        float maxSpeedX;
-        float SpeedY;// for Jumping
-        bool isDucking;
-        //std::list<Fireball*> fireballs
-        MarioState marioState;
-        MarioState AdditionalState;
+private:
+    int lives;
+    int coins;
+    float accelerationX;
+    float maxSpeedX;
+    float SpeedY;
+    bool isDucking;
+    MarioState marioState;
+    MarioState AdditionalState;
+    std::list<Fireball*> fireballs;
 
-        void Update() override;
-        
-        std::list<Fireball*>fireballs;
-        
-    
-    public:
-        Mario(Vector2 pos, int lives,MarioState form);
-        Mario(); // Ensure default constructor exists
-        ~Mario() override;
+    std::vector<Observer*> observers;
 
-        void jump();
-        void moveLeft();
-        void moveRight();
-        void stopMoving();
-        void Duck();
-        void fire();
-        void changeToBig();
-        void changeToSmall();
-        void changetoFire();
+    void Update() override;
 
-        void draw() override;
-        void HandleInput();
+public:
+    Mario(Vector2 pos, int lives, MarioState form);
+    Mario();
+    ~Mario() override;
 
-        // Setters
-        void SetLives(int lives);
-        void SetSprite(Texture2D sprite);
-        void SetState(ObjectState state);
+    void AddObserver(Observer* ob);
+    void RemoveObserver(Observer* ob);
+    void NotifyCoinChange();
 
-        // Getters
-        int GetLives() const;
-        bool GetIsDucking() const;
-        std::list<Fireball*> *GetFireballs();
+    void SetCoins(int c);
+    int GetCoins() const;
 
-        void UpdateCollisionProbes() override;
-        void UpdateStateAndPhysic() override;
+    void SetLives(int lives);
+    void SetSprite(Texture2D sprite);
+    void SetState(ObjectState state);
 
-        
+    void jump();
+    void moveLeft();
+    void moveRight();
+    void stopMoving();
+    void Duck();
+    void fire();
+    void changeToBig();
+    void changeToSmall();
+    void changetoFire();
+
+    void draw() override;
+    void HandleInput();
+
+    int GetLives() const;
+    bool GetIsDucking() const;
+    std::list<Fireball*> *GetFireballs();
+
+    void UpdateCollisionProbes() override;
+    void UpdateStateAndPhysic() override;
 };
