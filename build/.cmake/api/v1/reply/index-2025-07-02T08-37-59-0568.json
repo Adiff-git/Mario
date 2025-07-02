@@ -8,25 +8,25 @@
 		},
 		"paths" : 
 		{
-			"cmake" : "C:/mingw64/bin/cmake.exe",
-			"cpack" : "C:/mingw64/bin/cpack.exe",
-			"ctest" : "C:/mingw64/bin/ctest.exe",
-			"root" : "C:/mingw64/share/cmake-3.30"
+			"cmake" : "C:/Program Files/CMake/bin/cmake.exe",
+			"cpack" : "C:/Program Files/CMake/bin/cpack.exe",
+			"ctest" : "C:/Program Files/CMake/bin/ctest.exe",
+			"root" : "C:/Program Files/CMake/share/cmake-3.31"
 		},
 		"version" : 
 		{
 			"isDirty" : false,
 			"major" : 3,
-			"minor" : 30,
-			"patch" : 4,
-			"string" : "3.30.4",
+			"minor" : 31,
+			"patch" : 5,
+			"string" : "3.31.5",
 			"suffix" : ""
 		}
 	},
 	"objects" : 
 	[
 		{
-			"jsonFile" : "codemodel-v2-448f5c3cfcd85b4000af.json",
+			"jsonFile" : "codemodel-v2-68d7587dd9fa4c9c31cc.json",
 			"kind" : "codemodel",
 			"version" : 
 			{
@@ -35,7 +35,7 @@
 			}
 		},
 		{
-			"jsonFile" : "cache-v2-1cf5ec8b16e36cf7eac5.json",
+			"jsonFile" : "cache-v2-dbdd8b5fd2be83a51e7c.json",
 			"kind" : "cache",
 			"version" : 
 			{
@@ -44,7 +44,7 @@
 			}
 		},
 		{
-			"jsonFile" : "cmakeFiles-v1-8069e1daef212637448b.json",
+			"jsonFile" : "cmakeFiles-v1-aab9a437e695ea20ac01.json",
 			"kind" : "cmakeFiles",
 			"version" : 
 			{
@@ -53,7 +53,7 @@
 			}
 		},
 		{
-			"jsonFile" : "toolchains-v1-19a0fa42c1111b82c0c2.json",
+			"jsonFile" : "toolchains-v1-d83f33300efd1b808b56.json",
 			"kind" : "toolchains",
 			"version" : 
 			{
@@ -90,7 +90,7 @@
 				"responses" : 
 				[
 					{
-						"jsonFile" : "cache-v2-1cf5ec8b16e36cf7eac5.json",
+						"jsonFile" : "cache-v2-dbdd8b5fd2be83a51e7c.json",
 						"kind" : "cache",
 						"version" : 
 						{
@@ -99,7 +99,7 @@
 						}
 					},
 					{
-						"jsonFile" : "codemodel-v2-448f5c3cfcd85b4000af.json",
+						"jsonFile" : "codemodel-v2-68d7587dd9fa4c9c31cc.json",
 						"kind" : "codemodel",
 						"version" : 
 						{
@@ -108,7 +108,7 @@
 						}
 					},
 					{
-						"jsonFile" : "toolchains-v1-19a0fa42c1111b82c0c2.json",
+						"jsonFile" : "toolchains-v1-d83f33300efd1b808b56.json",
 						"kind" : "toolchains",
 						"version" : 
 						{
@@ -117,7 +117,7 @@
 						}
 					},
 					{
-						"jsonFile" : "cmakeFiles-v1-8069e1daef212637448b.json",
+						"jsonFile" : "cmakeFiles-v1-aab9a437e695ea20ac01.json",
 						"kind" : "cmakeFiles",
 						"version" : 
 						{

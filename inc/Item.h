@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Object.h"
-#include "CollisionType.h"
 #include "Mario.h"
 #include "raylib.h"
 

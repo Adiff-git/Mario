@@ -1,1 +1,1 @@
--IC:/Users/yennh/Downloads/ProjectCS202/Mario/inc -IC:/raylib/raylib/src -isystem C:/raylib/raylib/src/external/glfw/include
+-ID:/Downloads/Ref/Gia/Mario/inc -IC:/raylib/raylib/src -isystem C:/raylib/raylib/src/external/glfw/include
