@@ -11,6 +11,7 @@ enum CollisionType {
     COLLISION_TYPE_WEST,            // Collision occurred on the west (left) side of the sprite or probe
     COLLISION_TYPE_COLLIDED,        // General collision occurred (no specific direction, e.g., full overlap)
     COLLISION_TYPE_FIREBALL         // Collision involving a fireball (e.g., a projectile or special attack)
+    
 };
 
 class CollisionProbe : public Drawable {
