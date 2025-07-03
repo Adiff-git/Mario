@@ -1,5 +1,6 @@
 #include "MediatorCollision.h"
-
+#include <iostream>
+#include <algorithm>
 
 void MediatorCollision::HandleMarioWithTile(Mario* &mario, Tile * &tile, CollisionType AtoB)
 {
@@ -120,6 +121,12 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
         CollisionType AtoB = isBenemy->checkCollisionType(*isAtile);
         HandleEnemyWithTile(isBenemy, isAtile, AtoB);
     }
+    else if ((isAmario && isBenemy) || (isBmario && isAenemy)) {
+    CollisionType AtoB = isAmario ? isAmario->checkCollisionType(*isBenemy) : isBmario->checkCollisionType(*isAenemy);
+    if (isAmario)
+        HandleMarioWithEnemy(isAmario, isBenemy, AtoB);
+    else
+        HandleMarioWithEnemy(isBmario, isAenemy, AtoB);}
 }
 
 void MediatorCollision::HandleEnemyWithTile(Enemy*& enemy, Tile* tile, CollisionType AtoB) {
@@ -142,6 +149,33 @@ void MediatorCollision::HandleEnemyWithTile(Enemy*& enemy, Tile* tile, Collision
             enemy->SetDirection(DIRECTION_RIGHT); // Cập nhật hướng sang phải
             break;
 }
+    }
+}
+void MediatorCollision::HandleMarioWithEnemy(Mario*& mario, Enemy*& enemy, CollisionType AtoB) {
+    std::cout << "[DEBUG] HandleMarioWithEnemy called!" << std::endl;
+    if (AtoB == COLLISION_TYPE_NONE) {
+        std::cout << "No collision between Mario and Enemy" << std::endl;
+        return;
+    }
+
+    std::cout << "Enemies size before: " << enemies.size() << std::endl;
+    switch (AtoB) {
+        case COLLISION_TYPE_SOUTH: {
+            // Mario nhảy lên đầu Enemy -> Goomba chết
+            std::cout << "Goomba dies" << std::endl;
+            enemies.erase(std::remove(enemies.begin(), enemies.end(), enemy), enemies.end());
+            delete enemy;
+            enemy = nullptr;
+            mario->SetVel(Vector2{mario->GetVel().x, -20.0f}); // Mario bật lên
+            break;
+        }
+        case COLLISION_TYPE_EAST:
+        case COLLISION_TYPE_WEST:
+        case COLLISION_TYPE_NORTH: {
+            // Mario chạm ngang hoặc dưới -> Mario chết
+            std::cout << "Mario dies ";
+            break;
+        }
     }
 }
 std::vector<Enemy*>& MediatorCollision::GetEnemies() {

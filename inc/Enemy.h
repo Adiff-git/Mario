@@ -1,3 +1,4 @@
+    void drawCollisionProbes();
 #ifndef ENEMY_H
 #define ENEMY_H
 
@@ -7,6 +8,7 @@
 
 class Enemy : public Object {
 public:
+    void drawCollisionProbes();
     Enemy(Vector2 pos);
     void Update() override;
     void draw() override;

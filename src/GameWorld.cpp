@@ -33,6 +33,12 @@ void GameWorld::UpdateWorld() {
             enemy->Update();
         }
     }
+
+    // Kiểm tra va chạm Mario với Enemy
+    for (Enemy* enemy : mediatorCollision.GetEnemies()) {
+        CollisionType marioEnemyCollision = player.checkCollisionType(*enemy);
+        if (marioEnemyCollision) mediatorCollision.HandleCollision(&player, enemy);
+    }
 }
 
 void GameWorld::DrawWorld() {

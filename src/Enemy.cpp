@@ -87,6 +87,12 @@ void Enemy::UpdateCollisionProbes() {
     cpE.setPos(Vector2{ pos.x + size.x - cpE.getSize().x, pos.y + size.y / 2 - cpE.getSize().y / 2 }); // Sát mép phải
     cpW.setPos(Vector2{ pos.x, pos.y + size.y / 2 - cpW.getSize().y / 2 }); // Sát mép trái
 }
+void Enemy::drawCollisionProbes() {
+    cpN.draw();
+    cpS.draw();
+    cpE.draw();
+    cpW.draw();
+}
 
 void Enemy::draw() {
     if (sprite) {
@@ -94,6 +100,7 @@ void Enemy::draw() {
     } else {
         DrawRectangle((int)GetPos().x, (int)GetPos().y, (int)GetSize().x, (int)GetSize().y, GetColor());
     }
+    drawCollisionProbes();
 }
 
 Goomba::Goomba(Vector2 pos) : Enemy(pos) {}
