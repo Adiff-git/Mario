@@ -29,7 +29,7 @@ void Mushroom::Update()
 
     pos.x += vel.x * dt;
     if (applyGravity)
-        vel.y += GameWorld::gravity * dt;
+        vel.y += GameWorld::GetGravity() * dt;
 
     pos.y += vel.y * dt;
 

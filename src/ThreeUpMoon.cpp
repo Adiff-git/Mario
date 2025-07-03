@@ -11,7 +11,7 @@ ThreeUpMoon::ThreeUpMoon(Vector2 pos)
 
 void ThreeUpMoon::updateMario(Mario& mario)
 {
-    mario.SetLives(mario.GetLives() + 3);  // hoặc mario.addLives(3) nếu bạn có hàm đó
+    mario.SetLives(mario.GetLives() + 3);  
     this->SetState(OBJECT_STATE_TO_BE_REMOVED);
 }
 
@@ -27,7 +27,7 @@ void ThreeUpMoon::Update()
 
     pos.x += vel.x * dt;
     if (applyGravity)
-        vel.y += GameWorld::gravity * dt;
+        vel.y += GameWorld::GetGravity() * dt;
 
     pos.y += vel.y * dt;
 

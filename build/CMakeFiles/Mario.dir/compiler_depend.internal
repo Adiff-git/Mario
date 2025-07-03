@@ -210,6 +210,7 @@ CMakeFiles/Mario.dir/src/CourseClearToken.cpp.obj
  C:/mingw64/include/c++/14.2.0/bits/ranges_util.h
  C:/mingw64/include/c++/14.2.0/bits/refwrap.h
  C:/mingw64/include/c++/14.2.0/bits/requires_hosted.h
+ C:/mingw64/include/c++/14.2.0/bits/specfun.h
  C:/mingw64/include/c++/14.2.0/bits/std_abs.h
  C:/mingw64/include/c++/14.2.0/bits/stl_algobase.h
  C:/mingw64/include/c++/14.2.0/bits/stl_bvector.h
@@ -233,6 +234,7 @@ CMakeFiles/Mario.dir/src/CourseClearToken.cpp.obj
  C:/mingw64/include/c++/14.2.0/cctype
  C:/mingw64/include/c++/14.2.0/cerrno
  C:/mingw64/include/c++/14.2.0/clocale
+ C:/mingw64/include/c++/14.2.0/cmath
  C:/mingw64/include/c++/14.2.0/compare
  C:/mingw64/include/c++/14.2.0/concepts
  C:/mingw64/include/c++/14.2.0/cstddef
@@ -248,6 +250,7 @@ CMakeFiles/Mario.dir/src/CourseClearToken.cpp.obj
  C:/mingw64/include/c++/14.2.0/ext/type_traits.h
  C:/mingw64/include/c++/14.2.0/initializer_list
  C:/mingw64/include/c++/14.2.0/iosfwd
+ C:/mingw64/include/c++/14.2.0/limits
  C:/mingw64/include/c++/14.2.0/list
  C:/mingw64/include/c++/14.2.0/new
  C:/mingw64/include/c++/14.2.0/numbers
@@ -255,6 +258,18 @@ CMakeFiles/Mario.dir/src/CourseClearToken.cpp.obj
  C:/mingw64/include/c++/14.2.0/stdlib.h
  C:/mingw64/include/c++/14.2.0/string
  C:/mingw64/include/c++/14.2.0/string_view
+ C:/mingw64/include/c++/14.2.0/tr1/bessel_function.tcc
+ C:/mingw64/include/c++/14.2.0/tr1/beta_function.tcc
+ C:/mingw64/include/c++/14.2.0/tr1/ell_integral.tcc
+ C:/mingw64/include/c++/14.2.0/tr1/exp_integral.tcc
+ C:/mingw64/include/c++/14.2.0/tr1/gamma.tcc
+ C:/mingw64/include/c++/14.2.0/tr1/hypergeometric.tcc
+ C:/mingw64/include/c++/14.2.0/tr1/legendre_function.tcc
+ C:/mingw64/include/c++/14.2.0/tr1/modified_bessel_func.tcc
+ C:/mingw64/include/c++/14.2.0/tr1/poly_hermite.tcc
+ C:/mingw64/include/c++/14.2.0/tr1/poly_laguerre.tcc
+ C:/mingw64/include/c++/14.2.0/tr1/riemann_zeta.tcc
+ C:/mingw64/include/c++/14.2.0/tr1/special_function_util.h
  C:/mingw64/include/c++/14.2.0/tuple
  C:/mingw64/include/c++/14.2.0/type_traits
  C:/mingw64/include/c++/14.2.0/unordered_map
@@ -284,6 +299,7 @@ CMakeFiles/Mario.dir/src/CourseClearToken.cpp.obj
  C:/mingw64/x86_64-w64-mingw32/include/limits.h
  C:/mingw64/x86_64-w64-mingw32/include/locale.h
  C:/mingw64/x86_64-w64-mingw32/include/malloc.h
+ C:/mingw64/x86_64-w64-mingw32/include/math.h
  C:/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h
  C:/mingw64/x86_64-w64-mingw32/include/sec_api/stdio_s.h
  C:/mingw64/x86_64-w64-mingw32/include/sec_api/stdlib_s.h
@@ -440,8 +456,11 @@ CMakeFiles/Mario.dir/src/FireFlower.cpp.obj
 
 CMakeFiles/Mario.dir/src/Fireball.cpp.obj
  C:/Users/yennh/Downloads/ProjectCS202/Mario/src/Fireball.cpp
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Coin.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CollisionProbe.h
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CourseClearToken.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Drawable.h
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/FireFlower.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Fireball.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameClock.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameWorld.h
@@ -748,8 +767,11 @@ CMakeFiles/Mario.dir/src/GameClock.cpp.obj
 
 CMakeFiles/Mario.dir/src/GameWorld.cpp.obj
  C:/Users/yennh/Downloads/ProjectCS202/Mario/src/GameWorld.cpp
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Coin.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CollisionProbe.h
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CourseClearToken.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Drawable.h
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/FireFlower.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Fireball.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameClock.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameWorld.h
@@ -1183,11 +1205,18 @@ CMakeFiles/Mario.dir/src/Item.cpp.obj
 
 CMakeFiles/Mario.dir/src/Map.cpp.obj
  C:/Users/yennh/Downloads/ProjectCS202/Mario/src/Map.cpp
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Coin.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CollisionProbe.h
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CourseClearToken.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Drawable.h
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/FireFlower.h
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Fireball.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameClock.h
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Item.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Map.h
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Mario.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Object.h
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Observer.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/ResrcManager.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Tile.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/json.hpp
@@ -1241,6 +1270,7 @@ CMakeFiles/Mario.dir/src/Map.cpp.obj
  C:/mingw64/include/c++/14.2.0/bits/ios_base.h
  C:/mingw64/include/c++/14.2.0/bits/istream.tcc
  C:/mingw64/include/c++/14.2.0/bits/iterator_concepts.h
+ C:/mingw64/include/c++/14.2.0/bits/list.tcc
  C:/mingw64/include/c++/14.2.0/bits/locale_classes.h
  C:/mingw64/include/c++/14.2.0/bits/locale_classes.tcc
  C:/mingw64/include/c++/14.2.0/bits/locale_conv.h
@@ -1291,6 +1321,7 @@ CMakeFiles/Mario.dir/src/Map.cpp.obj
  C:/mingw64/include/c++/14.2.0/bits/stl_iterator.h
  C:/mingw64/include/c++/14.2.0/bits/stl_iterator_base_funcs.h
  C:/mingw64/include/c++/14.2.0/bits/stl_iterator_base_types.h
+ C:/mingw64/include/c++/14.2.0/bits/stl_list.h
  C:/mingw64/include/c++/14.2.0/bits/stl_map.h
  C:/mingw64/include/c++/14.2.0/bits/stl_multimap.h
  C:/mingw64/include/c++/14.2.0/bits/stl_numeric.h
@@ -1356,6 +1387,7 @@ CMakeFiles/Mario.dir/src/Map.cpp.obj
  C:/mingw64/include/c++/14.2.0/istream
  C:/mingw64/include/c++/14.2.0/iterator
  C:/mingw64/include/c++/14.2.0/limits
+ C:/mingw64/include/c++/14.2.0/list
  C:/mingw64/include/c++/14.2.0/locale
  C:/mingw64/include/c++/14.2.0/map
  C:/mingw64/include/c++/14.2.0/memory
@@ -1469,8 +1501,11 @@ CMakeFiles/Mario.dir/src/Map.cpp.obj
 
 CMakeFiles/Mario.dir/src/Mario.cpp.obj
  C:/Users/yennh/Downloads/ProjectCS202/Mario/src/Mario.cpp
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Coin.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CollisionProbe.h
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CourseClearToken.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Drawable.h
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/FireFlower.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Fireball.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameClock.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameWorld.h
@@ -1905,8 +1940,11 @@ CMakeFiles/Mario.dir/src/MediatorCollision.cpp.obj
 
 CMakeFiles/Mario.dir/src/Mushroom.cpp.obj
  C:/Users/yennh/Downloads/ProjectCS202/Mario/src/Mushroom.cpp
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Coin.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CollisionProbe.h
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CourseClearToken.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Drawable.h
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/FireFlower.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Fireball.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameClock.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameWorld.h
@@ -2217,8 +2255,11 @@ CMakeFiles/Mario.dir/src/Object.cpp.obj
 
 CMakeFiles/Mario.dir/src/OneUpMushroom.cpp.obj
  C:/Users/yennh/Downloads/ProjectCS202/Mario/src/OneUpMushroom.cpp
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Coin.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CollisionProbe.h
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CourseClearToken.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Drawable.h
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/FireFlower.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Fireball.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameClock.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameWorld.h
@@ -2635,8 +2676,11 @@ CMakeFiles/Mario.dir/src/ResrcManager.cpp.obj
 
 CMakeFiles/Mario.dir/src/Start.cpp.obj
  C:/Users/yennh/Downloads/ProjectCS202/Mario/src/Start.cpp
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Coin.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CollisionProbe.h
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CourseClearToken.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Drawable.h
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/FireFlower.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Fireball.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameClock.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameWorld.h
@@ -2931,8 +2975,11 @@ CMakeFiles/Mario.dir/src/Start.cpp.obj
 
 CMakeFiles/Mario.dir/src/ThreeUpMoon.cpp.obj
  C:/Users/yennh/Downloads/ProjectCS202/Mario/src/ThreeUpMoon.cpp
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Coin.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CollisionProbe.h
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CourseClearToken.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Drawable.h
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/FireFlower.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Fireball.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameClock.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameWorld.h
@@ -3354,8 +3401,11 @@ CMakeFiles/Mario.dir/src/Tile.cpp.obj
 
 CMakeFiles/Mario.dir/src/YoshiCoin.cpp.obj
  C:/Users/yennh/Downloads/ProjectCS202/Mario/src/YoshiCoin.cpp
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Coin.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CollisionProbe.h
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CourseClearToken.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Drawable.h
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/FireFlower.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Fireball.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameClock.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameWorld.h
@@ -3650,8 +3700,11 @@ CMakeFiles/Mario.dir/src/YoshiCoin.cpp.obj
 
 CMakeFiles/Mario.dir/src/main.cpp.obj
  C:/Users/yennh/Downloads/ProjectCS202/Mario/src/main.cpp
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Coin.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CollisionProbe.h
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CourseClearToken.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Drawable.h
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/FireFlower.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Fireball.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameClock.h
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameWorld.h

@@ -1,40 +1,41 @@
 #include "FireFlower.h"
 #include "raylib.h"
+#include "ResrcManager.h"
 
 FireFlower::FireFlower(Vector2 pos)
     : Item(pos, {32, 32}, {0, 0}, WHITE, 0.3f, 2, DIRECTION_RIGHT, 1, 0),
       blinking(false), blinkingAcum(0), blinkingTime(0.1f), doBlink(false)
 {
-    this->state = OBJECT_STATE_ACTIVE;
+    state = OBJECT_STATE_ACTIVE;
 }
 
 void FireFlower::updateMario(Mario& mario)
 {
     mario.changetoFire();
-    this->SetState(OBJECT_STATE_TO_BE_REMOVED);
+    SetState(OBJECT_STATE_TO_BE_REMOVED);
 }
 
 void FireFlower::playCollisionSound()
 {
-    
+    // TODO: play sound
 }
 
 void FireFlower::Update()
 {
     float delta = GetFrameTime();
     frameAcumulator += delta;
-    if (frameAcumulator >= frameTime)
-    {
+
+    // Cập nhật animation mỗi frameTime giây
+    if (frameAcumulator >= frameTime) {
         currentFrame = (currentFrame + 1) % maxFrames;
         frameAcumulator = 0.0f;
     }
 
-    if (blinking)
-    {
+    // Cập nhật blinking
+    if (blinking) {
         blinkingAcum += delta;
-        if (blinkingAcum >= blinkingTime)
-        {
-            blinkingAcum = 0;
+        if (blinkingAcum >= blinkingTime) {
+            blinkingAcum = 0.0f;
             doBlink = !doBlink;
         }
     }
@@ -50,14 +51,14 @@ void FireFlower::draw()
     if (blinking && doBlink)
         return;
 
-    std::string texName = (currentFrame == 0) ? "FireFlower_0" : "FireFlower_1";
-    Texture2D& tex = ResrcManager::GetInstance().getTexture(texName);
+    // Dùng currentFrame để lấy tên ảnh tương ứng
+    std::string texKey = "FIRE FLOWER_" + std::to_string(currentFrame);
+    Texture2D& tex = ResrcManager::GetInstance().getTexture(texKey);
 
-    DrawTextureEx(
-        tex,
-        pos,
-        0.0f,
-        1.0f,
-        color
-    );
+    if (tex.id == 0) {
+        TraceLog(LOG_ERROR, "Texture %s not loaded!", texKey.c_str());
+        return;
+    }
+
+    DrawTextureEx(tex, pos, 0.0f, 1.0f, color);
 }

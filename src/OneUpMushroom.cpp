@@ -27,7 +27,7 @@ void OneUpMushroom::Update()
     float dt = GetFrameTime();
 
     pos.x += vel.x * dt;
-    vel.y += GameWorld::gravity * dt;
+    vel.y += GameWorld::GetGravity() * dt;
     pos.y += vel.y * dt;
 
     UpdateCollisionProbes();

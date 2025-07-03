@@ -81,6 +81,19 @@ void ResrcManager::loadTextures() {
     {
     textures["BACKGROUND_0"] = LoadTexture("resources/images/backgrounds/background1.png");
     }
+    //item
+    {
+    //coin
+    textures["COIN_0"] = LoadTexture("resources/images/Object/items/Coin_0.png");
+    textures["COIN_1"] = LoadTexture("resources/images/Object/items/Coin_1.png");
+    textures["COIN_2"] = LoadTexture("resources/images/Object/items/Coin_2.png");
+    textures["COIN_3"] = LoadTexture("resources/images/Object/items/Coin_3.png");
+    //Course Clear Token
+    textures["COURSE CLEAR TOKEN"] = LoadTexture("resources/images/Object/items/CourseClearToken.png");
+    //Fire Flower
+    textures["FIRE FLOWER_0"] = LoadTexture("resources/images/Object/items/FireFlower_0.png");
+    textures["FIRE FLOWER_1"] = LoadTexture("resources/images/Object/items/FireFlower_1.png");
+    }
     //TILES
     for (int i = 0; i < 104; ++i) {
         std::string keyStr = "tile_" + std::to_string(i);

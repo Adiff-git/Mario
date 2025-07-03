@@ -138,6 +138,8 @@ CMakeFiles/Mario.dir/src/Fireball.cpp.obj: \
  C:/mingw64/include/c++/14.2.0/bits/stl_bvector.h \
  C:/mingw64/include/c++/14.2.0/bits/vector.tcc \
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Map.h \
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Coin.h \
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Item.h \
  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/json.hpp \
  C:/mingw64/include/c++/14.2.0/algorithm \
  C:/mingw64/include/c++/14.2.0/bits/stl_algo.h \
@@ -286,5 +288,6 @@ CMakeFiles/Mario.dir/src/Fireball.cpp.obj: \
  C:/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/basic_file.h \
  C:/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/c++io.h \
  C:/mingw64/include/c++/14.2.0/bits/fstream.tcc \
- C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/MediatorCollision.h \
- C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Item.h
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CourseClearToken.h \
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/FireFlower.h \
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/MediatorCollision.h

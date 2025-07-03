@@ -125,6 +125,15 @@ CMakeFiles/Mario.dir/src/Map.cpp.obj: \
  C:/mingw64/include/c++/14.2.0/cerrno \
  C:/mingw64/include/c++/14.2.0/bits/charconv.h \
  C:/mingw64/include/c++/14.2.0/bits/basic_string.tcc \
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Coin.h \
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Item.h \
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Mario.h \
+ C:/mingw64/include/c++/14.2.0/list \
+ C:/mingw64/include/c++/14.2.0/bits/stl_list.h \
+ C:/mingw64/include/c++/14.2.0/bits/allocated_ptr.h \
+ C:/mingw64/include/c++/14.2.0/bits/list.tcc \
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Fireball.h \
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Observer.h \
  C:/mingw64/include/c++/14.2.0/vector \
  C:/mingw64/include/c++/14.2.0/bits/stl_uninitialized.h \
  C:/mingw64/include/c++/14.2.0/bits/stl_vector.h \
@@ -195,7 +204,6 @@ CMakeFiles/Mario.dir/src/Map.cpp.obj: \
  C:/mingw64/include/c++/14.2.0/bits/ostream.tcc \
  C:/mingw64/include/c++/14.2.0/bits/shared_ptr.h \
  C:/mingw64/include/c++/14.2.0/bits/shared_ptr_base.h \
- C:/mingw64/include/c++/14.2.0/bits/allocated_ptr.h \
  C:/mingw64/include/c++/14.2.0/ext/concurrence.h \
  C:/mingw64/include/c++/14.2.0/bits/shared_ptr_atomic.h \
  C:/mingw64/include/c++/14.2.0/bits/atomic_base.h \
@@ -278,4 +286,6 @@ CMakeFiles/Mario.dir/src/Map.cpp.obj: \
  C:/mingw64/include/c++/14.2.0/fstream \
  C:/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/basic_file.h \
  C:/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/c++io.h \
- C:/mingw64/include/c++/14.2.0/bits/fstream.tcc
+ C:/mingw64/include/c++/14.2.0/bits/fstream.tcc \
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CourseClearToken.h \
+ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/FireFlower.h

@@ -1,10 +1,12 @@
 #include "GameWorld.h"
+#include "Coin.h"
 
 float GameWorld::gravity = 200.0f;
 
-GameWorld::GameWorld() : player(), interactiveTiles(map.getInteractiveTiles())
-{
+GameWorld::GameWorld() : player(), interactiveTiles(map.getInteractiveTiles()), interactiveCoins(map.getInteractiveCoins()), interactiveCourseClearTokens(map.getInteractiveCourseClearTokens()), interactiveFireFlowers(map.getInteractiveFireFlowers())
+{   
     // Trong GameWorld constructor, thêm:
+
     player = Mario(Vector2{100, 100}, 3, SMALL); // Đặt vị trí cụ thể
     map.LoadMap(0);
     camera.offset = Vector2{(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
@@ -38,7 +40,32 @@ void GameWorld::UpdateWorld()
             }
         }
     }
+
+    for( auto const coin : interactiveCoins){
+        CollisionType collision = player.checkCollisionType(*coin);
+        if(collision){
+            mediatorCollision.HandleCollision(&player, coin.get());
+        }
+        coin->Update();//animation
+    }
     
+    for (auto& course : interactiveCourseClearTokens) {
+    CollisionType collision = player.checkCollisionType(*course);
+    if (collision) {
+        mediatorCollision.HandleCollision(&player, course.get());
+    }
+
+    course->Update();  // BẮT BUỘC để token xoay
+    // course->draw();    // vẽ theo rotationAngle
+    }
+
+    for( auto const fire : interactiveFireFlowers){
+        CollisionType collision = player.checkCollisionType(*fire);
+        if(collision){
+            mediatorCollision.HandleCollision(&player, fire.get());
+        }
+        fire->Update();//animation
+    }
 }
 
 void GameWorld::DrawWorld()
@@ -60,13 +87,26 @@ void GameWorld::DrawWorld()
     {
         currBackgroundStarX = currBackgroundStarX - background.width * 1.3f;
     }
-
+    
     BeginMode2D(camera);
     DrawTextureEx(background, Vector2{currBackgroundStarX-background.width*1.3f,-200}, 0.0f, 1.3f, WHITE);
     DrawTextureEx(background,Vector2{currBackgroundStarX,-200},0.0f,1.3f,WHITE);
     DrawTextureEx(background,Vector2{currBackgroundStarX+background.width*1.3f,-200},0.0f,1.3f,WHITE);
+    
     map.draw();
     player.draw();
+    for(auto coin : interactiveCoins){
+        coin->draw();
+    }
+
+    for(auto course : interactiveCourseClearTokens){
+        course->draw();
+    }
+
+    for( auto const fire : interactiveFireFlowers){
+        fire->draw();
+    }
+
     EndMode2D();
 }
 

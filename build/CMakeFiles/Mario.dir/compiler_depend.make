@@ -207,6 +207,7 @@ CMakeFiles/Mario.dir/src/CourseClearToken.cpp.obj: C:/Users/yennh/Downloads/Proj
   C:/mingw64/include/c++/14.2.0/bits/ranges_util.h \
   C:/mingw64/include/c++/14.2.0/bits/refwrap.h \
   C:/mingw64/include/c++/14.2.0/bits/requires_hosted.h \
+  C:/mingw64/include/c++/14.2.0/bits/specfun.h \
   C:/mingw64/include/c++/14.2.0/bits/std_abs.h \
   C:/mingw64/include/c++/14.2.0/bits/stl_algobase.h \
   C:/mingw64/include/c++/14.2.0/bits/stl_bvector.h \
@@ -230,6 +231,7 @@ CMakeFiles/Mario.dir/src/CourseClearToken.cpp.obj: C:/Users/yennh/Downloads/Proj
   C:/mingw64/include/c++/14.2.0/cctype \
   C:/mingw64/include/c++/14.2.0/cerrno \
   C:/mingw64/include/c++/14.2.0/clocale \
+  C:/mingw64/include/c++/14.2.0/cmath \
   C:/mingw64/include/c++/14.2.0/compare \
   C:/mingw64/include/c++/14.2.0/concepts \
   C:/mingw64/include/c++/14.2.0/cstddef \
@@ -245,6 +247,7 @@ CMakeFiles/Mario.dir/src/CourseClearToken.cpp.obj: C:/Users/yennh/Downloads/Proj
   C:/mingw64/include/c++/14.2.0/ext/type_traits.h \
   C:/mingw64/include/c++/14.2.0/initializer_list \
   C:/mingw64/include/c++/14.2.0/iosfwd \
+  C:/mingw64/include/c++/14.2.0/limits \
   C:/mingw64/include/c++/14.2.0/list \
   C:/mingw64/include/c++/14.2.0/new \
   C:/mingw64/include/c++/14.2.0/numbers \
@@ -252,6 +255,18 @@ CMakeFiles/Mario.dir/src/CourseClearToken.cpp.obj: C:/Users/yennh/Downloads/Proj
   C:/mingw64/include/c++/14.2.0/stdlib.h \
   C:/mingw64/include/c++/14.2.0/string \
   C:/mingw64/include/c++/14.2.0/string_view \
+  C:/mingw64/include/c++/14.2.0/tr1/bessel_function.tcc \
+  C:/mingw64/include/c++/14.2.0/tr1/beta_function.tcc \
+  C:/mingw64/include/c++/14.2.0/tr1/ell_integral.tcc \
+  C:/mingw64/include/c++/14.2.0/tr1/exp_integral.tcc \
+  C:/mingw64/include/c++/14.2.0/tr1/gamma.tcc \
+  C:/mingw64/include/c++/14.2.0/tr1/hypergeometric.tcc \
+  C:/mingw64/include/c++/14.2.0/tr1/legendre_function.tcc \
+  C:/mingw64/include/c++/14.2.0/tr1/modified_bessel_func.tcc \
+  C:/mingw64/include/c++/14.2.0/tr1/poly_hermite.tcc \
+  C:/mingw64/include/c++/14.2.0/tr1/poly_laguerre.tcc \
+  C:/mingw64/include/c++/14.2.0/tr1/riemann_zeta.tcc \
+  C:/mingw64/include/c++/14.2.0/tr1/special_function_util.h \
   C:/mingw64/include/c++/14.2.0/tuple \
   C:/mingw64/include/c++/14.2.0/type_traits \
   C:/mingw64/include/c++/14.2.0/unordered_map \
@@ -281,6 +296,7 @@ CMakeFiles/Mario.dir/src/CourseClearToken.cpp.obj: C:/Users/yennh/Downloads/Proj
   C:/mingw64/x86_64-w64-mingw32/include/limits.h \
   C:/mingw64/x86_64-w64-mingw32/include/locale.h \
   C:/mingw64/x86_64-w64-mingw32/include/malloc.h \
+  C:/mingw64/x86_64-w64-mingw32/include/math.h \
   C:/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
   C:/mingw64/x86_64-w64-mingw32/include/sec_api/stdio_s.h \
   C:/mingw64/x86_64-w64-mingw32/include/sec_api/stdlib_s.h \
@@ -435,8 +451,11 @@ CMakeFiles/Mario.dir/src/FireFlower.cpp.obj: C:/Users/yennh/Downloads/ProjectCS2
   C:/raylib/raylib/src/raylib.h
 
 CMakeFiles/Mario.dir/src/Fireball.cpp.obj: C:/Users/yennh/Downloads/ProjectCS202/Mario/src/Fireball.cpp \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Coin.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CollisionProbe.h \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CourseClearToken.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Drawable.h \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/FireFlower.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Fireball.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameClock.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameWorld.h \
@@ -741,8 +760,11 @@ CMakeFiles/Mario.dir/src/GameClock.cpp.obj: C:/Users/yennh/Downloads/ProjectCS20
   C:/raylib/raylib/src/raylib.h
 
 CMakeFiles/Mario.dir/src/GameWorld.cpp.obj: C:/Users/yennh/Downloads/ProjectCS202/Mario/src/GameWorld.cpp \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Coin.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CollisionProbe.h \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CourseClearToken.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Drawable.h \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/FireFlower.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Fireball.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameClock.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameWorld.h \
@@ -1174,11 +1196,18 @@ CMakeFiles/Mario.dir/src/Item.cpp.obj: C:/Users/yennh/Downloads/ProjectCS202/Mar
   C:/raylib/raylib/src/raylib.h
 
 CMakeFiles/Mario.dir/src/Map.cpp.obj: C:/Users/yennh/Downloads/ProjectCS202/Mario/src/Map.cpp \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Coin.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CollisionProbe.h \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CourseClearToken.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Drawable.h \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/FireFlower.h \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Fireball.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameClock.h \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Item.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Map.h \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Mario.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Object.h \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Observer.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/ResrcManager.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Tile.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/json.hpp \
@@ -1232,6 +1261,7 @@ CMakeFiles/Mario.dir/src/Map.cpp.obj: C:/Users/yennh/Downloads/ProjectCS202/Mari
   C:/mingw64/include/c++/14.2.0/bits/ios_base.h \
   C:/mingw64/include/c++/14.2.0/bits/istream.tcc \
   C:/mingw64/include/c++/14.2.0/bits/iterator_concepts.h \
+  C:/mingw64/include/c++/14.2.0/bits/list.tcc \
   C:/mingw64/include/c++/14.2.0/bits/locale_classes.h \
   C:/mingw64/include/c++/14.2.0/bits/locale_classes.tcc \
   C:/mingw64/include/c++/14.2.0/bits/locale_conv.h \
@@ -1282,6 +1312,7 @@ CMakeFiles/Mario.dir/src/Map.cpp.obj: C:/Users/yennh/Downloads/ProjectCS202/Mari
   C:/mingw64/include/c++/14.2.0/bits/stl_iterator.h \
   C:/mingw64/include/c++/14.2.0/bits/stl_iterator_base_funcs.h \
   C:/mingw64/include/c++/14.2.0/bits/stl_iterator_base_types.h \
+  C:/mingw64/include/c++/14.2.0/bits/stl_list.h \
   C:/mingw64/include/c++/14.2.0/bits/stl_map.h \
   C:/mingw64/include/c++/14.2.0/bits/stl_multimap.h \
   C:/mingw64/include/c++/14.2.0/bits/stl_numeric.h \
@@ -1347,6 +1378,7 @@ CMakeFiles/Mario.dir/src/Map.cpp.obj: C:/Users/yennh/Downloads/ProjectCS202/Mari
   C:/mingw64/include/c++/14.2.0/istream \
   C:/mingw64/include/c++/14.2.0/iterator \
   C:/mingw64/include/c++/14.2.0/limits \
+  C:/mingw64/include/c++/14.2.0/list \
   C:/mingw64/include/c++/14.2.0/locale \
   C:/mingw64/include/c++/14.2.0/map \
   C:/mingw64/include/c++/14.2.0/memory \
@@ -1459,8 +1491,11 @@ CMakeFiles/Mario.dir/src/Map.cpp.obj: C:/Users/yennh/Downloads/ProjectCS202/Mari
   C:/raylib/raylib/src/raylib.h
 
 CMakeFiles/Mario.dir/src/Mario.cpp.obj: C:/Users/yennh/Downloads/ProjectCS202/Mario/src/Mario.cpp \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Coin.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CollisionProbe.h \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CourseClearToken.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Drawable.h \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/FireFlower.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Fireball.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameClock.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameWorld.h \
@@ -1893,8 +1928,11 @@ CMakeFiles/Mario.dir/src/MediatorCollision.cpp.obj: C:/Users/yennh/Downloads/Pro
   C:/raylib/raylib/src/raylib.h
 
 CMakeFiles/Mario.dir/src/Mushroom.cpp.obj: C:/Users/yennh/Downloads/ProjectCS202/Mario/src/Mushroom.cpp \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Coin.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CollisionProbe.h \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CourseClearToken.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Drawable.h \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/FireFlower.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Fireball.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameClock.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameWorld.h \
@@ -2203,8 +2241,11 @@ CMakeFiles/Mario.dir/src/Object.cpp.obj: C:/Users/yennh/Downloads/ProjectCS202/M
   C:/raylib/raylib/src/raylib.h
 
 CMakeFiles/Mario.dir/src/OneUpMushroom.cpp.obj: C:/Users/yennh/Downloads/ProjectCS202/Mario/src/OneUpMushroom.cpp \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Coin.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CollisionProbe.h \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CourseClearToken.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Drawable.h \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/FireFlower.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Fireball.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameClock.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameWorld.h \
@@ -2619,8 +2660,11 @@ CMakeFiles/Mario.dir/src/ResrcManager.cpp.obj: C:/Users/yennh/Downloads/ProjectC
   C:/raylib/raylib/src/raylib.h
 
 CMakeFiles/Mario.dir/src/Start.cpp.obj: C:/Users/yennh/Downloads/ProjectCS202/Mario/src/Start.cpp \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Coin.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CollisionProbe.h \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CourseClearToken.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Drawable.h \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/FireFlower.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Fireball.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameClock.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameWorld.h \
@@ -2914,8 +2958,11 @@ CMakeFiles/Mario.dir/src/Start.cpp.obj: C:/Users/yennh/Downloads/ProjectCS202/Ma
   C:/raylib/raylib/src/raylib.h
 
 CMakeFiles/Mario.dir/src/ThreeUpMoon.cpp.obj: C:/Users/yennh/Downloads/ProjectCS202/Mario/src/ThreeUpMoon.cpp \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Coin.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CollisionProbe.h \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CourseClearToken.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Drawable.h \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/FireFlower.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Fireball.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameClock.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameWorld.h \
@@ -3335,8 +3382,11 @@ CMakeFiles/Mario.dir/src/Tile.cpp.obj: C:/Users/yennh/Downloads/ProjectCS202/Mar
   C:/raylib/raylib/src/raylib.h
 
 CMakeFiles/Mario.dir/src/YoshiCoin.cpp.obj: C:/Users/yennh/Downloads/ProjectCS202/Mario/src/YoshiCoin.cpp \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Coin.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CollisionProbe.h \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CourseClearToken.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Drawable.h \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/FireFlower.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Fireball.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameClock.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameWorld.h \
@@ -3630,8 +3680,11 @@ CMakeFiles/Mario.dir/src/YoshiCoin.cpp.obj: C:/Users/yennh/Downloads/ProjectCS20
   C:/raylib/raylib/src/raylib.h
 
 CMakeFiles/Mario.dir/src/main.cpp.obj: C:/Users/yennh/Downloads/ProjectCS202/Mario/src/main.cpp \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Coin.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CollisionProbe.h \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CourseClearToken.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Drawable.h \
+  C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/FireFlower.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Fireball.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameClock.h \
   C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameWorld.h \
@@ -3956,10 +4009,6 @@ C:/mingw64/x86_64-w64-mingw32/include/pthread_unistd.h:
 
 C:/mingw64/x86_64-w64-mingw32/include/pthread.h:
 
-C:/mingw64/x86_64-w64-mingw32/include/pthread_compat.h:
-
-C:/mingw64/x86_64-w64-mingw32/include/math.h:
-
 C:/mingw64/x86_64-w64-mingw32/include/assert.h:
 
 C:/mingw64/x86_64-w64-mingw32/include/_timeval.h:
@@ -3990,23 +4039,15 @@ C:/mingw64/include/c++/14.2.0/utility:
 
 C:/mingw64/include/c++/14.2.0/typeinfo:
 
-C:/mingw64/include/c++/14.2.0/tr1/riemann_zeta.tcc:
+C:/mingw64/include/c++/14.2.0/stdexcept:
 
-C:/mingw64/include/c++/14.2.0/tr1/poly_laguerre.tcc:
+C:/mingw64/include/c++/14.2.0/sstream:
 
-C:/mingw64/include/c++/14.2.0/tr1/modified_bessel_func.tcc:
+C:/mingw64/include/c++/14.2.0/span:
 
-C:/mingw64/include/c++/14.2.0/tr1/legendre_function.tcc:
-
-C:/mingw64/include/c++/14.2.0/tr1/hypergeometric.tcc:
-
-C:/mingw64/include/c++/14.2.0/tr1/gamma.tcc:
+C:/mingw64/include/c++/14.2.0/ratio:
 
 C:/mingw64/x86_64-w64-mingw32/include/locale.h:
-
-C:/mingw64/include/c++/14.2.0/tr1/special_function_util.h:
-
-C:/mingw64/x86_64-w64-mingw32/include/corecrt_wstdlib.h:
 
 C:/Users/yennh/Downloads/ProjectCS202/Mario/src/ResrcManager.cpp:
 
@@ -4042,9 +4083,9 @@ C:/mingw64/include/c++/14.2.0/ext/numeric_traits.h:
 
 C:/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/os_defines.h:
 
-C:/mingw64/include/c++/14.2.0/bits/algorithmfwd.h:
-
 C:/mingw64/include/c++/14.2.0/limits:
+
+C:/mingw64/include/c++/14.2.0/bits/algorithmfwd.h:
 
 C:/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/c++allocator.h:
 
@@ -4098,6 +4139,8 @@ C:/mingw64/include/c++/14.2.0/cstdlib:
 
 C:/mingw64/x86_64-w64-mingw32/include/wchar.h:
 
+C:/mingw64/include/c++/14.2.0/tr1/legendre_function.tcc:
+
 C:/mingw64/include/c++/14.2.0/cstdio:
 
 C:/mingw64/include/c++/14.2.0/debug/debug.h:
@@ -4116,6 +4159,10 @@ C:/mingw64/include/c++/14.2.0/ext/type_traits.h:
 
 C:/mingw64/include/c++/14.2.0/bits/version.h:
 
+C:/mingw64/include/c++/14.2.0/pstl/glue_numeric_defs.h:
+
+C:/mingw64/include/c++/14.2.0/bits/allocator.h:
+
 C:/mingw64/include/c++/14.2.0/bits/codecvt.h:
 
 C:/Users/yennh/Downloads/ProjectCS202/Mario/src/FireFlower.cpp:
@@ -4133,6 +4180,12 @@ C:/mingw64/include/c++/14.2.0/pstl/pstl_config.h:
 C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/syslimits.h:
 
 C:/mingw64/include/c++/14.2.0/bits/max_size_type.h:
+
+C:/mingw64/x86_64-w64-mingw32/include/corecrt_startup.h:
+
+C:/mingw64/include/c++/14.2.0/pstl/glue_memory_defs.h:
+
+C:/mingw64/include/c++/14.2.0/ext/string_conversions.h:
 
 C:/mingw64/include/c++/14.2.0/bits/unordered_map.h:
 
@@ -4166,12 +4219,6 @@ C:/mingw64/include/c++/14.2.0/clocale:
 
 C:/mingw64/include/c++/14.2.0/bits/fs_ops.h:
 
-C:/mingw64/x86_64-w64-mingw32/include/corecrt_startup.h:
-
-C:/mingw64/include/c++/14.2.0/ext/string_conversions.h:
-
-C:/mingw64/include/c++/14.2.0/pstl/glue_memory_defs.h:
-
 C:/mingw64/include/c++/14.2.0/bits/cxxabi_forced.h:
 
 C:/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/time_members.h:
@@ -4189,8 +4236,6 @@ C:/mingw64/x86_64-w64-mingw32/include/crtdefs.h:
 C:/mingw64/include/c++/14.2.0/bits/fs_fwd.h:
 
 C:/mingw64/include/c++/14.2.0/bits/valarray_array.h:
-
-C:/mingw64/include/c++/14.2.0/span:
 
 C:/mingw64/include/c++/14.2.0/backward/binders.h:
 
@@ -4278,10 +4323,6 @@ C:/mingw64/include/c++/14.2.0/locale:
 
 C:/mingw64/include/c++/14.2.0/cctype:
 
-C:/mingw64/include/c++/14.2.0/tr1/exp_integral.tcc:
-
-C:/mingw64/x86_64-w64-mingw32/include/swprintf.inl:
-
 C:/mingw64/include/c++/14.2.0/bits/move.h:
 
 C:/mingw64/x86_64-w64-mingw32/include/_mingw_secapi.h:
@@ -4319,12 +4360,6 @@ C:/mingw64/include/c++/14.2.0/bits/functexcept.h:
 C:/mingw64/include/c++/14.2.0/bits/gslice_array.h:
 
 C:/mingw64/include/c++/14.2.0/bits/node_handle.h:
-
-C:/mingw64/include/c++/14.2.0/tr1/poly_hermite.tcc:
-
-C:/mingw64/include/c++/14.2.0/bits/ranges_cmp.h:
-
-C:/mingw64/include/c++/14.2.0/fstream:
 
 C:/mingw64/include/c++/14.2.0/bits/list.tcc:
 
@@ -4374,6 +4409,54 @@ C:/raylib/raylib/src/raylib.h:
 
 C:/Users/yennh/Downloads/ProjectCS202/Mario/src/CourseClearToken.cpp:
 
+C:/mingw64/x86_64-w64-mingw32/include/sec_api/string_s.h:
+
+C:/mingw64/include/c++/14.2.0/cmath:
+
+C:/mingw64/include/c++/14.2.0/tr1/bessel_function.tcc:
+
+C:/mingw64/include/c++/14.2.0/tr1/beta_function.tcc:
+
+C:/mingw64/x86_64-w64-mingw32/include/swprintf.inl:
+
+C:/mingw64/include/c++/14.2.0/tr1/exp_integral.tcc:
+
+C:/mingw64/include/c++/14.2.0/tr1/gamma.tcc:
+
+C:/mingw64/include/c++/14.2.0/tr1/hypergeometric.tcc:
+
+C:/mingw64/include/c++/14.2.0/tr1/modified_bessel_func.tcc:
+
+C:/Users/yennh/Downloads/ProjectCS202/Mario/src/Tile.cpp:
+
+C:/mingw64/include/c++/14.2.0/bits/fstream.tcc:
+
+C:/mingw64/include/c++/14.2.0/bits/ranges_cmp.h:
+
+C:/mingw64/include/c++/14.2.0/fstream:
+
+C:/mingw64/include/c++/14.2.0/tr1/poly_hermite.tcc:
+
+C:/mingw64/include/c++/14.2.0/tr1/poly_laguerre.tcc:
+
+C:/mingw64/include/c++/14.2.0/cstring:
+
+C:/mingw64/include/c++/14.2.0/tr1/riemann_zeta.tcc:
+
+C:/mingw64/x86_64-w64-mingw32/include/corecrt_wstdlib.h:
+
+C:/mingw64/include/c++/14.2.0/tr1/special_function_util.h:
+
+C:/mingw64/x86_64-w64-mingw32/include/pthread_compat.h:
+
+C:/mingw64/x86_64-w64-mingw32/include/math.h:
+
+C:/mingw64/include/c++/14.2.0/streambuf:
+
+C:/mingw64/include/c++/14.2.0/bits/align.h:
+
+C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/FireFlower.h:
+
 C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameWorld.h:
 
 C:/mingw64/x86_64-w64-mingw32/include/process.h:
@@ -4414,13 +4497,7 @@ C:/mingw64/include/c++/14.2.0/bits/valarray_after.h:
 
 C:/mingw64/include/c++/14.2.0/bits/locale_classes.tcc:
 
-C:/mingw64/include/c++/14.2.0/stdexcept:
-
 C:/mingw64/include/c++/14.2.0/bits/fs_path.h:
-
-C:/Users/yennh/Downloads/ProjectCS202/Mario/src/Tile.cpp:
-
-C:/mingw64/include/c++/14.2.0/bits/fstream.tcc:
 
 C:/mingw64/include/c++/14.2.0/bits/concept_check.h:
 
@@ -4516,12 +4593,6 @@ C:/Users/yennh/Downloads/ProjectCS202/Mario/src/ThreeUpMoon.cpp:
 
 C:/mingw64/include/c++/14.2.0/cassert:
 
-C:/mingw64/x86_64-w64-mingw32/include/sec_api/string_s.h:
-
-C:/mingw64/include/c++/14.2.0/cmath:
-
-C:/mingw64/include/c++/14.2.0/cstring:
-
 C:/mingw64/include/c++/14.2.0/ctime:
 
 C:/mingw64/include/c++/14.2.0/cwctype:
@@ -4545,21 +4616,3 @@ C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Object.h:
 C:/mingw64/include/c++/14.2.0/ostream:
 
 C:/mingw64/include/c++/14.2.0/pstl/execution_defs.h:
-
-C:/mingw64/include/c++/14.2.0/bits/allocator.h:
-
-C:/mingw64/include/c++/14.2.0/pstl/glue_numeric_defs.h:
-
-C:/mingw64/include/c++/14.2.0/ratio:
-
-C:/mingw64/include/c++/14.2.0/sstream:
-
-C:/mingw64/include/c++/14.2.0/bits/align.h:
-
-C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/FireFlower.h:
-
-C:/mingw64/include/c++/14.2.0/streambuf:
-
-C:/mingw64/include/c++/14.2.0/tr1/bessel_function.tcc:
-
-C:/mingw64/include/c++/14.2.0/tr1/beta_function.tcc:

@@ -1,34 +1,25 @@
 #include "Item.h"
+#include "raylib.h"
 
 Item::Item()
-    : Object(), pauseGameOnHit(false) {
-}
+    : Object(), pauseGameOnHit(false), earnedPoints(0), hitsToDie(1) {}
 
 Item::Item(Vector2 pos, Vector2 dim, Vector2 vel, Color color,
            float frameTime, int maxFrames, Direction facingDirection,
            int hitsToDie, int earnedPoints)
     : Object(pos, dim, vel, color, frameTime, maxFrames, facingDirection),
-      pauseGameOnHit(false)
-{
-    
-}
+      pauseGameOnHit(false), earnedPoints(earnedPoints), hitsToDie(hitsToDie) {}
 
-
-Item::~Item() {
-}
+Item::~Item() = default;
 
 void Item::draw() {
-    if (sprite && sprite->id != 0) {
+    if (sprite != nullptr && sprite->id != 0) {
         DrawTextureEx(*sprite, pos, angle, 1.0f, color);
     }
 }
 
-void Item::SetSprite(Texture2D texture) {
-    if (this->sprite == nullptr) {
-        this->sprite = new Texture2D(texture);
-    } else {
-        *this->sprite = texture;
-    }
+void Item::SetSprite(Texture2D* texture) {
+    this->sprite = texture; 
 }
 
 void Item::SetState(ObjectState state) {
@@ -47,10 +38,7 @@ CollisionType Item::checkCollision(const Object& other) {
     Rectangle rect2 = { other.GetPos().x, other.GetPos().y, other.GetSize().x, other.GetSize().y };
 
     if (CheckCollisionRecs(rect1, rect2)) {
-        return static_cast<CollisionType>(COLLISION_TYPE_COLLIDED);
-    } else {
-        return static_cast<CollisionType>(COLLISION_TYPE_NONE);
+        return COLLISION_TYPE_COLLIDED;
     }
+    return COLLISION_TYPE_NONE;
 }
-
-
