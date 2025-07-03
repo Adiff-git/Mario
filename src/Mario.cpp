@@ -390,10 +390,10 @@ void Mario::draw() {
     DrawTexture(*sprite, pos.x, pos.y, WHITE);
         // std::cout << "Mario position: " << pos.x << ", " << pos.y << std::endl;
     // std::cout << "Mario velocity: " << vel.x << ", " << vel.y << std::endl;
-    cpN.draw();
-    cpS.draw();
-    cpE.draw();
-    cpW.draw();
+    // cpN.draw();
+    // cpS.draw();
+    // cpE.draw();
+    // cpW.draw();
 }
 
 void Mario::changeToBig() {
