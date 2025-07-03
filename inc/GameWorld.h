@@ -12,7 +12,7 @@
 
 class GameWorld {
     private:
-        static constexpr float gravity = 200;
+        static constexpr float gravity = 300;
         Texture2D background = ResrcManager::GetInstance().getTexture("BACKGROUND_0");
         Map map;
         float currBackgroundStarX = 0.0f;

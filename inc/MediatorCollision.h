@@ -14,12 +14,11 @@ private:
     void HandleFireballWithTile(Fireball*& fireball, Tile*& tile, CollisionType AtoB);
     
     std::vector<Enemy*> enemies;
-
 public:
     MediatorCollision();
     ~MediatorCollision() = default;
     void HandleCollision(Object* ObjectA, Object* ObjectB);
-    std::vector<Enemy*>& GetEnemies();
+    
     void HandleEnemyWithTile(Enemy*& enemy, Tile* tile, CollisionType AtoB);
-
+    std::vector<Enemy*>& GetEnemies();
 };
