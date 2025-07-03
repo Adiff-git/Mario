@@ -1,3 +1,4 @@
+
 #include "Enemy.h"
 #include "ResrcManager.h"
 #include "raylib.h"
@@ -6,6 +7,16 @@
 Enemy::Enemy(Vector2 pos)
     : Object(pos, Vector2{32, 32}, Vector2{50, 0}, RED, 0.2f, 2, DIRECTION_RIGHT), maxSpeedX(20.0f), textureIndex(0) {
     sprite = &ResrcManager::GetInstance().getTexture("GOOMBA_0");
+    // Tùy chỉnh kích thước probe
+    cpN.setSize(Vector2{size.x/2, 1}); 
+    cpS.setSize(Vector2{size.x/2, 1}); 
+    cpE.setSize(Vector2{5, size.y - 5});
+    cpW.setSize(Vector2{5, size.y - 5});
+    cpN.setColor(RED);
+    cpS.setColor(RED);
+    cpE.setColor(RED);
+    cpW.setColor(RED);
+    UpdateCollisionProbes();
 }
 
 void Enemy::Update() {
@@ -34,26 +45,47 @@ void Enemy::UpdateStateAndPhysic() {
     vel.y += GameWorld::GetGravity() * deltaTime;
     UpdateCollisionProbes();
     
-   static int updateCount = 0; 
-    const int updateThreshold = 50; // Số lần gọi trước khi đổi texture (điều chỉnh tốc độ tại đây)
+      static int updateCount = 0; 
+    const int updateThreshold = 50; // Số lần gọi trước khi đổi texture
 
     if (fabs(GetVel().x) > 0.1f) { 
         updateCount++;
         if (updateCount >= updateThreshold) {
-            if (textureIndex == 0) {
-                sprite = &ResrcManager::GetInstance().getTexture("GOOMBA_0");
-                textureIndex = 1; // Chuyển sang GOOMBA_1
-            } else if (textureIndex == 1) {
-                sprite = &ResrcManager::GetInstance().getTexture("GOOMBA_1");
-                textureIndex = 0; // Quay lại GOOMBA_0
+            if (direction == DIRECTION_RIGHT) {
+                if (textureIndex == 0) {
+                    sprite = &ResrcManager::GetInstance().getTexture("GOOMBA_0_RIGHT");
+                    textureIndex = 1;
+                } else if (textureIndex == 1) {
+                    sprite = &ResrcManager::GetInstance().getTexture("GOOMBA_1_RIGHT");
+                    textureIndex = 0;
+                }
+            } else if (direction == DIRECTION_LEFT) {
+                if (textureIndex == 0) {
+                    sprite = &ResrcManager::GetInstance().getTexture("GOOMBA_0_LEFT");
+                    textureIndex = 1;
+                } else if (textureIndex == 1) {
+                    sprite = &ResrcManager::GetInstance().getTexture("GOOMBA_1_LEFT");
+                    textureIndex = 0;
+                }
             }
             updateCount = 0;
         }
     } else {
-        sprite = &ResrcManager::GetInstance().getTexture("GOOMBA_0"); // Đứng yên giữ GOOMBA_0
-        textureIndex = 0; 
-        updateCount = 0; 
+        if (direction == DIRECTION_RIGHT) {
+            sprite = &ResrcManager::GetInstance().getTexture("GOOMBA_0");
+        } else if (direction == DIRECTION_LEFT) {
+            sprite = &ResrcManager::GetInstance().getTexture("GOOMBA_3");
+        }
+        textureIndex = 0;
+        updateCount = 0;
     }
+}
+
+void Enemy::UpdateCollisionProbes() {
+    cpN.setPos(Vector2{ pos.x + size.x / 2 - cpN.getSize().x/2, pos.y });
+    cpS.setPos(Vector2{ pos.x + size.x / 2 - cpS.getSize().x/2, pos.y + size.y - cpS.getSize().y + 1 });
+    cpE.setPos(Vector2{ pos.x + size.x - cpE.getSize().x, pos.y + size.y / 2 - cpE.getSize().y / 2 }); // Sát mép phải
+    cpW.setPos(Vector2{ pos.x, pos.y + size.y / 2 - cpW.getSize().y / 2 }); // Sát mép trái
 }
 
 void Enemy::draw() {

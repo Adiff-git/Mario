@@ -88,8 +88,11 @@ void ResrcManager::loadTextures() {
     }
     // Enemy (Goomba)
     {
-        textures["GOOMBA_0"] = LoadTexture("resources/images/Object/enemy/Goomba_0.png");
-        textures["GOOMBA_1"] = LoadTexture("resources/images/Object/enemy/Goomba_1.png");
+        textures["GOOMBA_0_RIGHT"] = LoadTexture("resources/images/Object/enemy/Goomba_0.png");
+        textures["GOOMBA_1_RIGHT"] = LoadTexture("resources/images/Object/enemy/Goomba_1.png");
+        textures["GOOMBA_0_LEFT"] = FlipTextureHorizontal(textures["GOOMBA_0_RIGHT"]);
+        textures["GOOMBA_1_LEFT"] = FlipTextureHorizontal(textures["GOOMBA_1_RIGHT"]);
+
     }
 }
 
