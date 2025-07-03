@@ -1,4 +1,6 @@
 #include "Map.h"
+#include "QuestionBlock.h"
+#include "CloudBlock.h"
 
 
 Map::~Map()
@@ -49,9 +51,20 @@ void Map::LoadMap(int mapIndex)
             int tileId = data[y * width + x];
             if (tileId == 0)
                 continue;
-            else if(tileId==1)
-                nonInteractiveTiles.push_back(new Tile(Vector2{(float) x * 32,(float) y * 32 },mapIndex ,tileId-1));
-            else interactiveTiles.push_back(new Tile(Vector2{(float) x * 32,(float) y * 32 },mapIndex ,tileId-1));
+            else if(tileId == 24) {
+
+                blocks.push_back(new QuestionBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE));
+            }
+            else if (tileId == 100) {
+                // Đây là block mây (CloudBlock)
+                blocks.push_back(new CloudBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE));
+            }
+            else if (tileId == 1) {
+                nonInteractiveTiles.push_back(new Tile({(float)x * 32, (float)y * 32}, mapIndex, tileId - 1, TILE_TYPE_SOLID));
+            }
+            else {
+                interactiveTiles.push_back(new Tile({(float)x * 32, (float)y * 32}, mapIndex, tileId - 1, TILE_TYPE_SOLID));
+            }
             }
         }
 }
@@ -65,6 +78,10 @@ void Map::draw()
     for (auto tile : nonInteractiveTiles) {
         tile->draw();
     }
+
+    for (const auto& block : blocks) {
+        block->draw();
+    }
 }
 
 Map::Map()
@@ -72,3 +89,7 @@ Map::Map()
     currBackgroundStarX = 0.0f;
     background = ResrcManager::GetInstance().getTexture("BACKGROUND_0");
 }
+
+std::vector<Block*>& Map::getBlocks(){
+        return blocks;
+    };

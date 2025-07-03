@@ -58,7 +58,10 @@ Object::~Object() {
     sprite = nullptr; // Assuming sprite is managed elsewhere
 }
 
-
+Object::Object(Vector2 pos, Vector2 size, Color color, float frameTime, int maxFrames):
+    Object(pos, size, Vector2{0, 0}, color, frameTime, maxFrames, DIRECTION_RIGHT) {
+    // Constructor with position, size, color, frame time and max frames
+}   ;
 
 void Object::SetPos(Vector2 pos) {
     this->pos = pos;

@@ -4,9 +4,11 @@
 #include "Object.h"
 #include "Tile.h"
 #include <vector>
+#include "Block.h"
 #include "ResrcManager.h"
 #include "json.hpp"
 #include <iostream>
+#include "CloudBlock.h"
 #include <fstream>
 
 class Map : public Drawable {
@@ -19,6 +21,7 @@ class Map : public Drawable {
         std::vector<Tile*> interactiveTiles;
         std::vector<Tile*> nonInteractiveTiles;
         void LoadFromJsonFile(const std::string& filename);
+        std::vector<Block*> blocks;
     public:
         Map();
         ~Map();
@@ -27,4 +30,5 @@ class Map : public Drawable {
         void nextMap();
         void LoadMap(int mapIndex);
         void draw() override;
+        std::vector<Block*>& getBlocks();
 };

@@ -17,29 +17,68 @@ GameWorld::~GameWorld()
     // Destructor logic if needed
 }
 
+// void GameWorld::UpdateWorld()
+// {
+//     player.UpdateStateAndPhysic();
+//     for ( auto const &tile : interactiveTiles )
+//     {
+//         CollisionType collision = player.checkCollisionType(*tile);
+//         if ( collision )
+//         {
+//             mediatorCollision.HandleCollision(&player, tile);
+//         }
+
+//         for ( auto &fireball : *player.GetFireballs() )
+//         {
+//             CollisionType fireballCollision = fireball->checkCollisionType(*tile);
+//             if ( fireballCollision  )
+//             {
+//                 mediatorCollision.HandleCollision(fireball, tile);
+//             }
+//         }
+//     }
+    
+// }
 void GameWorld::UpdateWorld()
 {
     player.UpdateStateAndPhysic();
-    for ( auto const &tile : interactiveTiles )
+
+    // Va chạm với interactive tiles
+    for (auto const &tile : interactiveTiles)
     {
         CollisionType collision = player.checkCollisionType(*tile);
-        if ( collision )
+        if (collision)
         {
             mediatorCollision.HandleCollision(&player, tile);
         }
 
-        for ( auto &fireball : *player.GetFireballs() )
+        for (auto &fireball : *player.GetFireballs())
         {
             CollisionType fireballCollision = fireball->checkCollisionType(*tile);
-            if ( fireballCollision  )
+            if (fireballCollision)
             {
                 mediatorCollision.HandleCollision(fireball, tile);
             }
         }
     }
-    
+
+    for (auto &block : map.getBlocks())
+{
+    block->Update();
+
+    CollisionType collision = player.checkCollisionType(*block);
+    if (collision == COLLISION_TYPE_SOUTH)
+    {
+        block->doHit(player, &map);             // Gọi doHit
+        player.SetVel({player.GetVel().x, 0});
+    }
+    else if (collision != COLLISION_TYPE_NONE)
+    {
+        mediatorCollision.HandleCollision(&player, block);
+    }
 }
 
+}
 void GameWorld::DrawWorld()
 {
     camera.target.y = GetScreenHeight() / 2;
