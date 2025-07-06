@@ -30,6 +30,7 @@ QuestionBlock::QuestionBlock( Vector2 pos, Vector2 dim, Color color, float frame
 QuestionBlock::~QuestionBlock() = default;
 
 void QuestionBlock::Update() {
+    
 
     const float delta = GetFrameTime();
 

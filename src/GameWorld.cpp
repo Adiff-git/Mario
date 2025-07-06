@@ -69,8 +69,10 @@ void GameWorld::UpdateWorld()
     CollisionType collision = player.checkCollisionType(*block);
     if (collision == COLLISION_TYPE_NORTH)
     {
-        block->doHit(player, &map);             // Gọi doHit
+        if (block->GetBlockType() == BLOCK_QUESTION){
+        block->doHit(player, &map); // Gọi doHit
         player.SetVel({player.GetVel().x, 0});
+    }
     }
     else if (collision != COLLISION_TYPE_NONE)
     {

@@ -93,9 +93,11 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
     Fireball* isBfireball = dynamic_cast<Fireball*>(ObjectB);
     Tile* isAtile = dynamic_cast<Tile*>(ObjectA);
     Tile* isBtile = dynamic_cast<Tile*>(ObjectB);
-    Block* isAblock = dynamic_cast<Block*>(ObjectA);
-    Block* isBblock = dynamic_cast<Block*>(ObjectB);
-    if ((isAmario && isBtile)|| (isBmario&& isAtile))
+    Block* isAquestionBlock = dynamic_cast<QuestionBlock*>(ObjectA);
+    Block* isBquestionBlock = dynamic_cast<QuestionBlock*>(ObjectB);
+    CloudBlock* isAcloudBlock = dynamic_cast<CloudBlock*>(ObjectA);
+    CloudBlock* isBcloudBlock = dynamic_cast<CloudBlock*>(ObjectB);
+    if ((isAmario && isBtile) || (isBmario && isAtile))
     {
         CollisionType AtoB = isAmario ? isAmario->checkCollisionType(*isBtile) : isBmario->checkCollisionType(*isAtile);
         if (isAmario)
@@ -111,15 +113,23 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
         else
             HandleFireballWithTile(isBfireball, isAtile, AtoB);
     }
-    else if (isAmario && isBblock || isBmario && isAblock)
+    else if (isAmario && isBquestionBlock || isBmario && isAquestionBlock)
     {
-        CollisionType AtoB = isAmario ? isAmario->checkCollisionType(*isBblock) : isBmario->checkCollisionType(*isAblock);
+        CollisionType AtoB = isAmario ? isAmario->checkCollisionType(*isBquestionBlock) : isBmario->checkCollisionType(*isAquestionBlock);
 
         if (isAmario)
-            HandleMarioWithBlock(isAmario, isBblock, AtoB);
+            HandleMarioWithQuestionBlock(isAmario, isBquestionBlock, AtoB);
         else
-            HandleMarioWithBlock(isBmario, isAblock, AtoB);
+            HandleMarioWithQuestionBlock(isBmario, isAquestionBlock, AtoB);
     }
+    else if ((isAmario && isBcloudBlock) || (isBmario && isAcloudBlock))
+    {
+        CollisionType AtoB = isAmario ? isAmario->checkCollisionType(*isBcloudBlock) : isBmario->checkCollisionType(*isAcloudBlock);
+        if (isAmario)
+            HandleMarioWithCloudBlock(isAmario, isBcloudBlock, AtoB);
+        else
+            HandleMarioWithCloudBlock(isBmario, isAcloudBlock, AtoB);
+    }   
     // else if (isAfireball && isBblock || isBfireball && isAblock)
     // {
     //     CollisionType AtoB = isAfireball ? isAfireball->checkCollisionType(*isBblock) : isBfireball->checkCollisionType(*isAblock);
@@ -130,7 +140,7 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
     //         HandleFireballWithBlock(isBfireball, isAblock, AtoB);
     // }
 }
-void MediatorCollision::HandleMarioWithBlock(Mario* &mario, Block *&block, CollisionType AtoB)
+void MediatorCollision::HandleMarioWithQuestionBlock(Mario* &mario, Block *&questionBlock, CollisionType AtoB)
 {
     if (AtoB == COLLISION_TYPE_NONE)
         return;
@@ -139,29 +149,58 @@ void MediatorCollision::HandleMarioWithBlock(Mario* &mario, Block *&block, Colli
     {
     case COLLISION_TYPE_SOUTH:
     {
-        mario->SetPos(Vector2{mario->GetPos().x, block->GetPos().y - mario->GetSize().y});
+        mario->SetPos(Vector2{mario->GetPos().x, questionBlock->GetPos().y - mario->GetSize().y});
         mario->SetState(OBJECT_STATE_ON_GROUND);
         mario->SetVel(Vector2{mario->GetVel().x, 0});
         break;
     }
     case COLLISION_TYPE_NORTH:
     {
-        mario->SetPos(Vector2{mario->GetPos().x, block->GetPos().y + block->GetSize().y});
+        mario->SetPos(Vector2{mario->GetPos().x, questionBlock->GetPos().y + questionBlock->GetSize().y});
         mario->SetVel(Vector2{mario->GetVel().x, 0});
         break;
     }
     case COLLISION_TYPE_EAST:
     {
-        mario->SetPos(Vector2{block->GetPos().x - mario->GetSize().x, mario->GetPos().y});
+        mario->SetPos(Vector2{questionBlock->GetPos().x - mario->GetSize().x, mario->GetPos().y});
         mario->SetVel(Vector2{0, mario->GetVel().y});
         break;
     }
     case COLLISION_TYPE_WEST:
     {
-        mario->SetPos(Vector2{block->GetPos().x + block->GetSize().x, mario->GetPos().y});
+        mario->SetPos(Vector2{questionBlock->GetPos().x + questionBlock->GetSize().x, mario->GetPos().y});
         mario->SetVel(Vector2{0, mario->GetVel().y});
         break;
     }
+    default:
+        break;
+    }
+}
+
+void MediatorCollision::HandleMarioWithCloudBlock(Mario* &mario, CloudBlock *&cloudBlock, CollisionType AtoB)
+{
+    if (AtoB == COLLISION_TYPE_NONE)
+        return;
+    switch (AtoB)
+    {
+    case COLLISION_TYPE_SOUTH:
+        if(mario->GetState() == OBJECT_STATE_FALLING)
+        mario->SetPos(Vector2{mario->GetPos().x, cloudBlock->GetPos().y - mario->GetSize().y});
+        mario->SetState(OBJECT_STATE_ON_GROUND);
+        mario->SetVel(Vector2{mario->GetVel().x, 0});
+        break;
+    case COLLISION_TYPE_NORTH:
+        // mario->SetPos(Vector2{mario->GetPos().x, cloudBlock->GetPos().y + cloudBlock->GetSize().y});
+        // mario->SetVel(Vector2{mario->GetVel().x, 0});
+        break;
+    case COLLISION_TYPE_EAST:
+        // mario->SetPos(Vector2{cloudBlock->GetPos().x - mario->GetSize().x, mario->GetPos().y});
+        // mario->SetVel(Vector2{0, mario->GetVel().y});
+        break;
+    case COLLISION_TYPE_WEST:
+        // mario->SetPos(Vector2{cloudBlock->GetPos().x + cloudBlock->GetSize().x, mario->GetPos().y});
+        // mario->SetVel(Vector2{0, mario->GetVel().y});
+        break;
     default:
         break;
     }

@@ -36,5 +36,6 @@ public:
     void Update() override;
     void draw() override;
     void doHit( Mario& mario, Map *map ) override;
+    bool isQuestionBlock()  { return true; } // Override to indicate this is a QuestionBlock
 
 };

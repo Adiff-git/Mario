@@ -5,7 +5,8 @@
 #include "Tile.h"
 #include "Fireball.h"
 #include "Block.h"
-
+#include "CloudBlock.h"
+#include "QuestionBlock.h"
 // class Mario; // Forward declaration
 // class Tile; // Forward declaration
 // class Fireball; // Forward declaration
@@ -14,7 +15,8 @@ class MediatorCollision {
     private:
         void HandleMarioWithTile(Mario*& mario, Tile*& tile, CollisionType AtoB);
         void HandleFireballWithTile(Fireball*& fireball, Tile*& tile, CollisionType AtoB);
-        void HandleMarioWithBlock(Mario*& mario, Block*& block, CollisionType AtoB);
+        void HandleMarioWithQuestionBlock(Mario*& mario, Block*& questionBlock, CollisionType AtoB);
+        void HandleMarioWithCloudBlock(Mario*& mario, CloudBlock*& cloudBlock, CollisionType AtoB);
     public:
         MediatorCollision() = default; // Ensure default constructor exists
         ~MediatorCollision() = default;
