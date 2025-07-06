@@ -30,7 +30,7 @@ bool Fireball::isOutOfDistance() const
     return distanceLeft < 0.0f;
 }
 
-void Fireball::draw()
+void Fireball::Draw()
 {
     if (isOutOfDistance())
         return;

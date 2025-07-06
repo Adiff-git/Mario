@@ -1,3 +1,6 @@
+#pragma once
+#include "GameState.h"
+
 class GameStateManager {
     private:
         GameState* currentState;

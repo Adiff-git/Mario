@@ -7,7 +7,7 @@ Item::Item()
 Item::~Item() {
 }
 
-void Item::draw() {
+void Item::Draw() {
     if (sprite && sprite->id != 0) {
         DrawTextureEx(*sprite, pos, angle, 1.0f, color);
     }

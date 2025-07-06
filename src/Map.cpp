@@ -56,14 +56,14 @@ void Map::LoadMap(int mapIndex)
         }
 }
 
-void Map::draw()
+void Map::Draw()
 {
     for (auto tile : interactiveTiles) {
-        tile->draw();
+        tile->Draw();
     }
 
     for (auto tile : nonInteractiveTiles) {
-        tile->draw();
+        tile->Draw();
     }
 }
 

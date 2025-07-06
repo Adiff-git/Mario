@@ -1,8 +1,9 @@
+#pragma once
+#include "GameState.h"
+#include "Map.h"
 class Map1State : public GameState {
     private:
-        // Game world components for map1
         bool isPaused;
-        
     public:
         Map1State();
         void Enter() override;
@@ -10,4 +11,4 @@ class Map1State : public GameState {
         void Draw() override;
         void Exit() override;
         void HandleInput() override;
-    };
+};

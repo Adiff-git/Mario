@@ -10,6 +10,6 @@ class Tile : public Object {
     
     public:
         Tile(Vector2 pos,int map,  int key);
-        void draw() override;
+        void Draw() override;
         
     };

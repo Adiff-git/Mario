@@ -7,7 +7,7 @@ Tile::Tile(Vector2 pos,int map,int key):Object(pos,{32,32},WHITE)
     sprite = &ResrcManager::GetInstance().getTexture(keyStr);
 }
 
-void Tile::draw(){
+void Tile::Draw(){
     if(!sprite)
         return;
     DrawTexture(*sprite, pos.x, pos.y, WHITE);

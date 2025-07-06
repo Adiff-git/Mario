@@ -381,11 +381,11 @@ void Mario::UpdateStateAndPhysic() {
     UpdateCollisionProbes(); // Update the position of collision probes
 }
 
-void Mario::draw() {
+void Mario::Draw() {
     Update();
     for(auto& fireball:fireballs)
     {
-        fireball->draw();
+        fireball->Draw();
     }
     DrawTexture(*sprite, pos.x, pos.y, WHITE);
         // std::cout << "Mario position: " << pos.x << ", " << pos.y << std::endl;

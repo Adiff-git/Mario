@@ -17,7 +17,7 @@ public:
     
     Fireball(Vector2 pos, Direction direction);
     bool isOutOfDistance() const;
-    void draw() override;
+    void Draw() override;
     void setSpeed(float speedX, float speedY);
     void setDirection(Direction direction);
     void UpdateStateAndPhysic() override;

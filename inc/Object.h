@@ -58,7 +58,7 @@ class Object : public Drawable {
 
         virtual ~Object() override;
 
-        virtual void draw() = 0;
+        virtual void Draw() = 0;
 
         CollisionType checkCollisionType(const Object& other) const;
 

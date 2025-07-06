@@ -48,7 +48,7 @@ class Mario : public Object {
         void changeToSmall();
         void changetoFire();
 
-        void draw() override;
+        void Draw() override;
         void HandleInput();
 
         // Setters

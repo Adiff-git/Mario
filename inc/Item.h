@@ -12,7 +12,7 @@ public:
     Item();
     virtual ~Item();
 
-    void draw() override;
+    void Draw() override;
 
     //setter
     void SetSprite(Texture2D sprite);

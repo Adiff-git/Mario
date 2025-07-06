@@ -1,3 +1,7 @@
+#pragma once
+#include "GameState.h"
+
+
 class MenuState : public GameState {
     private:
         int selectedOption;
@@ -10,4 +14,4 @@ class MenuState : public GameState {
         void Draw() override;
         void Exit() override;
         void HandleInput() override;
-    };
+};

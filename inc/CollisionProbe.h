@@ -26,7 +26,7 @@ class CollisionProbe : public Drawable {
 
         ~CollisionProbe() override;
 
-        void draw() override;
+        void Draw() override;
 
         bool checkCollision( const Rectangle &rect) const;
 

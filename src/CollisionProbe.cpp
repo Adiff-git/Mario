@@ -14,7 +14,7 @@ CollisionProbe::~CollisionProbe() {
     // Destructor
 }
 
-void CollisionProbe::draw() {
+void CollisionProbe::Draw() {
     DrawRectangleV(pos, size, color);
 }
 

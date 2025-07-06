@@ -26,5 +26,5 @@ class Map : public Drawable {
         float GetWidth() const;
         void nextMap();
         void LoadMap(int mapIndex);
-        void draw() override;
+        void Draw() override;
 };

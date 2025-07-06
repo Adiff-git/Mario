@@ -64,8 +64,8 @@ void GameWorld::DrawWorld()
     DrawTextureEx(background, Vector2{currBackgroundStarX-background.width*1.3f,-200}, 0.0f, 1.3f, WHITE);
     DrawTextureEx(background,Vector2{currBackgroundStarX,-200},0.0f,1.3f,WHITE);
     DrawTextureEx(background,Vector2{currBackgroundStarX+background.width*1.3f,-200},0.0f,1.3f,WHITE);
-    map.draw();
-    player.draw();
+    map.Draw();
+    player.Draw();
     EndMode2D();
 }
 
