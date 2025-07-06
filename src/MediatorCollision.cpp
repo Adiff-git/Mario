@@ -87,9 +87,7 @@ void MediatorCollision::HandleFireballWithTile(Fireball *&fireball, Tile *&tile,
     }
 }
 void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
-
 {
-
     Mario* isAmario = dynamic_cast<Mario*>(ObjectA);
     Mario* isBmario = dynamic_cast<Mario*>(ObjectB);
     Fireball* isAfireball = dynamic_cast<Fireball*>(ObjectA);
@@ -127,6 +125,13 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
         HandleMarioWithEnemy(isAmario, isBenemy, AtoB);
     else
         HandleMarioWithEnemy(isBmario, isAenemy, AtoB);}
+        else if ((isAenemy && isBfireball) || (isBenemy && isAfireball)) {
+        CollisionType AtoB = isAenemy ? isAenemy->checkCollisionType(*isBfireball) : isBenemy->checkCollisionType(*isAfireball);
+        if (isAenemy)
+            HandleEnemyWithFireball(isAenemy, isBfireball, AtoB);
+        else
+            HandleEnemyWithFireball(isBenemy, isAfireball, AtoB);
+    }
 }
 
 void MediatorCollision::HandleEnemyWithTile(Enemy*& enemy, Tile* tile, CollisionType AtoB) {
@@ -178,6 +183,21 @@ void MediatorCollision::HandleMarioWithEnemy(Mario*& mario, Enemy*& enemy, Colli
         }
     }
 }
+void MediatorCollision::HandleEnemyWithFireball(Enemy*& enemy, Fireball*& fireball, CollisionType AtoB) {
+    std::cout << "[DEBUG] HandleEnemyWithFireball called!" << std::endl;
+    if (AtoB == COLLISION_TYPE_NONE) {
+        std::cout << "No collision between Enemy and Fireball" << std::endl;
+        return;
+    }
+
+    std::cout << "Enemies size before: " << enemies.size() << std::endl;
+    // Chỉ xóa enemy, KHÔNG xóa fireball
+    enemies.erase(std::remove(enemies.begin(), enemies.end(), enemy), enemies.end());
+    delete enemy;
+    enemy = nullptr;
+    std::cout << "Enemy dies by fireball" << std::endl;
+}
+
 std::vector<Enemy*>& MediatorCollision::GetEnemies() {
     return enemies;
 }

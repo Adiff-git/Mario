@@ -74,7 +74,7 @@ void Enemy::UpdateStateAndPhysic() {
         if (direction == DIRECTION_RIGHT) {
             sprite = &ResrcManager::GetInstance().getTexture("GOOMBA_0");
         } else if (direction == DIRECTION_LEFT) {
-            sprite = &ResrcManager::GetInstance().getTexture("GOOMBA_3");
+            sprite = &ResrcManager::GetInstance().getTexture("GOOMBA_1");
         }
         textureIndex = 0;
         updateCount = 0;

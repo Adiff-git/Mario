@@ -14,12 +14,12 @@ private:
     void HandleMarioWithTile(Mario*& mario, Tile*& tile, CollisionType AtoB);
     void HandleFireballWithTile(Fireball*& fireball, Tile*& tile, CollisionType AtoB);
     void HandleMarioWithEnemy(Mario*& mario, Enemy*& enemy, CollisionType AtoB);
+    void HandleEnemyWithFireball(Enemy*& enemy, Fireball*& fireball, CollisionType AtoB);
+    void HandleEnemyWithTile(Enemy*& enemy, Tile* tile, CollisionType AtoB);
     std::vector<Enemy*> enemies;
 public:
     MediatorCollision();
     ~MediatorCollision() = default;
     void HandleCollision(Object* ObjectA, Object* ObjectB);
-    
-    void HandleEnemyWithTile(Enemy*& enemy, Tile* tile, CollisionType AtoB);
     std::vector<Enemy*>& GetEnemies();
 };

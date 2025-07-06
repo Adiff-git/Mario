@@ -27,20 +27,24 @@ void GameWorld::UpdateWorld() {
             if (fireballCollision) mediatorCollision.HandleCollision(fireball, tile);
         }
 
-        for (Enemy* enemy : mediatorCollision.GetEnemies()) {
-            CollisionType enemyCollision = enemy->checkCollisionType(*tile);
-            if (enemyCollision) mediatorCollision.HandleEnemyWithTile(enemy, tile, enemyCollision);
+         for (Enemy* enemy : mediatorCollision.GetEnemies()) {
+            mediatorCollision.HandleCollision(enemy, tile);
             enemy->Update();
+            }
+            // Kiểm tra va chạm Mario với Enemy
+        for (Enemy* enemy : mediatorCollision.GetEnemies()) {
+            CollisionType marioEnemyCollision = player.checkCollisionType(*enemy);
+            if (marioEnemyCollision) mediatorCollision.HandleCollision(&player, enemy);
+        }
+        // Kiểm tra va chạm Enemy với Fireball
+        for (Enemy* enemy : mediatorCollision.GetEnemies()) {
+             for (auto& fireball : *player.GetFireballs()) {
+            CollisionType enemyFireballCollision = enemy->checkCollisionType(*fireball);
+            if (enemyFireballCollision) mediatorCollision.HandleCollision(enemy, fireball);
         }
     }
-
-    // Kiểm tra va chạm Mario với Enemy
-    for (Enemy* enemy : mediatorCollision.GetEnemies()) {
-        CollisionType marioEnemyCollision = player.checkCollisionType(*enemy);
-        if (marioEnemyCollision) mediatorCollision.HandleCollision(&player, enemy);
     }
 }
-
 void GameWorld::DrawWorld() {
     camera.target.y = GetScreenHeight() / 2;
     if (player.GetPos().x > GetScreenWidth() / 2 && player.GetPos().x < map.GetWidth() - GetScreenWidth() / 2) {
