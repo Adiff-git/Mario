@@ -18,6 +18,11 @@ std::vector<Tile *> &Map::getInteractiveTiles()
     return interactiveTiles;
 }
 
+std::vector<Tile*> &Map::getNonInteractiveTiles()
+{
+    return nonInteractiveTiles;
+}
+
 float Map::GetWidth() const
 {
     return width;
@@ -52,16 +57,14 @@ void Map::LoadMap(int mapIndex)
             if (tileId == 0)
                 continue;
             else if(tileId == 24) {
-
                 blocks.push_back(new QuestionBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE));
             }
             else if (tileId == 100) {
-                // Đây là block mây (CloudBlock)
                 blocks.push_back(new CloudBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE));
             }
-            else if (tileId == 1) {
-                nonInteractiveTiles.push_back(new Tile({(float)x * 32, (float)y * 32}, mapIndex, tileId - 1, TILE_TYPE_SOLID));
-            }
+            // else if (tileId == 1) {
+            //     nonInteractiveTiles.push_back(new Tile({(float)x * 32, (float)y * 32}, mapIndex, tileId - 1, TILE_TYPE_SOLID));
+            // }
             else {
                 interactiveTiles.push_back(new Tile({(float)x * 32, (float)y * 32}, mapIndex, tileId - 1, TILE_TYPE_SOLID));
             }

@@ -8,13 +8,13 @@ int main() {
     InitWindow(1600, 900, "Mario Game");
     InitAudioDevice();
 
-    SetTargetFPS(144);
+    SetTargetFPS(60);
     bool isPaused = false;
     ResrcManager::GetInstance().loadResources();
 
     // // Create a Mario instance
     // Mario mario(Vector2{100, 100}, 3, SMALL);
-    GameWorld::Init(); // Initialize game world resources   
+    GameWorld::Init(); // Initialize game world resources - Call Resource Manager to load textures, sounds, etc.   
     GameWorld gameWorld; // Create a game world instance
     while(!WindowShouldClose()) {
         // if (IsKeyPressed(KEY_P)) {

@@ -20,12 +20,13 @@ class Map : public Drawable {
         Texture2D background;
         std::vector<Tile*> interactiveTiles;
         std::vector<Tile*> nonInteractiveTiles;
-        void LoadFromJsonFile(const std::string& filename);
         std::vector<Block*> blocks;
+        void LoadFromJsonFile(const std::string& filename);
     public:
         Map();
         ~Map();
         std::vector<Tile*>& getInteractiveTiles();
+        std::vector<Tile*>& getNonInteractiveTiles();
         float GetWidth() const;
         void nextMap();
         void LoadMap(int mapIndex);

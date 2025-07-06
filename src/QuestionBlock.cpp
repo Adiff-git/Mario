@@ -7,7 +7,7 @@
 #include <string>
 
 QuestionBlock::QuestionBlock( Vector2 pos, Vector2 dim, Color color ) :
-    QuestionBlock( pos, dim, color, 0.1, 4 ) {}
+    QuestionBlock( pos, dim, color, 0.5, 4 ) {    }
 
 QuestionBlock::QuestionBlock( Vector2 pos, Vector2 dim, Color color, float frameTime, int maxFrames ) :
     Block( pos, dim, color, frameTime, maxFrames),
@@ -57,70 +57,70 @@ void QuestionBlock::Update() {
     }
 
     if ( !hit ) {
-        frameAcumulator += GetFrameTime();
-        if ( frameAcumulator >= frameTime ) {
+        frameAcumulator += delta;
+        if ( frameAcumulator > 6*frameTime ) {
             frameAcumulator = 0;
             currentFrame++;
             currentFrame %= maxFrames;
         }
     }
 
-    if ( stardustAnimationRunning ) {
+    // if ( stardustAnimationRunning ) {    
 
-        stardustAnimationAcum += delta;
-        if ( stardustAnimationAcum >= stardustAnimationTime ) {
-            stardustAnimationAcum = 0;
-            stardustAnimationFrame++;
-            if ( stardustAnimationFrame == maxStartDustAnimationFrame ) {
-                stardustAnimationRunning = false;
-            }
-        }
+    //     stardustAnimationAcum += delta;
+    //     if ( stardustAnimationAcum >= stardustAnimationTime ) {
+    //         stardustAnimationAcum = 0;
+    //         stardustAnimationFrame++;
+    //         if ( stardustAnimationFrame == maxStartDustAnimationFrame ) {
+    //             stardustAnimationRunning = false;
+    //         }
+    //     }
 
-    }
+    // }
 
-    if ( pointsAnimationRunning ) {
+    // if ( pointsAnimationRunning ) {
 
-        pointsFrameAcum += delta;
-        if ( pointsFrameAcum >= pointsFrameTime ) {
-            pointsAnimationRunning = false;
-        }
+    //     pointsFrameAcum += delta;
+    //     if ( pointsFrameAcum >= pointsFrameTime ) {
+    //         pointsAnimationRunning = false;
+    //     }
 
-    }
+    // }
 
 }
 
 void QuestionBlock::draw() {
     // Vẽ đồng xu nếu animation đang chạy
-    if (coinAnimationRunning) {
-        DrawTexture(ResrcManager::GetInstance().getTexture("tile_15"), pos.x + 4, coinY, WHITE);
-    }
+    // if (coinAnimationRunning) {
+    //     DrawTexture(ResrcManager::GetInstance().getTexture("BLOCK_QUESTION_0"), pos.x + 4, coinY, WHITE);
+    // }
 
-    // Vẽ hiệu ứng stardust nếu có
-    if (stardustAnimationRunning) {
-        DrawTexture(ResrcManager::GetInstance().getTexture("tile_13"), pos.x, pos.y - size.y, WHITE);
-    }
+    // // Vẽ hiệu ứng stardust nếu có
+    // if (stardustAnimationRunning) {
+    //     DrawTexture(ResrcManager::GetInstance().getTexture("BLOCK_WOOD"), pos.x, pos.y - size.y, WHITE);
+    // }
 
     // Vẽ điểm
-    if (pointsAnimationRunning) {
-        std::string pointsStr = "guiPoints" + std::to_string(stardustAnimationFrame);
-        Texture2D& tex = ResrcManager::GetInstance().getTexture(pointsStr);
-        DrawTexture(tex,
-            pos.x + size.x / 2 - tex.width / 2,
-            pos.y - size.y / 2 - tex.height - (20 * pointsFrameAcum / pointsFrameTime),
-            WHITE);
-    }
+    // if (pointsAnimationRunning) {
+    //     std::string pointsStr = "guiPoints" + std::to_string(stardustAnimationFrame);
+    //     Texture2D& tex = ResrcManager::GetInstance().getTexture(pointsStr);
+    //     DrawTexture(tex,
+    //         pos.x + size.x / 2 - tex.width / 2,
+    //         pos.y - size.y / 2 - tex.height - (20 * pointsFrameAcum / pointsFrameTime),
+    //         WHITE);
+    // }
 
     // Vẽ block (trạng thái chưa bị hit hoặc đã bị hit)
     if (hit) {
-        DrawTexture(ResrcManager::GetInstance().getTexture("tile_26"), pos.x, pos.y, WHITE);
+        DrawTexture(ResrcManager::GetInstance().getTexture("BLOCK_STONE"), this->pos.x, this->pos.y, WHITE);
     } else {
-        DrawTexture(ResrcManager::GetInstance().getTexture("tile_25"), pos.x, pos.y, WHITE);
+        DrawTexture( ResrcManager::GetInstance().getTexture(std::string( TextFormat( "BLOCK_QUESTION_%d", currentFrame ) )), pos.x, pos.y, WHITE );
     }
 
     // Vẽ overlay nếu có màu
-    if (color.a != 0) {
-        DrawRectangle(pos.x, pos.y, size.x, size.y, Fade(color, 0.5f));
-    }
+    // if (color.a != 0) {
+    //     DrawRectangle(this->pos.x, this->pos.y, this->size.x, this->size.y, Fade(this->color, 0.5f));
+    // }
 }
 
 

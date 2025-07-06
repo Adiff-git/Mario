@@ -19,10 +19,10 @@ Mario::Mario(Vector2 pos, int lives, MarioState form)
     else if ( form == FIRE)
         SetSize(Vector2{32, 56});
     state = OBJECT_STATE_ON_GROUND;
-    cpN.setSize(Vector2{size.x/2, 1});
-    cpS.setSize(Vector2{size.x/2, 1});
-    cpE.setSize(Vector2{1, size.y/2-5});
-    cpW.setSize(Vector2{1, size.y/2-5});
+    // cpN.setSize(Vector2{size.x/2, 1});
+    // cpS.setSize(Vector2{size.x/2, 1});
+    // cpE.setSize(Vector2{1, size.y/2-5});
+    // cpW.setSize(Vector2{1, size.y/2-5});
     UpdateCollisionProbes();
     cpN.setColor(RED);
     cpS.setColor(RED);
@@ -423,13 +423,13 @@ void Mario::changetoFire()
 void Mario::UpdateCollisionProbes() {
     if(isDucking) {
         cpN.setPos({pos.x + size.x/2 - cpN.getSize().x/2, pos.y + size.y/2 - cpN.getSize().y});
-        cpE.setSize({5,size.y/2});
+        //cpE.setSize({5,size.y/2});
         cpE.setPos({pos.x + size.x - cpE.getSize().x, pos.y + size.y*3/4 - cpE.getSize().y/2});
-        cpW.setSize({5,size.y/2});
+        //cpW.setSize({5,size.y/2});
         cpW.setPos({pos.x, pos.y + size.y*3/4 - cpW.getSize().y/2});
     } else {
-        cpE.setSize({1, size.y - 5});
-        cpW.setSize({1, size.y - 5});
+        //cpE.setSize({1, size.y - 5});
+        //cpW.setSize({1, size.y - 5});
         Object::UpdateCollisionProbes();
     }
 }

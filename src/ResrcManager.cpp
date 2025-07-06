@@ -86,6 +86,24 @@ void ResrcManager::loadTextures() {
         std::string keyStr = "tile_" + std::to_string(i);
         textures[keyStr] = LoadTexture(("resources/images/tiles/tile_" + std::to_string(i) + ".png").c_str());
     }
+
+    //Blocks
+    textures["BLOCK_QUESTION_0"] = LoadTexture("resources/images/Object/blocks/Question_0.png");
+    textures["BLOCK_QUESTION_1"] = LoadTexture("resources/images/Object/blocks/Question_1.png");
+    textures["BLOCK_QUESTION_2"] = LoadTexture("resources/images/Object/blocks/Question_2.png");
+    textures["BLOCK_QUESTION_3"] = LoadTexture("resources/images/Object/blocks/Question_3.png");
+    textures["BLOCK_STONE"] = LoadTexture("resources/images/Object/blocks/Stone_0.png");
+    textures["BLOCK_CLOUD"] = LoadTexture("resources/images/Object/blocks/Cloud_0.png");
+    textures["BLOCK_WOOD"] = LoadTexture("resources/images/Object/blocks/Wood_0.png");
+    textures["BLOCK_MESSAGE"] = LoadTexture("resources/images/Object/blocks/Message_0.png");
+    textures["BLOCK_GLASS"] = LoadTexture("resources/images/Object/blocks/Glass_0.png");
+    textures["BLOCK_EXCLAMATION"] = LoadTexture("resources/images/Object/blocks/Exclamation_0.png");
+    textures["BLOCK_EYE_OPEN"] = LoadTexture("resources/images/Object/blocks/EyesOpened_0.png");
+    textures["BLOCK_EYE_CLOSED"] = LoadTexture("resources/images/Object/blocks/EyesClosed_0.png");
+    textures["BLOCK_EYE_OPEN_1"] = LoadTexture("resources/images/Object/blocks/EyesOpened_1.png");
+    textures["BLOCK_EYE_OPEN_2"] = LoadTexture("resources/images/Object/blocks/EyesOpened_2.png");
+    textures["BLOCK_EYE_OPEN_3"] = LoadTexture("resources/images/Object/blocks/EyesOpened_3.png");
+    textures["BASE"] = LoadTexture("resources/images/Object/blocks/base/tiles.png");
 }
 
 void ResrcManager::loadSounds(){

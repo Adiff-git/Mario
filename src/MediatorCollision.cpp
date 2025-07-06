@@ -81,7 +81,7 @@ void MediatorCollision::HandleFireballWithTile(Fireball *&fireball, Tile *&tile,
         else
             fireball->setCurrFrame(fireball->GetCurrFrame() - 1);
         break;
-    }
+    }   
     }
 }
 void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
@@ -93,7 +93,9 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
     Fireball* isBfireball = dynamic_cast<Fireball*>(ObjectB);
     Tile* isAtile = dynamic_cast<Tile*>(ObjectA);
     Tile* isBtile = dynamic_cast<Tile*>(ObjectB);
-    if (isAmario && isBtile|| isBmario&& isAtile)
+    Block* isAblock = dynamic_cast<Block*>(ObjectA);
+    Block* isBblock = dynamic_cast<Block*>(ObjectB);
+    if ((isAmario && isBtile)|| (isBmario&& isAtile))
     {
         CollisionType AtoB = isAmario ? isAmario->checkCollisionType(*isBtile) : isBmario->checkCollisionType(*isAtile);
         if (isAmario)
@@ -101,7 +103,7 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
         else
             HandleMarioWithTile(isBmario, isAtile, AtoB);
     }
-    else if (isAfireball && isBtile || isBfireball && isAtile)
+    else if ((isAfireball && isBtile) || (isBfireball && isAtile))
     {
         CollisionType AtoB = isAfireball ? isAfireball->checkCollisionType(*isBtile) : isBfireball->checkCollisionType(*isAtile);
         if (isAfireball)
@@ -109,5 +111,58 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
         else
             HandleFireballWithTile(isBfireball, isAtile, AtoB);
     }
+    else if (isAmario && isBblock || isBmario && isAblock)
+    {
+        CollisionType AtoB = isAmario ? isAmario->checkCollisionType(*isBblock) : isBmario->checkCollisionType(*isAblock);
 
+        if (isAmario)
+            HandleMarioWithBlock(isAmario, isBblock, AtoB);
+        else
+            HandleMarioWithBlock(isBmario, isAblock, AtoB);
+    }
+    // else if (isAfireball && isBblock || isBfireball && isAblock)
+    // {
+    //     CollisionType AtoB = isAfireball ? isAfireball->checkCollisionType(*isBblock) : isBfireball->checkCollisionType(*isAblock);
+
+    //     if (isAfireball)
+    //         HandleFireballWithBlock(isAfireball, isBblock, AtoB);
+    //     else
+    //         HandleFireballWithBlock(isBfireball, isAblock, AtoB);
+    // }
+}
+void MediatorCollision::HandleMarioWithBlock(Mario* &mario, Block *&block, CollisionType AtoB)
+{
+    if (AtoB == COLLISION_TYPE_NONE)
+        return;
+
+    switch (AtoB)
+    {
+    case COLLISION_TYPE_SOUTH:
+    {
+        mario->SetPos(Vector2{mario->GetPos().x, block->GetPos().y - mario->GetSize().y});
+        mario->SetState(OBJECT_STATE_ON_GROUND);
+        mario->SetVel(Vector2{mario->GetVel().x, 0});
+        break;
+    }
+    case COLLISION_TYPE_NORTH:
+    {
+        mario->SetPos(Vector2{mario->GetPos().x, block->GetPos().y + block->GetSize().y});
+        mario->SetVel(Vector2{mario->GetVel().x, 0});
+        break;
+    }
+    case COLLISION_TYPE_EAST:
+    {
+        mario->SetPos(Vector2{block->GetPos().x - mario->GetSize().x, mario->GetPos().y});
+        mario->SetVel(Vector2{0, mario->GetVel().y});
+        break;
+    }
+    case COLLISION_TYPE_WEST:
+    {
+        mario->SetPos(Vector2{block->GetPos().x + block->GetSize().x, mario->GetPos().y});
+        mario->SetVel(Vector2{0, mario->GetVel().y});
+        break;
+    }
+    default:
+        break;
+    }
 }

@@ -26,6 +26,7 @@ class QuestionBlock : public Block {
     float pointsFrameTime;
     bool pointsAnimationRunning;
 
+
 public:
 
     QuestionBlock( Vector2 pos, Vector2 dim, Color color );
