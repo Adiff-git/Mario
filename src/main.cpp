@@ -4,6 +4,7 @@
 #include "Mario.h"
 #include "GameClock.h"
 #include <iostream>
+#include "ScreenController.h"
 int main() {
     InitWindow(1600, 900, "Mario Game");
     InitAudioDevice();
@@ -11,27 +12,23 @@ int main() {
     SetTargetFPS(144);
     bool isPaused = false;
     ResrcManager::GetInstance().loadResources();
-
+    ScreenController screenController; // Create a screen controller instance
     // // Create a Mario instance
     // Mario mario(Vector2{100, 100}, 3, SMALL);
     GameWorld::Init(); // Initialize game world resources   
     GameWorld gameWorld; // Create a game world instance
     while(!WindowShouldClose()) {
-        // if (IsKeyPressed(KEY_P)) {
-        //     isPaused = !isPaused;
-        // }
+        GameClock::getInstance().updateTimeAcum += GetFrameTime();
 
-        // if (!isPaused) {
-            GameClock::getInstance().updateTimeAcum += GetFrameTime();
-
-        // }
         
-        gameWorld.UpdateWorld(); // Update game world
+         // Update game world
         BeginDrawing();
         ClearBackground(RAYWHITE);
+        gameWorld.UpdateWorld();
         gameWorld.DrawWorld();
-        // mario.draw(); // Draw Mario
-        // mario.UpdateStateAndPhysic(); // Update Mario's state and physics
+        screenController.Update(); // Update the current screen
+        screenController.Draw(); // Draw the current screen
+        
         EndDrawing();
     }
 }

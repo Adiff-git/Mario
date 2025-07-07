@@ -246,6 +246,30 @@ update_mappings/fast:
 	$(MAKE) $(MAKESILENT) -f raylib_build\raylib\external\glfw\src\CMakeFiles\update_mappings.dir\build.make raylib_build/raylib/external/glfw/src/CMakeFiles/update_mappings.dir/build
 .PHONY : update_mappings/fast
 
+src/Button.obj: src/Button.cpp.obj
+.PHONY : src/Button.obj
+
+# target to build an object file
+src/Button.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/Button.cpp.obj
+.PHONY : src/Button.cpp.obj
+
+src/Button.i: src/Button.cpp.i
+.PHONY : src/Button.i
+
+# target to preprocess a source file
+src/Button.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/Button.cpp.i
+.PHONY : src/Button.cpp.i
+
+src/Button.s: src/Button.cpp.s
+.PHONY : src/Button.s
+
+# target to generate assembly for a file
+src/Button.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/Button.cpp.s
+.PHONY : src/Button.cpp.s
+
 src/CollisionProbe.obj: src/CollisionProbe.cpp.obj
 .PHONY : src/CollisionProbe.obj
 
@@ -438,6 +462,30 @@ src/MediatorCollision.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/MediatorCollision.cpp.s
 .PHONY : src/MediatorCollision.cpp.s
 
+src/MenuScreen.obj: src/MenuScreen.cpp.obj
+.PHONY : src/MenuScreen.obj
+
+# target to build an object file
+src/MenuScreen.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/MenuScreen.cpp.obj
+.PHONY : src/MenuScreen.cpp.obj
+
+src/MenuScreen.i: src/MenuScreen.cpp.i
+.PHONY : src/MenuScreen.i
+
+# target to preprocess a source file
+src/MenuScreen.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/MenuScreen.cpp.i
+.PHONY : src/MenuScreen.cpp.i
+
+src/MenuScreen.s: src/MenuScreen.cpp.s
+.PHONY : src/MenuScreen.s
+
+# target to generate assembly for a file
+src/MenuScreen.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/MenuScreen.cpp.s
+.PHONY : src/MenuScreen.cpp.s
+
 src/Object.obj: src/Object.cpp.obj
 .PHONY : src/Object.obj
 
@@ -485,6 +533,54 @@ src/ResrcManager.s: src/ResrcManager.cpp.s
 src/ResrcManager.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/ResrcManager.cpp.s
 .PHONY : src/ResrcManager.cpp.s
+
+src/Screen.obj: src/Screen.cpp.obj
+.PHONY : src/Screen.obj
+
+# target to build an object file
+src/Screen.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/Screen.cpp.obj
+.PHONY : src/Screen.cpp.obj
+
+src/Screen.i: src/Screen.cpp.i
+.PHONY : src/Screen.i
+
+# target to preprocess a source file
+src/Screen.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/Screen.cpp.i
+.PHONY : src/Screen.cpp.i
+
+src/Screen.s: src/Screen.cpp.s
+.PHONY : src/Screen.s
+
+# target to generate assembly for a file
+src/Screen.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/Screen.cpp.s
+.PHONY : src/Screen.cpp.s
+
+src/ScreenController.obj: src/ScreenController.cpp.obj
+.PHONY : src/ScreenController.obj
+
+# target to build an object file
+src/ScreenController.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/ScreenController.cpp.obj
+.PHONY : src/ScreenController.cpp.obj
+
+src/ScreenController.i: src/ScreenController.cpp.i
+.PHONY : src/ScreenController.i
+
+# target to preprocess a source file
+src/ScreenController.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/ScreenController.cpp.i
+.PHONY : src/ScreenController.cpp.i
+
+src/ScreenController.s: src/ScreenController.cpp.s
+.PHONY : src/ScreenController.s
+
+# target to generate assembly for a file
+src/ScreenController.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/ScreenController.cpp.s
+.PHONY : src/ScreenController.cpp.s
 
 src/Tile.obj: src/Tile.cpp.obj
 .PHONY : src/Tile.obj
@@ -553,6 +649,9 @@ help:
 	@echo ... Mario
 	@echo ... glfw
 	@echo ... raylib
+	@echo ... src/Button.obj
+	@echo ... src/Button.i
+	@echo ... src/Button.s
 	@echo ... src/CollisionProbe.obj
 	@echo ... src/CollisionProbe.i
 	@echo ... src/CollisionProbe.s
@@ -577,12 +676,21 @@ help:
 	@echo ... src/MediatorCollision.obj
 	@echo ... src/MediatorCollision.i
 	@echo ... src/MediatorCollision.s
+	@echo ... src/MenuScreen.obj
+	@echo ... src/MenuScreen.i
+	@echo ... src/MenuScreen.s
 	@echo ... src/Object.obj
 	@echo ... src/Object.i
 	@echo ... src/Object.s
 	@echo ... src/ResrcManager.obj
 	@echo ... src/ResrcManager.i
 	@echo ... src/ResrcManager.s
+	@echo ... src/Screen.obj
+	@echo ... src/Screen.i
+	@echo ... src/Screen.s
+	@echo ... src/ScreenController.obj
+	@echo ... src/ScreenController.i
+	@echo ... src/ScreenController.s
 	@echo ... src/Tile.obj
 	@echo ... src/Tile.i
 	@echo ... src/Tile.s

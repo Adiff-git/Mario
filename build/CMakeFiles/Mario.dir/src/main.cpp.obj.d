@@ -284,4 +284,6 @@ CMakeFiles/Mario.dir/src/main.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.2.0/x86_64-w64-mingw32/bits/basic_file.h \
  C:/msys64/ucrt64/include/c++/14.2.0/x86_64-w64-mingw32/bits/c++io.h \
  C:/msys64/ucrt64/include/c++/14.2.0/bits/fstream.tcc \
- D:/Downloads/Ref/Gia/Mario/inc/MediatorCollision.h
+ D:/Downloads/Ref/Gia/Mario/inc/MediatorCollision.h \
+ D:/Downloads/Ref/Gia/Mario/inc/ScreenController.h \
+ D:/Downloads/Ref/Gia/Mario/inc/Screen.h

@@ -5,6 +5,7 @@ cmake_policy(SET CMP0009 NEW)
 # SOURCES at CMakeLists.txt:21 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/Downloads/Ref/Gia/Mario/src/*.cpp")
 set(OLD_GLOB
+  "D:/Downloads/Ref/Gia/Mario/src/Button.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/CollisionProbe.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/Fireball.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/GameClock.cpp"
@@ -13,8 +14,11 @@ set(OLD_GLOB
   "D:/Downloads/Ref/Gia/Mario/src/Map.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/Mario.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/MediatorCollision.cpp"
+  "D:/Downloads/Ref/Gia/Mario/src/MenuScreen.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/Object.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/ResrcManager.cpp"
+  "D:/Downloads/Ref/Gia/Mario/src/Screen.cpp"
+  "D:/Downloads/Ref/Gia/Mario/src/ScreenController.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/Tile.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/main.cpp"
   )

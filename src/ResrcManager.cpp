@@ -79,6 +79,8 @@ void ResrcManager::loadTextures() {
     }
     //BACKGROUND
     {
+    textures["MENU_BACKGROUND"] = LoadTexture("resources/Menu/Menu.png");
+    
     textures["BACKGROUND_0"] = LoadTexture("resources/images/backgrounds/background1.png");
     }
     //TILES
@@ -86,6 +88,10 @@ void ResrcManager::loadTextures() {
         std::string keyStr = "tile_" + std::to_string(i);
         textures[keyStr] = LoadTexture(("resources/images/tiles/tile_" + std::to_string(i) + ".png").c_str());
     }
+    //Button
+    textures["START_BUTTON"] = LoadTexture("resources/Menu/StartButton.png");
+    // textures["EXIT_BUTTON"] = LoadTexture("resources/Menu/ExitButton.png");
+    // textures["SETTINGS_BUTTON"] = LoadTexture("resources/Menu/SettingsButton.png");
 }
 
 void ResrcManager::loadSounds(){
