@@ -1,14 +1,14 @@
 #pragma once
-#include "GameState.h"
+#include "Screen.h"
 
 
-class MenuState : public GameState {
+class MenuScreen : public Screen {
     private:
         int selectedOption;
         int totalOptions;
         
     public:
-        MenuState();
+        MenuScreen();
         void Enter() override;
         void Update() override;
         void Draw() override;

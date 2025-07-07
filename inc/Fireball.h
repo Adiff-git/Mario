@@ -7,7 +7,7 @@
 class Fireball: public Object{
 private:
     Texture2D *sprite;
-    static constexpr float MAX_DISTANCE = 1000.0f; // Maximum distance the fireball can travel
+    static constexpr float MAX_DISTANCE = 800.0f; // Maximum distance the fireball can travel
     float distanceLeft; // Distance left to travel
     static constexpr float FIREBALL_SPEEDX = 500.0f; // Speed of the fireball in the X direction
     void Update() override;

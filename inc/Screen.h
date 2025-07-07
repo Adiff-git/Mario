@@ -8,9 +8,9 @@ enum StateType {
     STATE_GAME_OVER
 };
 
-class GameState {
+class Screen {
     public:
-        virtual ~GameState() = default;
+        virtual ~Screen() = default;
         virtual void Enter() = 0;
         virtual void Update() = 0;
         virtual void Draw() = 0;

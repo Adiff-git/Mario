@@ -1,18 +1,18 @@
 #pragma once
-#include "GameState.h"
+#include "Screen.h"
 
-class GameStateManager {
+class ScreenController {
     private:
-        GameState* currentState;
-        GameState* menuState;
-        GameState* map1State;
-        GameState* map2State;
+        Screen* currentState;
+        Screen* menuState;
+        Screen* map1State;
+        Screen* map2State;
         bool shouldChangeState;
         StateType nextStateType;
         
     public:
-        GameStateManager();
-        ~GameStateManager();
+        ScreenController();
+        ~ScreenController();
         
         void Initialize();
         void Update();
@@ -21,6 +21,6 @@ class GameStateManager {
         void ChangeState(StateType newState);
         void Cleanup();
         
-        GameState* GetCurrentState() const { return currentState; }
+        Screen* GetCurrentState() const { return currentState; }
         bool ShouldExit() const;
     };

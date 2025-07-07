@@ -1,11 +1,11 @@
 #pragma once
-#include "GameState.h"
+#include "Screen.h"
 #include "Map.h"
-class Map1State : public GameState {
+class Map1Screen : public Screen {
     private:
         bool isPaused;
     public:
-        Map1State();
+        Map1Screen();
         void Enter() override;
         void Update() override;
         void Draw() override;
