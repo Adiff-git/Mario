@@ -1,7 +1,10 @@
 #include "MediatorCollision.h"
 #include <iostream>
 #include <algorithm>
-
+#include "Goomba.h"
+#include "GreenKoopa.h"
+#include "YellowKoopa.h"
+#include "RedKoopa.h"
 void MediatorCollision::HandleMarioWithTile(Mario* &mario, Tile * &tile, CollisionType AtoB)
 {
     if (AtoB == COLLISION_TYPE_NONE)
@@ -191,7 +194,6 @@ void MediatorCollision::HandleEnemyWithFireball(Enemy*& enemy, Fireball*& fireba
     }
 
     std::cout << "Enemies size before: " << enemies.size() << std::endl;
-    // Chỉ xóa enemy, KHÔNG xóa fireball
     enemies.erase(std::remove(enemies.begin(), enemies.end(), enemy), enemies.end());
     delete enemy;
     enemy = nullptr;
@@ -205,4 +207,10 @@ MediatorCollision::MediatorCollision() {
     // Thêm Goomba ngay khi khởi tạo
     Enemy* goomba = new Goomba(Vector2{600, 100}); // Vị trí mặc định
     enemies.push_back(goomba);
+    Enemy* greenKoopa = new GreenKoopa(Vector2{700, 100});
+    enemies.push_back(greenKoopa);
+    Enemy* yellowKoopa = new YellowKoopa(Vector2{800, 100});
+    enemies.push_back(yellowKoopa);
+    Enemy* redKoopa = new RedKoopa(Vector2{800, 100});
+    enemies.push_back(redKoopa);
 }

@@ -1,5 +1,8 @@
 #include "GameWorld.h"
-
+#include "Goomba.h"
+#include "GreenKoopa.h"
+#include "YellowKoopa.h"
+#include "RedKoopa.h"
 GameWorld::GameWorld() : player(), interactiveTiles(map.getInteractiveTiles()) {
     player = Mario(Vector2{100, 100}, 3, SMALL);
     map.LoadMap(0);
@@ -8,7 +11,10 @@ GameWorld::GameWorld() : player(), interactiveTiles(map.getInteractiveTiles()) {
     camera.rotation = 0.0f;
     camera.zoom = 1.0f;
 
-    mediatorCollision.GetEnemies().push_back(new Goomba(Vector2{10, 800}));
+    mediatorCollision.GetEnemies().push_back(new Goomba(Vector2{200, 800}));
+    mediatorCollision.GetEnemies().push_back(new GreenKoopa(Vector2{300, 790}));
+    mediatorCollision.GetEnemies().push_back(new YellowKoopa(Vector2{400, 800}));
+    mediatorCollision.GetEnemies().push_back(new RedKoopa(Vector2{400, 800}));
 }
 
 GameWorld::~GameWorld() {

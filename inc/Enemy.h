@@ -1,31 +1,24 @@
-    void drawCollisionProbes();
+
 #ifndef ENEMY_H
 #define ENEMY_H
 
 #include "Object.h"
-#include "raylib.h"
-#include "GameClock.h" // Thêm để sử dụng GameClock::getInstance()
 
 class Enemy : public Object {
+protected:
+    float maxSpeedX;
+    int textureIndex;
+
 public:
-    void drawCollisionProbes();
-    Enemy(Vector2 pos);
+    Enemy(Vector2 pos, Vector2 size, Vector2 vel, Color color, float friction, int currFrame, Direction dir);
+    virtual ~Enemy() = default;
+    virtual void UpdateStateAndPhysic() = 0; // Hàm ảo thuần túy
     void Update() override;
     void draw() override;
-    void UpdateStateAndPhysic() override;
-    void UpdateCollisionProbes() override; // Thêm khai báo override
+    void UpdateCollisionProbes() override;
+    void drawCollisionProbes();
     void SetDirection(Direction dir) { direction = dir; }
-    
-protected:
-    float maxSpeedX = 50.0f; // Tốc độ tối đa theo chiều ngang
-private:
-    int textureIndex = 0;
+    Direction GetDirection() const { return direction; }
 };
-
-class Goomba : public Enemy {
-public:
-    Goomba(Vector2 pos);
-};
-
 
 #endif
