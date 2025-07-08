@@ -68,7 +68,10 @@ for (auto &block : map.getBlocks())
     block->Update();
 
     CollisionType collision = block->checkCollisionType(player);
-
+    if( collision != COLLISION_TYPE_NONE && block->GetBlockType() == BLOCK_EYES_OPENED)
+    {
+        block->doHit(player, &map);
+    }
     if (collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_QUESTION)
     {   
         block->doHit(player, &map);

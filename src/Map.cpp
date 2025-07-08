@@ -65,6 +65,12 @@ void Map::LoadMap(int mapIndex)
             else if (tileId == 203) {
                 blocks.push_back(new GlassBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE));
             }
+            else if (tileId == 204) {
+                blocks.push_back(new EyesOpenedBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE));
+            }
+            else if (tileId == 205) {
+                blocks.push_back(new EyesClosedBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE));
+            }
             // else if (tileId == 1) {
             //     nonInteractiveTiles.push_back(new Tile({(float)x * 32, (float)y * 32}, mapIndex, tileId - 1, TILE_TYPE_SOLID));
             // }

@@ -19,6 +19,18 @@
 },
 {
   "directory": "D:/prj3/Mario/build",
+  "command": "C:\\Strawberry\\c\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -ID:/prj3/Mario/inc -IC:/raylib/src -IC:/raylib/src/external/glfw/include -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\EyesClosedBlock.cpp.obj -c D:\\prj3\\Mario\\src\\EyesClosedBlock.cpp",
+  "file": "D:\\prj3\\Mario\\src\\EyesClosedBlock.cpp",
+  "output": "CMakeFiles\\Mario.dir\\src\\EyesClosedBlock.cpp.obj"
+},
+{
+  "directory": "D:/prj3/Mario/build",
+  "command": "C:\\Strawberry\\c\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -ID:/prj3/Mario/inc -IC:/raylib/src -IC:/raylib/src/external/glfw/include -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\EyesOpenedBlock.cpp.obj -c D:\\prj3\\Mario\\src\\EyesOpenedBlock.cpp",
+  "file": "D:\\prj3\\Mario\\src\\EyesOpenedBlock.cpp",
+  "output": "CMakeFiles\\Mario.dir\\src\\EyesOpenedBlock.cpp.obj"
+},
+{
+  "directory": "D:/prj3/Mario/build",
   "command": "C:\\Strawberry\\c\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -ID:/prj3/Mario/inc -IC:/raylib/src -IC:/raylib/src/external/glfw/include -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\Fireball.cpp.obj -c D:\\prj3\\Mario\\src\\Fireball.cpp",
   "file": "D:\\prj3\\Mario\\src\\Fireball.cpp",
   "output": "CMakeFiles\\Mario.dir\\src\\Fireball.cpp.obj"

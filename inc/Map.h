@@ -12,6 +12,8 @@
 #include "CloudBlock.h"
 #include "WoodBlock.h"
 #include "GlassBlock.h"
+#include "EyesOpenedBlock.h"
+#include "EyesClosedBlock.h"
 #include <fstream>
 
 class Map : public Drawable {

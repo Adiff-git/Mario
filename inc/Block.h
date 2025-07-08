@@ -10,6 +10,8 @@ enum BlockType {
     BLOCK_CLOUD = 1,
     BLOCK_WOOD = 2,
     BLOCK_GLASS = 3,
+    BLOCK_EYES_OPENED = 4,
+    BLOCK_EYES_CLOSED = 5
 };
 class Block : public Object {
 

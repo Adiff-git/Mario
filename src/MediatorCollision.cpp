@@ -101,6 +101,10 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
     WoodBlock* isBwoodBlock = dynamic_cast<WoodBlock*>(ObjectB);
     GlassBlock* isAglassBlock = dynamic_cast<GlassBlock*>(ObjectA);
     GlassBlock* isBglassBlock = dynamic_cast<GlassBlock*>(ObjectB);
+    EyesOpenedBlock* isAeyesOpenedBlock = dynamic_cast<EyesOpenedBlock*>(ObjectA);
+    EyesOpenedBlock* isBeyesOpenedBlock = dynamic_cast<EyesOpenedBlock*>(ObjectB);
+    EyesClosedBlock* isAeyesClosedBlock = dynamic_cast<EyesClosedBlock*>(ObjectA);
+    EyesClosedBlock* isBeyesClosedBlock = dynamic_cast<EyesClosedBlock*>(ObjectB);  
     if ((isAmario && isBtile) || (isBmario && isAtile))
     {
         CollisionType AtoB = isAmario ? isAmario->checkCollisionType(*isBtile) : isBmario->checkCollisionType(*isAtile);
@@ -149,6 +153,22 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
             HandleMarioWithGlassBlock(isAmario, isBglassBlock, AtoB);
         else
             HandleMarioWithGlassBlock(isBmario, isAglassBlock, AtoB);
+    }
+    else if ((isAmario && isBeyesOpenedBlock) || (isBmario && isAeyesOpenedBlock))
+    {
+        CollisionType AtoB = isAmario ? isAmario->checkCollisionType(*isBeyesOpenedBlock) : isBmario->checkCollisionType(*isAeyesOpenedBlock);
+        if (isAmario)
+            HandleMarioWithEyesOpenedBlock(isAmario, isBeyesOpenedBlock, AtoB);
+        else
+            HandleMarioWithEyesOpenedBlock(isBmario, isAeyesOpenedBlock, AtoB);
+    }
+    else if ((isAmario && isBeyesClosedBlock) || (isBmario && isAeyesClosedBlock))
+    {
+        CollisionType AtoB = isAmario ? isAmario->checkCollisionType(*isBeyesClosedBlock) : isBmario->checkCollisionType(*isAeyesClosedBlock);
+        if (isAmario)
+            HandleMarioWithEyesClosedBlock(isAmario, isBeyesClosedBlock, AtoB);
+        else
+            HandleMarioWithEyesClosedBlock(isBmario, isAeyesClosedBlock, AtoB);
     }
 
 }
@@ -267,6 +287,63 @@ void MediatorCollision::HandleMarioWithGlassBlock(Mario* &mario, GlassBlock *&gl
         break;
     case COLLISION_TYPE_WEST:
         mario->SetPos(Vector2{glassBlock->GetPos().x + glassBlock->GetSize().x, mario->GetPos().y});
+        mario->SetVel(Vector2{0, mario->GetVel().y});
+        break;
+    default:
+        break;
+    }
+}
+
+void MediatorCollision::HandleMarioWithEyesOpenedBlock(Mario* &mario, EyesOpenedBlock *&eyesOpenedBlock, CollisionType AtoB)
+{
+    if (AtoB == COLLISION_TYPE_NONE)
+        return;
+    switch (AtoB)
+    {
+    case COLLISION_TYPE_SOUTH:
+        mario->SetPos(Vector2{mario->GetPos().x, eyesOpenedBlock->GetPos().y - mario->GetSize().y});
+        mario->SetState(OBJECT_STATE_ON_GROUND);
+        mario->SetVel(Vector2{mario->GetVel().x, 0});
+        break;
+    case COLLISION_TYPE_NORTH:
+        mario->SetPos(Vector2{mario->GetPos().x, eyesOpenedBlock->GetPos().y + eyesOpenedBlock->GetSize().y});
+        mario->SetVel(Vector2{mario->GetVel().x, 0});
+        break;  
+    case COLLISION_TYPE_EAST:
+        mario->SetPos(Vector2{eyesOpenedBlock->GetPos().x - mario->GetSize().x, mario->GetPos().y});
+        mario->SetVel(Vector2{0, mario->GetVel().y});
+        break;
+    case COLLISION_TYPE_WEST:
+        mario->SetPos(Vector2{eyesOpenedBlock->GetPos().x + eyesOpenedBlock->GetSize().x, mario->GetPos().y});
+        mario->SetVel(Vector2{0, mario->GetVel().y});
+        break; 
+    default:
+        break;
+    }
+}
+
+void MediatorCollision::HandleMarioWithEyesClosedBlock(Mario* &mario, EyesClosedBlock *&eyesClosedBlock, CollisionType AtoB)
+{
+    if (AtoB == COLLISION_TYPE_NONE)
+        return;
+
+    switch (AtoB)
+    {
+    case COLLISION_TYPE_SOUTH:
+        mario->SetPos(Vector2{mario->GetPos().x, eyesClosedBlock->GetPos().y - mario->GetSize().y});
+        mario->SetState(OBJECT_STATE_ON_GROUND);
+        mario->SetVel(Vector2{mario->GetVel().x, 0});
+        break;
+    case COLLISION_TYPE_NORTH:
+        mario->SetPos(Vector2{mario->GetPos().x, eyesClosedBlock->GetPos().y + eyesClosedBlock->GetSize().y});
+        mario->SetVel(Vector2{mario->GetVel().x, 0});
+        break;
+    case COLLISION_TYPE_EAST:
+        mario->SetPos(Vector2{eyesClosedBlock->GetPos().x - mario->GetSize().x, mario->GetPos().y});
+        mario->SetVel(Vector2{0, mario->GetVel().y});
+        break;
+    case COLLISION_TYPE_WEST:
+        mario->SetPos(Vector2{eyesClosedBlock->GetPos().x + eyesClosedBlock->GetSize().x, mario->GetPos().y});
         mario->SetVel(Vector2{0, mario->GetVel().y});
         break;
     default:

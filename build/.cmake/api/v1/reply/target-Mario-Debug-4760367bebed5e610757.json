@@ -124,7 +124,9 @@
 				13,
 				14,
 				15,
-				16
+				16,
+				17,
+				18
 			]
 		}
 	],
@@ -218,7 +220,9 @@
 				13,
 				14,
 				15,
-				16
+				16,
+				17,
+				18
 			]
 		}
 	],
@@ -240,6 +244,18 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "src/CollisionProbe.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/EyesClosedBlock.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/EyesOpenedBlock.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{

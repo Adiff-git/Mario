@@ -8,6 +8,8 @@ set(OLD_GLOB
   "D:/prj3/Mario/src/Block.cpp"
   "D:/prj3/Mario/src/CloudBlock.cpp"
   "D:/prj3/Mario/src/CollisionProbe.cpp"
+  "D:/prj3/Mario/src/EyesClosedBlock.cpp"
+  "D:/prj3/Mario/src/EyesOpenedBlock.cpp"
   "D:/prj3/Mario/src/Fireball.cpp"
   "D:/prj3/Mario/src/GameClock.cpp"
   "D:/prj3/Mario/src/GameWorld.cpp"

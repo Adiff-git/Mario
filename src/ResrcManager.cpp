@@ -98,8 +98,8 @@ void ResrcManager::loadTextures() {
     textures["BLOCK_MESSAGE"] = LoadTexture("resources/images/Object/blocks/Message_0.png");
     textures["BLOCK_GLASS"] = LoadTexture("resources/images/Object/blocks/Glass_0.png");
     textures["BLOCK_EXCLAMATION"] = LoadTexture("resources/images/Object/blocks/Exclamation_0.png");
-    textures["BLOCK_EYE_OPEN"] = LoadTexture("resources/images/Object/blocks/EyesOpened_0.png");
     textures["BLOCK_EYE_CLOSED"] = LoadTexture("resources/images/Object/blocks/EyesClosed_0.png");
+    textures["BLOCK_EYE_OPEN_0"] = LoadTexture("resources/images/Object/blocks/EyesOpened_0.png");
     textures["BLOCK_EYE_OPEN_1"] = LoadTexture("resources/images/Object/blocks/EyesOpened_1.png");
     textures["BLOCK_EYE_OPEN_2"] = LoadTexture("resources/images/Object/blocks/EyesOpened_2.png");
     textures["BLOCK_EYE_OPEN_3"] = LoadTexture("resources/images/Object/blocks/EyesOpened_3.png");
