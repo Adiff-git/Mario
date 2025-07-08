@@ -126,4 +126,10 @@ CMakeFiles/Mario.dir/src/Item.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.2.0/bits/charconv.h \
  C:/msys64/ucrt64/include/c++/14.2.0/bits/basic_string.tcc \
  D:/Downloads/Ref/Gia/Mario/inc/Fireball.h \
- D:/Downloads/Ref/Gia/Mario/inc/Tile.h
+ D:/Downloads/Ref/Gia/Mario/inc/Tile.h \
+ D:/Downloads/Ref/Gia/Mario/inc/Observer.h \
+ C:/msys64/ucrt64/include/c++/14.2.0/vector \
+ C:/msys64/ucrt64/include/c++/14.2.0/bits/stl_uninitialized.h \
+ C:/msys64/ucrt64/include/c++/14.2.0/bits/stl_vector.h \
+ C:/msys64/ucrt64/include/c++/14.2.0/bits/stl_bvector.h \
+ C:/msys64/ucrt64/include/c++/14.2.0/bits/vector.tcc

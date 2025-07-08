@@ -127,12 +127,13 @@ CMakeFiles/Mario.dir/src/Fireball.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.2.0/bits/stl_list.h \
  C:/msys64/ucrt64/include/c++/14.2.0/bits/allocated_ptr.h \
  C:/msys64/ucrt64/include/c++/14.2.0/bits/list.tcc \
- D:/Downloads/Ref/Gia/Mario/inc/Map.h \
+ D:/Downloads/Ref/Gia/Mario/inc/Observer.h \
  C:/msys64/ucrt64/include/c++/14.2.0/vector \
  C:/msys64/ucrt64/include/c++/14.2.0/bits/stl_uninitialized.h \
  C:/msys64/ucrt64/include/c++/14.2.0/bits/stl_vector.h \
  C:/msys64/ucrt64/include/c++/14.2.0/bits/stl_bvector.h \
  C:/msys64/ucrt64/include/c++/14.2.0/bits/vector.tcc \
+ D:/Downloads/Ref/Gia/Mario/inc/Map.h \
  D:/Downloads/Ref/Gia/Mario/inc/json.hpp \
  C:/msys64/ucrt64/include/c++/14.2.0/algorithm \
  C:/msys64/ucrt64/include/c++/14.2.0/bits/stl_algo.h \
@@ -284,4 +285,5 @@ CMakeFiles/Mario.dir/src/Fireball.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.2.0/x86_64-w64-mingw32/bits/basic_file.h \
  C:/msys64/ucrt64/include/c++/14.2.0/x86_64-w64-mingw32/bits/c++io.h \
  C:/msys64/ucrt64/include/c++/14.2.0/bits/fstream.tcc \
- D:/Downloads/Ref/Gia/Mario/inc/MediatorCollision.h
+ D:/Downloads/Ref/Gia/Mario/inc/MediatorCollision.h \
+ D:/Downloads/Ref/Gia/Mario/inc/Item.h

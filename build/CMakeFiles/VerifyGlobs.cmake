@@ -6,7 +6,9 @@ cmake_policy(SET CMP0009 NEW)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/Downloads/Ref/Gia/Mario/src/*.cpp")
 set(OLD_GLOB
   "D:/Downloads/Ref/Gia/Mario/src/Button.cpp"
+  "D:/Downloads/Ref/Gia/Mario/src/Coin.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/CollisionProbe.cpp"
+  "D:/Downloads/Ref/Gia/Mario/src/FireFlower.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/Fireball.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/GameClock.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/GameWorld.cpp"
@@ -15,11 +17,16 @@ set(OLD_GLOB
   "D:/Downloads/Ref/Gia/Mario/src/Mario.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/MediatorCollision.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/MenuScreen.cpp"
+  "D:/Downloads/Ref/Gia/Mario/src/Mushroom.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/Object.cpp"
+  "D:/Downloads/Ref/Gia/Mario/src/OneUpMushroom.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/ResrcManager.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/Screen.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/ScreenController.cpp"
+  "D:/Downloads/Ref/Gia/Mario/src/Star.cpp"
+  "D:/Downloads/Ref/Gia/Mario/src/ThreeUpMoon.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/Tile.cpp"
+  "D:/Downloads/Ref/Gia/Mario/src/YoshiCoin.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/main.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")

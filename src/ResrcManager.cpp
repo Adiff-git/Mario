@@ -92,6 +92,20 @@ void ResrcManager::loadTextures() {
     textures["START_BUTTON"] = LoadTexture("resources/Menu/StartButton.png");
     // textures["EXIT_BUTTON"] = LoadTexture("resources/Menu/ExitButton.png");
     // textures["SETTINGS_BUTTON"] = LoadTexture("resources/Menu/SettingsButton.png");
+
+    //item
+    {
+    //coin
+    textures["COIN_0"] = LoadTexture("resources/images/Object/items/Coin_0.png");
+    textures["COIN_1"] = LoadTexture("resources/images/Object/items/Coin_1.png");
+    textures["COIN_2"] = LoadTexture("resources/images/Object/items/Coin_2.png");
+    textures["COIN_3"] = LoadTexture("resources/images/Object/items/Coin_3.png");
+    //Course Clear Token
+    textures["COURSE CLEAR TOKEN"] = LoadTexture("resources/images/Object/items/CourseClearToken.png");
+    //Fire Flower
+    textures["FIRE FLOWER_0"] = LoadTexture("resources/images/Object/items/FireFlower_0.png");
+    textures["FIRE FLOWER_1"] = LoadTexture("resources/images/Object/items/FireFlower_1.png");
+    }
 }
 
 void ResrcManager::loadSounds(){

@@ -39,6 +39,8 @@ Mario::~Mario() {
     // Destructor
 }
 
+
+
 void Mario::SetLives(int lives) {
     this->lives = lives;
 }
@@ -436,4 +438,35 @@ void Mario::UpdateCollisionProbes() {
 
 void Mario::fire() {
     fireballs.push_back(new Fireball(pos, direction));
+}
+
+void Mario::setInvincible(bool value) {
+    isInvincible = value;
+}
+
+bool Mario::getInvincible() const {
+    return isInvincible;
+}
+
+void Mario::SetCoins(int c) {
+    coins = c;
+    NotifyCoinChange();
+}
+
+int Mario::GetCoins() const {
+    return coins;
+}
+
+void Mario::AddObserver(Observer* ob) {
+    observers.push_back(ob);
+}
+
+void Mario::RemoveObserver(Observer* ob) {
+    observers.erase(std::remove(observers.begin(), observers.end(), ob), observers.end());
+}
+
+void Mario::NotifyCoinChange() {
+    for (Observer* ob : observers) {
+        ob->onMarioCoinChanged(coins);
+    }
 }

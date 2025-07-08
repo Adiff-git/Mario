@@ -61,9 +61,12 @@ void Button::Draw() {
     }
 }
 
-bool Button::IsPressed() const {
-    Vector2 mousePos = GetMousePosition();
-    return isPressed && CheckCollisionPointRec(mousePos, CurButton);
+bool Button::IsPressed() const  {
+    // Chỉ trả về true đúng 1 lần khi click chuột vào button
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && IsHovered()) {
+        return true;
+    }
+    return false;
 }
 
 bool Button::IsHovered() const {

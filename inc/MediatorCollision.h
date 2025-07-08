@@ -4,6 +4,7 @@
 #include "CollisionProbe.h"
 #include "Tile.h"
 #include "Fireball.h"
+#include "Item.h"
 
 // class Mario; // Forward declaration
 // class Tile; // Forward declaration
