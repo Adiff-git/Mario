@@ -8,7 +8,9 @@
 #include "ResrcManager.h"
 #include "json.hpp"
 #include <iostream>
+#include "QuestionBlock.h"
 #include "CloudBlock.h"
+#include "WoodBlock.h"
 #include <fstream>
 
 class Map : public Drawable {

@@ -9,7 +9,7 @@ Block::Block() :
 Block::Block( Vector2 pos, Vector2 dim, Color color ) :
     Object( pos, dim, color ), hit( false ) {};
 Block::Block(Vector2 pos, Vector2 dim, Color color, float frameTime, int maxFrames)
-    : Object(pos, dim, color, frameTime, maxFrames), hit(false) {}
+    : Object(pos, dim, color, frameTime, maxFrames), hit(false) {};
 
 
 // Block::Block( Vector2 pos, Vector2 dim, Color color, float frameTime, int maxFrames ) :
@@ -25,3 +25,8 @@ void Block::doHit(Mario& mario, Map* map) {
 void Block::resetHit() {
     this->hit = false;
 }
+
+BlockType Block::GetBlockType() {
+    return blockType;
+}
+

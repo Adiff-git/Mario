@@ -46,7 +46,7 @@ Object::Object(Vector2 pos, Vector2 size, Vector2 vel, Color color, float frameT
       angle(0.0f), state(OBJECT_STATE_IDLE), AdditionalState(OBJECT_STATE_IDLE), sprite(nullptr),
       frameAcumulator(0.0f), currentFrame(0) {
     cpN = CollisionProbe{ Vector2{ pos.x + size.x/2 - 10, pos.y}, Vector2{20,5}, color }; // North probe
-    cpS = CollisionProbe{ Vector2{ pos.x + size.x/2 - 10, pos.y + size.y - 10}, Vector2{20,5}, color }; // South probe
+    cpS = CollisionProbe{ Vector2{ pos.x + size.x/2 - 10, pos.y + size.y - 5}, Vector2{20,5}, color }; // South probe
     cpE = CollisionProbe{ Vector2{ pos.x + size.x - 10, pos.y + size.y/2 - 10}, Vector2{5,20}, color }; // East probe
     cpW = CollisionProbe{ Vector2{ pos.x, pos.y + size.y/2 - 10}, Vector2{5,20}, color }; // West probe
 }

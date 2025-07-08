@@ -1,7 +1,4 @@
 #include "Map.h"
-#include "QuestionBlock.h"
-#include "CloudBlock.h"
-
 
 Map::~Map()
 {
@@ -56,11 +53,14 @@ void Map::LoadMap(int mapIndex)
             int tileId = data[y * width + x];
             if (tileId == 0)
                 continue;
-            else if(tileId == 24) {
+            else if(tileId == 201) {
                 blocks.push_back(new QuestionBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE));
             }
-            else if (tileId == 100) {
+            else if (tileId == 200) {
                 blocks.push_back(new CloudBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE));
+            }
+            else if (tileId == 202) {
+                blocks.push_back(new WoodBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE));
             }
             // else if (tileId == 1) {
             //     nonInteractiveTiles.push_back(new Tile({(float)x * 32, (float)y * 32}, mapIndex, tileId - 1, TILE_TYPE_SOLID));

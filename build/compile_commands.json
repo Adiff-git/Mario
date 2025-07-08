@@ -85,6 +85,12 @@
 },
 {
   "directory": "D:/prj3/Mario/build",
+  "command": "C:\\Strawberry\\c\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -ID:/prj3/Mario/inc -IC:/raylib/src -IC:/raylib/src/external/glfw/include -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\WoodBlock.cpp.obj -c D:\\prj3\\Mario\\src\\WoodBlock.cpp",
+  "file": "D:\\prj3\\Mario\\src\\WoodBlock.cpp",
+  "output": "CMakeFiles\\Mario.dir\\src\\WoodBlock.cpp.obj"
+},
+{
+  "directory": "D:/prj3/Mario/build",
   "command": "C:\\Strawberry\\c\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -ID:/prj3/Mario/inc -IC:/raylib/src -IC:/raylib/src/external/glfw/include -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\main.cpp.obj -c D:\\prj3\\Mario\\src\\main.cpp",
   "file": "D:\\prj3\\Mario\\src\\main.cpp",
   "output": "CMakeFiles\\Mario.dir\\src\\main.cpp.obj"

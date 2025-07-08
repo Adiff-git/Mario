@@ -19,6 +19,7 @@ set(OLD_GLOB
   "D:/prj3/Mario/src/QuestionBlock.cpp"
   "D:/prj3/Mario/src/ResrcManager.cpp"
   "D:/prj3/Mario/src/Tile.cpp"
+  "D:/prj3/Mario/src/WoodBlock.cpp"
   "D:/prj3/Mario/src/main.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")

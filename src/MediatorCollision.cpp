@@ -97,6 +97,8 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
     Block* isBquestionBlock = dynamic_cast<QuestionBlock*>(ObjectB);
     CloudBlock* isAcloudBlock = dynamic_cast<CloudBlock*>(ObjectA);
     CloudBlock* isBcloudBlock = dynamic_cast<CloudBlock*>(ObjectB);
+    WoodBlock* isAwoodBlock = dynamic_cast<WoodBlock*>(ObjectA);
+    WoodBlock* isBwoodBlock = dynamic_cast<WoodBlock*>(ObjectB);
     if ((isAmario && isBtile) || (isBmario && isAtile))
     {
         CollisionType AtoB = isAmario ? isAmario->checkCollisionType(*isBtile) : isBmario->checkCollisionType(*isAtile);
@@ -129,7 +131,15 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
             HandleMarioWithCloudBlock(isAmario, isBcloudBlock, AtoB);
         else
             HandleMarioWithCloudBlock(isBmario, isAcloudBlock, AtoB);
-    }   
+    }
+    else if ((isAmario && isBwoodBlock) || (isBmario && isAwoodBlock))
+    {
+        CollisionType AtoB = isAmario ? isAmario->checkCollisionType(*isBwoodBlock) : isBmario->checkCollisionType(*isAwoodBlock);
+        if (isAmario)
+            HandleMarioWithWoodBlock(isAmario, isBwoodBlock, AtoB);
+        else
+            HandleMarioWithWoodBlock(isBmario, isAwoodBlock, AtoB);
+    }
     // else if (isAfireball && isBblock || isBfireball && isAblock)
     // {
     //     CollisionType AtoB = isAfireball ? isAfireball->checkCollisionType(*isBblock) : isBfireball->checkCollisionType(*isAblock);
@@ -200,6 +210,33 @@ void MediatorCollision::HandleMarioWithCloudBlock(Mario* &mario, CloudBlock *&cl
     case COLLISION_TYPE_WEST:
         // mario->SetPos(Vector2{cloudBlock->GetPos().x + cloudBlock->GetSize().x, mario->GetPos().y});
         // mario->SetVel(Vector2{0, mario->GetVel().y});
+        break;
+    default:
+        break;
+    }
+}
+
+void MediatorCollision::HandleMarioWithWoodBlock(Mario* &mario, WoodBlock *&woodBlock, CollisionType AtoB){
+    if (AtoB == COLLISION_TYPE_NONE)
+        return;
+    switch (AtoB)
+    {
+    case COLLISION_TYPE_SOUTH:
+        mario->SetPos(Vector2{mario->GetPos().x, woodBlock->GetPos().y - mario->GetSize().y});
+        mario->SetState(OBJECT_STATE_ON_GROUND);
+        mario->SetVel(Vector2{mario->GetVel().x, 0});
+        break;
+    case COLLISION_TYPE_NORTH:
+        mario->SetPos(Vector2{mario->GetPos().x, woodBlock->GetPos().y + woodBlock->GetSize().y});
+        mario->SetVel(Vector2{mario->GetVel().x, 0});
+        break;
+    case COLLISION_TYPE_EAST:
+        mario->SetPos(Vector2{woodBlock->GetPos().x - mario->GetSize().x, mario->GetPos().y});
+        mario->SetVel(Vector2{0, mario->GetVel().y});
+        break;
+    case COLLISION_TYPE_WEST:
+        mario->SetPos(Vector2{woodBlock->GetPos().x + woodBlock->GetSize().x, mario->GetPos().y});
+        mario->SetVel(Vector2{0, mario->GetVel().y});
         break;
     default:
         break;

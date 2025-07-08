@@ -8,6 +8,7 @@ class Map;
 enum BlockType {
     BLOCK_QUESTION = 0,
     BLOCK_CLOUD = 1,
+    BLOCK_WOOD = 2,
 };
 class Block : public Object {
 
@@ -26,6 +27,5 @@ public:
     virtual void doHit( Mario &mario, Map *map );
     void resetHit();
 
-    BlockType GetBlockType() const { return blockType; }
-
+    BlockType GetBlockType();
 };
