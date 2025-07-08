@@ -3,6 +3,7 @@
 #include "Button.h"
 #include "raylib.h"
 #include <iostream>
+class ScreenController; // Forward declaration
 class MenuScreen : public Screen {
     private:
         Button startButton;
@@ -10,7 +11,7 @@ class MenuScreen : public Screen {
         Button settingsButton;
         Texture2D* backgroundTexture;
     public:
-        MenuScreen(ScreenManager* screenManager);
+        MenuScreen(ScreenController* screenController);
         void Update() override;
         void Draw() override;
 };

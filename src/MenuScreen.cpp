@@ -2,7 +2,7 @@
 #include "MenuScreen.h"
 #include "ResrcManager.h"
 // #include "Map1Screen.h"
-MenuScreen::MenuScreen(ScreenManager* screenManager ) : Screen(screenManager) {
+MenuScreen::MenuScreen(ScreenController* screenController ) : Screen(screenController) {
     backgroundTexture = &ResrcManager::GetInstance().getTexture("MENU_BACKGROUND");
     startButton.SetTexture(ResrcManager::GetInstance().getTexture("START_BUTTON"));
     startButton.SetPosition({1600 / 2 - 100, 900 / 2 - 50});
@@ -32,7 +32,7 @@ void MenuScreen::Update() {
 }
 
 void MenuScreen::Draw() {
-    DrawTextureNPatch(*backgroundTexture, NPatchInfo{0, 0, 0, 0, 0}, Rectangle{0, 0, 1600, 900}, Vector2{0, 0}, 0.0f, WHITE);
+    DrawTexturePro(*backgroundTexture,Rectangle{0, 0, (float)backgroundTexture->width, (float)backgroundTexture->height},Rectangle{0, 0, 1600, 900},Vector2{0, 0}, 0.0f, WHITE);
     startButton.Draw();
     // exitButton.Draw();
     // settingsButton.Draw();

@@ -43,12 +43,22 @@ void Button::Update() {
 }
 
 void Button::Draw() {
+    // Draw the button background
+    DrawRectangleRounded(CurButton, 0.5f, 360, WHITE); 
+    DrawRectangleRoundedLinesEx(CurButton, 0.5f, 360, 3.0f, BLACK);
+
+    // Draw the texture if it exists
     if (texture) {
-        DrawTextureRec(*texture, TextureButton, pos, WHITE);
-    } else {
-        DrawRectangleRec(CurButton, isPressed ? DARKGRAY : LIGHTGRAY);
+        TextureButton = {CurButton.x, CurButton.y, CurButton.width, CurButton.height}; // Ensure TextureButton matches CurButton
+        DrawTexturePro(*texture, Rectangle{0, 0, (float)texture->width, (float)texture->height}, TextureButton, Vector2{0, 0}, 0.0f, WHITE);
     }
-    DrawTextureNPatch(*texture, NPatchInfo{Rectangle{0,0,(float)texture->width,(float)texture->height},0,0,0,0}, TextureButton, Vector2{0, 0}, 0.0f, WHITE); 
+
+    // Draw the text if it exists
+    if (!text.empty()) {
+        Textpos = {CurButton.x + CurButton.width / 2 - MeasureText(text.c_str(), Text_Size) / 2, 
+                   CurButton.y + CurButton.height / 2 - Text_Size / 2}; // Update text position
+        DrawText(text.c_str(), Textpos.x, Textpos.y, Text_Size, BLACK);
+    }
 }
 
 bool Button::IsPressed() const {
