@@ -9,6 +9,7 @@ enum BlockType {
     BLOCK_QUESTION = 0,
     BLOCK_CLOUD = 1,
     BLOCK_WOOD = 2,
+    BLOCK_GLASS = 3,
 };
 class Block : public Object {
 

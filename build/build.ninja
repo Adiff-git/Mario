@@ -97,6 +97,14 @@ build CMakeFiles/Mario.dir/src/GameWorld.cpp.obj: CXX_COMPILER__Mario_unscanned_
   OBJECT_DIR = CMakeFiles\Mario.dir
   OBJECT_FILE_DIR = CMakeFiles\Mario.dir\src
 
+build CMakeFiles/Mario.dir/src/GlassBlock.cpp.obj: CXX_COMPILER__Mario_unscanned_Debug D$:/prj3/Mario/src/GlassBlock.cpp || cmake_object_order_depends_target_Mario
+  DEFINES = -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP
+  DEP_FILE = CMakeFiles\Mario.dir\src\GlassBlock.cpp.obj.d
+  FLAGS = -g -std=gnu++20
+  INCLUDES = -ID:/prj3/Mario/inc -IC:/raylib/src -IC:/raylib/src/external/glfw/include
+  OBJECT_DIR = CMakeFiles\Mario.dir
+  OBJECT_FILE_DIR = CMakeFiles\Mario.dir\src
+
 build CMakeFiles/Mario.dir/src/Item.cpp.obj: CXX_COMPILER__Mario_unscanned_Debug D$:/prj3/Mario/src/Item.cpp || cmake_object_order_depends_target_Mario
   DEFINES = -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP
   DEP_FILE = CMakeFiles\Mario.dir\src\Item.cpp.obj.d
@@ -185,7 +193,7 @@ build CMakeFiles/Mario.dir/src/main.cpp.obj: CXX_COMPILER__Mario_unscanned_Debug
 #############################################
 # Link the executable Mario.exe
 
-build Mario.exe: CXX_EXECUTABLE_LINKER__Mario_Debug CMakeFiles/Mario.dir/src/Block.cpp.obj CMakeFiles/Mario.dir/src/CloudBlock.cpp.obj CMakeFiles/Mario.dir/src/CollisionProbe.cpp.obj CMakeFiles/Mario.dir/src/Fireball.cpp.obj CMakeFiles/Mario.dir/src/GameClock.cpp.obj CMakeFiles/Mario.dir/src/GameWorld.cpp.obj CMakeFiles/Mario.dir/src/Item.cpp.obj CMakeFiles/Mario.dir/src/Map.cpp.obj CMakeFiles/Mario.dir/src/Mario.cpp.obj CMakeFiles/Mario.dir/src/MediatorCollision.cpp.obj CMakeFiles/Mario.dir/src/Object.cpp.obj CMakeFiles/Mario.dir/src/QuestionBlock.cpp.obj CMakeFiles/Mario.dir/src/ResrcManager.cpp.obj CMakeFiles/Mario.dir/src/Tile.cpp.obj CMakeFiles/Mario.dir/src/WoodBlock.cpp.obj CMakeFiles/Mario.dir/src/main.cpp.obj | raylib_build/raylib/libraylib.a || raylib_build/raylib/external/glfw/src/glfw raylib_build/raylib/libraylib.a
+build Mario.exe: CXX_EXECUTABLE_LINKER__Mario_Debug CMakeFiles/Mario.dir/src/Block.cpp.obj CMakeFiles/Mario.dir/src/CloudBlock.cpp.obj CMakeFiles/Mario.dir/src/CollisionProbe.cpp.obj CMakeFiles/Mario.dir/src/Fireball.cpp.obj CMakeFiles/Mario.dir/src/GameClock.cpp.obj CMakeFiles/Mario.dir/src/GameWorld.cpp.obj CMakeFiles/Mario.dir/src/GlassBlock.cpp.obj CMakeFiles/Mario.dir/src/Item.cpp.obj CMakeFiles/Mario.dir/src/Map.cpp.obj CMakeFiles/Mario.dir/src/Mario.cpp.obj CMakeFiles/Mario.dir/src/MediatorCollision.cpp.obj CMakeFiles/Mario.dir/src/Object.cpp.obj CMakeFiles/Mario.dir/src/QuestionBlock.cpp.obj CMakeFiles/Mario.dir/src/ResrcManager.cpp.obj CMakeFiles/Mario.dir/src/Tile.cpp.obj CMakeFiles/Mario.dir/src/WoodBlock.cpp.obj CMakeFiles/Mario.dir/src/main.cpp.obj | raylib_build/raylib/libraylib.a || raylib_build/raylib/external/glfw/src/glfw raylib_build/raylib/libraylib.a
   FLAGS = -g
   LINK_LIBRARIES = raylib_build/raylib/libraylib.a  -lwinmm  -lgdi32  -lopengl32  -lglu32  -lwinmm  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Mario.dir

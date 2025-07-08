@@ -11,6 +11,7 @@ set(OLD_GLOB
   "D:/prj3/Mario/src/Fireball.cpp"
   "D:/prj3/Mario/src/GameClock.cpp"
   "D:/prj3/Mario/src/GameWorld.cpp"
+  "D:/prj3/Mario/src/GlassBlock.cpp"
   "D:/prj3/Mario/src/Item.cpp"
   "D:/prj3/Mario/src/Map.cpp"
   "D:/prj3/Mario/src/Mario.cpp"
