@@ -11,6 +11,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "D:/Downloads/Ref/Gia/Mario/src/Button.cpp" "CMakeFiles/Mario.dir/src/Button.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/Button.cpp.obj.d"
   "D:/Downloads/Ref/Gia/Mario/src/Coin.cpp" "CMakeFiles/Mario.dir/src/Coin.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/Coin.cpp.obj.d"
   "D:/Downloads/Ref/Gia/Mario/src/CollisionProbe.cpp" "CMakeFiles/Mario.dir/src/CollisionProbe.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/CollisionProbe.cpp.obj.d"
+  "D:/Downloads/Ref/Gia/Mario/src/CourseClearToken.cpp" "CMakeFiles/Mario.dir/src/CourseClearToken.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/CourseClearToken.cpp.obj.d"
   "D:/Downloads/Ref/Gia/Mario/src/FireFlower.cpp" "CMakeFiles/Mario.dir/src/FireFlower.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/FireFlower.cpp.obj.d"
   "D:/Downloads/Ref/Gia/Mario/src/Fireball.cpp" "CMakeFiles/Mario.dir/src/Fireball.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/Fireball.cpp.obj.d"
   "D:/Downloads/Ref/Gia/Mario/src/GameClock.cpp" "CMakeFiles/Mario.dir/src/GameClock.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/GameClock.cpp.obj.d"

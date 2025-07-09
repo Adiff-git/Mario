@@ -16,6 +16,23 @@ std::vector<Tile *> &Map::getInteractiveTiles()
     return interactiveTiles;
 }
 
+std::vector<std::shared_ptr<Coin>> &Map::getInteractiveCoins()
+{
+    
+    return interactiveCoins;
+}
+
+std::vector<std::shared_ptr<FireFlower>> &Map::getInteractiveFireFlowers()
+{
+    
+    return interactiveFireFlowers;
+}
+
+std::vector<std::shared_ptr<CourseClearToken>>& Map::getInteractiveCourseClearTokens()
+{
+    return interactiveCourseClearTokens;
+}
+
 float Map::GetWidth() const
 {
     return width;
@@ -68,7 +85,19 @@ void Map::Draw()
 }
 
 Map::Map()
-{
+{   
+    interactiveCoins.clear();
     currBackgroundStarX = 0.0f;
     background = ResrcManager::GetInstance().getTexture("BACKGROUND_0");
+    // Coin coin({200, 800});
+    auto coin = std::make_shared<Coin>(Vector2{200, 800});
+    interactiveCoins.push_back(coin);
+    // std::cerr << interactiveCoins.size() << '\n';
+
+    auto courseClearToken = std::make_shared<CourseClearToken>(Vector2{1, 1});
+    interactiveCourseClearTokens.push_back(courseClearToken);
+
+    auto fireFlower = std::make_shared<FireFlower>(Vector2{300, 800});
+    interactiveFireFlowers.push_back(fireFlower);
+
 }

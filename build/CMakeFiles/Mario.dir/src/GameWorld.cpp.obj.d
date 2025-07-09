@@ -133,7 +133,9 @@ CMakeFiles/Mario.dir/src/GameWorld.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.2.0/bits/stl_vector.h \
  C:/msys64/ucrt64/include/c++/14.2.0/bits/stl_bvector.h \
  C:/msys64/ucrt64/include/c++/14.2.0/bits/vector.tcc \
+ D:/Downloads/Ref/Gia/Mario/inc/Item.h \
  D:/Downloads/Ref/Gia/Mario/inc/Map.h \
+ D:/Downloads/Ref/Gia/Mario/inc/Coin.h \
  D:/Downloads/Ref/Gia/Mario/inc/json.hpp \
  C:/msys64/ucrt64/include/c++/14.2.0/algorithm \
  C:/msys64/ucrt64/include/c++/14.2.0/bits/stl_algo.h \
@@ -285,5 +287,6 @@ CMakeFiles/Mario.dir/src/GameWorld.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.2.0/x86_64-w64-mingw32/bits/basic_file.h \
  C:/msys64/ucrt64/include/c++/14.2.0/x86_64-w64-mingw32/bits/c++io.h \
  C:/msys64/ucrt64/include/c++/14.2.0/bits/fstream.tcc \
- D:/Downloads/Ref/Gia/Mario/inc/MediatorCollision.h \
- D:/Downloads/Ref/Gia/Mario/inc/Item.h
+ D:/Downloads/Ref/Gia/Mario/inc/CourseClearToken.h \
+ D:/Downloads/Ref/Gia/Mario/inc/FireFlower.h \
+ D:/Downloads/Ref/Gia/Mario/inc/MediatorCollision.h

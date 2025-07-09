@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Mario.dir/src/Coin.cpp.obj.d"
   "CMakeFiles/Mario.dir/src/CollisionProbe.cpp.obj"
   "CMakeFiles/Mario.dir/src/CollisionProbe.cpp.obj.d"
+  "CMakeFiles/Mario.dir/src/CourseClearToken.cpp.obj"
+  "CMakeFiles/Mario.dir/src/CourseClearToken.cpp.obj.d"
   "CMakeFiles/Mario.dir/src/FireFlower.cpp.obj"
   "CMakeFiles/Mario.dir/src/FireFlower.cpp.obj.d"
   "CMakeFiles/Mario.dir/src/Fireball.cpp.obj"

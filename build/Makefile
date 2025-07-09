@@ -318,6 +318,30 @@ src/CollisionProbe.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/CollisionProbe.cpp.s
 .PHONY : src/CollisionProbe.cpp.s
 
+src/CourseClearToken.obj: src/CourseClearToken.cpp.obj
+.PHONY : src/CourseClearToken.obj
+
+# target to build an object file
+src/CourseClearToken.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/CourseClearToken.cpp.obj
+.PHONY : src/CourseClearToken.cpp.obj
+
+src/CourseClearToken.i: src/CourseClearToken.cpp.i
+.PHONY : src/CourseClearToken.i
+
+# target to preprocess a source file
+src/CourseClearToken.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/CourseClearToken.cpp.i
+.PHONY : src/CourseClearToken.cpp.i
+
+src/CourseClearToken.s: src/CourseClearToken.cpp.s
+.PHONY : src/CourseClearToken.s
+
+# target to generate assembly for a file
+src/CourseClearToken.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/CourseClearToken.cpp.s
+.PHONY : src/CourseClearToken.cpp.s
+
 src/FireFlower.obj: src/FireFlower.cpp.obj
 .PHONY : src/FireFlower.obj
 
@@ -826,6 +850,9 @@ help:
 	@echo ... src/CollisionProbe.obj
 	@echo ... src/CollisionProbe.i
 	@echo ... src/CollisionProbe.s
+	@echo ... src/CourseClearToken.obj
+	@echo ... src/CourseClearToken.i
+	@echo ... src/CourseClearToken.s
 	@echo ... src/FireFlower.obj
 	@echo ... src/FireFlower.i
 	@echo ... src/FireFlower.s

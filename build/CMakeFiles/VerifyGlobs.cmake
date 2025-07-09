@@ -8,6 +8,7 @@ set(OLD_GLOB
   "D:/Downloads/Ref/Gia/Mario/src/Button.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/Coin.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/CollisionProbe.cpp"
+  "D:/Downloads/Ref/Gia/Mario/src/CourseClearToken.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/FireFlower.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/Fireball.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/GameClock.cpp"

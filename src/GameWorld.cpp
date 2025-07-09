@@ -1,9 +1,10 @@
 #include "GameWorld.h"
 
 
-GameWorld::GameWorld() : player(), interactiveTiles(map.getInteractiveTiles())
-{
+GameWorld::GameWorld() : player(), interactiveTiles(map.getInteractiveTiles()), interactiveCoins(map.getInteractiveCoins()), interactiveCourseClearTokens(map.getInteractiveCourseClearTokens()), interactiveFireFlowers(map.getInteractiveFireFlowers())
+{   
     // Trong GameWorld constructor, thêm:
+
     player = Mario(Vector2{100, 100}, 3, SMALL); // Đặt vị trí cụ thể
     map.LoadMap(0);
     camera.offset = Vector2{(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
@@ -11,6 +12,7 @@ GameWorld::GameWorld() : player(), interactiveTiles(map.getInteractiveTiles())
     camera.rotation = 0.0f;
     camera.zoom = 1.0f;
 }
+
 
 GameWorld::~GameWorld()
 {
@@ -36,6 +38,32 @@ void GameWorld::UpdateWorld()
                 mediatorCollision.HandleCollision(fireball, tile);
             }
         }
+    }
+
+    for( auto const coin : interactiveCoins){
+        CollisionType collision = player.checkCollisionType(*coin);
+        if(collision){
+            mediatorCollision.HandleCollision(&player, coin.get());
+        }
+        coin->Update();//animation
+    }
+    
+    for (auto& course : interactiveCourseClearTokens) {
+    CollisionType collision = player.checkCollisionType(*course);
+    if (collision) {
+        mediatorCollision.HandleCollision(&player, course.get());
+    }
+
+    course->Update();  // BẮT BUỘC để token xoay
+    // course->Draw();    // vẽ theo rotationAngle
+    }
+
+    for( auto const fire : interactiveFireFlowers){
+        CollisionType collision = player.checkCollisionType(*fire);
+        if(collision){
+            mediatorCollision.HandleCollision(&player, fire.get());
+        }
+        fire->Update();//animation
     }
     
 }
@@ -66,6 +94,17 @@ void GameWorld::DrawWorld()
     DrawTextureEx(background,Vector2{currBackgroundStarX+background.width*1.3f,-200},0.0f,1.3f,WHITE);
     map.Draw();
     player.Draw();
+    for(auto coin : interactiveCoins){
+        coin->Draw();
+    }
+
+    for(auto course : interactiveCourseClearTokens){
+        course->Draw();
+    }
+
+    for( auto const fire : interactiveFireFlowers){
+        fire->Draw();
+    }
     EndMode2D();
 }
 
