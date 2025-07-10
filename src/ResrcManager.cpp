@@ -112,6 +112,12 @@ void ResrcManager::loadTextures() {
         //piranhaplant
         textures["PiranhaPlant_MouthOpen"] = LoadTexture("resources/images/Object/Enemy/PiranhaPlant_0.png");
         textures["PiranhaPlant_MouthClosed"] = LoadTexture("resources/images/Object/Enemy/PiranhaPlant_1.png");
+        //jumping piranha 
+        textures["PiranhaPlant_0"] = LoadTexture("resources/images/Object/Enemy/JumpingPiranhaPlant_0.png"); 
+        textures["PiranhaPlant_1"] = LoadTexture("resources/images/Object/Enemy/JumpingPiranhaPlant_1.png");
+        textures["PiranhaPlant_2"] = LoadTexture("resources/images/Object/Enemy/JumpingPiranhaPlant_2.png");
+        textures["PiranhaPlant_3"] = LoadTexture("resources/images/Object/Enemy/JumpingPiranhaPlant_3.png"); 
+
     }
 }
 
