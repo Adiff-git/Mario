@@ -23,10 +23,10 @@ class GameWorld {
         Mario player;
         Camera2D camera;
         std::vector<Tile*> &interactiveTiles;
-
-        std::vector<std::shared_ptr<Coin>> &interactiveCoins;
-        std::vector<std::shared_ptr<CourseClearToken>> &interactiveCourseClearTokens;
-        std::vector<std::shared_ptr<FireFlower>> &interactiveFireFlowers;
+//===============================
+//Nhi
+        std::vector<std::shared_ptr<Item>> interactiveItems;
+//================================
         
     public:
         GameWorld();

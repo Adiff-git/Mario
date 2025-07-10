@@ -1,17 +1,36 @@
 #include "GameWorld.h"
 
+//=============================
+//Nhi
+GameWorld::GameWorld()
+    : player(),
+      interactiveTiles(map.getInteractiveTiles())
+{
+    // Load map (đặt sau player để map biết cần load gì)
+    player = Mario(Vector2{100, 100}, 3, SMALL);
+    map.LoadMap(0);  // Sau khi load mới có dữ liệu item để lấy
 
-GameWorld::GameWorld() : player(), interactiveTiles(map.getInteractiveTiles()), interactiveCoins(map.getInteractiveCoins()), interactiveCourseClearTokens(map.getInteractiveCourseClearTokens()), interactiveFireFlowers(map.getInteractiveFireFlowers())
-{   
-    // Trong GameWorld constructor, thêm:
+    // Gộp tất cả item từ map vào vector chung
+    for (auto& coin : map.getInteractiveCoins()) {
+        interactiveItems.push_back(coin);
+    }
 
-    player = Mario(Vector2{100, 100}, 3, SMALL); // Đặt vị trí cụ thể
-    map.LoadMap(0);
+    for (auto& course : map.getInteractiveCourseClearTokens()) {
+        interactiveItems.push_back(course);
+    }
+
+    for (auto& fire : map.getInteractiveFireFlowers()) {
+        interactiveItems.push_back(fire);
+    }
+
+    // Thiết lập camera
     camera.offset = Vector2{(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
     camera.target = player.GetPos();
     camera.rotation = 0.0f;
     camera.zoom = 1.0f;
 }
+//=======================
+
 
 
 GameWorld::~GameWorld()
@@ -39,32 +58,17 @@ void GameWorld::UpdateWorld()
             }
         }
     }
-
-    for( auto const coin : interactiveCoins){
-        CollisionType collision = player.checkCollisionType(*coin);
-        if(collision){
-            mediatorCollision.HandleCollision(&player, coin.get());
+//=================================
+//Nhi
+    for (auto const& item : interactiveItems) {
+        CollisionType collision = player.checkCollisionType(*item);
+        if (collision) {
+            mediatorCollision.HandleCollision(&player, item.get());
         }
-        coin->Update();//animation
+        item->Update(); // animation hoặc xoay tùy loại
     }
-    
-    for (auto& course : interactiveCourseClearTokens) {
-    CollisionType collision = player.checkCollisionType(*course);
-    if (collision) {
-        mediatorCollision.HandleCollision(&player, course.get());
-    }
+//================
 
-    course->Update();  // BẮT BUỘC để token xoay
-    // course->Draw();    // vẽ theo rotationAngle
-    }
-
-    for( auto const fire : interactiveFireFlowers){
-        CollisionType collision = player.checkCollisionType(*fire);
-        if(collision){
-            mediatorCollision.HandleCollision(&player, fire.get());
-        }
-        fire->Update();//animation
-    }
     
 }
 
@@ -94,17 +98,13 @@ void GameWorld::DrawWorld()
     DrawTextureEx(background,Vector2{currBackgroundStarX+background.width*1.3f,-200},0.0f,1.3f,WHITE);
     map.Draw();
     player.Draw();
-    for(auto coin : interactiveCoins){
-        coin->Draw();
+    //========================
+    //Nhi
+    for (auto const& item : interactiveItems) {
+        item->Draw();
     }
+    //===========================
 
-    for(auto course : interactiveCourseClearTokens){
-        course->Draw();
-    }
-
-    for( auto const fire : interactiveFireFlowers){
-        fire->Draw();
-    }
     EndMode2D();
 }
 

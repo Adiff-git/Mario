@@ -84,20 +84,43 @@ void Map::Draw()
     }
 }
 
+//===============================
+//Nhi
 Map::Map()
-{   
-    interactiveCoins.clear();
+{
     currBackgroundStarX = 0.0f;
     background = ResrcManager::GetInstance().getTexture("BACKGROUND_0");
-    // Coin coin({200, 800});
+
+    // Coin
     auto coin = std::make_shared<Coin>(Vector2{200, 800});
-    interactiveCoins.push_back(coin);
-    // std::cerr << interactiveCoins.size() << '\n';
+    interactiveItems.push_back(coin);
 
-    auto courseClearToken = std::make_shared<CourseClearToken>(Vector2{1, 1});
-    interactiveCourseClearTokens.push_back(courseClearToken);
+    // Course Clear Token
+    auto courseClearToken = std::make_shared<CourseClearToken>(Vector2{250, 800});
+    interactiveItems.push_back(courseClearToken);
 
+    // Fire Flower
     auto fireFlower = std::make_shared<FireFlower>(Vector2{300, 800});
-    interactiveFireFlowers.push_back(fireFlower);
+    interactiveItems.push_back(fireFlower);
 
+    // Mushroom
+    auto mushroom = std::make_shared<Mushroom>(Vector2{350, 800});
+    interactiveItems.push_back(mushroom);
+
+    // One Up Mushroom
+    auto oneUp = std::make_shared<OneUpMushroom>(Vector2{400, 800});
+    interactiveItems.push_back(oneUp);
+
+    // Star
+    auto star = std::make_shared<Start>(Vector2{450, 800});
+    interactiveItems.push_back(star);
+
+    // Three Up Moon
+    auto moon = std::make_shared<ThreeUpMoon>(Vector2{500, 800});
+    interactiveItems.push_back(moon);
+
+    // Yoshi Coin
+    auto yoshi = std::make_shared<YoshiCoin>(Vector2{550, 800});
+    interactiveItems.push_back(yoshi);
 }
+//======================
