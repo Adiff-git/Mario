@@ -3,6 +3,9 @@
 #include "GreenKoopa.h"
 #include "YellowKoopa.h"
 #include "RedKoopa.h"
+#include "BuzzyBeetle.h"
+#include "BulletBill.h"
+#include "Bob-omb.h" 
 GameWorld::GameWorld() : player(), interactiveTiles(map.getInteractiveTiles()) {
     player = Mario(Vector2{100, 100}, 3, SMALL);
     map.LoadMap(0);
@@ -15,6 +18,9 @@ GameWorld::GameWorld() : player(), interactiveTiles(map.getInteractiveTiles()) {
     mediatorCollision.GetEnemies().push_back(new GreenKoopa(Vector2{300, 790}));
     mediatorCollision.GetEnemies().push_back(new YellowKoopa(Vector2{400, 800}));
     mediatorCollision.GetEnemies().push_back(new RedKoopa(Vector2{400, 800}));
+    mediatorCollision.GetEnemies().push_back(new BuzzyBeetle(Vector2{500, 800}));
+    mediatorCollision.GetEnemies().push_back(new Bob_omb(Vector2{700, 800}));
+    mediatorCollision.GetEnemies().push_back(new BulletBill(Vector2{600, 600}));
 }
 
 GameWorld::~GameWorld() {

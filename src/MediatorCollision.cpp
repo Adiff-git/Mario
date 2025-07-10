@@ -5,6 +5,9 @@
 #include "GreenKoopa.h"
 #include "YellowKoopa.h"
 #include "RedKoopa.h"
+#include "BuzzyBeetle.h"
+#include "BulletBill.h"
+#include "Bob-omb.h"
 void MediatorCollision::HandleMarioWithTile(Mario* &mario, Tile * &tile, CollisionType AtoB)
 {
     if (AtoB == COLLISION_TYPE_NONE)
@@ -169,7 +172,6 @@ void MediatorCollision::HandleMarioWithEnemy(Mario*& mario, Enemy*& enemy, Colli
     std::cout << "Enemies size before: " << enemies.size() << std::endl;
     switch (AtoB) {
         case COLLISION_TYPE_SOUTH: {
-            // Mario nhảy lên đầu Enemy -> Goomba chết
             std::cout << "Goomba dies" << std::endl;
             enemies.erase(std::remove(enemies.begin(), enemies.end(), enemy), enemies.end());
             delete enemy;
@@ -186,19 +188,27 @@ void MediatorCollision::HandleMarioWithEnemy(Mario*& mario, Enemy*& enemy, Colli
         }
     }
 }
-void MediatorCollision::HandleEnemyWithFireball(Enemy*& enemy, Fireball*& fireball, CollisionType AtoB) {
+void MediatorCollision::HandleEnemyWithFireball(Enemy* &enemy, Fireball* &fireball, CollisionType AtoB) {
     std::cout << "[DEBUG] HandleEnemyWithFireball called!" << std::endl;
     if (AtoB == COLLISION_TYPE_NONE) {
         std::cout << "No collision between Enemy and Fireball" << std::endl;
         return;
     }
 
+    // Kiểm tra nếu enemy là BuzzyBeetle
+    if (dynamic_cast<BuzzyBeetle*>(enemy)) {
+        std::cout << "BuzzyBeetle is immune to fireball!" << std::endl;
+        return;
+    }
+
+    // Các quái khác sẽ chết khi trúng fireball
     std::cout << "Enemies size before: " << enemies.size() << std::endl;
     enemies.erase(std::remove(enemies.begin(), enemies.end(), enemy), enemies.end());
     delete enemy;
     enemy = nullptr;
     std::cout << "Enemy dies by fireball" << std::endl;
 }
+
 
 std::vector<Enemy*>& MediatorCollision::GetEnemies() {
     return enemies;
@@ -211,6 +221,12 @@ MediatorCollision::MediatorCollision() {
     enemies.push_back(greenKoopa);
     Enemy* yellowKoopa = new YellowKoopa(Vector2{800, 100});
     enemies.push_back(yellowKoopa);
-    Enemy* redKoopa = new RedKoopa(Vector2{800, 100});
+    Enemy* redKoopa = new RedKoopa(Vector2{900, 100});
     enemies.push_back(redKoopa);
+    Enemy* buzzyBeetle = new BuzzyBeetle(Vector2{1000, 100});
+    enemies.push_back(buzzyBeetle);
+    Enemy* bulletBill = new BulletBill(Vector2{1100, 100});
+    enemies.push_back(bulletBill);
+    Enemy* bobOmb = new Bob_omb(Vector2{1100, 100});
+    enemies.push_back(bobOmb);
 }
