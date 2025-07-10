@@ -17,6 +17,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/yennh/Mario/src/Goomba.cpp" "CMakeFiles/Mario.dir/src/Goomba.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/Goomba.cpp.obj.d"
   "C:/Users/yennh/Mario/src/GreenKoopa.cpp" "CMakeFiles/Mario.dir/src/GreenKoopa.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/GreenKoopa.cpp.obj.d"
   "C:/Users/yennh/Mario/src/Item.cpp" "CMakeFiles/Mario.dir/src/Item.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/Item.cpp.obj.d"
+  "C:/Users/yennh/Mario/src/JumpingPiranha.cpp" "CMakeFiles/Mario.dir/src/JumpingPiranha.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/JumpingPiranha.cpp.obj.d"
   "C:/Users/yennh/Mario/src/Map.cpp" "CMakeFiles/Mario.dir/src/Map.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/Map.cpp.obj.d"
   "C:/Users/yennh/Mario/src/Mario.cpp" "CMakeFiles/Mario.dir/src/Mario.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/Mario.cpp.obj.d"
   "C:/Users/yennh/Mario/src/MediatorCollision.cpp" "CMakeFiles/Mario.dir/src/MediatorCollision.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/MediatorCollision.cpp.obj.d"

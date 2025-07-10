@@ -17,6 +17,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Mario.dir/src/GreenKoopa.cpp.obj.d"
   "CMakeFiles/Mario.dir/src/Item.cpp.obj"
   "CMakeFiles/Mario.dir/src/Item.cpp.obj.d"
+  "CMakeFiles/Mario.dir/src/JumpingPiranha.cpp.obj"
+  "CMakeFiles/Mario.dir/src/JumpingPiranha.cpp.obj.d"
   "CMakeFiles/Mario.dir/src/Map.cpp.obj"
   "CMakeFiles/Mario.dir/src/Map.cpp.obj.d"
   "CMakeFiles/Mario.dir/src/Mario.cpp.obj"

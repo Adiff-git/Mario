@@ -14,6 +14,7 @@ set(OLD_GLOB
   "C:/Users/yennh/Mario/src/Goomba.cpp"
   "C:/Users/yennh/Mario/src/GreenKoopa.cpp"
   "C:/Users/yennh/Mario/src/Item.cpp"
+  "C:/Users/yennh/Mario/src/JumpingPiranha.cpp"
   "C:/Users/yennh/Mario/src/Map.cpp"
   "C:/Users/yennh/Mario/src/Mario.cpp"
   "C:/Users/yennh/Mario/src/MediatorCollision.cpp"

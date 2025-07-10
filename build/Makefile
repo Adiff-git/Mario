@@ -449,6 +449,30 @@ src/Item.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/Item.cpp.s
 .PHONY : src/Item.cpp.s
 
+src/JumpingPiranha.obj: src/JumpingPiranha.cpp.obj
+.PHONY : src/JumpingPiranha.obj
+
+# target to build an object file
+src/JumpingPiranha.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/JumpingPiranha.cpp.obj
+.PHONY : src/JumpingPiranha.cpp.obj
+
+src/JumpingPiranha.i: src/JumpingPiranha.cpp.i
+.PHONY : src/JumpingPiranha.i
+
+# target to preprocess a source file
+src/JumpingPiranha.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/JumpingPiranha.cpp.i
+.PHONY : src/JumpingPiranha.cpp.i
+
+src/JumpingPiranha.s: src/JumpingPiranha.cpp.s
+.PHONY : src/JumpingPiranha.s
+
+# target to generate assembly for a file
+src/JumpingPiranha.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/JumpingPiranha.cpp.s
+.PHONY : src/JumpingPiranha.cpp.s
+
 src/Map.obj: src/Map.cpp.obj
 .PHONY : src/Map.obj
 
@@ -734,6 +758,9 @@ help:
 	@echo ... src/Item.obj
 	@echo ... src/Item.i
 	@echo ... src/Item.s
+	@echo ... src/JumpingPiranha.obj
+	@echo ... src/JumpingPiranha.i
+	@echo ... src/JumpingPiranha.s
 	@echo ... src/Map.obj
 	@echo ... src/Map.i
 	@echo ... src/Map.s
