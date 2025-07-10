@@ -54,9 +54,9 @@ void YellowKoopa::UpdateStateAndPhysic() {
         }
     } else {
         if (GetDirection() == DIRECTION_RIGHT) {
-            sprite = &ResrcManager::GetInstance().getTexture("YellowKoopaTroopa_0");
+            sprite = &ResrcManager::GetInstance().getTexture("YellowKoopaTroopa_0_RIGHT");
         } else {
-            sprite = &ResrcManager::GetInstance().getTexture("YellowKoopaTroopa_1");
+            sprite = &ResrcManager::GetInstance().getTexture("YellowKoopaTroopa_0_LEFT");
         }
         textureIndex = 0;
         updateCount = 0;

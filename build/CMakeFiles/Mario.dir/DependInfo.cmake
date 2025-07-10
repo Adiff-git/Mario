@@ -8,18 +8,25 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "D:/Mario Proj/Mario/src/Bob-omb.cpp" "CMakeFiles/Mario.dir/src/Bob-omb.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/Bob-omb.cpp.obj.d"
+  "D:/Mario Proj/Mario/src/BulletBill.cpp" "CMakeFiles/Mario.dir/src/BulletBill.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/BulletBill.cpp.obj.d"
+  "D:/Mario Proj/Mario/src/BuzzyBeetle.cpp" "CMakeFiles/Mario.dir/src/BuzzyBeetle.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/BuzzyBeetle.cpp.obj.d"
   "D:/Mario Proj/Mario/src/CollisionProbe.cpp" "CMakeFiles/Mario.dir/src/CollisionProbe.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/CollisionProbe.cpp.obj.d"
   "D:/Mario Proj/Mario/src/Enemy.cpp" "CMakeFiles/Mario.dir/src/Enemy.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/Enemy.cpp.obj.d"
   "D:/Mario Proj/Mario/src/Fireball.cpp" "CMakeFiles/Mario.dir/src/Fireball.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/Fireball.cpp.obj.d"
   "D:/Mario Proj/Mario/src/GameClock.cpp" "CMakeFiles/Mario.dir/src/GameClock.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/GameClock.cpp.obj.d"
   "D:/Mario Proj/Mario/src/GameWorld.cpp" "CMakeFiles/Mario.dir/src/GameWorld.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/GameWorld.cpp.obj.d"
+  "D:/Mario Proj/Mario/src/Goomba.cpp" "CMakeFiles/Mario.dir/src/Goomba.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/Goomba.cpp.obj.d"
+  "D:/Mario Proj/Mario/src/GreenKoopa.cpp" "CMakeFiles/Mario.dir/src/GreenKoopa.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/GreenKoopa.cpp.obj.d"
   "D:/Mario Proj/Mario/src/Item.cpp" "CMakeFiles/Mario.dir/src/Item.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/Item.cpp.obj.d"
   "D:/Mario Proj/Mario/src/Map.cpp" "CMakeFiles/Mario.dir/src/Map.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/Map.cpp.obj.d"
   "D:/Mario Proj/Mario/src/Mario.cpp" "CMakeFiles/Mario.dir/src/Mario.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/Mario.cpp.obj.d"
   "D:/Mario Proj/Mario/src/MediatorCollision.cpp" "CMakeFiles/Mario.dir/src/MediatorCollision.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/MediatorCollision.cpp.obj.d"
   "D:/Mario Proj/Mario/src/Object.cpp" "CMakeFiles/Mario.dir/src/Object.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/Object.cpp.obj.d"
+  "D:/Mario Proj/Mario/src/RedKoopa.cpp" "CMakeFiles/Mario.dir/src/RedKoopa.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/RedKoopa.cpp.obj.d"
   "D:/Mario Proj/Mario/src/ResrcManager.cpp" "CMakeFiles/Mario.dir/src/ResrcManager.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/ResrcManager.cpp.obj.d"
   "D:/Mario Proj/Mario/src/Tile.cpp" "CMakeFiles/Mario.dir/src/Tile.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/Tile.cpp.obj.d"
+  "D:/Mario Proj/Mario/src/YellowKoopa.cpp" "CMakeFiles/Mario.dir/src/YellowKoopa.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/YellowKoopa.cpp.obj.d"
   "D:/Mario Proj/Mario/src/main.cpp" "CMakeFiles/Mario.dir/src/main.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/main.cpp.obj.d"
   )
 

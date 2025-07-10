@@ -5,18 +5,25 @@ cmake_policy(SET CMP0009 NEW)
 # SOURCES at CMakeLists.txt:21 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/Mario Proj/Mario/src/*.cpp")
 set(OLD_GLOB
+  "D:/Mario Proj/Mario/src/Bob-omb.cpp"
+  "D:/Mario Proj/Mario/src/BulletBill.cpp"
+  "D:/Mario Proj/Mario/src/BuzzyBeetle.cpp"
   "D:/Mario Proj/Mario/src/CollisionProbe.cpp"
   "D:/Mario Proj/Mario/src/Enemy.cpp"
   "D:/Mario Proj/Mario/src/Fireball.cpp"
   "D:/Mario Proj/Mario/src/GameClock.cpp"
   "D:/Mario Proj/Mario/src/GameWorld.cpp"
+  "D:/Mario Proj/Mario/src/Goomba.cpp"
+  "D:/Mario Proj/Mario/src/GreenKoopa.cpp"
   "D:/Mario Proj/Mario/src/Item.cpp"
   "D:/Mario Proj/Mario/src/Map.cpp"
   "D:/Mario Proj/Mario/src/Mario.cpp"
   "D:/Mario Proj/Mario/src/MediatorCollision.cpp"
   "D:/Mario Proj/Mario/src/Object.cpp"
+  "D:/Mario Proj/Mario/src/RedKoopa.cpp"
   "D:/Mario Proj/Mario/src/ResrcManager.cpp"
   "D:/Mario Proj/Mario/src/Tile.cpp"
+  "D:/Mario Proj/Mario/src/YellowKoopa.cpp"
   "D:/Mario Proj/Mario/src/main.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")

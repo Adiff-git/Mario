@@ -88,37 +88,38 @@ void ResrcManager::loadTextures() {
     }
     // Enemy 
     {
-        textures["GOOMBA_0_RIGHT"] = LoadTexture("resources/images/Object/enemy/Goomba_0.png");
-        textures["GOOMBA_1_RIGHT"] = LoadTexture("resources/images/Object/enemy/Goomba_1.png");
+        textures["GOOMBA_0_RIGHT"] = LoadTexture("resources/images/Object/Enemy/Goomba_0.png");
+        textures["GOOMBA_1_RIGHT"] = LoadTexture("resources/images/Object/Enemy/Goomba_1.png");
         textures["GOOMBA_0_LEFT"] = FlipTextureHorizontal(textures["GOOMBA_0_RIGHT"]);
         textures["GOOMBA_1_LEFT"] = FlipTextureHorizontal(textures["GOOMBA_1_RIGHT"]);
         //Koopa Troopa
-        textures["GreenKoopaTroopa_0_RIGHT"] = LoadTexture("resources/images/Object/enemy/GreenKoopaTroopa_0.png");
-        textures["GreenKoopaTroopa_1_RIGHT"] = LoadTexture("resources/images/Object/enemy/GreenKoopaTroopa_1.png");
+        textures["GreenKoopaTroopa_0_RIGHT"] = LoadTexture("resources/images/Object/Enemy/GreenKoopaTroopa_0.png");
+        textures["GreenKoopaTroopa_1_RIGHT"] = LoadTexture("resources/images/Object/Enemy/GreenKoopaTroopa_1.png");
         textures["GreenKoopaTroopa_0_LEFT"] = FlipTextureHorizontal(textures["GreenKoopaTroopa_0_RIGHT"]);
-        textures["GreenKoopaTroopa_1_LEFT"] = FlipTextureHorizontal(textures["GreenKoopaTroopa_1_RIGHT"]);
+        textures["GreenKoopaTroopa_1_LEFT"] = FlipTextureHorizontal(textures["GreenKoopaTroopa_1_RIGHT"]);// với hồi nãy oog ghi folder là enemy, trong khi folder mình là Enemy
 
-        textures["RedKoopaTroopa_0_Right"] = LoadTexture("resources/images/Object/enemy/RedKoopaTroopa_0.png");
-        textures["RedKoopaTroopa_1_Right"] = LoadTexture("resources/images/Object/enemy/RedKoopaTroopa_1.png");
-        textures["RedKoopaTroopa_0_Left"] = FlipTextureHorizontal(textures["RedKoopaTroopa_0_Right"]);
-        textures["RedKoopaTroopa_1_Left"] = FlipTextureHorizontal(textures["RedKoopaTroopa_1_Right"]);
+        textures["RedKoopaTroopa_0_RIGHT"] = LoadTexture("resources/images/Object/Enemy/RedKoopaTroopa_0.png");
+        textures["RedKoopaTroopa_1_RIGHT"] = LoadTexture("resources/images/Object/Enemy/RedKoopaTroopa_1.png");
+        textures["RedKoopaTroopa_0_LEFT"] = FlipTextureHorizontal(textures["RedKoopaTroopa_0_RIGHT"]);
+        textures["RedKoopaTroopa_1_LEFT"] = FlipTextureHorizontal(textures["RedKoopaTroopa_1_RIGHT"]);
 
-        textures["YellowKoopaTroopa_0_Right"] = LoadTexture("resources/images/Object/enemy/YellowKoopaTroopa_0.png");
-        textures["YellowKoopaTroopa_1_Right"] = LoadTexture("resources/images/Object/enemy/YellowKoopaTroopa_1.png");
-        textures["YellowKoopaTroopa_0_Left"] = FlipTextureHorizontal(textures["YellowKoopaTroopa_0_Right"]);
-        textures["YellowKoopaTroopa_1_Left"] = FlipTextureHorizontal(textures["YellowKoopaTroopa_1_Right"]);
+        textures["YellowKoopaTroopa_0_RIGHT"] = LoadTexture("resources/images/Object/Enemy/YellowKoopaTroopa_0.png");
+        textures["YellowKoopaTroopa_1_RIGHT"] = LoadTexture("resources/images/Object/Enemy/YellowKoopaTroopa_1.png");
+        textures["YellowKoopaTroopa_0_LEFT"] = FlipTextureHorizontal(textures["YellowKoopaTroopa_0_RIGHT"]);
+        textures["YellowKoopaTroopa_1_LEFT"] = FlipTextureHorizontal(textures["YellowKoopaTroopa_1_RIGHT"]);
 
-        textures["BlueKoopaTroopa_0_Right"] = LoadTexture("resources/images/Object/enemy/BlueKoopaTroopa_0.png");
-        textures["BlueKoopaTroopa_1_Right"] = LoadTexture("resources/images/Object/enemy/BlueKoopaTroopa_1.png");
-        textures["BlueKoopaTroopa_0_Left"] = FlipTextureHorizontal(textures["BlueKoopaTroopa_0_Right"]);
-        textures["BlueKoopaTroopa_1_Left"] = FlipTextureHorizontal(textures["BlueKoopaTroopa_1_Right"]);
+        textures["BlueKoopaTroopa_0_RIGHT"] = LoadTexture("resources/images/Object/Enemy/BlueKoopaTroopa_0.png");
+        textures["BlueKoopaTroopa_1_RIGHT"] = LoadTexture("resources/images/Object/Enemy/BlueKoopaTroopa_1.png");
+        textures["BlueKoopaTroopa_0_LEFT"] = FlipTextureHorizontal(textures["BlueKoopaTroopa_0_RIGHT"]);
+        textures["BlueKoopaTroopa_1_LEFT"] = FlipTextureHorizontal(textures["BlueKoopaTroopa_1_RIGHT"]);
+
 
         textures["BuzzyBeetle_0_Right"] = LoadTexture("resources/images/Object/Enemy/BuzzyBeetle_0.png");
         textures["BuzzyBeetle_1_Right"] = LoadTexture("resources/images/Object/Enemy/BuzzyBeetle_1.png");
         textures["BuzzyBeetle_0_Left"] = FlipTextureHorizontal(textures["BuzzyBeetle_0_Right"]);
         textures["BuzzyBeetle_1_Left"] = FlipTextureHorizontal(textures["BuzzyBeetle_1_Right"]);
 
-        textures["BulletBill"] = LoadTexture("resources/images/Object/enemy/BulletBill_0.png");
+        textures["BulletBill"] = LoadTexture("resources/images/Object/Enemy/BulletBill_0.png");
 
         textures["Bob-omb_Right_0"]= LoadTexture("resources/images/Object/Enemy/BobOmb_0.png");
         textures["Bob-omb_Right_1"]= LoadTexture("resources/images/Object/Enemy/BobOmb_1.png");

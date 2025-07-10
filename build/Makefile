@@ -233,6 +233,78 @@ update_mappings/fast:
 	$(MAKE) $(MAKESILENT) -f raylib_build\raylib\external\glfw\src\CMakeFiles\update_mappings.dir\build.make raylib_build/raylib/external/glfw/src/CMakeFiles/update_mappings.dir/build
 .PHONY : update_mappings/fast
 
+src/Bob-omb.obj: src/Bob-omb.cpp.obj
+.PHONY : src/Bob-omb.obj
+
+# target to build an object file
+src/Bob-omb.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/Bob-omb.cpp.obj
+.PHONY : src/Bob-omb.cpp.obj
+
+src/Bob-omb.i: src/Bob-omb.cpp.i
+.PHONY : src/Bob-omb.i
+
+# target to preprocess a source file
+src/Bob-omb.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/Bob-omb.cpp.i
+.PHONY : src/Bob-omb.cpp.i
+
+src/Bob-omb.s: src/Bob-omb.cpp.s
+.PHONY : src/Bob-omb.s
+
+# target to generate assembly for a file
+src/Bob-omb.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/Bob-omb.cpp.s
+.PHONY : src/Bob-omb.cpp.s
+
+src/BulletBill.obj: src/BulletBill.cpp.obj
+.PHONY : src/BulletBill.obj
+
+# target to build an object file
+src/BulletBill.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/BulletBill.cpp.obj
+.PHONY : src/BulletBill.cpp.obj
+
+src/BulletBill.i: src/BulletBill.cpp.i
+.PHONY : src/BulletBill.i
+
+# target to preprocess a source file
+src/BulletBill.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/BulletBill.cpp.i
+.PHONY : src/BulletBill.cpp.i
+
+src/BulletBill.s: src/BulletBill.cpp.s
+.PHONY : src/BulletBill.s
+
+# target to generate assembly for a file
+src/BulletBill.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/BulletBill.cpp.s
+.PHONY : src/BulletBill.cpp.s
+
+src/BuzzyBeetle.obj: src/BuzzyBeetle.cpp.obj
+.PHONY : src/BuzzyBeetle.obj
+
+# target to build an object file
+src/BuzzyBeetle.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/BuzzyBeetle.cpp.obj
+.PHONY : src/BuzzyBeetle.cpp.obj
+
+src/BuzzyBeetle.i: src/BuzzyBeetle.cpp.i
+.PHONY : src/BuzzyBeetle.i
+
+# target to preprocess a source file
+src/BuzzyBeetle.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/BuzzyBeetle.cpp.i
+.PHONY : src/BuzzyBeetle.cpp.i
+
+src/BuzzyBeetle.s: src/BuzzyBeetle.cpp.s
+.PHONY : src/BuzzyBeetle.s
+
+# target to generate assembly for a file
+src/BuzzyBeetle.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/BuzzyBeetle.cpp.s
+.PHONY : src/BuzzyBeetle.cpp.s
+
 src/CollisionProbe.obj: src/CollisionProbe.cpp.obj
 .PHONY : src/CollisionProbe.obj
 
@@ -352,6 +424,54 @@ src/GameWorld.s: src/GameWorld.cpp.s
 src/GameWorld.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/GameWorld.cpp.s
 .PHONY : src/GameWorld.cpp.s
+
+src/Goomba.obj: src/Goomba.cpp.obj
+.PHONY : src/Goomba.obj
+
+# target to build an object file
+src/Goomba.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/Goomba.cpp.obj
+.PHONY : src/Goomba.cpp.obj
+
+src/Goomba.i: src/Goomba.cpp.i
+.PHONY : src/Goomba.i
+
+# target to preprocess a source file
+src/Goomba.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/Goomba.cpp.i
+.PHONY : src/Goomba.cpp.i
+
+src/Goomba.s: src/Goomba.cpp.s
+.PHONY : src/Goomba.s
+
+# target to generate assembly for a file
+src/Goomba.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/Goomba.cpp.s
+.PHONY : src/Goomba.cpp.s
+
+src/GreenKoopa.obj: src/GreenKoopa.cpp.obj
+.PHONY : src/GreenKoopa.obj
+
+# target to build an object file
+src/GreenKoopa.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/GreenKoopa.cpp.obj
+.PHONY : src/GreenKoopa.cpp.obj
+
+src/GreenKoopa.i: src/GreenKoopa.cpp.i
+.PHONY : src/GreenKoopa.i
+
+# target to preprocess a source file
+src/GreenKoopa.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/GreenKoopa.cpp.i
+.PHONY : src/GreenKoopa.cpp.i
+
+src/GreenKoopa.s: src/GreenKoopa.cpp.s
+.PHONY : src/GreenKoopa.s
+
+# target to generate assembly for a file
+src/GreenKoopa.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/GreenKoopa.cpp.s
+.PHONY : src/GreenKoopa.cpp.s
 
 src/Item.obj: src/Item.cpp.obj
 .PHONY : src/Item.obj
@@ -473,6 +593,30 @@ src/Object.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/Object.cpp.s
 .PHONY : src/Object.cpp.s
 
+src/RedKoopa.obj: src/RedKoopa.cpp.obj
+.PHONY : src/RedKoopa.obj
+
+# target to build an object file
+src/RedKoopa.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/RedKoopa.cpp.obj
+.PHONY : src/RedKoopa.cpp.obj
+
+src/RedKoopa.i: src/RedKoopa.cpp.i
+.PHONY : src/RedKoopa.i
+
+# target to preprocess a source file
+src/RedKoopa.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/RedKoopa.cpp.i
+.PHONY : src/RedKoopa.cpp.i
+
+src/RedKoopa.s: src/RedKoopa.cpp.s
+.PHONY : src/RedKoopa.s
+
+# target to generate assembly for a file
+src/RedKoopa.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/RedKoopa.cpp.s
+.PHONY : src/RedKoopa.cpp.s
+
 src/ResrcManager.obj: src/ResrcManager.cpp.obj
 .PHONY : src/ResrcManager.obj
 
@@ -521,6 +665,30 @@ src/Tile.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/Tile.cpp.s
 .PHONY : src/Tile.cpp.s
 
+src/YellowKoopa.obj: src/YellowKoopa.cpp.obj
+.PHONY : src/YellowKoopa.obj
+
+# target to build an object file
+src/YellowKoopa.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/YellowKoopa.cpp.obj
+.PHONY : src/YellowKoopa.cpp.obj
+
+src/YellowKoopa.i: src/YellowKoopa.cpp.i
+.PHONY : src/YellowKoopa.i
+
+# target to preprocess a source file
+src/YellowKoopa.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/YellowKoopa.cpp.i
+.PHONY : src/YellowKoopa.cpp.i
+
+src/YellowKoopa.s: src/YellowKoopa.cpp.s
+.PHONY : src/YellowKoopa.s
+
+# target to generate assembly for a file
+src/YellowKoopa.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/YellowKoopa.cpp.s
+.PHONY : src/YellowKoopa.cpp.s
+
 src/main.obj: src/main.cpp.obj
 .PHONY : src/main.obj
 
@@ -563,6 +731,15 @@ help:
 	@echo ... Mario
 	@echo ... glfw
 	@echo ... raylib
+	@echo ... src/Bob-omb.obj
+	@echo ... src/Bob-omb.i
+	@echo ... src/Bob-omb.s
+	@echo ... src/BulletBill.obj
+	@echo ... src/BulletBill.i
+	@echo ... src/BulletBill.s
+	@echo ... src/BuzzyBeetle.obj
+	@echo ... src/BuzzyBeetle.i
+	@echo ... src/BuzzyBeetle.s
 	@echo ... src/CollisionProbe.obj
 	@echo ... src/CollisionProbe.i
 	@echo ... src/CollisionProbe.s
@@ -578,6 +755,12 @@ help:
 	@echo ... src/GameWorld.obj
 	@echo ... src/GameWorld.i
 	@echo ... src/GameWorld.s
+	@echo ... src/Goomba.obj
+	@echo ... src/Goomba.i
+	@echo ... src/Goomba.s
+	@echo ... src/GreenKoopa.obj
+	@echo ... src/GreenKoopa.i
+	@echo ... src/GreenKoopa.s
 	@echo ... src/Item.obj
 	@echo ... src/Item.i
 	@echo ... src/Item.s
@@ -593,12 +776,18 @@ help:
 	@echo ... src/Object.obj
 	@echo ... src/Object.i
 	@echo ... src/Object.s
+	@echo ... src/RedKoopa.obj
+	@echo ... src/RedKoopa.i
+	@echo ... src/RedKoopa.s
 	@echo ... src/ResrcManager.obj
 	@echo ... src/ResrcManager.i
 	@echo ... src/ResrcManager.s
 	@echo ... src/Tile.obj
 	@echo ... src/Tile.i
 	@echo ... src/Tile.s
+	@echo ... src/YellowKoopa.obj
+	@echo ... src/YellowKoopa.i
+	@echo ... src/YellowKoopa.s
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s

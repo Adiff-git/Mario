@@ -1,6 +1,24 @@
 [
 {
   "directory": "D:/Mario Proj/Mario/build",
+  "command": "C:\\mingw64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\Bob-omb.cpp.obj -c \"D:\\Mario Proj\\Mario\\src\\Bob-omb.cpp\"",
+  "file": "D:/Mario Proj/Mario/src/Bob-omb.cpp",
+  "output": "CMakeFiles/Mario.dir/src/Bob-omb.cpp.obj"
+},
+{
+  "directory": "D:/Mario Proj/Mario/build",
+  "command": "C:\\mingw64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\BulletBill.cpp.obj -c \"D:\\Mario Proj\\Mario\\src\\BulletBill.cpp\"",
+  "file": "D:/Mario Proj/Mario/src/BulletBill.cpp",
+  "output": "CMakeFiles/Mario.dir/src/BulletBill.cpp.obj"
+},
+{
+  "directory": "D:/Mario Proj/Mario/build",
+  "command": "C:\\mingw64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\BuzzyBeetle.cpp.obj -c \"D:\\Mario Proj\\Mario\\src\\BuzzyBeetle.cpp\"",
+  "file": "D:/Mario Proj/Mario/src/BuzzyBeetle.cpp",
+  "output": "CMakeFiles/Mario.dir/src/BuzzyBeetle.cpp.obj"
+},
+{
+  "directory": "D:/Mario Proj/Mario/build",
   "command": "C:\\mingw64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\CollisionProbe.cpp.obj -c \"D:\\Mario Proj\\Mario\\src\\CollisionProbe.cpp\"",
   "file": "D:/Mario Proj/Mario/src/CollisionProbe.cpp",
   "output": "CMakeFiles/Mario.dir/src/CollisionProbe.cpp.obj"
@@ -28,6 +46,18 @@
   "command": "C:\\mingw64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\GameWorld.cpp.obj -c \"D:\\Mario Proj\\Mario\\src\\GameWorld.cpp\"",
   "file": "D:/Mario Proj/Mario/src/GameWorld.cpp",
   "output": "CMakeFiles/Mario.dir/src/GameWorld.cpp.obj"
+},
+{
+  "directory": "D:/Mario Proj/Mario/build",
+  "command": "C:\\mingw64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\Goomba.cpp.obj -c \"D:\\Mario Proj\\Mario\\src\\Goomba.cpp\"",
+  "file": "D:/Mario Proj/Mario/src/Goomba.cpp",
+  "output": "CMakeFiles/Mario.dir/src/Goomba.cpp.obj"
+},
+{
+  "directory": "D:/Mario Proj/Mario/build",
+  "command": "C:\\mingw64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\GreenKoopa.cpp.obj -c \"D:\\Mario Proj\\Mario\\src\\GreenKoopa.cpp\"",
+  "file": "D:/Mario Proj/Mario/src/GreenKoopa.cpp",
+  "output": "CMakeFiles/Mario.dir/src/GreenKoopa.cpp.obj"
 },
 {
   "directory": "D:/Mario Proj/Mario/build",
@@ -61,6 +91,12 @@
 },
 {
   "directory": "D:/Mario Proj/Mario/build",
+  "command": "C:\\mingw64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\RedKoopa.cpp.obj -c \"D:\\Mario Proj\\Mario\\src\\RedKoopa.cpp\"",
+  "file": "D:/Mario Proj/Mario/src/RedKoopa.cpp",
+  "output": "CMakeFiles/Mario.dir/src/RedKoopa.cpp.obj"
+},
+{
+  "directory": "D:/Mario Proj/Mario/build",
   "command": "C:\\mingw64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\ResrcManager.cpp.obj -c \"D:\\Mario Proj\\Mario\\src\\ResrcManager.cpp\"",
   "file": "D:/Mario Proj/Mario/src/ResrcManager.cpp",
   "output": "CMakeFiles/Mario.dir/src/ResrcManager.cpp.obj"
@@ -70,6 +106,12 @@
   "command": "C:\\mingw64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\Tile.cpp.obj -c \"D:\\Mario Proj\\Mario\\src\\Tile.cpp\"",
   "file": "D:/Mario Proj/Mario/src/Tile.cpp",
   "output": "CMakeFiles/Mario.dir/src/Tile.cpp.obj"
+},
+{
+  "directory": "D:/Mario Proj/Mario/build",
+  "command": "C:\\mingw64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\YellowKoopa.cpp.obj -c \"D:\\Mario Proj\\Mario\\src\\YellowKoopa.cpp\"",
+  "file": "D:/Mario Proj/Mario/src/YellowKoopa.cpp",
+  "output": "CMakeFiles/Mario.dir/src/YellowKoopa.cpp.obj"
 },
 {
   "directory": "D:/Mario Proj/Mario/build",
