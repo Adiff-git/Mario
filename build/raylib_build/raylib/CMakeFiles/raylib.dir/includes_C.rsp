@@ -1,1 +1,1 @@
--I"D:/Mario Proj/Mario/inc" -IC:/raylib/raylib/src -isystem C:/raylib/raylib/src/external/glfw/include
+-IC:/Users/yennh/Mario/inc -IC:/raylib/raylib/src -isystem C:/raylib/raylib/src/external/glfw/include

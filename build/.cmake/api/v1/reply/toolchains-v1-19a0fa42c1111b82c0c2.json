@@ -10,14 +10,14 @@
 				{
 					"includeDirectories" : 
 					[
-						"C:/mingw64/lib/gcc/x86_64-w64-mingw32/13.2.0/include",
+						"C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include",
 						"C:/mingw64/include",
-						"C:/mingw64/lib/gcc/x86_64-w64-mingw32/13.2.0/include-fixed",
+						"C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include-fixed",
 						"C:/mingw64/x86_64-w64-mingw32/include"
 					],
 					"linkDirectories" : 
 					[
-						"C:/mingw64/lib/gcc/x86_64-w64-mingw32/13.2.0",
+						"C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0",
 						"C:/mingw64/lib/gcc",
 						"C:/mingw64/x86_64-w64-mingw32/lib",
 						"C:/mingw64/lib"
@@ -27,7 +27,6 @@
 					[
 						"mingw32",
 						"gcc",
-						"moldname",
 						"mingwex",
 						"kernel32",
 						"pthread",
@@ -37,13 +36,12 @@
 						"kernel32",
 						"mingw32",
 						"gcc",
-						"moldname",
 						"mingwex",
 						"kernel32"
 					]
 				},
 				"path" : "C:/mingw64/bin/gcc.exe",
-				"version" : "13.2.0"
+				"version" : "14.2.0"
 			},
 			"language" : "C",
 			"sourceFileExtensions" : 
@@ -60,17 +58,17 @@
 				{
 					"includeDirectories" : 
 					[
-						"C:/mingw64/include/c++/13.2.0",
-						"C:/mingw64/include/c++/13.2.0/x86_64-w64-mingw32",
-						"C:/mingw64/include/c++/13.2.0/backward",
-						"C:/mingw64/lib/gcc/x86_64-w64-mingw32/13.2.0/include",
+						"C:/mingw64/include/c++/14.2.0",
+						"C:/mingw64/include/c++/14.2.0/x86_64-w64-mingw32",
+						"C:/mingw64/include/c++/14.2.0/backward",
+						"C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include",
 						"C:/mingw64/include",
-						"C:/mingw64/lib/gcc/x86_64-w64-mingw32/13.2.0/include-fixed",
+						"C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include-fixed",
 						"C:/mingw64/x86_64-w64-mingw32/include"
 					],
 					"linkDirectories" : 
 					[
-						"C:/mingw64/lib/gcc/x86_64-w64-mingw32/13.2.0",
+						"C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0",
 						"C:/mingw64/lib/gcc",
 						"C:/mingw64/x86_64-w64-mingw32/lib",
 						"C:/mingw64/lib"
@@ -82,7 +80,6 @@
 						"mingw32",
 						"gcc_s",
 						"gcc",
-						"moldname",
 						"mingwex",
 						"kernel32",
 						"pthread",
@@ -93,13 +90,12 @@
 						"mingw32",
 						"gcc_s",
 						"gcc",
-						"moldname",
 						"mingwex",
 						"kernel32"
 					]
 				},
 				"path" : "C:/mingw64/bin/g++.exe",
-				"version" : "13.2.0"
+				"version" : "14.2.0"
 			},
 			"language" : "CXX",
 			"sourceFileExtensions" : 

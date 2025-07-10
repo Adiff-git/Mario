@@ -1,6 +1,6 @@
 # CMake generated Testfile for 
 # Source directory: C:/raylib/raylib/src
-# Build directory: D:/Mario Proj/Mario/build/raylib_build/raylib
+# Build directory: C:/Users/yennh/Mario/build/raylib_build/raylib
 # 
 # This file includes the relevant testing commands required for 
 # testing this directory and lists subdirectories to be tested as well.

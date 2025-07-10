@@ -5,6 +5,7 @@
 #include "GreenKoopa.h"
 #include "YellowKoopa.h"
 #include "RedKoopa.h"
+#include "FlyingGoomba.h"
 void MediatorCollision::HandleMarioWithTile(Mario* &mario, Tile * &tile, CollisionType AtoB)
 {
     if (AtoB == COLLISION_TYPE_NONE)
@@ -213,4 +214,7 @@ MediatorCollision::MediatorCollision() {
     enemies.push_back(yellowKoopa);
     Enemy* redKoopa = new RedKoopa(Vector2{800, 100});
     enemies.push_back(redKoopa);
+    Enemy* flyingGoomba = new FlyingGoomba(Vector2{1000, 812});
+    enemies.push_back(flyingGoomba);
+
 }

@@ -1,6 +1,6 @@
 raylib_build/raylib/CMakeFiles/raylib.dir/rtextures.c.obj: \
  C:\raylib\raylib\src\rtextures.c C:\raylib\raylib\src\raylib.h \
- C:/mingw64/lib/gcc/x86_64-w64-mingw32/13.2.0/include/stdarg.h \
+ C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdarg.h \
  C:/mingw64/x86_64-w64-mingw32/include/stdarg.h \
  C:/mingw64/x86_64-w64-mingw32/include/_mingw_stdarg.h \
  C:/mingw64/x86_64-w64-mingw32/include/vadefs.h \
@@ -8,19 +8,19 @@ raylib_build/raylib/CMakeFiles/raylib.dir/rtextures.c.obj: \
  C:/mingw64/x86_64-w64-mingw32/include/_mingw_mac.h \
  C:/mingw64/x86_64-w64-mingw32/include/_mingw_secapi.h \
  C:/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
- C:/mingw64/lib/gcc/x86_64-w64-mingw32/13.2.0/include/stdbool.h \
+ C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdbool.h \
  C:\raylib\raylib\src\config.h C:\raylib\raylib\src\utils.h \
  C:\raylib\raylib\src\rlgl.h \
  C:/mingw64/x86_64-w64-mingw32/include/stdlib.h \
  C:/mingw64/x86_64-w64-mingw32/include/corecrt.h \
  C:/mingw64/x86_64-w64-mingw32/include/corecrt_wstdlib.h \
- C:/mingw64/lib/gcc/x86_64-w64-mingw32/13.2.0/include/limits.h \
- C:/mingw64/lib/gcc/x86_64-w64-mingw32/13.2.0/include/syslimits.h \
+ C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/limits.h \
+ C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/syslimits.h \
  C:/mingw64/x86_64-w64-mingw32/include/limits.h \
  C:/mingw64/x86_64-w64-mingw32/include/crtdefs.h \
  C:/mingw64/x86_64-w64-mingw32/include/sec_api/stdlib_s.h \
  C:/mingw64/x86_64-w64-mingw32/include/malloc.h \
- C:/mingw64/lib/gcc/x86_64-w64-mingw32/13.2.0/include/mm_malloc.h \
+ C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/mm_malloc.h \
  C:/mingw64/x86_64-w64-mingw32/include/errno.h \
  C:/mingw64/x86_64-w64-mingw32/include/string.h \
  C:/mingw64/x86_64-w64-mingw32/include/sec_api/string_s.h \
@@ -31,14 +31,14 @@ raylib_build/raylib/CMakeFiles/raylib.dir/rtextures.c.obj: \
  C:/mingw64/x86_64-w64-mingw32/include/swprintf.inl \
  C:/mingw64/x86_64-w64-mingw32/include/sec_api/stdio_s.h \
  C:\raylib\raylib\src\external/stb_image.h \
- C:/mingw64/lib/gcc/x86_64-w64-mingw32/13.2.0/include/stddef.h \
+ C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stddef.h \
  C:/mingw64/x86_64-w64-mingw32/include/stddef.h \
  C:/mingw64/x86_64-w64-mingw32/include/assert.h \
- C:/mingw64/lib/gcc/x86_64-w64-mingw32/13.2.0/include/stdint.h \
+ C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdint.h \
  C:/mingw64/x86_64-w64-mingw32/include/stdint.h \
- C:/mingw64/lib/gcc/x86_64-w64-mingw32/13.2.0/include/emmintrin.h \
- C:/mingw64/lib/gcc/x86_64-w64-mingw32/13.2.0/include/xmmintrin.h \
- C:/mingw64/lib/gcc/x86_64-w64-mingw32/13.2.0/include/mmintrin.h \
+ C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/emmintrin.h \
+ C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/xmmintrin.h \
+ C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/mmintrin.h \
  C:\raylib\raylib\src\external/rl_gputex.h \
  C:\raylib\raylib\src\external/qoi.h \
  C:\raylib\raylib\src\external/stb_image_write.h \

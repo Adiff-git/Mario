@@ -105,10 +105,12 @@ void ResrcManager::loadTextures() {
         textures["YellowKoopaTroopa_0_Left"] = FlipTextureHorizontal(textures["YellowKoopaTroopa_0_Right"]);
         textures["YellowKoopaTroopa_1_Left"] = FlipTextureHorizontal(textures["YellowKoopaTroopa_1_Right"]);
         //Flying Goomba
-        textures["FlyingGoomba_Flap_Center"] = FlipTextureHorizontal(textures["FlyingGoomba_0.png"]);
-        textures["FlyingGoomba_WingDown_Center"] = FlipTextureHorizontal(textures["FlyingGoomba_1.png"]);
-        textures["FlyingGoomba_Flap_Right"] = FlipTextureHorizontal(textures["FlyingGoomba_2.png"]);
-        textures["FlyingGoomba_WingDown_Right"] = FlipTextureHorizontal(textures["FlyingGoomba_3.png"]);
+        textures["FlyingGoomba_Flap_Center"] = LoadTexture("resources/images/Object/Enemy/FlyingGoomba_0.png");
+        textures["FlyingGoomba_WingDown_Center"] = LoadTexture("resources/images/Object/Enemy/FlyingGoomba_1.png");
+        textures["FlyingGoomba_Flap_Right"] = LoadTexture("resources/images/Object/Enemy/FlyingGoomba_2.png");
+        textures["FlyingGoomba_WingDown_Right"] = LoadTexture("resources/images/Object/Enemy/FlyingGoomba_3.png");
+        //piranhaplant
+        
     }
 }
 
@@ -181,9 +183,3 @@ Texture2D FlipTextureHorizontal(const Texture2D &texture) {
     UnloadImage(image); // Unload the image to free memory
     return flippedTexture;
 }
-
-
-
-
-
-
