@@ -4,31 +4,54 @@
 //Nhi
 GameWorld::GameWorld()
     : player(),
-      interactiveTiles(map.getInteractiveTiles())
+      interactiveTiles(map.getInteractiveTiles()) // nếu vẫn dùng tile riêng
 {
-    // Load map (đặt sau player để map biết cần load gì)
+    // Thiết lập Mario
     player = Mario(Vector2{100, 100}, 3, SMALL);
-    map.LoadMap(0);  // Sau khi load mới có dữ liệu item để lấy
 
-    // Gộp tất cả item từ map vào vector chung
+    // Load bản đồ
+    map.LoadMap(0);
+
+    // Thêm tất cả item vào danh sách đa hình chung
     for (auto& coin : map.getInteractiveCoins()) {
         interactiveItems.push_back(coin);
     }
 
-    for (auto& course : map.getInteractiveCourseClearTokens()) {
-        interactiveItems.push_back(course);
+    for (auto& token : map.getInteractiveCourseClearTokens()) {
+        interactiveItems.push_back(token);
     }
 
-    for (auto& fire : map.getInteractiveFireFlowers()) {
-        interactiveItems.push_back(fire);
+    for (auto& flower : map.getInteractiveFireFlowers()) {
+        interactiveItems.push_back(flower);
     }
 
-    // Thiết lập camera
+    for (auto& mushroom : map.getInteractiveMushrooms()) {
+        interactiveItems.push_back(mushroom);
+    }
+
+    for (auto& oneUp : map.getInteractiveOneUpMushrooms()) {
+        interactiveItems.push_back(oneUp);
+    }
+
+    for (auto& star : map.getInteractiveStarts()) {
+        interactiveItems.push_back(star);
+    }
+
+    for (auto& moon : map.getInteractiveThreeUpMoons()) {
+        interactiveItems.push_back(moon);
+    }
+
+    for (auto& yoshi : map.getInteractiveYoshiCoins()) {
+        interactiveItems.push_back(yoshi);
+    }
+
+    // Cài đặt camera
     camera.offset = Vector2{(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
     camera.target = player.GetPos();
     camera.rotation = 0.0f;
     camera.zoom = 1.0f;
 }
+
 //=======================
 
 
