@@ -7,6 +7,7 @@
 #include "RedKoopa.h"
 #include "FlyingGoomba.h"
 #include "Piranhaplant.h"
+#include "JumpingPiranha.h"
 void MediatorCollision::HandleMarioWithTile(Mario* &mario, Tile * &tile, CollisionType AtoB)
 {
     if (AtoB == COLLISION_TYPE_NONE)
@@ -207,17 +208,12 @@ std::vector<Enemy*>& MediatorCollision::GetEnemies() {
 }
 MediatorCollision::MediatorCollision() {
     // Thêm Goomba ngay khi khởi tạo
-    Enemy* goomba = new Goomba(Vector2{600, 100}); // Vị trí mặc định
-    enemies.push_back(goomba);
-    Enemy* greenKoopa = new GreenKoopa(Vector2{700, 100});
-    enemies.push_back(greenKoopa);
-    Enemy* yellowKoopa = new YellowKoopa(Vector2{800, 100});
-    enemies.push_back(yellowKoopa);
-    Enemy* redKoopa = new RedKoopa(Vector2{800, 100});
-    enemies.push_back(redKoopa);
-    Enemy* flyingGoomba = new FlyingGoomba(Vector2{400, 812});
-    enemies.push_back(flyingGoomba);
-    Enemy* piranha = new PiranhaPlant(Vector2{1100, 816});
-    enemies.push_back(piranha); 
+    enemies.push_back(new Goomba(Vector2{600, 100}));
+    enemies.push_back(new GreenKoopa(Vector2{700, 100}));
+    enemies.push_back(new YellowKoopa(Vector2{800, 100}));
+    enemies.push_back(new RedKoopa(Vector2{800, 100}));
+    enemies.push_back(new FlyingGoomba(Vector2{400, 812}));
+    enemies.push_back(new PiranhaPlant(Vector2{1100, 816}));
+    enemies.push_back(new JumpingPiranhaPlant(Vector2{1200, 816}));
 
 }

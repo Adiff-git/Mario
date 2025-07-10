@@ -286,4 +286,5 @@ CMakeFiles/Mario.dir/src/GameWorld.cpp.obj: \
  C:/Users/yennh/Mario/inc/YellowKoopa.h \
  C:/Users/yennh/Mario/inc/RedKoopa.h \
  C:/Users/yennh/Mario/inc/FlyingGoomba.h \
- C:/Users/yennh/Mario/inc/Piranhaplant.h
+ C:/Users/yennh/Mario/inc/Piranhaplant.h \
+ C:/Users/yennh/Mario/inc/JumpingPiranha.h
