@@ -4,6 +4,7 @@
 #include "YellowKoopa.h"
 #include "RedKoopa.h"
 #include "FlyingGoomba.h"
+#include "Piranhaplant.h"
 GameWorld::GameWorld() : player(), interactiveTiles(map.getInteractiveTiles()) {
     player = Mario(Vector2{100, 100}, 3, SMALL);
     map.LoadMap(0);
@@ -17,6 +18,7 @@ GameWorld::GameWorld() : player(), interactiveTiles(map.getInteractiveTiles()) {
     mediatorCollision.GetEnemies().push_back(new YellowKoopa(Vector2{400, 800}));
     mediatorCollision.GetEnemies().push_back(new RedKoopa(Vector2{400, 800}));
     mediatorCollision.GetEnemies().push_back(new FlyingGoomba(Vector2{500, 812}));
+    mediatorCollision.GetEnemies().push_back(new PiranhaPlant(Vector2{600, 816})); 
 }
 
 GameWorld::~GameWorld() {
