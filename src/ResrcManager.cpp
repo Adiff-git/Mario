@@ -110,7 +110,8 @@ void ResrcManager::loadTextures() {
         textures["FlyingGoomba_Flap_Right"] = LoadTexture("resources/images/Object/Enemy/FlyingGoomba_2.png");
         textures["FlyingGoomba_WingDown_Right"] = LoadTexture("resources/images/Object/Enemy/FlyingGoomba_3.png");
         //piranhaplant
-        
+        textures["PiranhaPlant_MouthOpen"] = LoadTexture("resources/images/Object/Enemy/PiranhaPlant_0.png");
+        textures["PiranhaPlant_MouthClosed"] = LoadTexture("resources/images/Object/Enemy/PiranhaPlant_1.png");
     }
 }
 
