@@ -1,6 +1,7 @@
-CMakeFiles/Mario.dir/src/GameWorld.cpp.obj: \
- C:\Users\yennh\Mario\src\GameWorld.cpp \
- C:/Users/yennh/Mario/inc/GameWorld.h C:/raylib/raylib/src/raylib.h \
+CMakeFiles/Mario.dir/src/Piranhaplant.cpp.obj: \
+ C:\Users\yennh\Mario\src\Piranhaplant.cpp \
+ C:/Users/yennh/Mario/inc/PiranhaPlant.h C:/Users/yennh/Mario/inc/Enemy.h \
+ C:/Users/yennh/Mario/inc/Object.h C:/raylib/raylib/src/raylib.h \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdarg.h \
  C:/mingw64/x86_64-w64-mingw32/include/stdarg.h \
  C:/mingw64/x86_64-w64-mingw32/include/_mingw_stdarg.h \
@@ -9,18 +10,21 @@ CMakeFiles/Mario.dir/src/GameWorld.cpp.obj: \
  C:/mingw64/x86_64-w64-mingw32/include/_mingw_mac.h \
  C:/mingw64/x86_64-w64-mingw32/include/_mingw_secapi.h \
  C:/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
- C:/Users/yennh/Mario/inc/Mario.h C:/mingw64/include/c++/14.2.0/list \
+ C:/Users/yennh/Mario/inc/Drawable.h \
+ C:/Users/yennh/Mario/inc/CollisionProbe.h \
+ C:/Users/yennh/Mario/inc/GameClock.h \
+ C:/Users/yennh/Mario/inc/ResrcManager.h \
+ C:/mingw64/include/c++/14.2.0/unordered_map \
  C:/mingw64/include/c++/14.2.0/bits/requires_hosted.h \
  C:/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/c++config.h \
  C:/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/os_defines.h \
  C:/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/cpu_defines.h \
  C:/mingw64/include/c++/14.2.0/pstl/pstl_config.h \
- C:/mingw64/include/c++/14.2.0/bits/stl_algobase.h \
- C:/mingw64/include/c++/14.2.0/bits/functexcept.h \
- C:/mingw64/include/c++/14.2.0/bits/exception_defines.h \
- C:/mingw64/include/c++/14.2.0/bits/cpp_type_traits.h \
- C:/mingw64/include/c++/14.2.0/ext/type_traits.h \
- C:/mingw64/include/c++/14.2.0/ext/numeric_traits.h \
+ C:/mingw64/include/c++/14.2.0/initializer_list \
+ C:/mingw64/include/c++/14.2.0/bits/unordered_map.h \
+ C:/mingw64/include/c++/14.2.0/bits/hashtable.h \
+ C:/mingw64/include/c++/14.2.0/bits/hashtable_policy.h \
+ C:/mingw64/include/c++/14.2.0/tuple \
  C:/mingw64/include/c++/14.2.0/bits/stl_pair.h \
  C:/mingw64/include/c++/14.2.0/type_traits \
  C:/mingw64/include/c++/14.2.0/bits/version.h \
@@ -28,61 +32,54 @@ CMakeFiles/Mario.dir/src/GameWorld.cpp.obj: \
  C:/mingw64/include/c++/14.2.0/bits/utility.h \
  C:/mingw64/include/c++/14.2.0/compare \
  C:/mingw64/include/c++/14.2.0/concepts \
+ C:/mingw64/include/c++/14.2.0/bits/uses_allocator.h \
+ C:/mingw64/include/c++/14.2.0/bits/invoke.h \
+ C:/mingw64/include/c++/14.2.0/bits/ranges_util.h \
+ C:/mingw64/include/c++/14.2.0/bits/ranges_base.h \
+ C:/mingw64/include/c++/14.2.0/bits/stl_iterator.h \
+ C:/mingw64/include/c++/14.2.0/bits/cpp_type_traits.h \
  C:/mingw64/include/c++/14.2.0/bits/stl_iterator_base_types.h \
  C:/mingw64/include/c++/14.2.0/bits/iterator_concepts.h \
  C:/mingw64/include/c++/14.2.0/bits/ptr_traits.h \
  C:/mingw64/include/c++/14.2.0/bits/ranges_cmp.h \
+ C:/mingw64/include/c++/14.2.0/ext/type_traits.h \
+ C:/mingw64/include/c++/14.2.0/new \
+ C:/mingw64/include/c++/14.2.0/bits/exception.h \
+ C:/mingw64/include/c++/14.2.0/bits/exception_defines.h \
+ C:/mingw64/include/c++/14.2.0/bits/stl_construct.h \
  C:/mingw64/include/c++/14.2.0/bits/stl_iterator_base_funcs.h \
  C:/mingw64/include/c++/14.2.0/bits/concept_check.h \
  C:/mingw64/include/c++/14.2.0/debug/assertions.h \
- C:/mingw64/include/c++/14.2.0/bits/stl_iterator.h \
- C:/mingw64/include/c++/14.2.0/new \
- C:/mingw64/include/c++/14.2.0/bits/exception.h \
- C:/mingw64/include/c++/14.2.0/bits/stl_construct.h \
+ C:/mingw64/include/c++/14.2.0/ext/numeric_traits.h \
+ C:/mingw64/include/c++/14.2.0/bits/max_size_type.h \
+ C:/mingw64/include/c++/14.2.0/numbers \
+ C:/mingw64/include/c++/14.2.0/bits/functional_hash.h \
+ C:/mingw64/include/c++/14.2.0/bits/hash_bytes.h \
+ C:/mingw64/include/c++/14.2.0/bits/stl_algobase.h \
+ C:/mingw64/include/c++/14.2.0/bits/functexcept.h \
  C:/mingw64/include/c++/14.2.0/debug/debug.h \
  C:/mingw64/include/c++/14.2.0/bits/predefined_ops.h \
  C:/mingw64/include/c++/14.2.0/bit \
+ C:/mingw64/include/c++/14.2.0/ext/aligned_buffer.h \
+ C:/mingw64/include/c++/14.2.0/ext/alloc_traits.h \
+ C:/mingw64/include/c++/14.2.0/bits/alloc_traits.h \
+ C:/mingw64/include/c++/14.2.0/bits/memoryfwd.h \
  C:/mingw64/include/c++/14.2.0/bits/allocator.h \
  C:/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/c++allocator.h \
  C:/mingw64/include/c++/14.2.0/bits/new_allocator.h \
- C:/mingw64/include/c++/14.2.0/bits/memoryfwd.h \
+ C:/mingw64/include/c++/14.2.0/bits/enable_special_members.h \
+ C:/mingw64/include/c++/14.2.0/bits/stl_function.h \
+ C:/mingw64/include/c++/14.2.0/backward/binders.h \
+ C:/mingw64/include/c++/14.2.0/bits/node_handle.h \
  C:/mingw64/include/c++/14.2.0/bits/range_access.h \
- C:/mingw64/include/c++/14.2.0/initializer_list \
- C:/mingw64/include/c++/14.2.0/bits/stl_list.h \
- C:/mingw64/include/c++/14.2.0/ext/alloc_traits.h \
- C:/mingw64/include/c++/14.2.0/bits/alloc_traits.h \
- C:/mingw64/include/c++/14.2.0/bits/allocated_ptr.h \
- C:/mingw64/include/c++/14.2.0/ext/aligned_buffer.h \
- C:/mingw64/include/c++/14.2.0/bits/list.tcc \
+ C:/mingw64/include/c++/14.2.0/bits/erase_if.h \
  C:/mingw64/include/c++/14.2.0/bits/memory_resource.h \
  C:/mingw64/include/c++/14.2.0/cstddef \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stddef.h \
  C:/mingw64/x86_64-w64-mingw32/include/stddef.h \
  C:/mingw64/x86_64-w64-mingw32/include/crtdefs.h \
  C:/mingw64/x86_64-w64-mingw32/include/corecrt.h \
- C:/mingw64/include/c++/14.2.0/bits/uses_allocator.h \
  C:/mingw64/include/c++/14.2.0/bits/uses_allocator_args.h \
- C:/mingw64/include/c++/14.2.0/tuple \
- C:/mingw64/include/c++/14.2.0/bits/invoke.h \
- C:/mingw64/include/c++/14.2.0/bits/ranges_util.h \
- C:/mingw64/include/c++/14.2.0/bits/ranges_base.h \
- C:/mingw64/include/c++/14.2.0/bits/max_size_type.h \
- C:/mingw64/include/c++/14.2.0/numbers \
- C:/Users/yennh/Mario/inc/Drawable.h C:/Users/yennh/Mario/inc/Object.h \
- C:/Users/yennh/Mario/inc/CollisionProbe.h \
- C:/Users/yennh/Mario/inc/GameClock.h \
- C:/Users/yennh/Mario/inc/ResrcManager.h \
- C:/mingw64/include/c++/14.2.0/unordered_map \
- C:/mingw64/include/c++/14.2.0/bits/unordered_map.h \
- C:/mingw64/include/c++/14.2.0/bits/hashtable.h \
- C:/mingw64/include/c++/14.2.0/bits/hashtable_policy.h \
- C:/mingw64/include/c++/14.2.0/bits/functional_hash.h \
- C:/mingw64/include/c++/14.2.0/bits/hash_bytes.h \
- C:/mingw64/include/c++/14.2.0/bits/enable_special_members.h \
- C:/mingw64/include/c++/14.2.0/bits/stl_function.h \
- C:/mingw64/include/c++/14.2.0/backward/binders.h \
- C:/mingw64/include/c++/14.2.0/bits/node_handle.h \
- C:/mingw64/include/c++/14.2.0/bits/erase_if.h \
  C:/mingw64/include/c++/14.2.0/string \
  C:/mingw64/include/c++/14.2.0/bits/stringfwd.h \
  C:/mingw64/include/c++/14.2.0/bits/char_traits.h \
@@ -126,6 +123,11 @@ CMakeFiles/Mario.dir/src/GameWorld.cpp.obj: \
  C:/mingw64/include/c++/14.2.0/cerrno \
  C:/mingw64/include/c++/14.2.0/bits/charconv.h \
  C:/mingw64/include/c++/14.2.0/bits/basic_string.tcc \
+ C:/Users/yennh/Mario/inc/GameWorld.h C:/Users/yennh/Mario/inc/Mario.h \
+ C:/mingw64/include/c++/14.2.0/list \
+ C:/mingw64/include/c++/14.2.0/bits/stl_list.h \
+ C:/mingw64/include/c++/14.2.0/bits/allocated_ptr.h \
+ C:/mingw64/include/c++/14.2.0/bits/list.tcc \
  C:/Users/yennh/Mario/inc/Fireball.h C:/Users/yennh/Mario/inc/Tile.h \
  C:/Users/yennh/Mario/inc/Map.h C:/mingw64/include/c++/14.2.0/vector \
  C:/mingw64/include/c++/14.2.0/bits/stl_uninitialized.h \
@@ -280,10 +282,4 @@ CMakeFiles/Mario.dir/src/GameWorld.cpp.obj: \
  C:/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/basic_file.h \
  C:/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/c++io.h \
  C:/mingw64/include/c++/14.2.0/bits/fstream.tcc \
- C:/Users/yennh/Mario/inc/MediatorCollision.h \
- C:/Users/yennh/Mario/inc/Enemy.h C:/Users/yennh/Mario/inc/Goomba.h \
- C:/Users/yennh/Mario/inc/GreenKoopa.h \
- C:/Users/yennh/Mario/inc/YellowKoopa.h \
- C:/Users/yennh/Mario/inc/RedKoopa.h \
- C:/Users/yennh/Mario/inc/FlyingGoomba.h \
- C:/Users/yennh/Mario/inc/Piranhaplant.h
+ C:/Users/yennh/Mario/inc/MediatorCollision.h

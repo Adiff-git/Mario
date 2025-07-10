@@ -4,27 +4,35 @@
 #include "raylib.h"
 
 PiranhaPlant::PiranhaPlant(Vector2 pos)
-    : Enemy(pos, Vector2{32, 48}, Vector2{0, 0}, GREEN, 0.0f, 0, DIRECTION_UP)
+    : Enemy(pos, {32, 48}, {0, 0}, GREEN, 0.0f, 0, DIRECTION_UP),
+      animationTimer(0.0f),
+      animationInterval(0.2f),
+      isMouthOpen(true)
 {
     sprite = &ResrcManager::GetInstance().getTexture("PiranhaPlant_MouthOpen");
 }
 
 void PiranhaPlant::UpdateStateAndPhysic() {
-    float deltaTime = GetFrameTime();
+    const float deltaTime = GetFrameTime();
     animationTimer += deltaTime;
 
-    if (animationTimer >= animationInterval) {
+    static int updateCount = 0;
+    const int updateThreshold = 17;  
+
+    updateCount++;
+    if (updateCount >= updateThreshold) {
         isMouthOpen = !isMouthOpen;
         sprite = &ResrcManager::GetInstance().getTexture(
             isMouthOpen ? "PiranhaPlant_MouthOpen" : "PiranhaPlant_MouthClosed"
         );
-        animationTimer = 0.0f;
+        updateCount = 0;
     }
 
-    // Không di chuyển, nhưng vẫn cập nhật vị trí nếu có hiệu ứng game
-    pos.y += vel.y * deltaTime;
-    pos.x += vel.x * deltaTime;
+    vel.y += GameWorld::GetGravity() * deltaTime;
 
-    // Update các vùng va chạm
+    pos.x += vel.x * deltaTime;
+    pos.y += vel.y * deltaTime;
+
     UpdateCollisionProbes();
 }
+

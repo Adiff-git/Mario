@@ -215,7 +215,7 @@ MediatorCollision::MediatorCollision() {
     enemies.push_back(yellowKoopa);
     Enemy* redKoopa = new RedKoopa(Vector2{800, 100});
     enemies.push_back(redKoopa);
-    Enemy* flyingGoomba = new FlyingGoomba(Vector2{1000, 812});
+    Enemy* flyingGoomba = new FlyingGoomba(Vector2{400, 812});
     enemies.push_back(flyingGoomba);
     Enemy* piranha = new PiranhaPlant(Vector2{1100, 816});
     enemies.push_back(piranha); 

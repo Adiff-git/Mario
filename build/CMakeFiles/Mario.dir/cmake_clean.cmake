@@ -25,6 +25,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Mario.dir/src/MediatorCollision.cpp.obj.d"
   "CMakeFiles/Mario.dir/src/Object.cpp.obj"
   "CMakeFiles/Mario.dir/src/Object.cpp.obj.d"
+  "CMakeFiles/Mario.dir/src/Piranhaplant.cpp.obj"
+  "CMakeFiles/Mario.dir/src/Piranhaplant.cpp.obj.d"
   "CMakeFiles/Mario.dir/src/RedKoopa.cpp.obj"
   "CMakeFiles/Mario.dir/src/RedKoopa.cpp.obj.d"
   "CMakeFiles/Mario.dir/src/ResrcManager.cpp.obj"

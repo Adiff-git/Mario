@@ -18,6 +18,7 @@ set(OLD_GLOB
   "C:/Users/yennh/Mario/src/Mario.cpp"
   "C:/Users/yennh/Mario/src/MediatorCollision.cpp"
   "C:/Users/yennh/Mario/src/Object.cpp"
+  "C:/Users/yennh/Mario/src/Piranhaplant.cpp"
   "C:/Users/yennh/Mario/src/RedKoopa.cpp"
   "C:/Users/yennh/Mario/src/ResrcManager.cpp"
   "C:/Users/yennh/Mario/src/Tile.cpp"

@@ -545,6 +545,30 @@ src/Object.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/Object.cpp.s
 .PHONY : src/Object.cpp.s
 
+src/Piranhaplant.obj: src/Piranhaplant.cpp.obj
+.PHONY : src/Piranhaplant.obj
+
+# target to build an object file
+src/Piranhaplant.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/Piranhaplant.cpp.obj
+.PHONY : src/Piranhaplant.cpp.obj
+
+src/Piranhaplant.i: src/Piranhaplant.cpp.i
+.PHONY : src/Piranhaplant.i
+
+# target to preprocess a source file
+src/Piranhaplant.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/Piranhaplant.cpp.i
+.PHONY : src/Piranhaplant.cpp.i
+
+src/Piranhaplant.s: src/Piranhaplant.cpp.s
+.PHONY : src/Piranhaplant.s
+
+# target to generate assembly for a file
+src/Piranhaplant.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/Piranhaplant.cpp.s
+.PHONY : src/Piranhaplant.cpp.s
+
 src/RedKoopa.obj: src/RedKoopa.cpp.obj
 .PHONY : src/RedKoopa.obj
 
@@ -722,6 +746,9 @@ help:
 	@echo ... src/Object.obj
 	@echo ... src/Object.i
 	@echo ... src/Object.s
+	@echo ... src/Piranhaplant.obj
+	@echo ... src/Piranhaplant.i
+	@echo ... src/Piranhaplant.s
 	@echo ... src/RedKoopa.obj
 	@echo ... src/RedKoopa.i
 	@echo ... src/RedKoopa.s

@@ -79,6 +79,12 @@
 },
 {
   "directory": "C:/Users/yennh/Mario/build",
+  "command": "C:\\mingw64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\Piranhaplant.cpp.obj -c C:\\Users\\yennh\\Mario\\src\\Piranhaplant.cpp",
+  "file": "C:/Users/yennh/Mario/src/Piranhaplant.cpp",
+  "output": "CMakeFiles/Mario.dir/src/Piranhaplant.cpp.obj"
+},
+{
+  "directory": "C:/Users/yennh/Mario/build",
   "command": "C:\\mingw64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\RedKoopa.cpp.obj -c C:\\Users\\yennh\\Mario\\src\\RedKoopa.cpp",
   "file": "C:/Users/yennh/Mario/src/RedKoopa.cpp",
   "output": "CMakeFiles/Mario.dir/src/RedKoopa.cpp.obj"

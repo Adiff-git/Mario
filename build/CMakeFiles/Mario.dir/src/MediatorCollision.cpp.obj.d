@@ -190,4 +190,5 @@ CMakeFiles/Mario.dir/src/MediatorCollision.cpp.obj: \
  C:/Users/yennh/Mario/inc/Goomba.h C:/Users/yennh/Mario/inc/GreenKoopa.h \
  C:/Users/yennh/Mario/inc/YellowKoopa.h \
  C:/Users/yennh/Mario/inc/RedKoopa.h \
- C:/Users/yennh/Mario/inc/FlyingGoomba.h
+ C:/Users/yennh/Mario/inc/FlyingGoomba.h \
+ C:/Users/yennh/Mario/inc/Piranhaplant.h

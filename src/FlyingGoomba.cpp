@@ -18,19 +18,15 @@ void FlyingGoomba::UpdateStateAndPhysic() {
 
     vel.y += GameWorld::GetGravity() * deltaTime;
 
-    // Cập nhật hướng bay
     if (vel.x > 0) direction = DIRECTION_RIGHT;
     else if (vel.x < 0) direction = DIRECTION_LEFT;
 
-    // Giới hạn vận tốc
     if (vel.x > maxSpeedX) vel.x = maxSpeedX;
     if (vel.x < -maxSpeedX) vel.x = -maxSpeedX;
 
-    // Cập nhật vị trí
     pos.x += vel.x * deltaTime;
     pos.y += vel.y * deltaTime;
 
-    // Animation đơn giản
     static int updateCount = 0;
     const int updateThreshold = 30;
     updateCount++;

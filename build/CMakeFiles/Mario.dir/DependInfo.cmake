@@ -21,6 +21,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/yennh/Mario/src/Mario.cpp" "CMakeFiles/Mario.dir/src/Mario.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/Mario.cpp.obj.d"
   "C:/Users/yennh/Mario/src/MediatorCollision.cpp" "CMakeFiles/Mario.dir/src/MediatorCollision.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/MediatorCollision.cpp.obj.d"
   "C:/Users/yennh/Mario/src/Object.cpp" "CMakeFiles/Mario.dir/src/Object.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/Object.cpp.obj.d"
+  "C:/Users/yennh/Mario/src/Piranhaplant.cpp" "CMakeFiles/Mario.dir/src/Piranhaplant.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/Piranhaplant.cpp.obj.d"
   "C:/Users/yennh/Mario/src/RedKoopa.cpp" "CMakeFiles/Mario.dir/src/RedKoopa.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/RedKoopa.cpp.obj.d"
   "C:/Users/yennh/Mario/src/ResrcManager.cpp" "CMakeFiles/Mario.dir/src/ResrcManager.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/ResrcManager.cpp.obj.d"
   "C:/Users/yennh/Mario/src/Tile.cpp" "CMakeFiles/Mario.dir/src/Tile.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/Tile.cpp.obj.d"

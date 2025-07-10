@@ -17,8 +17,8 @@ GameWorld::GameWorld() : player(), interactiveTiles(map.getInteractiveTiles()) {
     mediatorCollision.GetEnemies().push_back(new GreenKoopa(Vector2{300, 790}));
     mediatorCollision.GetEnemies().push_back(new YellowKoopa(Vector2{400, 800}));
     mediatorCollision.GetEnemies().push_back(new RedKoopa(Vector2{400, 800}));
-    mediatorCollision.GetEnemies().push_back(new FlyingGoomba(Vector2{500, 812}));
-    mediatorCollision.GetEnemies().push_back(new PiranhaPlant(Vector2{600, 816})); 
+    mediatorCollision.GetEnemies().push_back(new FlyingGoomba(Vector2{400, 812}));
+    mediatorCollision.GetEnemies().push_back(new PiranhaPlant(Vector2{500, 816})); 
 }
 
 GameWorld::~GameWorld() {
