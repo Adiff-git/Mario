@@ -34,6 +34,7 @@ public:
 
     static const float GetGravity();
     static void Init();
+    
 };
 
 #endif // GAMEWORLD_H

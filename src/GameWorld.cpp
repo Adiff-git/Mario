@@ -49,6 +49,8 @@ void GameWorld::UpdateWorld()
     }
 }
 
+
+
 void GameWorld::DrawWorld()
 {
     camera.target.y = GetScreenHeight() / 2;
@@ -91,3 +93,5 @@ void GameWorld::Init()
 {
     ResrcManager::GetInstance().loadResources();
 }
+
+
