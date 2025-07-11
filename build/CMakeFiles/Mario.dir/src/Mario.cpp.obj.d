@@ -1,6 +1,5 @@
 CMakeFiles/Mario.dir/src/Mario.cpp.obj: \
- C:\Users\yennh\Downloads\ProjectCS202\Mario\src\Mario.cpp \
- C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Mario.h \
+ C:\Users\yennh\Mario\src\Mario.cpp C:/Users/yennh/Mario/inc/Mario.h \
  C:/mingw64/include/c++/14.2.0/list \
  C:/mingw64/include/c++/14.2.0/bits/requires_hosted.h \
  C:/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/c++config.h \
@@ -68,11 +67,10 @@ CMakeFiles/Mario.dir/src/Mario.cpp.obj: \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdarg.h \
  C:/mingw64/x86_64-w64-mingw32/include/stdarg.h \
  C:/mingw64/x86_64-w64-mingw32/include/_mingw_stdarg.h \
- C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Drawable.h \
- C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Object.h \
- C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CollisionProbe.h \
- C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameClock.h \
- C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/ResrcManager.h \
+ C:/Users/yennh/Mario/inc/Drawable.h C:/Users/yennh/Mario/inc/Object.h \
+ C:/Users/yennh/Mario/inc/CollisionProbe.h \
+ C:/Users/yennh/Mario/inc/GameClock.h \
+ C:/Users/yennh/Mario/inc/ResrcManager.h \
  C:/mingw64/include/c++/14.2.0/unordered_map \
  C:/mingw64/include/c++/14.2.0/bits/unordered_map.h \
  C:/mingw64/include/c++/14.2.0/bits/hashtable.h \
@@ -127,19 +125,14 @@ CMakeFiles/Mario.dir/src/Mario.cpp.obj: \
  C:/mingw64/include/c++/14.2.0/cerrno \
  C:/mingw64/include/c++/14.2.0/bits/charconv.h \
  C:/mingw64/include/c++/14.2.0/bits/basic_string.tcc \
- C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Fireball.h \
- C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Tile.h \
- C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Observer.h \
- C:/mingw64/include/c++/14.2.0/vector \
+ C:/Users/yennh/Mario/inc/Fireball.h C:/Users/yennh/Mario/inc/Tile.h \
+ C:/Users/yennh/Mario/inc/Observer.h C:/mingw64/include/c++/14.2.0/vector \
  C:/mingw64/include/c++/14.2.0/bits/stl_uninitialized.h \
  C:/mingw64/include/c++/14.2.0/bits/stl_vector.h \
  C:/mingw64/include/c++/14.2.0/bits/stl_bvector.h \
  C:/mingw64/include/c++/14.2.0/bits/vector.tcc \
- C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameWorld.h \
- C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Map.h \
- C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Coin.h \
- C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Item.h \
- C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/json.hpp \
+ C:/Users/yennh/Mario/inc/GameWorld.h C:/Users/yennh/Mario/inc/Map.h \
+ C:/Users/yennh/Mario/inc/Item.h C:/Users/yennh/Mario/inc/json.hpp \
  C:/mingw64/include/c++/14.2.0/algorithm \
  C:/mingw64/include/c++/14.2.0/bits/stl_algo.h \
  C:/mingw64/include/c++/14.2.0/bits/algorithmfwd.h \
@@ -287,6 +280,11 @@ CMakeFiles/Mario.dir/src/Mario.cpp.obj: \
  C:/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/basic_file.h \
  C:/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/c++io.h \
  C:/mingw64/include/c++/14.2.0/bits/fstream.tcc \
- C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CourseClearToken.h \
- C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/FireFlower.h \
- C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/MediatorCollision.h
+ C:/Users/yennh/Mario/inc/Coin.h \
+ C:/Users/yennh/Mario/inc/CourseClearToken.h \
+ C:/Users/yennh/Mario/inc/FireFlower.h \
+ C:/Users/yennh/Mario/inc/Mushroom.h \
+ C:/Users/yennh/Mario/inc/OneUpMushroom.h \
+ C:/Users/yennh/Mario/inc/Start.h C:/Users/yennh/Mario/inc/ThreeUpMoon.h \
+ C:/Users/yennh/Mario/inc/YoshiCoin.h \
+ C:/Users/yennh/Mario/inc/MediatorCollision.h

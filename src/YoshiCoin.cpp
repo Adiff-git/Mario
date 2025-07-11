@@ -11,7 +11,7 @@ YoshiCoin::YoshiCoin(Vector2 pos)
 
 void YoshiCoin::updateMario(Mario& mario)
 {
-    mario.SetCoins(mario.GetCoins() + 1);  // Hoặc mario.addYoshiCoin(); nếu có hệ thống đặc biệt
+    mario.SetCoins(mario.GetCoins() + 1);  
     this->SetState(OBJECT_STATE_TO_BE_REMOVED);
 }
 

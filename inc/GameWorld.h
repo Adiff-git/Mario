@@ -1,15 +1,14 @@
 #ifndef GAMEWORLD_H
 #define GAMEWORLD_H
+
 #include "raylib.h"
 #include "Mario.h"
-
 #include "GameClock.h"
 #include "Tile.h"
 #include "Map.h"
 #include "ResrcManager.h"
 #include "MediatorCollision.h"
-#include "CourseClearToken.h"
-#include "FireFlower.h"
+#include "Item.h"
 
 class GameWorld
 {
@@ -22,10 +21,9 @@ private:
     MediatorCollision mediatorCollision;
     Mario player;
     Camera2D camera;
-    std::vector<Tile *> &interactiveTiles;
-    std::vector<std::shared_ptr<Coin>> &interactiveCoins;
-    std::vector<std::shared_ptr<CourseClearToken>> &interactiveCourseClearTokens;
-    std::vector<std::shared_ptr<FireFlower>> &interactiveFireFlowers;
+
+    std::vector<Tile*>& interactiveTiles;
+    std::vector<std::shared_ptr<Item>> interactiveItems;
 
 public:
     GameWorld();
@@ -37,4 +35,5 @@ public:
     static const float GetGravity();
     static void Init();
 };
+
 #endif // GAMEWORLD_H

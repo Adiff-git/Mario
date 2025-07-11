@@ -3,10 +3,10 @@
 #include "Item.h"
 #include "ResrcManager.h"
 
-class Star : public Item, GameWorld {
+class Start : public Item {
 public:
-    Star(Vector2 pos);
-    ~Star() override = default;
+    Start(Vector2 pos);
+    ~Start() override = default;
 
     void updateMario(Mario& mario) override;
     void playCollisionSound() override;

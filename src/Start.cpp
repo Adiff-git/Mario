@@ -4,24 +4,24 @@
 #include "raylib.h"
 #include "Start.h"
 
-Star::Star(Vector2 pos)
+Start::Start(Vector2 pos)
     : Item(pos, {32, 32}, {100, 0}, WHITE, 0.0f, 1, DIRECTION_RIGHT, 1, 0)
 {
     state = OBJECT_STATE_ACTIVE;
 }
 
-void Star::updateMario(Mario& mario)
+void Start::updateMario(Mario& mario)
 {
     mario.setInvincible(true);
     this->SetState(OBJECT_STATE_TO_BE_REMOVED);
 }
 
-void Star::playCollisionSound()
+void Start::playCollisionSound()
 {
     
 }
 
-void Star::Update()
+void Start::Update()
 {
     float dt = GetFrameTime();
 
@@ -32,7 +32,7 @@ void Star::Update()
     UpdateCollisionProbes();
 }
 
-void Star::draw()
+void Start::draw()
 {
     if (state == OBJECT_STATE_TO_BE_REMOVED || state == OBJECT_STATE_DEAD)
         return;

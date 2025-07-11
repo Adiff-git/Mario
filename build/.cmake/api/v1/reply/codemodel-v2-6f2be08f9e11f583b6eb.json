@@ -146,21 +146,21 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "Mario::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Mario-Debug-c2614cd9b4449753a4d0.json",
+					"jsonFile" : "target-Mario-Debug-9d5d856a4f20b2caab82.json",
 					"name" : "Mario",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 4,
 					"id" : "glfw::@0007fcb0029cba81045f",
-					"jsonFile" : "target-glfw-Debug-75241aeb35fd36b3e22c.json",
+					"jsonFile" : "target-glfw-Debug-2147f303371e333c7e96.json",
 					"name" : "glfw",
 					"projectIndex" : 2
 				},
 				{
 					"directoryIndex" : 2,
 					"id" : "raylib::@52310b9926f245239ea7",
-					"jsonFile" : "target-raylib-Debug-eb3bbd98006dca858589.json",
+					"jsonFile" : "target-raylib-Debug-01f3887ab70206274709.json",
 					"name" : "raylib",
 					"projectIndex" : 1
 				},
@@ -177,8 +177,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/yennh/Downloads/ProjectCS202/Mario/build",
-		"source" : "C:/Users/yennh/Downloads/ProjectCS202/Mario"
+		"build" : "C:/Users/yennh/Mario/build",
+		"source" : "C:/Users/yennh/Mario"
 	},
 	"version" : 
 	{

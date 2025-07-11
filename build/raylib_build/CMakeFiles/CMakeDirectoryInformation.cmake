@@ -3,7 +3,7 @@
 
 # Relative path conversion top directories.
 set(CMAKE_RELATIVE_PATH_TOP_SOURCE "C:/raylib/raylib")
-set(CMAKE_RELATIVE_PATH_TOP_BINARY "C:/Users/yennh/Downloads/ProjectCS202/Mario/build")
+set(CMAKE_RELATIVE_PATH_TOP_BINARY "C:/Users/yennh/Mario/build")
 
 # Force unix paths in dependencies.
 set(CMAKE_FORCE_UNIX_PATHS 1)

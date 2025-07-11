@@ -94,6 +94,19 @@ void ResrcManager::loadTextures() {
     textures["FIRE FLOWER_0"] = LoadTexture("resources/images/Object/items/FireFlower_0.png");
     textures["FIRE FLOWER_1"] = LoadTexture("resources/images/Object/items/FireFlower_1.png");
     }
+    //mushroom
+    textures["Mushroom"] = LoadTexture("resources/images/Object/items/Mushroom.png");
+    //One up Mushroom
+    textures["1UpMushroom"] = LoadTexture("resources/images/Object/items/1UpMushroom.png");
+    //Star
+    textures["star"] = LoadTexture("resources/images/Object/items/Star.png");
+    //Three Up Moon
+    textures["3UpMoon"] = LoadTexture("resources/images/Object/items/3UpMoon.png");
+    //Yoshi Coin 
+    textures["YoshiCoin_0"] = LoadTexture("resources/images/Object/items/YoshiCoin_0.png");
+    textures["YoshiCoin_1"] = LoadTexture("resources/images/Object/items/YoshiCoin_1.png");
+    textures["YoshiCoin_2"] = LoadTexture("resources/images/Object/items/YoshiCoin_2.png");
+    textures["YoshiCoin_3"] = LoadTexture("resources/images/Object/items/YoshiCoin_3.png");
     //TILES
     for (int i = 0; i < 104; ++i) {
         std::string keyStr = "tile_" + std::to_string(i);

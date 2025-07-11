@@ -1,6 +1,5 @@
 CMakeFiles/Mario.dir/src/Object.cpp.obj: \
- C:\Users\yennh\Downloads\ProjectCS202\Mario\src\Object.cpp \
- C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Object.h \
+ C:\Users\yennh\Mario\src\Object.cpp C:/Users/yennh/Mario/inc/Object.h \
  C:/raylib/raylib/src/raylib.h \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdarg.h \
  C:/mingw64/x86_64-w64-mingw32/include/stdarg.h \
@@ -10,6 +9,6 @@ CMakeFiles/Mario.dir/src/Object.cpp.obj: \
  C:/mingw64/x86_64-w64-mingw32/include/_mingw_mac.h \
  C:/mingw64/x86_64-w64-mingw32/include/_mingw_secapi.h \
  C:/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
- C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/Drawable.h \
- C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/CollisionProbe.h \
- C:/Users/yennh/Downloads/ProjectCS202/Mario/inc/GameClock.h
+ C:/Users/yennh/Mario/inc/Drawable.h \
+ C:/Users/yennh/Mario/inc/CollisionProbe.h \
+ C:/Users/yennh/Mario/inc/GameClock.h
