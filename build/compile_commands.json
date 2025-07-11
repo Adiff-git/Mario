@@ -13,9 +13,21 @@
 },
 {
   "directory": "D:/prj3/Mario/build",
+  "command": "C:\\Strawberry\\c\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -ID:/prj3/Mario/inc -IC:/raylib/src -IC:/raylib/src/external/glfw/include -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\Coin.cpp.obj -c D:\\prj3\\Mario\\src\\Coin.cpp",
+  "file": "D:\\prj3\\Mario\\src\\Coin.cpp",
+  "output": "CMakeFiles\\Mario.dir\\src\\Coin.cpp.obj"
+},
+{
+  "directory": "D:/prj3/Mario/build",
   "command": "C:\\Strawberry\\c\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -ID:/prj3/Mario/inc -IC:/raylib/src -IC:/raylib/src/external/glfw/include -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\CollisionProbe.cpp.obj -c D:\\prj3\\Mario\\src\\CollisionProbe.cpp",
   "file": "D:\\prj3\\Mario\\src\\CollisionProbe.cpp",
   "output": "CMakeFiles\\Mario.dir\\src\\CollisionProbe.cpp.obj"
+},
+{
+  "directory": "D:/prj3/Mario/build",
+  "command": "C:\\Strawberry\\c\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -ID:/prj3/Mario/inc -IC:/raylib/src -IC:/raylib/src/external/glfw/include -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\CourseClearToken.cpp.obj -c D:\\prj3\\Mario\\src\\CourseClearToken.cpp",
+  "file": "D:\\prj3\\Mario\\src\\CourseClearToken.cpp",
+  "output": "CMakeFiles\\Mario.dir\\src\\CourseClearToken.cpp.obj"
 },
 {
   "directory": "D:/prj3/Mario/build",
@@ -28,6 +40,12 @@
   "command": "C:\\Strawberry\\c\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -ID:/prj3/Mario/inc -IC:/raylib/src -IC:/raylib/src/external/glfw/include -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\EyesOpenedBlock.cpp.obj -c D:\\prj3\\Mario\\src\\EyesOpenedBlock.cpp",
   "file": "D:\\prj3\\Mario\\src\\EyesOpenedBlock.cpp",
   "output": "CMakeFiles\\Mario.dir\\src\\EyesOpenedBlock.cpp.obj"
+},
+{
+  "directory": "D:/prj3/Mario/build",
+  "command": "C:\\Strawberry\\c\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -ID:/prj3/Mario/inc -IC:/raylib/src -IC:/raylib/src/external/glfw/include -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\FireFlower.cpp.obj -c D:\\prj3\\Mario\\src\\FireFlower.cpp",
+  "file": "D:\\prj3\\Mario\\src\\FireFlower.cpp",
+  "output": "CMakeFiles\\Mario.dir\\src\\FireFlower.cpp.obj"
 },
 {
   "directory": "D:/prj3/Mario/build",
@@ -79,9 +97,21 @@
 },
 {
   "directory": "D:/prj3/Mario/build",
+  "command": "C:\\Strawberry\\c\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -ID:/prj3/Mario/inc -IC:/raylib/src -IC:/raylib/src/external/glfw/include -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\Mushroom.cpp.obj -c D:\\prj3\\Mario\\src\\Mushroom.cpp",
+  "file": "D:\\prj3\\Mario\\src\\Mushroom.cpp",
+  "output": "CMakeFiles\\Mario.dir\\src\\Mushroom.cpp.obj"
+},
+{
+  "directory": "D:/prj3/Mario/build",
   "command": "C:\\Strawberry\\c\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -ID:/prj3/Mario/inc -IC:/raylib/src -IC:/raylib/src/external/glfw/include -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\Object.cpp.obj -c D:\\prj3\\Mario\\src\\Object.cpp",
   "file": "D:\\prj3\\Mario\\src\\Object.cpp",
   "output": "CMakeFiles\\Mario.dir\\src\\Object.cpp.obj"
+},
+{
+  "directory": "D:/prj3/Mario/build",
+  "command": "C:\\Strawberry\\c\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -ID:/prj3/Mario/inc -IC:/raylib/src -IC:/raylib/src/external/glfw/include -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\OneUpMushroom.cpp.obj -c D:\\prj3\\Mario\\src\\OneUpMushroom.cpp",
+  "file": "D:\\prj3\\Mario\\src\\OneUpMushroom.cpp",
+  "output": "CMakeFiles\\Mario.dir\\src\\OneUpMushroom.cpp.obj"
 },
 {
   "directory": "D:/prj3/Mario/build",
@@ -97,6 +127,18 @@
 },
 {
   "directory": "D:/prj3/Mario/build",
+  "command": "C:\\Strawberry\\c\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -ID:/prj3/Mario/inc -IC:/raylib/src -IC:/raylib/src/external/glfw/include -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\Start.cpp.obj -c D:\\prj3\\Mario\\src\\Start.cpp",
+  "file": "D:\\prj3\\Mario\\src\\Start.cpp",
+  "output": "CMakeFiles\\Mario.dir\\src\\Start.cpp.obj"
+},
+{
+  "directory": "D:/prj3/Mario/build",
+  "command": "C:\\Strawberry\\c\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -ID:/prj3/Mario/inc -IC:/raylib/src -IC:/raylib/src/external/glfw/include -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\ThreeUpMoon.cpp.obj -c D:\\prj3\\Mario\\src\\ThreeUpMoon.cpp",
+  "file": "D:\\prj3\\Mario\\src\\ThreeUpMoon.cpp",
+  "output": "CMakeFiles\\Mario.dir\\src\\ThreeUpMoon.cpp.obj"
+},
+{
+  "directory": "D:/prj3/Mario/build",
   "command": "C:\\Strawberry\\c\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -ID:/prj3/Mario/inc -IC:/raylib/src -IC:/raylib/src/external/glfw/include -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\Tile.cpp.obj -c D:\\prj3\\Mario\\src\\Tile.cpp",
   "file": "D:\\prj3\\Mario\\src\\Tile.cpp",
   "output": "CMakeFiles\\Mario.dir\\src\\Tile.cpp.obj"
@@ -106,6 +148,12 @@
   "command": "C:\\Strawberry\\c\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -ID:/prj3/Mario/inc -IC:/raylib/src -IC:/raylib/src/external/glfw/include -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\WoodBlock.cpp.obj -c D:\\prj3\\Mario\\src\\WoodBlock.cpp",
   "file": "D:\\prj3\\Mario\\src\\WoodBlock.cpp",
   "output": "CMakeFiles\\Mario.dir\\src\\WoodBlock.cpp.obj"
+},
+{
+  "directory": "D:/prj3/Mario/build",
+  "command": "C:\\Strawberry\\c\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -ID:/prj3/Mario/inc -IC:/raylib/src -IC:/raylib/src/external/glfw/include -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\YoshiCoin.cpp.obj -c D:\\prj3\\Mario\\src\\YoshiCoin.cpp",
+  "file": "D:\\prj3\\Mario\\src\\YoshiCoin.cpp",
+  "output": "CMakeFiles\\Mario.dir\\src\\YoshiCoin.cpp.obj"
 },
 {
   "directory": "D:/prj3/Mario/build",

@@ -53,8 +53,14 @@ void Map::LoadMap(int mapIndex)
             int tileId = data[y * width + x];
             if (tileId == 0)
                 continue;
-            else if(tileId == 201) {
-                blocks.push_back(new QuestionBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE));
+            else if(tileId == 2010) {
+                blocks.push_back(new QuestionBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE, GIFT_NONE));
+            }
+            else if(tileId == 2011) {
+                blocks.push_back(new QuestionBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE, GIFT_COIN));
+            }
+            else if(tileId == 2012) {
+                blocks.push_back(new QuestionBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE, GIFT_FIRE_FLOWER));
             }
             else if (tileId == 200) {
                 blocks.push_back(new CloudBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE));
@@ -104,4 +110,22 @@ Map::Map()
 
 std::vector<Block*>& Map::getBlocks(){
         return blocks;
-    };
+};
+
+std::vector<std::shared_ptr<Coin>> &Map::getInteractiveCoins()
+{
+    
+    return interactiveCoins;
+}
+
+std::vector<std::shared_ptr<FireFlower>> &Map::getInteractiveFireFlowers()
+{
+    return interactiveFireFlowers;
+}
+
+std::vector<std::shared_ptr<CourseClearToken>>& Map::getInteractiveCourseClearTokens()
+{
+    return interactiveCourseClearTokens;
+}
+
+

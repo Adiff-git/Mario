@@ -13,7 +13,7 @@ class ResrcManager { // using Singleton Pattern
         std::unordered_map<std::string, Texture2D> textures;
         std::unordered_map<std::string, Sound> sounds;
         std::unordered_map<std::string, Music> musics;
-
+        
         void loadTextures();
         void loadSounds();
         void loadMusics();

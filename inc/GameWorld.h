@@ -8,7 +8,9 @@
 #include "Map.h"
 #include "ResrcManager.h"
 #include "MediatorCollision.h"
-
+#include "CourseClearToken.h"
+#include "FireFlower.h"
+#include "Coin.h"
 
 class GameWorld {
     private:
@@ -21,6 +23,10 @@ class GameWorld {
         Mario player;
         Camera2D camera;
         std::vector<Tile*> &interactiveTiles;
+        std::vector<std::shared_ptr<Coin>> &interactiveCoins;
+        std::vector<std::shared_ptr<CourseClearToken>> &interactiveCourseClearTokens;
+        std::vector<std::shared_ptr<FireFlower>> &interactiveFireFlowers;
+        std::vector<Block*> &blocks;
     public:
         GameWorld();
         ~GameWorld();

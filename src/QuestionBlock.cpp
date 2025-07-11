@@ -6,10 +6,10 @@
 #include <iostream>
 #include <string>
 
-QuestionBlock::QuestionBlock( Vector2 pos, Vector2 dim, Color color ) :
-    QuestionBlock( pos, dim, color, 0.5, 4 ) {    }
+QuestionBlock::QuestionBlock( Vector2 pos, Vector2 dim, Color color, GiftType giftType ) :
+    QuestionBlock( pos, dim, color, 0.5, 4, giftType ) {    }
 
-QuestionBlock::QuestionBlock( Vector2 pos, Vector2 dim, Color color, float frameTime, int maxFrames ) :
+QuestionBlock::QuestionBlock( Vector2 pos, Vector2 dim, Color color, float frameTime, int maxFrames, GiftType giftType ) :
     Block( pos, dim, color, frameTime, maxFrames),
     coinAnimationTime( 0.6 ),
     coinAnimationAcum( 0 ),
@@ -25,7 +25,8 @@ QuestionBlock::QuestionBlock( Vector2 pos, Vector2 dim, Color color, float frame
     stardustAnimationRunning( false ),
     pointsFrameAcum( 0 ),
     pointsFrameTime( 0.5 ),
-    pointsAnimationRunning( false ) {}
+    pointsAnimationRunning( false ),
+    giftType( giftType ) {}
 
 QuestionBlock::~QuestionBlock() = default;
 
@@ -131,5 +132,20 @@ void QuestionBlock::doHit( Mario& mario, Map *map ) {
         hit = true;
         coinAnimationRunning = true;
         coinY = pos.y;
+    }
+    switch(giftType) {
+        case GIFT_COIN: {
+            auto coin = std::make_shared<Coin>(Vector2{pos.x + size.x / 2 - 16, pos.y - 32});
+            map->getInteractiveCoins().push_back(coin);
+            break;
+        }
+        case GIFT_FIRE_FLOWER: {
+            auto fireFlower = std::make_shared<FireFlower>(Vector2{pos.x + size.x / 2 - 16, pos.y - 32});
+            map->getInteractiveFireFlowers().push_back(fireFlower);
+            break;
+        }
+        default: 
+            break;
+    
     }
 }

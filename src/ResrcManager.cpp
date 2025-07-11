@@ -87,6 +87,20 @@ void ResrcManager::loadTextures() {
         textures[keyStr] = LoadTexture(("resources/images/tiles/tile_" + std::to_string(i) + ".png").c_str());
     }
 
+    //item
+    {
+    //coin
+    textures["COIN_0"] = LoadTexture("resources/images/Object/items/Coin_0.png");
+    textures["COIN_1"] = LoadTexture("resources/images/Object/items/Coin_1.png");
+    textures["COIN_2"] = LoadTexture("resources/images/Object/items/Coin_2.png");
+    textures["COIN_3"] = LoadTexture("resources/images/Object/items/Coin_3.png");
+    //Course Clear Token
+    textures["COURSE CLEAR TOKEN"] = LoadTexture("resources/images/Object/items/CourseClearToken.png");
+    //Fire Flower
+    textures["FIRE FLOWER_0"] = LoadTexture("resources/images/Object/items/FireFlower_0.png");
+    textures["FIRE FLOWER_1"] = LoadTexture("resources/images/Object/items/FireFlower_1.png");
+    }
+
     //Blocks
     textures["BLOCK_QUESTION_0"] = LoadTexture("resources/images/Object/blocks/Question_0.png");
     textures["BLOCK_QUESTION_1"] = LoadTexture("resources/images/Object/blocks/Question_1.png");

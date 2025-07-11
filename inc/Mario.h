@@ -8,7 +8,8 @@
 #include "GameClock.h"
 #include "ResrcManager.h"
 #include "Fireball.h"
-
+#include "Observer.h" 
+#include <vector>
 // Removed unnecessary include of GameWorld.h
 // class Fireball; // Forward declaration
 enum MarioState {
@@ -20,23 +21,27 @@ enum MarioState {
 class Mario : public Object {
     private:
         int lives;
+        int coins;
         float accelerationX;
         float maxSpeedX;
         float SpeedY;// for Jumping
         bool isDucking;
-        //std::list<Fireball*> fireballs
+        bool isInvincible = false; // Added invincibility state
         MarioState marioState;
         MarioState AdditionalState;
 
         void Update() override;
-        
-        std::list<Fireball*>fireballs;
-        
-    
+        std::list<Fireball*> fireballs;
+        std::vector<Observer *> observers;
+
     public:
         Mario(Vector2 pos, int lives,MarioState form);
         Mario(); // Ensure default constructor exists
         ~Mario() override;
+
+        void AddObserver(Observer *ob);
+        void RemoveObserver(Observer *ob);
+        void NotifyCoinChange();
 
         void jump();
         void moveLeft();
@@ -55,8 +60,12 @@ class Mario : public Object {
         void SetLives(int lives);
         void SetSprite(Texture2D sprite);
         void SetState(ObjectState state);
+        void SetCoins(int c);
+        void setInvincible(bool value);
 
         // Getters
+        int GetCoins() const;
+        bool getInvincible() const;
         int GetLives() const;
         bool GetIsDucking() const;
         std::list<Fireball*> *GetFireballs();

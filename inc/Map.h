@@ -15,6 +15,9 @@
 #include "EyesOpenedBlock.h"
 #include "EyesClosedBlock.h"
 #include <fstream>
+#include "Coin.h"
+#include "FireFlower.h"
+#include "CourseClearToken.h"
 
 class Map : public Drawable {
     private:
@@ -25,6 +28,9 @@ class Map : public Drawable {
         Texture2D background;
         std::vector<Tile*> interactiveTiles;
         std::vector<Tile*> nonInteractiveTiles;
+        std::vector<std::shared_ptr<Coin>> interactiveCoins;
+        std::vector<std::shared_ptr<CourseClearToken>> interactiveCourseClearTokens;
+        std::vector<std::shared_ptr<FireFlower>> interactiveFireFlowers;
         std::vector<Block*> blocks;
         void LoadFromJsonFile(const std::string& filename);
     public:
@@ -32,9 +38,13 @@ class Map : public Drawable {
         ~Map();
         std::vector<Tile*>& getInteractiveTiles();
         std::vector<Tile*>& getNonInteractiveTiles();
+        std::vector<std::shared_ptr<Coin>>& getInteractiveCoins();
+        std::vector<std::shared_ptr<CourseClearToken>>& getInteractiveCourseClearTokens();
+        std::vector<std::shared_ptr<FireFlower>>& getInteractiveFireFlowers();
+        std::vector<Block*>& getBlocks();
         float GetWidth() const;
         void nextMap();
         void LoadMap(int mapIndex);
         void draw() override;
-        std::vector<Block*>& getBlocks();
+
 };
