@@ -8,9 +8,10 @@ GameScreen::GameScreen(ScreenController* screenController)
       transitionState(TransitionState::NONE), 
       transitionTime(1.0f), 
       transitionTimeAcum(0.0f) {
+
+    gameWorld = std::make_unique<GameWorld>(level, this);
     gameWorld->player.SetLives(3); // Set initial lives
     gameWorld->player.SetCoins(0); // Set initial coins
-    gameWorld = std::make_unique<GameWorld>(level, this);
     BackMenu.SetTexture(ResrcManager::GetInstance().getTexture("BACK_BUTTON"));  
     SoundManager::GetInstance().StopAllSounds();
     SoundManager::GetInstance().PlayMusic("GAMEWORLD_0");
