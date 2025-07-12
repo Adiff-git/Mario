@@ -4,7 +4,7 @@
 #include "raylib.h"
 
 YoshiCoin::YoshiCoin(Vector2 pos)
-    : Item(pos, {32, 32}, {0, 0}, WHITE, 0.3f, 4, DIRECTION_RIGHT, 0, 0)
+    : Item(pos, {32, 32}, {0, 0}, WHITE, 0.4f, 4, DIRECTION_RIGHT, 0, 0)
 {
     state = OBJECT_STATE_ACTIVE;
 }

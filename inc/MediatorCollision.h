@@ -1,21 +1,24 @@
 #pragma once
 #include "Object.h"
 #include "Mario.h"
-#include "Fireball.h"
+#include "CollisionProbe.h"
 #include "Tile.h"
+#include "Fireball.h"
 #include "Item.h"
 
+// class Mario; // Forward declaration
+// class Tile; // Forward declaration
+// class Fireball; // Forward declaration
+
 class MediatorCollision {
-private:
-    void HandleMarioWithTile(Mario*& mario, Tile*& tile, CollisionType AtoB);
-    void HandleFireballWithTile(Fireball*& fireball, Tile*& tile, CollisionType AtoB);
-    void HandleItemWithTile(Item*& item, Tile*& tile, CollisionType AtoB);
-    void HandleMarioWithItem(Mario*& mario, Item*& item);
-    void HandleItemWithFireball(Item*& item, Fireball*& fireball);
+    private:
+        void HandleMarioWithTile(Mario*& mario, Tile*& tile, CollisionType AtoB);
+        void HandleFireballWithTile(Fireball*& fireball, Tile*& tile, CollisionType AtoB);
+        void HandleItemWithTile(Item *& item, Tile *& tile, CollisionType AtoB);
+        void HandleItemWithFireball(Item *& item, Fireball *& fireball, CollisionType AtoB);
+    public:
+        MediatorCollision() = default; // Ensure default constructor exists
+        ~MediatorCollision() = default;
 
-public:
-    MediatorCollision() = default;
-    ~MediatorCollision() = default;
-
-    void HandleCollision(Object* ObjectA, Object* ObjectB);
+        void HandleCollision(Object* ObjectA, Object* ObjectB);
 };
