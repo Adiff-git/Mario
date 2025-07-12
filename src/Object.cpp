@@ -11,8 +11,8 @@ void Object::UpdateCollisionProbes() {
 
 void Object::UpdateStateAndPhysic() {
     // Update the object's state and physics based on its current state
-    pos.x += vel.x * GameClock::getInstance().FIXED_TIME_STEP;
-    pos.y += vel.y * GameClock::getInstance().FIXED_TIME_STEP;
+    pos.x += vel.x * GameClock::GetInstance().FIXED_TIME_STEP;
+    pos.y += vel.y * GameClock::GetInstance().FIXED_TIME_STEP;
     
     UpdateCollisionProbes(); // Update collision probes after moving
 }

@@ -16,20 +16,33 @@ enum MarioState
     SMALL = 0,
     BIG,
     FIRE
+
 };
 
 class Mario : public Object
 {
 private:
+    //mario game information
     int lives;
     int coins;
+    int score;
+    // mario physics
     float accelerationX;
     float maxSpeedX;
     float SpeedY;
+    // mario state
     bool isDucking;
     bool isInvincible = false;
+    // const float invincibleFrameTime;
+    // float invincibleFrameAcum;
+    // int invincibleFrame;
+    // float invincibleAcum;
+    // const float invincibleTime;
+
     MarioState marioState;
     MarioState AdditionalState;
+
+    
     std::list<Fireball *> fireballs;
 
     std::vector<Observer *> observers;
@@ -50,6 +63,7 @@ public:
     void SetLives(int lives);
     void SetSprite(Texture2D sprite);
     void SetState(ObjectState state);
+    void SetScore(int score);
 
     void jump();
     void moveLeft();
@@ -60,13 +74,29 @@ public:
     void changeToBig();
     void changeToSmall();
     void changetoFire();
+    void BeInvincible();
+    void Die();
+    void Victory();
+    void BeHit();
+
+    void SmallToBig();
+    void SmallToFire();
+    void BigToSmall();
+    void BigToFire();
+
 
     void Draw() override;
     void HandleInput();
 
     int GetCoins() const;
+    int GetScore() const;
     bool getInvincible() const;
     int GetLives() const;
+
+
+    void AddLives(int livesToAdd);
+    void AddCoins(int coinsToAdd);
+    void AddScore(int scoreToAdd);
     bool GetIsDucking() const;
     std::list<Fireball *> *GetFireballs();
 

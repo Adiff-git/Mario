@@ -28,11 +28,14 @@ Mario::Mario(Vector2 pos, int lives, MarioState form)
     cpS.setColor(RED);
     cpE.setColor(RED);
     cpW.setColor(RED);
+    coins = 0;
+    score = 0;
 
 }
 
 Mario::Mario() : lives(3), accelerationX(0), maxSpeedX(0), SpeedY(600), isDucking(false), marioState(SMALL), AdditionalState(SMALL) {
-    // Initialize default Mario state
+    coins = 0;
+    score = 0;  
 }
 
 Mario::~Mario() {
@@ -50,6 +53,11 @@ void Mario::SetSprite(Texture2D sprite) {
 }
 void Mario::SetState(ObjectState state) {
     this->state = state;
+}
+
+void Mario::SetScore(int score)
+{
+    this->score = score;
 }
 
 int Mario::GetLives() const
@@ -82,10 +90,10 @@ void Mario::moveLeft() {
         frameAcumulator = 0;
     }
 
-    if( vel.x + accelerationX * GameClock::getInstance().FIXED_TIME_STEP <= -maxSpeedX) {
+    if( vel.x + accelerationX * GameClock::GetInstance().FIXED_TIME_STEP <= -maxSpeedX) {
         vel.x = -maxSpeedX;
     } else {
-        vel.x -= accelerationX* GameClock::getInstance().FIXED_TIME_STEP;
+        vel.x -= accelerationX* GameClock::GetInstance().FIXED_TIME_STEP;
     }
 }
 
@@ -96,10 +104,10 @@ void Mario::moveRight() {
         frameAcumulator = 0;
     }
 
-    if( vel.x + accelerationX * GameClock::getInstance().FIXED_TIME_STEP >= maxSpeedX) {
+    if( vel.x + accelerationX * GameClock::GetInstance().FIXED_TIME_STEP >= maxSpeedX) {
         vel.x = maxSpeedX;
     } else {
-        vel.x += accelerationX* GameClock::getInstance().FIXED_TIME_STEP;
+        vel.x += accelerationX* GameClock::GetInstance().FIXED_TIME_STEP;
     }
 }
 
@@ -117,7 +125,7 @@ void Mario::Duck()
 
 void Mario::HandleInput()
 {
-    const float deltaTime = GameClock::getInstance().FIXED_TIME_STEP;
+    const float deltaTime = GameClock::GetInstance().FIXED_TIME_STEP;
 
     if (IsKeyDown(KEY_RIGHT)) moveRight();
     else if(IsKeyDown(KEY_LEFT)) moveLeft();
@@ -455,6 +463,11 @@ void Mario::SetCoins(int c) {
 
 int Mario::GetCoins() const {
     return coins;
+}
+
+int Mario::GetScore() const
+{
+    return score;
 }
 
 void Mario::AddObserver(Observer* ob) {

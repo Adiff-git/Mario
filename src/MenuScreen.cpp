@@ -1,7 +1,7 @@
 
 #include "MenuScreen.h"
 #include "ResrcManager.h"
-// #include "Map1Screen.h"
+#include "GameScreen.h"
 MenuScreen::MenuScreen(ScreenController* screenController ) : Screen(screenController) {
     backgroundTexture = &ResrcManager::GetInstance().getTexture("MENU_BACKGROUND");
     startButton.SetTexture(ResrcManager::GetInstance().getTexture("START_BUTTON"));
@@ -21,7 +21,9 @@ void MenuScreen::Update() {
     settingsButton.Update();
 
     if (startButton.IsPressed()) {
-        // screenController->ChangeScreen(new Map1Screen());
+        std::cout << "Start button pressed!" << std::endl;
+        screenController->ChangeScreen(new GameScreen(screenController));
+         // Debug message
     } else if (exitButton.IsPressed()) {
         CloseWindow(); // Close the window and exit the application
     } else if (settingsButton.IsPressed()) {

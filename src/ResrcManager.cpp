@@ -82,6 +82,16 @@ void ResrcManager::loadTextures() {
     textures["MENU_BACKGROUND"] = LoadTexture("resources/Menu/Menu.png");
     
     textures["BACKGROUND_0"] = LoadTexture("resources/images/backgrounds/background1.png");
+    textures["BACKGROUND_1"] = LoadTexture("resources/images/backgrounds/background2.png");
+    textures["BACKGROUND_2"] = LoadTexture("resources/images/backgrounds/background3.png");
+    textures["BACKGROUND_3"] = LoadTexture("resources/images/backgrounds/background4.png");
+    textures["BACKGROUND_4"] = LoadTexture("resources/images/backgrounds/background5.png");
+    textures["BACKGROUND_5"] = LoadTexture("resources/images/backgrounds/background6.png");
+    textures["BACKGROUND_6"] = LoadTexture("resources/images/backgrounds/background7.png");
+    textures["BACKGROUND_7"] = LoadTexture("resources/images/backgrounds/background8.png");
+    textures["BACKGROUND_8"] = LoadTexture("resources/images/backgrounds/background9.png");
+    textures["BACKGROUND_9"] = LoadTexture("resources/images/backgrounds/background10.png");
+    
     }
     //TILES
     for (int i = 0; i < 104; ++i) {
@@ -112,13 +122,40 @@ void ResrcManager::loadSounds(){
     sounds["MARIO_JUMP"] = LoadSound("resources/SFX/smw_jump.wav");
     sounds["MARIO_FIREBALL"] = LoadSound("resources/SFX/smw_fireball.wav");
     sounds["MARIO_POWERUP"] = LoadSound("resources/SFX/smw_power-up_appears.wav");
+
+    sounds["MARIO_POWERUP"] = LoadSound("resources/sfx/smw_power-up.wav");
+    sounds["MARIO_BEING_HIT"] = LoadSound("resources/sfx/smw_pipe.wav");
+    sounds["MARIO_DEATH"] = LoadSound("resources/musics/playerDown.wav");
+    sounds["COIN_COLLECTION"] = LoadSound("resources/sfx/smw_coin.wav");
+    sounds["POWER_UP_APPEARS"] = LoadSound("resources/sfx/smw_power-up_appears.wav");
+    sounds["POWER_UP"] = LoadSound("resources/sfx/smw_power-up.wav");
+
 }
 
 void ResrcManager::loadMusics(){
-    musics["Test"]= LoadMusicStream("resources/musics/test.mp3");
+    musics["GAME_OVER"] = LoadMusicStream("resources/musics/gameOver.wav");
+    musics["GAMEWORLD_0"] = LoadMusicStream("resources/musics/music1.wav");
+    musics["GAMEWORLD_1"] = LoadMusicStream("resources/musics/music2.wav");
+    musics["GAMEWORLD_2"] = LoadMusicStream("resources/musics/music3.wav");
+    musics["MENU"] = LoadMusicStream("resources/musics/title.wav");
+    musics["VICTORY"] = LoadMusicStream("resources/musics/courseClear.wav");
+
+}
+
+void ResrcManager::loadFonts() {
+    
+    fonts["SUPER_MARIO_WORLD_FONT"] = LoadFont("resources/Font/SuperMarioWorld.ttf");
+}
+
+void ResrcManager::unloadFonts() {
+    for (auto &pair : fonts) {
+        UnloadFont(pair.second);
+    }
+    fonts.clear();
 }
 
 void ResrcManager::loadResources() {
+    loadFonts();
     loadTextures();
     loadSounds();
     loadMusics();
@@ -164,10 +201,18 @@ Music& ResrcManager::getMusic(const std::string &name) {
     return musics[name];
 }
 
+Font& ResrcManager::getFont(const std::string &name)
+{
+    return fonts[name];
+}
+
+
+
 void ResrcManager::unloadResources() {
     unloadTextures();
     unloadSounds();
     unloadMusics();
+    unloadFonts();
 }
 
 Texture2D FlipTextureHorizontal(const Texture2D &texture) {

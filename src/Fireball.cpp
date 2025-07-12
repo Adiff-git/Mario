@@ -100,7 +100,7 @@ void Fireball::UpdateStateAndPhysic()
     if (isOutOfDistance())
         return;
     UpdateCollisionProbes();
-    const float deltaTime = GameClock::getInstance().FIXED_TIME_STEP;
+    const float deltaTime = GameClock::GetInstance().FIXED_TIME_STEP;
 
     frameAcumulator += deltaTime;
     maxFrames = 3;

@@ -414,6 +414,30 @@ src/GameClock.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/GameClock.cpp.s
 .PHONY : src/GameClock.cpp.s
 
+src/GameScreen.obj: src/GameScreen.cpp.obj
+.PHONY : src/GameScreen.obj
+
+# target to build an object file
+src/GameScreen.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/GameScreen.cpp.obj
+.PHONY : src/GameScreen.cpp.obj
+
+src/GameScreen.i: src/GameScreen.cpp.i
+.PHONY : src/GameScreen.i
+
+# target to preprocess a source file
+src/GameScreen.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/GameScreen.cpp.i
+.PHONY : src/GameScreen.cpp.i
+
+src/GameScreen.s: src/GameScreen.cpp.s
+.PHONY : src/GameScreen.s
+
+# target to generate assembly for a file
+src/GameScreen.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/GameScreen.cpp.s
+.PHONY : src/GameScreen.cpp.s
+
 src/GameWorld.obj: src/GameWorld.cpp.obj
 .PHONY : src/GameWorld.obj
 
@@ -702,6 +726,30 @@ src/ScreenController.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/ScreenController.cpp.s
 .PHONY : src/ScreenController.cpp.s
 
+src/SoundManager.obj: src/SoundManager.cpp.obj
+.PHONY : src/SoundManager.obj
+
+# target to build an object file
+src/SoundManager.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/SoundManager.cpp.obj
+.PHONY : src/SoundManager.cpp.obj
+
+src/SoundManager.i: src/SoundManager.cpp.i
+.PHONY : src/SoundManager.i
+
+# target to preprocess a source file
+src/SoundManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/SoundManager.cpp.i
+.PHONY : src/SoundManager.cpp.i
+
+src/SoundManager.s: src/SoundManager.cpp.s
+.PHONY : src/SoundManager.s
+
+# target to generate assembly for a file
+src/SoundManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/SoundManager.cpp.s
+.PHONY : src/SoundManager.cpp.s
+
 src/Star.obj: src/Star.cpp.obj
 .PHONY : src/Star.obj
 
@@ -862,6 +910,9 @@ help:
 	@echo ... src/GameClock.obj
 	@echo ... src/GameClock.i
 	@echo ... src/GameClock.s
+	@echo ... src/GameScreen.obj
+	@echo ... src/GameScreen.i
+	@echo ... src/GameScreen.s
 	@echo ... src/GameWorld.obj
 	@echo ... src/GameWorld.i
 	@echo ... src/GameWorld.s
@@ -898,6 +949,9 @@ help:
 	@echo ... src/ScreenController.obj
 	@echo ... src/ScreenController.i
 	@echo ... src/ScreenController.s
+	@echo ... src/SoundManager.obj
+	@echo ... src/SoundManager.i
+	@echo ... src/SoundManager.s
 	@echo ... src/Star.obj
 	@echo ... src/Star.i
 	@echo ... src/Star.s

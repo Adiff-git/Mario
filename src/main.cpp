@@ -20,18 +20,16 @@ int main() {
     GameWorld::Init(); // Initialize game world resources   
     GameWorld gameWorld; // Create a game world instance
     while(!WindowShouldClose()) {
-        GameClock::getInstance().updateTimeAcum += GetFrameTime();
+        GameClock::GetInstance().updateTimeAcum += GetFrameTime();
 
         
          // Update game world
         BeginDrawing();
         ClearBackground(RAYWHITE);
-        gameWorld.UpdateWorld();
-        gameWorld.DrawWorld();
-        // screenController.Update(); // Update the current screen
-        // screenController.Draw(); // Draw the current screen
-
-        // DrawTexturePro(*backgroundTexture,Rectangle{0, 0, (float)backgroundTexture->width, (float)backgroundTexture->height},Rectangle{0, 0, 1600, 900},Vector2{0, 0}, 0.0f, WHITE);
+        // gameWorld.UpdateWorld();
+        // gameWorld.DrawWorld();
+        screenController.Update();
+        screenController.Draw();
         
         EndDrawing();
     }

@@ -1,6 +1,6 @@
 #include "GameClock.h"
 GameClock *GameClock::instance = nullptr;
-GameClock &GameClock::getInstance()
+GameClock &GameClock::GetInstance()
 {
     if(instance == nullptr) {
         instance = new GameClock();

@@ -13,13 +13,16 @@ class ResrcManager { // using Singleton Pattern
         std::unordered_map<std::string, Texture2D> textures;
         std::unordered_map<std::string, Sound> sounds;
         std::unordered_map<std::string, Music> musics;
+        std::unordered_map<std::string, Font> fonts;
 
         void loadTextures();
         void loadSounds();
         void loadMusics();
+        void loadFonts();
         void unloadTextures();
         void unloadSounds();
         void unloadMusics();
+        void unloadFonts();
     public:
         static ResrcManager &GetInstance(); // Singleton instance generator
 
@@ -31,6 +34,7 @@ class ResrcManager { // using Singleton Pattern
         Texture2D &getTexture(const std::string &name) ; 
         Sound &getSound(const std::string &name) ;
         Music &getMusic(const std::string &name) ;
+        Font &getFont(const std::string &name) ;
 
 };
 

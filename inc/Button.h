@@ -19,6 +19,7 @@ class Button : public Drawable {
         bool isPressed;
     public:
         Button();
+        Button(Vector2 pos, Vector2 size);
         Button(Vector2 pos, Vector2 size, std::string text, int Text_Size = 20, float zoom = 1.0f);
         ~Button() override;
 

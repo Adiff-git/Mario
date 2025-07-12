@@ -14,6 +14,7 @@ enum ObjectState {
     OBJECT_STATE_FALLING,
     OBJECT_STATE_DYING,
     OBJECT_STATE_DEAD,
+    OBJECT_STATE_VICTORY
 };
 
 enum Direction {

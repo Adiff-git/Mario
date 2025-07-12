@@ -290,5 +290,9 @@ CMakeFiles/Mario.dir/src/Star.cpp.obj: \
  D:/Downloads/Ref/Gia/Mario/inc/CourseClearToken.h \
  D:/Downloads/Ref/Gia/Mario/inc/FireFlower.h \
  D:/Downloads/Ref/Gia/Mario/inc/MediatorCollision.h \
- D:/Downloads/Ref/Gia/Mario/inc/Star.h \
- D:/Downloads/Ref/Gia/Mario/inc/GameWorld.h
+ D:/Downloads/Ref/Gia/Mario/inc/GameScreen.h \
+ D:/Downloads/Ref/Gia/Mario/inc/Screen.h \
+ D:/Downloads/Ref/Gia/Mario/inc/ScreenController.h \
+ D:/Downloads/Ref/Gia/Mario/inc/Button.h \
+ D:/Downloads/Ref/Gia/Mario/inc/GameWorld.h \
+ D:/Downloads/Ref/Gia/Mario/inc/Star.h

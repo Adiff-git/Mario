@@ -10,6 +10,15 @@ Button::Button(Vector2 pos, Vector2 size, std::string text, int Text_Size, float
     texture = nullptr;    
 }
 
+Button::Button(Vector2 pos, Vector2 size) :pos(pos), size(size), text(""), zoom(1.0f), isPressed(false)
+{
+    ConstButton = {pos.x, pos.y, size.x, size.y};
+    CurButton = ConstButton;
+    Textpos = {pos.x + size.x / 2 - MeasureText(text.c_str(), 20) / 2 , pos.y + size.y / 2 - 20 / 2 };
+    TextureButton = {pos.x, pos.y, size.x, size.y};
+    texture = nullptr;    
+}
+
 Button::~Button() {
     if (texture) {
         UnloadTexture(*texture);
@@ -104,7 +113,7 @@ void Button::SetTextSize(int size) {
 
 void Button::SetTexture(const Texture2D& texture) {
     if (this->texture) {
-        UnloadTexture(*this->texture);
+        UnloadTexture(*(this->texture));
         delete this->texture;
     }
     this->texture = new Texture2D(texture);
