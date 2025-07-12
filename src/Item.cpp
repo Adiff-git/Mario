@@ -1,5 +1,15 @@
 #include "Item.h"
 #include "raylib.h"
+void Item::onFireballHit(Fireball& fireball) {
+    // Default behavior: decrease hitsToDie, mark for removal if needed
+    if (hitsToDie > 0) {
+        hitsToDie--;
+    }
+    if (hitsToDie <= 0) {
+        SetState(OBJECT_STATE_DEAD); // Or another state to indicate destruction
+    }
+    // Optionally, play a sound or spawn an effect here
+}
 
 Item::Item()
     : Object(), pauseGameOnHit(false), earnedPoints(0), hitsToDie(1) {}
@@ -42,3 +52,4 @@ CollisionType Item::checkCollision(const Object& other) {
     }
     return COLLISION_TYPE_NONE;
 }
+

@@ -49,10 +49,14 @@ void OneUpMushroom::Update() {
     UpdateCollisionProbes();
 }
 
-void OneUpMushroom::updateMario(Mario& mario) {
-    mario.SetLives(mario.GetLives() + 1);
-    SetState(OBJECT_STATE_TO_BE_REMOVED);
+void OneUpMushroom::updateMario(Mario& mario)
+{
+    if (state == OBJECT_STATE_TO_BE_REMOVED) return;
+
+    mario.SetLives(mario.GetLives() + 1);      // Thêm 1 mạng
+    this->SetState(OBJECT_STATE_TO_BE_REMOVED);
 }
+
 
 void OneUpMushroom::playCollisionSound() {
     // Optional

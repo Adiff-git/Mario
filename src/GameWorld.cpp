@@ -38,6 +38,7 @@ void GameWorld::UpdateWorld()
                 mediatorCollision.HandleCollision(fireball, tile);
             }
         }
+
     }
 
     for (auto const& item : interactiveItems) {

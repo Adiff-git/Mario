@@ -6,7 +6,7 @@ Map::Map()
     background = ResrcManager::GetInstance().getTexture("BACKGROUND_0");
 
     // Add all 8 items with distinct positions
-    interactiveItems.push_back(std::make_shared<Coin>(Vector2{100, 800}));
+    interactiveItems.push_back(std::make_shared<Coin>(Vector2{150, 800}));
     interactiveItems.push_back(std::make_shared<CourseClearToken>(Vector2{150, 800}));
     interactiveItems.push_back(std::make_shared<FireFlower>(Vector2{200, 800}));
     interactiveItems.push_back(std::make_shared<Mushroom>(Vector2{250, 800}));

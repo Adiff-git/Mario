@@ -4,7 +4,7 @@
 #include "raylib.h"
 
 YoshiCoin::YoshiCoin(Vector2 pos)
-    : Item(pos, {32, 32}, {0, 0}, WHITE, 0.15f, 4, DIRECTION_RIGHT, 0, 0)
+    : Item(pos, {32, 32}, {0, 0}, WHITE, 0.3f, 4, DIRECTION_RIGHT, 0, 0)
 {
     state = OBJECT_STATE_ACTIVE;
 }
@@ -26,9 +26,8 @@ void YoshiCoin::Update()
     if (state == OBJECT_STATE_TO_BE_REMOVED || state == OBJECT_STATE_DEAD)
         return;
 
-    float dt = GetFrameTime();
+    frameAcumulator += GameClock::getInstance().FIXED_TIME_STEP;
 
-    frameAcumulator += dt;
     if (frameAcumulator >= frameTime) {
         frameAcumulator = 0;
         currentFrame = (currentFrame + 1) % maxFrames;

@@ -19,9 +19,11 @@ public:
     virtual void Update() override = 0;
     virtual void draw() override;
 
+
     virtual void updateMario(Mario& mario) = 0;
     virtual void playCollisionSound() = 0;
     virtual void onSouthCollision(Mario& mario);
+    virtual void onFireballHit(Fireball& fireball);
 
     void SetState(ObjectState state);
     bool isPauseGameOnHit();
