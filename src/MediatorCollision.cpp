@@ -1,5 +1,5 @@
 #include "MediatorCollision.h"
-
+#include <iostream>
 void MediatorCollision::HandleMarioWithTile(Mario *&mario, Tile *&tile, CollisionType AtoB)
 {
     if (AtoB == COLLISION_TYPE_NONE)
@@ -93,39 +93,47 @@ void MediatorCollision::HandleItemWithTile(Item *&item, Tile *&tile, CollisionTy
     {
     case COLLISION_TYPE_SOUTH:
     {
+        // Đặt item lên trên tile và cho di chuyển sang phải
+        std::cout << "Item collided with tile at SOUTH" << std::endl;
         item->SetPos(Vector2{item->GetPos().x, tile->GetPos().y - item->GetSize().y});
-        // Always move right after landing
-        item->SetVel(Vector2{40.0f, 0});
-        item->SetDirection(DIRECTION_RIGHT);
-        item->SetState(OBJECT_STATE_ACTIVE); // Allow item to keep moving
+        item->SetVel(Vector2{item->GetVel().x, 0});  // Cho phép item tiếp tục di chuyển
         break;
     }
     case COLLISION_TYPE_NORTH:
     {
+        std::cout<< "Item collided with tile at NORTH" << std::endl;
         item->SetPos(Vector2{item->GetPos().x, tile->GetPos().y + tile->GetSize().y});
         item->SetVel(Vector2{item->GetVel().x, 0});
         break;
     }
     case COLLISION_TYPE_EAST:
     {
+        std::cout<< "Item collided with tile at EAST" << std::endl;
+        // Đặt item sát bên trái tile, giữ nguyên Y (không thay đổi Y)
         item->SetPos(Vector2{tile->GetPos().x - item->GetSize().x, item->GetPos().y});
-        item->SetVel(Vector2{-item->GetVel().x, item->GetVel().y}); // Reverse the x velocity
+        // Đảo chiều vận tốc X, giữ nguyên vận tốc Y
+        Vector2 vel = item->GetVel();
+        vel.x = -abs(vel.x); // Đảm bảo đi sang trái
+        item->SetVel(vel);
+        item->SetDirection(DIRECTION_LEFT);
         if (item->GetCurrFrame() == 0)
-        {
             item->setCurrFrame(3);
-        }
         else
             item->setCurrFrame(item->GetCurrFrame() - 1);
         break;
     }
     case COLLISION_TYPE_WEST:
     {
-        item->SetPos(Vector2{tile->GetPos().x + item->GetSize().x + tile->GetSize().x, item->GetPos().y});
-        item->SetVel(Vector2{-item->GetVel().x, item->GetVel().y}); // Reverse the x velocity
+        std::cout<< "Item collided with tile at WEST" << std::endl;
+        // Đặt item sát bên phải tile, giữ nguyên Y (không thay đổi Y)
+        item->SetPos(Vector2{tile->GetPos().x + tile->GetSize().x, item->GetPos().y});
+        // Đảo chiều vận tốc X, giữ nguyên vận tốc Y
+        Vector2 vel = item->GetVel();
+        vel.x = abs(vel.x); // Đảm bảo đi sang phải
+        item->SetVel(vel);
+        item->SetDirection(DIRECTION_RIGHT);
         if (item->GetCurrFrame() == 0)
-        {
             item->setCurrFrame(3);
-        }
         else
             item->setCurrFrame(item->GetCurrFrame() - 1);
         break;
