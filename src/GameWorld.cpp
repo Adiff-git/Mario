@@ -24,9 +24,12 @@ GameWorld::~GameWorld()
 
 void GameWorld::UpdateWorld()
 {
+    
     player.UpdateStateAndPhysic();
 
+    
     for (auto const& tile : interactiveTiles) {
+        
         CollisionType collision = player.checkCollisionType(*tile);
         if (collision) {
             mediatorCollision.HandleCollision(&player, tile);
@@ -39,6 +42,12 @@ void GameWorld::UpdateWorld()
             }
         }
 
+        for (auto const& item : interactiveItems) {
+            CollisionType collision = item->checkCollisionType(*tile);
+            if (collision) {
+                mediatorCollision.HandleCollision(item.get(), tile);
+            }
+        }
     }
 
     for (auto const& item : interactiveItems) {
@@ -46,9 +55,11 @@ void GameWorld::UpdateWorld()
         if (collision) {
             mediatorCollision.HandleCollision(&player, item.get());
         }
-        item->Update(); // animation, xoay, v.v.
+
+        item->Update();
     }
 }
+
 
 
 
