@@ -96,7 +96,7 @@ void ResrcManager::loadTextures() {
         textures["GreenKoopaTroopa_0_RIGHT"] = LoadTexture("resources/images/Object/Enemy/GreenKoopaTroopa_0.png");
         textures["GreenKoopaTroopa_1_RIGHT"] = LoadTexture("resources/images/Object/Enemy/GreenKoopaTroopa_1.png");
         textures["GreenKoopaTroopa_0_LEFT"] = FlipTextureHorizontal(textures["GreenKoopaTroopa_0_RIGHT"]);
-        textures["GreenKoopaTroopa_1_LEFT"] = FlipTextureHorizontal(textures["GreenKoopaTroopa_1_RIGHT"]);// với hồi nãy oog ghi folder là enemy, trong khi folder mình là Enemy
+        textures["GreenKoopaTroopa_1_LEFT"] = FlipTextureHorizontal(textures["GreenKoopaTroopa_1_RIGHT"]);
 
         textures["RedKoopaTroopa_0_RIGHT"] = LoadTexture("resources/images/Object/Enemy/RedKoopaTroopa_0.png");
         textures["RedKoopaTroopa_1_RIGHT"] = LoadTexture("resources/images/Object/Enemy/RedKoopaTroopa_1.png");
@@ -125,6 +125,17 @@ void ResrcManager::loadTextures() {
         textures["Bob-omb_Right_1"]= LoadTexture("resources/images/Object/Enemy/BobOmb_1.png");
         textures["Bob-omb_Left_0"]= FlipTextureHorizontal(textures["Bob-omb_Right_0"]);
         textures["Bob-omb_Left_1"]= FlipTextureHorizontal(textures["Bob-omb_Right_1"]);
+        textures["Bob-omb_Explosion"] = LoadTexture("resources/images/Object/Enemy/BobOmbExplosion_0.png");
+
+        textures["BANZAIBILL"]= LoadTexture("resources/images/Object/Enemy/BanzaiBill_0.png");
+
+        textures["REX_0_RIGHT"] = LoadTexture("resources/images/Object/Enemy/Rex_2_0.png");
+        textures["REX_1_RIGHT"] = LoadTexture("resources/images/Object/Enemy/Rex_2_1.png");
+        textures["REX_0_LEFT"] = FlipTextureHorizontal(textures["REX_0_RIGHT"]);
+        textures["REX_1_LEFT"] = FlipTextureHorizontal(textures["REX_1_RIGHT"]);
+
+        textures["REX_1"]= LoadTexture("resources/images/Object/Enemy/Rex_1_0.png");
+        textures["REX_2"]= LoadTexture("resources/images/Object/Enemy/Rex_2_0.png");
     }
 }
 

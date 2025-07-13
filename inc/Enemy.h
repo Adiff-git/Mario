@@ -3,7 +3,6 @@
 #define ENEMY_H
 
 #include "Object.h"
-
 class Enemy : public Object {
 protected:
     float maxSpeedX;

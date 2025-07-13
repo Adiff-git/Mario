@@ -1,11 +1,5 @@
 #include "GameWorld.h"
-#include "Goomba.h"
-#include "GreenKoopa.h"
-#include "YellowKoopa.h"
-#include "RedKoopa.h"
-#include "BuzzyBeetle.h"
-#include "BulletBill.h"
-#include "Bob-omb.h" 
+#include "EnemyManager.h"
 GameWorld::GameWorld() : player(), interactiveTiles(map.getInteractiveTiles()) {
     player = Mario(Vector2{100, 100}, 3, SMALL);
     map.LoadMap(0);
@@ -14,13 +8,8 @@ GameWorld::GameWorld() : player(), interactiveTiles(map.getInteractiveTiles()) {
     camera.rotation = 0.0f;
     camera.zoom = 1.0f;
 
-    mediatorCollision.GetEnemies().push_back(new Goomba(Vector2{200, 800}));
-    mediatorCollision.GetEnemies().push_back(new GreenKoopa(Vector2{300, 790}));
-    mediatorCollision.GetEnemies().push_back(new YellowKoopa(Vector2{400, 800}));
-    mediatorCollision.GetEnemies().push_back(new RedKoopa(Vector2{400, 800}));
-    mediatorCollision.GetEnemies().push_back(new BuzzyBeetle(Vector2{500, 800}));
-    mediatorCollision.GetEnemies().push_back(new Bob_omb(Vector2{700, 800}));
-    mediatorCollision.GetEnemies().push_back(new BulletBill(Vector2{600, 600}));
+    
+    mediatorCollision.GetEnemies().push_back(new Rex(Vector2{300, 780}));
 }
 
 GameWorld::~GameWorld() {
@@ -41,7 +30,7 @@ void GameWorld::UpdateWorld() {
 
          for (Enemy* enemy : mediatorCollision.GetEnemies()) {
             mediatorCollision.HandleCollision(enemy, tile);
-            enemy->Update();
+            enemy->UpdateStateAndPhysic();
             }
             // Kiểm tra va chạm Mario với Enemy
         for (Enemy* enemy : mediatorCollision.GetEnemies()) {

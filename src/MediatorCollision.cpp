@@ -1,13 +1,7 @@
 #include "MediatorCollision.h"
 #include <iostream>
 #include <algorithm>
-#include "Goomba.h"
-#include "GreenKoopa.h"
-#include "YellowKoopa.h"
-#include "RedKoopa.h"
-#include "BuzzyBeetle.h"
-#include "BulletBill.h"
-#include "Bob-omb.h"
+#include "EnemyManager.h"
 void MediatorCollision::HandleMarioWithTile(Mario* &mario, Tile * &tile, CollisionType AtoB)
 {
     if (AtoB == COLLISION_TYPE_NONE)
@@ -143,51 +137,74 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
 void MediatorCollision::HandleEnemyWithTile(Enemy*& enemy, Tile* tile, CollisionType AtoB) {
     if (AtoB == COLLISION_TYPE_NONE) return;
     switch (AtoB) {
-        case COLLISION_TYPE_SOUTH:{
+        case COLLISION_TYPE_SOUTH: {
             enemy->SetPos(Vector2{enemy->GetPos().x, tile->GetPos().y - enemy->GetSize().y});
             enemy->SetState(OBJECT_STATE_ON_GROUND);
             enemy->SetVel(Vector2{enemy->GetVel().x, 0});
-            break;}
+            break;
+        }
+        case COLLISION_TYPE_NORTH: {
+            enemy->SetPos(Vector2{enemy->GetPos().x, tile->GetPos().y + tile->GetSize().y});
+            enemy->SetVel(Vector2{enemy->GetVel().x, 0});
+            std::cout << "Enemy hit NORTH at " << enemy->GetPos().x << ", " << enemy->GetPos().y << std::endl;
+            break;
+        }
         case COLLISION_TYPE_EAST: {
             enemy->SetPos(Vector2{tile->GetPos().x - enemy->GetSize().x, enemy->GetPos().y});
             enemy->SetVel(Vector2{-enemy->GetVel().x, enemy->GetVel().y});
-            enemy->SetDirection(DIRECTION_LEFT); // Cập nhật hướng sang trái
+            enemy->SetDirection(DIRECTION_LEFT);
+            
             break;
-}
+        }
         case COLLISION_TYPE_WEST: {
             enemy->SetPos(Vector2{tile->GetPos().x + tile->GetSize().x, enemy->GetPos().y});
             enemy->SetVel(Vector2{-enemy->GetVel().x, enemy->GetVel().y});
-            enemy->SetDirection(DIRECTION_RIGHT); // Cập nhật hướng sang phải
+            enemy->SetDirection(DIRECTION_RIGHT);
+            
             break;
-}
+        }
     }
 }
 void MediatorCollision::HandleMarioWithEnemy(Mario*& mario, Enemy*& enemy, CollisionType AtoB) {
-    std::cout << "[DEBUG] HandleMarioWithEnemy called!" << std::endl;
     if (AtoB == COLLISION_TYPE_NONE) {
         std::cout << "No collision between Mario and Enemy" << std::endl;
         return;
     }
 
-    std::cout << "Enemies size before: " << enemies.size() << std::endl;
     switch (AtoB) {
         case COLLISION_TYPE_SOUTH: {
-            std::cout << "Goomba dies" << std::endl;
-            enemies.erase(std::remove(enemies.begin(), enemies.end(), enemy), enemies.end());
-            delete enemy;
-            enemy = nullptr;
-            mario->SetVel(Vector2{mario->GetVel().x, -20.0f}); // Mario bật lên
+            Rex* rex = dynamic_cast<Rex*>(enemy);
+            if (rex) {
+                rex->OnHit(); 
+                mario->SetVel(Vector2{mario->GetVel().x, -500.0f}); 
+                if (rex->GetHitCount() >= 3) { 
+                    enemies.erase(std::remove(enemies.begin(), enemies.end(), enemy), enemies.end());
+                    delete enemy;
+                    enemy = nullptr;
+                }
+            } else {
+                RedKoopa* redKoopa = dynamic_cast<RedKoopa*>(enemy);
+                if (redKoopa) {
+                    redKoopa->HandleCollisionWithMario(mario->GetPos().x);
+                    mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
+                } else {
+                    enemies.erase(std::remove(enemies.begin(), enemies.end(), enemy), enemies.end());
+                    delete enemy;
+                    enemy = nullptr;
+                    mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
+                }
+            }
             break;
         }
         case COLLISION_TYPE_EAST:
         case COLLISION_TYPE_WEST:
         case COLLISION_TYPE_NORTH: {
-            // Mario chạm ngang hoặc dưới -> Mario chết
             std::cout << "Mario dies ";
             break;
         }
     }
 }
+
 void MediatorCollision::HandleEnemyWithFireball(Enemy* &enemy, Fireball* &fireball, CollisionType AtoB) {
     std::cout << "[DEBUG] HandleEnemyWithFireball called!" << std::endl;
     if (AtoB == COLLISION_TYPE_NONE) {
@@ -229,4 +246,8 @@ MediatorCollision::MediatorCollision() {
     enemies.push_back(bulletBill);
     Enemy* bobOmb = new Bob_omb(Vector2{1100, 100});
     enemies.push_back(bobOmb);
+    Enemy* banzaiBill = new BanzaiBill(Vector2{1200, 100});
+    enemies.push_back(banzaiBill);
+    Enemy* rex = new Rex(Vector2{1300, 100});
+    enemies.push_back(rex);
 }

@@ -8,9 +8,6 @@ Goomba::Goomba(Vector2 pos)
 
 void Goomba::UpdateStateAndPhysic() {
     const float deltaTime = GetFrameTime();
-    if (GetState() != OBJECT_STATE_ON_GROUND) {
-        SetVel(Vector2{GetVel().x, GetVel().y + 9.81f * static_cast<float>(GameClock::getInstance().FIXED_TIME_STEP)});
-    }
     if (GetState() == OBJECT_STATE_ON_GROUND) {
         float newVelX = GetVel().x;
         if (newVelX > 0 && newVelX > maxSpeedX) newVelX = maxSpeedX;
@@ -26,7 +23,7 @@ void Goomba::UpdateStateAndPhysic() {
     }
 
     vel.y += GameWorld::GetGravity() * deltaTime;
-
+   
     static int updateCount = 0;
     const int updateThreshold = 50;
 
@@ -54,9 +51,9 @@ void Goomba::UpdateStateAndPhysic() {
         }
     } else {
         if (GetDirection() == DIRECTION_RIGHT) {
-            sprite = &ResrcManager::GetInstance().getTexture("GOOMBA_0");
+            sprite = &ResrcManager::GetInstance().getTexture("GOOMBA_0_RIGHT");
         } else {
-            sprite = &ResrcManager::GetInstance().getTexture("GOOMBA_1");
+            sprite = &ResrcManager::GetInstance().getTexture("GOOMBA_1_LEFT");
         }
         textureIndex = 0;
         updateCount = 0;

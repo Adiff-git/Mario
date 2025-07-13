@@ -1,0 +1,11 @@
+#pragma once
+
+#include "Goomba.h"
+#include "GreenKoopa.h"
+#include "YellowKoopa.h"
+#include "RedKoopa.h"
+#include "BuzzyBeetle.h"
+#include "BulletBill.h"
+#include "Bob-omb.h"
+#include "BanzaiBill.h"
+#include "Rex.h"

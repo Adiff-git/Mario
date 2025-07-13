@@ -8,6 +8,9 @@ class RedKoopa : public Enemy {
 public:
     RedKoopa(Vector2 pos);
     void UpdateStateAndPhysic() override;
+    void EnterShell();
+    void EnterShellWithVelocity(float velX);
+     void HandleCollisionWithMario(float marioX);
 };
 
 #endif
