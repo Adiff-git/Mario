@@ -1,6 +1,6 @@
 CMakeFiles/Mario.dir/src/CollisionProbe.cpp.obj: \
- C:\Users\yennh\Mario\src\CollisionProbe.cpp \
- C:/Users/yennh/Mario/inc/CollisionProbe.h C:/raylib/raylib/src/raylib.h \
+ D:\Mario_Gr02\src\CollisionProbe.cpp D:/Mario_Gr02/inc/CollisionProbe.h \
+ C:/raylib/raylib/src/raylib.h \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdarg.h \
  C:/mingw64/x86_64-w64-mingw32/include/stdarg.h \
  C:/mingw64/x86_64-w64-mingw32/include/_mingw_stdarg.h \
@@ -9,4 +9,4 @@ CMakeFiles/Mario.dir/src/CollisionProbe.cpp.obj: \
  C:/mingw64/x86_64-w64-mingw32/include/_mingw_mac.h \
  C:/mingw64/x86_64-w64-mingw32/include/_mingw_secapi.h \
  C:/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
- C:/Users/yennh/Mario/inc/Drawable.h
+ D:/Mario_Gr02/inc/Drawable.h

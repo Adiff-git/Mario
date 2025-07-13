@@ -195,7 +195,7 @@
 			[
 				{
 					"backtrace" : 7,
-					"path" : "C:/Users/yennh/Mario/inc"
+					"path" : "D:/Mario_Gr02/inc"
 				},
 				{
 					"backtrace" : 8,
@@ -207,7 +207,7 @@
 				},
 				{
 					"backtrace" : 9,
-					"path" : "C:/Users/yennh/Mario/build/raylib_build/raylib/external/glfw/src"
+					"path" : "D:/Mario_Gr02/build/raylib_build/raylib/external/glfw/src"
 				}
 			],
 			"language" : "C",

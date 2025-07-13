@@ -3,30 +3,30 @@
 cmake_policy(SET CMP0009 NEW)
 
 # SOURCES at CMakeLists.txt:21 (file)
-file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "C:/Users/yennh/Mario/src/*.cpp")
+file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/Mario_Gr02/src/*.cpp")
 set(OLD_GLOB
-  "C:/Users/yennh/Mario/src/CollisionProbe.cpp"
-  "C:/Users/yennh/Mario/src/Enemy.cpp"
-  "C:/Users/yennh/Mario/src/Fireball.cpp"
-  "C:/Users/yennh/Mario/src/FlyingGoomba.cpp"
-  "C:/Users/yennh/Mario/src/GameClock.cpp"
-  "C:/Users/yennh/Mario/src/GameWorld.cpp"
-  "C:/Users/yennh/Mario/src/Goomba.cpp"
-  "C:/Users/yennh/Mario/src/GreenKoopa.cpp"
-  "C:/Users/yennh/Mario/src/Item.cpp"
-  "C:/Users/yennh/Mario/src/JumpingPiranha.cpp"
-  "C:/Users/yennh/Mario/src/Map.cpp"
-  "C:/Users/yennh/Mario/src/Mario.cpp"
-  "C:/Users/yennh/Mario/src/MediatorCollision.cpp"
-  "C:/Users/yennh/Mario/src/Object.cpp"
-  "C:/Users/yennh/Mario/src/Piranhaplant.cpp"
-  "C:/Users/yennh/Mario/src/RedKoopa.cpp"
-  "C:/Users/yennh/Mario/src/ResrcManager.cpp"
-  "C:/Users/yennh/Mario/src/Tile.cpp"
-  "C:/Users/yennh/Mario/src/YellowKoopa.cpp"
-  "C:/Users/yennh/Mario/src/main.cpp"
+  "D:/Mario_Gr02/src/CollisionProbe.cpp"
+  "D:/Mario_Gr02/src/Enemy.cpp"
+  "D:/Mario_Gr02/src/Fireball.cpp"
+  "D:/Mario_Gr02/src/FlyingGoomba.cpp"
+  "D:/Mario_Gr02/src/GameClock.cpp"
+  "D:/Mario_Gr02/src/GameWorld.cpp"
+  "D:/Mario_Gr02/src/Goomba.cpp"
+  "D:/Mario_Gr02/src/GreenKoopa.cpp"
+  "D:/Mario_Gr02/src/Item.cpp"
+  "D:/Mario_Gr02/src/JumpingPiranha.cpp"
+  "D:/Mario_Gr02/src/Map.cpp"
+  "D:/Mario_Gr02/src/Mario.cpp"
+  "D:/Mario_Gr02/src/MediatorCollision.cpp"
+  "D:/Mario_Gr02/src/Object.cpp"
+  "D:/Mario_Gr02/src/Piranhaplant.cpp"
+  "D:/Mario_Gr02/src/RedKoopa.cpp"
+  "D:/Mario_Gr02/src/ResrcManager.cpp"
+  "D:/Mario_Gr02/src/Tile.cpp"
+  "D:/Mario_Gr02/src/YellowKoopa.cpp"
+  "D:/Mario_Gr02/src/main.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "C:/Users/yennh/Mario/build/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "D:/Mario_Gr02/build/CMakeFiles/cmake.verify_globs")
 endif()

@@ -79,7 +79,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/yennh/Mario/build"
+			"value" : "d:/Mario_Gr02/build"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -179,10 +179,10 @@
 				},
 				{
 					"name" : "HELPSTRING",
-					"value" : "No help, variable specified on the command line."
+					"value" : "CXX compiler"
 				}
 			],
-			"type" : "FILEPATH",
+			"type" : "STRING",
 			"value" : "C:/mingw64/bin/g++.exe"
 		},
 		{
@@ -323,10 +323,10 @@
 				},
 				{
 					"name" : "HELPSTRING",
-					"value" : "No help, variable specified on the command line."
+					"value" : "C compiler"
 				}
 			],
-			"type" : "FILEPATH",
+			"type" : "STRING",
 			"value" : "C:/mingw64/bin/gcc.exe"
 		},
 		{
@@ -599,7 +599,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/yennh/Mario/build/CMakeFiles/pkgRedirects"
+			"value" : "D:/Mario_Gr02/build/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -683,7 +683,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/yennh/Mario"
+			"value" : "D:/Mario_Gr02"
 		},
 		{
 			"name" : "CMAKE_INSTALL_BINDIR",
@@ -1751,7 +1751,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/yennh/Mario/build/raylib_build/raylib/external/glfw"
+			"value" : "D:/Mario_Gr02/build/raylib_build/raylib/external/glfw"
 		},
 		{
 			"name" : "GLFW_BUILD_DOCS",
@@ -1931,7 +1931,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/yennh/Mario/build"
+			"value" : "D:/Mario_Gr02/build"
 		},
 		{
 			"name" : "Mario_IS_TOP_LEVEL",
@@ -1955,7 +1955,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/yennh/Mario"
+			"value" : "D:/Mario_Gr02"
 		},
 		{
 			"name" : "OFF",
@@ -2155,7 +2155,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/yennh/Mario/build/raylib_build/raylib"
+			"value" : "D:/Mario_Gr02/build/raylib_build/raylib"
 		},
 		{
 			"name" : "raylib_IS_TOP_LEVEL",

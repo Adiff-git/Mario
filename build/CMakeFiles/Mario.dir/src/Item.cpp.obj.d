@@ -1,5 +1,5 @@
-CMakeFiles/Mario.dir/src/Item.cpp.obj: C:\Users\yennh\Mario\src\Item.cpp \
- C:/Users/yennh/Mario/inc/Item.h C:/Users/yennh/Mario/inc/Object.h \
+CMakeFiles/Mario.dir/src/Item.cpp.obj: D:\Mario_Gr02\src\Item.cpp \
+ D:/Mario_Gr02/inc/Item.h D:/Mario_Gr02/inc/Object.h \
  C:/raylib/raylib/src/raylib.h \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdarg.h \
  C:/mingw64/x86_64-w64-mingw32/include/stdarg.h \
@@ -9,9 +9,8 @@ CMakeFiles/Mario.dir/src/Item.cpp.obj: C:\Users\yennh\Mario\src\Item.cpp \
  C:/mingw64/x86_64-w64-mingw32/include/_mingw_mac.h \
  C:/mingw64/x86_64-w64-mingw32/include/_mingw_secapi.h \
  C:/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
- C:/Users/yennh/Mario/inc/Drawable.h \
- C:/Users/yennh/Mario/inc/CollisionProbe.h \
- C:/Users/yennh/Mario/inc/GameClock.h C:/Users/yennh/Mario/inc/Mario.h \
+ D:/Mario_Gr02/inc/Drawable.h D:/Mario_Gr02/inc/CollisionProbe.h \
+ D:/Mario_Gr02/inc/GameClock.h D:/Mario_Gr02/inc/Mario.h \
  C:/mingw64/include/c++/14.2.0/list \
  C:/mingw64/include/c++/14.2.0/bits/requires_hosted.h \
  C:/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/c++config.h \
@@ -70,8 +69,7 @@ CMakeFiles/Mario.dir/src/Item.cpp.obj: C:\Users\yennh\Mario\src\Item.cpp \
  C:/mingw64/include/c++/14.2.0/bits/ranges_util.h \
  C:/mingw64/include/c++/14.2.0/bits/ranges_base.h \
  C:/mingw64/include/c++/14.2.0/bits/max_size_type.h \
- C:/mingw64/include/c++/14.2.0/numbers \
- C:/Users/yennh/Mario/inc/ResrcManager.h \
+ C:/mingw64/include/c++/14.2.0/numbers D:/Mario_Gr02/inc/ResrcManager.h \
  C:/mingw64/include/c++/14.2.0/unordered_map \
  C:/mingw64/include/c++/14.2.0/bits/unordered_map.h \
  C:/mingw64/include/c++/14.2.0/bits/hashtable.h \
@@ -126,4 +124,4 @@ CMakeFiles/Mario.dir/src/Item.cpp.obj: C:\Users\yennh\Mario\src\Item.cpp \
  C:/mingw64/include/c++/14.2.0/cerrno \
  C:/mingw64/include/c++/14.2.0/bits/charconv.h \
  C:/mingw64/include/c++/14.2.0/bits/basic_string.tcc \
- C:/Users/yennh/Mario/inc/Fireball.h C:/Users/yennh/Mario/inc/Tile.h
+ D:/Mario_Gr02/inc/Fireball.h D:/Mario_Gr02/inc/Tile.h
