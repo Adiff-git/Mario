@@ -20,10 +20,6 @@ Button::Button(Vector2 pos, Vector2 size) :pos(pos), size(size), text(""), zoom(
 }
 
 Button::~Button() {
-    if (texture) {
-        UnloadTexture(*texture);
-        delete texture;
-    }
 }
 
 void Button::HandleInput() {
@@ -80,7 +76,7 @@ bool Button::IsPressed() const  {
 
 bool Button::IsHovered() const {
     Vector2 mousePos = GetMousePosition();
-    return CheckCollisionPointRec(mousePos, CurButton);
+    return CheckCollisionPointRec(mousePos, ConstButton);
 }
 
 void Button::SetPosition(Vector2 pos) {
@@ -112,10 +108,7 @@ void Button::SetTextSize(int size) {
 }
 
 void Button::SetTexture(const Texture2D& texture) {
-    if (this->texture) {
-        UnloadTexture(*(this->texture));
-        delete this->texture;
-    }
+
     this->texture = new Texture2D(texture);
 }
 
