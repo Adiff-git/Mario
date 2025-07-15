@@ -138,6 +138,19 @@ void ResrcManager::loadTextures() {
         textures["REX_4_RIGHT"]= LoadTexture("resources/images/Object/Enemy/Rex_1_1.png");
         textures["REX_3_LEFT"]= FlipTextureHorizontal(textures["REX_3_RIGHT"]);
         textures["REX_4_LEFT"]= FlipTextureHorizontal(textures["REX_4_RIGHT"]);
+        //Flying Goomba
+        textures["FlyingGoomba_Flap_Center"] = LoadTexture("resources/images/Object/Enemy/FlyingGoomba_0.png");
+        textures["FlyingGoomba_WingDown_Center"] = LoadTexture("resources/images/Object/Enemy/FlyingGoomba_1.png");
+        textures["FlyingGoomba_Flap_Right"] = LoadTexture("resources/images/Object/Enemy/FlyingGoomba_2.png");
+        textures["FlyingGoomba_WingDown_Right"] = LoadTexture("resources/images/Object/Enemy/FlyingGoomba_3.png");
+        //piranhaplant
+        textures["PiranhaPlant_MouthOpen"] = LoadTexture("resources/images/Object/Enemy/PiranhaPlant_0.png");
+        textures["PiranhaPlant_MouthClosed"] = LoadTexture("resources/images/Object/Enemy/PiranhaPlant_1.png");
+        //jumping piranha 
+        textures["PiranhaPlant_0"] = LoadTexture("resources/images/Object/Enemy/JumpingPiranhaPlant_0.png"); 
+        textures["PiranhaPlant_1"] = LoadTexture("resources/images/Object/Enemy/JumpingPiranhaPlant_1.png");
+        textures["PiranhaPlant_2"] = LoadTexture("resources/images/Object/Enemy/JumpingPiranhaPlant_2.png");
+        textures["PiranhaPlant_3"] = LoadTexture("resources/images/Object/Enemy/JumpingPiranhaPlant_3.png"); 
     }
 }
 

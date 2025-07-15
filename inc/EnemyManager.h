@@ -9,3 +9,6 @@
 #include "Bob-omb.h"
 #include "BanzaiBill.h"
 #include "Rex.h"
+#include "FlyingGoomba.h"
+#include "PiranhaPlant.h"
+#include "JumpingPiranha.h"

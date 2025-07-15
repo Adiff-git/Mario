@@ -172,24 +172,25 @@ void MediatorCollision::HandleMarioWithEnemy(Mario*& mario, Enemy*& enemy, Colli
     }
 
     switch (AtoB) {
-        //====================================================
-        //Tuan
         case COLLISION_TYPE_SOUTH: {
-            Rex* rex = dynamic_cast<Rex*>(enemy);
-            if (rex) {
-                rex->OnHit();
+            RedKoopa* redKoopa = dynamic_cast<RedKoopa*>(enemy);
+            if (redKoopa) {
+                float marioX = mario->GetPos().x;
+                float koopaX = redKoopa->GetPos().x;
+                bool fromLeft = (marioX < koopaX); 
+                redKoopa->OnHit(fromLeft); 
                 mario->SetVel(Vector2{mario->GetVel().x, -300.0f}); 
-                if (rex->GetHitCount() >= 2) {
-                    enemies.erase(std::remove(enemies.begin(), enemies.end(), rex), enemies.end());
-                    delete rex;
-                    rex = nullptr;
-                    std::cout << "Rex destroyed after 2 hits!" << std::endl;
-                }
             } else {
-                RedKoopa* redKoopa = dynamic_cast<RedKoopa*>(enemy);
-                if (redKoopa) {
-                    redKoopa->HandleCollisionWithMario(mario->GetPos().x);
+                Rex* rex = dynamic_cast<Rex*>(enemy);
+                if (rex) {
+                    rex->OnHit(); 
                     mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
+                    if (rex->GetHitCount() >= 2) {
+                        enemies.erase(std::remove(enemies.begin(), enemies.end(), rex), enemies.end());
+                        delete rex;
+                        rex = nullptr;
+                        std::cout << "Rex destroyed after 2 hits!" << std::endl;
+                    }
                 } else {
                     enemies.erase(std::remove(enemies.begin(), enemies.end(), enemy), enemies.end());
                     delete enemy;
@@ -236,25 +237,33 @@ std::vector<Enemy*>& MediatorCollision::GetEnemies() {
 }
 //=================================================
 MediatorCollision::MediatorCollision() {
-    // Thêm Goomba ngay khi khởi tạo
-    Enemy* goomba = new Goomba(Vector2{600, 100}); // Vị trí mặc định
-    enemies.push_back(goomba);
-    Enemy* greenKoopa = new GreenKoopa(Vector2{700, 100});
-    enemies.push_back(greenKoopa);
-    Enemy* yellowKoopa = new YellowKoopa(Vector2{800, 100});
-    enemies.push_back(yellowKoopa);
-    Enemy* redKoopa = new RedKoopa(Vector2{900, 100});
-    enemies.push_back(redKoopa);
-    Enemy* buzzyBeetle = new BuzzyBeetle(Vector2{1000, 100});
-    enemies.push_back(buzzyBeetle);
-    Enemy* bulletBill = new BulletBill(Vector2{1100, 100});
-    enemies.push_back(bulletBill);
-    Enemy* bobOmb = new Bob_omb(Vector2{1100, 100});
-    enemies.push_back(bobOmb);
-    Enemy* banzaiBill = new BanzaiBill(Vector2{1200, 100});
-    enemies.push_back(banzaiBill);
-    Enemy* rex = new Rex(Vector2{1300, 100});
-    enemies.push_back(rex);    
+    
+    //Enemy* goomba = new Goomba(Vector2{600, 100}); // Vị trí mặc định
+    //enemies.push_back(goomba);
+    //Enemy* greenKoopa = new GreenKoopa(Vector2{700, 100});
+    //enemies.push_back(greenKoopa);
+    //Enemy* yellowKoopa = new YellowKoopa(Vector2{800, 100});
+    //enemies.push_back(yellowKoopa);
+    //Enemy* redKoopa = new RedKoopa(Vector2{900, 100});
+    //enemies.push_back(redKoopa);
+    //Enemy* buzzyBeetle = new BuzzyBeetle(Vector2{1000, 100});
+    //enemies.push_back(buzzyBeetle);
+    //Enemy* bulletBill = new BulletBill(Vector2{1100, 100});
+    //enemies.push_back(bulletBill);
+    //Enemy* bobOmb = new Bob_omb(Vector2{1100, 100});
+    //enemies.push_back(bobOmb);
+    //Enemy* banzaiBill = new BanzaiBill(Vector2{1200, 100});
+    //enemies.push_back(banzaiBill);
+    //Enemy* rex = new Rex(Vector2{1300, 100});
+    //enemies.push_back(rex);
+    //Enemy* flyingGoomba = new FlyingGoomba(Vector2{1400, 100});
+    //enemies.push_back(flyingGoomba);
+    //Enemy* piranhaPlant = new PiranhaPlant(Vector2{1500, 100});
+    //enemies.push_back(piranhaPlant);
+    //Enemy* jumpingPiranhaPlant = new JumpingPiranhaPlant(Vector2{1600, 100});
+    //enemies.push_back(jumpingPiranhaPlant);    
+
+    
+    //Không hiểu tại sao lại cần cái này nhưng không ghi thì bị lỗi animation của các quái khi spawn dưới đất
+    //=================================================
 }
-//Không hiểu tại sao lại cần cái này nhưng không ghi thì bị lỗi animation của các quái khi spawn dưới đất
-//=================================================

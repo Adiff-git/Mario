@@ -8,14 +8,14 @@ class Rex : public Enemy {
 public:
     Rex(Vector2 pos);
     void UpdateStateAndPhysic() override;
-    void OnHit(); // Hàm xử lý khi bị đạp
-    int GetHitCount() const { return hitCount; } // Lấy số lần bị đạp
+    void OnHit(); 
+    int GetHitCount() const { return hitCount; } 
 
 private:
-    int jumpCooldown; // Biến để theo dõi thời gian cooldown nhảy
-    int hitCount; // Biến để theo dõi số lần bị đạp
-    Vector2 originalSize; // Lưu kích thước va chạm ban đầu
-    int animationFrame; // Biến để theo dõi frame trong animation
+    int jumpCooldown; 
+    int hitCount;
+    Vector2 originalSize; 
+    int animationFrame; 
 };
 
-#endif // REX_H_
+#endif 
