@@ -134,8 +134,10 @@ void ResrcManager::loadTextures() {
         textures["REX_0_LEFT"] = FlipTextureHorizontal(textures["REX_0_RIGHT"]);
         textures["REX_1_LEFT"] = FlipTextureHorizontal(textures["REX_1_RIGHT"]);
 
-        textures["REX_1"]= LoadTexture("resources/images/Object/Enemy/Rex_1_0.png");
-        textures["REX_2"]= LoadTexture("resources/images/Object/Enemy/Rex_2_0.png");
+        textures["REX_3_RIGHT"]= LoadTexture("resources/images/Object/Enemy/Rex_1_0.png");
+        textures["REX_4_RIGHT"]= LoadTexture("resources/images/Object/Enemy/Rex_1_1.png");
+        textures["REX_3_LEFT"]= FlipTextureHorizontal(textures["REX_3_RIGHT"]);
+        textures["REX_4_LEFT"]= FlipTextureHorizontal(textures["REX_4_RIGHT"]);
     }
 }
 

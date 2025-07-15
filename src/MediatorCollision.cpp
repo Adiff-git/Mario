@@ -146,7 +146,6 @@ void MediatorCollision::HandleEnemyWithTile(Enemy*& enemy, Tile* tile, Collision
         case COLLISION_TYPE_NORTH: {
             enemy->SetPos(Vector2{enemy->GetPos().x, tile->GetPos().y + tile->GetSize().y});
             enemy->SetVel(Vector2{enemy->GetVel().x, 0});
-            std::cout << "Enemy hit NORTH at " << enemy->GetPos().x << ", " << enemy->GetPos().y << std::endl;
             break;
         }
         case COLLISION_TYPE_EAST: {
@@ -165,6 +164,7 @@ void MediatorCollision::HandleEnemyWithTile(Enemy*& enemy, Tile* tile, Collision
         }
     }
 }
+
 void MediatorCollision::HandleMarioWithEnemy(Mario*& mario, Enemy*& enemy, CollisionType AtoB) {
     if (AtoB == COLLISION_TYPE_NONE) {
         std::cout << "No collision between Mario and Enemy" << std::endl;
@@ -172,15 +172,18 @@ void MediatorCollision::HandleMarioWithEnemy(Mario*& mario, Enemy*& enemy, Colli
     }
 
     switch (AtoB) {
+        //====================================================
+        //Tuan
         case COLLISION_TYPE_SOUTH: {
             Rex* rex = dynamic_cast<Rex*>(enemy);
             if (rex) {
-                rex->OnHit(); 
-                mario->SetVel(Vector2{mario->GetVel().x, -500.0f}); 
-                if (rex->GetHitCount() >= 3) { 
-                    enemies.erase(std::remove(enemies.begin(), enemies.end(), enemy), enemies.end());
-                    delete enemy;
-                    enemy = nullptr;
+                rex->OnHit();
+                mario->SetVel(Vector2{mario->GetVel().x, -300.0f}); 
+                if (rex->GetHitCount() >= 2) {
+                    enemies.erase(std::remove(enemies.begin(), enemies.end(), rex), enemies.end());
+                    delete rex;
+                    rex = nullptr;
+                    std::cout << "Rex destroyed after 2 hits!" << std::endl;
                 }
             } else {
                 RedKoopa* redKoopa = dynamic_cast<RedKoopa*>(enemy);
@@ -196,6 +199,7 @@ void MediatorCollision::HandleMarioWithEnemy(Mario*& mario, Enemy*& enemy, Colli
             }
             break;
         }
+        //====================================================
         case COLLISION_TYPE_EAST:
         case COLLISION_TYPE_WEST:
         case COLLISION_TYPE_NORTH: {
@@ -230,6 +234,7 @@ void MediatorCollision::HandleEnemyWithFireball(Enemy* &enemy, Fireball* &fireba
 std::vector<Enemy*>& MediatorCollision::GetEnemies() {
     return enemies;
 }
+//=================================================
 MediatorCollision::MediatorCollision() {
     // Thêm Goomba ngay khi khởi tạo
     Enemy* goomba = new Goomba(Vector2{600, 100}); // Vị trí mặc định
@@ -249,5 +254,7 @@ MediatorCollision::MediatorCollision() {
     Enemy* banzaiBill = new BanzaiBill(Vector2{1200, 100});
     enemies.push_back(banzaiBill);
     Enemy* rex = new Rex(Vector2{1300, 100});
-    enemies.push_back(rex);
+    enemies.push_back(rex);    
 }
+//Không hiểu tại sao lại cần cái này nhưng không ghi thì bị lỗi animation của các quái khi spawn dưới đất
+//=================================================
