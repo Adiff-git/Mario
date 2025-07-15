@@ -1,3 +1,5 @@
+//========================================
+//Nhi
 #include "GameClock.h"
 GameClock *GameClock::instance = nullptr;
 GameClock &GameClock::getInstance()
@@ -8,7 +10,7 @@ GameClock &GameClock::getInstance()
     }
     return *instance;
 }
-
+//========================================
 
 
 

@@ -1,3 +1,5 @@
+//========================================
+//nhi
 #include "Item.h"
 
 Item::Item()
@@ -42,5 +44,5 @@ CollisionType Item::checkCollision(const Object& other) {
         return static_cast<CollisionType>(COLLISION_TYPE_NONE);
     }
 }
-
+//========================================
 
