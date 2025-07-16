@@ -26,7 +26,7 @@ Coin::Coin(Vector2 pos)
 void Coin::Update() {
     if (state == OBJECT_STATE_TO_BE_REMOVED || state == OBJECT_STATE_DEAD) return;
 
-    frameAcumulator += GameClock::getInstance().FIXED_TIME_STEP;
+    frameAcumulator += GameClock::GetInstance().FIXED_TIME_STEP;
 
     if (frameAcumulator >= frameTime) {
         currentFrame = (currentFrame + 1) % maxFrames;

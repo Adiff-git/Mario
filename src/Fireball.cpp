@@ -1,7 +1,7 @@
 #include "Fireball.h"
 #include "GameWorld.h"
 
-Fireball::Fireball(Vector2 pos, Direction direction) : Object(pos, Vector2{16,16}, WHITE), distanceLeft(MAX_DISTANCE)
+Fireball::Fireball(Vector2 pos, Direction direction) : Object(pos, Vector2{16, 16}, WHITE), distanceLeft(MAX_DISTANCE)
 {
     sprite = &ResrcManager::GetInstance().getTexture("FIRE_BALL_0_RIGHT");
     frameTime = 0.1;
@@ -18,10 +18,10 @@ Fireball::Fireball(Vector2 pos, Direction direction) : Object(pos, Vector2{16,16
     cpS.setColor(RED);
     cpE.setColor(RED);
     cpW.setColor(RED);
-    cpN.setSize(Vector2{size.x-8, 1});
-    cpS.setSize(Vector2{size.x-8, 1});
-    cpE.setSize(Vector2{1, size.y-8});
-    cpW.setSize(Vector2{1, size.y-8});
+    cpN.setSize(Vector2{size.x - 8, 1});
+    cpS.setSize(Vector2{size.x - 8, 1});
+    cpE.setSize(Vector2{1, size.y - 8});
+    cpW.setSize(Vector2{1, size.y - 8});
     UpdateCollisionProbes();
 }
 
@@ -62,37 +62,40 @@ void Fireball::Update()
 {
     if (direction == DIRECTION_LEFT)
     {
-        switch(currentFrame) {
-            case 0:
-                sprite = &ResrcManager::GetInstance().getTexture("FIRE_BALL_0_LEFT");
-                break;
-            case 1:
-                sprite = &ResrcManager::GetInstance().getTexture("FIRE_BALL_1_LEFT");
-                break;
-            case 2:
-                sprite = &ResrcManager::GetInstance().getTexture("FIRE_BALL_2_LEFT");
-                break;
-            case 3:
-                sprite = &ResrcManager::GetInstance().getTexture("FIRE_BALL_3_LEFT");
-                break;
-        }
-    } else {
-        switch(currentFrame) {
-            case 0:
-                sprite = &ResrcManager::GetInstance().getTexture("FIRE_BALL_0_RIGHT");
-                break;
-            case 1:
-                sprite = &ResrcManager::GetInstance().getTexture("FIRE_BALL_1_RIGHT");
-                break;
-            case 2:
-                sprite = &ResrcManager::GetInstance().getTexture("FIRE_BALL_2_RIGHT");
-                break;
-            case 3:
-                sprite = &ResrcManager::GetInstance().getTexture("FIRE_BALL_3_RIGHT");
-                break;
+        switch (currentFrame)
+        {
+        case 0:
+            sprite = &ResrcManager::GetInstance().getTexture("FIRE_BALL_0_LEFT");
+            break;
+        case 1:
+            sprite = &ResrcManager::GetInstance().getTexture("FIRE_BALL_1_LEFT");
+            break;
+        case 2:
+            sprite = &ResrcManager::GetInstance().getTexture("FIRE_BALL_2_LEFT");
+            break;
+        case 3:
+            sprite = &ResrcManager::GetInstance().getTexture("FIRE_BALL_3_LEFT");
+            break;
         }
     }
-    
+    else
+    {
+        switch (currentFrame)
+        {
+        case 0:
+            sprite = &ResrcManager::GetInstance().getTexture("FIRE_BALL_0_RIGHT");
+            break;
+        case 1:
+            sprite = &ResrcManager::GetInstance().getTexture("FIRE_BALL_1_RIGHT");
+            break;
+        case 2:
+            sprite = &ResrcManager::GetInstance().getTexture("FIRE_BALL_2_RIGHT");
+            break;
+        case 3:
+            sprite = &ResrcManager::GetInstance().getTexture("FIRE_BALL_3_RIGHT");
+            break;
+        }
+    }
 }
 
 void Fireball::UpdateStateAndPhysic()
@@ -100,7 +103,7 @@ void Fireball::UpdateStateAndPhysic()
     if (isOutOfDistance())
         return;
     UpdateCollisionProbes();
-    const float deltaTime = GameClock::getInstance().FIXED_TIME_STEP;
+    const float deltaTime = GameClock::GetInstance().FIXED_TIME_STEP;
 
     frameAcumulator += deltaTime;
     maxFrames = 3;
@@ -112,10 +115,11 @@ void Fireball::UpdateStateAndPhysic()
 
     distanceLeft -= abs(vel.x) * deltaTime; // Update distance left based on speed
 
-    if (vel.x > 0) direction = DIRECTION_RIGHT;
-    else if (vel.x < 0) direction = DIRECTION_LEFT;
+    if (vel.x > 0)
+        direction = DIRECTION_RIGHT;
+    else if (vel.x < 0)
+        direction = DIRECTION_LEFT;
 
     Object::UpdateStateAndPhysic();
-    vel.y += GameWorld::GetGravity()*deltaTime;
+    vel.y += GameWorld::GetGravity() * deltaTime;
 }
-

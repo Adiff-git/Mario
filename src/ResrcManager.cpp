@@ -93,7 +93,6 @@ void ResrcManager::loadTextures() {
     //Fire Flower
     textures["FIRE FLOWER_0"] = LoadTexture("resources/images/Object/items/FireFlower_0.png");
     textures["FIRE FLOWER_1"] = LoadTexture("resources/images/Object/items/FireFlower_1.png");
-    }
     //mushroom
     textures["Mushroom"] = LoadTexture("resources/images/Object/items/Mushroom.png");
     //One up Mushroom
@@ -108,6 +107,7 @@ void ResrcManager::loadTextures() {
     textures["YoshiCoin_2"] = LoadTexture("resources/images/Object/items/YoshiCoin_2.png");
     textures["YoshiCoin_3"] = LoadTexture("resources/images/Object/items/YoshiCoin_3.png");
     //TILES
+    }
     for (int i = 0; i < 104; ++i) {
         std::string keyStr = "tile_" + std::to_string(i);
         textures[keyStr] = LoadTexture(("resources/images/tiles/tile_" + std::to_string(i) + ".png").c_str());

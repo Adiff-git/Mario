@@ -23,7 +23,7 @@ void Mushroom::StartMoving() {
 
 void Mushroom::Update() {
     float dt = GetFrameTime();
-    float fixedDt = GameClock::getInstance().FIXED_TIME_STEP;
+    float fixedDt = GameClock::GetInstance().FIXED_TIME_STEP;
 
     if (state != OBJECT_STATE_ACTIVE)
         return;

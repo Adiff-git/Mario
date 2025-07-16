@@ -43,7 +43,7 @@ void OneUpMushroom::Update() {
     if (vel.y > 0)
         state = OBJECT_STATE_FALLING;
 
-    pos.x += vel.x * GameClock::getInstance().FIXED_TIME_STEP;
+    pos.x += vel.x * GameClock::GetInstance().FIXED_TIME_STEP;
     pos.y += vel.y * dt;
 
     UpdateCollisionProbes();

@@ -4,7 +4,8 @@
 #include "Mario.h"
 #include "GameClock.h"
 #include <iostream>
-int main() {
+int main()
+{
     InitWindow(1600, 900, "Mario Game");
     InitAudioDevice();
 
@@ -14,18 +15,19 @@ int main() {
 
     // // Create a Mario instance
     // Mario mario(Vector2{100, 100}, 3, SMALL);
-    GameWorld::Init(); // Initialize game world resources   
+    GameWorld::Init();   // Initialize game world resources
     GameWorld gameWorld; // Create a game world instance
-    while(!WindowShouldClose()) {
+    while (!WindowShouldClose())
+    {
         // if (IsKeyPressed(KEY_P)) {
         //     isPaused = !isPaused;
         // }
 
         // if (!isPaused) {
-            GameClock::getInstance().updateTimeAcum += GetFrameTime();
+        GameClock::GetInstance().updateTimeAcum += GetFrameTime();
 
         // }
-        
+
         gameWorld.UpdateWorld(); // Update game world
         BeginDrawing();
         ClearBackground(RAYWHITE);

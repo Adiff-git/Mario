@@ -27,7 +27,7 @@ void Start::playCollisionSound()
 void Start::Update()
 {
     float dt = GetFrameTime();
-    float fixedDt = GameClock::getInstance().FIXED_TIME_STEP;
+    float fixedDt = GameClock::GetInstance().FIXED_TIME_STEP;
 
     if (state != OBJECT_STATE_ACTIVE)
         return;
