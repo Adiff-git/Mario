@@ -238,8 +238,8 @@ std::vector<Enemy*>& MediatorCollision::GetEnemies() {
 //=================================================
 MediatorCollision::MediatorCollision() {
     
-    //Enemy* goomba = new Goomba(Vector2{600, 100}); // Vị trí mặc định
-    //enemies.push_back(goomba);
+    Enemy* goomba = new Goomba(Vector2{600, 100}); // Vị trí mặc định
+    enemies.push_back(goomba);
     //Enemy* greenKoopa = new GreenKoopa(Vector2{700, 100});
     //enemies.push_back(greenKoopa);
     //Enemy* yellowKoopa = new YellowKoopa(Vector2{800, 100});
@@ -254,14 +254,14 @@ MediatorCollision::MediatorCollision() {
     //enemies.push_back(bobOmb);
     //Enemy* banzaiBill = new BanzaiBill(Vector2{1200, 100});
     //enemies.push_back(banzaiBill);
-    //Enemy* rex = new Rex(Vector2{1300, 100});
-    //enemies.push_back(rex);
-    //Enemy* flyingGoomba = new FlyingGoomba(Vector2{1400, 100});
-    //enemies.push_back(flyingGoomba);
-    //Enemy* piranhaPlant = new PiranhaPlant(Vector2{1500, 100});
-    //enemies.push_back(piranhaPlant);
-    //Enemy* jumpingPiranhaPlant = new JumpingPiranhaPlant(Vector2{1600, 100});
-    //enemies.push_back(jumpingPiranhaPlant);    
+    Enemy* rex = new Rex(Vector2{1300, 100});
+    enemies.push_back(rex);
+    Enemy* flyingGoomba = new FlyingGoomba(Vector2{1400, 100});
+    enemies.push_back(flyingGoomba);
+    Enemy* piranhaPlant = new PiranhaPlant(Vector2{1500, 100});
+    enemies.push_back(piranhaPlant);
+    Enemy* jumpingPiranhaPlant = new JumpingPiranhaPlant(Vector2{1600, 100});
+    enemies.push_back(jumpingPiranhaPlant);    
 
     
     //Không hiểu tại sao lại cần cái này nhưng không ghi thì bị lỗi animation của các quái khi spawn dưới đất
