@@ -15,4 +15,6 @@ public:
 
 private:
     bool applyGravity = true;
+    bool isMoving;
+    float maxSpeedX = 50.0f;
 };
