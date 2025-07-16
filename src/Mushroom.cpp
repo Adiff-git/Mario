@@ -28,9 +28,15 @@ void Mushroom::Update()
     float dt = GetFrameTime();
 
     pos.x += vel.x * dt;
-    if (applyGravity)
-        vel.y += GameWorld::GetGravity() * dt;
+    if (vel.y > 0) {
+        state = OBJECT_STATE_FALLING;
+    }
+    if (state == OBJECT_STATE_ON_GROUND) {
+        vel.y = 0;
+    }
 
+    vel.y += GameWorld::GetGravity() * dt;
+    Object::UpdateStateAndPhysic();
     pos.y += vel.y * dt;
 
     UpdateCollisionProbes();

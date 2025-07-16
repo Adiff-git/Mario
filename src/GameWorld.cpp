@@ -1,11 +1,15 @@
 #include "GameWorld.h"
-
+#include "Coin.h"
+#include "CourseClearToken.h"
+#include "FireFlower.h"
+#include "Mushroom.h"
+#include "OneUpMushroom.h"
+#include "Star.h"
+#include "ThreeUpMoon.h"
+#include "YoshiCoin.h"
 
 GameWorld::GameWorld() : player(), 
-interactiveTiles(map.getInteractiveTiles()), 
-interactiveCoins(map.getInteractiveCoins()), 
-interactiveCourseClearTokens(map.getInteractiveCourseClearTokens()), 
-interactiveFireFlowers(map.getInteractiveFireFlowers())
+interactiveTiles(map.getInteractiveTiles())
 {   
     // Trong GameWorld constructor, thêm:
 
@@ -21,9 +25,6 @@ interactiveFireFlowers(map.getInteractiveFireFlowers())
 GameWorld::GameWorld(int MapID, GameScreen* gameScreen) : 
 player(), 
 interactiveTiles(map.getInteractiveTiles()), 
-interactiveCoins(map.getInteractiveCoins()), 
-interactiveCourseClearTokens(map.getInteractiveCourseClearTokens()), 
-interactiveFireFlowers(map.getInteractiveFireFlowers()),
 gameScreen(gameScreen),
 gameState(GameState::GAME_PLAYING)
 {
@@ -65,6 +66,16 @@ gameState(GameState::GAME_PLAYING)
             background = ResrcManager::GetInstance().getTexture("BACKGROUND_9");
             break;
     }
+    if (MapID == 0) {
+        interactiveItems.push_back(std::make_shared<Coin>(Vector2{150, 500}));
+        interactiveItems.push_back(std::make_shared<CourseClearToken>(Vector2{150, 500}));
+        interactiveItems.push_back(std::make_shared<FireFlower>(Vector2{200, 500}));
+        interactiveItems.push_back(std::make_shared<Mushroom>(Vector2{250, 500}));
+        interactiveItems.push_back(std::make_shared<OneUpMushroom>(Vector2{300, 500}));
+        interactiveItems.push_back(std::make_shared<Star>(Vector2{350, 500}));
+        interactiveItems.push_back(std::make_shared<ThreeUpMoon>(Vector2{400, 500}));
+        interactiveItems.push_back(std::make_shared<YoshiCoin>(Vector2{450, 500}));
+    }
 }
 
 
@@ -98,30 +109,13 @@ void GameWorld::UpdateWorld()
                 }
             }
         
-            for( auto const coin : interactiveCoins){
-                CollisionType collision = player.checkCollisionType(*coin);
-                if(collision){
-                    mediatorCollision.HandleCollision(&player, coin.get());
+            for (auto const& item : interactiveItems) {
+                CollisionType collision = player.checkCollisionType(*item);
+                if (collision) {
+                    mediatorCollision.HandleCollision(&player, item.get());
                 }
-                coin->Update();//animation
-            }
-            
-            for (auto& course : interactiveCourseClearTokens) {
-            CollisionType collision = player.checkCollisionType(*course);
-            if (collision) {
-                mediatorCollision.HandleCollision(&player, course.get());
-            }
         
-            course->Update();  // BẮT BUỘC để token xoay
-            // course->Draw();    // vẽ theo rotationAngle
-            }
-        
-            for( auto const fire : interactiveFireFlowers){
-                CollisionType collision = player.checkCollisionType(*fire);
-                if(collision){
-                    mediatorCollision.HandleCollision(&player, fire.get());
-                }
-                fire->Update();//animation
+                item->Update();
             }
         }
 }
@@ -152,17 +146,12 @@ void GameWorld::DrawWorld()
     DrawTextureEx(background,Vector2{BGpos+background.width*1.3f,-200},0.0f,1.3f,WHITE);
     map.Draw();
     player.Draw();
-    for(auto coin : interactiveCoins){
-        coin->Draw();
+    std::cout << "Player Position: " << player.GetPos().x << ", " << player.GetPos().y << std::endl;
+
+    for (auto const& item : interactiveItems) {
+        item->Draw();
     }
 
-    for(auto course : interactiveCourseClearTokens){
-        course->Draw();
-    }
-
-    for( auto const fire : interactiveFireFlowers){
-        fire->Draw();
-    }
     EndMode2D();
 }
 

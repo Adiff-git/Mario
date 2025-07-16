@@ -8,7 +8,9 @@
     ],
     "fileStates": {
         "D:/Title.tsx": {
-            "dynamicWrapping": true
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         }
     },
     "last.exportedFilePath": "D:/Mario_Gr02/resources/maps",
@@ -17,9 +19,11 @@
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.width": 80,
     "openFiles": [
+        "D:/Title.tsx"
     ],
     "project": "untitled.tiled-project",
     "recentFiles": [
+        "D:/Title.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.type": 1

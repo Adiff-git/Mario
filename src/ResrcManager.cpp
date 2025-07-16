@@ -105,16 +105,30 @@ void ResrcManager::loadTextures() {
 
     //item
     {
-    //coin
-    textures["COIN_0"] = LoadTexture("resources/images/Object/items/Coin_0.png");
-    textures["COIN_1"] = LoadTexture("resources/images/Object/items/Coin_1.png");
-    textures["COIN_2"] = LoadTexture("resources/images/Object/items/Coin_2.png");
-    textures["COIN_3"] = LoadTexture("resources/images/Object/items/Coin_3.png");
-    //Course Clear Token
-    textures["COURSE CLEAR TOKEN"] = LoadTexture("resources/images/Object/items/CourseClearToken.png");
-    //Fire Flower
-    textures["FIRE FLOWER_0"] = LoadTexture("resources/images/Object/items/FireFlower_0.png");
-    textures["FIRE FLOWER_1"] = LoadTexture("resources/images/Object/items/FireFlower_1.png");
+        //coin
+        textures["COIN_0"] = LoadTexture("resources/images/Object/items/Coin_0.png");
+        textures["COIN_1"] = LoadTexture("resources/images/Object/items/Coin_1.png");
+        textures["COIN_2"] = LoadTexture("resources/images/Object/items/Coin_2.png");
+        textures["COIN_3"] = LoadTexture("resources/images/Object/items/Coin_3.png");
+        //Course Clear Token
+        textures["COURSE CLEAR TOKEN"] = LoadTexture("resources/images/Object/items/CourseClearToken.png");
+        //Fire Flower
+        textures["FIRE FLOWER_0"] = LoadTexture("resources/images/Object/items/FireFlower_0.png");
+        textures["FIRE FLOWER_1"] = LoadTexture("resources/images/Object/items/FireFlower_1.png");
+        
+        //mushroom
+        textures["Mushroom"] = LoadTexture("resources/images/Object/items/Mushroom.png");
+        //One up Mushroom
+        textures["1UpMushroom"] = LoadTexture("resources/images/Object/items/1UpMushroom.png");
+        //Star
+        textures["star"] = LoadTexture("resources/images/Object/items/Star.png");
+        //Three Up Moon
+        textures["3UpMoon"] = LoadTexture("resources/images/Object/items/3UpMoon.png");
+        //Yoshi Coin 
+        textures["YoshiCoin_0"] = LoadTexture("resources/images/Object/items/YoshiCoin_0.png");
+        textures["YoshiCoin_1"] = LoadTexture("resources/images/Object/items/YoshiCoin_1.png");
+        textures["YoshiCoin_2"] = LoadTexture("resources/images/Object/items/YoshiCoin_2.png");
+        textures["YoshiCoin_3"] = LoadTexture("resources/images/Object/items/YoshiCoin_3.png");
     }
 }
 
@@ -222,9 +236,3 @@ Texture2D FlipTextureHorizontal(const Texture2D &texture) {
     UnloadImage(image); // Unload the image to free memory
     return flippedTexture;
 }
-
-
-
-
-
-

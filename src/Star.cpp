@@ -1,13 +1,16 @@
-
 #include "GameWorld.h"
 #include "Mario.h"
 #include "raylib.h"
+#include "ResrcManager.h"
 #include "Star.h"
+#include "GameClock.h"
 
 Star::Star(Vector2 pos)
-    : Item(pos, {32, 32}, {100, 0}, WHITE, 0.0f, 1, DIRECTION_RIGHT, 1, 0)
+    : Item(pos, {32, 32}, {100, 0}, WHITE, 0.0f, 1, DIRECTION_RIGHT, 1, 0),
+      applyGravity(true), isMoving(true)
 {
     state = OBJECT_STATE_ACTIVE;
+    sprite = &ResrcManager::GetInstance().getTexture("star");
 }
 
 void Star::updateMario(Mario& mario)
@@ -18,15 +21,33 @@ void Star::updateMario(Mario& mario)
 
 void Star::playCollisionSound()
 {
-    
+    // Optional
 }
 
 void Star::Update()
 {
     float dt = GetFrameTime();
+    float fixedDt = GameClock::GetInstance().FIXED_TIME_STEP;
 
-    pos.x += vel.x * dt;
-    vel.y += GameWorld::GetGravity() * dt;
+    if (state != OBJECT_STATE_ACTIVE)
+        return;
+
+    // Áp dụng trọng lực
+    if (applyGravity)
+        vel.y += GameWorld::GetGravity() * dt;
+        Object::UpdateStateAndPhysic();
+
+    // Nếu chạm đất thì bật ngược lại (nhảy)
+    if (state == OBJECT_STATE_ON_GROUND) {
+        vel.y = -250.0f;  // độ cao bật lên (tùy chỉnh nếu cần)
+    }
+
+    // Cập nhật trạng thái rơi
+    if (vel.y > 0)
+        state = OBJECT_STATE_FALLING;
+
+    // Di chuyển
+    pos.x += vel.x * fixedDt;
     pos.y += vel.y * dt;
 
     UpdateCollisionProbes();
@@ -37,12 +58,6 @@ void Star::Draw()
     if (state == OBJECT_STATE_TO_BE_REMOVED || state == OBJECT_STATE_DEAD)
         return;
 
-    Texture2D& tex = ResrcManager::GetInstance().getTexture("star");
-    DrawTextureEx(
-        tex,
-        pos,
-        0.0f,
-        1.0f,
-        color
-    );
+    if (sprite)
+        DrawTextureEx(*sprite, pos, 0.0f, 1.0f, color);
 }

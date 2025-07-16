@@ -281,4 +281,7 @@ CMakeFiles/Mario.dir/src/GameWorld.cpp.obj: \
  D:/Mario_Gr02/inc/CourseClearToken.h D:/Mario_Gr02/inc/FireFlower.h \
  D:/Mario_Gr02/inc/MediatorCollision.h D:/Mario_Gr02/inc/GameScreen.h \
  D:/Mario_Gr02/inc/Screen.h D:/Mario_Gr02/inc/ScreenController.h \
- D:/Mario_Gr02/inc/Button.h D:/Mario_Gr02/inc/GameWorld.h
+ D:/Mario_Gr02/inc/Button.h D:/Mario_Gr02/inc/GameWorld.h \
+ D:/Mario_Gr02/inc/Mushroom.h D:/Mario_Gr02/inc/OneUpMushroom.h \
+ D:/Mario_Gr02/inc/Star.h D:/Mario_Gr02/inc/ThreeUpMoon.h \
+ D:/Mario_Gr02/inc/YoshiCoin.h

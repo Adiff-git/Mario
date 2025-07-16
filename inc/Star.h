@@ -1,15 +1,19 @@
 #pragma once
 
 #include "Item.h"
-#include "ResrcManager.h"
-#include "GameWorld.h"
-class Star : public Item, GameWorld {
+
+class Mario;
+
+class Star : public Item {
+private:
+    bool applyGravity;
+    bool isMoving;
+
 public:
     Star(Vector2 pos);
-    ~Star() override = default;
 
+    void Update() override;
     void updateMario(Mario& mario) override;
     void playCollisionSound() override;
     void Draw() override;
-    void Update() override;
 };
