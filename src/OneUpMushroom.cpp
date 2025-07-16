@@ -29,7 +29,7 @@ void OneUpMushroom::playCollisionSound()
 
 void OneUpMushroom::Update()
 {
-    const float dt = 1 / 60;
+    const float dt = 1.0f / 60.0f;
     float fixedDt = GameClock::GetInstance().FIXED_TIME_STEP;
 
     if (state == OBJECT_STATE_ACTIVE || state == OBJECT_STATE_FALLING)

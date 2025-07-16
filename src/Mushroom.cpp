@@ -5,7 +5,7 @@
 #include "ResrcManager.h"
 
 Mushroom::Mushroom(Vector2 pos)
-    : Item(pos, {32, 32}, {100, 0}, WHITE, 0.0f, 1, DIRECTION_RIGHT, 1, 0),
+    : Item(pos, {32, 32}, {40, 0}, WHITE, 0.0f, 1, DIRECTION_RIGHT, 1, 0),
       applyGravity(true),
       isMoving(true)
 {
