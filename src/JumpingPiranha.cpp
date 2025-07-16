@@ -95,7 +95,7 @@ void JumpingPiranhaPlant::UpdateStateAndPhysic()
         direction = false;
     }
 
-    // std::cerr << direction << '\n';
+    std::cerr << direction << '\n';
 
     UpdateCollisionProbes();
 }
