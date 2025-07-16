@@ -37,11 +37,7 @@
 					},
 					"parentIndex" : 0,
 					"projectIndex" : 1,
-					"source" : "C:/raylib/raylib",
-					"targetIndexes" : 
-					[
-						3
-					]
+					"source" : "C:/raylib/raylib"
 				},
 				{
 					"build" : "raylib_build/raylib",
@@ -91,7 +87,7 @@
 					"targetIndexes" : 
 					[
 						1,
-						4
+						3
 					]
 				}
 			],
@@ -127,8 +123,7 @@
 					"parentIndex" : 0,
 					"targetIndexes" : 
 					[
-						2,
-						3
+						2
 					]
 				},
 				{
@@ -142,7 +137,7 @@
 					"targetIndexes" : 
 					[
 						1,
-						4
+						3
 					]
 				}
 			],
@@ -151,29 +146,22 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "Mario::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Mario-Debug-b5f37e1cf7a2f88f07ba.json",
+					"jsonFile" : "target-Mario-Debug-22b1f31d12c07bb6a9ac.json",
 					"name" : "Mario",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 4,
 					"id" : "glfw::@0007fcb0029cba81045f",
-					"jsonFile" : "target-glfw-Debug-30f88d5a4d087e21b727.json",
+					"jsonFile" : "target-glfw-Debug-27a1739ac72f5ee64d7d.json",
 					"name" : "glfw",
 					"projectIndex" : 2
 				},
 				{
 					"directoryIndex" : 2,
 					"id" : "raylib::@52310b9926f245239ea7",
-					"jsonFile" : "target-raylib-Debug-73c103018f55f01ec462.json",
+					"jsonFile" : "target-raylib-Debug-40091bb4e2bf10de7746.json",
 					"name" : "raylib",
-					"projectIndex" : 1
-				},
-				{
-					"directoryIndex" : 1,
-					"id" : "uninstall::@18eff071ff3fd9fe1150",
-					"jsonFile" : "target-uninstall-Debug-252f707cc13fb89db1ac.json",
-					"name" : "uninstall",
 					"projectIndex" : 1
 				},
 				{
@@ -189,8 +177,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "D:/Downloads/Ref/Test/Mario/build",
-		"source" : "D:/Downloads/Ref/Test/Mario"
+		"build" : "D:/Mario_Gr02/build",
+		"source" : "D:/Mario_Gr02"
 	},
 	"version" : 
 	{
