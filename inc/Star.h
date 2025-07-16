@@ -6,7 +6,7 @@ class Mario;
 
 class Star : public Item {
 private:
-    bool applyGravity;
+    bool applyGravity = true;
     bool isMoving;
 
 public:

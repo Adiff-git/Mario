@@ -67,14 +67,14 @@ gameState(GameState::GAME_PLAYING)
             break;
     }
     if (MapID == 0) {
-        interactiveItems.push_back(std::make_shared<Coin>(Vector2{150, 500}));
-        interactiveItems.push_back(std::make_shared<CourseClearToken>(Vector2{150, 500}));
-        interactiveItems.push_back(std::make_shared<FireFlower>(Vector2{200, 500}));
+        // interactiveItems.push_back(std::make_shared<Coin>(Vector2{150, 500}));
+        // interactiveItems.push_back(std::make_shared<CourseClearToken>(Vector2{150, 500}));
+        // interactiveItems.push_back(std::make_shared<FireFlower>(Vector2{200, 500}));
         interactiveItems.push_back(std::make_shared<Mushroom>(Vector2{250, 500}));
         interactiveItems.push_back(std::make_shared<OneUpMushroom>(Vector2{300, 500}));
-        interactiveItems.push_back(std::make_shared<Star>(Vector2{350, 500}));
-        interactiveItems.push_back(std::make_shared<ThreeUpMoon>(Vector2{400, 500}));
-        interactiveItems.push_back(std::make_shared<YoshiCoin>(Vector2{450, 500}));
+        interactiveItems.push_back(std::make_shared<Star>(Vector2{350, 400}));
+        // interactiveItems.push_back(std::make_shared<ThreeUpMoon>(Vector2{400, 500}));
+        // interactiveItems.push_back(std::make_shared<YoshiCoin>(Vector2{450, 500}));
     }
 }
 
@@ -110,11 +110,18 @@ void GameWorld::UpdateWorld()
             }
         
             for (auto const& item : interactiveItems) {
-                CollisionType collision = player.checkCollisionType(*item);
-                if (collision) {
+                for (auto const& tile : interactiveTiles) {
+                    CollisionType collision = item->checkCollisionType(*tile);
+                    if (collision) {
+                        mediatorCollision.HandleCollision(item.get(), tile);
+                    }
+                }
+
+                CollisionType playerCollision = player.checkCollisionType(*item);
+                if (playerCollision) {
                     mediatorCollision.HandleCollision(&player, item.get());
                 }
-        
+
                 item->Update();
             }
         }

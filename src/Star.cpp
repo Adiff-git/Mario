@@ -29,29 +29,37 @@ void Star::Update()
     float dt = GetFrameTime();
     float fixedDt = GameClock::GetInstance().FIXED_TIME_STEP;
 
-    if (state != OBJECT_STATE_ACTIVE)
-        return;
-
-    // Áp dụng trọng lực
-    if (applyGravity)
+    if (state == OBJECT_STATE_ACTIVE || state == OBJECT_STATE_FALLING)
+    {
+        
         vel.y += GameWorld::GetGravity() * dt;
-        Object::UpdateStateAndPhysic();
 
-    // Nếu chạm đất thì bật ngược lại (nhảy)
-    if (state == OBJECT_STATE_ON_GROUND) {
-        vel.y = -250.0f;  // độ cao bật lên (tùy chỉnh nếu cần)
+        
+        if (vel.y > 0)
+        {
+            state = OBJECT_STATE_FALLING;
+        }
+        else if (vel.y < 0 && state != OBJECT_STATE_ON_GROUND)
+        {
+            state = OBJECT_STATE_ACTIVE; 
+        }
+
+        
+        pos.x += vel.x * fixedDt;
+        pos.y += vel.y * dt;
+
+        
+        UpdateCollisionProbes();
+
+        
+        if (state == OBJECT_STATE_ON_GROUND)
+        {
+            vel.y = -250.f; // Bật lên
+            state = OBJECT_STATE_ACTIVE; 
+        }
     }
-
-    // Cập nhật trạng thái rơi
-    if (vel.y > 0)
-        state = OBJECT_STATE_FALLING;
-
-    // Di chuyển
-    pos.x += vel.x * fixedDt;
-    pos.y += vel.y * dt;
-
-    UpdateCollisionProbes();
 }
+
 
 void Star::Draw()
 {
