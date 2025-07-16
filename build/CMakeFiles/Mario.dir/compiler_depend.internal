@@ -1485,12 +1485,17 @@ CMakeFiles/Mario.dir/src/GameWorld.cpp.obj
  D:/Downloads/Ref/Gia/Mario/inc/Map.h
  D:/Downloads/Ref/Gia/Mario/inc/Mario.h
  D:/Downloads/Ref/Gia/Mario/inc/MediatorCollision.h
+ D:/Downloads/Ref/Gia/Mario/inc/Mushroom.h
  D:/Downloads/Ref/Gia/Mario/inc/Object.h
  D:/Downloads/Ref/Gia/Mario/inc/Observer.h
+ D:/Downloads/Ref/Gia/Mario/inc/OneUpMushroom.h
  D:/Downloads/Ref/Gia/Mario/inc/ResrcManager.h
  D:/Downloads/Ref/Gia/Mario/inc/Screen.h
  D:/Downloads/Ref/Gia/Mario/inc/ScreenController.h
+ D:/Downloads/Ref/Gia/Mario/inc/Star.h
+ D:/Downloads/Ref/Gia/Mario/inc/ThreeUpMoon.h
  D:/Downloads/Ref/Gia/Mario/inc/Tile.h
+ D:/Downloads/Ref/Gia/Mario/inc/YoshiCoin.h
  D:/Downloads/Ref/Gia/Mario/inc/json.hpp
 
 CMakeFiles/Mario.dir/src/Item.cpp.obj

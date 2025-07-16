@@ -11,9 +11,12 @@ ThreeUpMoon::ThreeUpMoon(Vector2 pos)
 
 void ThreeUpMoon::updateMario(Mario& mario)
 {
-    mario.SetLives(mario.GetLives() + 3);  
+    if (state == OBJECT_STATE_TO_BE_REMOVED) return;
+
+    mario.SetLives(mario.GetLives() + 3);      // Tặng 3 mạng
     this->SetState(OBJECT_STATE_TO_BE_REMOVED);
 }
+
 
 void ThreeUpMoon::playCollisionSound()
 {

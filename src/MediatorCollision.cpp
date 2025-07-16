@@ -84,6 +84,63 @@ void MediatorCollision::HandleFireballWithTile(Fireball *&fireball, Tile *&tile,
     }
     }
 }
+
+void MediatorCollision::HandleItemWithTile(Item *&item, Tile *&tile, CollisionType AtoB)
+{
+    if (AtoB == COLLISION_TYPE_NONE)
+        return;
+    switch (AtoB)
+    {
+        case COLLISION_TYPE_SOUTH:
+        {
+            // Đặt item lên trên tile và cho di chuyển sang phải
+            
+            item->SetPos(Vector2{item->GetPos().x, tile->GetPos().y - item->GetSize().y});
+            item->SetVel(Vector2{item->GetVel().x, 0});  // Cho phép item tiếp tục di chuyển
+            break;
+        }
+        case COLLISION_TYPE_NORTH:
+        {
+           
+            item->SetPos(Vector2{item->GetPos().x, tile->GetPos().y + tile->GetSize().y});
+            item->SetVel(Vector2{item->GetVel().x, 0});
+            break;
+        }
+        case COLLISION_TYPE_EAST:
+        {
+            
+            // Đặt item sát bên trái tile, giữ nguyên Y (không thay đổi Y)
+            item->SetPos(Vector2{tile->GetPos().x - item->GetSize().x, item->GetPos().y});
+            // Đảo chiều vận tốc X, giữ nguyên vận tốc Y
+            Vector2 vel = item->GetVel();
+            vel.x = -abs(vel.x); // Đảm bảo đi sang trái
+            item->SetVel(vel);
+            item->SetDirection(DIRECTION_LEFT);
+            if (item->GetCurrFrame() == 0)
+                item->setCurrFrame(3);
+            else
+                item->setCurrFrame(item->GetCurrFrame() - 1);
+            break;
+        }
+        case COLLISION_TYPE_WEST:
+        {
+            
+            // Đặt item sát bên phải tile, giữ nguyên Y (không thay đổi Y)
+            item->SetPos(Vector2{tile->GetPos().x + tile->GetSize().x, item->GetPos().y});
+            // Đảo chiều vận tốc X, giữ nguyên vận tốc Y
+            Vector2 vel = item->GetVel();
+            vel.x = abs(vel.x); // Đảm bảo đi sang phải
+            item->SetVel(vel);
+            item->SetDirection(DIRECTION_RIGHT);
+            if (item->GetCurrFrame() == 0)
+                item->setCurrFrame(3);
+            else
+                item->setCurrFrame(item->GetCurrFrame() - 1);
+            break;
+        }
+    }
+}
+
 void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
 {
 
@@ -111,16 +168,25 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
         else
             HandleFireballWithTile(isBfireball, isAtile, AtoB);
     }
-    else if ((isAmario && isBitem) || (isBmario && isAitem))
-    {
-        Mario* mario = isAmario ? isAmario : isBmario;
-        Item* item = isAitem ? isAitem : isBitem;
+    // item with tile
+    else if ((isAitem && isBtile) || (isAtile && isBitem)){
+        CollisionType AtoB = isAitem ? isAitem->checkCollisionType(*isBtile) : isBitem->checkCollisionType(*isAtile);
+        if (isAitem)
+            HandleItemWithTile(isAitem, isBtile, AtoB);
+        else
+            HandleItemWithTile(isBitem, isAtile, AtoB);
+    }
 
-        if (item->checkCollision(*mario) == COLLISION_TYPE_COLLIDED)
-        {
-            item->updateMario(*mario);      
-            item->playCollisionSound();//sound
-        }
+   else if ((isAmario && isBitem) || (isBmario && isAitem))
+    {
+       Mario *mario = isAmario ? isAmario : isBmario;
+       Item *item = isAitem ? isAitem : isBitem;
+
+       if (item->checkCollision(*mario) == COLLISION_TYPE_COLLIDED)
+       {
+           item->updateMario(*mario);
+           item->playCollisionSound(); // sound
+       }
     }
 
 }

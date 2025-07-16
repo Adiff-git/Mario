@@ -3,7 +3,7 @@
 #include "ResrcManager.h"
 
 FireFlower::FireFlower(Vector2 pos)
-    : Item(pos, {32, 32}, {0, 0}, WHITE, 0.3f, 2, DIRECTION_RIGHT, 1, 0),
+    : Item(pos, {32, 32}, {0, 0}, WHITE, 0.8f, 2, DIRECTION_RIGHT, 1, 0),
       blinking(false), blinkingAcum(0), blinkingTime(0.1f), doBlink(false)
 {
     state = OBJECT_STATE_ACTIVE;
@@ -11,9 +11,12 @@ FireFlower::FireFlower(Vector2 pos)
 
 void FireFlower::updateMario(Mario& mario)
 {
-    mario.changetoFire();
-    SetState(OBJECT_STATE_TO_BE_REMOVED);
+    if (state == OBJECT_STATE_TO_BE_REMOVED) return;
+
+    mario.changetoFire();                      // Mario chuyển sang trạng thái bắn lửa
+    this->SetState(OBJECT_STATE_TO_BE_REMOVED);
 }
+
 
 void FireFlower::playCollisionSound()
 {
@@ -22,22 +25,13 @@ void FireFlower::playCollisionSound()
 
 void FireFlower::Update()
 {
-    float delta = GetFrameTime();
-    frameAcumulator += delta;
+    const float animSpeed = 0.6f; // mỗi frame 0.6s
+    static float animTime = 0.0f;
+    animTime += GameClock::GetInstance().FIXED_TIME_STEP;
 
-    // Cập nhật animation mỗi frameTime giây
-    if (frameAcumulator >= frameTime) {
+    if (animTime >= animSpeed) {
         currentFrame = (currentFrame + 1) % maxFrames;
-        frameAcumulator = 0.0f;
-    }
-
-    // Cập nhật blinking
-    if (blinking) {
-        blinkingAcum += delta;
-        if (blinkingAcum >= blinkingTime) {
-            blinkingAcum = 0.0f;
-            doBlink = !doBlink;
-        }
+        animTime = 0.0f;
     }
 
     UpdateCollisionProbes();

@@ -4,14 +4,14 @@
 #include "raylib.h"
 
 YoshiCoin::YoshiCoin(Vector2 pos)
-    : Item(pos, {32, 32}, {0, 0}, WHITE, 0.15f, 4, DIRECTION_RIGHT, 0, 0)
+    : Item(pos, {32, 32}, {0, 0}, WHITE, 0.4f, 4, DIRECTION_RIGHT, 0, 0)
 {
     state = OBJECT_STATE_ACTIVE;
 }
 
 void YoshiCoin::updateMario(Mario& mario)
 {
-    mario.SetCoins(mario.GetCoins() + 1);  // Hoặc mario.addYoshiCoin(); nếu có hệ thống đặc biệt
+    mario.SetCoins(mario.GetCoins() + 1);  
     this->SetState(OBJECT_STATE_TO_BE_REMOVED);
 }
 
@@ -26,9 +26,8 @@ void YoshiCoin::Update()
     if (state == OBJECT_STATE_TO_BE_REMOVED || state == OBJECT_STATE_DEAD)
         return;
 
-    float dt = GetFrameTime();
+    frameAcumulator += GameClock::GetInstance().FIXED_TIME_STEP;
 
-    frameAcumulator += dt;
     if (frameAcumulator >= frameTime) {
         frameAcumulator = 0;
         currentFrame = (currentFrame + 1) % maxFrames;

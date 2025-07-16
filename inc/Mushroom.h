@@ -1,18 +1,21 @@
-
 #pragma once
+
 #include "Item.h"
-#include "ResrcManager.h"
 
 class Mushroom : public Item {
+private:
+    bool applyGravity;
+    bool isMoving;
+    float maxSpeedX = 50.0f; 
+    Texture2D* sprite;
+
 public:
     Mushroom(Vector2 pos);
-    ~Mushroom() override = default;
 
     void updateMario(Mario& mario) override;
     void playCollisionSound() override;
-    void Draw() override;
     void Update() override;
+    void Draw() override;
 
-private:
-    bool applyGravity = true;
+    void StartMoving();//move 
 };

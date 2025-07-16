@@ -294,4 +294,9 @@ CMakeFiles/Mario.dir/src/GameWorld.cpp.obj: \
  D:/Downloads/Ref/Gia/Mario/inc/Screen.h \
  D:/Downloads/Ref/Gia/Mario/inc/ScreenController.h \
  D:/Downloads/Ref/Gia/Mario/inc/Button.h \
- D:/Downloads/Ref/Gia/Mario/inc/GameWorld.h
+ D:/Downloads/Ref/Gia/Mario/inc/GameWorld.h \
+ D:/Downloads/Ref/Gia/Mario/inc/Mushroom.h \
+ D:/Downloads/Ref/Gia/Mario/inc/OneUpMushroom.h \
+ D:/Downloads/Ref/Gia/Mario/inc/Star.h \
+ D:/Downloads/Ref/Gia/Mario/inc/ThreeUpMoon.h \
+ D:/Downloads/Ref/Gia/Mario/inc/YoshiCoin.h
