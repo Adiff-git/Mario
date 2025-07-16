@@ -24,6 +24,7 @@ void GameScreen::Update() {
 
     if (BackMenu.IsPressed()) {
         screenController->ChangeScreen(new MenuScreen(screenController));
+        return;
     }
     switch ( transitionState ) {
         case TransitionState::NEXT_LEVEL:
