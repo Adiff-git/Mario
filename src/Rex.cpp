@@ -22,11 +22,6 @@ void Rex::UpdateStateAndPhysic() {
         SetVel(Vector2{newVelX, GetVel().y});
         SetPos(Vector2{(float)(GetPos().x + GetVel().x * GameClock::getInstance().FIXED_TIME_STEP), GetPos().y});
 
-        if (jumpCooldown <= 0 && rand() % 100 < 5) {
-            SetVel(Vector2{GetVel().x, -200.0f});
-            state = OBJECT_STATE_JUMPING;
-            jumpCooldown = 100;
-        }
     }
 
     if (GetVel().y > 0) {
@@ -37,9 +32,7 @@ void Rex::UpdateStateAndPhysic() {
     }
     vel.y += GameWorld::GetGravity() * deltaTime;
     Object::UpdateStateAndPhysic();
-    if (jumpCooldown > 0) {
-        jumpCooldown--;
-    }
+   
 
     static int updateCount = 0;
     const int updateThreshold = 50;
@@ -117,9 +110,10 @@ void Rex::OnHit() {
     hitCount++;
     if (hitCount == 1) {
         sprite = &ResrcManager::GetInstance().getTexture("REX_3_RIGHT");
-        SetVel(Vector2{GetVel().x, GetVel().y}); // Giữ nguyên tốc độ
+        SetVel(Vector2{GetVel().x/2, GetVel().y});
         SetSize(Vector2{originalSize.x, originalSize.y/2});
-        SetPos(Vector2{GetPos().x, GetPos().y+48}); 
+        SetPos(Vector2{GetPos().x, GetPos().y+46}); 
+        UpdateCollisionProbes();
     }
 
 }

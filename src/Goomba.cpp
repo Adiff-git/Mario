@@ -2,7 +2,7 @@
 #include "GameWorld.h"
 
 Goomba::Goomba(Vector2 pos) 
-    : Enemy(pos, Vector2{32, 32}, Vector2{50, 0}, RED, 0.2f, 0, DIRECTION_RIGHT) {
+    : Enemy(pos, Vector2{32, 32}, Vector2{30, 0}, RED, 0.2f, 0, DIRECTION_RIGHT) {
     sprite = &ResrcManager::GetInstance().getTexture("GOOMBA_0");
 }
 
@@ -10,7 +10,7 @@ void Goomba::UpdateStateAndPhysic() {
     const float deltaTime = GetFrameTime();
     if (GetState() == OBJECT_STATE_ON_GROUND) {
         float newVelX = GetVel().x;
-        if (newVelX > 0 && newVelX > maxSpeedX) newVelX = maxSpeedX;
+        if ((newVelX > 0 && newVelX > maxSpeedX)) newVelX = maxSpeedX;
         if (newVelX < 0 && newVelX < -maxSpeedX) newVelX = -maxSpeedX;
         SetVel(Vector2{newVelX, GetVel().y});
         SetPos(Vector2{(float)(GetPos().x + GetVel().x * GameClock::getInstance().FIXED_TIME_STEP), GetPos().y});

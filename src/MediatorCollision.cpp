@@ -16,6 +16,7 @@ void MediatorCollision::HandleMarioWithTile(Mario* &mario, Tile * &tile, Collisi
             mario->SetState(OBJECT_STATE_ON_GROUND);
             mario->SetVel(Vector2{mario->GetVel().x, 0});
             break;
+            
         }
         
         case COLLISION_TYPE_NORTH:
@@ -189,7 +190,6 @@ void MediatorCollision::HandleMarioWithEnemy(Mario*& mario, Enemy*& enemy, Colli
                         enemies.erase(std::remove(enemies.begin(), enemies.end(), rex), enemies.end());
                         delete rex;
                         rex = nullptr;
-                        std::cout << "Rex destroyed after 2 hits!" << std::endl;
                     }
                 } else {
                     enemies.erase(std::remove(enemies.begin(), enemies.end(), enemy), enemies.end());
