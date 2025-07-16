@@ -142,8 +142,8 @@ raylib_build/raylib/external/glfw/src/clean: raylib_build/raylib/external/glfw/s
 # Target rules for target CMakeFiles/Mario.dir
 
 # All Build rule for target.
-CMakeFiles/Mario.dir/all: raylib_build/raylib/CMakeFiles/raylib.dir/all
 CMakeFiles/Mario.dir/all: raylib_build/raylib/external/glfw/src/CMakeFiles/glfw.dir/all
+CMakeFiles/Mario.dir/all: raylib_build/raylib/CMakeFiles/raylib.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=D:\Mario_Gr02\build\CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21 "Built target Mario"
