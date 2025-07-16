@@ -83,9 +83,9 @@ void RedKoopa::UpdateStateAndPhysic() {
     if (state == OBJECT_STATE_ON_GROUND) {
         SetVel(Vector2{GetVel().x, 0});
     }
-
-    SetVel(Vector2{GetVel().x, GetVel().y + GameWorld::GetGravity() * deltaTime});
-
+    vel.y += GameWorld::GetGravity() * deltaTime;
+    Object::UpdateStateAndPhysic();
+    
     static int updateCount = 0;
     const int updateThreshold = 50;
 

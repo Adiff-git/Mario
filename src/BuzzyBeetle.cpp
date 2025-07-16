@@ -26,7 +26,7 @@ void BuzzyBeetle::UpdateStateAndPhysic() {
     }
 
     vel.y += GameWorld::GetGravity() * deltaTime;
-    
+    Object::UpdateStateAndPhysic();
     static int updateCount = 0;
     const int updateThreshold = 50;
 

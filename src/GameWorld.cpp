@@ -8,14 +8,14 @@ GameWorld::GameWorld() : player(), interactiveTiles(map.getInteractiveTiles()) {
     camera.rotation = 0.0f;
     camera.zoom = 1.0f;
 
-    mediatorCollision.GetEnemies().push_back(new Rex(Vector2{200, 780}));
-    mediatorCollision.GetEnemies().push_back(new Goomba(Vector2{200, 800}));
-    // mediatorCollision.GetEnemies().push_back(new GreenKoopa(Vector2{300, 790}));
-    // mediatorCollision.GetEnemies().push_back(new YellowKoopa(Vector2{400, 800}));
-    // mediatorCollision.GetEnemies().push_back(new RedKoopa(Vector2{400, 800}));
-    mediatorCollision.GetEnemies().push_back(new FlyingGoomba(Vector2{400, 780}));
-    mediatorCollision.GetEnemies().push_back(new PiranhaPlant(Vector2{500, 780}));
-    mediatorCollision.GetEnemies().push_back(new JumpingPiranhaPlant(Vector2{600, 800}));
+    mediatorCollision.GetEnemies().push_back(new Rex(Vector2{300, 680}));
+    mediatorCollision.GetEnemies().push_back(new Goomba(Vector2{800, 600}));
+    mediatorCollision.GetEnemies().push_back(new GreenKoopa(Vector2{800, 600}));
+    mediatorCollision.GetEnemies().push_back(new YellowKoopa(Vector2{400, 800}));
+    mediatorCollision.GetEnemies().push_back(new RedKoopa(Vector2{800, 600}));
+    //mediatorCollision.GetEnemies().push_back(new FlyingGoomba(Vector2{400, 780}));
+    //mediatorCollision.GetEnemies().push_back(new PiranhaPlant(Vector2{500, 780}));
+    //mediatorCollision.GetEnemies().push_back(new JumpingPiranhaPlant(Vector2{600, 800}));
 }
 
 GameWorld::~GameWorld() {
