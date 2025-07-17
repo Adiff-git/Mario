@@ -140,7 +140,7 @@ void MediatorCollision::HandleItemWithTile(Item *&item, Tile *&tile, CollisionTy
             break;
         }
     }
-}
+}   
 
 void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
 {
