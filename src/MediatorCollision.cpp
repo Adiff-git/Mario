@@ -96,7 +96,7 @@ void MediatorCollision::HandleItemWithTile(Item *&item, Tile *&tile, CollisionTy
         case COLLISION_TYPE_SOUTH:
         {
             // Đặt item lên trên tile và cho di chuyển sang phải
-            
+            std::cout << "==============================================================================" << std::endl;
             item->SetPos(Vector2{item->GetPos().x, tile->GetPos().y - item->GetSize().y});
             item->SetVel(Vector2{item->GetVel().x, 0});  // Cho phép item tiếp tục di chuyển
             break;
@@ -141,55 +141,133 @@ void MediatorCollision::HandleItemWithTile(Item *&item, Tile *&tile, CollisionTy
             break;
         }
     }
+}   
+
+// void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
+// {
+//     Mario* isAmario = dynamic_cast<Mario*>(ObjectA);
+//     Mario* isBmario = dynamic_cast<Mario*>(ObjectB);
+//     Fireball* isAfireball = dynamic_cast<Fireball*>(ObjectA);
+//     Fireball* isBfireball = dynamic_cast<Fireball*>(ObjectB);
+//     Tile* isAtile = dynamic_cast<Tile*>(ObjectA);
+//     Tile* isBtile = dynamic_cast<Tile*>(ObjectB);
+//     Enemy* isAenemy = dynamic_cast<Enemy*>(ObjectA); 
+//     Enemy* isBenemy = dynamic_cast<Enemy*>(ObjectB); 
+//     if (isAmario && isBtile|| isBmario&& isAtile)
+//     {
+//         CollisionType AtoB = isAmario ? isAmario->checkCollisionType(*isBtile) : isBmario->checkCollisionType(*isAtile);
+//         if (isAmario)
+//             HandleMarioWithTile(isAmario, isBtile, AtoB);
+//         else
+//             HandleMarioWithTile(isBmario, isAtile, AtoB);
+//     }
+//     else if (isAfireball && isBtile || isBfireball && isAtile)
+//     {
+//         CollisionType AtoB = isAfireball ? isAfireball->checkCollisionType(*isBtile) : isBfireball->checkCollisionType(*isAtile);
+//         if (isAfireball)
+//             HandleFireballWithTile(isAfireball, isBtile, AtoB);
+//         else
+//             HandleFireballWithTile(isBfireball, isAtile, AtoB);
+//     }
+//     else if (isAenemy && isBtile) {
+//         CollisionType AtoB = isAenemy->checkCollisionType(*isBtile);
+//         HandleEnemyWithTile(isAenemy, isBtile, AtoB);
+//     } else if (isBenemy && isAtile) {
+//         CollisionType AtoB = isBenemy->checkCollisionType(*isAtile);
+//         HandleEnemyWithTile(isBenemy, isAtile, AtoB);
+//     }
+//     else if ((isAmario && isBenemy) || (isBmario && isAenemy)) {
+//     CollisionType AtoB = isAmario ? isAmario->checkCollisionType(*isBenemy) : isBmario->checkCollisionType(*isAenemy);
+//     if (isAmario)
+//         HandleMarioWithEnemy(isAmario, isBenemy, AtoB);
+//     else
+//         HandleMarioWithEnemy(isBmario, isAenemy, AtoB);}
+//         else if ((isAenemy && isBfireball) || (isBenemy && isAfireball)) {
+//         CollisionType AtoB = isAenemy ? isAenemy->checkCollisionType(*isBfireball) : isBenemy->checkCollisionType(*isAfireball);
+//         if (isAenemy)
+//             HandleEnemyWithFireball(isAenemy, isBfireball, AtoB);
+//         else
+//             HandleEnemyWithFireball(isBenemy, isAfireball, AtoB);
+//     }
+// }
+
+void MediatorCollision::HandleCollision(Object* ObjectA, Object* ObjectB)
+{
+    Mario* marioA = dynamic_cast<Mario*>(ObjectA);
+    Mario* marioB = dynamic_cast<Mario*>(ObjectB);
+
+    Fireball* fireballA = dynamic_cast<Fireball*>(ObjectA);
+    Fireball* fireballB = dynamic_cast<Fireball*>(ObjectB);
+
+    Tile* tileA = dynamic_cast<Tile*>(ObjectA);
+    Tile* tileB = dynamic_cast<Tile*>(ObjectB);
+
+    Enemy* enemyA = dynamic_cast<Enemy*>(ObjectA);
+    Enemy* enemyB = dynamic_cast<Enemy*>(ObjectB);
+
+    Item* itemA = dynamic_cast<Item*>(ObjectA);
+    Item* itemB = dynamic_cast<Item*>(ObjectB);
+
+    // Mario vs Tile
+    if ((marioA && tileB) || (marioB && tileA)) {
+        Mario* mario = marioA ? marioA : marioB;
+        Tile* tile = tileA ? tileA : tileB;
+        CollisionType type = mario->checkCollisionType(*tile);
+        HandleMarioWithTile(mario, tile, type);
+    }
+
+    // Fireball vs Tile
+    else if ((fireballA && tileB) || (fireballB && tileA)) {
+        Fireball* fireball = fireballA ? fireballA : fireballB;
+        Tile* tile = tileA ? tileA : tileB;
+        CollisionType type = fireball->checkCollisionType(*tile);
+        HandleFireballWithTile(fireball, tile, type);
+    }
+
+    // Item vs Tile
+    else if ((itemA && tileB) || (itemB && tileA)) {
+        Item* item = itemA ? itemA : itemB;
+        Tile* tile = tileA ? tileA : tileB;
+        CollisionType type = item->checkCollisionType(*tile);
+        HandleItemWithTile(item, tile, type);
+    }
+
+    // Mario vs Item
+    else if ((marioA && itemB) || (marioB && itemA)) {
+        Mario* mario = marioA ? marioA : marioB;
+        Item* item = itemA ? itemA : itemB;
+
+        if (item->checkCollision(*mario) == COLLISION_TYPE_COLLIDED) {
+            item->updateMario(*mario);
+            item->playCollisionSound();
+        }
+    }
+
+    // Mario vs Enemy
+    else if ((marioA && enemyB) || (marioB && enemyA)) {
+        Mario* mario = marioA ? marioA : marioB;
+        Enemy* enemy = enemyA ? enemyA : enemyB;
+        CollisionType type = mario->checkCollisionType(*enemy);
+        HandleMarioWithEnemy(mario, enemy, type);
+    }
+
+    // Enemy vs Tile
+    else if ((enemyA && tileB) || (enemyB && tileA)) {
+        Enemy* enemy = enemyA ? enemyA : enemyB;
+        Tile* tile = tileA ? tileA : tileB;
+        CollisionType type = enemy->checkCollisionType(*tile);
+        HandleEnemyWithTile(enemy, tile, type);
+    }
+
+    // Enemy vs Fireball
+    else if ((enemyA && fireballB) || (enemyB && fireballA)) {
+        Enemy* enemy = enemyA ? enemyA : enemyB;
+        Fireball* fireball = fireballA ? fireballA : fireballB;
+        CollisionType type = enemy->checkCollisionType(*fireball);
+        HandleEnemyWithFireball(enemy, fireball, type);
+    }
 }
 
-void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
-{
-    Mario* isAmario = dynamic_cast<Mario*>(ObjectA);
-    Mario* isBmario = dynamic_cast<Mario*>(ObjectB);
-    Fireball* isAfireball = dynamic_cast<Fireball*>(ObjectA);
-    Fireball* isBfireball = dynamic_cast<Fireball*>(ObjectB);
-    Tile* isAtile = dynamic_cast<Tile*>(ObjectA);
-    Tile* isBtile = dynamic_cast<Tile*>(ObjectB);
-    Enemy* isAenemy = dynamic_cast<Enemy*>(ObjectA); 
-    Enemy* isBenemy = dynamic_cast<Enemy*>(ObjectB); 
-    if (isAmario && isBtile|| isBmario&& isAtile)
-    {
-        CollisionType AtoB = isAmario ? isAmario->checkCollisionType(*isBtile) : isBmario->checkCollisionType(*isAtile);
-        if (isAmario)
-            HandleMarioWithTile(isAmario, isBtile, AtoB);
-        else
-            HandleMarioWithTile(isBmario, isAtile, AtoB);
-    }
-    else if (isAfireball && isBtile || isBfireball && isAtile)
-    {
-        CollisionType AtoB = isAfireball ? isAfireball->checkCollisionType(*isBtile) : isBfireball->checkCollisionType(*isAtile);
-        if (isAfireball)
-            HandleFireballWithTile(isAfireball, isBtile, AtoB);
-        else
-            HandleFireballWithTile(isBfireball, isAtile, AtoB);
-    }
-    else if (isAenemy && isBtile) {
-        CollisionType AtoB = isAenemy->checkCollisionType(*isBtile);
-        HandleEnemyWithTile(isAenemy, isBtile, AtoB);
-    } else if (isBenemy && isAtile) {
-        CollisionType AtoB = isBenemy->checkCollisionType(*isAtile);
-        HandleEnemyWithTile(isBenemy, isAtile, AtoB);
-    }
-    else if ((isAmario && isBenemy) || (isBmario && isAenemy)) {
-    CollisionType AtoB = isAmario ? isAmario->checkCollisionType(*isBenemy) : isBmario->checkCollisionType(*isAenemy);
-    if (isAmario)
-        HandleMarioWithEnemy(isAmario, isBenemy, AtoB);
-    else
-        HandleMarioWithEnemy(isBmario, isAenemy, AtoB);}
-        else if ((isAenemy && isBfireball) || (isBenemy && isAfireball)) {
-        CollisionType AtoB = isAenemy ? isAenemy->checkCollisionType(*isBfireball) : isBenemy->checkCollisionType(*isAfireball);
-        if (isAenemy)
-            HandleEnemyWithFireball(isAenemy, isBfireball, AtoB);
-        else
-            HandleEnemyWithFireball(isBenemy, isAfireball, AtoB);
-    }
-}
 
 void MediatorCollision::HandleEnemyWithTile(Enemy*& enemy, Tile* tile, CollisionType AtoB) {
     if (AtoB == COLLISION_TYPE_NONE) return;

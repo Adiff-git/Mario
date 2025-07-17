@@ -6,7 +6,7 @@
 #include "GameClock.h"
 
 Star::Star(Vector2 pos)
-    : Item(pos, {32, 32}, {100, 0}, WHITE, 0.0f, 1, DIRECTION_RIGHT, 1, 0),
+    : Item(pos, {32, 32}, {40, 0}, WHITE, 0.0f, 1, DIRECTION_RIGHT, 1, 0),
       applyGravity(true), isMoving(true)
 {
     state = OBJECT_STATE_ACTIVE;
@@ -26,31 +26,44 @@ void Star::playCollisionSound()
 
 void Star::Update()
 {
-    float dt = GetFrameTime();
+    const float dt = 1.0f / 60.0f;
     float fixedDt = GameClock::GetInstance().FIXED_TIME_STEP;
 
-    if (state != OBJECT_STATE_ACTIVE)
-        return;
-
-    // Áp dụng trọng lực
-    if (applyGravity)
+    if (state == OBJECT_STATE_ACTIVE || state == OBJECT_STATE_FALLING)
+    {
+        
+        std::cout << "Trước Gravity VelY: " << vel.y << std::endl;
+        std::cout << "FrameTime dt = " << dt << std::endl;
         vel.y += GameWorld::GetGravity() * dt;
+        std::cout << "Sau Gravity VelY: " << vel.y << std::endl;
+        
+        if (vel.y > 0)
+        {
+            state = OBJECT_STATE_FALLING;
+        }
+        else if (vel.y < 0 && state != OBJECT_STATE_ON_GROUND)
+        {
+            state = OBJECT_STATE_ACTIVE; 
+        }
 
-    // Nếu chạm đất thì bật ngược lại (nhảy)
-    if (state == OBJECT_STATE_ON_GROUND) {
-        vel.y = -250.0f;  // độ cao bật lên (tùy chỉnh nếu cần)
+        Object::UpdateStateAndPhysic();
+        pos.x += vel.x * fixedDt;
+        pos.y += vel.y * dt;
+
+        
+        UpdateCollisionProbes();
+
+        if (state == OBJECT_STATE_ON_GROUND)
+        {
+            vel.y = -250.f; // Bật lên
+            state = OBJECT_STATE_ACTIVE; 
+        }
     }
+    std::cout << "Y: " << pos.y << ", VelY: " << vel.y << ", State: " << state << std::endl;
+    std::cout << "x: " << pos.x << ", Velx: " << vel.x << ", State: " << state << std::endl;
 
-    // Cập nhật trạng thái rơi
-    if (vel.y > 0)
-        state = OBJECT_STATE_FALLING;
-
-    // Di chuyển
-    pos.x += vel.x * fixedDt;
-    pos.y += vel.y * dt;
-
-    UpdateCollisionProbes();
 }
+
 
 void Star::Draw()
 {
