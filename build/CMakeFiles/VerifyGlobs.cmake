@@ -3,36 +3,36 @@
 cmake_policy(SET CMP0009 NEW)
 
 # SOURCES at CMakeLists.txt:21 (file)
-file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/Mario_Gr02/src/*.cpp")
+file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "D:/Mario/Mario/src/*.cpp")
 set(OLD_GLOB
-  "D:/Mario_Gr02/src/Button.cpp"
-  "D:/Mario_Gr02/src/Coin.cpp"
-  "D:/Mario_Gr02/src/CollisionProbe.cpp"
-  "D:/Mario_Gr02/src/CourseClearToken.cpp"
-  "D:/Mario_Gr02/src/FireFlower.cpp"
-  "D:/Mario_Gr02/src/Fireball.cpp"
-  "D:/Mario_Gr02/src/GameClock.cpp"
-  "D:/Mario_Gr02/src/GameScreen.cpp"
-  "D:/Mario_Gr02/src/GameWorld.cpp"
-  "D:/Mario_Gr02/src/Item.cpp"
-  "D:/Mario_Gr02/src/Map.cpp"
-  "D:/Mario_Gr02/src/Mario.cpp"
-  "D:/Mario_Gr02/src/MediatorCollision.cpp"
-  "D:/Mario_Gr02/src/MenuScreen.cpp"
-  "D:/Mario_Gr02/src/Mushroom.cpp"
-  "D:/Mario_Gr02/src/Object.cpp"
-  "D:/Mario_Gr02/src/OneUpMushroom.cpp"
-  "D:/Mario_Gr02/src/ResrcManager.cpp"
-  "D:/Mario_Gr02/src/Screen.cpp"
-  "D:/Mario_Gr02/src/ScreenController.cpp"
-  "D:/Mario_Gr02/src/SoundManager.cpp"
-  "D:/Mario_Gr02/src/Star.cpp"
-  "D:/Mario_Gr02/src/ThreeUpMoon.cpp"
-  "D:/Mario_Gr02/src/Tile.cpp"
-  "D:/Mario_Gr02/src/YoshiCoin.cpp"
-  "D:/Mario_Gr02/src/main.cpp"
+  "D:/Mario/Mario/src/Button.cpp"
+  "D:/Mario/Mario/src/Coin.cpp"
+  "D:/Mario/Mario/src/CollisionProbe.cpp"
+  "D:/Mario/Mario/src/CourseClearToken.cpp"
+  "D:/Mario/Mario/src/FireFlower.cpp"
+  "D:/Mario/Mario/src/Fireball.cpp"
+  "D:/Mario/Mario/src/GameClock.cpp"
+  "D:/Mario/Mario/src/GameScreen.cpp"
+  "D:/Mario/Mario/src/GameWorld.cpp"
+  "D:/Mario/Mario/src/Item.cpp"
+  "D:/Mario/Mario/src/Map.cpp"
+  "D:/Mario/Mario/src/Mario.cpp"
+  "D:/Mario/Mario/src/MediatorCollision.cpp"
+  "D:/Mario/Mario/src/MenuScreen.cpp"
+  "D:/Mario/Mario/src/Mushroom.cpp"
+  "D:/Mario/Mario/src/Object.cpp"
+  "D:/Mario/Mario/src/OneUpMushroom.cpp"
+  "D:/Mario/Mario/src/ResrcManager.cpp"
+  "D:/Mario/Mario/src/Screen.cpp"
+  "D:/Mario/Mario/src/ScreenController.cpp"
+  "D:/Mario/Mario/src/SoundManager.cpp"
+  "D:/Mario/Mario/src/Star.cpp"
+  "D:/Mario/Mario/src/ThreeUpMoon.cpp"
+  "D:/Mario/Mario/src/Tile.cpp"
+  "D:/Mario/Mario/src/YoshiCoin.cpp"
+  "D:/Mario/Mario/src/main.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")
-  file(TOUCH_NOCREATE "D:/Mario_Gr02/build/CMakeFiles/cmake.verify_globs")
+  file(TOUCH_NOCREATE "D:/Mario/Mario/build/CMakeFiles/cmake.verify_globs")
 endif()

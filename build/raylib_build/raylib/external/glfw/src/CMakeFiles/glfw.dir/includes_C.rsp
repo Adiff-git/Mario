@@ -1,1 +1,1 @@
--ID:/Mario_Gr02/inc -IC:/raylib/raylib/src/external/glfw/include -IC:/raylib/raylib/src/external/glfw/src -ID:/Mario_Gr02/build/raylib_build/raylib/external/glfw/src
+-ID:/Mario/Mario/inc -IC:/raylib/raylib/src/external/glfw/include -IC:/raylib/raylib/src/external/glfw/src -ID:/Mario/Mario/build/raylib_build/raylib/external/glfw/src

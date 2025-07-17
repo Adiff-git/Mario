@@ -1,4 +1,4 @@
-# Install script for directory: D:/Mario_Gr02
+# Install script for directory: D:/Mario/Mario
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("D:/Mario_Gr02/build/raylib_build/cmake_install.cmake")
+  include("D:/Mario/Mario/build/raylib_build/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -57,6 +57,6 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-  file(WRITE "D:/Mario_Gr02/build/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "D:/Mario/Mario/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

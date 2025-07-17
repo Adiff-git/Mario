@@ -1,8 +1,8 @@
 CMakeFiles/Mario.dir/src/ScreenController.cpp.obj: \
- D:\Mario_Gr02\src\ScreenController.cpp \
- D:/Mario_Gr02/inc/ScreenController.h D:/Mario_Gr02/inc/Screen.h \
- D:/Mario_Gr02/inc/MenuScreen.h D:/Mario_Gr02/inc/Button.h \
- D:/Mario_Gr02/inc/Drawable.h C:/raylib/raylib/src/raylib.h \
+ D:\Mario\Mario\src\ScreenController.cpp \
+ D:/Mario/Mario/inc/ScreenController.h D:/Mario/Mario/inc/Screen.h \
+ D:/Mario/Mario/inc/MenuScreen.h D:/Mario/Mario/inc/Button.h \
+ D:/Mario/Mario/inc/Drawable.h C:/raylib/raylib/src/raylib.h \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdarg.h \
  C:/mingw64/x86_64-w64-mingw32/include/stdarg.h \
  C:/mingw64/x86_64-w64-mingw32/include/_mingw_stdarg.h \

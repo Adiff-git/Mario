@@ -146,21 +146,21 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "Mario::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Mario-Debug-fefe8ca71c7dda670475.json",
+					"jsonFile" : "target-Mario-Debug-39564ca7e599d060e421.json",
 					"name" : "Mario",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 4,
 					"id" : "glfw::@0007fcb0029cba81045f",
-					"jsonFile" : "target-glfw-Debug-27a1739ac72f5ee64d7d.json",
+					"jsonFile" : "target-glfw-Debug-b04b587881415a20c452.json",
 					"name" : "glfw",
 					"projectIndex" : 2
 				},
 				{
 					"directoryIndex" : 2,
 					"id" : "raylib::@52310b9926f245239ea7",
-					"jsonFile" : "target-raylib-Debug-40091bb4e2bf10de7746.json",
+					"jsonFile" : "target-raylib-Debug-427c59f22b7e56871326.json",
 					"name" : "raylib",
 					"projectIndex" : 1
 				},
@@ -177,8 +177,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "D:/Mario_Gr02/build",
-		"source" : "D:/Mario_Gr02"
+		"build" : "D:/Mario/Mario/build",
+		"source" : "D:/Mario/Mario"
 	},
 	"version" : 
 	{

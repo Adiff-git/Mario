@@ -1,5 +1,5 @@
 CMakeFiles/Mario.dir/src/SoundManager.cpp.obj: \
- D:\Mario_Gr02\src\SoundManager.cpp D:/Mario_Gr02/inc/SoundManager.h \
+ D:\Mario\Mario\src\SoundManager.cpp D:/Mario/Mario/inc/SoundManager.h \
  C:/raylib/raylib/src/raylib.h \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdarg.h \
  C:/mingw64/x86_64-w64-mingw32/include/stdarg.h \
@@ -118,4 +118,4 @@ CMakeFiles/Mario.dir/src/SoundManager.cpp.obj: \
  C:/mingw64/include/c++/14.2.0/bits/enable_special_members.h \
  C:/mingw64/include/c++/14.2.0/bits/node_handle.h \
  C:/mingw64/include/c++/14.2.0/bits/erase_if.h \
- D:/Mario_Gr02/inc/ResrcManager.h
+ D:/Mario/Mario/inc/ResrcManager.h

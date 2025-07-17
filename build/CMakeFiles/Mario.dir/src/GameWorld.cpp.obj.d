@@ -1,5 +1,5 @@
 CMakeFiles/Mario.dir/src/GameWorld.cpp.obj: \
- D:\Mario_Gr02\src\GameWorld.cpp D:/Mario_Gr02/inc/GameWorld.h \
+ D:\Mario\Mario\src\GameWorld.cpp D:/Mario/Mario/inc/GameWorld.h \
  C:/raylib/raylib/src/raylib.h \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdarg.h \
  C:/mingw64/x86_64-w64-mingw32/include/stdarg.h \
@@ -9,7 +9,7 @@ CMakeFiles/Mario.dir/src/GameWorld.cpp.obj: \
  C:/mingw64/x86_64-w64-mingw32/include/_mingw_mac.h \
  C:/mingw64/x86_64-w64-mingw32/include/_mingw_secapi.h \
  C:/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
- D:/Mario_Gr02/inc/Mario.h C:/mingw64/include/c++/14.2.0/list \
+ D:/Mario/Mario/inc/Mario.h C:/mingw64/include/c++/14.2.0/list \
  C:/mingw64/include/c++/14.2.0/bits/requires_hosted.h \
  C:/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/c++config.h \
  C:/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/os_defines.h \
@@ -67,9 +67,9 @@ CMakeFiles/Mario.dir/src/GameWorld.cpp.obj: \
  C:/mingw64/include/c++/14.2.0/bits/ranges_util.h \
  C:/mingw64/include/c++/14.2.0/bits/ranges_base.h \
  C:/mingw64/include/c++/14.2.0/bits/max_size_type.h \
- C:/mingw64/include/c++/14.2.0/numbers D:/Mario_Gr02/inc/Drawable.h \
- D:/Mario_Gr02/inc/Object.h D:/Mario_Gr02/inc/CollisionProbe.h \
- D:/Mario_Gr02/inc/GameClock.h D:/Mario_Gr02/inc/ResrcManager.h \
+ C:/mingw64/include/c++/14.2.0/numbers D:/Mario/Mario/inc/Drawable.h \
+ D:/Mario/Mario/inc/Object.h D:/Mario/Mario/inc/CollisionProbe.h \
+ D:/Mario/Mario/inc/GameClock.h D:/Mario/Mario/inc/ResrcManager.h \
  C:/mingw64/include/c++/14.2.0/unordered_map \
  C:/mingw64/include/c++/14.2.0/bits/unordered_map.h \
  C:/mingw64/include/c++/14.2.0/bits/hashtable.h \
@@ -124,14 +124,14 @@ CMakeFiles/Mario.dir/src/GameWorld.cpp.obj: \
  C:/mingw64/include/c++/14.2.0/cerrno \
  C:/mingw64/include/c++/14.2.0/bits/charconv.h \
  C:/mingw64/include/c++/14.2.0/bits/basic_string.tcc \
- D:/Mario_Gr02/inc/Fireball.h D:/Mario_Gr02/inc/Tile.h \
- D:/Mario_Gr02/inc/Observer.h C:/mingw64/include/c++/14.2.0/vector \
+ D:/Mario/Mario/inc/Fireball.h D:/Mario/Mario/inc/Tile.h \
+ D:/Mario/Mario/inc/Observer.h C:/mingw64/include/c++/14.2.0/vector \
  C:/mingw64/include/c++/14.2.0/bits/stl_uninitialized.h \
  C:/mingw64/include/c++/14.2.0/bits/stl_vector.h \
  C:/mingw64/include/c++/14.2.0/bits/stl_bvector.h \
- C:/mingw64/include/c++/14.2.0/bits/vector.tcc D:/Mario_Gr02/inc/Item.h \
- D:/Mario_Gr02/inc/Map.h D:/Mario_Gr02/inc/Coin.h \
- D:/Mario_Gr02/inc/json.hpp C:/mingw64/include/c++/14.2.0/algorithm \
+ C:/mingw64/include/c++/14.2.0/bits/vector.tcc D:/Mario/Mario/inc/Item.h \
+ D:/Mario/Mario/inc/Map.h D:/Mario/Mario/inc/Coin.h \
+ D:/Mario/Mario/inc/json.hpp C:/mingw64/include/c++/14.2.0/algorithm \
  C:/mingw64/include/c++/14.2.0/bits/stl_algo.h \
  C:/mingw64/include/c++/14.2.0/bits/algorithmfwd.h \
  C:/mingw64/include/c++/14.2.0/bits/stl_heap.h \
@@ -278,10 +278,10 @@ CMakeFiles/Mario.dir/src/GameWorld.cpp.obj: \
  C:/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/basic_file.h \
  C:/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/c++io.h \
  C:/mingw64/include/c++/14.2.0/bits/fstream.tcc \
- D:/Mario_Gr02/inc/CourseClearToken.h D:/Mario_Gr02/inc/FireFlower.h \
- D:/Mario_Gr02/inc/MediatorCollision.h D:/Mario_Gr02/inc/GameScreen.h \
- D:/Mario_Gr02/inc/Screen.h D:/Mario_Gr02/inc/ScreenController.h \
- D:/Mario_Gr02/inc/Button.h D:/Mario_Gr02/inc/GameWorld.h \
- D:/Mario_Gr02/inc/Mushroom.h D:/Mario_Gr02/inc/OneUpMushroom.h \
- D:/Mario_Gr02/inc/Star.h D:/Mario_Gr02/inc/ThreeUpMoon.h \
- D:/Mario_Gr02/inc/YoshiCoin.h
+ D:/Mario/Mario/inc/CourseClearToken.h D:/Mario/Mario/inc/FireFlower.h \
+ D:/Mario/Mario/inc/MediatorCollision.h D:/Mario/Mario/inc/GameScreen.h \
+ D:/Mario/Mario/inc/Screen.h D:/Mario/Mario/inc/ScreenController.h \
+ D:/Mario/Mario/inc/Button.h D:/Mario/Mario/inc/GameWorld.h \
+ D:/Mario/Mario/inc/Mushroom.h D:/Mario/Mario/inc/OneUpMushroom.h \
+ D:/Mario/Mario/inc/Star.h D:/Mario/Mario/inc/ThreeUpMoon.h \
+ D:/Mario/Mario/inc/YoshiCoin.h

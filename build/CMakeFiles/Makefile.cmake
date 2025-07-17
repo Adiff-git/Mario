@@ -151,7 +151,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "C:/raylib/raylib/src/external/glfw/CMake/glfw3Config.cmake.in"
   "C:/raylib/raylib/src/external/glfw/CMakeLists.txt"
   "C:/raylib/raylib/src/external/glfw/src/CMakeLists.txt"
-  "D:/Mario_Gr02/CMakeLists.txt"
+  "D:/Mario/Mario/CMakeLists.txt"
   "CMakeFiles/3.30.4/CMakeCCompiler.cmake"
   "CMakeFiles/3.30.4/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.30.4/CMakeRCCompiler.cmake"

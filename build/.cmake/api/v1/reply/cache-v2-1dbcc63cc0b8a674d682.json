@@ -79,7 +79,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "d:/Mario_Gr02/build"
+			"value" : "d:/Mario/Mario/build"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -599,7 +599,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "D:/Mario_Gr02/build/CMakeFiles/pkgRedirects"
+			"value" : "D:/Mario/Mario/build/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -683,7 +683,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "D:/Mario_Gr02"
+			"value" : "D:/Mario/Mario"
 		},
 		{
 			"name" : "CMAKE_INSTALL_BINDIR",
@@ -1751,7 +1751,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "D:/Mario_Gr02/build/raylib_build/raylib/external/glfw"
+			"value" : "D:/Mario/Mario/build/raylib_build/raylib/external/glfw"
 		},
 		{
 			"name" : "GLFW_BUILD_DOCS",
@@ -1931,7 +1931,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "D:/Mario_Gr02/build"
+			"value" : "D:/Mario/Mario/build"
 		},
 		{
 			"name" : "Mario_IS_TOP_LEVEL",
@@ -1955,7 +1955,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "D:/Mario_Gr02"
+			"value" : "D:/Mario/Mario"
 		},
 		{
 			"name" : "OFF",
@@ -2155,7 +2155,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "D:/Mario_Gr02/build/raylib_build/raylib"
+			"value" : "D:/Mario/Mario/build/raylib_build/raylib"
 		},
 		{
 			"name" : "raylib_IS_TOP_LEVEL",

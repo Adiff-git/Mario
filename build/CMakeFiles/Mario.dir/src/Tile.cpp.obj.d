@@ -1,5 +1,5 @@
-CMakeFiles/Mario.dir/src/Tile.cpp.obj: D:\Mario_Gr02\src\Tile.cpp \
- D:/Mario_Gr02/inc/Tile.h D:/Mario_Gr02/inc/Object.h \
+CMakeFiles/Mario.dir/src/Tile.cpp.obj: D:\Mario\Mario\src\Tile.cpp \
+ D:/Mario/Mario/inc/Tile.h D:/Mario/Mario/inc/Object.h \
  C:/raylib/raylib/src/raylib.h \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdarg.h \
  C:/mingw64/x86_64-w64-mingw32/include/stdarg.h \
@@ -9,8 +9,8 @@ CMakeFiles/Mario.dir/src/Tile.cpp.obj: D:\Mario_Gr02\src\Tile.cpp \
  C:/mingw64/x86_64-w64-mingw32/include/_mingw_mac.h \
  C:/mingw64/x86_64-w64-mingw32/include/_mingw_secapi.h \
  C:/mingw64/x86_64-w64-mingw32/include/sdks/_mingw_ddk.h \
- D:/Mario_Gr02/inc/Drawable.h D:/Mario_Gr02/inc/CollisionProbe.h \
- D:/Mario_Gr02/inc/GameClock.h D:/Mario_Gr02/inc/ResrcManager.h \
+ D:/Mario/Mario/inc/Drawable.h D:/Mario/Mario/inc/CollisionProbe.h \
+ D:/Mario/Mario/inc/GameClock.h D:/Mario/Mario/inc/ResrcManager.h \
  C:/mingw64/include/c++/14.2.0/unordered_map \
  C:/mingw64/include/c++/14.2.0/bits/requires_hosted.h \
  C:/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/c++config.h \

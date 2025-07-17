@@ -1,5 +1,5 @@
-CMakeFiles/Mario.dir/src/Button.cpp.obj: D:\Mario_Gr02\src\Button.cpp \
- D:/Mario_Gr02/inc/Button.h D:/Mario_Gr02/inc/Drawable.h \
+CMakeFiles/Mario.dir/src/Button.cpp.obj: D:\Mario\Mario\src\Button.cpp \
+ D:/Mario/Mario/inc/Button.h D:/Mario/Mario/inc/Drawable.h \
  C:/raylib/raylib/src/raylib.h \
  C:/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdarg.h \
  C:/mingw64/x86_64-w64-mingw32/include/stdarg.h \
