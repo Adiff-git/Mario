@@ -5,7 +5,8 @@
 #include "Tile.h"
 #include "Fireball.h"
 #include "Item.h"
-
+#include "Enemy.h"
+#include "EnemyManager.h"
 // class Mario; // Forward declaration
 // class Tile; // Forward declaration
 // class Fireball; // Forward declaration
@@ -15,9 +16,16 @@ class MediatorCollision {
         void HandleMarioWithTile(Mario*& mario, Tile*& tile, CollisionType AtoB);
         void HandleFireballWithTile(Fireball*& fireball, Tile*& tile, CollisionType AtoB);
         void HandleItemWithTile(Item *& item, Tile *& tile, CollisionType AtoB);
+        
+        void HandleMarioWithEnemy(Mario*& mario, Enemy*& enemy, CollisionType AtoB);
+        void HandleEnemyWithFireball(Enemy*& enemy, Fireball*& fireball, CollisionType AtoB);
+        void HandleEnemyWithTile(Enemy*& enemy, Tile* tile, CollisionType AtoB);
+        std::vector<Enemy*> enemies;
+
     public:
         MediatorCollision() = default; // Ensure default constructor exists
         ~MediatorCollision() = default;
 
         void HandleCollision(Object* ObjectA, Object* ObjectB);
+        std::vector<Enemy*>& GetEnemies();
 };

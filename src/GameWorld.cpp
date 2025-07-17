@@ -7,7 +7,7 @@
 #include "Star.h"
 #include "ThreeUpMoon.h"
 #include "YoshiCoin.h"
-
+#include "EnemyManager.h"
 GameWorld::GameWorld() : player(), 
 interactiveTiles(map.getInteractiveTiles())
 {   
@@ -20,6 +20,7 @@ interactiveTiles(map.getInteractiveTiles())
     camera.rotation = 0.0f;
     camera.zoom = 1.0f;
     background = ResrcManager::GetInstance().getTexture("BACKGROUND_0");
+    
 }
 
 GameWorld::GameWorld(int MapID, GameScreen* gameScreen) : 
@@ -75,6 +76,11 @@ gameState(GameState::GAME_PLAYING)
         interactiveItems.push_back(std::make_shared<Star>(Vector2{350, 500}));
         interactiveItems.push_back(std::make_shared<ThreeUpMoon>(Vector2{400, 500}));
         interactiveItems.push_back(std::make_shared<YoshiCoin>(Vector2{450, 500}));
+        mediatorCollision.GetEnemies().push_back(new Goomba(Vector2{450, 500}));
+        mediatorCollision.GetEnemies().push_back(new GreenKoopa(Vector2{500, 500}));
+        mediatorCollision.GetEnemies().push_back(new BuzzyBeetle(Vector2{600, 500}));
+        mediatorCollision.GetEnemies().push_back(new Rex(Vector2{650, 500}));
+        mediatorCollision.GetEnemies().push_back(new FlyingGoomba(Vector2{750, 500}));
     }
 }
 
@@ -118,6 +124,46 @@ void GameWorld::UpdateWorld()
                 item->Update();
             }
         }
+        for (Enemy *enemy : mediatorCollision.GetEnemies())
+    {
+        enemy->Update();
+    }
+
+    for (auto const &tile : interactiveTiles)
+    {
+        CollisionType collision = player.checkCollisionType(*tile);
+        if (collision)
+            mediatorCollision.HandleCollision(&player, tile);
+
+        for (auto &fireball : *player.GetFireballs())
+        {
+            CollisionType fireballCollision = fireball->checkCollisionType(*tile);
+            if (fireballCollision)
+                mediatorCollision.HandleCollision(fireball, tile);
+        }
+
+        for (Enemy *enemy : mediatorCollision.GetEnemies())
+        {
+            mediatorCollision.HandleCollision(enemy, tile);
+        }
+    }
+
+    for (Enemy *enemy : mediatorCollision.GetEnemies())
+    {
+        CollisionType marioEnemyCollision = player.checkCollisionType(*enemy);
+        if (marioEnemyCollision)
+            mediatorCollision.HandleCollision(&player, enemy);
+    }
+
+    for (Enemy *enemy : mediatorCollision.GetEnemies())
+    {
+        for (auto &fireball : *player.GetFireballs())
+        {
+            CollisionType enemyFireballCollision = enemy->checkCollisionType(*fireball);
+            if (enemyFireballCollision)
+                mediatorCollision.HandleCollision(enemy, fireball);
+        }
+    }
 }
 
 void GameWorld::DrawWorld()
@@ -151,7 +197,9 @@ void GameWorld::DrawWorld()
     for (auto const& item : interactiveItems) {
         item->Draw();
     }
-
+    for (Enemy* enemy : mediatorCollision.GetEnemies()) {
+        enemy->Draw();
+    }
     EndMode2D();
 }
 
