@@ -20,9 +20,18 @@ GlassBlock::~GlassBlock() = default;
 void GlassBlock::Update() {}
 
 void GlassBlock::Draw() {
+    if(this->GetState() == OBJECT_STATE_TRANSITIONING_1) {
+        DrawTexture(ResrcManager::GetInstance().getTexture("BLOCK_GLASS_1"), pos.x, pos.y, WHITE);
+        return;
+    }else if(this->GetState() == OBJECT_STATE_TRANSITIONING_2) {
+        DrawTexture(ResrcManager::GetInstance().getTexture("BLOCK_GLASS_2"), pos.x, pos.y, WHITE);
+        return;
+    }
     DrawTexture( ResrcManager::GetInstance().getTexture("BLOCK_GLASS"), pos.x, pos.y, WHITE );
 }
 
 void GlassBlock::doHit(Mario& mario, GameWorld* world) {
-    this->SetState(OBJECT_STATE_TO_BE_REMOVED);
+    if(this->GetState() == OBJECT_STATE_TRANSITIONING_1) this->SetState(OBJECT_STATE_TRANSITIONING_2);
+    else if(this->GetState() == OBJECT_STATE_TRANSITIONING_2) this->SetState(OBJECT_STATE_TO_BE_REMOVED);
+    else this->SetState(OBJECT_STATE_TRANSITIONING_1);
 }
