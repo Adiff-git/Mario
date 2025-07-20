@@ -4,9 +4,8 @@
 #include "raylib.h"
 #include <iostream>
 #include <memory>
-#include "GameWorld.h"
 #include "Mario.h"
-class GameWorld;
+#include "GameWorld.h"
 
 enum class TransitionState {
     NEXT_LEVEL,

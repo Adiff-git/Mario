@@ -1,7 +1,4 @@
 #include "GameWorld.h"
-#include "Coin.h"
-#include "CourseClearToken.h"
-#include "FireFlower.h"
 #include "Mushroom.h"
 #include "OneUpMushroom.h"
 #include "Star.h"
@@ -171,6 +168,7 @@ void GameWorld::UpdateWorld()
 {
     // 1. Cập nhật trạng thái và vật lý của người chơi
     player.UpdateStateAndPhysic();
+    player.UpdateCollisionProbes();
 
     // 2. Kiểm tra nếu Mario vẫn đang chơi bình thường
     if (player.GetState() != OBJECT_STATE_DEAD &&
@@ -242,6 +240,54 @@ void GameWorld::UpdateWorld()
                 mediatorCollision.HandleCollision(enemy, tile);
         }
     }
+
+    for (auto &block : map.getBlocks())
+{
+    block->Update();
+    CollisionType collision = block->checkCollisionType(player);
+    if( collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_EYES_OPENED)
+    {   
+        if(!block->isHit()) player.SetVel(Vector2{player.GetVel().x, 0});
+        block->doHit(player, this);
+    }
+    if (collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_QUESTION)
+    {   
+        block->doHit(player, this);
+        player.SetVel({player.GetVel().x, 0});
+    }
+    if (collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_GLASS)
+    {
+        block->doHit(player, this);
+        player.SetVel({player.GetVel().x, 0});
+    }
+    
+    mediatorCollision.HandleCollision(&player, block);
+}
+    auto& blocks = map.getBlocks();
+        blocks.erase(
+            std::remove_if(
+                blocks.begin(),
+                blocks.end(),
+                [](Block* block) {
+                    return block->GetState() == OBJECT_STATE_TO_BE_REMOVED;
+                }
+            ),
+            blocks.end()
+        );
+
+    interactiveItems.erase(
+    std::remove_if(
+        interactiveItems.begin(),
+        interactiveItems.end(),
+        [](const std::shared_ptr<Item>& item) {
+            return item->GetState() == OBJECT_STATE_TO_BE_REMOVED || item->GetState() == OBJECT_STATE_DEAD;
+        }
+    ),
+    interactiveItems.end()
+
+    
+);
+    
 }
 
 
@@ -300,4 +346,8 @@ const float GameWorld::GetGravity()
 void GameWorld::Init()
 {
     ResrcManager::GetInstance().loadResources();
+}
+
+Map GameWorld::GetMap() {
+    return map;
 }

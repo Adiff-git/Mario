@@ -1,4 +1,4 @@
-# Install script for directory: C:/raylib/raylib/src/external/glfw
+# Install script for directory: C:/raylib/src/external/glfw
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -32,13 +32,13 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "FALSE")
 endif()
 
-# Set path to fallback-tool for dependency-resolution.
+# Set default install directory permissions.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "C:/mingw64/bin/objdump.exe")
+  set(CMAKE_OBJDUMP "C:/Strawberry/c/bin/objdump.exe")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("D:/Mario/Mario/build/raylib_build/raylib/external/glfw/src/cmake_install.cmake")
+  include("D:/prj3/Mario/build/raylib_build/raylib/external/glfw/src/cmake_install.cmake")
 endif()
 

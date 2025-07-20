@@ -16,6 +16,10 @@ std::vector<Tile *> &Map::getInteractiveTiles()
     return interactiveTiles;
 }
 
+std::vector<Block*>& Map :: getBlocks(){
+    return blocks;
+}
+
 
 
 float Map::GetWidth() const
@@ -51,10 +55,35 @@ void Map::LoadMap(int mapIndex)
             int tileId = data[y * width + x];
             if (tileId == 0)
                 continue;
+            else if(tileId == 2010) {
+                blocks.push_back(new QuestionBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE, GIFT_NONE));
+            }
+            else if(tileId == 2011) {
+                blocks.push_back(new QuestionBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE, GIFT_COIN));
+            }
+            else if(tileId == 2012) {
+                blocks.push_back(new QuestionBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE, GIFT_FIRE_FLOWER));
+            }
+            else if (tileId == 200) {
+                blocks.push_back(new CloudBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE));
+            }
+            else if (tileId == 202) {
+                blocks.push_back(new WoodBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE));
+            }
+            else if (tileId == 203) {
+                blocks.push_back(new GlassBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE));
+            }
+            else if (tileId == 204) {
+                blocks.push_back(new EyesOpenedBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE));
+            }
+            else if (tileId == 205) {
+                blocks.push_back(new EyesClosedBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE));
+            }
             else if(tileId==1)
                 nonInteractiveTiles.push_back(new Tile(Vector2{(float) x * 32,(float) y * 32 },mapIndex ,tileId-1));
             else interactiveTiles.push_back(new Tile(Vector2{(float) x * 32,(float) y * 32 },mapIndex ,tileId-1));
             }
+
         }
 }
 
@@ -66,6 +95,10 @@ void Map::Draw()
 
     for (auto tile : nonInteractiveTiles) {
         tile->Draw();
+    }
+
+    for (auto block : blocks) {
+        block->Draw();
     }
 }
 

@@ -39,9 +39,6 @@ void FireFlower::Update()
 
 void FireFlower::Draw()
 {
-    if (state == OBJECT_STATE_TO_BE_REMOVED || state == OBJECT_STATE_DEAD)
-        return;
-
     if (blinking && doBlink)
         return;
 

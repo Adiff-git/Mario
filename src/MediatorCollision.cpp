@@ -208,6 +208,8 @@ void MediatorCollision::HandleCollision(Object* ObjectA, Object* ObjectB)
     Item* itemA = dynamic_cast<Item*>(ObjectA);
     Item* itemB = dynamic_cast<Item*>(ObjectB);
 
+    Block* blockA = dynamic_cast<Block*>(ObjectA);
+    Block* blockB = dynamic_cast<Block*>(ObjectB);
     // Mario vs Tile
     if ((marioA && tileB) || (marioB && tileA)) {
         Mario* mario = marioA ? marioA : marioB;
@@ -266,8 +268,159 @@ void MediatorCollision::HandleCollision(Object* ObjectA, Object* ObjectB)
         CollisionType type = enemy->checkCollisionType(*fireball);
         HandleEnemyWithFireball(enemy, fireball, type);
     }
+
+    // Mario vs block
+    else if((marioA && blockB) || (blockA && marioB)){
+        Block* block = blockA ? blockA : blockB;
+        Mario* mario = marioA ? marioA :marioB;
+        CollisionType type = mario->checkCollisionType(*block);
+        HandleMarioWithBlock(mario, block, type);
+    }
 }
 
+void MediatorCollision :: HandleMarioWithBlock(Mario* &mario, Block* &block, CollisionType type){
+    if(type == COLLISION_TYPE_NONE) return;
+    switch(type){
+        case COLLISION_TYPE_SOUTH:{
+            switch(block->GetBlockType())
+            {
+            case BLOCK_QUESTION:
+                mario->SetPos(Vector2{mario->GetPos().x, block->GetPos().y - mario->GetSize().y});
+                mario->SetState(OBJECT_STATE_ON_GROUND);
+                mario->SetVel(Vector2{mario->GetVel().x, 0});
+                break;
+            case BLOCK_CLOUD:
+                if(mario->GetState() == OBJECT_STATE_FALLING)
+                mario->SetPos(Vector2{mario->GetPos().x, block->GetPos().y - mario->GetSize().y});
+                mario->SetState(OBJECT_STATE_ON_GROUND);
+                mario->SetVel(Vector2{mario->GetVel().x, 0});
+                break;
+            case BLOCK_GLASS:
+                mario->SetPos(Vector2{mario->GetPos().x, block->GetPos().y - mario->GetSize().y});
+                mario->SetState(OBJECT_STATE_ON_GROUND);
+                mario->SetVel(Vector2{mario->GetVel().x, 0});
+                break;
+            case BLOCK_WOOD:
+                mario->SetPos(Vector2{mario->GetPos().x, block->GetPos().y - mario->GetSize().y});
+                mario->SetState(OBJECT_STATE_ON_GROUND);
+                mario->SetVel(Vector2{mario->GetVel().x, 0});
+                break;
+            case BLOCK_EYES_OPENED:
+                if(!block->isHit()){
+                mario->SetPos(Vector2{mario->GetPos().x, block->GetPos().y - mario->GetSize().y});
+                mario->SetState(OBJECT_STATE_ON_GROUND);
+                mario->SetVel(Vector2{mario->GetVel().x, 0});
+                }
+                break;
+            case BLOCK_EYES_CLOSED:
+                mario->SetPos(Vector2{mario->GetPos().x, block->GetPos().y - mario->GetSize().y});
+                mario->SetState(OBJECT_STATE_ON_GROUND);
+                mario->SetVel(Vector2{mario->GetVel().x, 0});
+                break;
+            default:
+                break;
+            };
+            break;
+        }
+        case COLLISION_TYPE_NORTH:{
+            switch(block->GetBlockType())
+            {
+            case BLOCK_QUESTION:
+                mario->SetPos(Vector2{mario->GetPos().x, block->GetPos().y + block->GetSize().y});
+                mario->SetVel(Vector2{mario->GetVel().x, 0});
+                break;
+            case BLOCK_CLOUD:
+                break;
+            case BLOCK_GLASS:
+                mario->SetPos(Vector2{mario->GetPos().x, block->GetPos().y + block->GetSize().y});
+                mario->SetVel(Vector2{mario->GetVel().x, 0});
+                break;
+            case BLOCK_WOOD:
+                mario->SetPos(Vector2{mario->GetPos().x, block->GetPos().y + block->GetSize().y});
+                mario->SetVel(Vector2{mario->GetVel().x, 0});
+                break;
+            case BLOCK_EYES_OPENED:
+                if(!block->isHit())
+                {
+                mario->SetPos(Vector2{mario->GetPos().x, block->GetPos().y + block->GetSize().y});
+                mario->SetVel(Vector2{mario->GetVel().x, 0});
+                }
+                break;
+            case BLOCK_EYES_CLOSED:
+                mario->SetPos(Vector2{mario->GetPos().x, block->GetPos().y + block->GetSize().y});
+                mario->SetVel(Vector2{mario->GetVel().x, 0});
+                break;
+            default:
+                break;
+            };
+            break;
+        }
+        case COLLISION_TYPE_EAST:{
+            switch(block->GetBlockType())
+            {
+            case BLOCK_QUESTION:
+                mario->SetPos(Vector2{block->GetPos().x - mario->GetSize().x, mario->GetPos().y});
+                mario->SetVel(Vector2{0, mario->GetVel().y});
+                break;
+            case BLOCK_CLOUD:
+                break;
+            case BLOCK_GLASS:
+                mario->SetPos(Vector2{block->GetPos().x - mario->GetSize().x, mario->GetPos().y});
+                mario->SetVel(Vector2{0, mario->GetVel().y});
+                break;
+            case BLOCK_WOOD:
+                mario->SetPos(Vector2{block->GetPos().x - mario->GetSize().x, mario->GetPos().y});
+                mario->SetVel(Vector2{0, mario->GetVel().y});
+                break;
+            case BLOCK_EYES_OPENED:
+                if(!block->isHit()){
+                mario->SetPos(Vector2{block->GetPos().x - mario->GetSize().x, mario->GetPos().y});
+                mario->SetVel(Vector2{0, mario->GetVel().y});
+                }
+                break;
+            case BLOCK_EYES_CLOSED:
+                mario->SetPos(Vector2{block->GetPos().x - mario->GetSize().x, mario->GetPos().y});
+                mario->SetVel(Vector2{0, mario->GetVel().y});
+                break;
+            default:
+                break;
+            };
+            break;
+        }
+        case COLLISION_TYPE_WEST:{
+            switch(block->GetBlockType())
+            {
+            case BLOCK_QUESTION:
+                mario->SetPos(Vector2{block->GetPos().x + block->GetSize().x, mario->GetPos().y});
+                mario->SetVel(Vector2{0, mario->GetVel().y});
+                break;
+            case BLOCK_CLOUD:
+                break;
+            case BLOCK_GLASS:
+                mario->SetPos(Vector2{block->GetPos().x + block->GetSize().x, mario->GetPos().y});
+                mario->SetVel(Vector2{0, mario->GetVel().y});
+                break;
+            case BLOCK_WOOD:
+                mario->SetPos(Vector2{block->GetPos().x + block->GetSize().x, mario->GetPos().y});
+                mario->SetVel(Vector2{0, mario->GetVel().y});
+                break;
+            case BLOCK_EYES_OPENED:
+                if(!block->isHit()){
+                mario->SetPos(Vector2{block->GetPos().x + block->GetSize().x, mario->GetPos().y});
+                mario->SetVel(Vector2{0, mario->GetVel().y});
+                }
+                break;
+            case BLOCK_EYES_CLOSED:
+                mario->SetPos(Vector2{block->GetPos().x + block->GetSize().x, mario->GetPos().y});
+                mario->SetVel(Vector2{0, mario->GetVel().y});
+                break;
+            default:
+                break;
+            };
+            break;
+        }
+    }
+};
 
 void MediatorCollision::HandleEnemyWithTile(Enemy*& enemy, Tile* tile, CollisionType AtoB) {
     if (AtoB == COLLISION_TYPE_NONE) return;

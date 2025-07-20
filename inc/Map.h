@@ -12,6 +12,13 @@
 #include <memory>
 #include "CourseClearToken.h"
 #include "FireFlower.h"
+#include "Block.h"
+#include "QuestionBlock.h"
+#include "CloudBlock.h"
+#include "EyesOpenedBlock.h"
+#include "EyesClosedBlock.h"
+#include "GlassBlock.h"
+#include "WoodBlock.h"
 
 class Map : public Drawable {
     private:
@@ -22,13 +29,14 @@ class Map : public Drawable {
         Texture2D background;
         std::vector<Tile*> interactiveTiles;
         std::vector<Tile*> nonInteractiveTiles;
+        std::vector<Block*> blocks;
         void LoadFromJsonFile(const std::string& filename);
     public:
         Map();
         ~Map();
 
         std::vector<Tile*>& getInteractiveTiles();
-        
+        std::vector<Block*>& getBlocks();
 
         float GetWidth() const;
         void nextMap();

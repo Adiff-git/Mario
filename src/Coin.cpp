@@ -39,9 +39,6 @@ void Coin::Update() {
 
 void Coin::Draw()
 {
-    if (state == OBJECT_STATE_TO_BE_REMOVED || state == OBJECT_STATE_DEAD)
-        return;
-
     if (sprite != nullptr && sprite->id != 0) {
         DrawTextureEx(*sprite, pos, 0.0f, 1.0f, color);
     }

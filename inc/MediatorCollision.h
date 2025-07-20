@@ -7,6 +7,7 @@
 #include "Item.h"
 #include "Enemy.h"
 #include "EnemyManager.h"
+#include "Block.h"
 // class Mario; // Forward declaration
 // class Tile; // Forward declaration
 // class Fireball; // Forward declaration
@@ -20,6 +21,8 @@ class MediatorCollision {
         void HandleMarioWithEnemy(Mario*& mario, Enemy*& enemy, CollisionType AtoB);
         void HandleEnemyWithFireball(Enemy*& enemy, Fireball*& fireball, CollisionType AtoB);
         void HandleEnemyWithTile(Enemy*& enemy, Tile* tile, CollisionType AtoB);
+
+        void HandleMarioWithBlock(Mario* &mario, Block* &block, CollisionType);
         std::vector<Enemy*> enemies;
 
     public:
