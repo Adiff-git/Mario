@@ -954,7 +954,7 @@ typedef void (*TraceLogCallback)(int logLevel, const char *text, va_list args); 
 typedef unsigned char *(*LoadFileDataCallback)(const char *fileName, int *dataSize);    // FileIO: Load binary data
 typedef bool (*SaveFileDataCallback)(const char *fileName, void *data, int dataSize);   // FileIO: Save binary data
 typedef char *(*LoadFileTextCallback)(const char *fileName);            // FileIO: Load text data
-typedef bool (*SaveFileTextCallback)(const char *fileName, const char *text); // FileIO: Save text data
+typedef bool (*SaveFileTextCallback)(const char *fileName, char *text); // FileIO: Save text data
 
 //------------------------------------------------------------------------------------
 // Global Variables Definition
@@ -987,7 +987,7 @@ RLAPI void ToggleFullscreen(void);                                // Toggle wind
 RLAPI void ToggleBorderlessWindowed(void);                        // Toggle window state: borderless windowed, resizes window to match monitor resolution
 RLAPI void MaximizeWindow(void);                                  // Set window state: maximized, if resizable
 RLAPI void MinimizeWindow(void);                                  // Set window state: minimized, if resizable
-RLAPI void RestoreWindow(void);                                   // Restore window from being minimized/maximized
+RLAPI void RestoreWindow(void);                                   // Set window state: not minimized/maximized
 RLAPI void SetWindowIcon(Image image);                            // Set icon for window (single image, RGBA 32bit)
 RLAPI void SetWindowIcons(Image *images, int count);              // Set icon for window (multiple images, RGBA 32bit)
 RLAPI void SetWindowTitle(const char *title);                     // Set title for window
@@ -1123,7 +1123,7 @@ RLAPI bool SaveFileData(const char *fileName, void *data, int dataSize); // Save
 RLAPI bool ExportDataAsCode(const unsigned char *data, int dataSize, const char *fileName); // Export data to code (.h), returns true on success
 RLAPI char *LoadFileText(const char *fileName);                   // Load text data from file (read), returns a '\0' terminated string
 RLAPI void UnloadFileText(char *text);                            // Unload file text data allocated by LoadFileText()
-RLAPI bool SaveFileText(const char *fileName, const char *text);  // Save text data to file (write), string must be '\0' terminated, returns true on success
+RLAPI bool SaveFileText(const char *fileName, char *text);        // Save text data to file (write), string must be '\0' terminated, returns true on success
 //------------------------------------------------------------------
 
 // File system functions
@@ -1153,8 +1153,8 @@ RLAPI long GetFileModTime(const char *fileName);                  // Get file mo
 // Compression/Encoding functionality
 RLAPI unsigned char *CompressData(const unsigned char *data, int dataSize, int *compDataSize);        // Compress data (DEFLATE algorithm), memory must be MemFree()
 RLAPI unsigned char *DecompressData(const unsigned char *compData, int compDataSize, int *dataSize);  // Decompress data (DEFLATE algorithm), memory must be MemFree()
-RLAPI char *EncodeDataBase64(const unsigned char *data, int dataSize, int *outputSize);               // Encode data to Base64 string (includes NULL terminator), memory must be MemFree()
-RLAPI unsigned char *DecodeDataBase64(const char *text, int *outputSize);                             // Decode Base64 string (expected NULL terminated), memory must be MemFree()
+RLAPI char *EncodeDataBase64(const unsigned char *data, int dataSize, int *outputSize);               // Encode data to Base64 string, memory must be MemFree()
+RLAPI unsigned char *DecodeDataBase64(const unsigned char *data, int *outputSize);                    // Decode Base64 string data, memory must be MemFree()
 RLAPI unsigned int ComputeCRC32(unsigned char *data, int dataSize);  // Compute CRC32 hash code
 RLAPI unsigned int *ComputeMD5(unsigned char *data, int dataSize);   // Compute MD5 hash code, returns static int[4] (16 bytes)
 RLAPI unsigned int *ComputeSHA1(unsigned char *data, int dataSize);  // Compute SHA1 hash code, returns static int[5] (20 bytes)
