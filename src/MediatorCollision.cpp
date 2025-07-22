@@ -485,83 +485,20 @@ void MediatorCollision::HandleMarioWithEnemy(Mario*& mario, Enemy*& enemy, Colli
                         rex = nullptr;
                     }
                 } else {
-                    // Xử lý hiệu ứng nhấp nháy cho tất cả các enemy
-                    Goomba* goomba = dynamic_cast<Goomba*>(enemy);
-                    if (goomba) {
-                        if (!goomba->IsBlinking()) {
-                            goomba->StartBlinking(0.8f, 0.1f);
-                            mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
-                        }
-                    } else {
-                        GreenKoopa* greenKoopa = dynamic_cast<GreenKoopa*>(enemy);
-                        if (greenKoopa) {
-                            if (!greenKoopa->IsBlinking()) {
-                                greenKoopa->StartBlinking(1.0f, 0.08f);
-                                mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
-                            }
-                        } else {
-                            BuzzyBeetle* buzzyBeetle = dynamic_cast<BuzzyBeetle*>(enemy);
-                            if (buzzyBeetle) {
-                                if (!buzzyBeetle->IsBlinking()) {
-                                    buzzyBeetle->StartBlinking(1.2f, 0.12f);
-                                    mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
-                                }
-                            } else {
-                                FlyingGoomba* flyingGoomba = dynamic_cast<FlyingGoomba*>(enemy);
-                                if (flyingGoomba) {
-                                    if (!flyingGoomba->IsBlinking()) {
-                                        flyingGoomba->StartBlinking(0.7f, 0.07f);
-                                        mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
-                                    }
-                                } else {
-                                    // Các enemy khác vẫn bị xóa ngay
-                                    enemies.erase(std::remove(enemies.begin(), enemies.end(), enemy), enemies.end());
-                                    delete enemy;
-                                    enemy = nullptr;
-                                    mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
-                                }
-                            }
-                        }
+                    // Enemy nhấp nháy trước khi bị xóa
+                    if (!enemy->IsBlinking()) {
+                        enemy->StartBlinking(0.8f, 0.1f);
                     }
+                    mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
                 }
             }
             break;
-        }   
+        }
         //====================================================
         case COLLISION_TYPE_EAST:
         case COLLISION_TYPE_WEST:
         case COLLISION_TYPE_NORTH: {
-            mario->BeHit();            
-            // Thêm hiệu ứng nhấp nháy cho enemy khi va chạm với Mario
-            Goomba* goomba = dynamic_cast<Goomba*>(enemy);
-            if (goomba) {
-                goomba->StartBlinking(0.8f, 0.1f);
-            } else {
-                GreenKoopa* greenKoopa = dynamic_cast<GreenKoopa*>(enemy);
-                if (greenKoopa) {
-                    greenKoopa->StartBlinking(1.0f, 0.08f);
-                } else {
-                    BuzzyBeetle* buzzyBeetle = dynamic_cast<BuzzyBeetle*>(enemy);
-                    if (buzzyBeetle) {
-                        buzzyBeetle->StartBlinking(1.2f, 0.12f);
-                    } else {
-                        Rex* rex = dynamic_cast<Rex*>(enemy);
-                        if (rex) {
-                            rex->StartBlinking(0.9f, 0.09f);
-                        } else {
-                            FlyingGoomba* flyingGoomba = dynamic_cast<FlyingGoomba*>(enemy);
-                            if (flyingGoomba) {
-                                flyingGoomba->StartBlinking(0.7f, 0.07f);
-                            } else {
-                                PiranhaPlant* piranhaPlant = dynamic_cast<PiranhaPlant*>(enemy);
-                                if (piranhaPlant) {
-                                    piranhaPlant->StartBlinking(1.5f, 0.15f);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            mario->BeHit();
             break;
         }
     }
