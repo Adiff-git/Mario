@@ -526,13 +526,12 @@ void MediatorCollision::HandleMarioWithEnemy(Mario*& mario, Enemy*& enemy, Colli
                 }
             }
             break;
-        }
+        }   
         //====================================================
         case COLLISION_TYPE_EAST:
         case COLLISION_TYPE_WEST:
         case COLLISION_TYPE_NORTH: {
-            std::cout << "Mario dies ";
-            
+            mario->BeHit();            
             // Thêm hiệu ứng nhấp nháy cho enemy khi va chạm với Mario
             Goomba* goomba = dynamic_cast<Goomba*>(enemy);
             if (goomba) {

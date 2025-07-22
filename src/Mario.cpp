@@ -9,7 +9,15 @@ Mario::Mario(Vector2 pos, int lives, MarioState form)
       SpeedY(600.0f),
       marioState(form), 
       AdditionalState(SMALL),
-      isDucking(false) 
+      isDucking(false),
+      blinking(false), 
+      doBlink(false), 
+      blinkingAcum(0.0f), 
+      blinkingTime(2.0f), 
+      blinkingAcumTotal(0.0f),
+      isInvincible(false), // Khởi tạo trạng thái bất tử
+      invincibleTimer(0.0f), // Thời gian còn lại của bất tử
+      invincibleDuration(30.0f) // Thời gian bất tử 
       { // Removed direction initialization
     sprite = &ResrcManager::GetInstance().getTexture("SMALLMARIO_0_RIGHT");
     if ( form == SMALL)
@@ -310,6 +318,52 @@ void Mario::Update() {
 void Mario::UpdateStateAndPhysic() {
     HandleInput();
     const float deltaTime = GetFrameTime();
+    if (isInvincible) {
+        invincibleTimer -= deltaTime;
+        std::cout << "Invincible Timer: " << invincibleTimer << ", isInvincible: " << isInvincible << std::endl;
+        if (invincibleTimer <= 0.0f) {
+            isInvincible = false;
+            doBlink = false;
+            blinking = false;
+            std::cout << "Invincibility ended" << std::endl;
+        } else {
+            blinkingAcum += deltaTime;
+            if (blinkingAcum >= blinkingTime) {
+                doBlink = !doBlink; // Đồng bộ với logic của OBJECT_STATE_DYING
+                blinkingAcum = 0.0f;
+            }
+        }
+    }
+
+    if (state == OBJECT_STATE_DYING) {
+        blinkingAcum += deltaTime;
+        blinkingAcumTotal += deltaTime;
+        if (blinkingAcum >= blinkingTime) {
+            doBlink = !doBlink;
+            blinkingAcum = 0.0f;
+        }
+
+        if (blinkingAcumTotal >= 10.0f) {
+            state = OBJECT_STATE_DEAD;
+            lives--;
+            isInvincible = false; // Đảm bảo tắt bất tử khi chết
+            doBlink = false;
+            blinking = false;
+            if (lives <= 0) {
+                // TODO: Kích hoạt game over
+            } else {
+                pos = {100, 100};
+                state = OBJECT_STATE_ON_GROUND;
+                marioState = SMALL;
+                SetSize(Vector2{32, 40});
+                sprite = &ResrcManager::GetInstance().getTexture("SMALLMARIO_0_RIGHT");
+                blinking = false;
+                doBlink = false;
+            }
+            return;
+        }
+        return;
+    }
     switch(marioState) { // Corrected from MarioState to marioState
         case SMALL:
         {
@@ -398,18 +452,16 @@ void Mario::UpdateStateAndPhysic() {
 
 void Mario::Draw() {
     Update();
-    for(auto& fireball:fireballs)
-    {
+
+    for (auto& fireball : fireballs) {
         fireball->Draw();
     }
-    DrawTexture(*sprite, pos.x, pos.y, WHITE);
-        // std::cout << "Mario position: " << pos.x << ", " << pos.y << std::endl;
-    // std::cout << "Mario velocity: " << vel.x << ", " << vel.y << std::endl;
-    // cpN.draw();
-    // cpS.draw();
-    // cpE.draw();
-    // cpW.draw();
+    if (!blinking || (blinking && doBlink)) {
+        DrawTexture(*sprite, pos.x, pos.y, WHITE);
+    }
+
 }
+
 
 void Mario::changeToBig() {
     if (marioState == SMALL) {
@@ -418,14 +470,17 @@ void Mario::changeToBig() {
     }
 }
 
-void Mario::changeToSmall()
-{
-    if (marioState == BIG) {
+void Mario::changeToSmall() {
+    if (marioState == BIG || marioState == FIRE) {
         marioState = SMALL;
-        SetSize(Vector2{32, 40}); // Update size for SMALL Mario
+        SetSize(Vector2{32, 40});
+        isInvincible = true;
+        invincibleTimer = invincibleDuration;
+        blinking = true;
+        doBlink = false;
+        blinkingAcum = 0.0f;
     }
 }
-
 void Mario::changetoFire()
 {
     if (marioState == SMALL || marioState == BIG) {
@@ -454,9 +509,20 @@ void Mario::fire() {
 }
 
 void Mario::setInvincible(bool value) {
-    isInvincible = value;
+    if (isInvincible != value) { 
+        isInvincible = value;
+        if (!value) {
+            blinking = false;
+            doBlink = false;
+            invincibleTimer = 0.0f;
+        } else {
+            invincibleTimer = invincibleDuration;
+            blinking = true;
+            doBlink = false;
+            blinkingAcum = 0.0f;
+        }
+    }
 }
-
 bool Mario::getInvincible() const {
     return isInvincible;
 }
@@ -487,4 +553,26 @@ void Mario::NotifyCoinChange() {
     for (Observer* ob : observers) {
         ob->onMarioCoinChanged(coins);
     }
+}
+void Mario::BeHit() {
+    if (!isInvincible) {
+        if (marioState == BIG || marioState == FIRE) {
+            changeToSmall();
+            
+        } else {
+            Die();
+        }
+    }
+}
+
+void Mario::Die() {
+    if (state == OBJECT_STATE_DYING || state == OBJECT_STATE_DEAD) return;
+    state = OBJECT_STATE_DYING;
+    blinking = true;
+    doBlink = false;
+    blinkingAcum = 0.0f;
+    blinkingAcumTotal = 0.0f;
+    
+    sprite = &ResrcManager::GetInstance().getTexture("MARIO_DIE");
+    
 }

@@ -116,6 +116,6 @@ void Fireball::UpdateStateAndPhysic()
     else if (vel.x < 0) direction = DIRECTION_LEFT;
 
     Object::UpdateStateAndPhysic();
-    vel.y += GameWorld::GetGravity()*deltaTime;
+    vel.y += GameWorld::GetGravity()*deltaTime*10;
 }
 

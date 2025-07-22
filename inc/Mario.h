@@ -33,6 +33,13 @@ private:
     // mario state
     bool isDucking;
     bool isInvincible = false;
+    float invincibleTimer;
+    float invincibleDuration;
+    bool blinking;
+    bool doBlink;
+    float blinkingAcum;
+    float blinkingTime;
+    float blinkingAcumTotal;
     // const float invincibleFrameTime;
     // float invincibleFrameAcum;
     // int invincibleFrame;
