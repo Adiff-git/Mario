@@ -1,8 +1,10 @@
 #include "Enemy.h"
 #include "GameWorld.h"
+#include <cmath>
 
 Enemy::Enemy(Vector2 pos, Vector2 size, Vector2 vel, Color color, float friction, int currFrame, Direction dir)
-    : Object(pos, size, vel, color, friction, currFrame, dir), maxSpeedX(50.0f), textureIndex(0) {
+    : Object(pos, size, vel, color, friction, currFrame, dir), maxSpeedX(50.0f), textureIndex(0),
+      isBlinking(false), blinkingAcum(0), blinkingTime(0.1f), blinkingAcumTotal(0), doBlink(false), markedForRemoval(false) {
     cpN.setSize(Vector2{size.x/2, 1});
     cpS.setSize(Vector2{size.x/2, 1});
     cpE.setSize(Vector2{5, size.y - 5});
@@ -33,10 +35,61 @@ void Enemy::drawCollisionProbes() {
 }
 
 void Enemy::Draw() {
+    UpdateBlinking();
+
+    // Giống FireFlower: if (blinking && doBlink) return;
+    if (isBlinking && doBlink) return;
+
     if (sprite) {
         DrawTexture(*sprite, (int)pos.x, (int)pos.y, WHITE);
     } else {
         DrawRectangle((int)pos.x, (int)pos.y, (int)size.x, (int)size.y, color);
     }
+    
     drawCollisionProbes();
+}
+
+void Enemy::StartBlinking(float duration, float interval) {
+    isBlinking = true;
+    blinkingAcum = 0;
+    blinkingTime = interval;
+    blinkingAcumTotal = 0;
+    doBlink = false;
+}
+
+void Enemy::UpdateBlinking() {
+    if (!isBlinking) return;
+
+    blinkingAcum += GameClock::GetInstance().FIXED_TIME_STEP;
+    blinkingAcumTotal += GameClock::GetInstance().FIXED_TIME_STEP;
+    
+    if (blinkingAcum >= blinkingTime) {
+        doBlink = !doBlink;
+        blinkingAcum = 0;
+    }
+    
+    if (blinkingAcumTotal >= 0.8f) {
+        StopBlinking();
+        markedForRemoval = true;
+    }
+}
+
+bool Enemy::IsBlinking() const {
+    return isBlinking;
+}
+
+void Enemy::StopBlinking() {
+    isBlinking = false;
+    blinkingAcum = 0;
+    blinkingTime = 0.1f;
+    blinkingAcumTotal = 0;
+    doBlink = false;
+}
+
+bool Enemy::ShouldRender() const {
+    return !doBlink;
+}
+
+bool Enemy::ShouldBeRemoved() const {
+    return markedForRemoval;
 }
