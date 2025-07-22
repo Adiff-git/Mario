@@ -92,6 +92,7 @@ public:
     int GetScore() const;
     bool getInvincible() const;
     int GetLives() const;
+    MarioState GetMarioState() const;
 
 
     void AddLives(int livesToAdd);

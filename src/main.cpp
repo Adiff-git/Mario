@@ -25,7 +25,7 @@ int main() {
         
          // Update game world
         BeginDrawing();
-        ClearBackground(RAYWHITE);
+        ClearBackground(BLUE);
         // gameWorld.UpdateWorld();
         // gameWorld.DrawWorld();
         screenController.Update();

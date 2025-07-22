@@ -65,6 +65,11 @@ int Mario::GetLives() const
     return lives;
 }
 
+MarioState Mario::GetMarioState() const
+{
+    return marioState;
+}
+
 bool Mario::GetIsDucking() const
 {
     return isDucking;

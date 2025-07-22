@@ -233,6 +233,9 @@ void ResrcManager::loadTextures() {
     {
         textures["GUI_COIN"] = LoadTexture("resources/images/gui/guiCoin.png");
         textures["GUI_MARIO"] = LoadTexture("resources/images/gui/guiMario.png");
+        textures["GUI_BLOCK"] = LoadTexture("resources/images/gui/guiNextItem.png");
+        textures["FIREFLOWER_ICON"] = LoadTexture("resources/images/Object/items/FireFlower_0.png");
+        textures["MUSHROOM_ICON"] = LoadTexture("resources/images/Object/items/Mushroom.png");
     }
 }
 

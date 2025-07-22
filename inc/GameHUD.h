@@ -16,6 +16,15 @@ class GameHUD : public Drawable {
         Vector2 scoreSize;
         Texture2D *MarioHUD;
 
+        Vector2 marioStatePosition;
+        Vector2 marioStateSize;
+        Texture2D *marioStateTexture;
+
+        Vector2 block;
+        Vector2 blockSize;
+        Texture2D *blockTexture;
+
+        
         Font* font;
     public:
         GameHUD() = default;
