@@ -7,7 +7,8 @@
 Mushroom::Mushroom(Vector2 pos)
     : Item(pos, {32, 32}, {40, 0}, WHITE, 0.0f, 1, DIRECTION_RIGHT, 1, 0),
       applyGravity(true),
-      isMoving(true)
+      isMoving(true),
+      blinking(false), blinkingAcum(0), blinkingTime(0.1f), doBlink(false), blinkingAcumTotal(0)
 {
     state = OBJECT_STATE_ACTIVE;
     sprite = &ResrcManager::GetInstance().getTexture("Mushroom");
@@ -15,22 +16,39 @@ Mushroom::Mushroom(Vector2 pos)
 
 void Mushroom::updateMario(Mario& mario)
 {
-    if (state == OBJECT_STATE_TO_BE_REMOVED)
+    if (state == OBJECT_STATE_TO_BE_REMOVED || blinking)
         return;
 
-    mario.changeToBig(); // Mario biến to
-    this->SetState(OBJECT_STATE_TO_BE_REMOVED);
+    mario.changeToBig(); 
+    blinking = true;     
+    blinkingAcum = 0;
+    blinkingAcumTotal = 0;
 }
 
 void Mushroom::playCollisionSound()
 {
-    // Optional: Add mushroom pickup sound
+
 }
 
 void Mushroom::Update()
 {
     const float dt = 1.0f / 60.0f;
     float fixedDt = GameClock::GetInstance().FIXED_TIME_STEP;
+
+    if (blinking) {
+        blinkingAcum += GameClock::GetInstance().FIXED_TIME_STEP;
+        blinkingAcumTotal += GameClock::GetInstance().FIXED_TIME_STEP;
+        
+        if (blinkingAcum >= blinkingTime) {
+            doBlink = !doBlink;
+            blinkingAcum = 0;
+        }
+        
+        if (blinkingAcumTotal >= 0.8f) {
+            this->SetState(OBJECT_STATE_TO_BE_REMOVED);
+            return;
+        }
+    }
 
     if (state == OBJECT_STATE_ACTIVE || state == OBJECT_STATE_FALLING)
     {
@@ -48,7 +66,7 @@ void Mushroom::Update()
 
         if (state == OBJECT_STATE_ON_GROUND)
         {
-            vel.y = -200.f; // Bật lên khi chạm đất
+            vel.y = -200.f; 
             state = OBJECT_STATE_ACTIVE;
         }
     }
@@ -58,6 +76,8 @@ void Mushroom::Draw()
 {
     if (state == OBJECT_STATE_TO_BE_REMOVED || state == OBJECT_STATE_DEAD)
         return;
+
+    if (blinking && doBlink) return;
 
     if (sprite)
         DrawTextureEx(*sprite, pos, 0.0f, 1.0f, color);

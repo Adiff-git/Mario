@@ -16,7 +16,7 @@ interactiveTiles(map.getInteractiveTiles())
     camera.target = player.GetPos();
     camera.rotation = 0.0f;
     camera.zoom = 1.0f;
-    background = ResrcManager::GetInstance().getTexture("BACKGROUND_0");
+    background = ResrcManager::GetInstance().getTexture("BACKGROUND_0"); 
     
 }
 
@@ -65,9 +65,9 @@ gameState(GameState::GAME_PLAYING)
             break;
     }
     if (MapID == 0) {
-        interactiveItems.push_back(std::make_shared<Coin>(Vector2{150, 500}));
+        interactiveItems.push_back(std::make_shared<Coin>(Vector2{150, 800}));
         interactiveItems.push_back(std::make_shared<CourseClearToken>(Vector2{150, 500}));
-        interactiveItems.push_back(std::make_shared<FireFlower>(Vector2{200, 500}));
+        interactiveItems.push_back(std::make_shared<FireFlower>(Vector2{200, 800}));
         interactiveItems.push_back(std::make_shared<Mushroom>(Vector2{250, 500}));
         interactiveItems.push_back(std::make_shared<OneUpMushroom>(Vector2{300, 500}));
         interactiveItems.push_back(std::make_shared<Star>(Vector2{350, 500}));

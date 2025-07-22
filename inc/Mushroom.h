@@ -8,6 +8,12 @@ private:
     bool isMoving;
     float maxSpeedX = 50.0f; 
     Texture2D* sprite;
+    
+    bool blinking;
+    float blinkingAcum;
+    float blinkingTime;
+    bool doBlink;
+    float blinkingAcumTotal;
 
 public:
     Mushroom(Vector2 pos);

@@ -218,6 +218,17 @@ void ResrcManager::loadTextures() {
         textures["BLOCK_EYE_OPEN_3"] = LoadTexture("resources/images/Object/blocks/EyesOpened_3.png");
         textures["BASE"] = LoadTexture("resources/images/Object/blocks/base/tiles.png");
     }
+
+    //animation of item
+
+
+    {
+
+
+        textures["+200"] = LoadTexture("resources/images/gui/guiHundredsPoints_200.png");
+
+
+    }
 }
 
 void ResrcManager::loadSounds(){

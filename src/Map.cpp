@@ -105,7 +105,7 @@ void Map::Draw()
 Map::Map()
 {   
     currBackgroundStarX = 0.0f;
-    background = ResrcManager::GetInstance().getTexture("BACKGROUND_0");
+    background = ResrcManager::GetInstance().getTexture("BACKGROUND_3");
     // Coin coin({200, 800});
     
 

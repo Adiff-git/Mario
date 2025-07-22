@@ -9,6 +9,7 @@ private:
     float blinkingAcum;
     float blinkingTime;
     bool doBlink;
+    float blinkingAcumTotal;
 
 public:
     FireFlower(Vector2 pos);

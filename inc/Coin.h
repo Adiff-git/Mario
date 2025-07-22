@@ -7,7 +7,14 @@
 class Coin : public Item {
 private:
     std::vector<Texture2D*> coinFrames;
+    Texture2D* scoreTexture;   // Texture cho "+200"
     bool collected;
+    Vector2 vel;
+    Vector2 origin;
+    float riseAmount;      
+    float maxRise;         
+    bool showScore;   
+
 
 public:
     Coin(Vector2 pos);

@@ -4,7 +4,7 @@
 GameScreen::GameScreen(ScreenController* screenController)
     : Screen(screenController), 
       BackMenu(Vector2{50, 50}, Vector2{50, 50}), 
-      level(0), 
+      level(2), 
       transitionState(TransitionState::NONE), 
       transitionTime(1.0f), 
       transitionTimeAcum(0.0f) {
@@ -257,4 +257,3 @@ void GameScreen::NextLevel() {
     }
     gameWorld = std::make_unique<GameWorld>(level, this);
 }
-

@@ -5,7 +5,8 @@
 
 Coin::Coin(Vector2 pos)
     : Item(pos, {20, 20}, {0, 0}, YELLOW, 0.25f, 4, DIRECTION_RIGHT, 1, 100),
-      collected(false)
+      collected(false), vel({0, 0}), origin(pos),
+      riseAmount(0.0f), maxRise(30.0f), showScore(false)
 {
     for (int i = 0; i < 4; ++i) {
         std::string name = "COIN_" + std::to_string(i);
@@ -15,6 +16,9 @@ Coin::Coin(Vector2 pos)
         }
         coinFrames.push_back(tex);
     }
+
+    // Load score texture
+    scoreTexture = &ResrcManager::GetInstance().getTexture("+200");
 
     currentFrame = 0;
     frameAcumulator = 0.0f; 
@@ -34,6 +38,17 @@ void Coin::Update() {
         frameAcumulator = 0;
     }
 
+    if(collected){
+        float dt = GameClock::GetInstance().FIXED_TIME_STEP;
+        vel.y = -60.0f; // velocity bay
+        pos.y += vel.y * dt;
+        riseAmount += -vel.y * dt;
+
+        if (riseAmount >= maxRise) {
+            this->SetState(OBJECT_STATE_TO_BE_REMOVED);
+        }
+    }
+
     UpdateCollisionProbes();
 }
 
@@ -42,22 +57,31 @@ void Coin::Draw()
     if (sprite != nullptr && sprite->id != 0) {
         DrawTextureEx(*sprite, pos, 0.0f, 1.0f, color);
     }
+
+    //animation +marks
+    if (collected && riseAmount < maxRise && showScore) {
+        if (scoreTexture != nullptr && scoreTexture->id != 0) {
+            DrawTextureEx(*scoreTexture, {pos.x, pos.y - 15}, 0.0f, 1.0f, WHITE);
+        }
+    }
 }
 
 void Coin::updateMario(Mario& mario)
 {
     if (collected || state == OBJECT_STATE_TO_BE_REMOVED) return;
 
-    int currentCoins = mario.GetCoins() + 1;
-    if (currentCoins >= 100) {
+    int currentCoins = mario.GetCoins() + 200;
+    if (currentCoins >= 10000) {
         mario.SetLives(mario.GetLives() + 1);
-        mario.SetCoins(currentCoins - 100);
+        mario.SetCoins(currentCoins - 10000);
     } else {
         mario.SetCoins(currentCoins);
     }
 
     collected = true;
-    this->SetState(OBJECT_STATE_TO_BE_REMOVED);
+    vel = {0, -60}; 
+    showScore = true;
+    // this->SetState(OBJECT_STATE_TO_BE_REMOVED);
 }
 
 void Coin::playCollisionSound()
