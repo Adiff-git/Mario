@@ -7,7 +7,7 @@ BulletBill::BulletBill(Vector2 pos)
     maxSpeedX = 1.0f; // Tốc độ tối đa bằng vận tốc ban đầu
 }
 
-void BulletBill::UpdateStateAndPhysic() {
+void BulletBill::UpdateStateAndPhysic()  {
     const float deltaTime = GetFrameTime();
     // BulletBill bay thẳng, không chịu trọng lực
     SetPos(Vector2{(float)(GetPos().x + GetVel().x * GameClock::GetInstance().FIXED_TIME_STEP), GetPos().y});

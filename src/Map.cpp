@@ -20,6 +20,10 @@ std::vector<Block*>& Map :: getBlocks(){
     return blocks;
 }
 
+std::vector<Enemy*>& Map::GetEnemies() {
+    return enemies;
+}
+
 
 
 float Map::GetWidth() const
@@ -79,6 +83,18 @@ void Map::LoadMap(int mapIndex)
             else if (tileId == 205) {
                 blocks.push_back(new EyesClosedBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE));
             }
+            else if(tileId == 206) {
+                enemies.push_back(new Rex(Vector2{(float)x * 32 , (float)(y * 32 - 35)}));
+            }
+            else if(tileId == 207) {
+                enemies.push_back(new GreenKoopa(Vector2{(float)x * 32 , (float)(y * 32 - 20)}));
+            }
+            else if(tileId == 208) {
+                enemies.push_back(new BuzzyBeetle(Vector2{(float)x * 32, (float)y * 32}));
+            }
+            else if(tileId >= 100 && tileId <= 199) {
+                interactiveTiles.push_back(new Tile(Vector2{(float)x * 32,(float)y * 32 },mapIndex ,tileId-100));
+            }
             else if(tileId==1)
                 nonInteractiveTiles.push_back(new Tile(Vector2{(float) x * 32,(float) y * 32 },mapIndex ,tileId-1));
             else interactiveTiles.push_back(new Tile(Vector2{(float) x * 32,(float) y * 32 },mapIndex ,tileId-1));
@@ -99,6 +115,10 @@ void Map::Draw()
 
     for (auto block : blocks) {
         block->Draw();
+    }
+
+    for(auto enemy : enemies) {
+        enemy->Draw();
     }
 }
 

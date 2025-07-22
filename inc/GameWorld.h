@@ -34,7 +34,7 @@ class GameWorld {
         GameScreen* gameScreen;
 
         std::vector<Tile*> &interactiveTiles;
-        std::vector<std::shared_ptr<Item>> interactiveItems;  
+        std::vector<std::shared_ptr<Item>> interactiveItems;
     public:
         GameWorld();
         GameWorld(int MapID, GameScreen* gameScreen); 
@@ -53,6 +53,7 @@ class GameWorld {
         std::vector<std::shared_ptr<Item>>& GetInteractiveItems() {
             return interactiveItems;
         };
+
         
         friend class GameScreen;
 };

@@ -16,6 +16,7 @@ private:
     int hitCount;
     Vector2 originalSize; 
     int animationFrame; 
+    int updateCount = 0;
 };
 
 #endif 

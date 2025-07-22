@@ -3,9 +3,10 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "D:/Downloads/untitled.tmx",
+    "activeFile": "map0.tsx",
     "expandedProjectPaths": [
     ],
+    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "D:/Downloads/untitled.tmx": {
             "scale": 0.5826171875,
@@ -15,10 +16,29 @@
                 "y": 479.7318136104592
             }
         },
+        "Mario/map2.tsj": {
+            "scaleInDock": 1
+        },
         "map0.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 1,
             "scaleInEditor": 1
+        },
+        "resources/maps/map0.json": {
+            "scale": 0.556640625,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1023.1017543859649,
+                "y": 480.561403508772
+            }
+        },
+        "resources/maps/map2.json": {
+            "scale": 0.2375,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 2397.8947368421054,
+                "y": 1117.8947368421052
+            }
         },
         "resources/maps/map2.tmx": {
             "scale": 0.5826171875,
@@ -27,21 +47,32 @@
                 "x": 1023.8283607106938,
                 "y": 690.8481394569226
             }
+        },
+        "resources/maps/map4.json": {
+            "scale": 0.2375,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 2397.8947368421054,
+                "y": 477.8947368421052
+            }
         }
     },
     "last.exportedFilePath": "D:/Downloads/Ref/Gia/Mario/resources/maps",
+    "last.externalTilesetPath": "D:/prj3/Mario",
     "last.imagePath": "D:/Downloads/Ref/Gia/Mario/resources/images/tiles",
     "map.height": 30,
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "tmx",
     "map.width": 64,
     "openFiles": [
-        "map0.tsx",
-        "D:/Downloads/untitled.tmx"
+        "map0.tsx"
     ],
     "project": "untitled.tiled-project",
     "recentFiles": [
         "map0.tsx",
+        "resources/maps/map0.json",
+        "resources/maps/map2.json",
+        "resources/maps/map4.json",
         "D:/Downloads/untitled.tmx",
         "resources/maps/map2.tmx"
     ],

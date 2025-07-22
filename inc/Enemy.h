@@ -7,6 +7,7 @@ class Enemy : public Object {
 protected:
     float maxSpeedX;
     int textureIndex;
+    int updateCount = 0;
 
 public:
     Enemy(Vector2 pos, Vector2 size, Vector2 vel, Color color, float friction, int currFrame, Direction dir);
