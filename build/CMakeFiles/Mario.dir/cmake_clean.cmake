@@ -33,6 +33,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Mario.dir/src/FlyingGoomba.cpp.obj.d"
   "CMakeFiles/Mario.dir/src/GameClock.cpp.obj"
   "CMakeFiles/Mario.dir/src/GameClock.cpp.obj.d"
+  "CMakeFiles/Mario.dir/src/GameHUD.cpp.obj"
+  "CMakeFiles/Mario.dir/src/GameHUD.cpp.obj.d"
   "CMakeFiles/Mario.dir/src/GameScreen.cpp.obj"
   "CMakeFiles/Mario.dir/src/GameScreen.cpp.obj.d"
   "CMakeFiles/Mario.dir/src/GameWorld.cpp.obj"

@@ -229,6 +229,11 @@ void ResrcManager::loadTextures() {
 
 
     }
+    // GUI
+    {
+        textures["GUI_COIN"] = LoadTexture("resources/images/gui/guiCoin.png");
+        textures["GUI_MARIO"] = LoadTexture("resources/images/gui/guiMario.png");
+    }
 }
 
 void ResrcManager::loadSounds(){

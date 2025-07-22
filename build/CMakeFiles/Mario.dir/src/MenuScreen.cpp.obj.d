@@ -315,4 +315,5 @@ CMakeFiles/Mario.dir/src/MenuScreen.cpp.obj: \
  D:/Downloads/Ref/Gia/Mario/inc/Rex.h \
  D:/Downloads/Ref/Gia/Mario/inc/FlyingGoomba.h \
  D:/Downloads/Ref/Gia/Mario/inc/PiranhaPlant.h \
- D:/Downloads/Ref/Gia/Mario/inc/JumpingPiranha.h
+ D:/Downloads/Ref/Gia/Mario/inc/JumpingPiranha.h \
+ D:/Downloads/Ref/Gia/Mario/inc/GameHUD.h

@@ -315,4 +315,5 @@ CMakeFiles/Mario.dir/src/GreenKoopa.cpp.obj: \
  D:/Downloads/Ref/Gia/Mario/inc/GameScreen.h \
  D:/Downloads/Ref/Gia/Mario/inc/Screen.h \
  D:/Downloads/Ref/Gia/Mario/inc/ScreenController.h \
- D:/Downloads/Ref/Gia/Mario/inc/Button.h
+ D:/Downloads/Ref/Gia/Mario/inc/Button.h \
+ D:/Downloads/Ref/Gia/Mario/inc/GameHUD.h

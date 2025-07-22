@@ -25,6 +25,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "D:/Downloads/Ref/Gia/Mario/src/Fireball.cpp" "CMakeFiles/Mario.dir/src/Fireball.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/Fireball.cpp.obj.d"
   "D:/Downloads/Ref/Gia/Mario/src/FlyingGoomba.cpp" "CMakeFiles/Mario.dir/src/FlyingGoomba.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/FlyingGoomba.cpp.obj.d"
   "D:/Downloads/Ref/Gia/Mario/src/GameClock.cpp" "CMakeFiles/Mario.dir/src/GameClock.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/GameClock.cpp.obj.d"
+  "D:/Downloads/Ref/Gia/Mario/src/GameHUD.cpp" "CMakeFiles/Mario.dir/src/GameHUD.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/GameHUD.cpp.obj.d"
   "D:/Downloads/Ref/Gia/Mario/src/GameScreen.cpp" "CMakeFiles/Mario.dir/src/GameScreen.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/GameScreen.cpp.obj.d"
   "D:/Downloads/Ref/Gia/Mario/src/GameWorld.cpp" "CMakeFiles/Mario.dir/src/GameWorld.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/GameWorld.cpp.obj.d"
   "D:/Downloads/Ref/Gia/Mario/src/GlassBlock.cpp" "CMakeFiles/Mario.dir/src/GlassBlock.cpp.obj" "gcc" "CMakeFiles/Mario.dir/src/GlassBlock.cpp.obj.d"

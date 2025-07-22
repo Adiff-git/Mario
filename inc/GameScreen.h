@@ -6,7 +6,7 @@
 #include <memory>
 #include "Mario.h"
 #include "GameWorld.h"
-
+#include "GameHUD.h"
 enum class TransitionState {
     NEXT_LEVEL,
     GAME_OVER,
@@ -18,7 +18,7 @@ class GameScreen : public Screen {
     private:
         Button BackMenu;
         std::unique_ptr<GameWorld> gameWorld;
-
+        std::unique_ptr<GameHUD> gameHUD;
         int level;
         void NextLevel();
         TransitionState transitionState;

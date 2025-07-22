@@ -4,14 +4,18 @@
 GameScreen::GameScreen(ScreenController* screenController)
     : Screen(screenController), 
       BackMenu(Vector2{50, 50}, Vector2{50, 50}), 
-      level(2), 
+      level(1), 
       transitionState(TransitionState::NONE), 
       transitionTime(1.0f), 
-      transitionTimeAcum(0.0f) {
+      transitionTimeAcum(0.0f),
+      gameHUD(nullptr)// Initialize GameHUD with player{
+    {
 
     gameWorld = std::make_unique<GameWorld>(level, this);
     gameWorld->player.SetLives(3); // Set initial lives
     gameWorld->player.SetCoins(0); // Set initial coins
+    gameWorld->player.SetScore(0); // Set initial score
+    gameHUD = std::make_unique<GameHUD>(&gameWorld->player);
     BackMenu.SetTexture(ResrcManager::GetInstance().getTexture("BACK_BUTTON"));  
     SoundManager::GetInstance().StopAllSounds();
     SoundManager::GetInstance().PlayMusic("GAMEWORLD_0");
@@ -104,6 +108,7 @@ void GameScreen::BeginTransition(TransitionState transitionState) {
 void GameScreen::Draw() {
     gameWorld->DrawWorld();
     BackMenu.Draw();
+    gameHUD->Draw();
     if (gameWorld->IsCompleted()) {
         if (transitionState == TransitionState::NONE) {
             DrawEnd();
@@ -212,6 +217,7 @@ void GameScreen::ResetGame() {
         gameWorld->player.SetCoins(0); // Reset coins
         gameWorld = std::make_unique<GameWorld>(level, this);
     }
+    gameHUD = std::make_unique<GameHUD>(&gameWorld->player);
 }
 
 void GameScreen::DrawEnd() {
@@ -256,4 +262,5 @@ void GameScreen::NextLevel() {
         level = 0; // Reset to first level if exceeded
     }
     gameWorld = std::make_unique<GameWorld>(level, this);
+    gameHUD = std::make_unique<GameHUD>(&gameWorld->player); // Reinitialize GameHUD with the new player
 }

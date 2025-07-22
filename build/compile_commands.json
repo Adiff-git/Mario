@@ -103,6 +103,12 @@
 },
 {
   "directory": "D:/Downloads/Ref/Gia/Mario/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\GameHUD.cpp.obj -c D:\\Downloads\\Ref\\Gia\\Mario\\src\\GameHUD.cpp",
+  "file": "D:/Downloads/Ref/Gia/Mario/src/GameHUD.cpp",
+  "output": "CMakeFiles/Mario.dir/src/GameHUD.cpp.obj"
+},
+{
+  "directory": "D:/Downloads/Ref/Gia/Mario/build",
   "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP @CMakeFiles/Mario.dir/includes_CXX.rsp -g -std=gnu++20 -o CMakeFiles\\Mario.dir\\src\\GameScreen.cpp.obj -c D:\\Downloads\\Ref\\Gia\\Mario\\src\\GameScreen.cpp",
   "file": "D:/Downloads/Ref/Gia/Mario/src/GameScreen.cpp",
   "output": "CMakeFiles/Mario.dir/src/GameScreen.cpp.obj"

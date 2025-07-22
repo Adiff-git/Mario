@@ -21,13 +21,13 @@ interactiveTiles(map.getInteractiveTiles())
 }
 
 GameWorld::GameWorld(int MapID, GameScreen* gameScreen) : 
-player(), 
+player(Vector2{100, 100}, 3, SMALL), 
 interactiveTiles(map.getInteractiveTiles()), 
 gameScreen(gameScreen),
 gameState(GameState::GAME_PLAYING)
 {
     map.LoadMap(MapID);
-    player = Mario(Vector2{100, 100}, 3, SMALL); // Đặt vị trí cụ thể
+    // player = Mario(Vector2{100, 100}, 3, SMALL); // Đặt vị trí cụ thể
     camera.offset = Vector2{(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
     camera.target = player.GetPos();
     camera.rotation = 0.0f;

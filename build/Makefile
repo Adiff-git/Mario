@@ -654,6 +654,30 @@ src/GameClock.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/GameClock.cpp.s
 .PHONY : src/GameClock.cpp.s
 
+src/GameHUD.obj: src/GameHUD.cpp.obj
+.PHONY : src/GameHUD.obj
+
+# target to build an object file
+src/GameHUD.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/GameHUD.cpp.obj
+.PHONY : src/GameHUD.cpp.obj
+
+src/GameHUD.i: src/GameHUD.cpp.i
+.PHONY : src/GameHUD.i
+
+# target to preprocess a source file
+src/GameHUD.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/GameHUD.cpp.i
+.PHONY : src/GameHUD.cpp.i
+
+src/GameHUD.s: src/GameHUD.cpp.s
+.PHONY : src/GameHUD.s
+
+# target to generate assembly for a file
+src/GameHUD.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Mario.dir\build.make CMakeFiles/Mario.dir/src/GameHUD.cpp.s
+.PHONY : src/GameHUD.cpp.s
+
 src/GameScreen.obj: src/GameScreen.cpp.obj
 .PHONY : src/GameScreen.obj
 
@@ -1420,6 +1444,9 @@ help:
 	@echo ... src/GameClock.obj
 	@echo ... src/GameClock.i
 	@echo ... src/GameClock.s
+	@echo ... src/GameHUD.obj
+	@echo ... src/GameHUD.i
+	@echo ... src/GameHUD.s
 	@echo ... src/GameScreen.obj
 	@echo ... src/GameScreen.i
 	@echo ... src/GameScreen.s

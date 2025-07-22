@@ -315,5 +315,6 @@ CMakeFiles/Mario.dir/src/GameScreen.cpp.obj: \
  D:/Downloads/Ref/Gia/Mario/inc/FlyingGoomba.h \
  D:/Downloads/Ref/Gia/Mario/inc/PiranhaPlant.h \
  D:/Downloads/Ref/Gia/Mario/inc/JumpingPiranha.h \
+ D:/Downloads/Ref/Gia/Mario/inc/GameHUD.h \
  D:/Downloads/Ref/Gia/Mario/inc/MenuScreen.h \
  D:/Downloads/Ref/Gia/Mario/inc/SoundManager.h

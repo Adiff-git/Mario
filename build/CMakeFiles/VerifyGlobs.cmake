@@ -22,6 +22,7 @@ set(OLD_GLOB
   "D:/Downloads/Ref/Gia/Mario/src/Fireball.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/FlyingGoomba.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/GameClock.cpp"
+  "D:/Downloads/Ref/Gia/Mario/src/GameHUD.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/GameScreen.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/GameWorld.cpp"
   "D:/Downloads/Ref/Gia/Mario/src/GlassBlock.cpp"
