@@ -135,9 +135,9 @@ void GameScreen::Draw() {
             DrawTextEx(*SuperMarioFont, ("Level " + std::to_string(level )).c_str(),
                 Vector2{(float)GetScreenWidth() / 2 - MeasureTextEx(
                 *SuperMarioFont,
-                ("Level " + std::to_string(level )).c_str(),
-                20,7).x/2,
-                (float)GetScreenHeight() / 2 -100}, 
+                ("Level " + std::to_string(level )).c_str(),//fgdgdfgdf
+                20,7).x/2,// thisssbad
+                (float)GetScreenHeight() / 2 -100}, //dvsvsv
                 20, 7, WHITE);
             DrawTextureNPatch(*SmallMario,
                 NPatchInfo{Rectangle{0, 0, (float)(*SmallMario).width,
