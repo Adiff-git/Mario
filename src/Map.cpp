@@ -92,15 +92,11 @@ void Map::LoadMap(int mapIndex)
             else if(tileId == 208) {
                 enemies.push_back(new BuzzyBeetle(Vector2{(float)x * 32, (float)y * 32}));
             }
-            else if(tileId >= 100 && tileId <= 199) {
-                interactiveTiles.push_back(new Tile(Vector2{(float)x * 32,(float)y * 32 },mapIndex ,tileId-100));
-            }
-            else if(tileId==1)
-                nonInteractiveTiles.push_back(new Tile(Vector2{(float) x * 32,(float) y * 32 },mapIndex ,tileId-1));
-            else interactiveTiles.push_back(new Tile(Vector2{(float) x * 32,(float) y * 32 },mapIndex ,tileId-1));
-            }
-
+            else if(tileId <=104) {
+                interactiveTiles.push_back(new Tile(Vector2{(float) x * 32,(float) y * 32 },mapIndex ,tileId-1));
+            }else continue;
         }
+    }
 }
 
 void Map::Draw()
