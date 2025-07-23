@@ -24,7 +24,7 @@ void ResrcManager::loadTextures() {
     textures["SMALLMARIO_DUCKING_LEFT"] = FlipTextureHorizontal(textures["SMALLMARIO_DUCKING_RIGHT"]);
     textures["SMALLMARIO_FALLING_RIGHT"] = LoadTexture("resources/images/Object/mario/SmallMarioFalling_0.png");
     textures["SMALLMARIO_FALLING_LEFT"] = FlipTextureHorizontal(textures["SMALLMARIO_FALLING_RIGHT"]);
-    textures["MARIO_DIE"] = LoadTexture("resources/images/Object/mario/SmallMario_0.png");
+    textures["MARIO_DIE"] = LoadTexture("resources/images/Object/mario/SmallMarioDying_0.png");
     }
 
     textures["SUPER_MARIO_0_RIGHT"] = LoadTexture("resources/images/Object/mario/SuperMario_0.png");
@@ -251,7 +251,8 @@ void ResrcManager::loadSounds(){
     sounds["COIN_COLLECTION"] = LoadSound("resources/sfx/smw_coin.wav");
     sounds["POWER_UP_APPEARS"] = LoadSound("resources/sfx/smw_power-up_appears.wav");
     sounds["POWER_UP"] = LoadSound("resources/sfx/smw_power-up.wav");
-
+    sounds["FIREBALL"] = LoadSound("resources/sfx/smw_fireball.wav");
+    sounds["MARIO_STOMP"] = LoadSound("resources/sfx/smw_stomp.wav");
 }
 
 void ResrcManager::loadMusics(){

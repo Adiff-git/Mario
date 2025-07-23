@@ -8,6 +8,7 @@
 #include "PiranhaPlant.h"
 #include <iostream>
 #include <algorithm>
+#include "SoundManager.h"
 void MediatorCollision::HandleMarioWithTile(Mario* &mario, Tile * &tile, CollisionType AtoB)
 {
     if (AtoB == COLLISION_TYPE_NONE)
@@ -467,29 +468,35 @@ void MediatorCollision::HandleMarioWithEnemy(Mario*& mario, Enemy*& enemy, Colli
 
     switch (AtoB) {
         case COLLISION_TYPE_SOUTH: {
-            RedKoopa* redKoopa = dynamic_cast<RedKoopa*>(enemy);
-            if (redKoopa) {
-                float marioX = mario->GetPos().x;
-                float koopaX = redKoopa->GetPos().x;
-                bool fromLeft = (marioX < koopaX); 
-                redKoopa->OnHit(fromLeft); 
-                mario->SetVel(Vector2{mario->GetVel().x, -300.0f}); 
-            } else {
-                Rex* rex = dynamic_cast<Rex*>(enemy);
-                if (rex) {
-                    rex->OnHit(); 
-                    mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
-                    if (rex->GetHitCount() >= 2) {
-                        enemies.erase(std::remove(enemies.begin(), enemies.end(), rex), enemies.end());
-                        delete rex;
-                        rex = nullptr;
-                    }
+            if (mario->GetVel().y > 0) {
+                SoundManager::GetInstance().PlaySound("MARIO_STOMP");
+
+                RedKoopa* redKoopa = dynamic_cast<RedKoopa*>(enemy);
+                if (redKoopa) {
+                    float marioX = mario->GetPos().x;
+                    float koopaX = redKoopa->GetPos().x;
+                    bool fromLeft = (marioX < koopaX); 
+                    redKoopa->OnHit(fromLeft); 
+                    mario->SetVel(Vector2{mario->GetVel().x, -300.0f}); 
                 } else {
-                    // Enemy nhấp nháy trước khi bị xóa
-                    if (!enemy->IsBlinking()) {
-                        enemy->StartBlinking(0.8f, 0.1f);
+                    Rex* rex = dynamic_cast<Rex*>(enemy);
+                    if (rex) {
+                        rex->OnHit(); 
+                        mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
+                        if (rex->GetHitCount() >= 2) {
+                            enemies.erase(std::remove(enemies.begin(), enemies.end(), rex), enemies.end());
+                            delete rex;
+                            rex = nullptr;
+                        }
+                    } else {
+                        // Enemy nhấp nháy trước khi bị xóa
+                        if (!enemy->IsBlinking()) {
+                            enemy->StartBlinking(0.8f, 0.1f);
+                        }
+                        mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
+                        mario->SetScore(mario->GetScore() + 100); 
+                        
                     }
-                    mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
                 }
             }
             break;

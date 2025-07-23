@@ -40,11 +40,6 @@ private:
     float blinkingAcum;
     float blinkingTime;
     float blinkingAcumTotal;
-    // const float invincibleFrameTime;
-    // float invincibleFrameAcum;
-    // int invincibleFrame;
-    // float invincibleAcum;
-    // const float invincibleTime;
 
     MarioState marioState;
     MarioState AdditionalState;
