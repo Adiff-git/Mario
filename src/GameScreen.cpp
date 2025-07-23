@@ -139,7 +139,7 @@ void GameScreen::Draw() {
                 20,7).x/2,// thisssbad
                 (float)GetScreenHeight() / 2 -100}, //dvsvsv
                 20, 7, WHITE);
-            DrawTextureNPatch(*SmallMario,
+            DrawTextureNPatch(*SmallMario,//fbdb
                 NPatchInfo{Rectangle{0, 0, (float)(*SmallMario).width,
                                     24}, 0, 0, 0, 0},
                 Rectangle{(float)GetScreenWidth() / 2 -100, (float)GetScreenHeight() / 2-16, 43, 32}, Vector2{0, 0}, 0.0f, WHITE);
