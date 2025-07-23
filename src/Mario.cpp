@@ -336,14 +336,30 @@ void Mario::Update() {
 void Mario::UpdateStateAndPhysic() {
     HandleInput();
     const float deltaTime = GetFrameTime();
-    if (state == OBJECT_STATE_DYING || state == OBJECT_STATE_DEAD || state == OBJECT_STATE_TO_BE_REMOVED) {
-        vel = Vector2{0, 0}; // Stop movement when dying or dead
-        return; // Do not update if dying or dead
-    }
     if (state == OBJECT_STATE_DYING) {
-        vel.y += GameWorld::GetGravity() * deltaTime; // Apply gravity when dying
-        pos.y += vel.y * deltaTime; // Update position with vertical velocity
+        sprite = &ResrcManager::GetInstance().getTexture("MARIO_DIE");
+        
+        // Rơi xuống với gravity
+        vel.y += GameWorld::GetGravity() * deltaTime;
+        pos.y += vel.y * deltaTime;
+        
+        // Tăng thời gian chết
+        blinkingAcumTotal += deltaTime;
+        
+        // Sau 2 giây, chuyển sang DEAD
+        if (blinkingAcumTotal >= 2.0f) {
+            state = OBJECT_STATE_DEAD;
+            blinkingAcumTotal = 0.0f;
+        }
+        return; // Không xử lý logic khác khi đang chết
     }
+
+    if (state == OBJECT_STATE_DEAD || state == OBJECT_STATE_TO_BE_REMOVED) {
+        vel = Vector2{0, 0};
+        return;
+    }
+
+    
     if (isInvincible) {
         invincibleTimer -= deltaTime;
         std::cout << "Invincible Timer: " << invincibleTimer << ", isInvincible: " << isInvincible << std::endl;
@@ -370,7 +386,7 @@ void Mario::UpdateStateAndPhysic() {
             blinkingAcum = 0.0f;
         }
 
-        if (blinkingAcumTotal >= 10.0f) {
+        if (blinkingAcumTotal >= 2.0f) {
             state = OBJECT_STATE_DEAD;
             lives--;
             isInvincible = false; // Đảm bảo tắt bất tử khi chết
@@ -595,7 +611,12 @@ void Mario::BeHit() {
 
 void Mario::Die() {
     if (state == OBJECT_STATE_DYING || state == OBJECT_STATE_DEAD || state == OBJECT_STATE_TO_BE_REMOVED) return;
+    
     state = OBJECT_STATE_DYING;
+    vel = Vector2{0, -500};
+    this->SetLives(this->GetLives() - 1);
+    this->SetCoins(0);
+    this->SetScore(0);
     blinking = true;
     doBlink = false;
     blinkingAcum = 0.0f;

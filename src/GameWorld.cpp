@@ -183,10 +183,12 @@ void GameWorld::UpdateWorld()
         
     }
     //==========
-    if (player.GetState() == OBJECT_STATE_TO_BE_REMOVED ){
-        if( player.GetLives() > 0) {
+    if (player.GetState() == OBJECT_STATE_DEAD) { // ← Sửa từ TO_BE_REMOVED thành DEAD
+        if (player.GetLives() > 0) {
             gameState = GameState::GAME_RESET;
-        } else gameState = GameState::GAME_OVER;
+        } else {
+            gameState = GameState::GAME_OVER;
+        }
     }
 
     if (player.GetState() == OBJECT_STATE_VICTORY) {
@@ -264,7 +266,7 @@ void GameWorld::DrawWorld()
     DrawTextureEx(background, Vector2{BGpos + background.width * 1.3f, -200}, 0.0f, 1.3f, WHITE);
     map.Draw();
     player.Draw();
-    std::cout << "Player Position: " << player.GetPos().x << ", " << player.GetPos().y << std::endl;
+    // std::cout << "Player Position: " << player.GetPos().x << ", " << player.GetPos().y << std::endl;
 
     for (auto const &item : interactiveItems)
     {
