@@ -467,29 +467,27 @@ void MediatorCollision::HandleMarioWithEnemy(Mario*& mario, Enemy*& enemy, Colli
 
     switch (AtoB) {
         case COLLISION_TYPE_SOUTH: {
-            RedKoopa* redKoopa = dynamic_cast<RedKoopa*>(enemy);
-            if (redKoopa) {
-                float marioX = mario->GetPos().x;
-                float koopaX = redKoopa->GetPos().x;
-                bool fromLeft = (marioX < koopaX); 
-                redKoopa->OnHit(fromLeft); 
-                mario->SetVel(Vector2{mario->GetVel().x, -300.0f}); 
+            if (!enemy->IsBlinking()) {
+                enemy->StartBlinking(0.8f, 0.1f);
+            }
+            
+            mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
+            
+            Rex* rex = dynamic_cast<Rex*>(enemy);
+            if (rex) {
+                rex->OnHit(); 
+                if (rex->GetHitCount() >= 2) {
+                    enemies.erase(std::remove(enemies.begin(), enemies.end(), rex), enemies.end());
+                    delete rex;
+                    rex = nullptr;
+                }
             } else {
-                Rex* rex = dynamic_cast<Rex*>(enemy);
-                if (rex) {
-                    rex->OnHit(); 
-                    mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
-                    if (rex->GetHitCount() >= 2) {
-                        enemies.erase(std::remove(enemies.begin(), enemies.end(), rex), enemies.end());
-                        delete rex;
-                        rex = nullptr;
-                    }
-                } else {
-                    // Enemy nhấp nháy trước khi bị xóa
-                    if (!enemy->IsBlinking()) {
-                        enemy->StartBlinking(0.8f, 0.1f);
-                    }
-                    mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
+                RedKoopa* redKoopa = dynamic_cast<RedKoopa*>(enemy);
+                if (redKoopa) {
+                    float marioX = mario->GetPos().x;
+                    float koopaX = redKoopa->GetPos().x;
+                    bool fromLeft = (marioX < koopaX); 
+                    redKoopa->OnHit(fromLeft); 
                 }
             }
             break;
