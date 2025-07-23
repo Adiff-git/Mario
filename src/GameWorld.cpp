@@ -5,6 +5,7 @@
 #include "ThreeUpMoon.h"
 #include "YoshiCoin.h"
 #include "EnemyManager.h"
+#include "MediatorCollision.h"
 GameWorld::GameWorld() : player(),
                          interactiveTiles(map.getInteractiveTiles())
 {
@@ -70,15 +71,15 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen) : player(),
         interactiveItems.push_back(std::make_shared<FireFlower>(Vector2{200, 800}));
         // interactiveItems.push_back(std::make_shared<Mushroom>(Vector2{250, 500}));
         // interactiveItems.push_back(std::make_shared<OneUpMushroom>(Vector2{300, 500}));
-        // interactiveItems.push_back(std::make_shared<Star>(Vector2{350, 500}));
-        // interactiveItems.push_back(std::make_shared<ThreeUpMoon>(Vector2{400, 500}));
-        // interactiveItems.push_back(std::make_shared<YoshiCoin>(Vector2{450, 500}));
+        interactiveItems.push_back(std::make_shared<Star>(Vector2{350, 500}));
+        interactiveItems.push_back(std::make_shared<ThreeUpMoon>(Vector2{400, 500}));
+        interactiveItems.push_back(std::make_shared<YoshiCoin>(Vector2{450, 800}));
 
-        mediatorCollision.GetEnemies().push_back(new Goomba(Vector2{450, 500}));
-        mediatorCollision.GetEnemies().push_back(new GreenKoopa(Vector2{500, 500}));
-        mediatorCollision.GetEnemies().push_back(new BuzzyBeetle(Vector2{600, 500}));
-        mediatorCollision.GetEnemies().push_back(new Rex(Vector2{650, 500}));
-        mediatorCollision.GetEnemies().push_back(new FlyingGoomba(Vector2{750, 500}));
+        // mediatorCollision.GetEnemies().push_back(new Goomba(Vector2{450, 500}));
+        // mediatorCollision.GetEnemies().push_back(new GreenKoopa(Vector2{500, 500}));
+        // mediatorCollision.GetEnemies().push_back(new BuzzyBeetle(Vector2{600, 500}));
+        // mediatorCollision.GetEnemies().push_back(new Rex(Vector2{650, 500}));
+        // mediatorCollision.GetEnemies().push_back(new FlyingGoomba(Vector2{750, 800}));
     }
 }
 
@@ -271,6 +272,9 @@ void GameWorld::UpdateWorld()
         interactiveItems.end());
 
     auto &enemies = mediatorCollision.GetEnemies();
+    
+    mediatorCollision.UpdateEnemies();
+    
     auto it = enemies.begin();
     while (it != enemies.end())
     {

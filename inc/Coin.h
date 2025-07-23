@@ -7,7 +7,7 @@
 class Coin : public Item {
 private:
     std::vector<Texture2D*> coinFrames;
-    Texture2D* scoreTexture;   // Texture cho "+200"
+    Texture2D* scoreTexture;   
     bool collected;
     Vector2 vel;
     Vector2 origin;

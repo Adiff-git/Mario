@@ -30,5 +30,6 @@ class MediatorCollision {
         ~MediatorCollision() = default;
 
         void HandleCollision(Object* ObjectA, Object* ObjectB);
+        void UpdateEnemies(); 
         std::vector<Enemy*>& GetEnemies();
 };

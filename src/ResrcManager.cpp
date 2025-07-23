@@ -224,10 +224,11 @@ void ResrcManager::loadTextures() {
 
 
     {
-
-
         textures["+200"] = LoadTexture("resources/images/gui/guiHundredsPoints_200.png");
-
+        textures["+2000"] = LoadTexture("resources/images/gui/guiThousandsPoints_2000.png");
+        textures["+1000"] = LoadTexture("resources/images/gui/guiThousandsPoints_1000.png");
+        textures["+1UP"] = LoadTexture("resources/images/gui/gui1Up.png");
+        textures["+3UP"] = LoadTexture("resources/images/gui/gui3Up.png");
 
     }
     // GUI

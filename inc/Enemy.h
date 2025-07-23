@@ -15,6 +15,7 @@ protected:
     float blinkingAcumTotal;  
     bool doBlink;              
     bool markedForRemoval;     
+    bool hitByFireball;           
 
 public:
     Enemy(Vector2 pos, Vector2 size, Vector2 vel, Color color, float friction, int currFrame, Direction dir);
@@ -33,6 +34,8 @@ public:
     void StopBlinking();
     bool ShouldRender() const;
     bool ShouldBeRemoved() const; 
+    bool IsHitByFireball() const { return hitByFireball; }
+    void SetHitByFireball(bool hit) { hitByFireball = hit; } 
 };
 
 #endif

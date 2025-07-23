@@ -22,6 +22,7 @@ public:
     virtual void updateMario(Mario& mario) = 0;
     virtual void playCollisionSound() = 0;
     virtual void onSouthCollision(Mario& mario);
+    virtual bool canBeCollected() const { return true; } 
 
     void SetState(ObjectState state);
     bool isPauseGameOnHit();

@@ -4,7 +4,7 @@
 
 Enemy::Enemy(Vector2 pos, Vector2 size, Vector2 vel, Color color, float friction, int currFrame, Direction dir)
     : Object(pos, size, vel, color, friction, currFrame, dir), maxSpeedX(50.0f), textureIndex(0),
-      isBlinking(false), blinkingAcum(0), blinkingTime(0.1f), blinkingAcumTotal(0), doBlink(false), markedForRemoval(false) {
+      isBlinking(false), blinkingAcum(0), blinkingTime(0.1f), blinkingAcumTotal(0), doBlink(false), markedForRemoval(false), hitByFireball(false) {
     cpN.setSize(Vector2{size.x/2, 1});
     cpS.setSize(Vector2{size.x/2, 1});
     cpE.setSize(Vector2{5, size.y - 5});
@@ -37,7 +37,6 @@ void Enemy::drawCollisionProbes() {
 void Enemy::Draw() {
     UpdateBlinking();
 
-    // Giống FireFlower: if (blinking && doBlink) return;
     if (isBlinking && doBlink) return;
 
     if (sprite) {
