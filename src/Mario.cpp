@@ -337,7 +337,7 @@ void Mario::UpdateStateAndPhysic() {
     HandleInput();
     const float deltaTime = GetFrameTime();
     if (state == OBJECT_STATE_DYING) {
-        sprite = &ResrcManager::GetInstance().getTexture("MARIO_DIE");
+        
         
         // Rơi xuống với gravity
         vel.y += GameWorld::GetGravity() * deltaTime;
@@ -347,7 +347,7 @@ void Mario::UpdateStateAndPhysic() {
         blinkingAcumTotal += deltaTime;
         
         // Sau 2 giây, chuyển sang DEAD
-        if (blinkingAcumTotal >= 2.0f) {
+        if (blinkingAcumTotal >= 3.0f) {
             state = OBJECT_STATE_DEAD;
             blinkingAcumTotal = 0.0f;
         }
@@ -377,36 +377,7 @@ void Mario::UpdateStateAndPhysic() {
         }
     }
 
-    if (state == OBJECT_STATE_DYING) {
-        sprite = &ResrcManager::GetInstance().getTexture("MARIO_DIE");
-        blinkingAcum += deltaTime;
-        blinkingAcumTotal += deltaTime;
-        if (blinkingAcum >= blinkingTime) {
-            doBlink = !doBlink;
-            blinkingAcum = 0.0f;
-        }
-
-        if (blinkingAcumTotal >= 2.0f) {
-            state = OBJECT_STATE_DEAD;
-            lives--;
-            isInvincible = false; // Đảm bảo tắt bất tử khi chết
-            doBlink = false;
-            blinking = false;
-            if (lives <= 0) {
-                // TODO: Kích hoạt game over
-            } else {
-                pos = {100, 100};
-                state = OBJECT_STATE_ON_GROUND;
-                marioState = SMALL;
-                SetSize(Vector2{32, 40});
-                sprite = &ResrcManager::GetInstance().getTexture("SMALLMARIO_0_RIGHT");
-                blinking = false;
-                doBlink = false;
-            }
-            return;
-        }
-        return;
-    }
+    
     switch(marioState) { // Corrected from MarioState to marioState
         case SMALL:
         {
@@ -499,9 +470,9 @@ void Mario::Draw() {
     for (auto& fireball : fireballs) {
         fireball->Draw();
     }
-    if (!blinking || (blinking && doBlink)) {
-        DrawTexture(*sprite, pos.x, pos.y, WHITE);
-    }
+   
+    DrawTexture(*sprite, pos.x, pos.y, WHITE);
+    
 
 }
 
@@ -614,7 +585,7 @@ void Mario::Die() {
     
     state = OBJECT_STATE_DYING;
     vel = Vector2{0, -500};
-    this->SetLives(this->GetLives() - 1);
+    // this->SetLives(this->GetLives() - 1);
     this->SetCoins(0);
     this->SetScore(0);
     blinking = true;
