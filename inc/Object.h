@@ -50,9 +50,7 @@ class Object : public Drawable {
         int currentFrame;
         int maxFrames;
 
-        virtual void Update() = 0;
-        virtual void UpdateCollisionProbes();
-        virtual void UpdateStateAndPhysic();
+
     public:
         Object();
         Object(Vector2 pos, Vector2 size,Vector2 vel, Color color,float frameTime, int maxFrames,  Direction direction);
@@ -97,4 +95,7 @@ class Object : public Drawable {
         int GetCurrFrame() const;
         int GetMaxFrame() const;
 
+        virtual void Update() = 0;
+        virtual void UpdateCollisionProbes();
+        virtual void UpdateStateAndPhysic();
 };

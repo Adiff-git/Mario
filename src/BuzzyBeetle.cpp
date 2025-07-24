@@ -27,7 +27,7 @@ void BuzzyBeetle::UpdateStateAndPhysic() {
 
     vel.y += GameWorld::GetGravity() * deltaTime;
     Object::UpdateStateAndPhysic();
-    static int updateCount = 0;
+    
     const int updateThreshold = 50;
 
     if (fabs(GetVel().x) > 0.1f) {

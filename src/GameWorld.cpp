@@ -75,11 +75,11 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen) : player(),
         interactiveItems.push_back(std::make_shared<ThreeUpMoon>(Vector2{400, 500}));
         interactiveItems.push_back(std::make_shared<YoshiCoin>(Vector2{450, 800}));
 
-        // mediatorCollision.GetEnemies().push_back(new Goomba(Vector2{450, 500}));
-        // mediatorCollision.GetEnemies().push_back(new GreenKoopa(Vector2{500, 500}));
-        // mediatorCollision.GetEnemies().push_back(new BuzzyBeetle(Vector2{600, 500}));
-        // mediatorCollision.GetEnemies().push_back(new Rex(Vector2{650, 500}));
-        // mediatorCollision.GetEnemies().push_back(new FlyingGoomba(Vector2{750, 800}));
+        map.GetEnemies().push_back(new Goomba(Vector2{450, 500}));
+        map.GetEnemies().push_back(new GreenKoopa(Vector2{500, 500}));
+        map.GetEnemies().push_back(new BuzzyBeetle(Vector2{600, 500}));
+        map.GetEnemies().push_back(new Rex(Vector2{650, 500}));
+        map.GetEnemies().push_back(new FlyingGoomba(Vector2{750, 500}));
     }
 }
 
@@ -88,81 +88,7 @@ GameWorld::~GameWorld()
     // Destructor logic if needed
 }
 
-// void GameWorld::UpdateWorld()
-// {
-//     player.UpdateStateAndPhysic();
-//     const float ActiveWidth = GetScreenWidth() / 2.0f + 50;
-//     if (player.GetState() != OBJECT_STATE_DEAD &&
-//         player.GetState() != OBJECT_STATE_DYING &&
-//         player.GetState() != OBJECT_STATE_VICTORY) {
-//             for ( auto const &tile : interactiveTiles )
-//             {
-//                 CollisionType collision = player.checkCollisionType(*tile);
-//                 if ( collision )
-//                 {
-//                     mediatorCollision.HandleCollision(&player, tile);
-//                 }
 
-//                 for ( auto &fireball : *player.GetFireballs() )
-//                 {
-//                     CollisionType fireballCollision = fireball->checkCollisionType(*tile);
-//                     if ( fireballCollision  )
-//                     {
-//                         mediatorCollision.HandleCollision(fireball, tile);
-//                     }
-//                 }
-//             }
-
-//             for (auto const& item : interactiveItems) {
-//                 CollisionType collision = player.checkCollisionType(*item);
-//                 if (collision) {
-//                     mediatorCollision.HandleCollision(&player, item.get());
-//                 }
-
-//                 item->Update();
-//             }
-//         }
-//         for (Enemy *enemy : mediatorCollision.GetEnemies())
-//     {
-//         enemy->Update();
-//     }
-
-//     for (auto const &tile : interactiveTiles)
-//     {
-//         CollisionType collision = player.checkCollisionType(*tile);
-//         if (collision)
-//             mediatorCollision.HandleCollision(&player, tile);
-
-//         for (auto &fireball : *player.GetFireballs())
-//         {
-//             CollisionType fireballCollision = fireball->checkCollisionType(*tile);
-//             if (fireballCollision)
-//                 mediatorCollision.HandleCollision(fireball, tile);
-//         }
-
-//         for (Enemy *enemy : mediatorCollision.GetEnemies())
-//         {
-//             mediatorCollision.HandleCollision(enemy, tile);
-//         }
-//     }
-
-//     for (Enemy *enemy : mediatorCollision.GetEnemies())
-//     {
-//         CollisionType marioEnemyCollision = player.checkCollisionType(*enemy);
-//         if (marioEnemyCollision)
-//             mediatorCollision.HandleCollision(&player, enemy);
-//     }
-
-//     for (Enemy *enemy : mediatorCollision.GetEnemies())
-//     {
-//         for (auto &fireball : *player.GetFireballs())
-//         {
-//             CollisionType enemyFireballCollision = enemy->checkCollisionType(*fireball);
-//             if (enemyFireballCollision)
-//                 mediatorCollision.HandleCollision(enemy, fireball);
-//         }
-//     }
-// }
 
 void GameWorld::UpdateWorld()
 {
@@ -185,27 +111,59 @@ void GameWorld::UpdateWorld()
                 mediatorCollision.HandleCollision(&player, item.get());
         }
 
-        for (Enemy *enemy : mediatorCollision.GetEnemies())
+        // 5. Va chạm Mario với enemy
+        for (Enemy* enemy : map.GetEnemies())
         {
             if (player.checkCollisionType(*enemy) != COLLISION_TYPE_NONE)
                 mediatorCollision.HandleCollision(&player, enemy);
         }
     }
-
-    for (auto &fireball : *player.GetFireballs())
+    
+    // 6. Cập nhật và xử lý fireball
+    for (auto& fireball : *player.GetFireballs())
     {
         for (auto const &tile : interactiveTiles)
         {
             if (fireball->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
                 mediatorCollision.HandleCollision(fireball, tile);
         }
-        for (Enemy *enemy : mediatorCollision.GetEnemies())
+
+        // Fireball với enemy
+        for (Enemy* enemy : map.GetEnemies())
         {
             if (enemy->checkCollisionType(*fireball) != COLLISION_TYPE_NONE)
                 mediatorCollision.HandleCollision(enemy, fireball);
         }
     }
-    for (auto const &item : interactiveItems)
+
+        // Xóa Enemy bị tiêu diệt
+    map.GetEnemies().erase(
+        std::remove_if(
+            map.GetEnemies().begin(),
+            map.GetEnemies().end(),
+            [](Enemy* enemy){
+                return (enemy->GetState() == OBJECT_STATE_DEAD || enemy->GetState() == OBJECT_STATE_TO_BE_REMOVED);
+            }
+        ),
+        map.GetEnemies().end()
+    );
+    // Xóa Enemy bị tiêu diệt
+    // 8. Cập nhật và xử lý enemy
+    for (Enemy* enemy : map.GetEnemies())
+    {
+        // enemy->Update();
+        enemy->UpdateStateAndPhysic();
+
+        // Enemy với tile
+        for (auto const& tile : interactiveTiles)
+        {
+            if (enemy->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
+                mediatorCollision.HandleCollision(enemy, tile);
+        }
+    }
+
+    // 7. Cập nhật và xử lý item
+    for (auto const& item : interactiveItems)
     {
         item->Update();
 
@@ -216,79 +174,59 @@ void GameWorld::UpdateWorld()
         }
     }
 
-    for (Enemy *enemy : mediatorCollision.GetEnemies())
-    {
-        enemy->Update();
-
-        for (auto const &tile : interactiveTiles)
-        {
-            if (enemy->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
-                mediatorCollision.HandleCollision(enemy, tile);
-        }
-    }
-
     for (auto &block : map.getBlocks())
-    {
-        block->Update();
-        CollisionType collision = block->checkCollisionType(player);
-        if (collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_EYES_OPENED)
-        {
-            if (!block->isHit())
-                player.SetVel(Vector2{player.GetVel().x, 0});
-            block->doHit(player, this);
-        }
-        if (collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_QUESTION)
-        {
-            block->doHit(player, this);
-            player.SetVel({player.GetVel().x, 0});
-        }
-        if (collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_GLASS)
-        {
-            block->doHit(player, this);
-            player.SetVel({player.GetVel().x, 0});
-        }
-
-        mediatorCollision.HandleCollision(&player, block);
+{
+    block->Update();
+    CollisionType collision = block->checkCollisionType(player);
+    if( collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_EYES_OPENED)
+    {   
+        if(!block->isHit()) player.SetVel(Vector2{player.GetVel().x, 0});
+        block->doHit(player, this);
     }
-    auto &blocks = map.getBlocks();
-    blocks.erase(
-        std::remove_if(
-            blocks.begin(),
-            blocks.end(),
-            [](Block *block)
-            {
-                return block->GetState() == OBJECT_STATE_TO_BE_REMOVED;
-            }),
-        blocks.end());
+    if (collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_QUESTION)
+    {   
+        block->doHit(player, this);
+        player.SetVel({player.GetVel().x, 0});
+    }
+    if (collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_GLASS)
+    {
+        block->doHit(player, this);
+        player.SetVel({player.GetVel().x, 0});
+    }
+    
+    mediatorCollision.HandleCollision(&player, block);
+}   
+    // Xóa Blocks đã bị phá vỡ 
+    auto& blocks = map.getBlocks();
+        blocks.erase(
+            std::remove_if(
+                blocks.begin(),
+                blocks.end(),
+                [](Block* block) {
+                    return block->GetState() == OBJECT_STATE_TO_BE_REMOVED;
+                }
+            ),
+            blocks.end()
+        );
+    // Xóa Blocks đã bị phá vỡ 
 
+
+    // Xóa Item đã bị ăn 
     interactiveItems.erase(
         std::remove_if(
             interactiveItems.begin(),
             interactiveItems.end(),
-            [](const std::shared_ptr<Item> &item)
-            {
+            [](const std::shared_ptr<Item>& item) {
                 return item->GetState() == OBJECT_STATE_TO_BE_REMOVED || item->GetState() == OBJECT_STATE_DEAD;
-            }),
-        interactiveItems.end());
+            }
+        ),
+        interactiveItems.end()  
+    );
+    //Xóa ITem đã bị ăn 
 
-    auto &enemies = mediatorCollision.GetEnemies();
-    
-    mediatorCollision.UpdateEnemies();
-    
-    auto it = enemies.begin();
-    while (it != enemies.end())
-    {
-        if ((*it)->ShouldBeRemoved())
-        {
-            delete *it;
-            it = enemies.erase(it);
-        }
-        else
-        {
-            ++it;
-        }
-    }
+
 }
+
 
 void GameWorld::DrawWorld()
 {
@@ -326,10 +264,6 @@ void GameWorld::DrawWorld()
     for (auto const &item : interactiveItems)
     {
         item->Draw();
-    }
-    for (Enemy *enemy : mediatorCollision.GetEnemies())
-    {
-        enemy->Draw();
     }
     EndMode2D();
 }

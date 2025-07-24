@@ -19,6 +19,13 @@
 #include "EyesClosedBlock.h"
 #include "GlassBlock.h"
 #include "WoodBlock.h"
+#include "Enemy.h"
+#include "Goomba.h"
+#include "GreenKoopa.h"
+#include "BuzzyBeetle.h"
+#include "Rex.h"
+#include "FlyingGoomba.h"
+#include "RedKoopa.h"
 
 class Map : public Drawable {
     private:
@@ -30,6 +37,7 @@ class Map : public Drawable {
         std::vector<Tile*> interactiveTiles;
         std::vector<Tile*> nonInteractiveTiles;
         std::vector<Block*> blocks;
+        std::vector<Enemy*> enemies;
         void LoadFromJsonFile(const std::string& filename);
     public:
         Map();
@@ -37,7 +45,7 @@ class Map : public Drawable {
 
         std::vector<Tile*>& getInteractiveTiles();
         std::vector<Block*>& getBlocks();
-
+        std::vector<Enemy*>& GetEnemies();
         float GetWidth() const;
         void nextMap();
         void LoadMap(int mapIndex);

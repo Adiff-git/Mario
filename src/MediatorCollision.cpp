@@ -149,53 +149,7 @@ void MediatorCollision::HandleItemWithTile(Item *&item, Tile *&tile, CollisionTy
     }
 }   
 
-// void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
-// {
-//     Mario* isAmario = dynamic_cast<Mario*>(ObjectA);
-//     Mario* isBmario = dynamic_cast<Mario*>(ObjectB);
-//     Fireball* isAfireball = dynamic_cast<Fireball*>(ObjectA);
-//     Fireball* isBfireball = dynamic_cast<Fireball*>(ObjectB);
-//     Tile* isAtile = dynamic_cast<Tile*>(ObjectA);
-//     Tile* isBtile = dynamic_cast<Tile*>(ObjectB);
-//     Enemy* isAenemy = dynamic_cast<Enemy*>(ObjectA); 
-//     Enemy* isBenemy = dynamic_cast<Enemy*>(ObjectB); 
-//     if (isAmario && isBtile|| isBmario&& isAtile)
-//     {
-//         CollisionType AtoB = isAmario ? isAmario->checkCollisionType(*isBtile) : isBmario->checkCollisionType(*isAtile);
-//         if (isAmario)
-//             HandleMarioWithTile(isAmario, isBtile, AtoB);
-//         else
-//             HandleMarioWithTile(isBmario, isAtile, AtoB);
-//     }
-//     else if (isAfireball && isBtile || isBfireball && isAtile)
-//     {
-//         CollisionType AtoB = isAfireball ? isAfireball->checkCollisionType(*isBtile) : isBfireball->checkCollisionType(*isAtile);
-//         if (isAfireball)
-//             HandleFireballWithTile(isAfireball, isBtile, AtoB);
-//         else
-//             HandleFireballWithTile(isBfireball, isAtile, AtoB);
-//     }
-//     else if (isAenemy && isBtile) {
-//         CollisionType AtoB = isAenemy->checkCollisionType(*isBtile);
-//         HandleEnemyWithTile(isAenemy, isBtile, AtoB);
-//     } else if (isBenemy && isAtile) {
-//         CollisionType AtoB = isBenemy->checkCollisionType(*isAtile);
-//         HandleEnemyWithTile(isBenemy, isAtile, AtoB);
-//     }
-//     else if ((isAmario && isBenemy) || (isBmario && isAenemy)) {
-//     CollisionType AtoB = isAmario ? isAmario->checkCollisionType(*isBenemy) : isBmario->checkCollisionType(*isAenemy);
-//     if (isAmario)
-//         HandleMarioWithEnemy(isAmario, isBenemy, AtoB);
-//     else
-//         HandleMarioWithEnemy(isBmario, isAenemy, AtoB);}
-//         else if ((isAenemy && isBfireball) || (isBenemy && isAfireball)) {
-//         CollisionType AtoB = isAenemy ? isAenemy->checkCollisionType(*isBfireball) : isBenemy->checkCollisionType(*isAfireball);
-//         if (isAenemy)
-//             HandleEnemyWithFireball(isAenemy, isBfireball, AtoB);
-//         else
-//             HandleEnemyWithFireball(isBenemy, isAfireball, AtoB);
-//     }
-// }
+
 
 void MediatorCollision::HandleCollision(Object* ObjectA, Object* ObjectB)
 {
@@ -467,28 +421,31 @@ void MediatorCollision::HandleMarioWithEnemy(Mario*& mario, Enemy*& enemy, Colli
 
     switch (AtoB) {
         case COLLISION_TYPE_SOUTH: {
-            mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
-            
-            Rex* rex = dynamic_cast<Rex*>(enemy);
-            if (rex) {
-                rex->OnHit(); 
-                if (rex->GetHitCount() >= 2) {
-                    if (!rex->IsBlinking()) {
-                        rex->StartBlinking(0.8f, 0.1f);
-                    }
-                }
+            RedKoopa* redKoopa = dynamic_cast<RedKoopa*>(enemy);
+            if (redKoopa) {
+                float marioX = mario->GetPos().x;
+                float koopaX = redKoopa->GetPos().x;
+                bool fromLeft = (marioX < koopaX); 
+                redKoopa->OnHit(fromLeft); 
+                mario->SetVel(Vector2{mario->GetVel().x, -300.0f}); 
             } else {
-                if (!enemy->IsBlinking()) {
-                    enemy->StartBlinking(0.8f, 0.1f);
-                    enemy->SetHitByFireball(true);  
-                }
-                
-                RedKoopa* redKoopa = dynamic_cast<RedKoopa*>(enemy);
-                if (redKoopa) {
-                    float marioX = mario->GetPos().x;
-                    float koopaX = redKoopa->GetPos().x;
-                    bool fromLeft = (marioX < koopaX); 
-                    redKoopa->OnHit(fromLeft); 
+                Rex* rex = dynamic_cast<Rex*>(enemy);
+                if (rex) {
+                    rex->OnHit(); 
+                    mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
+                    if (rex->GetHitCount() >= 2) {
+                        rex->SetState(OBJECT_STATE_DEAD);
+                        // enemies.erase(std::remove(enemies.begin(), enemies.end(), rex), enemies.end());
+                        // delete rex;
+                        // rex = nullptr;
+                    }
+                } else {
+                    
+                    // enemies.erase(std::remove(enemies.begin(), enemies.end(), enemy), enemies.end());
+                    // delete enemy;
+                    // enemy = nullptr;
+                    enemy->SetState(OBJECT_STATE_DEAD);
+                    mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
                 }
             }
             break;
@@ -515,42 +472,14 @@ void MediatorCollision::HandleEnemyWithFireball(Enemy* &enemy, Fireball* &fireba
         return;
     }
 
-    if (enemy->IsBlinking()) {
-        std::cout << "Enemy already hit by fireball, ignoring" << std::endl;
-        return;
-    }
-
-    enemy->StartBlinking(0.8f, 0.1f);
-    enemy->SetHitByFireball(true);  
-    std::cout << "Enemy hit by fireball, starts blinking" << std::endl;
-    
+    // Các quái khác sẽ chết khi trúng fireball
+    //std::cout << "Enemies size before: " << enemies.size() << std::endl;
+    // enemies.erase(std::remove(enemies.begin(), enemies.end(), enemy), enemies.end());
+    // delete enemy;
+    // enemy = nullptr;
+    enemy->SetState(OBJECT_STATE_DEAD);
+    std::cout << "Enemy dies by fireball" << std::endl;
 }
 
 
-std::vector<Enemy*>& MediatorCollision::GetEnemies() {
-    return enemies;
-}
 
-void MediatorCollision::UpdateEnemies() {
-    for (auto it = enemies.begin(); it != enemies.end();) {
-        Enemy* enemy = *it;
-        bool shouldRemove = false;
-        
-        Rex* rex = dynamic_cast<Rex*>(enemy);
-        if (rex && rex->GetHitCount() >= 2 && !rex->IsBlinking()) {
-            std::cout << "Rex finished blinking, removing from game" << std::endl;
-            shouldRemove = true;
-        }
-        else if (!rex && !enemy->IsBlinking() && enemy->IsHitByFireball()) {
-            std::cout << "Enemy finished blinking after fireball hit, removing from game" << std::endl;
-            shouldRemove = true;
-        }
-        
-        if (shouldRemove) {
-            delete enemy;
-            it = enemies.erase(it);
-        } else {
-            ++it;
-        }
-    }
-}

@@ -7,6 +7,7 @@ class Enemy : public Object {
 protected:
     float maxSpeedX;
     int textureIndex;
+    int updateCount = 0;
 
     //animation nhấp nháy
     bool isBlinking;

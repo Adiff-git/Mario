@@ -5,7 +5,7 @@
 
 Rex::Rex(Vector2 pos) 
     : Enemy(pos, Vector2{48, 64}, Vector2{5, 0}, GREEN, 0.3f, 0, DIRECTION_RIGHT) {
-    sprite = &ResrcManager::GetInstance().getTexture("REX_0");
+    sprite = &ResrcManager::GetInstance().getTexture("REX_0_RIGHT");
     jumpCooldown = 0;
     hitCount = 0;
     originalSize = GetSize();
@@ -33,14 +33,12 @@ void Rex::UpdateStateAndPhysic() {
     vel.y += GameWorld::GetGravity() * deltaTime;
     Object::UpdateStateAndPhysic();
    
-
-    static int updateCount = 0;
     const int updateThreshold = 50;
 
     if (hitCount == 0) {
   
         if (fabs(GetVel().x) > 0.1f) {
-            updateCount++;
+            updateCount += 1;
             if (updateCount >= updateThreshold) {
                 if (GetDirection() == DIRECTION_RIGHT) {
                     if (textureIndex == 0) {

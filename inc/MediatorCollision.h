@@ -23,13 +23,12 @@ class MediatorCollision {
         void HandleEnemyWithTile(Enemy*& enemy, Tile* tile, CollisionType AtoB);
 
         void HandleMarioWithBlock(Mario* &mario, Block* &block, CollisionType);
-        std::vector<Enemy*> enemies;
+        
 
     public:
         MediatorCollision() = default; // Ensure default constructor exists
         ~MediatorCollision() = default;
 
         void HandleCollision(Object* ObjectA, Object* ObjectB);
-        void UpdateEnemies(); 
-        std::vector<Enemy*>& GetEnemies();
+        
 };

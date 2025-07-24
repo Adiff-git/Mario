@@ -16,7 +16,6 @@ void PiranhaPlant::UpdateStateAndPhysic() {
     const float deltaTime = GetFrameTime();
     animationTimer += deltaTime;
 
-    static int updateCount = 0;
     const int updateThreshold = 17;  
 
     updateCount++;
