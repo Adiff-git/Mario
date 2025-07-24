@@ -480,6 +480,3 @@ void MediatorCollision::HandleEnemyWithFireball(Enemy* &enemy, Fireball* &fireba
     enemy->SetState(OBJECT_STATE_DEAD);
     std::cout << "Enemy dies by fireball" << std::endl;
 }
-
-
-
