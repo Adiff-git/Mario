@@ -31,6 +31,7 @@ void FireFlower::updateMario(Mario& mario)
     scoreYOffset = 0.0f;      
     scoreAlpha = 1.0f;       
     scoreScale = 0.5f;        
+    this->SetState(OBJECT_STATE_TO_BE_REMOVED);
 }
 
 

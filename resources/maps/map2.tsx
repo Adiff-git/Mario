@@ -348,7 +348,7 @@
  </tile>
  <tile id="121">
   <image source="../images/Object/Enemy/BlueKoopaTroopa_0.png" width="32" height="54"/>
- </tile>
+ </tile>    
  <tile id="122">
   <image source="../images/Object/Enemy/BobOmb_0.png" width="24" height="30"/>
  </tile>

@@ -81,7 +81,7 @@ void Coin::updateMario(Mario& mario)
     collected = true;
     vel = {0, -60}; 
     showScore = true;
-    // this->SetState(OBJECT_STATE_TO_BE_REMOVED);
+    this->SetState(OBJECT_STATE_TO_BE_REMOVED);
 }
 
 void Coin::playCollisionSound()

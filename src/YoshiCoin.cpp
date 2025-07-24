@@ -26,6 +26,7 @@ void YoshiCoin::updateMario(Mario& mario)
     scoreYOffset = 0.0f;      
     scoreAlpha = 1.0f;// nhạt dần
     scoreScale = 0.5f;// từ nhỏ to dần
+    this->SetState(OBJECT_STATE_TO_BE_REMOVED);
 }
 
 void YoshiCoin::playCollisionSound()

@@ -7,7 +7,7 @@
 #include "EnemyManager.h"
 #include "MediatorCollision.h"
 GameWorld::GameWorld() : player(),
-                         interactiveTiles(map.getInteractiveTiles())
+interactiveTiles(map.getInteractiveTiles())
 {
     // Trong GameWorld constructor, thêm:
 
@@ -66,14 +66,14 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen) : player(),
     }
     if (MapID == 0)
     {
-        interactiveItems.push_back(std::make_shared<Coin>(Vector2{150, 800}));
+        map.GetInteractiveItems().push_back(std::make_shared<Coin>(Vector2{150, 800}));
         // interactiveItems.push_back(std::make_shared<CourseClearToken>(Vector2{150, 500}));
-        interactiveItems.push_back(std::make_shared<FireFlower>(Vector2{200, 800}));
+        map.GetInteractiveItems().push_back(std::make_shared<FireFlower>(Vector2{200, 800}));
         // interactiveItems.push_back(std::make_shared<Mushroom>(Vector2{250, 500}));
         // interactiveItems.push_back(std::make_shared<OneUpMushroom>(Vector2{300, 500}));
-        interactiveItems.push_back(std::make_shared<Star>(Vector2{350, 500}));
-        interactiveItems.push_back(std::make_shared<ThreeUpMoon>(Vector2{400, 500}));
-        interactiveItems.push_back(std::make_shared<YoshiCoin>(Vector2{450, 800}));
+        map.GetInteractiveItems().push_back(std::make_shared<Star>(Vector2{350, 500}));
+        map.GetInteractiveItems().push_back(std::make_shared<ThreeUpMoon>(Vector2{400, 500}));
+        map.GetInteractiveItems().push_back(std::make_shared<YoshiCoin>(Vector2{450, 800}));
 
         map.GetEnemies().push_back(new Goomba(Vector2{450, 500}));
         map.GetEnemies().push_back(new GreenKoopa(Vector2{500, 500}));
@@ -105,7 +105,7 @@ void GameWorld::UpdateWorld()
                 mediatorCollision.HandleCollision(&player, tile);
         }
 
-        for (auto const &item : interactiveItems)
+        for (auto const &item : map.GetInteractiveItems())
         {
             if (player.checkCollisionType(*item) != COLLISION_TYPE_NONE)
                 mediatorCollision.HandleCollision(&player, item.get());
@@ -163,7 +163,7 @@ void GameWorld::UpdateWorld()
     }
 
     // 7. Cập nhật và xử lý item
-    for (auto const& item : interactiveItems)
+    for (auto  &item : map.GetInteractiveItems())
     {
         item->Update();
 
@@ -212,6 +212,7 @@ void GameWorld::UpdateWorld()
 
 
     // Xóa Item đã bị ăn 
+    auto &interactiveItems = map.GetInteractiveItems();
     interactiveItems.erase(
         std::remove_if(
             interactiveItems.begin(),
@@ -261,10 +262,10 @@ void GameWorld::DrawWorld()
     player.Draw();
     std::cout << "Player Position: " << player.GetPos().x << ", " << player.GetPos().y << std::endl;
 
-    for (auto const &item : interactiveItems)
-    {
-        item->Draw();
-    }
+    // for (auto const &item : interactiveItems)
+    // {
+    //     item->Draw();
+    // }
     EndMode2D();
 }
 

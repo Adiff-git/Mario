@@ -3,7 +3,6 @@
 #include "Drawable.h"
 #include "Object.h"
 #include "Tile.h"
-#include "Coin.h"
 #include <vector>
 #include "ResrcManager.h"
 #include "json.hpp"
@@ -26,6 +25,12 @@
 #include "Rex.h"
 #include "FlyingGoomba.h"
 #include "RedKoopa.h"
+#include "Coin.h"
+#include "Star.h"
+#include "Mushroom.h"
+#include "OneUpMushroom.h"
+#include "ThreeUpMoon.h"
+#include "YoshiCoin.h"
 
 class Map : public Drawable {
     private:
@@ -38,6 +43,7 @@ class Map : public Drawable {
         std::vector<Tile*> nonInteractiveTiles;
         std::vector<Block*> blocks;
         std::vector<Enemy*> enemies;
+        std::vector<std::shared_ptr<Item>> interactiveItems;
         void LoadFromJsonFile(const std::string& filename);
     public:
         Map();
@@ -46,6 +52,7 @@ class Map : public Drawable {
         std::vector<Tile*>& getInteractiveTiles();
         std::vector<Block*>& getBlocks();
         std::vector<Enemy*>& GetEnemies();
+        std::vector<std::shared_ptr<Item>>& GetInteractiveItems() { return interactiveItems; }
         float GetWidth() const;
         void nextMap();
         void LoadMap(int mapIndex);

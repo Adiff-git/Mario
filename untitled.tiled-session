@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "map0.tsx",
+    "activeFile": "resources/maps/map2.json",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
@@ -33,11 +33,11 @@
             }
         },
         "resources/maps/map2.json": {
-            "scale": 0.2375,
+            "scale": 0.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 2397.8947368421054,
-                "y": 1117.8947368421052
+                "x": 965,
+                "y": 913
             }
         },
         "resources/maps/map2.tmx": {
@@ -47,6 +47,9 @@
                 "x": 1023.8283607106938,
                 "y": 690.8481394569226
             }
+        },
+        "resources/maps/map2.tsx": {
+            "scaleInDock": 1
         },
         "resources/maps/map4.json": {
             "scale": 0.2375,
@@ -65,13 +68,13 @@
     "map.lastUsedFormat": "tmx",
     "map.width": 64,
     "openFiles": [
-        "map0.tsx"
+        "resources/maps/map2.json"
     ],
     "project": "untitled.tiled-project",
     "recentFiles": [
+        "resources/maps/map2.json",
         "map0.tsx",
         "resources/maps/map0.json",
-        "resources/maps/map2.json",
         "resources/maps/map4.json",
         "D:/Downloads/untitled.tmx",
         "resources/maps/map2.tmx"
