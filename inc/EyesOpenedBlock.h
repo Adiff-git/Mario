@@ -19,5 +19,5 @@ public:
 
     void Update() override;
     void Draw() override;
-    void doHit( Mario& mario, GameWorld *world ) override;
+    void doHit( Mario& mario, Map* map ) override;
 };

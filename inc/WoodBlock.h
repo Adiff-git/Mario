@@ -12,7 +12,7 @@ public:
     WoodBlock( Vector2 pos, Vector2 dim, Color color, float frameTime, int maxFrames );
     ~WoodBlock() override;
 
-    void doHit(Mario& mario, GameWorld* world) override {};
+    void doHit(Mario& mario, Map* map) override {};
     void Update() override;
     void Draw() override;
 

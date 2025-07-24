@@ -42,7 +42,7 @@ public:
 
     void Update() override;
     void Draw() override;
-    void doHit( Mario& mario, GameWorld* world );
+    void doHit( Mario& mario, Map* map );
     bool isQuestionBlock()  { return true; } // Override to indicate this is a QuestionBlock
 
 };

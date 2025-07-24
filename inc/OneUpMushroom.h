@@ -11,6 +11,14 @@ private:
     bool isMoving;
     float maxSpeedX = 50.0f; 
 
+    // Hiệu ứng xuất hiện "1UP"
+    bool collected;
+    float scoreDisplayTimer; 
+    float scoreYOffset;      
+    float scoreAlpha;        
+    float scoreScale;
+    Texture2D* scoreTexture; 
+
 public:
     OneUpMushroom(Vector2 pos);
 
@@ -21,4 +29,5 @@ public:
     void updateMario(Mario& mario) override;
     void playCollisionSound() override;
     void Draw() override;
+    bool canBeCollected() const override { return !collected; } 
 };

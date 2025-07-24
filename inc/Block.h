@@ -3,7 +3,7 @@
 #include "raylib.h"
 #include "Object.h"
 #include "Mario.h"
-class GameWorld;
+class Map;
 enum BlockType {
     BLOCK_QUESTION = 0,
     BLOCK_CLOUD = 1,
@@ -26,7 +26,7 @@ public:
 
     void Update() override = 0 ;
     void Draw() override = 0;
-    virtual void doHit( Mario &mario, GameWorld *world ) = 0;
+    virtual void doHit( Mario &mario, Map* map ) = 0;
     void resetHit();
     bool isHit() const { return hit; }
 

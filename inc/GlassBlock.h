@@ -12,7 +12,7 @@ public:
     GlassBlock( Vector2 pos, Vector2 dim, Color color, float frameTime, int maxFrames );
     ~GlassBlock() override;
 
-    void doHit(Mario& mario, GameWorld* world) override; // No specific action for GlassBlock
+    void doHit(Mario& mario, Map* map) override; // No specific action for GlassBlock
     void Update() override;
     void Draw() override;
 

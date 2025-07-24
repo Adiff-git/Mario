@@ -10,7 +10,6 @@
 #include "CourseClearToken.h"
 #include "FireFlower.h"
 #include "Coin.h"
-#include "GameScreen.h"
 class GameScreen;
 enum class GameState {
     GAME_PLAYING,
@@ -34,7 +33,6 @@ class GameWorld {
         GameScreen* gameScreen;
 
         std::vector<Tile*> &interactiveTiles;
-        std::vector<std::shared_ptr<Item>> interactiveItems;
     public:
         GameWorld();
         GameWorld(int MapID, GameScreen* gameScreen); 
@@ -45,15 +43,9 @@ class GameWorld {
         bool IsCompleted();
         GameState GetGameState() ;
 
-        Map GetMap();
+        Map* GetMap();
 
         static const float GetGravity();
         static void Init();
-
-        std::vector<std::shared_ptr<Item>>& GetInteractiveItems() {
-            return interactiveItems;
-        };
-
-        
         friend class GameScreen;
 };

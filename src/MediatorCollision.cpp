@@ -421,31 +421,28 @@ void MediatorCollision::HandleMarioWithEnemy(Mario*& mario, Enemy*& enemy, Colli
 
     switch (AtoB) {
         case COLLISION_TYPE_SOUTH: {
-            RedKoopa* redKoopa = dynamic_cast<RedKoopa*>(enemy);
-            if (redKoopa) {
-                float marioX = mario->GetPos().x;
-                float koopaX = redKoopa->GetPos().x;
-                bool fromLeft = (marioX < koopaX); 
-                redKoopa->OnHit(fromLeft); 
-                mario->SetVel(Vector2{mario->GetVel().x, -300.0f}); 
-            } else {
-                Rex* rex = dynamic_cast<Rex*>(enemy);
-                if (rex) {
-                    rex->OnHit(); 
-                    mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
-                    if (rex->GetHitCount() >= 2) {
-                        rex->SetState(OBJECT_STATE_DEAD);
-                        // enemies.erase(std::remove(enemies.begin(), enemies.end(), rex), enemies.end());
-                        // delete rex;
-                        // rex = nullptr;
+            mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
+            
+            Rex* rex = dynamic_cast<Rex*>(enemy);
+            if (rex) {
+                rex->OnHit(); 
+                if (rex->GetHitCount() >= 2) {
+                    if (!rex->IsBlinking()) {
+                        rex->StartBlinking(2.0f, 0.1f);
                     }
-                } else {
-                    
-                    // enemies.erase(std::remove(enemies.begin(), enemies.end(), enemy), enemies.end());
-                    // delete enemy;
-                    // enemy = nullptr;
-                    enemy->SetState(OBJECT_STATE_DEAD);
-                    mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
+                }
+            } else {
+                if (!enemy->IsBlinking()) {
+                    enemy->StartBlinking(2.0f, 0.1f);
+                    enemy->SetHitByFireball(true);  
+                }
+                
+                RedKoopa* redKoopa = dynamic_cast<RedKoopa*>(enemy);
+                if (redKoopa) {
+                    float marioX = mario->GetPos().x;
+                    float koopaX = redKoopa->GetPos().x;
+                    bool fromLeft = (marioX < koopaX); 
+                    redKoopa->OnHit(fromLeft); 
                 }
             }
             break;
@@ -459,7 +456,6 @@ void MediatorCollision::HandleMarioWithEnemy(Mario*& mario, Enemy*& enemy, Colli
         }
     }
 }
-
 void MediatorCollision::HandleEnemyWithFireball(Enemy* &enemy, Fireball* &fireball, CollisionType AtoB) {
     std::cout << "[DEBUG] HandleEnemyWithFireball called!" << std::endl;
     if (AtoB == COLLISION_TYPE_NONE) {

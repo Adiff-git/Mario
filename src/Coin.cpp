@@ -42,7 +42,7 @@ void Coin::Update() {
         float dt = GameClock::GetInstance().FIXED_TIME_STEP;
         vel.y = -60.0f; // velocity bay
         pos.y += vel.y * dt;
-        riseAmount += -vel.y * dt;
+        riseAmount += -(vel.y) * dt;
 
         if (riseAmount >= maxRise) {
             this->SetState(OBJECT_STATE_TO_BE_REMOVED);
@@ -81,10 +81,10 @@ void Coin::updateMario(Mario& mario)
     collected = true;
     vel = {0, -60}; 
     showScore = true;
-    this->SetState(OBJECT_STATE_TO_BE_REMOVED);
+    //this->SetState(OBJECT_STATE_TO_BE_REMOVED);
 }
 
 void Coin::playCollisionSound()
 {
-    // Gọi âm thanh nếu có
+    
 }

@@ -111,7 +111,6 @@ void GameWorld::UpdateWorld()
                 mediatorCollision.HandleCollision(&player, item.get());
         }
 
-        // 5. Va chạm Mario với enemy
         for (Enemy* enemy : map.GetEnemies())
         {
             if (player.checkCollisionType(*enemy) != COLLISION_TYPE_NONE)
@@ -119,7 +118,6 @@ void GameWorld::UpdateWorld()
         }
     }
     
-    // 6. Cập nhật và xử lý fireball
     for (auto& fireball : *player.GetFireballs())
     {
         for (auto const &tile : interactiveTiles)
@@ -151,7 +149,6 @@ void GameWorld::UpdateWorld()
     // 8. Cập nhật và xử lý enemy
     for (Enemy* enemy : map.GetEnemies())
     {
-        // enemy->Update();
         enemy->UpdateStateAndPhysic();
 
         // Enemy với tile
@@ -176,21 +173,21 @@ void GameWorld::UpdateWorld()
 
     for (auto &block : map.getBlocks())
 {
-    block->Update();
+    block->Update();    
     CollisionType collision = block->checkCollisionType(player);
     if( collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_EYES_OPENED)
     {   
         if(!block->isHit()) player.SetVel(Vector2{player.GetVel().x, 0});
-        block->doHit(player, this);
+        block->doHit(player, this->GetMap());
     }
     if (collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_QUESTION)
     {   
-        block->doHit(player, this);
+        block->doHit(player, this->GetMap());
         player.SetVel({player.GetVel().x, 0});
     }
     if (collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_GLASS)
     {
-        block->doHit(player, this);
+        block->doHit(player, this->GetMap());
         player.SetVel({player.GetVel().x, 0});
     }
     
@@ -289,7 +286,7 @@ void GameWorld::Init()
     ResrcManager::GetInstance().loadResources();
 }
 
-Map GameWorld::GetMap()
+Map* GameWorld::GetMap()
 {
-    return map;
+    return &map;
 }

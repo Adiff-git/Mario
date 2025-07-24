@@ -70,6 +70,7 @@ void Enemy::UpdateBlinking() {
     if (blinkingAcumTotal >= 0.8f) {
         StopBlinking();
         markedForRemoval = true;
+        this->SetState(OBJECT_STATE_TO_BE_REMOVED);
     }
 }
 

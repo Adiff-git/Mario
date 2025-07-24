@@ -23,7 +23,6 @@ void Mushroom::updateMario(Mario& mario)
     blinking = true;     
     blinkingAcum = 0;
     blinkingAcumTotal = 0;
-    this->SetState(OBJECT_STATE_TO_BE_REMOVED);
 }
 
 void Mushroom::playCollisionSound()

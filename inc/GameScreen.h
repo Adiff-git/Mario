@@ -1,9 +1,9 @@
 #pragma once
+#include <memory>
 #include "Screen.h"
 #include "Button.h" 
 #include "raylib.h"
 #include <iostream>
-#include <memory>
 #include "Mario.h"
 #include "GameWorld.h"
 #include "GameHUD.h"
@@ -13,7 +13,6 @@ enum class TransitionState {
     GAME_RESET,
     NONE
 };
-
 class GameScreen : public Screen {
     private:
         Button BackMenu;

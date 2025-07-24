@@ -12,7 +12,7 @@ public:
     ~CloudBlock() override;
 
 
-    void doHit(Mario& mario, GameWorld* world) override {}; // No specific action for CloudBlock
+    void doHit(Mario& mario, Map* map) override {}; // No specific action for CloudBlock
     void Update() override ;
     void Draw() override;
 

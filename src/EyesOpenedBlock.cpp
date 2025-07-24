@@ -59,7 +59,7 @@ void EyesOpenedBlock::Draw() {
 
 }
 
-void EyesOpenedBlock::doHit( Mario& mario, GameWorld* world ) {
+void EyesOpenedBlock::doHit( Mario& mario, Map* map ) {
     if ( !hit ) {
         //PlaySound( ResrcManager::GetInstance().getSound("shellRicochet") );
         hit = true;
