@@ -1,5 +1,7 @@
 #include "Mario.h"
 #include "GameWorld.h"
+#include "ResrcManager.h"
+#include "SoundManager.h"
 // full constructor
 Mario::Mario(Vector2 pos, int lives, MarioState form)
     : Object(pos, Vector2{32, 40}, Vector2{0, 0}, WHITE, 0.1f, 2, DIRECTION_RIGHT),
@@ -168,6 +170,15 @@ void Mario::HandleInput()
 
 void Mario::Update() {
     const float deltaTime = GetFrameTime();
+    if (state == OBJECT_STATE_TO_BE_REMOVED) {
+        sprite = nullptr;
+        return;
+    }
+    if (state == OBJECT_STATE_DYING) {
+        sprite = &ResrcManager::GetInstance().getTexture("MARIO_DIE");
+        return;
+    }
+
     switch(marioState) { // Corrected from MarioState to marioState
         case SMALL:
         {
@@ -211,6 +222,9 @@ void Mario::Update() {
                 } else if (direction == DIRECTION_LEFT) {
                     sprite = &ResrcManager::GetInstance().getTexture("SMALLMARIO_FALLING_LEFT");
                 }
+            }
+            if (state == OBJECT_STATE_DYING) {
+                sprite = &ResrcManager::GetInstance().getTexture("MARIO_DIE");
             }
             break;
         }
@@ -261,6 +275,9 @@ void Mario::Update() {
                     sprite = &ResrcManager::GetInstance().getTexture("SUPER_MARIO_FALLING_0_LEFT");
                 }
             }
+            if (state == OBJECT_STATE_DYING) {
+                sprite = &ResrcManager::GetInstance().getTexture("MARIO_DIE");
+            }
             break;
         }
         case FIRE:
@@ -310,6 +327,10 @@ void Mario::Update() {
                     sprite = &ResrcManager::GetInstance().getTexture("FIRE_MARIO_FALLING_0_LEFT");
                 }
             }
+
+            if (state == OBJECT_STATE_DYING) {
+                sprite = &ResrcManager::GetInstance().getTexture("MARIO_DIE");
+            }
             break;
         }
     }
@@ -318,6 +339,30 @@ void Mario::Update() {
 void Mario::UpdateStateAndPhysic() {
     HandleInput();
     const float deltaTime = GetFrameTime();
+    if (state == OBJECT_STATE_DYING) {
+        
+        
+        // Rơi xuống với gravity
+        vel.y += GameWorld::GetGravity() * deltaTime;
+        pos.y += vel.y * deltaTime;
+        
+        // Tăng thời gian chết
+        blinkingAcumTotal += deltaTime;
+        
+        // Sau 2 giây, chuyển sang DEAD
+        if (blinkingAcumTotal >= 3.0f) {
+            state = OBJECT_STATE_DEAD;
+            blinkingAcumTotal = 0.0f;
+        }
+        return; // Không xử lý logic khác khi đang chết
+    }
+
+    if (state == OBJECT_STATE_DEAD || state == OBJECT_STATE_TO_BE_REMOVED) {
+        vel = Vector2{0, 0};
+        return;
+    }
+
+    
     if (isInvincible) {
         invincibleTimer -= deltaTime;
         std::cout << "Invincible Timer: " << invincibleTimer << ", isInvincible: " << isInvincible << std::endl;
@@ -335,35 +380,7 @@ void Mario::UpdateStateAndPhysic() {
         }
     }
 
-    if (state == OBJECT_STATE_DYING) {
-        blinkingAcum += deltaTime;
-        blinkingAcumTotal += deltaTime;
-        if (blinkingAcum >= blinkingTime) {
-            doBlink = !doBlink;
-            blinkingAcum = 0.0f;
-        }
-
-        if (blinkingAcumTotal >= 10.0f) {
-            state = OBJECT_STATE_DEAD;
-            lives--;
-            isInvincible = false; // Đảm bảo tắt bất tử khi chết
-            doBlink = false;
-            blinking = false;
-            if (lives <= 0) {
-                // TODO: Kích hoạt game over
-            } else {
-                pos = {100, 100};
-                state = OBJECT_STATE_ON_GROUND;
-                marioState = SMALL;
-                SetSize(Vector2{32, 40});
-                sprite = &ResrcManager::GetInstance().getTexture("SMALLMARIO_0_RIGHT");
-                blinking = false;
-                doBlink = false;
-            }
-            return;
-        }
-        return;
-    }
+    
     switch(marioState) { // Corrected from MarioState to marioState
         case SMALL:
         {
@@ -456,9 +473,9 @@ void Mario::Draw() {
     for (auto& fireball : fireballs) {
         fireball->Draw();
     }
-    if (!blinking || (blinking && doBlink)) {
-        DrawTexture(*sprite, pos.x, pos.y, WHITE);
-    }
+   
+    DrawTexture(*sprite, pos.x, pos.y, WHITE);
+    
 
 }
 
@@ -506,6 +523,7 @@ void Mario::UpdateCollisionProbes() {
 
 void Mario::fire() {
     fireballs.push_back(new Fireball(pos, direction));
+    SoundManager::GetInstance().PlaySound("FIREBALL");
 }
 
 void Mario::setInvincible(bool value) {
@@ -566,8 +584,13 @@ void Mario::BeHit() {
 }
 
 void Mario::Die() {
-    if (state == OBJECT_STATE_DYING || state == OBJECT_STATE_DEAD) return;
+    if (state == OBJECT_STATE_DYING || state == OBJECT_STATE_DEAD || state == OBJECT_STATE_TO_BE_REMOVED) return;
+    
     state = OBJECT_STATE_DYING;
+    vel = Vector2{0, -500};
+    // this->SetLives(this->GetLives() - 1);
+    this->SetCoins(0);
+    this->SetScore(0);
     blinking = true;
     doBlink = false;
     blinkingAcum = 0.0f;

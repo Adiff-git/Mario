@@ -4,7 +4,7 @@
 GameScreen::GameScreen(ScreenController* screenController)
     : Screen(screenController), 
       BackMenu(Vector2{50, 50}, Vector2{50, 50}), 
-      level(2), 
+      level(3), 
       transitionState(TransitionState::NONE), 
       transitionTime(1.0f), 
       transitionTimeAcum(0.0f),
@@ -24,7 +24,7 @@ GameScreen::GameScreen(ScreenController* screenController)
 
 void GameScreen::Update() {
     BackMenu.Update();
-    gameWorld->UpdateWorld();
+    
 
     if (BackMenu.IsPressed()) {
         screenController->ChangeScreen(new MenuScreen(screenController));
@@ -48,38 +48,40 @@ void GameScreen::Update() {
             if (transitionTimeAcum >= transitionTime) {
                 BeginTransition(TransitionState::NONE);
             }
-        if (transitionState != TransitionState::NONE) {
-            return;
-        }
-
-        switch ( gameWorld->GetGameState()) {
-
-            case GameState::GAME_PLAYING:
-                gameWorld->UpdateWorld();
-                break;
-            case GameState::GAME_COMPLETED:
-                if (IsKeyPressed(KEY_ENTER)) {
-                    NextLevel();
-                    BeginTransition(TransitionState::NEXT_LEVEL);
-                }
-                break;
-            case GameState::GAME_RESET:
-                if (IsKeyPressed(GetKeyPressed())) {
-                    ResetGame();
-                    BeginTransition(TransitionState::GAME_RESET);
-                }
-                break;
-            case GameState::GAME_OVER:
-                if (IsKeyPressed(KEY_ENTER)) {
-                    ResetGame();
-                    BeginTransition(TransitionState::GAME_OVER);
-                }
-                break;
-            default:
             break;
-        }
+    }
+    if (transitionState != TransitionState::NONE) {
+        return;
+    }
+
+    switch ( gameWorld->GetGameState()) {
+
+        case GameState::GAME_PLAYING:
+            gameWorld->UpdateWorld();
+            break;
+        case GameState::GAME_COMPLETED:
+            if (IsKeyPressed(KEY_ENTER)) {
+                NextLevel();
+                BeginTransition(TransitionState::NEXT_LEVEL);
+            }
+            break;
+        case GameState::GAME_RESET:
+            if (IsKeyPressed(KEY_ENTER)) {
+                ResetGame();
+                BeginTransition(TransitionState::GAME_RESET);
+            }
+            break;
+        case GameState::GAME_OVER:
+            if (IsKeyPressed(KEY_ENTER)) {
+                ResetGame();
+                BeginTransition(TransitionState::GAME_OVER);
+            }
+            break;
+        default:
+        break;
     }
 }
+
 
 void GameScreen::BeginTransition(TransitionState transitionState) {
     this->transitionState = transitionState;
@@ -107,7 +109,6 @@ void GameScreen::BeginTransition(TransitionState transitionState) {
 
 void GameScreen::Draw() {
     gameWorld->DrawWorld();
-    BackMenu.Draw();
     gameHUD->Draw();
     if (gameWorld->IsCompleted()) {
         if (transitionState == TransitionState::NONE) {
@@ -125,7 +126,10 @@ void GameScreen::Draw() {
     }
     if (gameWorld->GetGameState() == GameState::GAME_RESET && transitionState == TransitionState::NONE) {
        
-        DrawTextEx(*SuperMarioFont, "Press ENTER to restart", Vector2{(float)GetScreenWidth() / 2 - 200, (float)GetScreenHeight() / 2 + 100}, 20, 7, WHITE);
+        DrawTextEx(*SuperMarioFont, 
+            "Press ENTER to restart",
+             Vector2{(float)GetScreenWidth() / 2 - 200, 
+                (float)GetScreenHeight() / 2 + 100}, 20, 7, WHITE);
     }
 
     switch(transitionState) {
@@ -135,11 +139,11 @@ void GameScreen::Draw() {
             DrawTextEx(*SuperMarioFont, ("Level " + std::to_string(level )).c_str(),
                 Vector2{(float)GetScreenWidth() / 2 - MeasureTextEx(
                 *SuperMarioFont,
-                ("Level " + std::to_string(level )).c_str(),
-                20,7).x/2,
-                (float)GetScreenHeight() / 2 -100}, 
+                ("Level " + std::to_string(level )).c_str(),//fgdgdfgdf
+                20,7).x/2,// thisssbad
+                (float)GetScreenHeight() / 2 -100}, //dvsvsv
                 20, 7, WHITE);
-            DrawTextureNPatch(*SmallMario,
+            DrawTextureNPatch(*SmallMario,//fbdb
                 NPatchInfo{Rectangle{0, 0, (float)(*SmallMario).width,
                                     24}, 0, 0, 0, 0},
                 Rectangle{(float)GetScreenWidth() / 2 -100, (float)GetScreenHeight() / 2-16, 43, 32}, Vector2{0, 0}, 0.0f, WHITE);
@@ -209,14 +213,20 @@ void GameScreen::Draw() {
 }
 
 void GameScreen::ResetGame() {
-    if (gameWorld->player.GetLives() > 0) {
+    // Lưu thông tin trước khi xóa gameWorld
+    int currentLives = gameWorld->player.GetLives();
+    
+    if (currentLives > 0) {
         gameWorld = std::make_unique<GameWorld>(level, this);
+        gameWorld->player.SetLives(currentLives - 1);
     } else {
-        gameWorld->player.SetLives(3); // Reset lives
-        level = 0; // Reset level
-        gameWorld->player.SetCoins(0); // Reset coins
+        level = 0;
         gameWorld = std::make_unique<GameWorld>(level, this);
+        gameWorld->player.SetLives(3);
+        gameWorld->player.SetCoins(0);
+        gameWorld->player.SetScore(0);
     }
+    
     gameHUD = std::make_unique<GameHUD>(&gameWorld->player);
 }
 
