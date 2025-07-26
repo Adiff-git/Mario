@@ -1,4 +1,5 @@
 #include "Map.h"
+#include "Boss.h"
 
 
 Map::~Map()
@@ -22,6 +23,15 @@ std::vector<Block*>& Map :: getBlocks(){
 
 std::vector<Enemy*>& Map::GetEnemies() {
     return enemies;
+}
+
+void Map::SetMarioPositionForBosses(Vector2* marioPos) {
+    for (Enemy* enemy : enemies) {
+        Boss* boss = dynamic_cast<Boss*>(enemy);
+        if (boss != nullptr) {
+            boss->SetMarioPosition(marioPos);
+        }
+    }
 }
 
 

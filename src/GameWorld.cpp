@@ -6,6 +6,7 @@
 #include "YoshiCoin.h"
 #include "EnemyManager.h"
 #include "MediatorCollision.h"
+#include "Boss.h"
 GameWorld::GameWorld() : player(),
 interactiveTiles(map.getInteractiveTiles())
 {
@@ -13,6 +14,7 @@ interactiveTiles(map.getInteractiveTiles())
 
     player = Mario(Vector2{100, 100}, 3, SMALL); // Đặt vị trí cụ thể
     map.LoadMap(0);
+    map.SetMarioPositionForBosses(player.GetPosPtr()); // Set Mario position cho Boss
     camera.offset = Vector2{(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
     camera.target = player.GetPos();
     camera.rotation = 0.0f;
@@ -27,6 +29,8 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen) : player(),
 {
     map.LoadMap(MapID);
     player = Mario(Vector2{100, 100}, 3, SMALL); // Đặt vị trí cụ thể
+    map.SetMarioPositionForBosses(player.GetPosPtr()); // Set Mario position cho Boss
+    
     camera.offset = Vector2{(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
     camera.target = player.GetPos();
     camera.rotation = 0.0f;
@@ -67,7 +71,7 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen) : player(),
     if (MapID == 0)
     {
         map.GetInteractiveItems().push_back(std::make_shared<Coin>(Vector2{150, 800}));
-        map.GetInteractiveItems().push_back(std::make_shared<CourseClearToken>(Vector2{200, 800}));
+        // map.GetInteractiveItems().push_back(std::make_shared<CourseClearToken>(Vector2{300, 800}));
         map.GetInteractiveItems().push_back(std::make_shared<FireFlower>(Vector2{200, 800}));
         // interactiveItems.push_back(std::make_shared<Mushroom>(Vector2{250, 500}));
         // interactiveItems.push_back(std::make_shared<OneUpMushroom>(Vector2{300, 500}));
@@ -80,6 +84,10 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen) : player(),
         map.GetEnemies().push_back(new BuzzyBeetle(Vector2{600, 500}));
         map.GetEnemies().push_back(new Rex(Vector2{650, 500}));
         map.GetEnemies().push_back(new FlyingGoomba(Vector2{750, 500}));
+        
+        // Thêm Boss để test - tạm comment để test game base
+        Boss* boss = new Boss(Vector2{300, 800}, player.GetPosPtr());
+        map.GetEnemies().push_back(boss);
     }
 }
 
@@ -268,12 +276,7 @@ void GameWorld::DrawWorld()
     DrawTextureEx(background, Vector2{BGpos + background.width * 1.3f, -200}, 0.0f, 1.3f, WHITE);
     map.Draw();
     player.Draw();
-    // std::cout << "Player Position: " << player.GetPos().x << ", " << player.GetPos().y << std::endl;
-
-    // for (auto const &item : interactiveItems)
-    // {
-    //     item->Draw();
-    // }
+    
     EndMode2D();
 }
 

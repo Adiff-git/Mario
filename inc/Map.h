@@ -56,5 +56,6 @@ class Map : public Drawable {
         float GetWidth() const;
         void nextMap();
         void LoadMap(int mapIndex);
+        void SetMarioPositionForBosses(Vector2* marioPos);
         void Draw() override;
 };

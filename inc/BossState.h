@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "ResrcManager.h"
 using namespace std;
 
 enum class BossState{
