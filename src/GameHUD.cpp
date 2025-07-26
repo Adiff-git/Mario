@@ -41,7 +41,7 @@ void GameHUD::Draw() {
     int score = mario->GetScore();
     int coins = mario->GetCoins();
     int lives = mario->GetLives();
-    MarioState marioState = mario->GetMarioState();
+    PlayerState marioState = mario->GetMarioState();
 
     // Draw coins
     DrawTextureNPatch(*coinTexture,

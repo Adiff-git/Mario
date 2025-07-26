@@ -76,10 +76,10 @@ void Star::Update()
 
         if (state == OBJECT_STATE_ACTIVE || state == OBJECT_STATE_FALLING)
         {
-            std::cout << "Trước Gravity VelY: " << vel.y << std::endl;
-            std::cout << "FrameTime dt = " << dt << std::endl;
+            // std::cout << "Trước Gravity VelY: " << vel.y << std::endl;
+            // std::cout << "FrameTime dt = " << dt << std::endl;
             vel.y += GameWorld::GetGravity() * dt;
-            std::cout << "Sau Gravity VelY: " << vel.y << std::endl;
+            // std::cout << "Sau Gravity VelY: " << vel.y << std::endl;
             
             if (vel.y > 0)
             {
@@ -102,8 +102,8 @@ void Star::Update()
                 state = OBJECT_STATE_ACTIVE; 
             }
         }
-        std::cout << "Y: " << pos.y << ", VelY: " << vel.y << ", State: " << state << std::endl;
-        std::cout << "x: " << pos.x << ", Velx: " << vel.x << ", State: " << state << std::endl;
+        // std::cout << "Y: " << pos.y << ", VelY: " << vel.y << ", State: " << state << std::endl;
+        // std::cout << "x: " << pos.x << ", Velx: " << vel.x << ", State: " << state << std::endl;
     }
 }
 

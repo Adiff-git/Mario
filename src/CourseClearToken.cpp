@@ -69,8 +69,8 @@ void CourseClearToken::Draw() {
 }
 
 void CourseClearToken::updateMario(Mario& mario) {
-    mario.SetState(OBJECT_STATE_TO_BE_REMOVED); 
-    this->SetState(OBJECT_STATE_TO_BE_REMOVED);
+    mario.Victory();
+    mario.SetState(OBJECT_STATE_VICTORY);
 }
 
 void CourseClearToken::playCollisionSound() {

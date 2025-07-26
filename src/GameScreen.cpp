@@ -4,7 +4,7 @@
 GameScreen::GameScreen(ScreenController* screenController)
     : Screen(screenController), 
       BackMenu(Vector2{50, 50}, Vector2{50, 50}), 
-      level(0), 
+      level(1), 
       transitionState(TransitionState::NONE), 
       transitionTime(1.0f), 
       transitionTimeAcum(0.0f),
@@ -88,19 +88,19 @@ void GameScreen::BeginTransition(TransitionState transitionState) {
     transitionTimeAcum = 0.0f; // Reset the transition time accumulator
     switch (transitionState) {
         case TransitionState::NEXT_LEVEL:
-            transitionTime = 5;
+            transitionTime = 3;
             SoundManager::GetInstance().StopAllSounds();
             break;
         case TransitionState::GAME_OVER:
-            transitionTime = 5;
+            transitionTime = 3;
             SoundManager::GetInstance().StopAllSounds();
             break;
         case TransitionState::GAME_RESET:
-            transitionTime = 5;
+            transitionTime = 3;
             SoundManager::GetInstance().StopAllSounds();
             break;
         case TransitionState::NONE:
-            transitionTime = 5;
+            transitionTime = 3;
             SoundManager::GetInstance().StopAllSounds();
             SoundManager::GetInstance().PlayMusic("GAMEWORLD_" + std::to_string(level));
             break;
@@ -267,10 +267,26 @@ void GameScreen::DrawEnd() {
 }
 
 void GameScreen::NextLevel() {
+    // Lưu thông tin trước khi chuyển level
+    int currentLives = gameWorld->player.GetLives();
+    int currentCoins = gameWorld->player.GetCoins();
+    int currentScore = gameWorld->player.GetScore();
+    PlayerState currentMarioState = gameWorld->player.GetMarioState();
+    
     level++;
-    if ( level >2) {
+    if (level > 2) {
         level = 0; // Reset to first level if exceeded
     }
+    
+    // Tạo GameWorld mới
     gameWorld = std::make_unique<GameWorld>(level, this);
-    gameHUD = std::make_unique<GameHUD>(&gameWorld->player); // Reinitialize GameHUD with the new player
+    
+    // Khôi phục thông tin Mario
+    gameWorld->player.SetLives(currentLives);
+    gameWorld->player.SetCoins(currentCoins);
+    gameWorld->player.SetScore(currentScore);
+    gameWorld->player.SetMarioState(currentMarioState);
+    
+    // Reinitialize GameHUD với player đã được cập nhật
+    gameHUD = std::make_unique<GameHUD>(&gameWorld->player);
 }

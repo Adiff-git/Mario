@@ -64,7 +64,7 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen) : player(),
         background = ResrcManager::GetInstance().getTexture("BACKGROUND_9");
         break;
     }
-    if (MapID == 0)
+    if (MapID == 1)
     {
         map.GetInteractiveItems().push_back(std::make_shared<Coin>(Vector2{150, 800}));
         map.GetInteractiveItems().push_back(std::make_shared<CourseClearToken>(Vector2{200, 800}));

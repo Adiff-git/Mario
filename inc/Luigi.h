@@ -11,20 +11,18 @@
 #include "Observer.h"
 #include <vector>
 
-
-
-class Mario : public Object
+class Luigi : public Object
 {
 private:
-    //mario game information
+    //Luigi game information
     int lives;
     int coins;
     int score;
-    // mario physics
+    // Luigi physics
     float accelerationX;
     float maxSpeedX;
     float SpeedY;
-    // mario state
+    // Luigi state
     bool isDucking;
     bool isInvincible = false;
     float invincibleTimer;
@@ -35,9 +33,7 @@ private:
     float blinkingTime;
     float blinkingAcumTotal;
 
-    PlayerState marioState;
-    PlayerState AdditionalState;
-
+    PlayerState LuigiState;
     
     std::list<Fireball *> fireballs;
 
@@ -46,9 +42,9 @@ private:
     void Update() override;
 
 public:
-    Mario(Vector2 pos, int lives, PlayerState form);
-    Mario();
-    ~Mario() override;
+    Luigi(Vector2 pos, int lives, PlayerState LuigiState);
+    Luigi();
+    ~Luigi() override;
 
     void AddObserver(Observer *ob);
     void RemoveObserver(Observer *ob);
@@ -85,9 +81,9 @@ public:
     int GetScore() const;
     bool getInvincible() const;
     int GetLives() const;
-    PlayerState GetMarioState() const;
+    PlayerState GetPlayerState() const;
 
-    void SetMarioState(PlayerState state);
+    void SetPlayerState(PlayerState state);
     bool GetIsDucking() const;
     std::list<Fireball *> *GetFireballs();
 
