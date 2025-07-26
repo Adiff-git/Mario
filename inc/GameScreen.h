@@ -23,7 +23,7 @@ class GameScreen : public Screen {
         TransitionState transitionState;
         float transitionTime;
         float transitionTimeAcum;
-
+        
     public:
         GameScreen(ScreenController* screenController);
         void Update() override;

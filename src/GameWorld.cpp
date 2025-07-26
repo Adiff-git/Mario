@@ -67,7 +67,7 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen) : player(),
     if (MapID == 0)
     {
         map.GetInteractiveItems().push_back(std::make_shared<Coin>(Vector2{150, 800}));
-        // interactiveItems.push_back(std::make_shared<CourseClearToken>(Vector2{150, 500}));
+        map.GetInteractiveItems().push_back(std::make_shared<CourseClearToken>(Vector2{200, 800}));
         map.GetInteractiveItems().push_back(std::make_shared<FireFlower>(Vector2{200, 800}));
         // interactiveItems.push_back(std::make_shared<Mushroom>(Vector2{250, 500}));
         // interactiveItems.push_back(std::make_shared<OneUpMushroom>(Vector2{300, 500}));
