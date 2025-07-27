@@ -277,7 +277,25 @@ void ResrcManager::loadTextures() {
         // textures["Skill 6_7"] = LoadTexture("resources/images/gui/Skill 6-7.png");
         textures["Skill 6_9"] = LoadTexture("resources/images/Object/Enemy/Skill 6-9.png");
         textures["Skill 6_10"] = LoadTexture("resources/images/Object/Enemy/Skill 6-10.png");
-
+        
+        textures["Fire_Small_UP_Left"]= LoadTexture("resources/images/Object/Enemy/Fire 1.png");
+        textures["Fire_Normal_UP_Left"]= LoadTexture("resources/images/Object/Enemy/Fire 2.png");
+        textures["Fire_Big_UP_Left"]= LoadTexture("resources/images/Object/Enemy/Fire 3.png");
+        textures["Fire_Small_UP_Right"]= FlipTextureHorizontal(textures["Fire_Small_UP_Left"]);
+        textures["Fire_Normal_UP_Right"]= FlipTextureHorizontal(textures["Fire_Normal_UP_Left"]);
+        textures["Fire_Big_UP_Right"]= FlipTextureHorizontal(textures["Fire_Big_UP_Left"]);
+        textures["Fire_Small_STRAIGHT_Left"]= LoadTexture("resources/images/Object/Enemy/Fire 4.png");
+        textures["Fire_Normal_STRAIGHT_Left"]= LoadTexture("resources/images/Object/Enemy/Fire 5.png");
+        textures["Fire_Big_STRAIGHT_Left"]= LoadTexture("resources/images/Object/Enemy/Fire 6.png");
+        textures["Fire_Small_STRAIGHT_Right"]= FlipTextureHorizontal(textures["Fire_Small_STRAIGHT_Left"]);
+        textures["Fire_Normal_STRAIGHT_Right"]= FlipTextureHorizontal(textures["Fire_Normal_STRAIGHT_Left"]);
+        textures["Fire_Big_STRAIGHT_Right"]= FlipTextureHorizontal(textures["Fire_Big_STRAIGHT_Left"]);
+        textures["Fire_Small_DOWN_Left"]= LoadTexture("resources/images/Object/Enemy/Fire 7.png");
+        textures["Fire_Normal_DOWN_Left"]= LoadTexture("resources/images/Object/Enemy/Fire 8.png");
+        textures["Fire_Big_DOWN_Left"]= LoadTexture("resources/images/Object/Enemy/Fire 9.png");
+        textures["Fire_Small_DOWN_Right"]= FlipTextureHorizontal(textures["Fire_Small_DOWN_Left"]);
+        textures["Fire_Normal_DOWN_Right"]= FlipTextureHorizontal(textures["Fire_Normal_DOWN_Left"]);
+        textures["Fire_Big_DOWN_Right"]= FlipTextureHorizontal(textures["Fire_Big_DOWN_Left"]);
     }
 }
 
