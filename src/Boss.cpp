@@ -162,46 +162,35 @@ void Boss::LoadTextures() {
         
         // Clear tất cả các vector frames
         idleFrames.clear();
+        movingFrames.clear();
         chaseFrames.clear();
         attackFrames.clear();
-        skillFrames.clear();
+        skill1Frames.clear();
         
-        // Load Skill 1 frames cho IDLE state
-        idleFrames.push_back(&resrc.getTexture("Skill 1_1"));
-        idleFrames.push_back(&resrc.getTexture("Skill 1_2"));
-        idleFrames.push_back(&resrc.getTexture("Skill 1_3"));
-        idleFrames.push_back(&resrc.getTexture("Skill 1_4"));
-        idleFrames.push_back(&resrc.getTexture("Skill 1_5,7"));
-        idleFrames.push_back(&resrc.getTexture("Skill 1_6"));
+        movingFrames.push_back(&resrc.getTexture("Moving 1"));
+        movingFrames.push_back(&resrc.getTexture("Moving 2"));
+        movingFrames.push_back(&resrc.getTexture("Moving 3"));
+        movingFrames.push_back(&resrc.getTexture("Moving 4"));
         
-        printf("Boss LoadTextures: Loaded %d idle frames\n", (int)idleFrames.size());
+        chaseFrames.push_back(&resrc.getTexture("Skill 1_1"));
+        chaseFrames.push_back(&resrc.getTexture("Skill 1_2"));
+        chaseFrames.push_back(&resrc.getTexture("Skill 1_3"));
+        chaseFrames.push_back(&resrc.getTexture("Skill 1_4"));
+        chaseFrames.push_back(&resrc.getTexture("Skill 1_5,7"));
+        chaseFrames.push_back(&resrc.getTexture("Skill 1_6"));
         
-        // Load Skill 2 frames cho CHASE/PATROL state
-        chaseFrames.push_back(&resrc.getTexture("Skill 2_1"));
-        chaseFrames.push_back(&resrc.getTexture("Skill 2_2"));
-        chaseFrames.push_back(&resrc.getTexture("Skill 2_3"));
-        chaseFrames.push_back(&resrc.getTexture("Skill 2_4"));
+        attackFrames.push_back(&resrc.getTexture("Skill 2_1"));
+        attackFrames.push_back(&resrc.getTexture("Skill 2_2"));
+        attackFrames.push_back(&resrc.getTexture("Skill 2_3"));
+        attackFrames.push_back(&resrc.getTexture("Skill 2_4"));
         
         // Load Skill 3 frames cho ATTACK state
-        attackFrames.push_back(&resrc.getTexture("Skill 3_1"));
-        attackFrames.push_back(&resrc.getTexture("Skill 3_2"));
-        attackFrames.push_back(&resrc.getTexture("Skill 3_3,6"));
-        attackFrames.push_back(&resrc.getTexture("Skill 3_4"));
-        attackFrames.push_back(&resrc.getTexture("Skill 3_5"));
-        
-        // Load Skill 4 và 6 frames cho SKILL state (fire animation)
-        skillFrames.push_back(&resrc.getTexture("Skill 4_1"));
-        skillFrames.push_back(&resrc.getTexture("Skill 4_2"));
-        skillFrames.push_back(&resrc.getTexture("Skill 4_3"));
-        skillFrames.push_back(&resrc.getTexture("Skill 6_1"));
-        skillFrames.push_back(&resrc.getTexture("Skill 6_2"));
-        skillFrames.push_back(&resrc.getTexture("Skill 6_3"));
-        skillFrames.push_back(&resrc.getTexture("Skill 6_4"));
-        skillFrames.push_back(&resrc.getTexture("Skill 6_5"));
-        skillFrames.push_back(&resrc.getTexture("Skill 6_6"));
-        skillFrames.push_back(&resrc.getTexture("Skill 6_8"));
-        skillFrames.push_back(&resrc.getTexture("Skill 6_9"));
-        skillFrames.push_back(&resrc.getTexture("Skill 6_10"));
+        skill1Frames.push_back(&resrc.getTexture("Skill 3_1"));
+        skill1Frames.push_back(&resrc.getTexture("Skill 3_2"));
+        skill1Frames.push_back(&resrc.getTexture("Skill 3_3,6"));
+        skill1Frames.push_back(&resrc.getTexture("Skill 3_4"));
+        skill1Frames.push_back(&resrc.getTexture("Skill 3_5"));
+    
         
         if (!idleFrames.empty()) {
             currentTexture = idleFrames[0]; // Start with idle
@@ -225,10 +214,10 @@ void Boss::UpdateTexture() {
             }
             break;
         case BossState::PATROL:
-            if (!chaseFrames.empty()) {
-                maxFrames = chaseFrames.size();
-                int frameIndex = currentFrame % chaseFrames.size();
-                currentTexture = chaseFrames[frameIndex];
+            if (!movingFrames.empty()) {
+                maxFrames = movingFrames.size();
+                int frameIndex = currentFrame % movingFrames.size();
+                currentTexture = movingFrames[frameIndex];
                 sprite = currentTexture;
             }
             break;
@@ -311,7 +300,7 @@ void Boss::OnStateEnter(BossState newState) {
             maxFrames = idleFrames.empty() ? 1 : idleFrames.size();
             break;
         case BossState::PATROL:
-            maxFrames = chaseFrames.empty() ? 1 : chaseFrames.size();
+            maxFrames = movingFrames.empty() ? 1 : movingFrames.size();
             break;
         case BossState::CHASE:
             maxFrames = chaseFrames.empty() ? 1 : chaseFrames.size();

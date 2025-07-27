@@ -23,10 +23,12 @@ private:
     Texture2D* currentTexture;  // Texture hiện tại đang dùng
     
     // Skill animation frames cho từng state
-    vector<Texture2D*> idleFrames;    // Skill 1 frames cho IDLE
-    vector<Texture2D*> chaseFrames;   // Skill 2 frames cho CHASE/PATROL  
-    vector<Texture2D*> attackFrames;  // Skill 3 frames cho ATTACK
-    vector<Texture2D*> skillFrames;   // Skill 4,6 frames cho SKILL (fire)
+    vector<Texture2D*> idleFrames;    
+    vector<Texture2D*> movingFrames;  
+    vector<Texture2D*> chaseFrames;   
+    vector<Texture2D*> attackFrames;
+    vector<Texture2D*> skillFlyFrames; 
+    //tự thêm mấy skill kia dô đây  
     
     int skillCurrentFrame;           // Frame hiện tại của skill
     float skillFrameTime;           // Thời gian giữa các skill frame
