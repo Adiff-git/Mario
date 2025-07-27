@@ -17,12 +17,10 @@ private:
 
     BehaviorTree* behavior;//Behavior tree
 
-    Vector2* marioPos;//check mario position
+    Vector2* marioPos;
 
-    // ===== Textures =====
     Texture2D* currentTexture;  // Texture hiện tại đang dùng
     
-    // Skill animation frames cho từng state
     vector<Texture2D*> idleFrames;    
     vector<Texture2D*> movingFrames;  
     vector<Texture2D*> chaseFrames;   
@@ -34,25 +32,21 @@ private:
     float skillFrameTime;           // Thời gian giữa các skill frame
     float skillFrameAccumulator;    // Đếm thời gian skill frame
     
-    // ===== Các tham số AI =====
     float detectionRange;  // Phát hiện Mario
     float chaseRange;      // Bắt đầu đuổi
     float attackRange;     // Bắt đầu tấn công
     float moveSpeed;       // Tốc độ di chuyển
     float chaseSpeedMultiplier; // Nhân tốc độ khi chase
 
-    // ===== Cooldown =====
     float attackCooldown;   // Thời gian hồi attack
     float attackTimer;      // Đếm ngược hồi attack
     
-    // ===== Attack System =====
     int attackCount;        // Đếm số lần attack liên tiếp
     int maxAttacks;         // Số attack tối đa trước khi nghỉ
     float skillCooldown;    // Thời gian hồi skill
     float skillTimer;       // Đếm ngược skill
     bool isUsingSkill;      // Đang dùng skill hay không
     
-    // Helper để reset animation hoặc timer khi đổi state
     void OnStateEnter(BossState newState);
     
     // Helper để khởi tạo behavior tree

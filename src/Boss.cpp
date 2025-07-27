@@ -7,9 +7,9 @@
 
 Boss::Boss(Vector2 startPos, Vector2* marioPosition)
     : Enemy(startPos, {64.0f, 64.0f}, {0.0f, 0.0f}, WHITE, 0.8f, 0, DIRECTION_RIGHT), 
-      currentState(BossState::IDLE), marioPos(marioPosition),
+      currentState(BossState::PATROL), marioPos(marioPosition),
       detectionRange(300.0f), chaseRange(200.0f), attackRange(100.0f), 
-      moveSpeed(150.0f), chaseSpeedMultiplier(1.5f),
+      moveSpeed(20.0f), chaseSpeedMultiplier(1.5f),
       attackCooldown(1.5f), attackTimer(0.0f),
       attackCount(0), maxAttacks(3), skillCooldown(5.0f), skillTimer(0.0f),
       isUsingSkill(false), skillCurrentFrame(0), skillFrameTime(0.5f), skillFrameAccumulator(0.0f) {
@@ -47,9 +47,6 @@ void Boss::BuildBehaviorTree() {
     auto doPatrol = new ActionNode([this]() { 
         SetState(BossState::PATROL); 
     });
-    auto doIdle = new ActionNode([this]() { 
-        SetState(BossState::IDLE); 
-    });
     
     // Tạo sequence cho skill: Gần Mario + Skill ready -> Skill
     auto skillSequence = new SequenceNode({isCloseToMario, isSkillReady, doSkill});
@@ -60,13 +57,12 @@ void Boss::BuildBehaviorTree() {
     // Tạo sequence cho chase: Thấy Mario -> Chase  
     auto chaseSequence = new SequenceNode({canSeeMario, doChase});
     
-    //Skill -> Attack -> Chase -> Patrol -> Idle
+    //Skill -> Attack -> Chase -> Patrol (bỏ IDLE)
     auto rootSelector = new SelectorNode({
         skillSequence,
         attackSequence,  
         chaseSequence,  
-        doPatrol,        
-        doIdle           
+        doPatrol        
     });
     
     behavior = new BehaviorTree(rootSelector);
@@ -80,10 +76,10 @@ Boss::~Boss() {
 }
 
 void Boss::Update() {
-    // Tạm thời tắt behavior tree để test
-    // if (behavior) {
-    //     behavior->Tick();
-    // }
+    // Bật behavior tree để Boss hoạt động
+    if (behavior) {
+        behavior->Tick();
+    }
 
     float dt = GetFrameTime(); 
     
@@ -94,33 +90,63 @@ void Boss::Update() {
     skillTimer -= dt;
     if (skillTimer < 0) skillTimer = 0;
 
-    // Update skill frame animation
-    if (currentState == BossState::SKILL && !skillFrames.empty()) {
+    // Update skill frame animation cho SKILL state
+    if (currentState == BossState::SKILL && !skillFlyFrames.empty()) {
         skillFrameAccumulator += dt;
         if (skillFrameAccumulator >= skillFrameTime) {
             skillFrameAccumulator = 0.0f;
-            skillCurrentFrame = (skillCurrentFrame + 1) % skillFrames.size();
+            skillCurrentFrame = (skillCurrentFrame + 1) % skillFlyFrames.size();
         }
     }
 
-    // Đơn giản: chỉ để Boss ở IDLE để test animation
-    if (currentState != BossState::IDLE) {
-        SetState(BossState::IDLE);
-    }
-
-    // Simple FSM cho test  
+    // Boss FSM - bỏ IDLE state
     switch (currentState) {
-        case BossState::IDLE: 
-            // Đứng yên hoàn toàn, không di chuyển
-            vel = {0.0f, 0.0f};
-            // Không update vị trí khi IDLE
+        case BossState::PATROL: 
+            Patrol(dt); 
+            // Update vị trí cho patrol
+            pos.x += vel.x * dt;
+            pos.y += vel.y * dt;
             break;
-        default:
-            // Các state khác tạm thời không dùng
+        case BossState::CHASE:  
+            Chase(dt);  
+            // Update vị trí cho chase
+            pos.x += vel.x * dt;
+            pos.y += vel.y * dt;
             break;
+        case BossState::ATTACK: 
+            Attack(dt); 
+            // Attack có thể di chuyển một chút
+            pos.x += vel.x * dt;
+            pos.y += vel.y * dt;
+            break;
+        case BossState::SKILL: 
+            UseSkill(dt); 
+            // Skill thường đứng yên
+            break;
+        default: break;
     }
 
-    // Chỉ update animation frame, không update vị trí chung
+    // Giới hạn Boss trong màn hình
+    if (pos.x < 50) {
+        pos.x = 50;
+        vel.x = 0;
+        direction = DIRECTION_RIGHT;
+    }
+    if (pos.x > 750) {
+        pos.x = 750;
+        vel.x = 0;
+        direction = DIRECTION_LEFT;
+    }
+    if (pos.y < 400) {
+        pos.y = 400;
+        vel.y = 0;
+    }
+    if (pos.y > 600) {
+        pos.y = 600;
+        vel.y = 0;
+    }
+
+    // Update animation frame
     frameAcumulator += dt;
     if (frameAcumulator >= frameTime && maxFrames > 0) {
         frameAcumulator = 0;
@@ -165,7 +191,7 @@ void Boss::LoadTextures() {
         movingFrames.clear();
         chaseFrames.clear();
         attackFrames.clear();
-        skill1Frames.clear();
+        skillFlyFrames.clear();
         
         movingFrames.push_back(&resrc.getTexture("Moving 1"));
         movingFrames.push_back(&resrc.getTexture("Moving 2"));
@@ -184,12 +210,11 @@ void Boss::LoadTextures() {
         attackFrames.push_back(&resrc.getTexture("Skill 2_3"));
         attackFrames.push_back(&resrc.getTexture("Skill 2_4"));
         
-        // Load Skill 3 frames cho ATTACK state
-        skill1Frames.push_back(&resrc.getTexture("Skill 3_1"));
-        skill1Frames.push_back(&resrc.getTexture("Skill 3_2"));
-        skill1Frames.push_back(&resrc.getTexture("Skill 3_3,6"));
-        skill1Frames.push_back(&resrc.getTexture("Skill 3_4"));
-        skill1Frames.push_back(&resrc.getTexture("Skill 3_5"));
+        skillFlyFrames.push_back(&resrc.getTexture("Skill 3_1"));
+        skillFlyFrames.push_back(&resrc.getTexture("Skill 3_2"));
+        skillFlyFrames.push_back(&resrc.getTexture("Skill 3_3,6"));
+        skillFlyFrames.push_back(&resrc.getTexture("Skill 3_4"));
+        skillFlyFrames.push_back(&resrc.getTexture("Skill 3_5"));
     
         
         if (!idleFrames.empty()) {
@@ -205,14 +230,6 @@ void Boss::LoadTextures() {
 
 void Boss::UpdateTexture() {
     switch (currentState) {
-        case BossState::IDLE:
-            if (!idleFrames.empty()) {
-                maxFrames = idleFrames.size();
-                int frameIndex = currentFrame % idleFrames.size();
-                currentTexture = idleFrames[frameIndex];
-                sprite = currentTexture;
-            }
-            break;
         case BossState::PATROL:
             if (!movingFrames.empty()) {
                 maxFrames = movingFrames.size();
@@ -238,16 +255,16 @@ void Boss::UpdateTexture() {
             }
             break;
         case BossState::SKILL:
-            if (!skillFrames.empty()) {
-                maxFrames = skillFrames.size();
-                currentTexture = skillFrames[skillCurrentFrame];
+            if (!skillFlyFrames.empty()) {
+                maxFrames = skillFlyFrames.size();
+                currentTexture = skillFlyFrames[skillCurrentFrame];
                 sprite = currentTexture;
             }
             break;
         default:
-            if (!idleFrames.empty()) {
-                maxFrames = idleFrames.size();
-                currentTexture = idleFrames[0];
+            if (!movingFrames.empty()) {
+                maxFrames = movingFrames.size();
+                currentTexture = movingFrames[0];
                 sprite = currentTexture;
             }
             break;
@@ -289,16 +306,10 @@ void Boss::Draw() {
 }
 
 void Boss::OnStateEnter(BossState newState) {
-    // Reset animation when entering new state
     currentFrame = 0;
     frameAcumulator = 0.0f;
     
-    // State-specific initialization
     switch (newState) {
-        case BossState::IDLE:
-            vel = {0.0f, 0.0f};
-            maxFrames = idleFrames.empty() ? 1 : idleFrames.size();
-            break;
         case BossState::PATROL:
             maxFrames = movingFrames.empty() ? 1 : movingFrames.size();
             break;
@@ -313,9 +324,9 @@ void Boss::OnStateEnter(BossState newState) {
         case BossState::SKILL:
             vel = {0.0f, 0.0f}; // Stop moving during skill
             isUsingSkill = true;
-            skillCurrentFrame = 0; // Reset skill animation
+            skillCurrentFrame = 0; // Reset skill animatiIon
             skillFrameAccumulator = 0.0f;
-            maxFrames = skillFrames.empty() ? 1 : skillFrames.size();
+            maxFrames = skillFlyFrames.empty() ? 1 : skillFlyFrames.size();
             break;
         default:
             maxFrames = 1;
@@ -347,25 +358,34 @@ bool Boss::IsCloseToMario() const{
 
 void Boss::Patrol(float dt){
     vel.x = moveSpeed * (direction == DIRECTION_RIGHT ? 1 : -1);
-    vel.y = 0.0f; //chỗ này có thể sửa nếu muốn lên xuống
-
-    if (pos.x < 100) direction = DIRECTION_RIGHT;
-    if (pos.x > 800) direction = DIRECTION_LEFT;
+    vel.y = 0.0f; 
+    
+    // Giới hạn Boss trong khu vực an toàn
+    if (pos.x < 200) {
+        direction = DIRECTION_RIGHT;
+        pos.x = 200; // Không cho đi quá trái
+    }
+    if (pos.x > 600) {
+        direction = DIRECTION_LEFT;
+        pos.x = 600; // Không cho đi quá phải
+    }
 
     if(CanSeeMario()){
         SetState(BossState::CHASE);
     } else if (IsCloseToMario()) {
         SetState(BossState::ATTACK);
-    } else {
-        SetState(BossState::IDLE);
     }
+    // Bỏ transition về IDLE - chỉ patrol
 }
 
 void Boss::Chase(float dt){
     Vector2 directionToMario = GetDirectionToMario();
     float currentSpeed = moveSpeed * chaseSpeedMultiplier;
     
-    // Di chuyển về phía Mario với tốc độ cao hơn
+    // Giới hạn tốc độ chase để không quá nhanh
+    currentSpeed = fmin(currentSpeed, 80.0f); // Max 80 pixels/sec
+    
+    // Di chuyển về phía Mario với tốc độ được giới hạn
     vel.x = directionToMario.x * currentSpeed;
     vel.y = directionToMario.y * currentSpeed;
     
@@ -384,7 +404,7 @@ void Boss::Chase(float dt){
     } else if (distanceToMario > chaseRange) {
         SetState(BossState::PATROL);
     } else if (distanceToMario > detectionRange) {
-        SetState(BossState::IDLE);
+        SetState(BossState::PATROL); // Chuyển về PATROL thay vì IDLE
     }
 }
 
@@ -469,17 +489,5 @@ void Boss::UseSkill(float dt) {
         } else {
             SetState(BossState::PATROL);
         }
-    }
-}
-
-//đứng yên thấy mario thì đuổi theo
-void Boss::Idle(float dt){
-    vel.x = 0.0f;
-    vel.y = 0.0f;
-
-    if(CanSeeMario()){
-        SetState(BossState::CHASE);
-    } else {
-        SetState(BossState::IDLE);
     }
 }
