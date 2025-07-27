@@ -77,14 +77,13 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen) : player(),
         map.GetInteractiveItems().push_back(std::make_shared<ThreeUpMoon>(Vector2{400, 500}));
         map.GetInteractiveItems().push_back(std::make_shared<YoshiCoin>(Vector2{450, 800}));
 
-        map.GetEnemies().push_back(new Goomba(Vector2{450, 500}));
-        map.GetEnemies().push_back(new GreenKoopa(Vector2{500, 500}));
-        map.GetEnemies().push_back(new BuzzyBeetle(Vector2{600, 500}));
-        map.GetEnemies().push_back(new Rex(Vector2{650, 500}));
-        map.GetEnemies().push_back(new FlyingGoomba(Vector2{750, 500}));
+        // map.GetEnemies().push_back(new Goomba(Vector2{450, 500}));
+        // map.GetEnemies().push_back(new GreenKoopa(Vector2{500, 500}));
+        // map.GetEnemies().push_back(new BuzzyBeetle(Vector2{600, 500}));
+        // map.GetEnemies().push_back(new Rex(Vector2{650, 500}));
+        // map.GetEnemies().push_back(new FlyingGoomba(Vector2{750, 500}));
         
-        // Thêm Boss vào Map 1 để test
-        Boss* boss = new Boss(Vector2{800, 500}, player.GetPosPtr());
+        Boss* boss = new Boss(Vector2{800, 800}, player.GetPosPtr());
         map.GetEnemies().push_back(boss);
     }
 }

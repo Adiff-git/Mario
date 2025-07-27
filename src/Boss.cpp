@@ -9,13 +9,13 @@ Boss::Boss(Vector2 startPos, Vector2* marioPosition)
     : Enemy(startPos, {64.0f, 64.0f}, {0.0f, 0.0f}, WHITE, 0.8f, 0, DIRECTION_RIGHT), 
       currentState(BossState::PATROL), marioPos(marioPosition),
       detectionRange(300.0f), chaseRange(200.0f), attackRange(100.0f), 
-      moveSpeed(20.0f), chaseSpeedMultiplier(1.5f),
+      moveSpeed(10.0f), chaseSpeedMultiplier(1.5f),
       attackCooldown(1.5f), attackTimer(0.0f),
       attackCount(0), maxAttacks(3), skillCooldown(5.0f), skillTimer(0.0f),
-      isUsingSkill(false), skillCurrentFrame(0), skillFrameTime(0.5f), skillFrameAccumulator(0.0f) {
+      isUsingSkill(false), skillCurrentFrame(0), skillFrameTime(0.2f), skillFrameAccumulator(0.0f) {
     
     // Các thiết lập riêng cho Boss
-    frameTime = 0.4f; //thời gian giữa các frame (làm chậm hơn nữa)
+    frameTime = 0.2f; // Thời gian giữa các frame (200ms cho animation mượt hơn)
     frameAcumulator = 0.0f;// đếm
     currentFrame = 0;
     maxFrames = 4; // sẽ được update trong OnStateEnter 
@@ -48,16 +48,12 @@ void Boss::BuildBehaviorTree() {
         SetState(BossState::PATROL); 
     });
     
-    // Tạo sequence cho skill: Gần Mario + Skill ready -> Skill
     auto skillSequence = new SequenceNode({isCloseToMario, isSkillReady, doSkill});
     
-    // Tạo sequence cho attack: Gần Mario + Attack ready -> Attack
     auto attackSequence = new SequenceNode({isCloseToMario, isAttackReady, doAttack});
     
-    // Tạo sequence cho chase: Thấy Mario -> Chase  
     auto chaseSequence = new SequenceNode({canSeeMario, doChase});
     
-    //Skill -> Attack -> Chase -> Patrol (bỏ IDLE)
     auto rootSelector = new SelectorNode({
         skillSequence,
         attackSequence,  
@@ -72,25 +68,22 @@ Boss::~Boss() {
     if (behavior) {
         delete behavior;
     }
-    // ResrcManager sẽ tự quản lý texture, không cần unload
 }
 
 void Boss::Update() {
-    // Bật behavior tree để Boss hoạt động
+
     if (behavior) {
         behavior->Tick();
     }
 
-    float dt = GetFrameTime(); 
+    float dt = GameClock::GetInstance().FIXED_TIME_STEP; 
     
-    // Update timers
     attackTimer -= dt;
     if (attackTimer < 0) attackTimer = 0;
     
     skillTimer -= dt;
     if (skillTimer < 0) skillTimer = 0;
 
-    // Update skill frame animation cho SKILL state
     if (currentState == BossState::SKILL && !skillFlyFrames.empty()) {
         skillFrameAccumulator += dt;
         if (skillFrameAccumulator >= skillFrameTime) {
@@ -99,29 +92,24 @@ void Boss::Update() {
         }
     }
 
-    // Boss FSM - bỏ IDLE state
     switch (currentState) {
         case BossState::PATROL: 
             Patrol(dt); 
-            // Update vị trí cho patrol
             pos.x += vel.x * dt;
             pos.y += vel.y * dt;
             break;
         case BossState::CHASE:  
             Chase(dt);  
-            // Update vị trí cho chase
             pos.x += vel.x * dt;
             pos.y += vel.y * dt;
             break;
         case BossState::ATTACK: 
             Attack(dt); 
-            // Attack có thể di chuyển một chút
             pos.x += vel.x * dt;
             pos.y += vel.y * dt;
             break;
         case BossState::SKILL: 
             UseSkill(dt); 
-            // Skill thường đứng yên
             break;
         default: break;
     }
@@ -146,7 +134,6 @@ void Boss::Update() {
         vel.y = 0;
     }
 
-    // Update animation frame
     frameAcumulator += dt;
     if (frameAcumulator >= frameTime && maxFrames > 0) {
         frameAcumulator = 0;
@@ -162,19 +149,16 @@ void Boss::UpdateStateAndPhysic() {
 }
 
 float Boss::GetDistanceToMario() const{
-    if (!marioPos) return 999999.0f; // Fallback nếu marioPos null
-    
-    float dx = marioPos->x - pos.x;
-    float dy = marioPos->y - pos.y;
-    return sqrt(dx * dx + dy * dy);
+    if (!marioPos) return 999999.0f; 
+    return sqrt((marioPos->x - pos.x) * (marioPos->x - pos.x) + (marioPos->y - pos.y) * (marioPos->y - pos.y));
 }
 
 Vector2 Boss::GetDirectionToMario() const {
-    if (!marioPos) return {0, 0}; // Fallback nếu marioPos null
+    if (!marioPos) return {0, 0}; 
     
     float dx = marioPos->x - pos.x;
     float dy = marioPos->y - pos.y;
-    float distance = sqrt(dx * dx + dy * dy);
+    float distance = GetDistanceToMario();
     
     if (distance > 0) {
         return {dx / distance, dy / distance};
@@ -186,7 +170,6 @@ void Boss::LoadTextures() {
     try {
         ResrcManager& resrc = ResrcManager::GetInstance();
         
-        // Clear tất cả các vector frames
         idleFrames.clear();
         movingFrames.clear();
         chaseFrames.clear();
@@ -217,13 +200,17 @@ void Boss::LoadTextures() {
         skillFlyFrames.push_back(&resrc.getTexture("Skill 3_5"));
     
         
-        if (!idleFrames.empty()) {
-            currentTexture = idleFrames[0]; // Start with idle
+        if (!attackFrames.empty()) {
+            currentTexture = attackFrames[0]; // Start with attack state texture
+        } else if (!movingFrames.empty()) {
+            currentTexture = movingFrames[0]; // Start with patrol/moving
+        } else if (!chaseFrames.empty()) {
+            currentTexture = chaseFrames[0]; // Fallback to chase
         } else {
             currentTexture = nullptr;
         }
     } catch (...) {
-        // Fallback nếu không load được texture
+
         currentTexture = nullptr;
     }
 }
@@ -272,7 +259,7 @@ void Boss::UpdateTexture() {
 }
 
 void Boss::FireProjectile(Vector2 direction) {
-    
+    //viên đạn
 }
 
 void Boss::Draw() {
@@ -282,13 +269,14 @@ void Boss::Draw() {
         Rectangle dest = {pos.x, pos.y, size.x, size.y};
         Vector2 origin = {0, 0};
         
-        if (direction == DIRECTION_LEFT) {
-            source.width = -source.width; // Flip horizontally
+        if (direction == DIRECTION_RIGHT) {
+            source.width = -abs(source.width); // đảm bảo width luôn âm khi quay phải
+        } else {
+            source.width = abs(source.width);  // đảm bảo width luôn dương khi quay trái
         }
         
         DrawTexturePro(*sprite, source, dest, origin, angle, color);
     } else {
-        // Fallback: draw a colored rectangle if no sprite
         DrawRectangle(pos.x, pos.y, size.x, size.y, RED);
         DrawText("BOSS", pos.x + 10, pos.y + 20, 12, WHITE);
     }
@@ -297,12 +285,6 @@ void Boss::Draw() {
     string stateText = BossStateToString(currentState);
     DrawText(stateText.c_str(), pos.x, pos.y - 20, 12, YELLOW);
     
-    // Debug: Draw detection range circle
-    #ifdef DEBUG
-    DrawCircleLines(pos.x + size.x/2, pos.y + size.y/2, detectionRange, RED);
-    DrawCircleLines(pos.x + size.x/2, pos.y + size.y/2, chaseRange, ORANGE);
-    DrawCircleLines(pos.x + size.x/2, pos.y + size.y/2, attackRange, YELLOW);
-    #endif
 }
 
 void Boss::OnStateEnter(BossState newState) {
@@ -317,12 +299,12 @@ void Boss::OnStateEnter(BossState newState) {
             maxFrames = chaseFrames.empty() ? 1 : chaseFrames.size();
             break;
         case BossState::ATTACK:
-            vel = {0.0f, 0.0f}; // Stop moving during attack
+            vel = {0.0f, 0.0f}; 
             attackCount++;
             maxFrames = attackFrames.empty() ? 1 : attackFrames.size();
             break;
         case BossState::SKILL:
-            vel = {0.0f, 0.0f}; // Stop moving during skill
+            vel = {0.0f, 0.0f}; 
             isUsingSkill = true;
             skillCurrentFrame = 0; // Reset skill animatiIon
             skillFrameAccumulator = 0.0f;
@@ -336,10 +318,6 @@ void Boss::OnStateEnter(BossState newState) {
 
 void Boss::SetState(BossState newState){
     if (currentState != newState) {
-        // Debug: In ra khi chuyển state
-        printf("Boss state change: %s -> %s\n", 
-               BossStateToString(currentState).c_str(), 
-               BossStateToString(newState).c_str());
         
         OnStateEnter(newState);
         currentState = newState;
@@ -357,35 +335,57 @@ bool Boss::IsCloseToMario() const{
 }
 
 void Boss::Patrol(float dt){
-    vel.x = moveSpeed * (direction == DIRECTION_RIGHT ? 1 : -1);
-    vel.y = 0.0f; 
     
-    // Giới hạn Boss trong khu vực an toàn
-    if (pos.x < 200) {
-        direction = DIRECTION_RIGHT;
-        pos.x = 200; // Không cho đi quá trái
+    static float patrolTimer = 0.0f;
+    static int patrolPhase = 0; 
+    
+    patrolTimer += dt;
+    
+    if (patrolTimer >= 3.0f) {
+        patrolTimer = 0.0f;
+        patrolPhase = (patrolPhase + 1) % 4;
     }
-    if (pos.x > 600) {
-        direction = DIRECTION_LEFT;
-        pos.x = 600; // Không cho đi quá phải
+    
+    switch (patrolPhase) {
+        case 0: // đi phải
+            vel.x = moveSpeed;
+            vel.y = 0;
+            direction = DIRECTION_RIGHT;
+            break;
+        case 1: // đi xuống
+            vel.x = 0;
+            vel.y = moveSpeed;
+            break;
+        case 2: // đi trái
+            vel.x = -moveSpeed;
+            vel.y = 0;
+            direction = DIRECTION_LEFT;
+            break;
+        case 3: // đi lên
+            vel.x = 0;
+            vel.y = -moveSpeed;
+            break;
     }
 
+    // Chuyển sang CHASE nếu thấy Mario
     if(CanSeeMario()){
         SetState(BossState::CHASE);
-    } else if (IsCloseToMario()) {
-        SetState(BossState::ATTACK);
     }
-    // Bỏ transition về IDLE - chỉ patrol
 }
 
 void Boss::Chase(float dt){
     Vector2 directionToMario = GetDirectionToMario();
     float currentSpeed = moveSpeed * chaseSpeedMultiplier;
+    if (directionToMario.x == 0 && directionToMario.y == 0) {
+        // Nếu Mario không di chuyển, giữ nguyên tốc độ
+        currentSpeed = moveSpeed;
+    } else {
+        // Giới hạn tốc độ tối thiểu: 5 pixels/sec
+        currentSpeed = max(currentSpeed, 5.0f);
+    }
+    currentSpeed = min(currentSpeed, 30.0f); // Max 30 pixels/sec
     
-    // Giới hạn tốc độ chase để không quá nhanh
-    currentSpeed = fmin(currentSpeed, 80.0f); // Max 80 pixels/sec
-    
-    // Di chuyển về phía Mario với tốc độ được giới hạn
+    // Di chuyển về phía Mario
     vel.x = directionToMario.x * currentSpeed;
     vel.y = directionToMario.y * currentSpeed;
     
@@ -398,20 +398,19 @@ void Boss::Chase(float dt){
     
     float distanceToMario = GetDistanceToMario();
     
-    // Transition conditions
-    if (distanceToMario < attackRange && attackTimer <= 0) {
+    if (distanceToMario < attackRange) {
         SetState(BossState::ATTACK);
-    } else if (distanceToMario > chaseRange) {
+    }
+
+    else if (distanceToMario > chaseRange) {
         SetState(BossState::PATROL);
-    } else if (distanceToMario > detectionRange) {
-        SetState(BossState::PATROL); // Chuyển về PATROL thay vì IDLE
     }
 }
 
 void Boss::Attack(float dt){
-    if (attackTimer > 0) return; 
-
-    // Face Mario before attacking
+    vel.x = 0;
+    vel.y = 0;
+    
     Vector2 directionToMario = GetDirectionToMario();
     if (directionToMario.x < 0) {
         direction = DIRECTION_LEFT;
@@ -419,75 +418,32 @@ void Boss::Attack(float dt){
         direction = DIRECTION_RIGHT;
     }
     
-    // Simple attack: Fire projectile towards Mario
-    FireProjectile(directionToMario);
-    
-    // Reset attack timer
-    attackTimer = attackCooldown;
-    
-    // Check if should use skill after multiple attacks
-    if (attackCount >= maxAttacks && IsSkillReady()) {
-        attackCount = 0; // Reset attack count
-        SetState(BossState::SKILL);
-        return;
+    if (attackTimer <= 0) {
+        // Fire projectile towards Mario
+        FireProjectile(directionToMario);
+        
+        // Reset attack timer
+        attackTimer = attackCooldown;
+        attackCount++;
+        
+        // Skill after multiple attacks
+        if (attackCount >= maxAttacks && IsSkillReady()) {
+            attackCount = 0;
+            SetState(BossState::SKILL);
+            return;
+        }
     }
     
-    // Transition back to chase if Mario is still in range
     float distanceToMario = GetDistanceToMario();
+    
     if (distanceToMario > attackRange) {
-        if (distanceToMario < chaseRange) {
-            SetState(BossState::CHASE);
-        } else {
-            SetState(BossState::PATROL);
-        }
+        SetState(BossState::CHASE);
+    }
+    else if (distanceToMario > chaseRange) {
+        SetState(BossState::PATROL);
     }
 }
 
 void Boss::UseSkill(float dt) {
-    static float skillDuration = 2.0f; // Thời gian thực hiện skill
-    static float skillTimer = 0.0f;
-    
-    skillTimer += dt;
-    
-    // Face Mario during skill
-    Vector2 directionToMario = GetDirectionToMario();
-    if (directionToMario.x < 0) {
-        direction = DIRECTION_LEFT;
-    } else {
-        direction = DIRECTION_RIGHT;
-    }
-    
-    // Fire multiple projectiles during skill
-    static float fireRate = 0.3f; // Bắn mỗi 0.3 giây
-    static float fireTimer = 0.0f;
-    
-    fireTimer += dt;
-    if (fireTimer >= fireRate) {
-        fireTimer = 0.0f;
-        
-        // Fire projectiles in multiple directions
-        float angleStep = 45.0f; // 45 degrees between each shot
-        for (int i = -1; i <= 1; i++) {
-            float angle = atan2(directionToMario.y, directionToMario.x) + (i * angleStep * PI / 180.0f);
-            Vector2 fireDirection = {cos(angle), sin(angle)};
-            FireProjectile(fireDirection);
-        }
-    }
-    
-    // End skill after duration
-    if (skillTimer >= skillDuration) {
-        skillTimer = 0.0f;
-        isUsingSkill = false;
-        this->skillTimer = skillCooldown; // Set cooldown
-        
-        // Return to appropriate state
-        float distanceToMario = GetDistanceToMario();
-        if (distanceToMario < attackRange) {
-            SetState(BossState::ATTACK);
-        } else if (distanceToMario < chaseRange) {
-            SetState(BossState::CHASE);
-        } else {
-            SetState(BossState::PATROL);
-        }
-    }
+    //skill nhảy hay gì đó
 }
