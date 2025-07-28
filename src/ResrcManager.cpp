@@ -248,7 +248,7 @@ void ResrcManager::loadTextures() {
         textures["Skill 1_1"] = LoadTexture("resources/images/Object/Enemy/Skill 1-1.png");
         textures["Skill 1_2"] = LoadTexture("resources/images/Object/Enemy/Skill 1-2.png");
         textures["Skill 1_3"] = LoadTexture("resources/images/Object/Enemy/Skill 1-3.png");
-        textures["Skill 1_4"] = LoadTexture("resources/images/Object/Enemy/Skill 1-4.png");
+        textures["Skill 1_4"] = LoadTexture("resources/images/Object/Enemy/Skill1-4.png");
         textures["Skill 1_5,7"] = LoadTexture("resources/images/Object/Enemy/Skill 1-5,7.png");
         textures["Skill 1_6"] = LoadTexture("resources/images/Object/Enemy/Skill 1-6.png");
 
@@ -261,7 +261,7 @@ void ResrcManager::loadTextures() {
         textures["Skill 3_2"] = LoadTexture("resources/images/Object/Enemy/Skill 3-2.png");
         textures["Skill 3_3,6"] = LoadTexture("resources/images/Object/Enemy/Skill 3-3,6.png");
         textures["Skill 3_4"] = LoadTexture("resources/images/Object/Enemy/Skill 3-4.png");
-        textures["Skill 3_5"] = LoadTexture("resources/images/Object/Enemy/Skill 3-5.png");
+        textures["Skill 3_5"] = LoadTexture("resources/images/Object/Enemy/Skill3-5.png");
 
         textures["Skill 4_1"] = LoadTexture("resources/images/Object/Enemy/Skill 4-1.png");
         textures["Skill 4_2"] = LoadTexture("resources/images/Object/Enemy/Skill 4-2.png");

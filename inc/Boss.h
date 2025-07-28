@@ -6,8 +6,10 @@
 #include "BehaviorTree.h"
 #include "Mario.h"
 #include "ResrcManager.h"
+#include "BossFireball.h"
 #include <memory>
 #include <cmath>
+#include <list>
 using namespace std;
 
 
@@ -31,6 +33,7 @@ private:
     int skillCurrentFrame;           // Frame hiện tại của skill
     float skillFrameTime;           // Thời gian giữa các skill frame
     float skillFrameAccumulator;    // Đếm thời gian skill frame
+    float skillDurationAccumulator; // Track skill duration (instance variable)
     
     float detectionRange;  // Phát hiện Mario
     float chaseRange;      // Bắt đầu đuổi
@@ -46,6 +49,18 @@ private:
     float skillCooldown;    // Thời gian hồi skill
     float skillTimer;       // Đếm ngược skill
     bool isUsingSkill;      // Đang dùng skill hay không
+
+    float patrolTimer;
+    int patrolPhase;
+    
+    // Hit counter system
+    int hitCount;           // Number of times Boss has been hit by Mario's fireballs
+    static const int maxHits = 10; // Boss dies after 10 hits
+    float hitCooldown;      // Cooldown timer to prevent multiple hits per frame
+    static constexpr float hitCooldownTime = 0.5f; // 0.5 second cooldown between hits
+    
+    // Projectile management
+    std::list<BossFireball*> projectiles;
     
     void OnStateEnter(BossState newState);
     
@@ -83,10 +98,22 @@ public:
     // ===== Utility =====
     float GetDistanceToMario() const;
     Vector2 GetDirectionToMario() const;
+    Vector2 GetPredictedDirectionToMario() const;
     void FireProjectile(Vector2 direction);
+    
+    // ===== Projectile management =====
+    void UpdateProjectiles();
+    void DrawProjectiles();
+    void CleanupProjectiles();
+    std::list<BossFireball*>& getProjectiles() { return projectiles; }
     
     // ===== Getters & Setters =====
     bool IsSkillReady() const { return skillTimer <= 0 && !isUsingSkill; }
     void SetMarioPosition(Vector2* marioPosition) { marioPos = marioPosition; }
+    
+    // ===== Hit counter methods =====
+    void OnHitByFireball();
+    int GetHitCount() const { return hitCount; }
+    bool IsDead() const { return hitCount >= maxHits; }
 
 };

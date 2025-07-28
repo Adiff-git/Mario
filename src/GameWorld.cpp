@@ -7,6 +7,7 @@
 #include "EnemyManager.h"
 #include "MediatorCollision.h"
 #include "Boss.h"
+#include "BossFireball.h"
 GameWorld::GameWorld() : player(),
 interactiveTiles(map.getInteractiveTiles())
 {
@@ -28,7 +29,12 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen) : player(),
 {
     map.LoadMap(MapID);
     player = Mario(Vector2{100, 100}, 3, SMALL); // Đặt vị trí cụ thể
-    map.SetMarioPositionForBosses(player.GetPosPtr()); // Set Mario position cho Boss
+    
+    // Tạo boss TRƯỚC KHI set mario position
+    Boss* boss = new Boss(Vector2{800, 800}, player.GetPosPtr());
+    map.GetEnemies().push_back(boss);
+    
+    map.SetMarioPositionForBosses(player.GetPosPtr()); // Set Mario position cho Boss AFTER boss is created
     camera.offset = Vector2{(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
     camera.target = player.GetPos();
     camera.rotation = 0.0f;
@@ -83,8 +89,9 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen) : player(),
         // map.GetEnemies().push_back(new Rex(Vector2{650, 500}));
         // map.GetEnemies().push_back(new FlyingGoomba(Vector2{750, 500}));
         
-        Boss* boss = new Boss(Vector2{800, 800}, player.GetPosPtr());
-        map.GetEnemies().push_back(boss);
+        // Boss đã được tạo ở constructor, không tạo lại ở đây
+        // Boss* boss = new Boss(Vector2{800, 800}, player.GetPosPtr());
+        // map.GetEnemies().push_back(boss);
     }
 }
 
@@ -99,6 +106,9 @@ void GameWorld::UpdateWorld()
 {
     player.UpdateStateAndPhysic();
     player.UpdateCollisionProbes();
+
+    // Cập nhật Mario position cho tất cả bosses mỗi frame
+    map.SetMarioPositionForBosses(player.GetPosPtr());
 
     if (player.GetState() != OBJECT_STATE_DEAD &&
         player.GetState() != OBJECT_STATE_DYING &&
@@ -136,6 +146,22 @@ void GameWorld::UpdateWorld()
         {
             if (enemy->checkCollisionType(*fireball) != COLLISION_TYPE_NONE)
                 mediatorCollision.HandleCollision(enemy, fireball);
+        }
+    }
+    
+    // Check collision for BossFireball vs Mario
+    for (Enemy* enemy : map.GetEnemies())
+    {
+        Boss* boss = dynamic_cast<Boss*>(enemy);
+        if (boss) {
+            // Get boss projectiles and check collision with Mario
+            for (BossFireball* bossFireball : boss->getProjectiles())
+            {
+                if (bossFireball && player.checkCollisionType(*bossFireball) != COLLISION_TYPE_NONE) {
+                    std::cout << "BossFireball collision detected in GameWorld!" << std::endl;
+                    mediatorCollision.HandleCollision(&player, bossFireball);
+                }
+            }
         }
     }
 

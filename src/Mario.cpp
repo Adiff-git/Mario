@@ -599,3 +599,12 @@ void Mario::Die() {
     sprite = &ResrcManager::GetInstance().getTexture("MARIO_DIE");
     
 }
+
+void Mario::BeInvincible() {
+    isInvincible = true;
+    invincibleTimer = invincibleDuration;
+    blinking = true;
+    doBlink = true;
+    blinkingAcum = 0.0f;
+    blinkingAcumTotal = 0.0f;
+}

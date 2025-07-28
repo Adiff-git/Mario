@@ -6,8 +6,13 @@
 #include "Rex.h"
 #include "FlyingGoomba.h"
 #include "PiranhaPlant.h"
+#include "BossFireball.h"
+#include "Boss.h"
 #include <iostream>
 #include <algorithm>
+
+// Initialize static member
+int MediatorCollision::marioFireballHits = 0;
 void MediatorCollision::HandleMarioWithTile(Mario* &mario, Tile * &tile, CollisionType AtoB)
 {
     if (AtoB == COLLISION_TYPE_NONE)
@@ -159,11 +164,17 @@ void MediatorCollision::HandleCollision(Object* ObjectA, Object* ObjectB)
     Fireball* fireballA = dynamic_cast<Fireball*>(ObjectA);
     Fireball* fireballB = dynamic_cast<Fireball*>(ObjectB);
 
+    BossFireball* bossFireballA = dynamic_cast<BossFireball*>(ObjectA);
+    BossFireball* bossFireballB = dynamic_cast<BossFireball*>(ObjectB);
+
     Tile* tileA = dynamic_cast<Tile*>(ObjectA);
     Tile* tileB = dynamic_cast<Tile*>(ObjectB);
 
     Enemy* enemyA = dynamic_cast<Enemy*>(ObjectA);
     Enemy* enemyB = dynamic_cast<Enemy*>(ObjectB);
+
+    Boss* bossA = dynamic_cast<Boss*>(ObjectA);
+    Boss* bossB = dynamic_cast<Boss*>(ObjectB);
 
     Item* itemA = dynamic_cast<Item*>(ObjectA);
     Item* itemB = dynamic_cast<Item*>(ObjectB);
@@ -205,6 +216,14 @@ void MediatorCollision::HandleCollision(Object* ObjectA, Object* ObjectB)
         }
     }
 
+    // Mario vs Boss (MUST be before Mario vs Enemy since Boss inherits from Enemy)
+    else if ((marioA && bossB) || (marioB && bossA)) {
+        Mario* mario = marioA ? marioA : marioB;
+        Boss* boss = bossA ? bossA : bossB;
+        CollisionType type = mario->checkCollisionType(*boss);
+        HandleMarioWithBoss(mario, boss, type);
+    }
+
     // Mario vs Enemy
     else if ((marioA && enemyB) || (marioB && enemyA)) {
         Mario* mario = marioA ? marioA : marioB;
@@ -221,6 +240,14 @@ void MediatorCollision::HandleCollision(Object* ObjectA, Object* ObjectB)
         HandleEnemyWithTile(enemy, tile, type);
     }
 
+    // Boss vs Fireball (MUST be before Enemy vs Fireball since Boss inherits from Enemy)
+    else if ((bossA && fireballB) || (bossB && fireballA)) {
+        Boss* boss = bossA ? bossA : bossB;
+        Fireball* fireball = fireballA ? fireballA : fireballB;
+        CollisionType type = boss->checkCollisionType(*fireball);
+        HandleBossWithFireball(boss, fireball, type);
+    }
+
     // Enemy vs Fireball
     else if ((enemyA && fireballB) || (enemyB && fireballA)) {
         Enemy* enemy = enemyA ? enemyA : enemyB;
@@ -235,6 +262,14 @@ void MediatorCollision::HandleCollision(Object* ObjectA, Object* ObjectB)
         Mario* mario = marioA ? marioA :marioB;
         CollisionType type = mario->checkCollisionType(*block);
         HandleMarioWithBlock(mario, block, type);
+    }
+
+    // Mario vs BossFireball
+    else if ((marioA && bossFireballB) || (marioB && bossFireballA)) {
+        Mario* mario = marioA ? marioA : marioB;
+        BossFireball* bossFireball = bossFireballA ? bossFireballA : bossFireballB;
+        CollisionType type = mario->checkCollisionType(*bossFireball);
+        HandleMarioWithBossFireball(mario, bossFireball, type);
     }
 }
 
@@ -419,6 +454,12 @@ void MediatorCollision::HandleMarioWithEnemy(Mario*& mario, Enemy*& enemy, Colli
         return;
     }
 
+    // Check if this enemy is actually a Boss - Boss should be handled by HandleMarioWithBoss
+    if (dynamic_cast<Boss*>(enemy)) {
+        std::cout << "This is a Boss! Should be handled by HandleMarioWithBoss, not HandleMarioWithEnemy!" << std::endl;
+        return; // Don't process Boss here, let HandleMarioWithBoss handle it
+    }
+
     switch (AtoB) {
         case COLLISION_TYPE_SOUTH: {
             mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
@@ -463,6 +504,12 @@ void MediatorCollision::HandleEnemyWithFireball(Enemy* &enemy, Fireball* &fireba
         return;
     }
 
+    // Check if this enemy is actually a Boss - Boss should be handled by HandleBossWithFireball
+    if (dynamic_cast<Boss*>(enemy)) {
+        std::cout << "This is a Boss! Should be handled by HandleBossWithFireball, not HandleEnemyWithFireball!" << std::endl;
+        return; // Don't process Boss here, let HandleBossWithFireball handle it
+    }
+
     if (dynamic_cast<BuzzyBeetle*>(enemy)) {
         std::cout << "BuzzyBeetle is immune to fireball!" << std::endl;
         return;
@@ -476,3 +523,76 @@ void MediatorCollision::HandleEnemyWithFireball(Enemy* &enemy, Fireball* &fireba
     enemy->SetState(OBJECT_STATE_DEAD);
     std::cout << "Enemy dies by fireball" << std::endl;
 }
+
+void MediatorCollision::HandleMarioWithBossFireball(Mario*& mario, BossFireball*& bossFireball, CollisionType AtoB) {
+    if (AtoB == COLLISION_TYPE_NONE) return;
+    
+    std::cout << "BossFireball collision detected! Type: " << AtoB << std::endl;
+    
+    // Handle any collision type (similar to Mario vs Enemy)
+    if (AtoB != COLLISION_TYPE_NONE) {
+        // Increment fireball hit counter first
+        marioFireballHits++;
+        std::cout << "Mario hit by Boss Fireball! Hits: " << marioFireballHits << "/" << maxFireballHits << std::endl;
+        
+        // Let Mario's BeHit() handle damage and invincibility normally
+        mario->BeHit(); // This will handle state changes, invincibility, damage, etc.
+        std::cout << "Mario hit by BossFireball - BeHit() called" << std::endl;
+        
+        // Check if this is the final hit for death (after BeHit processing)
+        if (marioFireballHits >= maxFireballHits) {
+            std::cout << "Mario reaches " << maxFireballHits << " Boss Fireball hits - forcing death!" << std::endl;
+            mario->Die(); // Force death after max hits
+            // Reset counter after death
+            marioFireballHits = 0;
+        }
+        
+        // Mark BossFireball as consumed/destroyed
+        bossFireball->SetState(OBJECT_STATE_DEAD);
+        std::cout << "BossFireball destroyed after hitting Mario" << std::endl;
+    }
+}
+
+void MediatorCollision::HandleMarioWithBoss(Mario*& mario, Boss*& boss, CollisionType AtoB) {
+    if (AtoB == COLLISION_TYPE_NONE) {
+        std::cout << "No collision between Mario and Boss" << std::endl;
+        return;
+    }
+
+    std::cout << "Mario vs Boss collision detected! Type: " << AtoB << std::endl;
+
+    switch (AtoB) {
+        case COLLISION_TYPE_SOUTH: {
+            // Mario jumps on Boss - Boss should NOT die from this, unlike normal enemies
+            std::cout << "Mario jumped on Boss - Boss takes no damage from stomping!" << std::endl;
+            mario->SetVel(Vector2{mario->GetVel().x, -300.0f}); // Mario bounces
+            // Boss doesn't take damage from being stomped
+            break;
+        }
+        case COLLISION_TYPE_EAST:
+        case COLLISION_TYPE_WEST:
+        case COLLISION_TYPE_NORTH: {
+            // Boss hurts Mario on side/top collision
+            std::cout << "Boss damages Mario on side collision!" << std::endl;
+            mario->BeHit();
+            break;
+        }
+    }
+}
+
+void MediatorCollision::HandleBossWithFireball(Boss*& boss, Fireball*& fireball, CollisionType AtoB) {
+    if (AtoB == COLLISION_TYPE_NONE) return;
+    
+    std::cout << "Boss hit by Mario's Fireball! Collision type: " << AtoB << std::endl;
+    std::cout << "Boss current hit count before: " << boss->GetHitCount() << std::endl;
+    
+    // Boss takes damage from Mario's fireball
+    boss->OnHitByFireball();
+    
+    std::cout << "Boss hit count after: " << boss->GetHitCount() << std::endl;
+    
+    // Destroy the fireball after hitting the boss
+    fireball->SetState(OBJECT_STATE_DEAD);
+    std::cout << "Fireball destroyed after hitting Boss" << std::endl;
+}
+
