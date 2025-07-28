@@ -7,7 +7,7 @@
 #endif
 
 Boss::Boss(Vector2 startPos, Vector2* marioPosition)
-    : Enemy(startPos, {64.0f, 64.0f}, {0.0f, 0.0f}, WHITE, 0.8f, 0, DIRECTION_RIGHT),
+    : Enemy(startPos, {128.0f, 128.0f}, {0.0f, 0.0f}, WHITE, 0.8f, 0, DIRECTION_RIGHT),
       currentState(BossState::PATROL), marioPos(marioPosition),
       detectionRange(300.0f), chaseRange(200.0f), attackRange(100.0f),
       moveSpeed(10.0f), chaseSpeedMultiplier(1.5f),
