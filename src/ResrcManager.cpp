@@ -297,6 +297,13 @@ void ResrcManager::loadTextures() {
         textures["Fire_Normal_DOWN_Right"]= FlipTextureHorizontal(textures["Fire_Normal_DOWN_Left"]);
         textures["Fire_Big_DOWN_Right"]= FlipTextureHorizontal(textures["Fire_Big_DOWN_Left"]);
     }
+    {
+        textures["HealthBar1"] = LoadTexture("resources/images/Object/HealthBar/Full.png");
+        textures["HealthBar2"] = LoadTexture("resources/images/Object/HealthBar/Full2.png");
+        textures["HealthBar3"] = LoadTexture("resources/images/Object/HealthBar/Full3.png");
+        textures["HealthBar4"] = LoadTexture("resources/images/Object/HealthBar/Full4.png");
+        textures["HealthBar5"] = LoadTexture("resources/images/Object/HealthBar/Full5.png");
+    }
 }
 
 void ResrcManager::loadSounds(){
