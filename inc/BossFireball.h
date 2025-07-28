@@ -28,6 +28,7 @@ private:
     
     void Update() override;
     void UpdateTexture();
+    float CalculateRotationAngle(float actualAngle) const; // Calculate rotation for sprite based on actual direction
     
 public:
     BossFireball(Vector2 pos, Vector2 direction, FireType type = FireType::NORMAL);

@@ -147,6 +147,21 @@ void GameWorld::UpdateWorld()
             if (enemy->checkCollisionType(*fireball) != COLLISION_TYPE_NONE)
                 mediatorCollision.HandleCollision(enemy, fireball);
         }
+        
+        // EXPLICIT CHECK: Mario's Fireball vs Boss
+        for (Enemy* enemy : map.GetEnemies())
+        {
+            Boss* boss = dynamic_cast<Boss*>(enemy);
+            if (boss) {
+                std::cout << "[DEBUG] Checking Mario's Fireball vs Boss collision..." << std::endl;
+                if (boss->checkCollisionType(*fireball) != COLLISION_TYPE_NONE) {
+                    std::cout << "[DEBUG] Mario's Fireball HIT Boss! Calling HandleCollision..." << std::endl;
+                    mediatorCollision.HandleCollision(boss, fireball);
+                } else {
+                    //std::cout << "[DEBUG] No collision between Mario's Fireball and Boss" << std::endl;
+                }
+            }
+        }
     }
     
     // Check collision for BossFireball vs Mario

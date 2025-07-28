@@ -7,6 +7,7 @@
 #include "Mario.h"
 #include "ResrcManager.h"
 #include "BossFireball.h"
+#include "GameClock.h"
 #include <memory>
 #include <cmath>
 #include <list>
@@ -58,6 +59,19 @@ private:
     static const int maxHits = 10; // Boss dies after 10 hits
     float hitCooldown;      // Cooldown timer to prevent multiple hits per frame
     static constexpr float hitCooldownTime = 0.5f; // 0.5 second cooldown between hits
+    
+    // Blinking effect when dying
+    bool isBlinking;
+    float blinkingAcum;
+    float blinkingTime;
+    float blinkingAcumTotal;
+    bool doBlink;
+    bool markedForRemoval;
+    float blinkingAlpha;        // Alpha value for smooth blinking effect
+    bool fadingOut;             // Direction of fade (true = fading out, false = fading in)
+    
+    // Health bar system
+    Texture2D* GetCurrentHealthBarTexture() const; // Get current health bar texture based on hit count
     
     // Projectile management
     std::list<BossFireball*> projectiles;
@@ -115,5 +129,11 @@ public:
     void OnHitByFireball();
     int GetHitCount() const { return hitCount; }
     bool IsDead() const { return hitCount >= maxHits; }
+    
+    // ===== Blinking effect methods =====
+    void StartBlinking(float duration = 1.0f, float interval = 0.1f);
+    void UpdateBlinking();
+    bool IsBlinking() const;
+    void StopBlinking();
 
 };

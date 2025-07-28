@@ -159,11 +159,23 @@ void Mario::HandleInput()
     }
 
     if(IsKeyPressed(KEY_F)){
+        std::cout << "KEY_F pressed - changing to FIRE mode" << std::endl;
         changetoFire();
     }
     if (marioState == FIRE) {
         if ( IsKeyPressed(KEY_Z)) {
+            std::cout << "KEY_Z pressed - firing fireball!" << std::endl;
             fire();
+        }
+    } else {
+        if ( IsKeyPressed(KEY_Z)) {
+            std::cout << "[DEBUG] Z pressed but Mario is not in FIRE mode! Current state: " << marioState << std::endl;
+        }
+        // Show current Mario state when not in FIRE mode
+        static int debugCounter = 0;
+        debugCounter++;
+        if (debugCounter % 180 == 0) { // Every 3 seconds
+            std::cout << "Mario state: " << (int)marioState << " (Press F for FIRE mode, then Z to shoot)" << std::endl;
         }
     }
 }
@@ -522,7 +534,9 @@ void Mario::UpdateCollisionProbes() {
 }
 
 void Mario::fire() {
+    std::cout << "Mario::fire() called! Creating fireball at pos(" << pos.x << ", " << pos.y << ") direction: " << direction << std::endl;
     fireballs.push_back(new Fireball(pos, direction));
+    std::cout << "Fireball created! Total fireballs: " << fireballs.size() << std::endl;
     SoundManager::GetInstance().PlaySound("FIREBALL");
 }
 
