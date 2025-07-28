@@ -28,6 +28,7 @@ class MediatorCollision {
         void HandleEnemyWithFireball(Enemy*& enemy, Fireball*& fireball, CollisionType AtoB);
         void HandleBossWithFireball(Boss*& boss, Fireball*& fireball, CollisionType AtoB);
         void HandleEnemyWithTile(Enemy*& enemy, Tile* tile, CollisionType AtoB);
+        void HandleBossWithTile(Boss*& boss, Tile*& tile, CollisionType AtoB);
         void HandleMarioWithBossFireball(Mario*& mario, BossFireball*& bossFireball, CollisionType AtoB);
 
         void HandleMarioWithBlock(Mario* &mario, Block* &block, CollisionType);

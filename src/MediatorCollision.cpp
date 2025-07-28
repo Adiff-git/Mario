@@ -200,6 +200,16 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
         HandleBossWithFireball(boss, fireball, type);
         return; // Early return to prevent other collision checks
     }
+
+    // Boss vs Tile
+    else if ((bossA && tileB) || (bossB && tileA))
+    {
+        Boss *boss = bossA ? bossA : bossB;
+        Tile *tile = tileA ? tileA : tileB;
+        CollisionType type = boss->checkCollisionType(*tile);
+        HandleBossWithTile(boss, tile, type);
+    }
+
     // Mario vs Tile
     else if ((marioA && tileB) || (marioB && tileA))
     {
@@ -492,6 +502,46 @@ void MediatorCollision::HandleEnemyWithTile(Enemy *&enemy, Tile *tile, Collision
     }
 }
 
+void MediatorCollision::HandleBossWithTile(Boss *&boss, Tile *&tile, CollisionType AtoB)
+{
+    if (AtoB == COLLISION_TYPE_NONE)
+        return;
+        
+    switch (AtoB)
+    {
+    case COLLISION_TYPE_SOUTH:
+    {
+        // Boss hits ground - position boss on top of tile
+        boss->SetPos(Vector2{boss->GetPos().x, tile->GetPos().y - boss->GetSize().y});
+        boss->SetVel(Vector2{boss->GetVel().x, 0});
+        break;
+    }
+    case COLLISION_TYPE_NORTH:
+    {
+        // Boss hits ceiling - position boss below tile
+        boss->SetPos(Vector2{boss->GetPos().x, tile->GetPos().y + tile->GetSize().y});
+        boss->SetVel(Vector2{boss->GetVel().x, 0});
+        break;
+    }
+    case COLLISION_TYPE_EAST:
+    {
+        // Boss hits wall from left - position boss to left of tile and reverse direction
+        boss->SetPos(Vector2{tile->GetPos().x - boss->GetSize().x, boss->GetPos().y});
+        boss->SetVel(Vector2{-boss->GetVel().x, boss->GetVel().y});
+        boss->SetDirection(DIRECTION_LEFT);
+        break;
+    }
+    case COLLISION_TYPE_WEST:
+    {
+        // Boss hits wall from right - position boss to right of tile and reverse direction
+        boss->SetPos(Vector2{tile->GetPos().x + tile->GetSize().x, boss->GetPos().y});
+        boss->SetVel(Vector2{-boss->GetVel().x, boss->GetVel().y});
+        boss->SetDirection(DIRECTION_RIGHT);
+        break;
+    }
+    }
+}
+
 void MediatorCollision::HandleMarioWithEnemy(Mario *&mario, Enemy *&enemy, CollisionType AtoB)
 {
     if (AtoB == COLLISION_TYPE_NONE)
@@ -632,10 +682,20 @@ void MediatorCollision::HandleMarioWithBoss(Mario *&mario, Boss *&boss, Collisio
     {
     case COLLISION_TYPE_SOUTH:
     {
-        // Mario jumps on Boss - Boss should NOT die from this, unlike normal enemies
-        std::cout << "Mario jumped on Boss - Boss takes no damage from stomping!" << std::endl;
+        // Mario jumps on Boss - Boss takes damage like fireball hit
+        std::cout << "Mario jumped on Boss - Boss takes damage from stomping!" << std::endl;
         mario->SetVel(Vector2{mario->GetVel().x, -300.0f}); // Mario bounces
-        // Boss doesn't take damage from being stomped
+        
+        // Boss takes damage similar to fireball hit
+        std::cout << "Boss hit by Mario's stomp! Hit count before: " << boss->GetHitCount() << std::endl;
+        boss->OnHitByFireball(); // Use same damage method as fireball
+        std::cout << "Boss hit count after: " << boss->GetHitCount() << "/" << 10 << std::endl;
+        
+        // Check if Boss should die after 10 hits
+        if (boss->GetHitCount() >= 10)
+        {
+            std::cout << "Boss defeated after 10 hits (including stomp)!" << std::endl;
+        }
         break;
     }
     case COLLISION_TYPE_EAST:

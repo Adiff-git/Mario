@@ -10,11 +10,11 @@
 Boss::Boss(Vector2 startPos, Vector2 *marioPosition)
     : Enemy(startPos, {128.0f, 128.0f}, {0.0f, 0.0f}, WHITE, 0.8f, 0, DIRECTION_RIGHT),
       currentState(BossState::PATROL), marioPos(marioPosition),
-      detectionRange(300.0f), chaseRange(200.0f), attackRange(100.0f),
-      moveSpeed(10.0f), chaseSpeedMultiplier(1.5f),
+      detectionRange(500.0f), chaseRange(350.0f), attackRange(200.0f),
+      moveSpeed(15.0f), chaseSpeedMultiplier(2.0f),
       attackCooldown(0.5f), attackTimer(0.0f), // Giảm từ 1.5f xuống 0.5f
-      attackCount(0), maxAttacks(3), skillCooldown(5.0f), skillTimer(0.0f),
-      isUsingSkill(false), skillCurrentFrame(0), skillFrameTime(0.2f), skillFrameAccumulator(0.0f),
+      attackCount(0), maxAttacks(3), skillCooldown(12.0f), skillTimer(0.0f), // Increased from 8.0f to 12.0f
+      isUsingSkill(false), skillCurrentFrame(0), skillFrameTime(0.3f), skillFrameAccumulator(0.0f), // Slower skill frame time (was 0.2f)
       skillDurationAccumulator(0.0f),                                                                                        // Initialize skill duration tracker
       patrolTimer(0.0f), patrolPhase(0),                                                                                     // Khởi tạo biến tuần tra
       hitCount(0),                                                                                                           // Initialize hit counter
@@ -22,7 +22,7 @@ Boss::Boss(Vector2 startPos, Vector2 *marioPosition)
       isBlinking(false), blinkingAcum(0), blinkingTime(0.1f), blinkingAcumTotal(0), doBlink(false), markedForRemoval(false), // Initialize blinking variables
       blinkingAlpha(1.0f), fadingOut(true)                                                                                   // Initialize smooth blinking variables
 {
-    frameTime = 0.2f;
+    frameTime = 0.35f; // Slower frame animation (was 0.2f)
     frameAcumulator = 0.0f;
     currentFrame = 0;
     maxFrames = 4;
@@ -152,26 +152,26 @@ void Boss::Update()
 
     if (currentState == BossState::PATROL)
     {
-        if (pos.x < 50)
+        if (pos.x < 20)
         {
-            pos.x = 50;
+            pos.x = 20;
             vel.x = 0;
             direction = DIRECTION_RIGHT;
         }
-        if (pos.x > 750)
+        if (pos.x > 780)
         {
-            pos.x = 750;
+            pos.x = 780;
             vel.x = 0;
             direction = DIRECTION_LEFT;
         }
-        if (pos.y < 400)
+        if (pos.y < 350)
         {
-            pos.y = 400;
+            pos.y = 350;
             vel.y = 0;
         }
-        if (pos.y > 600)
+        if (pos.y > 650)
         {
-            pos.y = 600;
+            pos.y = 650;
             vel.y = 0;
         }
     }
@@ -277,26 +277,26 @@ void Boss::UpdateStateAndPhysic()
     // Boundary constraints
     if (currentState == BossState::PATROL)
     {
-        if (pos.x < 50)
+        if (pos.x < 20)
         {
-            pos.x = 50;
+            pos.x = 20;
             vel.x = 0;
             direction = DIRECTION_RIGHT;
         }
-        if (pos.x > 750)
+        if (pos.x > 780)
         {
-            pos.x = 750;
+            pos.x = 780;
             vel.x = 0;
             direction = DIRECTION_LEFT;
         }
-        if (pos.y < 400)
+        if (pos.y < 350)
         {
-            pos.y = 400;
+            pos.y = 350;
             vel.y = 0;
         }
-        if (pos.y > 600)
+        if (pos.y > 650)
         {
-            pos.y = 600;
+            pos.y = 650;
             vel.y = 0;
         }
     }
@@ -805,24 +805,50 @@ void Boss::Chase(float dt)
 {
     Vector2 directionToMario = GetDirectionToMario();
     float currentSpeed = moveSpeed * chaseSpeedMultiplier;
+    
+    // Smooth acceleration/deceleration for more natural movement
+    const float acceleration = 80.0f; // How fast boss accelerates
+    const float maxChaseSpeed = 50.0f;
+    const float minChaseSpeed = 8.0f;
+    
     if (directionToMario.x == 0 && directionToMario.y == 0)
     {
-        currentSpeed = moveSpeed;
+        // Gradually slow down when no direction
+        vel.x *= 0.9f;
+        vel.y *= 0.9f;
     }
     else
     {
-        currentSpeed = max(currentSpeed, 5.0f);
+        // Calculate target velocity
+        Vector2 targetVel = {
+            directionToMario.x * currentSpeed,
+            directionToMario.y * currentSpeed
+        };
+        
+        // Gradually accelerate towards target velocity for smoother movement
+        vel.x += (targetVel.x - vel.x) * acceleration * dt;
+        vel.y += (targetVel.y - vel.y) * acceleration * dt;
+        
+        // Clamp speed to reasonable limits
+        float currentVelMagnitude = sqrt(vel.x * vel.x + vel.y * vel.y);
+        if (currentVelMagnitude > maxChaseSpeed)
+        {
+            vel.x = (vel.x / currentVelMagnitude) * maxChaseSpeed;
+            vel.y = (vel.y / currentVelMagnitude) * maxChaseSpeed;
+        }
+        else if (currentVelMagnitude < minChaseSpeed && currentVelMagnitude > 0)
+        {
+            vel.x = (vel.x / currentVelMagnitude) * minChaseSpeed;
+            vel.y = (vel.y / currentVelMagnitude) * minChaseSpeed;
+        }
     }
-    currentSpeed = min(currentSpeed, 30.0f);
 
-    vel.x = directionToMario.x * currentSpeed;
-    vel.y = directionToMario.y * currentSpeed;
-
-    if (directionToMario.x < 0)
+    // Update direction based on movement, not just target direction
+    if (vel.x < -1.0f)
     {
         direction = DIRECTION_LEFT;
     }
-    else if (directionToMario.x > 0)
+    else if (vel.x > 1.0f)
     {
         direction = DIRECTION_RIGHT;
     }
@@ -830,15 +856,56 @@ void Boss::Chase(float dt)
 
 void Boss::Attack(float dt)
 {
-    vel.x = 0;
-    vel.y = 0;
-
+    // Don't stop completely - maintain some movement for more natural feel
     Vector2 directionToMario = GetPredictedDirectionToMario();
-    if (directionToMario.x < 0)
+    
+    // Slow down movement during attack but don't stop completely
+    const float attackMoveSpeed = moveSpeed * 0.3f; // Move at 30% of normal speed
+    const float positioningSpeed = 15.0f; // Speed for subtle positioning adjustments
+    
+    // Subtle positioning - try to maintain optimal attack distance
+    float distanceToMario = GetDistanceToMario();
+    float optimalAttackDistance = attackRange * 0.7f; // Stay at 70% of max attack range
+    
+    if (distanceToMario > optimalAttackDistance + 20.0f)
+    {
+        // Too far - move closer slowly
+        vel.x += directionToMario.x * positioningSpeed * dt;
+        vel.y += directionToMario.y * positioningSpeed * dt;
+    }
+    else if (distanceToMario < optimalAttackDistance - 20.0f)
+    {
+        // Too close - back away slowly
+        vel.x -= directionToMario.x * positioningSpeed * dt;
+        vel.y -= directionToMario.y * positioningSpeed * dt;
+    }
+    else
+    {
+        // Good distance - maintain slight circular movement for dynamic feel
+        Vector2 perpendicular = {-directionToMario.y, directionToMario.x}; // 90 degree rotation
+        vel.x += perpendicular.x * attackMoveSpeed * 0.5f * dt;
+        vel.y += perpendicular.y * attackMoveSpeed * 0.5f * dt;
+    }
+    
+    // Apply friction to prevent excessive speed buildup
+    vel.x *= 0.95f;
+    vel.y *= 0.95f;
+    
+    // Clamp velocity to reasonable limits during attack
+    float maxAttackSpeed = attackMoveSpeed * 1.5f;
+    float currentSpeed = sqrt(vel.x * vel.x + vel.y * vel.y);
+    if (currentSpeed > maxAttackSpeed)
+    {
+        vel.x = (vel.x / currentSpeed) * maxAttackSpeed;
+        vel.y = (vel.y / currentSpeed) * maxAttackSpeed;
+    }
+
+    // Always face Mario when attacking
+    if (directionToMario.x < -0.1f)
     {
         direction = DIRECTION_LEFT;
     }
-    else
+    else if (directionToMario.x > 0.1f)
     {
         direction = DIRECTION_RIGHT;
     }
