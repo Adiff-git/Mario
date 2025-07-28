@@ -1,6 +1,6 @@
 #pragma once
 #include "Object.h"
-#include "Mario.h"
+#include "Character.h"
 #include "CollisionProbe.h"
 #include "Tile.h"
 #include "Fireball.h"
@@ -14,15 +14,15 @@
 
 class MediatorCollision {
     private:
-        void HandleMarioWithTile(Mario*& mario, Tile*& tile, CollisionType AtoB);
+        void HandleMarioWithTile(Character*& mario, Tile*& tile, CollisionType AtoB);
         void HandleFireballWithTile(Fireball*& fireball, Tile*& tile, CollisionType AtoB);
         void HandleItemWithTile(Item *& item, Tile *& tile, CollisionType AtoB);
         
-        void HandleMarioWithEnemy(Mario*& mario, Enemy*& enemy, CollisionType AtoB);
+        void HandleMarioWithEnemy(Character*& mario, Enemy*& enemy, CollisionType AtoB);
         void HandleEnemyWithFireball(Enemy*& enemy, Fireball*& fireball, CollisionType AtoB);
         void HandleEnemyWithTile(Enemy*& enemy, Tile* tile, CollisionType AtoB);
 
-        void HandleMarioWithBlock(Mario* &mario, Block* &block, CollisionType);
+        void HandleMarioWithBlock(Character* &mario, Block* &block, CollisionType);
         
 
     public:

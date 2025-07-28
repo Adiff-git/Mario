@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Character.h"
 #include "Item.h"
 #include "ResrcManager.h"
 
@@ -14,7 +15,7 @@ public:
     CourseClearToken(Vector2 pos);
     ~CourseClearToken() override = default;
 
-    void updateMario(Mario& mario) override;
+    void updateMario(Character& mario) override;
     void playCollisionSound() override;
     void Draw() override;
     void Update() override;

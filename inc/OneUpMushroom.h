@@ -3,7 +3,7 @@
 #include "Item.h"
 #include "raylib.h"
 
-class Mario;
+class Character;
 
 class OneUpMushroom : public Item {
 private:
@@ -26,7 +26,7 @@ public:
 
     void Update(); // Không truyền world
 
-    void updateMario(Mario& mario) override;
+    void updateMario(Character& mario) override;
     void playCollisionSound() override;
     void Draw() override;
     bool canBeCollected() const override { return !collected; } 

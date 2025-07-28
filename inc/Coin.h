@@ -22,6 +22,6 @@ public:
 
     void Update() override;
     void Draw() override;
-    void updateMario(Mario& mario) override;
+    void updateMario(Character& mario) override;
     void playCollisionSound() override;
 };

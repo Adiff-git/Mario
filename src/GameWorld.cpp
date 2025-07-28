@@ -3,6 +3,7 @@
 #include "OneUpMushroom.h"
 #include "Star.h"
 #include "ThreeUpMoon.h"
+#include "Mario.h"
 #include "YoshiCoin.h"
 #include "EnemyManager.h"
 #include "MediatorCollision.h"
@@ -11,7 +12,7 @@ interactiveTiles(map.getInteractiveTiles())
 {
     // Trong GameWorld constructor, thêm:
 
-    player = Mario(Vector2{100, 100}, 3, SMALL); // Đặt vị trí cụ thể
+    player =  new Mario(Vector2{100, 100}, 3, SMALL); // Đặt vị trí cụ thể
     map.LoadMap(0);
     camera.offset = Vector2{(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
     camera.target = player.GetPos();
@@ -26,7 +27,7 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen) : player(),
                                                           gameState(GameState::GAME_PLAYING)
 {
     map.LoadMap(MapID);
-    player = Mario(Vector2{100, 100}, 3, SMALL); // Đặt vị trí cụ thể
+    player = Character(Vector2{100, 100}, 3, SMALL); // Đặt vị trí cụ thể
     camera.offset = Vector2{(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
     camera.target = player.GetPos();
     camera.rotation = 0.0f;

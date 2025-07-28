@@ -126,7 +126,7 @@ void QuestionBlock::Draw() {
 }
 
 
-void QuestionBlock::doHit( Mario& mario, Map* map ) {
+void QuestionBlock::doHit( Character& mario, Map* map ) {
     if ( !hit ) {
         //PlaySound( ResrcManager::GetInstance().getSound()["coin"] );
         hit = true;

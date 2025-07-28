@@ -1,7 +1,7 @@
 #include "OneUpMushroom.h"
 #include "GameWorld.h"
 #include "GameClock.h"
-#include "Mario.h"
+#include "Character.h"
 #include "ResrcManager.h"
 
 OneUpMushroom::OneUpMushroom(Vector2 pos)
@@ -20,7 +20,7 @@ OneUpMushroom::OneUpMushroom(Vector2 pos)
     scoreTexture = &ResrcManager::GetInstance().getTexture("+1UP");
 }
 
-void OneUpMushroom::updateMario(Mario &mario)
+void OneUpMushroom::updateMario(Character &mario)
 {
     if (collected) return;
 

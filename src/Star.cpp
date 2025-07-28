@@ -1,5 +1,5 @@
 #include "GameWorld.h"
-#include "Mario.h"
+#include "Character.h"
 #include "raylib.h"
 #include "ResrcManager.h"
 #include "Star.h"
@@ -20,7 +20,7 @@ Star::Star(Vector2 pos)
     scoreTexture = &ResrcManager::GetInstance().getTexture("+1000");
 }
 
-void Star::updateMario(Mario& mario)
+void Star::updateMario(Character& mario)
 {
     if (collected) return;
 

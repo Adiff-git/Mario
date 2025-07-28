@@ -18,7 +18,7 @@ private:
 public:
     Mushroom(Vector2 pos);
 
-    void updateMario(Mario& mario) override;
+    void updateMario(Character& mario) override;
     void playCollisionSound() override;
     void Update() override;
     void Draw() override;

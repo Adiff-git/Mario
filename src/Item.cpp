@@ -26,7 +26,7 @@ void Item::SetState(ObjectState state) {
     this->state = state;
 }
 
-void Item::onSouthCollision(Mario& mario) {
+void Item::onSouthCollision(Character& mario) {
 }
 
 bool Item::isPauseGameOnHit() {

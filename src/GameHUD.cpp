@@ -2,7 +2,7 @@
 #include "raylib.h"
 #include "ResrcManager.h"
 
-GameHUD::GameHUD(Mario* mario) : mario(mario), luigi(nullptr) {
+GameHUD::GameHUD(Character* mario) : mario(mario), luigi(nullptr) {
     // Initialize positions and sizes
     coinsPosition = { 1500, 100 };
     coinsSize = { 30, 30 };
@@ -23,7 +23,7 @@ GameHUD::GameHUD(Mario* mario) : mario(mario), luigi(nullptr) {
     font = &ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT"); // Initialize font if needed
 }
 
-GameHUD::GameHUD(Mario* mario, Mario* luigi) : mario(mario), luigi(luigi) {
+GameHUD::GameHUD(Character* mario, Character* luigi) : mario(mario), luigi(luigi) {
     // Initialize positions and sizes for multiple players
     coinsPosition = { 10, 10 };
     coinsSize = { 50, 50 };
@@ -41,7 +41,7 @@ void GameHUD::Draw() {
     int score = mario->GetScore();
     int coins = mario->GetCoins();
     int lives = mario->GetLives();
-    PlayerState marioState = mario->GetMarioState();
+    ObjectState marioState = mario->GetMarioState();
 
     // Draw coins
     DrawTextureNPatch(*coinTexture,

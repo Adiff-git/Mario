@@ -24,7 +24,7 @@ public:
     FireFlower(Vector2 pos);
     ~FireFlower() override = default;
 
-    void updateMario(Mario &mario) override;
+    void updateMario(Character &mario) override;
     void playCollisionSound() override;
     void Draw() override;
     void NewFunction(Texture2D &tex, std::string &texKey, bool &retFlag);

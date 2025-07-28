@@ -1,7 +1,7 @@
 #include "Mushroom.h"
 #include "GameWorld.h"
 #include "GameClock.h"
-#include "Mario.h"
+#include "Character.h"
 #include "ResrcManager.h"
 
 Mushroom::Mushroom(Vector2 pos)
@@ -14,7 +14,7 @@ Mushroom::Mushroom(Vector2 pos)
     sprite = &ResrcManager::GetInstance().getTexture("Mushroom");
 }
 
-void Mushroom::updateMario(Mario& mario)
+void Mushroom::updateMario(Character& mario)
 {
     if (state == OBJECT_STATE_TO_BE_REMOVED || blinking)
         return;

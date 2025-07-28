@@ -1,6 +1,6 @@
 #pragma once
 #include "raylib.h"
-#include "Mario.h"
+#include "Character.h"
 #include "Item.h"
 #include "GameClock.h"
 #include "Tile.h"
@@ -26,7 +26,7 @@ class GameWorld {
         float BGpos = 0.0f;// 
 
         MediatorCollision mediatorCollision;
-        Mario player;
+        Character* player;
         Camera2D camera;
         
         GameState gameState;

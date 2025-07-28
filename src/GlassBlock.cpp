@@ -30,7 +30,7 @@ void GlassBlock::Draw() {
     DrawTexture( ResrcManager::GetInstance().getTexture("BLOCK_GLASS"), pos.x, pos.y, WHITE );
 }
 
-void GlassBlock::doHit(Mario& mario, Map* map) {
+void GlassBlock::doHit(Character& mario, Map* map) {
     if(this->GetState() == OBJECT_STATE_TRANSITIONING_1) this->SetState(OBJECT_STATE_TRANSITIONING_2);
     else if(this->GetState() == OBJECT_STATE_TRANSITIONING_2) this->SetState(OBJECT_STATE_TO_BE_REMOVED);
     else this->SetState(OBJECT_STATE_TRANSITIONING_1);

@@ -1,6 +1,6 @@
 #include "YoshiCoin.h"
 #include "GameWorld.h"
-#include "Mario.h"
+#include "Character.h"
 #include "raylib.h"
 
 YoshiCoin::YoshiCoin(Vector2 pos)
@@ -15,7 +15,7 @@ YoshiCoin::YoshiCoin(Vector2 pos)
     scoreTexture = &ResrcManager::GetInstance().getTexture("+2000");
 }
 
-void YoshiCoin::updateMario(Mario& mario)
+void YoshiCoin::updateMario(Character& mario)
 {
     if (collected) return;
     

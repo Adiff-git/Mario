@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Object.h"
-#include "Mario.h"
+#include "Character.h"
 
 class Item : public Object {
 protected:
@@ -19,9 +19,9 @@ public:
     virtual void Update() override = 0;
     virtual void Draw() override;
 
-    virtual void updateMario(Mario& mario) = 0;
+    virtual void updateMario(Character& mario) = 0;
     virtual void playCollisionSound() = 0;
-    virtual void onSouthCollision(Mario& mario);
+    virtual void onSouthCollision(Character& mario);
     virtual bool canBeCollected() const { return true; } 
 
     void SetState(ObjectState state);

@@ -3,7 +3,7 @@
 
 #include "raylib.h"
 #include "Block.h"
-#include "Mario.h"
+#include "Character.h"
 
 class EyesOpenedBlock : public Block {
 
@@ -19,5 +19,5 @@ public:
 
     void Update() override;
     void Draw() override;
-    void doHit( Mario& mario, Map* map ) override;
+    void doHit( Character& mario, Map* map ) override;
 };

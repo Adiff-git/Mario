@@ -8,7 +8,7 @@
 #include "PiranhaPlant.h"
 #include <iostream>
 #include <algorithm>
-void MediatorCollision::HandleMarioWithTile(Mario* &mario, Tile * &tile, CollisionType AtoB)
+void MediatorCollision::HandleMarioWithTile(Character* &mario, Tile * &tile, CollisionType AtoB)
 {
     if (AtoB == COLLISION_TYPE_NONE)
         return;
@@ -153,8 +153,8 @@ void MediatorCollision::HandleItemWithTile(Item *&item, Tile *&tile, CollisionTy
 
 void MediatorCollision::HandleCollision(Object* ObjectA, Object* ObjectB)
 {
-    Mario* marioA = dynamic_cast<Mario*>(ObjectA);
-    Mario* marioB = dynamic_cast<Mario*>(ObjectB);
+    Character* marioA = dynamic_cast<Character*>(ObjectA);
+    Character* marioB = dynamic_cast<Character*>(ObjectB);
 
     Fireball* fireballA = dynamic_cast<Fireball*>(ObjectA);
     Fireball* fireballB = dynamic_cast<Fireball*>(ObjectB);
@@ -172,7 +172,7 @@ void MediatorCollision::HandleCollision(Object* ObjectA, Object* ObjectB)
     Block* blockB = dynamic_cast<Block*>(ObjectB);
     // Mario vs Tile
     if ((marioA && tileB) || (marioB && tileA)) {
-        Mario* mario = marioA ? marioA : marioB;
+        Character* mario = marioA ? marioA : marioB;
         Tile* tile = tileA ? tileA : tileB;
         CollisionType type = mario->checkCollisionType(*tile);
         HandleMarioWithTile(mario, tile, type);
@@ -196,7 +196,7 @@ void MediatorCollision::HandleCollision(Object* ObjectA, Object* ObjectB)
 
     // Mario vs Item
     else if ((marioA && itemB) || (marioB && itemA)) {
-        Mario* mario = marioA ? marioA : marioB;
+        Character* mario = marioA ? marioA : marioB;
         Item* item = itemA ? itemA : itemB;
 
         if (item->canBeCollected() && item->checkCollision(*mario) == COLLISION_TYPE_COLLIDED) {
@@ -207,7 +207,7 @@ void MediatorCollision::HandleCollision(Object* ObjectA, Object* ObjectB)
 
     // Mario vs Enemy
     else if ((marioA && enemyB) || (marioB && enemyA)) {
-        Mario* mario = marioA ? marioA : marioB;
+        Character* mario = marioA ? marioA : marioB;
         Enemy* enemy = enemyA ? enemyA : enemyB;
         CollisionType type = mario->checkCollisionType(*enemy);
         HandleMarioWithEnemy(mario, enemy, type);
@@ -232,13 +232,13 @@ void MediatorCollision::HandleCollision(Object* ObjectA, Object* ObjectB)
     // Mario vs block
     else if((marioA && blockB) || (blockA && marioB)){
         Block* block = blockA ? blockA : blockB;
-        Mario* mario = marioA ? marioA :marioB;
+        Character* mario = marioA ? marioA :marioB;
         CollisionType type = mario->checkCollisionType(*block);
         HandleMarioWithBlock(mario, block, type);
     }
 }
 
-void MediatorCollision :: HandleMarioWithBlock(Mario* &mario, Block* &block, CollisionType type){
+void MediatorCollision :: HandleMarioWithBlock(Character* &mario, Block* &block, CollisionType type){
     if(type == COLLISION_TYPE_NONE) return;
     switch(type){
         case COLLISION_TYPE_SOUTH:{
@@ -413,7 +413,7 @@ void MediatorCollision::HandleEnemyWithTile(Enemy*& enemy, Tile* tile, Collision
     }
 }
 
-void MediatorCollision::HandleMarioWithEnemy(Mario*& mario, Enemy*& enemy, CollisionType AtoB) {
+void MediatorCollision::HandleMarioWithEnemy(Character*& mario, Enemy*& enemy, CollisionType AtoB) {
     if (AtoB == COLLISION_TYPE_NONE) {
         std::cout << "No collision between Mario and Enemy" << std::endl;
         return;

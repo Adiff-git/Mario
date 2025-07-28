@@ -1,6 +1,6 @@
 #include "Coin.h"
 #include "ResrcManager.h"
-#include "Mario.h"
+#include "Character.h"
 #include "raylib.h"
 
 Coin::Coin(Vector2 pos)
@@ -66,7 +66,7 @@ void Coin::Draw()
     }
 }
 
-void Coin::updateMario(Mario& mario)
+void Coin::updateMario(Character& mario)
 {
     if (collected || state == OBJECT_STATE_TO_BE_REMOVED) return;
 

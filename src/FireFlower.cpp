@@ -17,7 +17,7 @@ FireFlower::FireFlower(Vector2 pos)
 
 }
 
-void FireFlower::updateMario(Mario& mario)
+void FireFlower::updateMario(Character& mario)
 {
     
     if (collected) return;

@@ -1,7 +1,7 @@
 #include "ThreeUpMoon.h"
 #include "GameWorld.h"
 #include "GameClock.h"
-#include "Mario.h"
+#include "Character.h"
 #include "raylib.h"
 
 ThreeUpMoon::ThreeUpMoon(Vector2 pos)
@@ -18,7 +18,7 @@ ThreeUpMoon::ThreeUpMoon(Vector2 pos)
     scoreTexture = &ResrcManager::GetInstance().getTexture("+3UP");
 }
 
-void ThreeUpMoon::updateMario(Mario& mario)
+void ThreeUpMoon::updateMario(Character& mario)
 {
     
     if (collected) return;

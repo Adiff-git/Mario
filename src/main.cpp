@@ -1,7 +1,7 @@
 #include "raylib.h"
 #include "ResrcManager.h"
 #include "GameWorld.h"
-#include "Mario.h"
+#include "Character.h"
 #include "GameClock.h"
 #include <iostream>
 #include "ScreenController.h"

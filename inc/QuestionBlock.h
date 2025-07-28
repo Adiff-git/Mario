@@ -3,7 +3,7 @@
 #include "ResrcManager.h"
 #include "raylib.h"
 #include "Block.h"
-#include "Mario.h"
+#include "Character.h"
 #include "Map.h"
 enum GiftType{
     GIFT_NONE,
@@ -42,7 +42,7 @@ public:
 
     void Update() override;
     void Draw() override;
-    void doHit( Mario& mario, Map* map );
+    void doHit( Character& mario, Map* map );
     bool isQuestionBlock()  { return true; } // Override to indicate this is a QuestionBlock
 
 };

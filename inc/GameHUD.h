@@ -1,12 +1,12 @@
 #pragma once
 
 #include "Drawable.h"
-#include "Mario.h"
+#include "Character.h"
 
 class GameHUD : public Drawable {
     private:
-        Mario* mario;
-        Mario* luigi;
+        Character* mario;
+        Character* luigi;
 
         Vector2 coinsPosition;
         Vector2 coinsSize;
@@ -28,8 +28,8 @@ class GameHUD : public Drawable {
         Font* font;
     public:
         GameHUD() = default;
-        GameHUD(Mario* mario);
-        GameHUD(Mario* mario, Mario* luigi);// for multiple player
+        GameHUD(Character* mario);
+        GameHUD(Character* mario, Character* luigi);// for multiple player
 
         void Draw() override;
         void setFont(Font& font);

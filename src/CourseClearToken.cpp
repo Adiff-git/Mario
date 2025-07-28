@@ -1,6 +1,6 @@
 #include "CourseClearToken.h"
 #include "ResrcManager.h"
-#include "Mario.h"
+#include "Character.h"
 #include "raylib.h"
 #include <cmath>
 
@@ -68,7 +68,7 @@ void CourseClearToken::Draw() {
     );
 }
 
-void CourseClearToken::updateMario(Mario& mario) {
+void CourseClearToken::updateMario(Character& mario) {
     mario.Victory();
     mario.SetState(OBJECT_STATE_VICTORY);
 }

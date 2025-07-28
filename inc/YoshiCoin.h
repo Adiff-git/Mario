@@ -15,7 +15,7 @@ public:
     YoshiCoin(Vector2 pos);
     ~YoshiCoin() override = default;
 
-    void updateMario(Mario& mario) override;
+    void updateMario(Character& mario) override;
     void playCollisionSound() override;
     void Draw() override;
     void Update() override;

@@ -2,7 +2,7 @@
 #pragma once
 #include "raylib.h"
 #include "Object.h"
-#include "Mario.h"
+#include "Character.h"
 class Map;
 enum BlockType {
     BLOCK_QUESTION = 0,
@@ -26,7 +26,7 @@ public:
 
     void Update() override = 0 ;
     void Draw() override = 0;
-    virtual void doHit( Mario &mario, Map* map ) = 0;
+    virtual void doHit( Character &mario, Map* map ) = 0;
     void resetHit();
     bool isHit() const { return hit; }
 

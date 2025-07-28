@@ -4,7 +4,7 @@
 #include "Button.h" 
 #include "raylib.h"
 #include <iostream>
-#include "Mario.h"
+#include "Character.h"
 #include "GameWorld.h"
 #include "GameHUD.h"
 enum class TransitionState {

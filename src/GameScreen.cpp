@@ -271,7 +271,7 @@ void GameScreen::NextLevel() {
     int currentLives = gameWorld->player.GetLives();
     int currentCoins = gameWorld->player.GetCoins();
     int currentScore = gameWorld->player.GetScore();
-    PlayerState currentMarioState = gameWorld->player.GetMarioState();
+    ObjectState currentMarioState = gameWorld->player.GetMarioState();
     
     level++;
     if (level > 2) {

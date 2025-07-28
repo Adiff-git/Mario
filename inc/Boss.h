@@ -4,7 +4,7 @@
 #include <raylib.h> 
 #include <memory>
 #include "Object.h"
-#include "Mario.h"
+#include "Character.h"
 #include <cmath>
 using namespace std;
 

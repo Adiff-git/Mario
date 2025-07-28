@@ -2,7 +2,7 @@
 
 #include "Item.h"
 
-class Mario;
+class Character;
 
 class Star : public Item {
 private:
@@ -21,7 +21,7 @@ public:
     Star(Vector2 pos);
 
     void Update() override;
-    void updateMario(Mario& mario) override;
+    void updateMario(Character& mario) override;
     void playCollisionSound() override;
     void Draw() override;
     bool canBeCollected() const;

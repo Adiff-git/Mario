@@ -8,7 +8,7 @@ public:
     ThreeUpMoon(Vector2 pos);
     ~ThreeUpMoon() override = default;
 
-    void updateMario(Mario& mario) override;
+    void updateMario(Character& mario) override;
     void playCollisionSound() override;
     void Draw() override;
     void Update() override;
