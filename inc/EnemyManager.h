@@ -1,14 +1,19 @@
-#pragma once
+#ifndef ENEMY_MANAGER_H
+#define ENEMY_MANAGER_H
+#include "Enemy.h"
+#include <vector>
+#include <string>
 
-#include "Goomba.h"
-#include "GreenKoopa.h"
-#include "YellowKoopa.h"
-#include "RedKoopa.h"
-#include "BuzzyBeetle.h"
-#include "BulletBill.h"
-#include "Bob-omb.h"
-#include "BanzaiBill.h"
-#include "Rex.h"
-#include "FlyingGoomba.h"
-#include "PiranhaPlant.h"
-#include "JumpingPiranha.h"
+class EnemyManager {
+private:
+    std::vector<Enemy*> enemies;
+
+public:
+    EnemyManager();
+    ~EnemyManager();
+    Enemy* CreateEnemy(const std::string& enemyType, Vector2 pos);
+    void Update();
+    std::vector<Enemy*>& GetEnemies();
+};
+
+#endif

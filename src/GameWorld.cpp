@@ -6,6 +6,7 @@
 #include "YoshiCoin.h"
 #include "EnemyManager.h"
 #include "MediatorCollision.h"
+#include "Boss.h"
 GameWorld::GameWorld() : player(),
 interactiveTiles(map.getInteractiveTiles())
 {
@@ -66,23 +67,22 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen) : player(),
     }
     if (MapID == 0)
     {
-        map.GetInteractiveItems().push_back(std::make_shared<Coin>(Vector2{150, 800}));
-        map.GetInteractiveItems().push_back(std::make_shared<CourseClearToken>(Vector2{200, 800}));
-        map.GetInteractiveItems().push_back(std::make_shared<FireFlower>(Vector2{200, 800}));
+        
         // interactiveItems.push_back(std::make_shared<Mushroom>(Vector2{250, 500}));
         // interactiveItems.push_back(std::make_shared<OneUpMushroom>(Vector2{300, 500}));
-        map.GetInteractiveItems().push_back(std::make_shared<Star>(Vector2{350, 500}));
-        map.GetInteractiveItems().push_back(std::make_shared<ThreeUpMoon>(Vector2{400, 500}));
-        map.GetInteractiveItems().push_back(std::make_shared<YoshiCoin>(Vector2{450, 800}));
-
-        map.GetEnemies().push_back(new Goomba(Vector2{450, 500}));
-        map.GetEnemies().push_back(new GreenKoopa(Vector2{500, 500}));
-        map.GetEnemies().push_back(new BuzzyBeetle(Vector2{600, 500}));
-        map.GetEnemies().push_back(new Rex(Vector2{650, 500}));
-        map.GetEnemies().push_back(new FlyingGoomba(Vector2{750, 500}));
+        
+           
+        enemyManager.CreateEnemy("GreenKoopa", Vector2{500, 500});
+        enemyManager.CreateEnemy("Rex", Vector2{550, 500});
+    }
+    else if (MapID == 1)
+    {
+        // Thêm các enemy khác nếu cần
+        enemyManager.GetEnemies().push_back(enemyManager.CreateEnemy("Goomba", Vector2{400, 500}));
+        enemyManager.GetEnemies().push_back(enemyManager.CreateEnemy("GreenKoopa", Vector2{450, 500}));
+        
     }
 }
-
 GameWorld::~GameWorld()
 {
     // Destructor logic if needed
@@ -111,7 +111,7 @@ void GameWorld::UpdateWorld()
                 mediatorCollision.HandleCollision(&player, item.get());
         }
 
-        for (Enemy* enemy : map.GetEnemies())
+        for (Enemy* enemy : enemyManager.GetEnemies())
         {
             if (player.checkCollisionType(*enemy) != COLLISION_TYPE_NONE)
                 mediatorCollision.HandleCollision(&player, enemy);
@@ -127,7 +127,7 @@ void GameWorld::UpdateWorld()
         }
 
         // Fireball với enemy
-        for (Enemy* enemy : map.GetEnemies())
+        for (Enemy* enemy : enemyManager.GetEnemies())
         {
             if (enemy->checkCollisionType(*fireball) != COLLISION_TYPE_NONE)
                 mediatorCollision.HandleCollision(enemy, fireball);
@@ -135,23 +135,20 @@ void GameWorld::UpdateWorld()
     }
 
         // Xóa Enemy bị tiêu diệt
-    map.GetEnemies().erase(
-        std::remove_if(
-            map.GetEnemies().begin(),
-            map.GetEnemies().end(),
-            [](Enemy* enemy){
+        auto& enemies = enemyManager.GetEnemies();
+        enemies.erase(
+            std::remove_if(enemies.begin(), enemies.end(),
+            [](Enemy* enemy) {
                 return (enemy->GetState() == OBJECT_STATE_DEAD || enemy->GetState() == OBJECT_STATE_TO_BE_REMOVED);
-            }
-        ),
-        map.GetEnemies().end()
+            }),
+        enemies.end()
     );
-    // Xóa Enemy bị tiêu diệt
-    // 8. Cập nhật và xử lý enemy
-    for (Enemy* enemy : map.GetEnemies())
-    {
-        enemy->UpdateStateAndPhysic();
 
-        // Enemy với tile
+    // Cập nhật và xử lý enemy
+        for (Enemy* enemy : enemyManager.GetEnemies())
+        {
+        enemy->Update();
+
         for (auto const& tile : interactiveTiles)
         {
             if (enemy->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
@@ -233,7 +230,7 @@ void GameWorld::UpdateWorld()
         gameState = GameState::GAME_COMPLETED;
         return;
     }
-
+    
 }
 
 
@@ -268,6 +265,11 @@ void GameWorld::DrawWorld()
     DrawTextureEx(background, Vector2{BGpos + background.width * 1.3f, -200}, 0.0f, 1.3f, WHITE);
     map.Draw();
     player.Draw();
+    for (Enemy* enemy : enemyManager.GetEnemies()) {
+        if (enemy && enemy->ShouldRender()) {
+            enemy->Draw();
+        }
+    }
     // std::cout << "Player Position: " << player.GetPos().x << ", " << player.GetPos().y << std::endl;
 
     // for (auto const &item : interactiveItems)

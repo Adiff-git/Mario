@@ -20,9 +20,6 @@ std::vector<Block*>& Map :: getBlocks(){
     return blocks;
 }
 
-std::vector<Enemy*>& Map::GetEnemies() {
-    return enemies;
-}
 
 
 

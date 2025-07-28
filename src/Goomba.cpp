@@ -2,7 +2,7 @@
 #include "GameWorld.h"
 
 Goomba::Goomba(Vector2 pos) 
-    : Enemy(pos, Vector2{32, 32}, Vector2{5, 0}, RED, 0.2f, 0, DIRECTION_RIGHT) {
+    : Enemy(pos, Vector2{81,90}, Vector2{5, 0}, RED, 0.2f, 0, DIRECTION_RIGHT) {
     sprite = &ResrcManager::GetInstance().getTexture("GOOMBA_0");
 }
 
@@ -31,10 +31,10 @@ void Goomba::UpdateStateAndPhysic() {
         if (updateCount >= updateThreshold) {
             if (GetDirection() == DIRECTION_RIGHT) {
                 if (textureIndex == 0) {
-                    sprite = &ResrcManager::GetInstance().getTexture("GOOMBA_0_RIGHT");
+                    sprite = &ResrcManager::GetInstance().getTexture("Skill 1_1");
                     textureIndex = 1;
                 } else {
-                    sprite = &ResrcManager::GetInstance().getTexture("GOOMBA_1_RIGHT");
+                    sprite = &ResrcManager::GetInstance().getTexture("Skill 1_3");
                     textureIndex = 0;
                 }
             } else {

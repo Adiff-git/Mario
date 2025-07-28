@@ -149,19 +149,36 @@ bool Boss::IsCloseToMario() const{
     return dist < attackRange;
 }
 
-void Boss::Patrol(float dt){
+void Boss::Patrol(float dt) {
+    // Cập nhật vận tốc di chuyển
     vel.x = moveSpeed * (direction == DIRECTION_RIGHT ? 1 : -1);
-    vel.y = 0.0f; //chỗ này có thể sửa nếu muốn lên xuống
+    vel.y = 0.0f; // Không di chuyển theo trục y
 
+    // Kiểm tra giới hạn tuần tra
     if (pos.x < 100) direction = DIRECTION_RIGHT;
     if (pos.x > 800) direction = DIRECTION_LEFT;
 
-    if(CanSeeMario()){
+    // Kiểm tra chuyển trạng thái
+    if (CanSeeMario()) {
         SetState(BossState::CHASE);
+        return;
     } else if (IsCloseToMario()) {
         SetState(BossState::ATTACK);
-    } else {
-        SetState(BossState::IDLE);
+        return;
+    }
+
+    // Cập nhật animation (chuyển đổi liên tục giữa Moving 1, Moving 2, Moving 3, Moving 4)
+    frameAcumulator += dt;
+    if (frameAcumulator >= frameTime) {
+        frameAcumulator = 0.0f;
+        currentFrame = (currentFrame + 1) % maxFrames; // maxFrames = 4
+        // Gán sprite tương ứng với frame
+        string textureName = "Moving " + std::to_string(currentFrame + 1);
+        if (direction == DIRECTION_LEFT) textureName += "_LEFT"; // Hỗ trợ sprite hướng trái (tùy chọn)
+        sprite = &ResrcManager::GetInstance().getTexture(textureName);
+        printf("Boss Patrol: Frame Moving %d, Pos: (%.1f, %.1f), Direction: %s\n", 
+               currentFrame + 1, pos.x, pos.y, 
+               direction == DIRECTION_RIGHT ? "RIGHT" : "LEFT"); // Debug
     }
 }
 

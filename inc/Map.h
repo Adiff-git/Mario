@@ -51,7 +51,6 @@ class Map : public Drawable {
 
         std::vector<Tile*>& getInteractiveTiles();
         std::vector<Block*>& getBlocks();
-        std::vector<Enemy*>& GetEnemies();
         std::vector<std::shared_ptr<Item>>& GetInteractiveItems() { return interactiveItems; }
         float GetWidth() const;
         void nextMap();

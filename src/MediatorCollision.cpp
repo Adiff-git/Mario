@@ -8,6 +8,7 @@
 #include "PiranhaPlant.h"
 #include <iostream>
 #include <algorithm>
+#include "EnemyManager.h"
 void MediatorCollision::HandleMarioWithTile(Mario* &mario, Tile * &tile, CollisionType AtoB)
 {
     if (AtoB == COLLISION_TYPE_NONE)
@@ -436,15 +437,8 @@ void MediatorCollision::HandleMarioWithEnemy(Mario*& mario, Enemy*& enemy, Colli
                     enemy->StartBlinking(2.0f, 0.1f);
                     enemy->SetHitByFireball(true);  
                 }
-                
-                RedKoopa* redKoopa = dynamic_cast<RedKoopa*>(enemy);
-                if (redKoopa) {
-                    float marioX = mario->GetPos().x;
-                    float koopaX = redKoopa->GetPos().x;
-                    bool fromLeft = (marioX < koopaX); 
-                    redKoopa->OnHit(fromLeft); 
-                }
             }
+            enemy->SetState(OBJECT_STATE_DEAD);
             break;
         }
         //====================================================
@@ -456,6 +450,7 @@ void MediatorCollision::HandleMarioWithEnemy(Mario*& mario, Enemy*& enemy, Colli
         }
     }
 }
+
 void MediatorCollision::HandleEnemyWithFireball(Enemy* &enemy, Fireball* &fireball, CollisionType AtoB) {
     std::cout << "[DEBUG] HandleEnemyWithFireball called!" << std::endl;
     if (AtoB == COLLISION_TYPE_NONE) {
@@ -468,11 +463,38 @@ void MediatorCollision::HandleEnemyWithFireball(Enemy* &enemy, Fireball* &fireba
         return;
     }
 
-    // Các quái khác sẽ chết khi trúng fireball
-    //std::cout << "Enemies size before: " << enemies.size() << std::endl;
-    // enemies.erase(std::remove(enemies.begin(), enemies.end(), enemy), enemies.end());
-    // delete enemy;
-    // enemy = nullptr;
-    enemy->SetState(OBJECT_STATE_DEAD);
-    std::cout << "Enemy dies by fireball" << std::endl;
+    if (enemy->IsBlinking()) {
+        std::cout << "Enemy already hit by fireball, ignoring" << std::endl;
+        return;
+    }
+
+    enemy->StartBlinking(0.8f, 0.1f);
+    enemy->SetHitByFireball(true);  
+    std::cout << "Enemy hit by fireball, starts blinking" << std::endl;
+    
+}
+MediatorCollision::MediatorCollision(EnemyManager* manager) : enemyManager(manager) {
+}
+
+void MediatorCollision::UpdateEnemies() {
+    auto& enemies = enemyManager->GetEnemies(); 
+    for (auto it = enemies.begin(); it != enemies.end();) {
+        Enemy* enemy = *it;
+        bool shouldRemove = false;
+        
+        Rex* rex = dynamic_cast<Rex*>(enemy);
+        if (rex && rex->GetHitCount() >= 2 && !rex->IsBlinking()) {
+            shouldRemove = true;
+        }
+        else if (!rex && !enemy->IsBlinking() && enemy->IsHitByFireball()) {
+            shouldRemove = true;
+        }
+        
+        if (shouldRemove) {
+            delete enemy;
+            it = enemies.erase(it);
+        } else {
+            ++it;
+        }
+    }
 }

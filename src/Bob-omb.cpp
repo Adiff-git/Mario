@@ -27,6 +27,7 @@ void Bob_omb::UpdateStateAndPhysic() {
     }
 
     vel.y += GameWorld::GetGravity() * deltaTime;
+    Object::UpdateStateAndPhysic();
     const int updateThreshold = 50; // Animation chuyển đổi mỗi ~0.83 giây
 
     if (fabs(GetVel().x) > 0.1f) {

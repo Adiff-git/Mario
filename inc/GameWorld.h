@@ -26,6 +26,7 @@ class GameWorld {
         float BGpos = 0.0f;// 
 
         MediatorCollision mediatorCollision;
+        EnemyManager enemyManager; 
         Mario player;
         Camera2D camera;
         
