@@ -30,11 +30,7 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen) : player(),
     map.LoadMap(MapID);
     player = Mario(Vector2{100, 100}, 3, SMALL); // Đặt vị trí cụ thể
     
-    // Tạo boss TRƯỚC KHI set mario position
-    Boss* boss = new Boss(Vector2{800, 800}, player.GetPosPtr());
-    map.GetEnemies().push_back(boss);
-    
-    map.SetMarioPositionForBosses(player.GetPosPtr()); // Set Mario position cho Boss AFTER boss is created
+    map.SetMarioPositionForBosses(player.GetPosPtr()); // Set Mario position
     camera.offset = Vector2{(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
     camera.target = player.GetPos();
     camera.rotation = 0.0f;
@@ -89,9 +85,10 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen) : player(),
         // map.GetEnemies().push_back(new Rex(Vector2{650, 500}));
         // map.GetEnemies().push_back(new FlyingGoomba(Vector2{750, 500}));
         
-        // Boss đã được tạo ở constructor, không tạo lại ở đây
-        // Boss* boss = new Boss(Vector2{800, 800}, player.GetPosPtr());
-        // map.GetEnemies().push_back(boss);
+        // Tạo Boss chỉ cho MapID == 0
+        Boss* boss = new Boss(Vector2{800, 800}, player.GetPosPtr());
+        map.GetEnemies().push_back(boss);
+        map.SetMarioPositionForBosses(player.GetPosPtr()); // Update Mario position for Boss
     }
 }
 
@@ -181,16 +178,44 @@ void GameWorld::UpdateWorld()
     }
 
         // Xóa Enemy bị tiêu diệt
+    auto initialEnemyCount = map.GetEnemies().size();
+    
+    // Debug: Check Boss state before removal
+    for (Enemy* enemy : map.GetEnemies()) {
+        Boss* boss = dynamic_cast<Boss*>(enemy);
+        if (boss) {
+            std::cout << "[DEBUG] Boss state before removal: " << (int)boss->Object::GetState() 
+                      << " (DEAD=" << OBJECT_STATE_DEAD 
+                      << ", TO_BE_REMOVED=" << OBJECT_STATE_TO_BE_REMOVED << ")" << std::endl;
+            std::cout << "[DEBUG] Boss IsBlinking: " << boss->IsBlinking() 
+                      << ", ShouldBeRemoved: " << boss->ShouldBeRemoved() << std::endl;
+        }
+    }
+    
     map.GetEnemies().erase(
         std::remove_if(
             map.GetEnemies().begin(),
             map.GetEnemies().end(),
             [](Enemy* enemy){
+                Boss* boss = dynamic_cast<Boss*>(enemy);
+                if (boss) {
+                    bool shouldRemove = (enemy->GetState() == OBJECT_STATE_DEAD || enemy->GetState() == OBJECT_STATE_TO_BE_REMOVED);
+                    if (shouldRemove) {
+                        std::cout << "[DEBUG] Removing Boss from enemies list!" << std::endl;
+                        delete boss; // Properly delete the Boss
+                    }
+                    return shouldRemove;
+                }
                 return (enemy->GetState() == OBJECT_STATE_DEAD || enemy->GetState() == OBJECT_STATE_TO_BE_REMOVED);
             }
         ),
         map.GetEnemies().end()
     );
+    
+    auto finalEnemyCount = map.GetEnemies().size();
+    if (initialEnemyCount != finalEnemyCount) {
+        std::cout << "[DEBUG] Enemies removed: " << (initialEnemyCount - finalEnemyCount) << std::endl;
+    }
     // Xóa Enemy bị tiêu diệt
     // 8. Cập nhật và xử lý enemy
     for (Enemy* enemy : map.GetEnemies())

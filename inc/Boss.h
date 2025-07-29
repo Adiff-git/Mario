@@ -60,13 +60,7 @@ private:
     float hitCooldown;      // Cooldown timer to prevent multiple hits per frame
     static constexpr float hitCooldownTime = 0.5f; // 0.5 second cooldown between hits
     
-    // Blinking effect when dying
-    bool isBlinking;
-    float blinkingAcum;
-    float blinkingTime;
-    float blinkingAcumTotal;
-    bool doBlink;
-    bool markedForRemoval;
+    // Boss-specific blinking effect (extends Enemy's blinking)
     float blinkingAlpha;        // Alpha value for smooth blinking effect
     bool fadingOut;             // Direction of fade (true = fading out, false = fading in)
     
@@ -86,6 +80,17 @@ private:
     
     // Helper để update texture theo state
     void UpdateTexture();
+    
+    // Helper methods for cleaner code organization
+    void UpdateTimers(float dt);
+    void UpdateMovement(float dt);
+    void UpdateBoundaries();
+    void UpdateAnimations(float dt);
+    
+    // Helper methods for drawing
+    void DrawSprite();
+    void DrawHealthBar();
+    void DrawDebugInfo();
 public:
     Boss(Vector2 startPos, Vector2* marioPosition);
     ~Boss();
@@ -96,7 +101,7 @@ public:
 
     // ===== FSM control =====
     void SetState(BossState newState);
-    BossState GetState() const { return currentState; }
+    BossState GetBossState() const { return currentState; }
 
     // ===== Điều kiện cho Behavior Tree =====
     bool CanSeeMario() const;
@@ -130,10 +135,7 @@ public:
     int GetHitCount() const { return hitCount; }
     bool IsDead() const { return hitCount >= maxHits; }
     
-    // ===== Blinking effect methods =====
-    void StartBlinking(float duration = 1.0f, float interval = 0.1f);
-    void UpdateBlinking();
-    bool IsBlinking() const;
-    void StopBlinking();
+    // ===== Boss-specific smooth blinking for alpha effect =====
+    void UpdateSmoothBlinking();
 
 };
