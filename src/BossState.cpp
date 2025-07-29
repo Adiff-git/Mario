@@ -9,6 +9,6 @@ string BossStateToString(BossState state){
         case BossState::ATTACK: return "ATTACKING";
         case BossState::SKILL: return "SKILLING";
         default:
-            break;
+            return "UNKNOWN";
     }
 }

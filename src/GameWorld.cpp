@@ -13,7 +13,7 @@ interactiveTiles(map.getInteractiveTiles())
 {
     // Trong GameWorld constructor, thêm:
 
-    player1 =  new Luigi(Vector2{100, 100}, 3, SMALL); // Đặt vị trí cụ thể
+    player1 =  new Luigi(Vector2{100, 100}, 3, SMALL, ControlType::ARROWS); // Đặt vị trí cụ thể
     map.LoadMap(0);
     camera.offset = Vector2{(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
     camera.target = player1->GetPos();
@@ -107,9 +107,41 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer1,
     }
 }
 
+GameWorld::GameWorld(int level, GameScreen* gameScreen) 
+    : gameState(GameState::GAME_PLAYING),
+      gameScreen(gameScreen),
+      isMultiplayer(false),
+      player1Character(CharacterType::MARIO),
+      player2Character(CharacterType::LUIGI),
+      player1(nullptr),
+      player2(nullptr),
+      interactiveTiles(map.getInteractiveTiles()) {
+    
+    map.LoadMap(level);
+    
+    // Tạo player1 với control mặc định
+    player1 = new Mario(Vector2{100, 100}, 3, SMALL, ControlType::ARROWS);
+    player2 = nullptr;
+    
+    // Setup camera
+    camera.target = Vector2{player1->GetPos().x, player1->GetPos().y};
+    camera.offset = Vector2{400, 300};
+    camera.rotation = 0.0f;
+    camera.zoom = 1.0f;
+}
+
 GameWorld::~GameWorld()
 {
-    // Destructor logic if needed
+    {
+        if (player1) {
+            delete player1;
+            player1 = nullptr;
+        }
+        if (player2) {
+            delete player2;
+            player2 = nullptr;
+        }
+    }
 }
 
 
@@ -616,4 +648,19 @@ void GameWorld::Init()
 Map* GameWorld::GetMap()
 {
     return &map;
+}
+
+Character* GameWorld::GetPlayer1()
+{
+    return player1;
+}
+
+Character* GameWorld::GetPlayer2()
+{
+    return player2;
+}
+
+bool GameWorld::IsMultiplayer()
+{
+    return isMultiplayer;
 }

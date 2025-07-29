@@ -4,11 +4,14 @@
 GameScreen::GameScreen(ScreenController* screenController)
     : Screen(screenController), 
       BackMenu(Vector2{50, 50}, Vector2{50, 50}), 
-      level(1), 
+      level(2), 
       transitionState(TransitionState::NONE), 
       transitionTime(1.0f), 
       transitionTimeAcum(0.0f),
-      gameHUD(nullptr)// Initialize GameHUD with player{
+      gameHUD(nullptr),
+      isMultiplayer(false),        // Thêm này
+      player1Type(CharacterType::MARIO),   // Thêm này
+      player2Type(CharacterType::LUIGI)// Initialize GameHUD with player{
     {
 
     gameWorld = std::make_unique<GameWorld>(level, this);
@@ -26,7 +29,7 @@ GameScreen::GameScreen(ScreenController* screenController, bool multiplayer,
     CharacterType p1Type, CharacterType p2Type)
         : Screen(screenController), 
         BackMenu(Vector2{50, 50}, Vector2{50, 50}), 
-        level(1), 
+        level(2), 
         transitionState(TransitionState::NONE), 
         transitionTime(1.0f), 
         transitionTimeAcum(0.0f),
@@ -185,7 +188,7 @@ void GameScreen::Draw() {
                 
                 Vector2 size = MeasureTextEx(*SuperMarioFont,
                 ("X " + std::to_string(level + 1)).c_str(), 20, 7);
-            DrawTextEx(*SuperMarioFont, ("X " + std::to_string(gameWorld->player->GetLives())).c_str(),
+            DrawTextEx(*SuperMarioFont, ("X " + std::to_string(gameWorld->player1->GetLives())).c_str(),
                 Vector2{(float)GetScreenWidth() / 2 -size.x/2,
                     (float)GetScreenHeight() / 2-size.y/2 }, 
                 20, 7, WHITE);
@@ -211,7 +214,7 @@ void GameScreen::Draw() {
             Vector2 size = MeasureTextEx(*SuperMarioFont,
                 ("X " + std::to_string(level + 1)).c_str(), 20, 7);
 
-            DrawTextEx(*SuperMarioFont, ("X " + std::to_string(gameWorld->player->GetLives())).c_str(),
+            DrawTextEx(*SuperMarioFont, ("X " + std::to_string(gameWorld->player1->GetLives())).c_str(),
             Vector2{(float)GetScreenWidth() / 2 -size.x/2,
             (float)GetScreenHeight() / 2-size.y/2 }, 
             20, 7, WHITE);
@@ -237,7 +240,7 @@ void GameScreen::Draw() {
             Vector2 size = MeasureTextEx(*SuperMarioFont,
                 ("X " + std::to_string(level + 1)).c_str(), 20, 7);
 
-            DrawTextEx(*SuperMarioFont, ("X " + std::to_string(gameWorld->player->GetLives())).c_str(),
+            DrawTextEx(*SuperMarioFont, ("X " + std::to_string(gameWorld->player1->GetLives())).c_str(),
             Vector2{(float)GetScreenWidth() / 2 -size.x/2,
             (float)GetScreenHeight() / 2-size.y/2 }, 
             20, 7, WHITE);
@@ -249,20 +252,20 @@ void GameScreen::Draw() {
 
 void GameScreen::ResetGame() {
     // Lưu thông tin trước khi xóa gameWorld
-    int currentLives = gameWorld->player->GetLives();
+    int currentLives = gameWorld->player1->GetLives();
     
     if (currentLives > 0) {
         gameWorld = std::make_unique<GameWorld>(level, this);
-        gameWorld->player->SetLives(currentLives - 1);
+        gameWorld->player1->SetLives(currentLives - 1);
     } else {
         level = 0;
         gameWorld = std::make_unique<GameWorld>(level, this);
-        gameWorld->player->SetLives(3);
-        gameWorld->player->SetCoins(0);
-        gameWorld->player->SetScore(0);
+        gameWorld->player1->SetLives(3);
+        gameWorld->player1->SetCoins(0);
+        gameWorld->player1->SetScore(0);
     }
     
-    gameHUD = std::make_unique<GameHUD>(gameWorld->player);
+    gameHUD = std::make_unique<GameHUD>(gameWorld->player1);
 }
 
 void GameScreen::DrawEnd() {
@@ -283,7 +286,7 @@ void GameScreen::DrawEnd() {
                        Vector2{(float)GetScreenWidth() / 2 - MeasureTextEx(ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT"),(summarry).c_str(),40,2).x / 2, (float)GetScreenHeight() / 2 - 150}, 40, 2, WHITE);
 
     // Display the player's score
-                        std::string score = "Score: " + std::to_string(gameWorld->player->GetScore() );
+                        std::string score = "Score: " + std::to_string(gameWorld->player1->GetScore() );
     DrawTextEx(ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT"), score.c_str(),
             Vector2{(float)GetScreenWidth() / 2 - MeasureTextEx(ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT"),(score).c_str(),60,2).x / 2, (float)GetScreenHeight() / 2 }, 60, 2, WHITE);
       
@@ -296,17 +299,17 @@ void GameScreen::DrawEnd() {
                        NPatchInfo{Rectangle{0, 0, (float)ResrcManager::GetInstance().getTexture("HUD_COINS").width,
                                            (float)ResrcManager::GetInstance().getTexture("HUD_COINS").height}, 0, 0, 0, 0},
                        Rectangle{(float)GetScreenWidth() / 2 - 200, (float)GetScreenHeight() / 2 + 100, 70, 70}, Vector2{0, 0}, 0.0f, WHITE);
-        std::string coins = "X " + std::to_string(gameWorld->player->GetCoins());
+        std::string coins = "X " + std::to_string(gameWorld->player1->GetCoins());
         DrawTextEx(ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT"), coins.c_str(),
                          Vector2{(float)GetScreenWidth() / 2+50 - MeasureTextEx(ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT"),(coins).c_str(),70,2).x / 2, (float)GetScreenHeight() / 2 + 105}, 70, 2, WHITE);
 }
 
 void GameScreen::NextLevel() {
     // Lưu thông tin trước khi chuyển level
-    int currentLives = gameWorld->player->GetLives();
-    int currentCoins = gameWorld->player->GetCoins();
-    int currentScore = gameWorld->player->GetScore();
-    ObjectState currentMarioState = gameWorld->player->GetMarioState();
+    int currentLives = gameWorld->player1->GetLives();
+    int currentCoins = gameWorld->player1->GetCoins();
+    int currentScore = gameWorld->player1->GetScore();
+    ObjectState currentMarioState = gameWorld->player1->GetMarioState();
     
     level++;
     if (level > 2) {
@@ -317,11 +320,11 @@ void GameScreen::NextLevel() {
     gameWorld = std::make_unique<GameWorld>(level, this);
     
     // Khôi phục thông tin Mario
-    gameWorld->player->SetLives(currentLives);
-    gameWorld->player->SetCoins(currentCoins);
-    gameWorld->player->SetScore(currentScore);
-    gameWorld->player->SetMarioState(currentMarioState);
+    gameWorld->player1->SetLives(currentLives);
+    gameWorld->player1->SetCoins(currentCoins);
+    gameWorld->player1->SetScore(currentScore);
+    gameWorld->player1->SetMarioState(currentMarioState);
     
     // Reinitialize GameHUD với player đã được cập nhật
-    gameHUD = std::make_unique<GameHUD>(gameWorld->player);
+    gameHUD = std::make_unique<GameHUD>(gameWorld->player1);
 }

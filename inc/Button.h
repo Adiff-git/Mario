@@ -41,4 +41,4 @@ class Button : public Drawable {
         void SetTextureSize(Vector2 size);
 };
 
-        
+

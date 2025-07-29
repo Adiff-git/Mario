@@ -2,8 +2,9 @@
 #include "GameWorld.h"
 #include "ResrcManager.h"
 #include "SoundManager.h"
+#include "InputHandler.h"
 // full constructor
-Character::Character(Vector2 pos, int lives, ObjectState form , ControlType controlType)
+Character::Character(Vector2 pos, int lives, ObjectState form, ControlType controlType)
     : Object(pos, Vector2{32, 40}, Vector2{0, 0}, WHITE, 0.1f, 2, DIRECTION_RIGHT),
       lives(lives), 
       accelerationX(660.5f), 
@@ -19,10 +20,9 @@ Character::Character(Vector2 pos, int lives, ObjectState form , ControlType cont
       blinkingAcumTotal(0.0f),
       isInvincible(false), // Khởi tạo trạng thái bất tử
       invincibleTimer(0.0f), // Thời gian còn lại của bất tử
-      invincibleDuration(30.0f),
-       // Thời gian bất tử 
+      invincibleDuration(30.0f) // Thời gian bất tử 
       { // Removed direction initialization
-        inputHandler = std::make_unique<InputHandler>(this, controlType);
+    inputHandler = std::make_unique<InputHandler>(this, controlType);
     sprite = &ResrcManager::GetInstance().getTexture("SMALLMARIO_0_RIGHT");
     if ( form == SMALL)
         SetSize(Vector2{32, 40});

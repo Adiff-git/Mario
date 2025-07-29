@@ -9,6 +9,14 @@ GameClock &GameClock::GetInstance()
     return *instance;
 }
 
+// Add destructor to prevent memory leaks
+GameClock::~GameClock() {
+    if (instance != nullptr) {
+        delete instance;
+        instance = nullptr;
+    }
+}
+
 
 
 

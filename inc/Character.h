@@ -11,6 +11,7 @@
 #include <vector>
 #include "InputHandler.h"
 
+class InputHandler;
 
 class Character : public Object
 {

@@ -7,6 +7,9 @@
 #include "Character.h"
 #include "GameWorld.h"
 #include "GameHUD.h"
+#include "ResrcManager.h"
+#include "SoundManager.h"
+#include "GameClock.h"
 
 enum class TransitionState {
     NEXT_LEVEL,

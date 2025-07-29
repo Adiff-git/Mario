@@ -1,8 +1,14 @@
 #include "InputHandler.h"
 #include "raylib.h"
+#include "Character.h"
+#include "CharacterCommands.h"
 
 InputHandler::InputHandler(Character* character, ControlType type) 
     : character(character), controlType(type) {
+    if (!character) {
+        throw std::invalid_argument("Character cannot be null");
+    }
+    
     nullCommand = std::make_unique<NullCommand>();
     
     if (type == ControlType::ARROWS) {
@@ -12,25 +18,36 @@ InputHandler::InputHandler(Character* character, ControlType type)
     }
 }
 
+// QUAN TRỌNG: Định nghĩa destructor trong .cpp file
+InputHandler::~InputHandler() {
+    // Destructor sẽ tự động dọn dẹp unique_ptr
+}
+
 void InputHandler::setupArrowControls() {
     keyBindings.clear();
-    keyBindings[KEY_LEFT] = std::make_unique<MoveLeftCommand>(character);
-    keyBindings[KEY_RIGHT] = std::make_unique<MoveRightCommand>(character);
-    keyBindings[KEY_UP] = std::make_unique<JumpCommand>(character);
-    keyBindings[KEY_DOWN] = std::make_unique<DuckCommand>(character);
-    keyBindings[KEY_SPACE] = std::make_unique<FireCommand>(character);
+    if (character) {
+        keyBindings[KEY_LEFT] = std::make_unique<MoveLeftCommand>(character);
+        keyBindings[KEY_RIGHT] = std::make_unique<MoveRightCommand>(character);
+        keyBindings[KEY_UP] = std::make_unique<JumpCommand>(character);
+        keyBindings[KEY_DOWN] = std::make_unique<DuckCommand>(character);
+        keyBindings[KEY_SPACE] = std::make_unique<FireCommand>(character);
+    }
 }
 
 void InputHandler::setupWASDControls() {
     keyBindings.clear();
-    keyBindings[KEY_A] = std::make_unique<MoveLeftCommand>(character);
-    keyBindings[KEY_D] = std::make_unique<MoveRightCommand>(character);
-    keyBindings[KEY_W] = std::make_unique<JumpCommand>(character);
-    keyBindings[KEY_S] = std::make_unique<DuckCommand>(character);
-    keyBindings[KEY_ENTER] = std::make_unique<FireCommand>(character);
+    if (character) {
+        keyBindings[KEY_A] = std::make_unique<MoveLeftCommand>(character);
+        keyBindings[KEY_D] = std::make_unique<MoveRightCommand>(character);
+        keyBindings[KEY_W] = std::make_unique<JumpCommand>(character);
+        keyBindings[KEY_S] = std::make_unique<DuckCommand>(character);
+        keyBindings[KEY_ENTER] = std::make_unique<FireCommand>(character);
+    }
 }
 
 void InputHandler::handleInput() {
+    if (!character) return;
+    
     // Xử lý phím giữ (movement)
     for (const auto& binding : keyBindings) {
         int key = binding.first;
@@ -69,15 +86,14 @@ void InputHandler::handleInput() {
     }
     
     // Reset ducking khi không nhấn phím down
+    bool isDuckKeyPressed = false;
     if (controlType == ControlType::ARROWS) {
-        if (!IsKeyDown(KEY_DOWN)) {
-            character->SetDucking(false);
-        }
+        isDuckKeyPressed = IsKeyDown(KEY_DOWN);
     } else {
-        if (!IsKeyDown(KEY_S)) {
-            character->SetDucking(false);
-        }
+        isDuckKeyPressed = IsKeyDown(KEY_S);
     }
+    
+    character->SetDucking(isDuckKeyPressed);
 }
 
 void InputHandler::setControlType(ControlType type) {

@@ -45,7 +45,7 @@ void CharacterSelectScreen::Update() {
     // Start game if conditions are met
     if (startButton.IsPressed() && CanStartGame()) {
         SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
-        screenController->ChangeScreen(new GameScreen(screenController));
+        screenController->ChangeScreen(new GameScreen(screenController, isMultiplayer, player1Character, player2Character));
     }
     
     if (backButton.IsPressed()) {

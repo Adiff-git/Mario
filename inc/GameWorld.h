@@ -1,6 +1,5 @@
 #pragma once
 #include "raylib.h"
-#include "Character.h"
 #include "Item.h"
 #include "GameClock.h"
 #include "Tile.h"
@@ -11,6 +10,7 @@
 #include "FireFlower.h"
 #include "Coin.h"
 #include "CharacterSelectScreen.h"
+class Character;
 class GameScreen;
 enum class GameState {
     GAME_PLAYING,
@@ -27,8 +27,7 @@ class GameWorld {
         float BGpos = 0.0f;// 
 
         MediatorCollision mediatorCollision;
-        Character* player1;
-        Character* player2;
+        
 
         Camera2D camera;
         
@@ -41,7 +40,12 @@ class GameWorld {
 
         std::vector<Tile*> &interactiveTiles;
     public:
+
+        Character* player1;
+        Character* player2;
+
         GameWorld();
+        GameWorld(int level, GameScreen* gameScreen);
         GameWorld(int MapID, GameScreen* gameScreen, bool multiplayer, CharacterType p1Type, CharacterType p2Type); 
         ~GameWorld();
 
@@ -54,5 +58,11 @@ class GameWorld {
 
         static const float GetGravity();
         static void Init();
+        friend class GameScreen;
+
+        Character* GetPlayer1();
+        Character* GetPlayer2();
+        bool IsMultiplayer() ;
+
         friend class GameScreen;
 };
