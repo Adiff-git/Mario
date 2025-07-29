@@ -1,14 +1,14 @@
 #pragma once
 #include "Character.h"
-
+#include "InputHandler.h"
 
 class Mario : public Character {
 private:
    
 
 public:
-    Mario(Vector2 pos, int lives, ObjectState form)
-        : Character(pos, lives, form) {
+    Mario(Vector2 pos, int lives, ObjectState form, ControlType controlType)
+        : Character(pos, lives, form, controlType) {
         
     }
 

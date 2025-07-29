@@ -3,7 +3,7 @@
 #include "ResrcManager.h"
 #include "SoundManager.h"
 // full constructor
-Character::Character(Vector2 pos, int lives, ObjectState form)
+Character::Character(Vector2 pos, int lives, ObjectState form , ControlType controlType)
     : Object(pos, Vector2{32, 40}, Vector2{0, 0}, WHITE, 0.1f, 2, DIRECTION_RIGHT),
       lives(lives), 
       accelerationX(660.5f), 
@@ -19,8 +19,10 @@ Character::Character(Vector2 pos, int lives, ObjectState form)
       blinkingAcumTotal(0.0f),
       isInvincible(false), // Khởi tạo trạng thái bất tử
       invincibleTimer(0.0f), // Thời gian còn lại của bất tử
-      invincibleDuration(30.0f) // Thời gian bất tử 
+      invincibleDuration(30.0f),
+       // Thời gian bất tử 
       { // Removed direction initialization
+        inputHandler = std::make_unique<InputHandler>(this, controlType);
     sprite = &ResrcManager::GetInstance().getTexture("SMALLMARIO_0_RIGHT");
     if ( form == SMALL)
         SetSize(Vector2{32, 40});
@@ -155,31 +157,34 @@ void Character::Duck()
 
 void Character::HandleInput()
 {
-    const float deltaTime = GameClock::GetInstance().FIXED_TIME_STEP;
+    // const float deltaTime = GameClock::GetInstance().FIXED_TIME_STEP;
 
-    if (IsKeyDown(KEY_RIGHT)) moveRight();
-    else if(IsKeyDown(KEY_LEFT)) moveLeft();
-    else stopMoving();
+    // if (IsKeyDown(KEY_RIGHT)) moveRight();
+    // else if(IsKeyDown(KEY_LEFT)) moveLeft();
+    // else stopMoving();
     
-    if(state == OBJECT_STATE_ON_GROUND) {
-        if( IsKeyPressed(KEY_UP)) {
-            jump();
-        }
-        if (IsKeyPressed(KEY_DOWN) && CharState != SMALL) {
-            Duck();
-        } else isDucking = false; // Reset ducking state if not pressing down
-    }
-    if(IsKeyPressed(KEY_SPACE)){
-        changeToBig();
-    }
+    // if(state == OBJECT_STATE_ON_GROUND) {
+    //     if( IsKeyPressed(KEY_UP)) {
+    //         jump();
+    //     }
+    //     if (IsKeyPressed(KEY_DOWN) && CharState != SMALL) {
+    //         Duck();
+    //     } else isDucking = false; // Reset ducking state if not pressing down
+    // }
+    // if(IsKeyPressed(KEY_SPACE)){
+    //     changeToBig();
+    // }
 
-    if(IsKeyPressed(KEY_F)){
-        changetoFire();
-    }
-    if (CharState == FIRE) {
-        if ( IsKeyPressed(KEY_Z)) {
-            fire();
-        }
+    // if(IsKeyPressed(KEY_F)){
+    //     changetoFire();
+    // }
+    // if (CharState == FIRE) {
+    //     if ( IsKeyPressed(KEY_Z)) {
+    //         fire();
+    //     }
+    // }
+    if (inputHandler) {
+        inputHandler->handleInput();
     }
 }
 

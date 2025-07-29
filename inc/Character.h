@@ -9,7 +9,7 @@
 #include "Fireball.h"
 #include "Observer.h"
 #include <vector>
-
+#include "InputHandler.h"
 
 
 class Character : public Object
@@ -42,10 +42,12 @@ protected:
 
     std::vector<Observer *> observers;
 
+    std::unique_ptr<InputHandler> inputHandler;
+
     void Update() override;
 
 public:
-    Character(Vector2 pos, int lives, ObjectState form);
+    Character(Vector2 pos, int lives, ObjectState form, ControlType controlType);
     Character();
     ~Character() override;
 
@@ -60,6 +62,16 @@ public:
     void SetState(ObjectState state);
     void SetScore(int score);
 
+
+    void SetDucking(bool ducking) {
+        isDucking = ducking;
+    }
+    void setInputHandler(std::unique_ptr<InputHandler> handler) {
+        inputHandler = std::move(handler);
+    }
+    ControlType getControlType() const {
+        return inputHandler ? inputHandler->getControlType() : ControlType::ARROWS;
+    }
     void jump();
     void moveLeft();
     void moveRight();

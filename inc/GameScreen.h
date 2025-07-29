@@ -7,6 +7,7 @@
 #include "Character.h"
 #include "GameWorld.h"
 #include "GameHUD.h"
+
 enum class TransitionState {
     NEXT_LEVEL,
     GAME_OVER,
@@ -23,9 +24,14 @@ class GameScreen : public Screen {
         TransitionState transitionState;
         float transitionTime;
         float transitionTimeAcum;
+
+        bool isMultiplayer;
+        CharacterType player1Type;
+        CharacterType player2Type;
         
     public:
         GameScreen(ScreenController* screenController);
+        GameScreen(ScreenController* screenController, bool multiplayer, CharacterType p1Type, CharacterType p2Type);
         void Update() override;
         void Draw() override;
         void ResetGame();

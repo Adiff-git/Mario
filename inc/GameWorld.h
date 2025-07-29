@@ -10,6 +10,7 @@
 #include "CourseClearToken.h"
 #include "FireFlower.h"
 #include "Coin.h"
+#include "CharacterSelectScreen.h"
 class GameScreen;
 enum class GameState {
     GAME_PLAYING,
@@ -26,16 +27,22 @@ class GameWorld {
         float BGpos = 0.0f;// 
 
         MediatorCollision mediatorCollision;
-        Character* player;
+        Character* player1;
+        Character* player2;
+
         Camera2D camera;
         
         GameState gameState;
         GameScreen* gameScreen;
 
+        bool isMultiplayer;
+        CharacterType player1Character;
+        CharacterType player2Character;
+
         std::vector<Tile*> &interactiveTiles;
     public:
         GameWorld();
-        GameWorld(int MapID, GameScreen* gameScreen); 
+        GameWorld(int MapID, GameScreen* gameScreen, bool multiplayer, CharacterType p1Type, CharacterType p2Type); 
         ~GameWorld();
 
         void UpdateWorld();

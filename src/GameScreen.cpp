@@ -12,14 +12,49 @@ GameScreen::GameScreen(ScreenController* screenController)
     {
 
     gameWorld = std::make_unique<GameWorld>(level, this);
-    gameWorld->player->SetLives(3); // Set initial lives
-    gameWorld->player->SetCoins(0); // Set initial coins
-    gameWorld->player->SetScore(0); // Set initial score
-    gameHUD = std::make_unique<GameHUD>(gameWorld->player);
+    gameWorld->player1->SetLives(3); // Set initial lives
+    gameWorld->player1->SetCoins(0); // Set initial coins
+    gameWorld->player1->SetScore(0); // Set initial score
+    gameHUD = std::make_unique<GameHUD>(gameWorld->player1);
     BackMenu.SetTexture(ResrcManager::GetInstance().getTexture("BACK_BUTTON"));  
     SoundManager::GetInstance().StopAllSounds();
     SoundManager::GetInstance().PlayMusic("GAMEWORLD_0");
 
+}
+
+GameScreen::GameScreen(ScreenController* screenController, bool multiplayer, 
+    CharacterType p1Type, CharacterType p2Type)
+        : Screen(screenController), 
+        BackMenu(Vector2{50, 50}, Vector2{50, 50}), 
+        level(1), 
+        transitionState(TransitionState::NONE), 
+        transitionTime(1.0f), 
+        transitionTimeAcum(0.0f),
+        gameHUD(nullptr),
+        isMultiplayer(multiplayer),
+        player1Type(p1Type),
+        player2Type(p2Type)
+{
+    gameWorld = std::make_unique<GameWorld>(level, this, multiplayer, p1Type, p2Type);
+
+    // Initialize Player 1
+    gameWorld->player1->SetLives(3);
+    gameWorld->player1->SetCoins(0);
+    gameWorld->player1->SetScore(0);
+
+    // Initialize Player 2 if multiplayer
+    if (multiplayer && gameWorld->player2) {
+    gameWorld->player2->SetLives(3);
+    gameWorld->player2->SetCoins(0);
+    gameWorld->player2->SetScore(0);
+    gameHUD = std::make_unique<GameHUD>(gameWorld->player1, gameWorld->player2);
+    } else {
+    gameHUD = std::make_unique<GameHUD>(gameWorld->player1);
+    }
+
+    BackMenu.SetTexture(ResrcManager::GetInstance().getTexture("BACK_BUTTON"));  
+    SoundManager::GetInstance().StopAllSounds();
+    SoundManager::GetInstance().PlayMusic("GAMEWORLD_0");
 }
 
 void GameScreen::Update() {

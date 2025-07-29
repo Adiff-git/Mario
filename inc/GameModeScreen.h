@@ -1,0 +1,17 @@
+#pragma once
+#include "Screen.h"
+#include "Button.h"
+
+class GameModeScreen : public Screen {
+private:
+    Button singlePlayerButton;
+    Button multiPlayerButton;
+    Button backButton;
+    
+public:
+    GameModeScreen(ScreenController* screenController);
+    virtual ~GameModeScreen();
+    
+    virtual void Update() override;
+    virtual void Draw() override;
+};
