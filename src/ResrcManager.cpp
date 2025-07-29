@@ -167,9 +167,16 @@ void ResrcManager::loadTextures() {
         textures[keyStr] = LoadTexture(("resources/images/tiles/tile_" + std::to_string(i) + ".png").c_str());
     }
     //Button
-    textures["START_BUTTON"] = LoadTexture("resources/Menu/StartButton.png");
+    // textures["START_BUTTON"] = LoadTexture("resources/Menu/StartButton.png");
     // textures["EXIT_BUTTON"] = LoadTexture("resources/Menu/ExitButton.png");
     // textures["SETTINGS_BUTTON"] = LoadTexture("resources/Menu/SettingsButton.png");
+    textures["START_BUTTON"] = LoadTexture("../resources/images/Button/StartButton.png");
+    textures["PAUSE_BUTTON"] = LoadTexture("../resources/images/Button/PauseButton.png");
+    textures["STOP_BUTTON"] = LoadTexture("../resources/images/Button/StopButton.png");
+    textures["GREEN_ARROW"] = LoadTexture("../resources/images/Button/GreenArrow.png");
+    textures["YELLOW_ARROW"] = LoadTexture("../resources/images/Button/YellowArrow.png");
+
+
 
     //item
     {
