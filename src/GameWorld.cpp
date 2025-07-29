@@ -3,7 +3,7 @@
 #include "OneUpMushroom.h"
 #include "Star.h"
 #include "ThreeUpMoon.h"
-#include "Mario.h"
+#include "Luigi.h"
 #include "YoshiCoin.h"
 #include "EnemyManager.h"
 #include "MediatorCollision.h"
@@ -12,10 +12,10 @@ interactiveTiles(map.getInteractiveTiles())
 {
     // Trong GameWorld constructor, thêm:
 
-    player =  new Mario(Vector2{100, 100}, 3, SMALL); // Đặt vị trí cụ thể
+    player =  new Luigi(Vector2{100, 100}, 3, SMALL); // Đặt vị trí cụ thể
     map.LoadMap(0);
     camera.offset = Vector2{(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
-    camera.target = player.GetPos();
+    camera.target = player->GetPos();
     camera.rotation = 0.0f;
     camera.zoom = 1.0f;
     background = ResrcManager::GetInstance().getTexture("BACKGROUND_0");
@@ -27,9 +27,9 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen) : player(),
                                                           gameState(GameState::GAME_PLAYING)
 {
     map.LoadMap(MapID);
-    player = Character(Vector2{100, 100}, 3, SMALL); // Đặt vị trí cụ thể
+    player = new Luigi(Vector2{100, 100}, 3, SMALL); // Đặt vị trí cụ thể
     camera.offset = Vector2{(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
-    camera.target = player.GetPos();
+    camera.target = player->GetPos();
     camera.rotation = 0.0f;
     camera.zoom = 1.0f;
     switch (MapID)
@@ -93,33 +93,33 @@ GameWorld::~GameWorld()
 
 void GameWorld::UpdateWorld()
 {
-    player.UpdateStateAndPhysic();
-    player.UpdateCollisionProbes();
+    player->UpdateStateAndPhysic();
+    player->UpdateCollisionProbes();
 
-    if (player.GetState() != OBJECT_STATE_DEAD &&
-        player.GetState() != OBJECT_STATE_DYING &&
-        player.GetState() != OBJECT_STATE_VICTORY)
+    if (player->GetState() != OBJECT_STATE_DEAD &&
+        player->GetState() != OBJECT_STATE_DYING &&
+        player->GetState() != OBJECT_STATE_VICTORY)
     {
         for (auto const &tile : interactiveTiles)
         {
-            if (player.checkCollisionType(*tile) != COLLISION_TYPE_NONE)
-                mediatorCollision.HandleCollision(&player, tile);
+            if (player->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
+                mediatorCollision.HandleCollision(player, tile);
         }
 
         for (auto const &item : map.GetInteractiveItems())
         {
-            if (player.checkCollisionType(*item) != COLLISION_TYPE_NONE)
-                mediatorCollision.HandleCollision(&player, item.get());
+            if (player->checkCollisionType(*item) != COLLISION_TYPE_NONE)
+                mediatorCollision.HandleCollision(player, item.get());
         }
 
         for (Enemy* enemy : map.GetEnemies())
         {
-            if (player.checkCollisionType(*enemy) != COLLISION_TYPE_NONE)
-                mediatorCollision.HandleCollision(&player, enemy);
+            if (player->checkCollisionType(*enemy) != COLLISION_TYPE_NONE)
+                mediatorCollision.HandleCollision(player, enemy);
         }
     }
     
-    for (auto& fireball : *player.GetFireballs())
+    for (auto& fireball : *player->GetFireballs())
     {
         for (auto const &tile : interactiveTiles)
         {
@@ -175,24 +175,24 @@ void GameWorld::UpdateWorld()
     for (auto &block : map.getBlocks())
 {
     block->Update();    
-    CollisionType collision = block->checkCollisionType(player);
+    CollisionType collision = block->checkCollisionType(*player);
     if( collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_EYES_OPENED)
     {   
-        if(!block->isHit()) player.SetVel(Vector2{player.GetVel().x, 0});
-        block->doHit(player, this->GetMap());
+        if(!block->isHit()) player->SetVel(Vector2{player->GetVel().x, 0});
+        block->doHit(*player, this->GetMap());
     }
     if (collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_QUESTION)
     {   
-        block->doHit(player, this->GetMap());
-        player.SetVel({player.GetVel().x, 0});
+        block->doHit(*player, this->GetMap());
+        player->SetVel({player->GetVel().x, 0});
     }
     if (collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_GLASS)
     {
-        block->doHit(player, this->GetMap());
-        player.SetVel({player.GetVel().x, 0});
+        block->doHit(*player, this->GetMap());
+        player->SetVel({player->GetVel().x, 0});
     }
     
-    mediatorCollision.HandleCollision(&player, block);
+    mediatorCollision.HandleCollision(player, block);
 }   
     // Xóa Blocks đã bị phá vỡ 
     auto& blocks = map.getBlocks();
@@ -222,15 +222,15 @@ void GameWorld::UpdateWorld()
         interactiveItems.end()  
     );
     //Xóa ITem đã bị ăn 
-    if (player.GetState() == OBJECT_STATE_DEAD) { // ← Sửa từ TO_BE_REMOVED thành DEAD
-        if (player.GetLives() > 0) {
+    if (player->GetState() == OBJECT_STATE_DEAD) { // ← Sửa từ TO_BE_REMOVED thành DEAD
+        if (player->GetLives() > 0) {
             gameState = GameState::GAME_RESET;
         } else {
             gameState = GameState::GAME_OVER;
         }
     }
 
-    if (player.GetState() == OBJECT_STATE_VICTORY) {
+    if (player->GetState() == OBJECT_STATE_VICTORY) {
         gameState = GameState::GAME_COMPLETED;
         return;
     }
@@ -241,11 +241,11 @@ void GameWorld::UpdateWorld()
 void GameWorld::DrawWorld()
 {
     camera.target.y = GetScreenHeight() / 2;
-    if (player.GetPos().x > GetScreenWidth() / 2 && player.GetPos().x < map.GetWidth() - GetScreenWidth() / 2)
+    if (player->GetPos().x > GetScreenWidth() / 2 && player->GetPos().x < map.GetWidth() - GetScreenWidth() / 2)
     {
-        camera.target.x = player.GetPos().x;
+        camera.target.x = player->GetPos().x;
     }
-    else if (player.GetPos().x <= GetScreenWidth() / 2)
+    else if (player->GetPos().x <= GetScreenWidth() / 2)
     {
         camera.target.x = GetScreenWidth() / 2;
     }
@@ -268,8 +268,8 @@ void GameWorld::DrawWorld()
     DrawTextureEx(background, Vector2{BGpos, -200}, 0.0f, 1.3f, WHITE);
     DrawTextureEx(background, Vector2{BGpos + background.width * 1.3f, -200}, 0.0f, 1.3f, WHITE);
     map.Draw();
-    player.Draw();
-    // std::cout << "Player Position: " << player.GetPos().x << ", " << player.GetPos().y << std::endl;
+    player->Draw();
+    // std::cout << "Player Position: " << player->GetPos().x << ", " << player->GetPos().y << std::endl;
 
     // for (auto const &item : interactiveItems)
     // {

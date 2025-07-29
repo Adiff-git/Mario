@@ -34,7 +34,7 @@ protected:
     float blinkingTime;
     float blinkingAcumTotal;
 
-    ObjectState marioState;
+    ObjectState CharState;
     ObjectState AdditionalState;
 
     

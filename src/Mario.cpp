@@ -13,7 +13,7 @@ void Mario::Update() {
         return;
     }
 
-    switch(marioState) { // Corrected from MarioState to marioState
+    switch(CharState) { // Corrected from MarioState to marioState
         case SMALL:
         {
             if(state == OBJECT_STATE_ON_GROUND) {

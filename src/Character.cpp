@@ -9,7 +9,7 @@ Character::Character(Vector2 pos, int lives, ObjectState form)
       accelerationX(660.5f), 
       maxSpeedX(500.0f), 
       SpeedY(600.0f),
-      marioState(form), 
+      CharState(form), 
       AdditionalState(SMALL),
       isDucking(false),
       blinking(false), 
@@ -43,7 +43,7 @@ Character::Character(Vector2 pos, int lives, ObjectState form)
 
 }
 
-Character::Character() : lives(3), accelerationX(0), maxSpeedX(0), SpeedY(600), isDucking(false), marioState(SMALL), AdditionalState(SMALL) {
+Character::Character() : lives(3), accelerationX(0), maxSpeedX(0), SpeedY(600), isDucking(false), CharState(SMALL), AdditionalState(SMALL) {
     coins = 0;
     score = 0;  
 }
@@ -77,12 +77,12 @@ int Character::GetLives() const
 
 ObjectState Character::GetMarioState() const
 {
-    return marioState;
+    return CharState;
 }
 
 void Character::SetMarioState(ObjectState state)
 {
-    this->marioState = state;
+    this->CharState = state;
     if (state == SMALL) {
         SetSize(Vector2{32, 40});
         sprite = &ResrcManager::GetInstance().getTexture("SMALLMARIO_0_RIGHT");
@@ -165,7 +165,7 @@ void Character::HandleInput()
         if( IsKeyPressed(KEY_UP)) {
             jump();
         }
-        if (IsKeyPressed(KEY_DOWN) && marioState != SMALL) {
+        if (IsKeyPressed(KEY_DOWN) && CharState != SMALL) {
             Duck();
         } else isDucking = false; // Reset ducking state if not pressing down
     }
@@ -176,7 +176,7 @@ void Character::HandleInput()
     if(IsKeyPressed(KEY_F)){
         changetoFire();
     }
-    if (marioState == FIRE) {
+    if (CharState == FIRE) {
         if ( IsKeyPressed(KEY_Z)) {
             fire();
         }
@@ -194,7 +194,7 @@ void Character::Update() {
         return;
     }
 
-    switch(marioState) { // Corrected from MarioState to marioState
+    switch(CharState) { // Corrected from MarioState to marioState
         case SMALL:
         {
             if(state == OBJECT_STATE_ON_GROUND) {
@@ -405,7 +405,7 @@ void Character::UpdateStateAndPhysic() {
     }
 
     
-    switch(marioState) { // Corrected from MarioState to marioState
+    switch(CharState) { // Corrected from MarioState to marioState
         case SMALL:
         {
             if (state == OBJECT_STATE_ON_GROUND) {
@@ -505,15 +505,15 @@ void Character::Draw() {
 
 
 void Character::changeToBig() {
-    if (marioState == SMALL) {
-        marioState = BIG;
+    if (CharState == SMALL) {
+        CharState = BIG;
         SetSize(Vector2{32, 56}); // Update size for BIG Mario
     }
 }
 
 void Character::changeToSmall() {
-    if (marioState == BIG || marioState == FIRE) {
-        marioState = SMALL;
+    if (CharState == BIG || CharState == FIRE) {
+        CharState = SMALL;
         SetSize(Vector2{32, 40});
         isInvincible = true;
         invincibleTimer = invincibleDuration;
@@ -524,8 +524,8 @@ void Character::changeToSmall() {
 }
 void Character::changetoFire()
 {
-    if (marioState == SMALL || marioState == BIG) {
-        marioState = FIRE;
+    if (CharState == SMALL || CharState == BIG) {
+        CharState = FIRE;
         SetSize(Vector2{32, 56}); // Update size for FIRE Mario
         sprite = &ResrcManager::GetInstance().getTexture("FIRE_MARIO_0_RIGHT");
     }
@@ -598,7 +598,7 @@ void Character::NotifyCoinChange() {
 }
 void Character::BeHit() {
     if (!isInvincible) {
-        if (marioState == BIG || marioState == FIRE) {
+        if (CharState == BIG || CharState == FIRE) {
             changeToSmall();
             
         } else {
