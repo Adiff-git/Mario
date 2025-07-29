@@ -1,4 +1,5 @@
 #include "Boss.h"
+#include "GameWorld.h"
 #include <cmath>
 #include <iostream>
 #include <algorithm>
@@ -93,7 +94,7 @@ void Boss::UpdateBoundaries()
                 if(pos.x < 20){ pos.x = 20; vel.x = 0; direction = DIRECTION_RIGHT; }
                 if(pos.x > 780){ pos.x = 780; vel.x = 0; direction = DIRECTION_LEFT; }
                 if(pos.y < 350){ pos.y = 350; vel.y = 0; }
-                if(pos.y > 650){ pos.y = 650; vel.y = 0; }
+                if(pos.y > 1400){ pos.y = 1400; vel.y = 0; } 
         }
 }
 void Boss::UpdateAnimations(float dt)
@@ -343,28 +344,28 @@ bool Boss::IsCloseToMario() const
         bool isClose = dist < attackRange;
         return isClose;
 }
-void Boss::Chase(float dt)
-{
-        Vector2 directionToMario = GetDirectionToMario();
-        float currentSpeed = moveSpeed * chaseSpeedMultiplier;
-        const float acceleration = 80.0f, maxChaseSpeed = 50.0f, minChaseSpeed = 8.0f;
-        if(directionToMario.x==0 && directionToMario.y==0){
-                vel.x *= 0.9f; vel.y *= 0.9f;
-        } else {
-                Vector2 targetVel = { directionToMario.x * currentSpeed, directionToMario.y * currentSpeed };
-                vel.x += (targetVel.x - vel.x)*acceleration*dt;
-                vel.y += (targetVel.y - vel.y)*acceleration*dt;
-                float currentVelMagnitude = sqrt(vel.x*vel.x+vel.y*vel.y);
-                if(currentVelMagnitude > maxChaseSpeed){
-                        vel.x = (vel.x/currentVelMagnitude)*maxChaseSpeed;
-                        vel.y = (vel.y/currentVelMagnitude)*maxChaseSpeed;
-                } else if(currentVelMagnitude < minChaseSpeed && currentVelMagnitude > 0){
-                        vel.x = (vel.x/currentVelMagnitude)*minChaseSpeed;
-                        vel.y = (vel.y/currentVelMagnitude)*minChaseSpeed;
-                }
+void Boss::Chase(float dt){
+    Vector2 directionToMario = GetDirectionToMario();
+    float currentSpeed = moveSpeed * chaseSpeedMultiplier;
+    const float acceleration = 80.0f, maxChaseSpeed = 50.0f, minChaseSpeed = 8.0f;
+    if(directionToMario.x==0 && directionToMario.y==0){
+        vel.x *= 0.9f;
+    } else {
+        float targetVelX = directionToMario.x * currentSpeed;
+        if(currentFrame >= 4){
+            targetVelX = directionToMario.x * currentSpeed * 2.5f;
         }
-        if(vel.x < -1.0f){ direction = DIRECTION_LEFT; }
-        else if(vel.x > 1.0f){ direction = DIRECTION_RIGHT; }
+        vel.x += (targetVelX - vel.x) * acceleration * dt;
+        float maxSpeed = (currentFrame >= 4) ? maxChaseSpeed * 2.0f : maxChaseSpeed;
+        if(abs(vel.x) > maxSpeed){
+            vel.x = (vel.x > 0) ? maxSpeed : -maxSpeed;
+        } else if(abs(vel.x) < minChaseSpeed && abs(vel.x) > 0){
+            vel.x = (vel.x > 0) ? minChaseSpeed : -minChaseSpeed;
+        }
+    }
+    vel.y += GameWorld::GetGravity() * dt;
+    if(vel.x < -1.0f){ direction = DIRECTION_LEFT; }
+    else if(vel.x > 1.0f){ direction = DIRECTION_RIGHT; }
 }
 void Boss::Attack(float dt)
 {

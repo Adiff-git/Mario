@@ -86,7 +86,7 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen) : player(),
         // map.GetEnemies().push_back(new FlyingGoomba(Vector2{750, 500}));
         
         // Tạo Boss chỉ cho MapID == 0
-        Boss* boss = new Boss(Vector2{800, 800}, player.GetPosPtr());
+        Boss* boss = new Boss(Vector2{800, 735}, player.GetPosPtr()); 
         map.GetEnemies().push_back(boss);
         map.SetMarioPositionForBosses(player.GetPosPtr()); // Update Mario position for Boss
     }
@@ -201,7 +201,7 @@ void GameWorld::UpdateWorld()
                 if (boss) {
                     bool shouldRemove = (enemy->GetState() == OBJECT_STATE_DEAD || enemy->GetState() == OBJECT_STATE_TO_BE_REMOVED);
                     if (shouldRemove) {
-                        std::cout << "[DEBUG] Removing Boss from enemies list!" << std::endl;
+                        // std::cout << "[DEBUG] Removing Boss from enemies list!" << std::endl;
                         delete boss; // Properly delete the Boss
                     }
                     return shouldRemove;
