@@ -12,11 +12,19 @@ enum BlockType {
     BLOCK_EYES_OPENED = 4,
     BLOCK_EYES_CLOSED = 5
 };
+enum GiftType{
+    GIFT_NONE,
+    GIFT_COIN,
+    GIFT_STAR_DUST,
+    GIFT_FIRE_FLOWER,
+    GIFT_POINTS
+};
 class Block : public Object {
 
 protected:
     bool hit;
     BlockType blockType = BLOCK_QUESTION;
+    GiftType giftType = GIFT_NONE;
 public:
 
     Block();
@@ -31,4 +39,6 @@ public:
     bool isHit() const { return hit; }
 
     BlockType GetBlockType();
+    GiftType  virtual GetGiftType() { return giftType; }
+
 };

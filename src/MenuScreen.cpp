@@ -2,10 +2,13 @@
 #include "MenuScreen.h"
 #include "ResrcManager.h"
 #include "GameScreen.h"
+#include "MapEditorScreen.h"
 MenuScreen::MenuScreen(ScreenController* screenController ) : Screen(screenController), 
-startButton(Vector2{1600/2 - 50,900/2 - 50}, Vector2{200, 50}) {
+startButton(Vector2{1600/2 - 100,900/2 - 50}, Vector2{200, 50}),
+MapEditorButton(Vector2{1600/2 - 228/2 ,900/2 + 60}, Vector2{227, 50}) {
     backgroundTexture = &ResrcManager::GetInstance().getTexture("MENU_BACKGROUND");
     startButton.SetTexture(ResrcManager::GetInstance().getTexture("START_BUTTON"));
+    MapEditorButton.SetTexture(ResrcManager::GetInstance().getTexture("MAP_EDITOR_BUTTON"));
     // startButton.SetPosition({1600/2 - 50, 900 / 2 - 50});
     // startButton.SetSize({200, 50});
     // exitButton.SetTexture(ResrcManager::GetInstance().getTexture("EXIT_BUTTON"));
@@ -18,12 +21,16 @@ startButton(Vector2{1600/2 - 50,900/2 - 50}, Vector2{200, 50}) {
 
 void MenuScreen::Update() {
     startButton.Update();
+    MapEditorButton.Update();
     // exitButton.Update();
     // settingsButton.Update();
 
     if (startButton.IsPressed()) {
         std::cout << "Start button pressed!" << std::endl;
         screenController->ChangeScreen(new GameScreen(screenController));}
+    else if (MapEditorButton.IsPressed()) {
+        std::cout << "Map Editor button pressed!" << std::endl;
+        screenController->ChangeScreen(new MapEditorScreen(screenController));}
          // Debug message
     // } else if (exitButton.IsPressed()) {
     //     CloseWindow(); // Close the window and exit the application
@@ -38,6 +45,7 @@ void MenuScreen::Draw() {
 
     DrawTexturePro(*backgroundTexture,Rectangle{0, 0, (float)backgroundTexture->width, (float)backgroundTexture->height},Rectangle{0, 0, 1600, 900},Vector2{0, 0}, 0.0f, WHITE);
     startButton.Draw();
+    MapEditorButton.Draw();
 
     // exitButton.Draw();
     // settingsButton.Draw();

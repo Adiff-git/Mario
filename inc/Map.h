@@ -31,6 +31,7 @@
 #include "OneUpMushroom.h"
 #include "ThreeUpMoon.h"
 #include "YoshiCoin.h"
+#include <regex>
 
 class Map : public Drawable {
     private:
@@ -44,7 +45,6 @@ class Map : public Drawable {
         std::vector<Block*> blocks;
         std::vector<Enemy*> enemies;
         std::vector<std::shared_ptr<Item>> interactiveItems;
-        void LoadFromJsonFile(const std::string& filename);
     public:
         Map();
         ~Map();
@@ -57,4 +57,19 @@ class Map : public Drawable {
         void nextMap();
         void LoadMap(int mapIndex);
         void Draw() override;
+        int ExtractMapIndex(const std::string& filename);
+        void LoadFromJsonFile(const std::string& filepath);
+        int getHeight() const { return 960; };
+        int getWidth() const { return width; };
+        // void AddTile(int x, int y, int tileId);
+        // void RemoveTile(int x, int y);
+        // void AddBlock(int x, int y, int blockType);
+        // void RemoveBlock(int x, int y);
+        // void AddEnemy(int x, int y, int enemyType);
+        // void RemoveEnemy(int x, int y);
+        // void AddItem(int x, int y, int itemType);
+        // void RemoveItem(int x, int y);
+        
+        // void SaveToFile(const std::string& filename);
+        // void LoadFromFile(const std::string& filename);
 };
