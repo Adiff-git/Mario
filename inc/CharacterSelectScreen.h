@@ -4,7 +4,8 @@
 
 enum class CharacterType {
     MARIO,
-    LUIGI
+    LUIGI,
+    NONE
 };
 
 class CharacterSelectScreen : public Screen {

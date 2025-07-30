@@ -25,16 +25,23 @@ GameHUD::GameHUD(Character* mario) : mario(mario), luigi(nullptr) {
 
 GameHUD::GameHUD(Character* mario, Character* luigi) : mario(mario), luigi(luigi) {
     // Initialize positions and sizes for multiple players
-    coinsPosition = { 10, 10 };
-    coinsSize = { 50, 50 };
-    coinTexture = nullptr; // Load your coin texture here
+    coinsPosition = { 1500, 100 };
+    coinsSize = { 30, 30 };
+    coinTexture = &ResrcManager::GetInstance().getTexture("GUI_COIN"); // Load your coin texture here
 
-    scorePosition = { 10, 70 };
+    scorePosition = { 1500, 120 };
     scoreSize = { 200, 50 };
-    MarioHUD = nullptr; // Load your HUD texture here
+    MarioHUD = &ResrcManager::GetInstance().getTexture("GUI_MARIO"); // Load your HUD texture here
 
-    
-    font = nullptr; // Initialize font if needed
+    block = {1600/2-20, 100};
+    blockSize = { 50, 50 };
+    blockTexture = &ResrcManager::GetInstance().getTexture("GUI_BLOCK"); // Load your block texture here
+
+    marioStatePosition = { 1600/2 -10, 100 + 10 };
+    marioStateSize = { 30, 30 };
+    marioStateTexture = nullptr;
+
+    font = &ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT");
 }
 
 void GameHUD::Draw() {

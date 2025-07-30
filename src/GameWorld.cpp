@@ -14,7 +14,7 @@ interactiveTiles(map.getInteractiveTiles())
     // Trong GameWorld constructor, thêm:
 
     player1 =  new Luigi(Vector2{100, 100}, 3, SMALL, ControlType::ARROWS); // Đặt vị trí cụ thể
-    map.LoadMap(0);
+    map.LoadMap(2);
     camera.offset = Vector2{(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
     camera.target = player1->GetPos();
     camera.rotation = 0.0f;
@@ -22,39 +22,17 @@ interactiveTiles(map.getInteractiveTiles())
     background = ResrcManager::GetInstance().getTexture("BACKGROUND_0");
 }
 
-GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer1,
+GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
                         CharacterType p1Type, CharacterType p2Type) : 
                                                         player1(nullptr), player2(nullptr),
                                                           interactiveTiles(map.getInteractiveTiles()),
                                                           gameScreen(gameScreen),
                                                           gameState(GameState::GAME_PLAYING),
-                                                            isMultiplayer(multiplayer1),
+                                                            isMultiplayer(multiplayer),
                                                             player1Character(p1Type),
                                                             player2Character(p2Type)
 {
     map.LoadMap(MapID);
-    
-    // Initialize Player1 1
-    if (p1Type == CharacterType::MARIO) {
-        player1 = new Mario(Vector2{100, 100}, 3, SMALL, ControlType::ARROWS);
-    } else {
-        player1 = new Luigi(Vector2{100, 100}, 3, SMALL, ControlType::ARROWS);
-    }
-    
-    // Initialize Player1 2 if multiplayer1
-    if (multiplayer1) {
-        if (p2Type == CharacterType::MARIO) {
-            player2 = new Mario(Vector2{150, 100}, 3, SMALL, ControlType::WASD);
-        } else {
-            player2 = new Luigi(Vector2{150, 100}, 3, SMALL, ControlType::WASD);
-        }
-    }
-
-
-    camera.offset = Vector2{(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
-    camera.target = player1->GetPos();
-    camera.rotation = 0.0f;
-    camera.zoom = 1.0f;
     switch (MapID)
     {
     case 0:
@@ -105,6 +83,28 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer1,
         map.GetEnemies().push_back(new Rex(Vector2{650, 500}));
         map.GetEnemies().push_back(new FlyingGoomba(Vector2{750, 500}));
     }
+    // Initialize Player1 1
+    if (p1Type == CharacterType::MARIO) {
+        player1 = new Mario(Vector2{100, 100}, 3, SMALL, ControlType::ARROWS);
+    } else {
+        player1 = new Luigi(Vector2{100, 100}, 3, SMALL, ControlType::ARROWS);
+    }
+    
+    // Initialize Player1 2 if multiplayer
+    if (multiplayer ) {
+        if (p2Type == CharacterType::MARIO) {
+            player2 = new Mario(Vector2{150, 100}, 3, SMALL, ControlType::WASD);
+        } else {
+            player2 = new Luigi(Vector2{150, 100}, 3, SMALL, ControlType::WASD);
+        }
+    }
+
+
+    camera.offset = Vector2{(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
+    camera.target = player1->GetPos();
+    camera.rotation = 0.0f;
+    camera.zoom = 1.0f;
+    
 }
 
 GameWorld::GameWorld(int level, GameScreen* gameScreen) 
@@ -294,7 +294,7 @@ GameWorld::~GameWorld()
 
 void GameWorld::UpdateWorld()
 {
-    // Update Player1 1
+    // Update Player 1
     if (player1) {
         player1->UpdateStateAndPhysic();
         player1->UpdateCollisionProbes();
@@ -303,7 +303,7 @@ void GameWorld::UpdateWorld()
             player1->GetState() != OBJECT_STATE_DYING &&
             player1->GetState() != OBJECT_STATE_VICTORY)
         {
-            // Handle Player1 1 collisions
+            // Handle Player 1 collisions
             for (auto const &tile : interactiveTiles)
             {
                 if (player1->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
@@ -323,24 +323,28 @@ void GameWorld::UpdateWorld()
             }
         }
         
-        // Handle Player1 1 fireballs
-        for (auto& fireball : *player1->GetFireballs())
-        {
-            for (auto const &tile : interactiveTiles)
+        // Handle Player 1 fireballs - KIỂM TRA NULL TRƯỚC KHI TRUY CẬP
+        if (player1->GetFireballs()) {
+            for (auto& fireball : *player1->GetFireballs())
             {
-                if (fireball->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
-                    mediatorCollision.HandleCollision(fireball, tile);
-            }
+                if (fireball) { // Kiểm tra fireball không null
+                    for (auto const &tile : interactiveTiles)
+                    {
+                        if (fireball->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
+                            mediatorCollision.HandleCollision(fireball, tile);
+                    }
 
-            for (Enemy* enemy : map.GetEnemies())
-            {
-                if (enemy->checkCollisionType(*fireball) != COLLISION_TYPE_NONE)
-                    mediatorCollision.HandleCollision(enemy, fireball);
+                    for (Enemy* enemy : map.GetEnemies())
+                    {
+                        if (enemy && enemy->checkCollisionType(*fireball) != COLLISION_TYPE_NONE)
+                            mediatorCollision.HandleCollision(enemy, fireball);
+                    }
+                }
             }
         }
     }
 
-    // Update Player1 2 (if multiplayer1)
+    // Update Player 2 (if multiplayer) - SỬA LOGIC KIỂM TRA
     if (isMultiplayer && player2) {
         player2->UpdateStateAndPhysic();
         player2->UpdateCollisionProbes();
@@ -349,7 +353,7 @@ void GameWorld::UpdateWorld()
             player2->GetState() != OBJECT_STATE_DYING &&
             player2->GetState() != OBJECT_STATE_VICTORY)
         {
-            // Handle Player1 2 collisions
+            // Handle Player 2 collisions
             for (auto const &tile : interactiveTiles)
             {
                 if (player2->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
@@ -364,119 +368,130 @@ void GameWorld::UpdateWorld()
 
             for (Enemy* enemy : map.GetEnemies())
             {
-                if (player2->checkCollisionType(*enemy) != COLLISION_TYPE_NONE)
+                if (enemy && player2->checkCollisionType(*enemy) != COLLISION_TYPE_NONE)
                     mediatorCollision.HandleCollision(player2, enemy);
             }
         }
         
-        // Handle Player1 2 fireballs
-        for (auto& fireball : *player2->GetFireballs())
-        {
-            for (auto const &tile : interactiveTiles)
+        // Handle Player 2 fireballs - KIỂM TRA NULL
+        if (player2->GetFireballs()) {
+            for (auto& fireball : *player2->GetFireballs())
             {
-                if (fireball->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
-                    mediatorCollision.HandleCollision(fireball, tile);
-            }
+                if (fireball) { // Kiểm tra fireball không null
+                    for (auto const &tile : interactiveTiles)
+                    {
+                        if (fireball->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
+                            mediatorCollision.HandleCollision(fireball, tile);
+                    }
 
-            for (Enemy* enemy : map.GetEnemies())
-            {
-                if (enemy->checkCollisionType(*fireball) != COLLISION_TYPE_NONE)
-                    mediatorCollision.HandleCollision(enemy, fireball);
+                    for (Enemy* enemy : map.GetEnemies())
+                    {
+                        if (enemy && enemy->checkCollisionType(*fireball) != COLLISION_TYPE_NONE)
+                            mediatorCollision.HandleCollision(enemy, fireball);
+                    }
+                }
             }
         }
     }
 
-    // ...existing enemy cleanup code...
+    // Enemy cleanup - KIỂM TRA NULL ENEMIES
     map.GetEnemies().erase(
         std::remove_if(
             map.GetEnemies().begin(),
             map.GetEnemies().end(),
             [](Enemy* enemy){
-                return (enemy->GetState() == OBJECT_STATE_DEAD || enemy->GetState() == OBJECT_STATE_TO_BE_REMOVED);
+                return (!enemy || enemy->GetState() == OBJECT_STATE_DEAD || enemy->GetState() == OBJECT_STATE_TO_BE_REMOVED);
             }
         ),
         map.GetEnemies().end()
     );
 
-    // ...existing enemy and item update code...
+    // Enemy update - KIỂM TRA NULL
     for (Enemy* enemy : map.GetEnemies())
     {
-        enemy->UpdateStateAndPhysic();
+        if (enemy) {
+            enemy->UpdateStateAndPhysic();
 
-        for (auto const& tile : interactiveTiles)
-        {
-            if (enemy->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
-                mediatorCollision.HandleCollision(enemy, tile);
+            for (auto const& tile : interactiveTiles)
+            {
+                if (tile && enemy->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
+                    mediatorCollision.HandleCollision(enemy, tile);
+            }
         }
     }
 
+    // Item update
     for (auto &item : map.GetInteractiveItems())
     {
-        item->Update();
+        if (item) {
+            item->Update();
 
-        for (auto const &tile : interactiveTiles)
-        {
-            if (item->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
-                mediatorCollision.HandleCollision(item.get(), tile);
+            for (auto const &tile : interactiveTiles)
+            {
+                if (tile && item->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
+                    mediatorCollision.HandleCollision(item.get(), tile);
+            }
         }
     }
 
-    // Handle blocks for both player1s
+    // Handle blocks for both players
     for (auto &block : map.getBlocks())
     {
-        block->Update();    
-        
-        // Player1 1 block collisions
-        if (player1) {
-            CollisionType collision = block->checkCollisionType(*player1);
-            if( collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_EYES_OPENED)
-            {   
-                if(!block->isHit()) player1->SetVel(Vector2{player1->GetVel().x, 0});
-                block->doHit(*player1, this->GetMap());
+        if (block) {
+            block->Update();    
+            
+            // Player 1 block collisions
+            if (player1) {
+                CollisionType collision = block->checkCollisionType(*player1);
+                if( collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_EYES_OPENED)
+                {   
+                    if(!block->isHit()) player1->SetVel(Vector2{player1->GetVel().x, 0});
+                    block->doHit(*player1, this->GetMap());
+                }
+                if (collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_QUESTION)
+                {   
+                    block->doHit(*player1, this->GetMap());
+                    player1->SetVel({player1->GetVel().x, 0});
+                }
+                if (collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_GLASS)
+                {
+                    block->doHit(*player1, this->GetMap());
+                    player1->SetVel({player1->GetVel().x, 0});
+                }
+                mediatorCollision.HandleCollision(player1, block);
             }
-            if (collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_QUESTION)
-            {   
-                block->doHit(*player1, this->GetMap());
-                player1->SetVel({player1->GetVel().x, 0});
+            
+            // Player 2 block collisions
+            if (isMultiplayer && player2) {
+                CollisionType collision2 = block->checkCollisionType(*player2);
+                if( collision2 == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_EYES_OPENED)
+                {   
+                    if(!block->isHit()) player2->SetVel(Vector2{player2->GetVel().x, 0});
+                    block->doHit(*player2, this->GetMap());
+                }
+                if (collision2 == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_QUESTION)
+                {   
+                    block->doHit(*player2, this->GetMap());
+                    player2->SetVel({player2->GetVel().x, 0});
+                }
+                if (collision2 == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_GLASS)
+                {
+                    block->doHit(*player2, this->GetMap());
+                    player2->SetVel({player2->GetVel().x, 0});
+                }
+                mediatorCollision.HandleCollision(player2, block);
             }
-            if (collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_GLASS)
-            {
-                block->doHit(*player1, this->GetMap());
-                player1->SetVel({player1->GetVel().x, 0});
-            }
-            mediatorCollision.HandleCollision(player1, block);
-        }
-        
-        // Player1 2 block collisions
-        if (isMultiplayer && player2) {
-            CollisionType collision2 = block->checkCollisionType(*player2);
-            if( collision2 == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_EYES_OPENED)
-            {   
-                if(!block->isHit()) player2->SetVel(Vector2{player2->GetVel().x, 0});
-                block->doHit(*player2, this->GetMap());
-            }
-            if (collision2 == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_QUESTION)
-            {   
-                block->doHit(*player2, this->GetMap());
-                player2->SetVel({player2->GetVel().x, 0});
-            }
-            if (collision2 == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_GLASS)
-            {
-                block->doHit(*player2, this->GetMap());
-                player2->SetVel({player2->GetVel().x, 0});
-            }
-            mediatorCollision.HandleCollision(player2, block);
         }
     }
     
-    // ...existing cleanup code...
+    // Cleanup with null checks
     auto& blocks = map.getBlocks();
     blocks.erase(
         std::remove_if(
             blocks.begin(),
             blocks.end(),
             [](Block* block) {
-                return block->GetState() == OBJECT_STATE_TO_BE_REMOVED;
+                return (!block || block->GetState() == OBJECT_STATE_TO_BE_REMOVED);
             }
         ),
         blocks.end()
@@ -488,18 +503,18 @@ void GameWorld::UpdateWorld()
             interactiveItems.begin(),
             interactiveItems.end(),
             [](const std::shared_ptr<Item>& item) {
-                return item->GetState() == OBJECT_STATE_TO_BE_REMOVED || item->GetState() == OBJECT_STATE_DEAD;
+                return (!item || item->GetState() == OBJECT_STATE_TO_BE_REMOVED || item->GetState() == OBJECT_STATE_DEAD);
             }
         ),
         interactiveItems.end()  
     );
 
-    // Game state logic for multiplayer1
+    // Game state logic for multiplayer
     bool player1Dead = (player1 && player1->GetState() == OBJECT_STATE_DEAD);
     bool player2Dead = (isMultiplayer && player2 && player2->GetState() == OBJECT_STATE_DEAD);
     
     if (isMultiplayer) {
-        // In multiplayer1, game over only if both player1s are dead
+        // In multiplayer, game over only if both players are dead
         if (player1Dead && player2Dead) {
             if ((player1 && player1->GetLives() > 0) || (player2 && player2->GetLives() > 0)) {
                 gameState = GameState::GAME_RESET;
@@ -508,7 +523,7 @@ void GameWorld::UpdateWorld()
             }
         }
     } else {
-        // Single player1 logic
+        // Single player logic
         if (player1Dead) {
             if (player1 && player1->GetLives() > 0) {
                 gameState = GameState::GAME_RESET;
@@ -518,7 +533,7 @@ void GameWorld::UpdateWorld()
         }
     }
 
-    // Victory condition - any player1 reaches the end
+    // Victory condition - any player reaches the end
     if ((player1 && player1->GetState() == OBJECT_STATE_VICTORY) || 
         (isMultiplayer && player2 && player2->GetState() == OBJECT_STATE_VICTORY)) {
         gameState = GameState::GAME_COMPLETED;
@@ -568,60 +583,65 @@ void GameWorld::UpdateWorld()
 
 void GameWorld::DrawWorld()
 {
-    // Camera follows the active player1 (or average position in multiplayer1)
-    if (isMultiplayer && player2) {
-        // Follow average position of both player1s
-        float avgX = (player1->GetPos().x + player2->GetPos().x) / 2;
-        camera.target.y = GetScreenHeight() / 2;
-        
-        if (avgX > GetScreenWidth() / 2 && avgX < map.GetWidth() - GetScreenWidth() / 2)
-        {
-            camera.target.x = avgX;
-        }
-        else if (avgX <= GetScreenWidth() / 2)
-        {
-            camera.target.x = GetScreenWidth() / 2;
-        }
-        else
-        {
-            camera.target.x = map.GetWidth() - GetScreenWidth() / 2;
-        }
-    } else {
-        // Single player1 camera
-        camera.target.y = GetScreenHeight() / 2;
-        if (player1->GetPos().x > GetScreenWidth() / 2 && player1->GetPos().x < map.GetWidth() - GetScreenWidth() / 2)
-        {
-            camera.target.x = player1->GetPos().x;
-        }
-        else if (player1->GetPos().x <= GetScreenWidth() / 2)
-        {
-            camera.target.x = GetScreenWidth() / 2;
-        }
-        else
-        {
-            camera.target.x = map.GetWidth() - GetScreenWidth() / 2;
-        }
+    if (isMultiplayer && player1 && player2) {
+        // Trung điểm 2 người chơi
+        Vector2 p1 = player1->GetPos();
+        Vector2 p2 = player2->GetPos();
+        float avgX = (p1.x + p2.x) / 2.0f;
+        float avgY = (p1.y + p2.y) / 2.0f;
+
+        // Khoảng cách giữa 2 người chơi
+        float dx = fabsf(p1.x - p2.x);
+        float dy = fabsf(p1.y - p2.y);
+
+        // Tính zoom: càng xa càng zoom out, càng gần càng zoom in
+        // Clamp zoom trong khoảng [0.7, 1.3]
+        float maxDist = 700.0f; // khoảng cách tối đa để zoom out hết cỡ
+        float minZoom = 0.7f;
+        float maxZoom = 1.3f;
+        float dist = sqrtf(dx*dx + dy*dy);
+        float zoom = maxZoom - (dist / maxDist) * (maxZoom - minZoom);
+        if (zoom < minZoom) zoom = minZoom;
+        if (zoom > maxZoom) zoom = maxZoom;
+
+        camera.target = { avgX, avgY };
+        camera.offset = { (float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2 };
+        camera.zoom = zoom;
+
+        // Giới hạn camera trong map
+        float camLeft = camera.target.x - (GetScreenWidth() / 2) / camera.zoom;
+        float camRight = camera.target.x + (GetScreenWidth() / 2) / camera.zoom;
+        if (camLeft < 0) camera.target.x = (GetScreenWidth() / 2) / camera.zoom;
+        if (camRight > map.GetWidth()) camera.target.x = map.GetWidth() - (GetScreenWidth() / 2) / camera.zoom;
+        // (Có thể thêm giới hạn trục y nếu muốn)
+    } else if (player1) {
+        // Single player camera
+        camera.target = player1->GetPos();
+        camera.offset = { (float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2 };
+        camera.zoom = 1.3f;
+
+        // Giới hạn camera trong map
+        float camLeft = camera.target.x - (GetScreenWidth() / 2) / camera.zoom;
+        float camRight = camera.target.x + (GetScreenWidth() / 2) / camera.zoom;
+        if (camLeft < 0) camera.target.x = (GetScreenWidth() / 2) / camera.zoom;
+        if (camRight > map.GetWidth()) camera.target.x = map.GetWidth() - (GetScreenWidth() / 2) / camera.zoom;
     }
 
+    // --- DRAW ---
     if (camera.target.x - GetScreenWidth() / 2 >= BGpos)
-    {
         BGpos = BGpos + background.width * 1.3f;
-    }
     if (camera.target.x + GetScreenWidth() / 2 <= BGpos + background.width * 1.3f)
-    {
         BGpos = BGpos - background.width * 1.3f;
-    }
 
     BeginMode2D(camera);
     DrawTextureEx(background, Vector2{BGpos - background.width * 1.3f, -200}, 0.0f, 1.3f, WHITE);
     DrawTextureEx(background, Vector2{BGpos, -200}, 0.0f, 1.3f, WHITE);
     DrawTextureEx(background, Vector2{BGpos + background.width * 1.3f, -200}, 0.0f, 1.3f, WHITE);
     map.Draw();
-    
-    // Draw both player1s
+
     if (player1) player1->Draw();
     if (isMultiplayer && player2) player2->Draw();
-    
+
     EndMode2D();
 }
 
