@@ -1,12 +1,10 @@
-
 #include "MenuScreen.h"
 #include "ResrcManager.h"
 #include "GameScreen.h"
-<<<<<<< HEAD
 #include "GameModeScreen.h"
-=======
 #include "MapEditorScreen.h"
->>>>>>> origin/mapedit
+
+
 MenuScreen::MenuScreen(ScreenController* screenController ) : Screen(screenController), 
 startButton(Vector2{1600/2 - 100,900/2 - 50}, Vector2{200, 50}),
 MapEditorButton(Vector2{1600/2 - 228/2 ,900/2 + 60}, Vector2{227, 50}) {
@@ -31,14 +29,13 @@ void MenuScreen::Update() {
 
     if (startButton.IsPressed()) {
         std::cout << "Start button pressed!" << std::endl;
-<<<<<<< HEAD
-        screenController->ChangeScreen(new GameModeScreen(screenController));}
-=======
-        screenController->ChangeScreen(new GameScreen(screenController));}
+        screenController->ChangeScreen(new GameModeScreen(screenController));
+    }
     else if (MapEditorButton.IsPressed()) {
         std::cout << "Map Editor button pressed!" << std::endl;
-        screenController->ChangeScreen(new MapEditorScreen(screenController));}
->>>>>>> origin/mapedit
+        screenController->ChangeScreen(new MapEditorScreen(screenController));
+    }
+
          // Debug message
     // } else if (exitButton.IsPressed()) {
     //     CloseWindow(); // Close the window and exit the application
