@@ -2,7 +2,8 @@
 
 
 Tile::Tile(Vector2 pos,int map,int key):Object(pos,{32,32},WHITE)
-{
+{   
+    this->key = key;
     std::string keyStr ="tile_" + std::to_string(key);
     sprite = &ResrcManager::GetInstance().getTexture(keyStr);
 }

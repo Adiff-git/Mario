@@ -5,6 +5,7 @@ class Screen;
 class ScreenController {
     private:
         Screen* currentScreen;
+//unique_pointer<Screen> Cúcreen;
     public:
         ScreenController();
         ~ScreenController();

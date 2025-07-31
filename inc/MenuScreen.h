@@ -7,6 +7,7 @@ class ScreenController; // Forward declaration
 class MenuScreen : public Screen {
     private:
         Button startButton;
+        Button MapEditorButton;
         // Button exitButton;
         // Button settingsButton;
         Texture2D* backgroundTexture;

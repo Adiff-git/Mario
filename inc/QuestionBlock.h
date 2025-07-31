@@ -5,13 +5,6 @@
 #include "Block.h"
 #include "Character.h"
 #include "Map.h"
-enum GiftType{
-    GIFT_NONE,
-    GIFT_COIN,
-    GIFT_STAR_DUST,
-    GIFT_FIRE_FLOWER,
-    GIFT_POINTS
-};
 
 class QuestionBlock : public Block {
 
@@ -44,5 +37,5 @@ public:
     void Draw() override;
     void doHit( Character& mario, Map* map );
     bool isQuestionBlock()  { return true; } // Override to indicate this is a QuestionBlock
-
+    GiftType GetGiftType() const { return giftType; }
 };

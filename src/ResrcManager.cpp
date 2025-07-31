@@ -167,7 +167,15 @@ void ResrcManager::loadTextures() {
         textures[keyStr] = LoadTexture(("resources/images/tiles/tile_" + std::to_string(i) + ".png").c_str());
     }
     //Button
+<<<<<<< HEAD
     // textures["START_BUTTON"] = LoadTexture("resources/Menu/StartButton.png");
+=======
+    textures["START_BUTTON"] = LoadTexture("resources/Menu/StartButton.png");
+    textures["MAP_EDITOR_BUTTON"] = LoadTexture("resources/Menu/MapEditorButton.png");
+    textures["BACK_BUTTON"] = LoadTexture("resources/Menu/BackButton.png");
+    textures["NEW_MAP_BUTTON"] = LoadTexture("resources/Menu/NewMapButton.png");
+    textures["LOAD_MAP_BUTTON"] = LoadTexture("resources/Menu/LoadMapButton.png");
+>>>>>>> origin/mapedit
     // textures["EXIT_BUTTON"] = LoadTexture("resources/Menu/ExitButton.png");
     // textures["SETTINGS_BUTTON"] = LoadTexture("resources/Menu/SettingsButton.png");
     textures["START_BUTTON"] = LoadTexture("../resources/images/Button/StartButton.png");

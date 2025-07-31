@@ -33,11 +33,11 @@
             }
         },
         "resources/maps/map2.json": {
-            "scale": 0.5,
+            "scale": 0.25,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 965,
-                "y": 493
+                "x": 2338,
+                "y": 510
             }
         },
         "resources/maps/map2.tmx": {
@@ -49,7 +49,7 @@
             }
         },
         "resources/maps/map2.tsx": {
-            "scaleInDock": 1
+            "scaleInDock": 0.33
         },
         "resources/maps/map4.json": {
             "scale": 0.2375,
