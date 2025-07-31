@@ -252,20 +252,34 @@ void GameScreen::Draw() {
 
 void GameScreen::ResetGame() {
     // Lưu thông tin trước khi xóa gameWorld
-    int currentLives = gameWorld->player1->GetLives();
-    
-    if (currentLives > 0) {
-        gameWorld = std::make_unique<GameWorld>(level, this);
-        gameWorld->player1->SetLives(currentLives - 1);
+    int currentLives1 = gameWorld->player1->GetLives();
+    int currentLives2 = gameWorld->player2 ? gameWorld->player2->GetLives() : 0;
+    if (currentLives1 > 0 || (isMultiplayer && currentLives2 > 0)) {
+        gameWorld = std::make_unique<GameWorld>(level, this, isMultiplayer, player1Type, player2Type);
+         
+        gameWorld->player1->SetLives(currentLives1 - 1);
+        if (isMultiplayer && gameWorld->player2) {
+            gameWorld->player2->SetLives(3); // Reset Player 2 lives
+        }
     } else {
         level = 0;
-        gameWorld = std::make_unique<GameWorld>(level, this);
+        gameWorld = std::make_unique<GameWorld>(level, this, isMultiplayer, player1Type, player2Type);
         gameWorld->player1->SetLives(3);
         gameWorld->player1->SetCoins(0);
         gameWorld->player1->SetScore(0);
+        if (isMultiplayer && gameWorld->player2) {
+            gameWorld->player2->SetLives(3);
+            gameWorld->player2->SetCoins(0);
+            gameWorld->player2->SetScore(0);
+        }
     }
-    
-    gameHUD = std::make_unique<GameHUD>(gameWorld->player1);
+    if (isMultiplayer) {
+        gameWorld = std::make_unique<GameWorld>(level, this, isMultiplayer, player1Type, player2Type);
+        gameHUD = std::make_unique<GameHUD>(gameWorld->player1, gameWorld->player2);
+    } else {
+        gameWorld = std::make_unique<GameWorld>(level, this, isMultiplayer, player1Type, player2Type);
+        gameHUD = std::make_unique<GameHUD>(gameWorld->player1);
+    }
 }
 
 void GameScreen::DrawEnd() {
@@ -306,10 +320,18 @@ void GameScreen::DrawEnd() {
 
 void GameScreen::NextLevel() {
     // Lưu thông tin trước khi chuyển level
-    int currentLives = gameWorld->player1->GetLives();
-    int currentCoins = gameWorld->player1->GetCoins();
-    int currentScore = gameWorld->player1->GetScore();
-    ObjectState currentMarioState = gameWorld->player1->GetMarioState();
+    int currentLives1 = gameWorld->player1->GetLives();
+    int currentCoins1 = gameWorld->player1->GetCoins();
+    int currentScore1 = gameWorld->player1->GetScore();
+    ObjectState currentPlayerState1 = gameWorld->player1->GetMarioState();
+
+    int currentLives2 = isMultiplayer && gameWorld->player2 ? gameWorld->player2->GetLives() : 0;
+    int currentCoins2 = isMultiplayer && gameWorld->player2 ? gameWorld->player2->GetCoins() : 0;
+    int currentScore2 = isMultiplayer && gameWorld->player2 ? gameWorld->player2->GetScore() : 0;
+    ObjectState currentPlayerState2 = SMALL;
+    if (isMultiplayer && gameWorld->player2) {
+        currentPlayerState2 =  gameWorld->player2->GetMarioState();
+    }
     
     level++;
     if (level > 2) {
@@ -317,14 +339,18 @@ void GameScreen::NextLevel() {
     }
     
     // Tạo GameWorld mới
-    gameWorld = std::make_unique<GameWorld>(level, this);
+    gameWorld = std::make_unique<GameWorld>(level, this, isMultiplayer, player1Type, player2Type);
     
     // Khôi phục thông tin Mario
-    gameWorld->player1->SetLives(currentLives);
-    gameWorld->player1->SetCoins(currentCoins);
-    gameWorld->player1->SetScore(currentScore);
-    gameWorld->player1->SetMarioState(currentMarioState);
-    
-    // Reinitialize GameHUD với player đã được cập nhật
-    gameHUD = std::make_unique<GameHUD>(gameWorld->player1);
+    gameWorld->player1->SetLives(currentLives1);
+    gameWorld->player1->SetCoins(currentCoins1);
+    gameWorld->player1->SetScore(currentScore1);
+    gameWorld->player1->SetMarioState(currentPlayerState1);
+    if (isMultiplayer && gameWorld->player2) {
+        gameWorld->player2->SetLives(currentLives2);
+        gameWorld->player2->SetCoins(currentCoins2);
+        gameWorld->player2->SetScore(currentScore2);
+        gameWorld->player2->SetMarioState(currentPlayerState2);
+        gameHUD = std::make_unique<GameHUD>(gameWorld->player1, gameWorld->player2);
+    } else gameHUD = std::make_unique<GameHUD>(gameWorld->player1);
 }

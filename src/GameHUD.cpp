@@ -2,7 +2,7 @@
 #include "raylib.h"
 #include "ResrcManager.h"
 
-GameHUD::GameHUD(Character* mario) : mario(mario), luigi(nullptr) {
+GameHUD::GameHUD(Character* mario) : player1(mario), player2(nullptr) {
     // Initialize positions and sizes
     coinsPosition = { 1500, 100 };
     coinsSize = { 30, 30 };
@@ -23,7 +23,7 @@ GameHUD::GameHUD(Character* mario) : mario(mario), luigi(nullptr) {
     font = &ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT"); // Initialize font if needed
 }
 
-GameHUD::GameHUD(Character* mario, Character* luigi) : mario(mario), luigi(luigi) {
+GameHUD::GameHUD(Character* mario, Character* luigi) : player1(mario), player2(luigi) {
     // Initialize positions and sizes for multiple players
     coinsPosition = { 1500, 100 };
     coinsSize = { 30, 30 };
@@ -45,10 +45,10 @@ GameHUD::GameHUD(Character* mario, Character* luigi) : mario(mario), luigi(luigi
 }
 
 void GameHUD::Draw() {
-    int score = mario->GetScore();
-    int coins = mario->GetCoins();
-    int lives = mario->GetLives();
-    ObjectState marioState = mario->GetMarioState();
+    int score = player1->GetScore();
+    int coins = player1->GetCoins();
+    int lives = player1->GetLives();
+    ObjectState marioState = player1->GetMarioState();
 
     // Draw coins
     DrawTextureNPatch(*coinTexture,

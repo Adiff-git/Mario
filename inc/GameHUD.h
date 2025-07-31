@@ -5,8 +5,8 @@
 
 class GameHUD : public Drawable {
     private:
-        Character* mario;
-        Character* luigi;
+        Character* player1;
+        Character* player2;
 
         Vector2 coinsPosition;
         Vector2 coinsSize;
