@@ -10,6 +10,7 @@
 #include "ResrcManager.h"
 #include "SoundManager.h"
 #include "GameClock.h"
+#include "SettingsScreen.h"
 
 enum class TransitionState {
     NEXT_LEVEL,
@@ -20,6 +21,7 @@ enum class TransitionState {
 class GameScreen : public Screen {
     private:
         Button BackMenu;
+        Button SettingsButton;
         std::unique_ptr<GameWorld> gameWorld;
         std::unique_ptr<GameHUD> gameHUD;
         int level;

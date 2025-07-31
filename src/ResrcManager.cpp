@@ -174,7 +174,7 @@ void ResrcManager::loadTextures() {
     textures["NEW_MAP_BUTTON"] = LoadTexture("resources/Menu/NewMapButton.png");
     textures["LOAD_MAP_BUTTON"] = LoadTexture("resources/Menu/LoadMapButton.png");
     // textures["EXIT_BUTTON"] = LoadTexture("resources/Menu/ExitButton.png");
-    // textures["SETTINGS_BUTTON"] = LoadTexture("resources/Menu/SettingsButton.png");
+    textures["SETTINGS_BUTTON"] = LoadTexture("resources/Menu/SettingsButton.png");
 
     
     // textures["START_BUTTON"] = LoadTexture("../resources/images/Button/StartButton.png");

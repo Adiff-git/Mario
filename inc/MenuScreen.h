@@ -8,6 +8,7 @@ class MenuScreen : public Screen {
     private:
         Button startButton;
         Button MapEditorButton;
+        Button settingsButton;
         // Button exitButton;
         // Button settingsButton;
         Texture2D* backgroundTexture;

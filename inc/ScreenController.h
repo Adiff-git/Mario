@@ -1,15 +1,17 @@
 #pragma once
 #include "Screen.h"
+#include <stack>
 
 class Screen;
 class ScreenController {
-    private:
-        Screen* currentScreen;
-//unique_pointer<Screen> Cúcreen;
-    public:
-        ScreenController();
-        ~ScreenController();
-        void Update();
-        void Draw();
-        void ChangeScreen(Screen* newScreen);
+private:
+    std::stack<Screen*> screenStack;
+public:
+    ScreenController();
+    ~ScreenController();
+    void Update();
+    void Draw();
+    void ChangeScreen(Screen* newScreen); 
+    void PushScreen(Screen* newScreen);   
+    void PopScreen();                     
 };

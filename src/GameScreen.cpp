@@ -3,7 +3,8 @@
 #include "SoundManager.h"
 GameScreen::GameScreen(ScreenController* screenController)
     : Screen(screenController), 
-      BackMenu(Vector2{50, 50}, Vector2{50, 50}), 
+      BackMenu(Vector2{50, 50}, Vector2{50, 50}),
+      SettingsButton(Vector2{50, 110}, Vector2{50, 50}),
       level(2), 
       transitionState(TransitionState::NONE), 
       transitionTime(1.0f), 
@@ -28,7 +29,8 @@ GameScreen::GameScreen(ScreenController* screenController)
 GameScreen::GameScreen(ScreenController* screenController, bool multiplayer, 
     CharacterType p1Type, CharacterType p2Type)
         : Screen(screenController), 
-        BackMenu(Vector2{50, 50}, Vector2{50, 50}), 
+        BackMenu(Vector2{50, 50}, Vector2{50, 50}),
+        SettingsButton(Vector2{50, 110}, Vector2{50, 50}),
         level(1), 
         transitionState(TransitionState::NONE), 
         transitionTime(1.0f), 
@@ -55,17 +57,23 @@ GameScreen::GameScreen(ScreenController* screenController, bool multiplayer,
     gameHUD = std::make_unique<GameHUD>(gameWorld->player1);
     }
 
-    BackMenu.SetTexture(ResrcManager::GetInstance().getTexture("BACK_BUTTON"));  
+    BackMenu.SetTexture(ResrcManager::GetInstance().getTexture("BACK_BUTTON")); 
+    SettingsButton.SetTexture(ResrcManager::GetInstance().getTexture("SETTINGS_BUTTON")); 
     SoundManager::GetInstance().StopAllSounds();
     SoundManager::GetInstance().PlayMusic("GAMEWORLD_0");
 }
 
 void GameScreen::Update() {
     BackMenu.Update();
+    SettingsButton.Update();
     
 
     if (BackMenu.IsPressed()) {
         screenController->ChangeScreen(new MenuScreen(screenController));
+        return;
+    }
+    if (SettingsButton.IsPressed()) {
+        screenController->PushScreen(new SettingsScreen(screenController));
         return;
     }
     switch ( transitionState ) {
@@ -248,6 +256,7 @@ void GameScreen::Draw() {
             }
     }
     BackMenu.Draw();
+    SettingsButton.Draw();
 }
 
 void GameScreen::ResetGame() {
