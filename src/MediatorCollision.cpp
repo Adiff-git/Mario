@@ -101,7 +101,6 @@ void MediatorCollision::HandleItemWithTile(Item *&item, Tile *&tile, CollisionTy
     {
     case COLLISION_TYPE_SOUTH:
     {
-        std::cout << "==============================================================================" << std::endl;
         item->SetPos(Vector2{item->GetPos().x, tile->GetPos().y - item->GetSize().y});
         item->SetVel(Vector2{item->GetVel().x, 0});
         break;
@@ -391,6 +390,8 @@ void MediatorCollision::HandleEnemyWithTile(Enemy *&enemy, Tile *tile, Collision
         enemy->SetPos(Vector2{enemy->GetPos().x, tile->GetPos().y - enemy->GetSize().y});
         enemy->SetState(OBJECT_STATE_ON_GROUND);
         enemy->SetVel(Vector2{enemy->GetVel().x, 0});
+         std::cout << "Enemy collided with ground at position: ("
+              << enemy->GetPos().x << ", " << enemy->GetPos().y << ")" << std::endl;
         break;
     }
     case COLLISION_TYPE_NORTH:
@@ -503,10 +504,10 @@ void MediatorCollision::HandleMarioWithEnemy(Mario *&mario, Enemy *&enemy, Colli
 
 void MediatorCollision::HandleEnemyWithFireball(Enemy *&enemy, Fireball *&fireball, CollisionType AtoB)
 {
-    std::cout << "[DEBUG] HandleEnemyWithFireball called!" << std::endl;
+    // std::cout << "[DEBUG] HandleEnemyWithFireball called!" << std::endl;
     if (AtoB == COLLISION_TYPE_NONE)
     {
-        std::cout << "No collision between Enemy and Fireball" << std::endl;
+        // std::cout << "No collision between Enemy and Fireball" << std::endl;
         return;
     }
 
@@ -515,19 +516,19 @@ void MediatorCollision::HandleEnemyWithFireball(Enemy *&enemy, Fireball *&fireba
     {
         if (boss->GetHitCount() >= 10 || boss->IsBlinking())
         {
-            std::cout << "Boss already defeated or dying - ignoring fireball hit" << std::endl;
+            // std::cout << "Boss already defeated or dying - ignoring fireball hit" << std::endl;
             fireball->SetState(OBJECT_STATE_DEAD);
             return;
         }
-        std::cout << "Boss hit by Mario's Fireball! Hit count before: " << boss->GetHitCount() << std::endl;
+        // std::cout << "Boss hit by Mario's Fireball! Hit count before: " << boss->GetHitCount() << std::endl;
         boss->OnHitByFireball();
-        std::cout << "Boss hit count after: " << boss->GetHitCount() << "/" << 10 << std::endl;
+        // std::cout << "Boss hit count after: " << boss->GetHitCount() << "/" << 10 << std::endl;
         if (boss->GetHitCount() >= 10)
         {
-            std::cout << "Boss defeated after 10 fireball hits!" << std::endl;
+            // std::cout << "Boss defeated after 10 fireball hits!" << std::endl;
         }
         fireball->SetState(OBJECT_STATE_DEAD);
-        std::cout << "Fireball destroyed after hitting Boss" << std::endl;
+        // std::cout << "Fireball destroyed after hitting Boss" << std::endl;
         return;
     }
 

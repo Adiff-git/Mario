@@ -44,13 +44,16 @@ private:
 
     float attackCooldown;   // Thời gian hồi attack
     float attackTimer;      // Đếm ngược hồi attack
+
     
+
     int attackCount;        // Đếm số lần attack liên tiếp
     int maxAttacks;         // Số attack tối đa trước khi nghỉ
     float skillCooldown;    // Thời gian hồi skill
     float skillTimer;       // Đếm ngược skill
     bool isUsingSkill;      // Đang dùng skill hay không
-
+    
+    bool hasPlayedIdleAnimation = false; // Đã chơi animation idle hay chưa
     float patrolTimer;
     int patrolPhase;
     
@@ -83,7 +86,7 @@ private:
     
     // Helper methods for cleaner code organization
     void UpdateTimers(float dt);
-    void UpdateMovement(float dt);
+    void UpdateMovement();
     void UpdateBoundaries();
     void UpdateAnimations(float dt);
     

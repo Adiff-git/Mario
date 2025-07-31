@@ -75,7 +75,6 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen) : player(),
         map.GetInteractiveItems().push_back(std::make_shared<FireFlower>(Vector2{200, 800}));
         // interactiveItems.push_back(std::make_shared<Mushroom>(Vector2{250, 500}));
         // interactiveItems.push_back(std::make_shared<OneUpMushroom>(Vector2{300, 500}));
-        map.GetInteractiveItems().push_back(std::make_shared<Star>(Vector2{350, 500}));
         map.GetInteractiveItems().push_back(std::make_shared<ThreeUpMoon>(Vector2{400, 500}));
         map.GetInteractiveItems().push_back(std::make_shared<YoshiCoin>(Vector2{450, 800}));
 
@@ -86,7 +85,7 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen) : player(),
         // map.GetEnemies().push_back(new FlyingGoomba(Vector2{750, 500}));
         
         // Tạo Boss chỉ cho MapID == 0
-        Boss* boss = new Boss(Vector2{800, 735}, player.GetPosPtr()); 
+        Boss* boss = new Boss(Vector2{1200, 535}, player.GetPosPtr()); 
         map.GetEnemies().push_back(boss);
         map.SetMarioPositionForBosses(player.GetPosPtr()); // Update Mario position for Boss
     }
@@ -153,7 +152,11 @@ void GameWorld::UpdateWorld()
                 std::cout << "[DEBUG] Checking Mario's Fireball vs Boss collision..." << std::endl;
                 if (boss->checkCollisionType(*fireball) != COLLISION_TYPE_NONE) {
                     std::cout << "[DEBUG] Mario's Fireball HIT Boss! Calling HandleCollision..." << std::endl;
-                    mediatorCollision.HandleCollision(boss, fireball);
+                    mediatorCollision.HandleCollision(boss, fireball
+                    
+                    
+                    
+                    );
                 } else {
                     //std::cout << "[DEBUG] No collision between Mario's Fireball and Boss" << std::endl;
                 }
@@ -184,11 +187,11 @@ void GameWorld::UpdateWorld()
     for (Enemy* enemy : map.GetEnemies()) {
         Boss* boss = dynamic_cast<Boss*>(enemy);
         if (boss) {
-            std::cout << "[DEBUG] Boss state before removal: " << (int)boss->Object::GetState() 
-                      << " (DEAD=" << OBJECT_STATE_DEAD 
-                      << ", TO_BE_REMOVED=" << OBJECT_STATE_TO_BE_REMOVED << ")" << std::endl;
-            std::cout << "[DEBUG] Boss IsBlinking: " << boss->IsBlinking() 
-                      << ", ShouldBeRemoved: " << boss->ShouldBeRemoved() << std::endl;
+            // std::cout << "[DEBUG] Boss state before removal: " << (int)boss->Object::GetState() 
+            //           << " (DEAD=" << OBJECT_STATE_DEAD 
+            //           << ", TO_BE_REMOVED=" << OBJECT_STATE_TO_BE_REMOVED << ")" << std::endl;
+            // // std::cout << "[DEBUG] Boss IsBlinking: " << boss->IsBlinking() 
+            //           << ", ShouldBeRemoved: " << boss->ShouldBeRemoved() << std::endl;
         }
     }
     

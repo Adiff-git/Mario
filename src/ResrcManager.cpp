@@ -267,6 +267,7 @@ void ResrcManager::loadTextures() {
         textures["Skill 4_2"] = LoadTexture("resources/images/Object/Enemy/Skill 4-2.png");
         textures["Skill 4_3"] = LoadTexture("resources/images/Object/Enemy/Skill 4-3.png");
 
+        textures["Waiting"] = LoadTexture("resources/images/Object/Enemy/Waiting Boss.png");
         textures["Skill 6_1"] = LoadTexture("resources/images/Object/Enemy/Skill 6-1.png");
         textures["Skill 6_2"] = LoadTexture("resources/images/Object/Enemy/Skill 6-2.png");
         textures["Skill 6_3"] = LoadTexture("resources/images/Object/Enemy/Skill 6-3.png");

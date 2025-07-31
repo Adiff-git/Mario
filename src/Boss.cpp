@@ -6,16 +6,17 @@
 #ifndef PI
 #define PI 3.14159265358979323846f
 #endif
+
 Boss::Boss(Vector2 startPos, Vector2 *marioPosition)
 : Enemy(startPos, {128.0f,128.0f}, {0.0f,0.0f}, WHITE,0.8f,0,DIRECTION_RIGHT),
-    currentState(BossState::PATROL), marioPos(marioPosition),
+    currentState(BossState::IDLE), marioPos(marioPosition),
     detectionRange(500.0f), chaseRange(350.0f), attackRange(200.0f),
     moveSpeed(15.0f), chaseSpeedMultiplier(2.0f),
     attackCooldown(0.5f), attackTimer(0.0f),
     attackCount(0), maxAttacks(3), skillCooldown(12.0f), skillTimer(0.0f),
     isUsingSkill(false), skillCurrentFrame(0), skillFrameTime(0.3f), skillFrameAccumulator(0.0f),
     skillDurationAccumulator(0.0f), patrolTimer(0.0f), patrolPhase(0),
-    hitCount(0), hitCooldown(0.0f), blinkingAlpha(1.0f), fadingOut(true)
+    hitCount(0), hitCooldown(0.0f), blinkingAlpha(1.0f), fadingOut(true), hasPlayedIdleAnimation(false)
 {
         frameTime = 0.35f; frameAcumulator = 0.0f; currentFrame = 0; maxFrames = 4;
         LoadTextures(); UpdateTexture();
@@ -23,21 +24,26 @@ Boss::Boss(Vector2 startPos, Vector2 *marioPosition)
 }
 void Boss::BuildBehaviorTree()
 {
-        auto canSeeMario = new ConditionNode([this](){ return CanSeeMario(); });
-        auto isCloseToMario = new ConditionNode([this](){ return IsCloseToMario(); });
-        auto isAttackReady = new ConditionNode([this](){ return attackCount < maxAttacks; });
-        auto shouldUseSkill = new ConditionNode([this](){ return attackCount >= maxAttacks && IsSkillReady(); });
-        auto notInActionState = new ConditionNode([this](){ return !(currentState == BossState::SKILL && isUsingSkill); });
-        auto doSkill = new ActionNode([this](){ SetState(BossState::SKILL); });
-        auto doAttack = new ActionNode([this](){ SetState(BossState::ATTACK); });
-        auto doChase = new ActionNode([this](){ SetState(BossState::CHASE); });
-        auto doPatrol = new ActionNode([this](){ SetState(BossState::PATROL); });
-        auto skillSequence = new SequenceNode({notInActionState, isCloseToMario, shouldUseSkill, doSkill});
-        auto attackSequence = new SequenceNode({notInActionState, isCloseToMario, isAttackReady, doAttack});
-        auto chaseSequence = new SequenceNode({notInActionState, canSeeMario, doChase});
-        auto patrolAction = new SequenceNode({notInActionState, doPatrol});
-        auto rootSelector = new SelectorNode({skillSequence, attackSequence, chaseSequence, patrolAction});
-        behavior = new BehaviorTree(rootSelector);
+    auto canSeeMario = new ConditionNode([this](){ return CanSeeMario(); });
+    auto isCloseToMario = new ConditionNode([this](){ return IsCloseToMario(); });
+    auto isAttackReady = new ConditionNode([this](){ return attackCount < maxAttacks; });
+    auto shouldUseSkill = new ConditionNode([this](){ return attackCount >= maxAttacks && IsSkillReady(); });
+    auto notInActionState = new ConditionNode([this](){ return !(currentState == BossState::SKILL && isUsingSkill); });
+    auto isIdleNotPlayed = new ConditionNode([this](){ return !hasPlayedIdleAnimation; });
+
+    auto doSkill = new ActionNode([this](){ SetState(BossState::SKILL); });
+    auto doAttack = new ActionNode([this](){ SetState(BossState::ATTACK); });
+    auto doChase = new ActionNode([this](){ SetState(BossState::CHASE); }); 
+    auto doPatrol = new ActionNode([this](){ SetState(BossState::PATROL); });
+    auto doIdle = new ActionNode([this](){ SetState(BossState::IDLE); });
+
+    auto idleSequence = new SequenceNode({notInActionState, isIdleNotPlayed, doIdle});
+    auto skillSequence = new SequenceNode({notInActionState, isCloseToMario, shouldUseSkill, doSkill});
+    auto attackSequence = new SequenceNode({notInActionState, isCloseToMario, isAttackReady, doAttack});
+    auto chaseSequence = new SequenceNode({notInActionState, canSeeMario, doChase});
+    auto patrolAction = new SequenceNode({notInActionState, doPatrol});
+    auto rootSelector = new SelectorNode({idleSequence, skillSequence, attackSequence, chaseSequence, patrolAction});
+    behavior = new BehaviorTree(rootSelector);
 }
 Boss::~Boss()
 {
@@ -54,7 +60,7 @@ void Boss::UpdateStateAndPhysic()
         UpdateTimers(dt);
         UpdateSmoothBlinking();
         if(behavior){ behavior->Tick(); }
-        UpdateMovement(dt);
+        UpdateMovement();
         UpdateBoundaries();
         UpdateAnimations(dt);
         UpdateTexture(); UpdateProjectiles(); UpdateCollisionProbes();
@@ -72,18 +78,24 @@ void Boss::UpdateTimers(float dt)
                 }
         }
 }
-void Boss::UpdateMovement(float dt)
-{
+void Boss::UpdateMovement()
+{       float dt = GameClock::GetInstance().FIXED_TIME_STEP;
         switch(currentState){
+        case BossState::IDLE:
+                Idle(dt);
+                pos.x += vel.x * dt;
+                pos.y += vel.y * dt;
+                break;
         case BossState::PATROL:
                 Patrol(dt);
-                pos.x += vel.x * dt; pos.y += vel.y * dt; break;
+                pos.x += vel.x * dt; break;
+                
         case BossState::CHASE:
                 Chase(dt);
-                pos.x += vel.x * dt; pos.y += vel.y * dt; break;
+                pos.x += vel.x * dt;break;
         case BossState::ATTACK:
                 Attack(dt);
-                pos.x += vel.x * dt; pos.y += vel.y * dt; break;
+                pos.x += vel.x * dt;break;
         case BossState::SKILL:
                 UseSkill(dt); break;
         }
@@ -92,9 +104,8 @@ void Boss::UpdateBoundaries()
 {
         if(currentState == BossState::PATROL){
                 if(pos.x < 20){ pos.x = 20; vel.x = 0; direction = DIRECTION_RIGHT; }
-                if(pos.x > 780){ pos.x = 780; vel.x = 0; direction = DIRECTION_LEFT; }
-                if(pos.y < 350){ pos.y = 350; vel.y = 0; }
-                if(pos.y > 1400){ pos.y = 1400; vel.y = 0; } 
+                if(pos.x > 1780){ pos.x = 780; vel.x = 0; direction = DIRECTION_LEFT; }
+                
         }
 }
 void Boss::UpdateAnimations(float dt)
@@ -112,7 +123,7 @@ void Boss::UpdateAnimations(float dt)
                 case BossState::ATTACK:
                         if(!attackFrames.empty()){ currentFrame = (currentFrame + 1) % attackFrames.size(); }
                         break;
-                case BossState::SKILL:
+                case BossState::IDLE:
                         break;
                 default:
                         if(!movingFrames.empty()){ currentFrame = (currentFrame + 1) % movingFrames.size(); }
@@ -174,12 +185,23 @@ void Boss::LoadTextures()
                 skillFlyFrames.push_back(&resrc.getTexture("Skill 3_3,6"));
                 skillFlyFrames.push_back(&resrc.getTexture("Skill 3_4"));
                 skillFlyFrames.push_back(&resrc.getTexture("Skill 3_5"));
+
+                idleFrames.push_back(&resrc.getTexture("Waiting"));
+                idleFrames.push_back(&resrc.getTexture("Skill 6_1"));
+                idleFrames.push_back(&resrc.getTexture("Skill 6_2"));
+                idleFrames.push_back(&resrc.getTexture("Skill 6_3"));
+                idleFrames.push_back(&resrc.getTexture("Skill 6_4"));
+                idleFrames.push_back(&resrc.getTexture("Skill 6_5"));
+                idleFrames.push_back(&resrc.getTexture("Skill 6_6"));
+
                 if(!attackFrames.empty()){
                         currentTexture = attackFrames[0];
                 } else if(!movingFrames.empty()){
                         currentTexture = movingFrames[0];
                 } else if(!chaseFrames.empty()){
                         currentTexture = chaseFrames[0];
+                }else if(!idleFrames.empty()){
+                        currentTexture = idleFrames[0];
                 } else {
                         currentTexture = nullptr;
                 }
@@ -188,6 +210,19 @@ void Boss::LoadTextures()
 void Boss::UpdateTexture()
 {
         switch(currentState){
+        case BossState::IDLE:
+            if (!idleFrames.empty()) {
+                if (currentFrame >= idleFrames.size()) {
+                    currentFrame = 0;
+                }
+                currentTexture = idleFrames[currentFrame];
+                sprite = currentTexture;
+                if (marioPos) {
+                    if (marioPos->x > pos.x) direction = DIRECTION_RIGHT;
+                    else direction = DIRECTION_LEFT;
+                }
+            }
+            break;
         case BossState::PATROL:
                 if(!movingFrames.empty()){
                         if(currentFrame >= movingFrames.size()){ currentFrame = 0; }
@@ -231,6 +266,7 @@ void Boss::UpdateTexture()
                         }
                 }
                 break;
+        
         default:
                 if(!movingFrames.empty()){
                         currentTexture = movingFrames[0];
@@ -363,7 +399,6 @@ void Boss::Chase(float dt){
             vel.x = (vel.x > 0) ? minChaseSpeed : -minChaseSpeed;
         }
     }
-    vel.y += GameWorld::GetGravity() * dt;
     if(vel.x < -1.0f){ direction = DIRECTION_LEFT; }
     else if(vel.x > 1.0f){ direction = DIRECTION_RIGHT; }
 }
@@ -405,13 +440,12 @@ void Boss::Patrol(float dt)
         patrolTimer += dt;
         if(patrolTimer >= 3.0f){ patrolTimer = 0.0f; patrolPhase = (patrolPhase+1)%4; }
         switch(patrolPhase){
-        case 0: vel.x = moveSpeed; vel.y = 0; direction = DIRECTION_RIGHT; break;
-        case 1: vel.x = 0; vel.y = moveSpeed; break;
-        case 2: vel.x = -moveSpeed; vel.y = 0; direction = DIRECTION_LEFT; break;
-        case 3: vel.x = 0; vel.y = -moveSpeed; break;
+        case 0: vel.x = moveSpeed;  direction = DIRECTION_RIGHT; break;
+        case 1: vel.x = -moveSpeed; direction = DIRECTION_LEFT; break;
         }
 }
 void Boss::UseSkill(float dt)
+
 {
         skillDurationAccumulator += dt;
         const float skillDuration = 2.0f;
@@ -424,6 +458,54 @@ void Boss::UseSkill(float dt)
                 attackTimer = 0.0f;
                 if(behavior){ behavior->Tick(); }
         }
+}
+
+void Boss::Idle(float dt)
+{
+    float distance = GetDistanceToMario();
+    static bool idleAnimationPlaying = false;
+    static float idleFrameAccumulator = 0.0f;
+    static int idleCurrentFrame = 0;
+    const float idleFrameTime = 0.6f; // Thời gian mỗi frame
+
+    if (hasPlayedIdleAnimation) {
+        // Nếu animation đã chạy, chuyển ngay sang PATROL
+        SetState(BossState::PATROL);
+        return;
+    }
+
+    if (distance > detectionRange*1.5) {
+        // Mario ở xa, hiển thị frame "Waiting Boss"
+        idleAnimationPlaying = false;
+        idleCurrentFrame = 0; 
+        idleFrameAccumulator = 0.0f;
+        vel.x = 0;
+        currentFrame = 0;
+    } else {
+        // Mario trong detectionRange, chạy animation nhảy xuống
+        if (!idleAnimationPlaying) {
+            idleAnimationPlaying = true;
+            idleCurrentFrame = 0; // Bắt đầu từ "Waiting Boss"
+            idleFrameAccumulator = 0.0f;
+        }
+
+        idleFrameAccumulator += dt;
+        if (idleFrameAccumulator >= idleFrameTime) {
+            idleFrameAccumulator = 0.0f;
+            idleCurrentFrame++;
+            if (idleCurrentFrame >= idleFrames.size()) {
+                // Animation hoàn tất
+                idleCurrentFrame = 0;
+                idleAnimationPlaying = false;
+                hasPlayedIdleAnimation = true;
+                SetState(BossState::PATROL);
+                return;
+            }
+        }
+        vel.x = 0;
+        vel.y = GameWorld::GetGravity() * dt*25 ;
+        currentFrame = idleCurrentFrame;
+    }
 }
 void Boss::UpdateProjectiles()
 {
