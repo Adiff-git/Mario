@@ -584,19 +584,15 @@ void GameWorld::UpdateWorld()
 void GameWorld::DrawWorld()
 {
     if (isMultiplayer && player1 && player2) {
-        // Trung điểm 2 người chơi
         Vector2 p1 = player1->GetPos();
         Vector2 p2 = player2->GetPos();
         float avgX = (p1.x + p2.x) / 2.0f;
         float avgY = (p1.y + p2.y) / 2.0f;
 
-        // Khoảng cách giữa 2 người chơi
         float dx = fabsf(p1.x - p2.x);
         float dy = fabsf(p1.y - p2.y);
 
-        // Tính zoom: càng xa càng zoom out, càng gần càng zoom in
-        // Clamp zoom trong khoảng [0.7, 1.3]
-        float maxDist = 700.0f; // khoảng cách tối đa để zoom out hết cỡ
+        float maxDist = 700.0f;
         float minZoom = 0.7f;
         float maxZoom = 1.3f;
         float dist = sqrtf(dx*dx + dy*dy);
@@ -608,23 +604,34 @@ void GameWorld::DrawWorld()
         camera.offset = { (float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2 };
         camera.zoom = zoom;
 
-        // Giới hạn camera trong map
+        // --- Giới hạn camera trong map (cả X và Y) ---
         float camLeft = camera.target.x - (GetScreenWidth() / 2) / camera.zoom;
         float camRight = camera.target.x + (GetScreenWidth() / 2) / camera.zoom;
+        float camTop = camera.target.y - (GetScreenHeight() / 2) / camera.zoom;
+        float camBottom = camera.target.y + (GetScreenHeight() / 2) / camera.zoom;
+
+        // Giới hạn X
         if (camLeft < 0) camera.target.x = (GetScreenWidth() / 2) / camera.zoom;
         if (camRight > map.GetWidth()) camera.target.x = map.GetWidth() - (GetScreenWidth() / 2) / camera.zoom;
-        // (Có thể thêm giới hạn trục y nếu muốn)
+
+        // Giới hạn Y
+        if (camTop < 0) camera.target.y = (GetScreenHeight() / 2) / camera.zoom;
+        if (camBottom > map.getHeight()) camera.target.y = map.getHeight() - (GetScreenHeight() / 2) / camera.zoom;
     } else if (player1) {
-        // Single player camera
         camera.target = player1->GetPos();
         camera.offset = { (float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2 };
         camera.zoom = 1.3f;
 
-        // Giới hạn camera trong map
         float camLeft = camera.target.x - (GetScreenWidth() / 2) / camera.zoom;
         float camRight = camera.target.x + (GetScreenWidth() / 2) / camera.zoom;
+        float camTop = camera.target.y - (GetScreenHeight() / 2) / camera.zoom;
+        float camBottom = camera.target.y + (GetScreenHeight() / 2) / camera.zoom;
+
         if (camLeft < 0) camera.target.x = (GetScreenWidth() / 2) / camera.zoom;
         if (camRight > map.GetWidth()) camera.target.x = map.GetWidth() - (GetScreenWidth() / 2) / camera.zoom;
+
+        if (camTop < 0) camera.target.y = (GetScreenHeight() / 2) / camera.zoom;
+        if (camBottom > map.getHeight()) camera.target.y = map.getHeight() - (GetScreenHeight() / 2) / camera.zoom;
     }
 
     // --- DRAW ---
