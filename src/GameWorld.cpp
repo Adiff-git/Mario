@@ -66,10 +66,11 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
         background = ResrcManager::GetInstance().getTexture("BACKGROUND_9");
         break;
     }
+    // map.GetInteractiveItems().push_back(std::make_shared<CourseClearToken>(Vector2{200, 700}));
     if (MapID == 1)
     {
         map.GetInteractiveItems().push_back(std::make_shared<Coin>(Vector2{150, 800}));
-        map.GetInteractiveItems().push_back(std::make_shared<CourseClearToken>(Vector2{200, 800}));
+        
         map.GetInteractiveItems().push_back(std::make_shared<FireFlower>(Vector2{200, 800}));
         // interactiveItems.push_back(std::make_shared<Mushroom>(Vector2{250, 500}));
         // interactiveItems.push_back(std::make_shared<OneUpMushroom>(Vector2{300, 500}));

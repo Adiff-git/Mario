@@ -62,7 +62,15 @@ GameScreen::GameScreen(ScreenController* screenController, bool multiplayer,
 
 void GameScreen::Update() {
     BackMenu.Update();
-    
+    // Toggle pause/resume bằng phím P
+    if (IsKeyPressed(KEY_P)) {
+        isPaused = !isPaused;
+    }
+
+    // Nếu đang pause thì chỉ xử lý menu hoặc vẽ overlay, không update game logic
+    if (isPaused) {
+        return;
+    }
 
     if (BackMenu.IsPressed()) {
         screenController->ChangeScreen(new MenuScreen(screenController));
@@ -153,7 +161,11 @@ void GameScreen::Draw() {
             DrawEnd();
         } 
     }
-
+    if (isPaused) {
+        Font* SuperMarioFont = &ResrcManager::GetInstance().getFont("SUPER_MARIO_FONT");
+        DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 0.5f));
+        DrawTextEx(*SuperMarioFont, "PAUSED\nPress P to resume", Vector2{(float)GetScreenWidth()/2-120, (float)GetScreenHeight()/2-40}, 32, 2, WHITE);
+    }
     Texture *GameOver = &ResrcManager::GetInstance().getTexture("GAME_OVER");
     Font* SuperMarioFont = &ResrcManager::GetInstance().getFont("SUPER_MARIO_FONT");
     Texture *SmallMario = &ResrcManager::GetInstance().getTexture("SMALL_MARIO_0_RIGHT");

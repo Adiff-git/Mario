@@ -616,7 +616,7 @@ void Character::Die() {
     if (state == OBJECT_STATE_DYING || state == OBJECT_STATE_DEAD || state == OBJECT_STATE_TO_BE_REMOVED) return;
     
     state = OBJECT_STATE_DYING;
-    vel = Vector2{0, -500};
+    vel = Vector2{0, -200};
     // this->SetLives(this->GetLives() - 1);
     this->SetCoins(0);
     this->SetScore(0);
@@ -624,8 +624,6 @@ void Character::Die() {
     doBlink = false;
     blinkingAcum = 0.0f;
     blinkingAcumTotal = 0.0f;
-    
-    sprite = &ResrcManager::GetInstance().getTexture("MARIO_DIE");
     
 }
 

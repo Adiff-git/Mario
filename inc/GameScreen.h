@@ -19,6 +19,9 @@ enum class TransitionState {
 };
 class GameScreen : public Screen {
     private:
+
+    bool isPaused = false;
+
         Button BackMenu;
         std::unique_ptr<GameWorld> gameWorld;
         std::unique_ptr<GameHUD> gameHUD;
