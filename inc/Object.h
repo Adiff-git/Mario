@@ -87,6 +87,7 @@ class Object : public Drawable {
 
         // Getters
         Vector2 GetPos() const ;
+        Vector2* GetPosPtr() { return &pos; } // Trả về pointer đến position
         Vector2 GetSize() const ;
         float GetAngle() const;
         ObjectState GetState() const;

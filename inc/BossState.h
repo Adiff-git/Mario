@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "ResrcManager.h"
 using namespace std;
 
 enum class BossState{
@@ -7,7 +8,7 @@ enum class BossState{
     PATROL,     // Đi tuần
     CHASE,      // Đuổi Mario
     ATTACK,     // Tấn công
-    SKILL       // Sill bắn 3 lần mới chết
+    SKILL       // Skill nhảy
 };
 
 //debug

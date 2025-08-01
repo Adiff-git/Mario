@@ -1,6 +1,6 @@
 #include "Mario.h"
 #include "ResrcManager.h"
-#include "GameClock.h"
+
 
 void Mario::Update() {
     const float deltaTime = GetFrameTime();
@@ -177,4 +177,3 @@ void Mario::Update() {
             break;
         }
     }
-}

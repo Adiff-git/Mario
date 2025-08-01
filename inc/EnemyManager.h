@@ -12,3 +12,4 @@
 #include "FlyingGoomba.h"
 #include "PiranhaPlant.h"
 #include "JumpingPiranha.h"
+#include "Boss.h"

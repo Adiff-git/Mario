@@ -320,6 +320,72 @@ void ResrcManager::loadTextures() {
         textures["FIREFLOWER_ICON"] = LoadTexture("resources/images/Object/items/FireFlower_0.png");
         textures["MUSHROOM_ICON"] = LoadTexture("resources/images/Object/items/Mushroom.png");
     }
+    {
+        textures["Moving 1"]=LoadTexture("resources/images/Object/Enemy/Moving 1.png");
+        textures["Moving 2"]=LoadTexture("resources/images/Object/Enemy/Moving 2.png");
+        textures["Moving 3"]=LoadTexture("resources/images/Object/Enemy/Moving 3.png");
+        textures["Moving 4"]=LoadTexture("resources/images/Object/Enemy/Moving 4.png");
+
+        textures["Skill 1_1"] = LoadTexture("resources/images/Object/Enemy/Skill 1-1.png");
+        textures["Skill 1_2"] = LoadTexture("resources/images/Object/Enemy/Skill 1-2.png");
+        textures["Skill 1_3"] = LoadTexture("resources/images/Object/Enemy/Skill 1-3.png");
+        textures["Skill 1_4"] = LoadTexture("resources/images/Object/Enemy/Skill1-4.png");
+        textures["Skill 1_5,7"] = LoadTexture("resources/images/Object/Enemy/Skill 1-5,7.png");
+        textures["Skill 1_6"] = LoadTexture("resources/images/Object/Enemy/Skill 1-6.png");
+
+        textures["Skill 2_1"] = LoadTexture("resources/images/Object/Enemy/Skill 2-1.png");
+        textures["Skill 2_2"] = LoadTexture("resources/images/Object/Enemy/Skill 2-2.png");
+        textures["Skill 2_3"] = LoadTexture("resources/images/Object/Enemy/Skill 2-3.png");
+        textures["Skill 2_4"] = LoadTexture("resources/images/Object/Enemy/Skill 2-4.png");
+
+        textures["Skill 3_1"] = LoadTexture("resources/images/Object/Enemy/Skill 3-1.png");
+        textures["Skill 3_2"] = LoadTexture("resources/images/Object/Enemy/Skill 3-2.png");
+        textures["Skill 3_3,6"] = LoadTexture("resources/images/Object/Enemy/Skill 3-3,6.png");
+        textures["Skill 3_4"] = LoadTexture("resources/images/Object/Enemy/Skill 3-4.png");
+        textures["Skill 3_5"] = LoadTexture("resources/images/Object/Enemy/Skill3-5.png");
+
+        textures["Skill 4_1"] = LoadTexture("resources/images/Object/Enemy/Skill 4-1.png");
+        textures["Skill 4_2"] = LoadTexture("resources/images/Object/Enemy/Skill 4-2.png");
+        textures["Skill 4_3"] = LoadTexture("resources/images/Object/Enemy/Skill 4-3.png");
+
+        textures["Waiting"] = LoadTexture("resources/images/Object/Enemy/Waiting Boss.png");
+        textures["Skill 6_1"] = LoadTexture("resources/images/Object/Enemy/Skill 6-1.png");
+        textures["Skill 6_2"] = LoadTexture("resources/images/Object/Enemy/Skill 6-2.png");
+        textures["Skill 6_3"] = LoadTexture("resources/images/Object/Enemy/Skill 6-3.png");
+        textures["Skill 6_4"] = LoadTexture("resources/images/Object/Enemy/Skill 6-4.png");
+        textures["Skill 6_5"] = LoadTexture("resources/images/Object/Enemy/Skill 6-5.png");
+        textures["Skill 6_6"] = LoadTexture("resources/images/Object/Enemy/Skill 6-6.png");
+        textures["Skill 6_8"] = LoadTexture("resources/images/Object/Enemy/Skill 6-8.png");
+        // textures["Skill 6_7"] = LoadTexture("resources/images/gui/Skill 6-7.png");
+        textures["Skill 6_9"] = LoadTexture("resources/images/Object/Enemy/Skill 6-9.png");
+        textures["Skill 6_10"] = LoadTexture("resources/images/Object/Enemy/Skill 6-10.png");
+        
+        textures["Fire_Small_UP_Left"]= LoadTexture("resources/images/Object/Enemy/Fire 1.png");
+        textures["Fire_Normal_UP_Left"]= LoadTexture("resources/images/Object/Enemy/Fire 2.png");
+        textures["Fire_Big_UP_Left"]= LoadTexture("resources/images/Object/Enemy/Fire 3.png");
+        textures["Fire_Small_UP_Right"]= FlipTextureHorizontal(textures["Fire_Small_UP_Left"]);
+        textures["Fire_Normal_UP_Right"]= FlipTextureHorizontal(textures["Fire_Normal_UP_Left"]);
+        textures["Fire_Big_UP_Right"]= FlipTextureHorizontal(textures["Fire_Big_UP_Left"]);
+        textures["Fire_Small_STRAIGHT_Left"]= LoadTexture("resources/images/Object/Enemy/Fire 4.png");
+        textures["Fire_Normal_STRAIGHT_Left"]= LoadTexture("resources/images/Object/Enemy/Fire 5.png");
+        textures["Fire_Big_STRAIGHT_Left"]= LoadTexture("resources/images/Object/Enemy/Fire 6.png");
+        textures["Fire_Small_STRAIGHT_Right"]= FlipTextureHorizontal(textures["Fire_Small_STRAIGHT_Left"]);
+        textures["Fire_Normal_STRAIGHT_Right"]= FlipTextureHorizontal(textures["Fire_Normal_STRAIGHT_Left"]);
+        textures["Fire_Big_STRAIGHT_Right"]= FlipTextureHorizontal(textures["Fire_Big_STRAIGHT_Left"]);
+        textures["Fire_Small_DOWN_Left"]= LoadTexture("resources/images/Object/Enemy/Fire 7.png");
+        textures["Fire_Normal_DOWN_Left"]= LoadTexture("resources/images/Object/Enemy/Fire 8.png");
+        textures["Fire_Big_DOWN_Left"]= LoadTexture("resources/images/Object/Enemy/Fire 9.png");
+        textures["Fire_Small_DOWN_Right"]= FlipTextureHorizontal(textures["Fire_Small_DOWN_Left"]);
+        textures["Fire_Normal_DOWN_Right"]= FlipTextureHorizontal(textures["Fire_Normal_DOWN_Left"]);
+        textures["Fire_Big_DOWN_Right"]= FlipTextureHorizontal(textures["Fire_Big_DOWN_Left"]);
+    }
+    {
+        textures["HealthBar1"] = LoadTexture("resources/images/Object/HealthBar/Full.png");
+        textures["HealthBar2"] = LoadTexture("resources/images/Object/HealthBar/Full2.png");
+        textures["HealthBar3"] = LoadTexture("resources/images/Object/HealthBar/Full3.png");
+        textures["HealthBar4"] = LoadTexture("resources/images/Object/HealthBar/Full4.png");
+        textures["HealthBar5"] = LoadTexture("resources/images/Object/HealthBar/Full5.png");
+    }
 }
 
 void ResrcManager::loadSounds(){

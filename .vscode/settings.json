@@ -63,6 +63,7 @@
         "valarray": "cpp",
         "variant": "cpp",
 <<<<<<< HEAD
+<<<<<<< HEAD
         "chrono": "cpp",
         "filesystem": "cpp",
         "ios": "cpp",
@@ -87,5 +88,9 @@
         "bitset": "cpp",
         "regex": "cpp"
 >>>>>>> origin/mapedit
+=======
+        "cinttypes": "cpp",
+        "*.m": "cpp"
+>>>>>>> origin/Boss-2
     }
 }

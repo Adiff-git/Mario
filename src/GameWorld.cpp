@@ -83,8 +83,15 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
         map.GetEnemies().push_back(new BuzzyBeetle(Vector2{600, 500}));
         map.GetEnemies().push_back(new Rex(Vector2{650, 500}));
         map.GetEnemies().push_back(new FlyingGoomba(Vector2{750, 500}));
+
+
+
+        Boss* boss = new Boss(Vector2{1200, 535}, player1->GetPosPtr()); 
+        map.GetEnemies().push_back(boss);
+        map.SetMarioPositionForBosses(player1->GetPosPtr());
     }
     // Initialize Player1 1
+    
     if (p1Type == CharacterType::MARIO) {
         player1 = new Mario(Vector2{100, 100}, 3, SMALL, ControlType::ARROWS);
     } else {
@@ -99,6 +106,8 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
             player2 = new Luigi(Vector2{150, 100}, 3, SMALL, ControlType::WASD);
         }
     }
+    
+    map.SetMarioPositionForBosses(player1->GetPosPtr()); // Set Mario position
 
 
     camera.offset = Vector2{(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
@@ -123,6 +132,8 @@ GameWorld::GameWorld(int level, GameScreen* gameScreen)
     // Tạo player1 với control mặc định
     player1 = new Mario(Vector2{100, 100}, 3, SMALL, ControlType::ARROWS);
     player2 = nullptr;
+    
+    map.SetMarioPositionForBosses(player1->GetPosPtr()); // Set Mario position
     
     // Setup camera
     camera.target = Vector2{player1->GetPos().x, player1->GetPos().y};
@@ -299,6 +310,8 @@ void GameWorld::UpdateWorld()
     if (player1) {
         player1->UpdateStateAndPhysic();
         player1->UpdateCollisionProbes();
+        
+        map.SetMarioPositionForBosses(player1->GetPosPtr());
         
         if (player1->GetState() != OBJECT_STATE_DEAD &&
             player1->GetState() != OBJECT_STATE_DYING &&
