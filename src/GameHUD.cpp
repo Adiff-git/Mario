@@ -27,35 +27,35 @@ GameHUD::GameHUD(Character *mario) : player1(mario), player2(nullptr)
 GameHUD::GameHUD(Character *mario, Character *luigi) : player1(mario), player2(luigi)
 {
 
-    coinsPosition1 = {300, 100};
+    coinsPosition1 = {1300 + 110, 110};
     coinsSize1 = {30, 30};
     coinTexture1 = &ResrcManager::GetInstance().getTexture("GUI_COIN"); // Load your coin texture here
 
-    scorePosition1 = {300, 120};
+    scorePosition1 = {1300 + 110, 120};
     scoreSize1 = {200, 50};
     MarioHUD1 = &ResrcManager::GetInstance().getTexture("GUI_MARIO"); // Load your HUD texture here
 
-    block1 = {1600 / 2 - 20 - 100, 100};
+    block1 = {1600 / 2 - 20 + 100, 100};
     block1Size = {50, 50};
     block1Texture = &ResrcManager::GetInstance().getTexture("GUI_BLOCK"); // Load your block texture here
 
-    Player1StatePos = {1600 / 2 - 10 - 100, 100 + 10};
+    Player1StatePos = {1600 / 2 - 10 + 100, 100 + 10};
     Player1StateSize = {30, 30};
     Player1StateTexture = nullptr;
     //===========================================================================
-    coinsPosition2 = {1400, 100};
+    coinsPosition2 = {400, 110};
     coinsSize2 = {30, 30};
     coinTexture2 = &ResrcManager::GetInstance().getTexture("GUI_COIN"); // Load your coin texture here
 
-    scorePosition2 = {1400, 120};
+    scorePosition2 = {400, 120};
     scoreSize2 = {200, 50};
     MarioHUD2 = &ResrcManager::GetInstance().getTexture("GUI_MARIO"); // Load your HUD texture here
 
-    block2 = {1600 / 2 - 20 + 100, 100};
+    block2 = {1600 / 2 - 20 - 100, 100};
     block2Size = {50, 50};
     block2Texture = &ResrcManager::GetInstance().getTexture("GUI_BLOCK"); // Load your block texture here
 
-    Player2StatePos = {1600 / 2 - 10 + 100, 100 + 10};
+    Player2StatePos = {1600 / 2 - 10 - 100, 100 + 10};
     Player2StateSize = {30, 30};
     Player2StateTexture = nullptr;
 
@@ -142,29 +142,18 @@ void GameHUD::Draw()
         // Draw Player 1 score
         DrawTextEx(*font, (std::to_string(score1)).c_str(), Vector2{scorePosition1.x, scorePosition1.y + 30}, 20, 2, WHITE);
 
-        // Draw Player 2 coins
-        DrawTextureNPatch(*coinTexture2,
-                          NPatchInfo{Rectangle{0, 0, (float)(*coinTexture2).width,
-                                               (float)(*coinTexture2).height},
-                                     0, 0, 0, 0},
-                          Rectangle{coinsPosition2.x, coinsPosition2.y, coinsSize2.x, coinsSize2.y}, Vector2{0, 0}, 0.0f, WHITE);
-        DrawTextEx(*font, ("x" + std::to_string(player2->GetCoins())).c_str(), Vector2{coinsPosition2.x + 50, coinsPosition2.y}, 20, 2, WHITE);
-
-        // Draw Player 2 score
-        DrawTextEx(*font, (std::to_string(player2->GetScore())).c_str(), Vector2{scorePosition2.x, scorePosition2.y + 30}, 20, 2, WHITE);
-
         // Draw Lives for Player 1
         DrawTextureNPatch(*MarioHUD1,
                           NPatchInfo{Rectangle{0, 0, (float)(*MarioHUD1).width,
                                                (float)(*MarioHUD1).height},
                                      0, 0, 0, 0},
-                            Rectangle{(float)GetScreenWidth() / 2 - 16 - 600, scorePosition1.y, 120, 24}, Vector2{0, 0}, 0.0f, WHITE);
+                            Rectangle{(float)GetScreenWidth() / 2 - 16 + 600 - 100, scorePosition1.y, 120, 24}, Vector2{0, 0}, 0.0f, WHITE);
         DrawTextureNPatch(ResrcManager::GetInstance().getTexture("SMALLMARIO_0_RIGHT"),
                           NPatchInfo{Rectangle{0, 0, (float)ResrcManager::GetInstance().getTexture("SMALLMARIO_0_RIGHT").width,
                                                24},
                                      0, 0, 0, 0},
-                            Rectangle{(float)GetScreenWidth() / 2 - 630, scorePosition1.y + 25, 32, 24}, Vector2{0, 0}, 0.0f, WHITE);
-        DrawTextEx(*font, ("x" + std::to_string(lives1)).c_str(), Vector2{(float)GetScreenWidth() / 2 - 600, scorePosition1.y + 30}, 20, 2, WHITE);
+                            Rectangle{(float)GetScreenWidth() / 2 + 600 - 100, scorePosition1.y + 25, 32, 24}, Vector2{0, 0}, 0.0f, WHITE);
+        DrawTextEx(*font, ("x" + std::to_string(lives1)).c_str(), Vector2{(float)GetScreenWidth() / 2 + 600 + 30 - 100, scorePosition1.y + 30}, 20, 2, WHITE);
         // draw block1
         DrawTextureNPatch(*block1Texture,
             NPatchInfo{Rectangle{0, 0, (float)(*block1Texture).width,
@@ -192,12 +181,26 @@ void GameHUD::Draw()
         }
 
         //player2
+
+        // Draw Player 2 coins
+        DrawTextureNPatch(*coinTexture2,
+            NPatchInfo{Rectangle{0, 0, (float)(*coinTexture2).width,
+                                 (float)(*coinTexture2).height},
+                       0, 0, 0, 0},
+            Rectangle{coinsPosition2.x, coinsPosition2.y, coinsSize2.x, coinsSize2.y}, Vector2{0, 0}, 0.0f, WHITE);
+DrawTextEx(*font, ("x" + std::to_string(player2->GetCoins())).c_str(), Vector2{coinsPosition2.x + 50, coinsPosition2.y}, 20, 2, WHITE);
+
+
+        // Draw Player 2 score
+        DrawTextEx(*font, (std::to_string(player2->GetScore())).c_str(), Vector2{scorePosition2.x, scorePosition2.y + 30}, 20, 2, WHITE);
+
+
         // Draw Lives for Player 2
         DrawTextureNPatch(*MarioHUD2,
                           NPatchInfo{Rectangle{0, 0, (float)(*MarioHUD2).width,
                                                (float)(*MarioHUD2).height},
                                      0, 0, 0, 0},
-                            Rectangle{(float)GetScreenWidth() / 2 - 16 + 100, scorePosition2.y, 120, 24}, Vector2{0, 0}, 0.0f, WHITE);
+                            Rectangle{(float)GetScreenWidth() / 2 - 600 +50 , scorePosition2.y, 120, 24}, Vector2{0, 0}, 0.0f, WHITE);
         DrawTextureNPatch(ResrcManager::GetInstance().getTexture("SMALLMARIO_0_RIGHT"),
                           NPatchInfo{Rectangle{0, 0, (float)ResrcManager::GetInstance().getTexture("SMALLMARIO_0_RIGHT").width,
                                                24},
