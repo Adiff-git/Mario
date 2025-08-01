@@ -1,21 +1,15 @@
 #pragma once
-#include "raylib.h"
-#include "Object.h"
 #include "Enemy.h"
 #include "BossState.h"
 #include "BehaviorTree.h"
-<<<<<<< HEAD
 #include <raylib.h> 
 #include <memory>
 #include "Object.h"
 #include "Character.h"
-=======
 #include "Mario.h"
 #include "ResrcManager.h"
 #include "BossFireball.h"
 #include "GameClock.h"
-#include <memory>
->>>>>>> origin/Boss-2
 #include <cmath>
 #include <list>
 using namespace std;

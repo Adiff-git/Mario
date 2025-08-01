@@ -93,7 +93,6 @@ void MediatorCollision::HandleFireballWithTile(Fireball *&fireball, Tile *&tile,
     }
     }
 }
-
 void MediatorCollision::HandleItemWithTile(Item *&item, Tile *&tile, CollisionType AtoB)
 {
     if (AtoB == COLLISION_TYPE_NONE)
@@ -140,7 +139,6 @@ void MediatorCollision::HandleItemWithTile(Item *&item, Tile *&tile, CollisionTy
     }
     }
 }
-
 void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
 {
     Character* marioA = dynamic_cast<Character*>(ObjectA);
@@ -234,7 +232,6 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
         HandleMarioWithBossFireball(mario, bossFireball, type);
     }
 }
-
 void MediatorCollision :: HandleMarioWithBlock(Character* &mario, Block* &block, CollisionType type){
     if(type == COLLISION_TYPE_NONE) return;
     switch(type){
@@ -378,7 +375,6 @@ void MediatorCollision :: HandleMarioWithBlock(Character* &mario, Block* &block,
         }
     }
 };
-
 void MediatorCollision::HandleEnemyWithTile(Enemy *&enemy, Tile *tile, CollisionType AtoB)
 {
     if (AtoB == COLLISION_TYPE_NONE)
@@ -416,7 +412,6 @@ void MediatorCollision::HandleEnemyWithTile(Enemy *&enemy, Tile *tile, Collision
     }
     }
 }
-
 void MediatorCollision::HandleMarioWithEnemy(Character*& mario, Enemy*& enemy, CollisionType AtoB) {
     if (AtoB == COLLISION_TYPE_NONE) {
 
@@ -500,7 +495,6 @@ void MediatorCollision::HandleMarioWithEnemy(Character*& mario, Enemy*& enemy, C
     }
     }
 }
-
 void MediatorCollision::HandleEnemyWithFireball(Enemy *&enemy, Fireball *&fireball, CollisionType AtoB)
 {
     // std::cout << "[DEBUG] HandleEnemyWithFireball called!" << std::endl;
@@ -540,7 +534,6 @@ void MediatorCollision::HandleEnemyWithFireball(Enemy *&enemy, Fireball *&fireba
     enemy->SetState(OBJECT_STATE_DEAD);
     std::cout << "Enemy dies by fireball" << std::endl;
 }
-
 void MediatorCollision::HandleMarioWithBossFireball(Character *&mario, BossFireball *&bossFireball, CollisionType AtoB)
 {
     if (AtoB == COLLISION_TYPE_NONE)
