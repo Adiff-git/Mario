@@ -9,7 +9,7 @@ class MenuScreen : public Screen {
         Button startButton;
         Button MapEditorButton;
         // Button exitButton;
-        // Button settingsButton;
+        Button settingsButton;
         Texture2D* backgroundTexture;
     public:
         MenuScreen(ScreenController* screenController);
