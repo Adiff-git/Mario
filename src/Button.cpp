@@ -73,7 +73,7 @@ bool Button::IsPressed() const  {
     }
     return false;
 }
-
+Vector2 Button::GetSize() const { return size; }
 bool Button::IsHovered() const {
     Vector2 mousePos = GetMousePosition();
     return CheckCollisionPointRec(mousePos, ConstButton);

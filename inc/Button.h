@@ -18,6 +18,7 @@ class Button : public Drawable {
 
         bool isPressed;
     public:
+        Vector2 GetSize() const;
         Button();
         Button(Vector2 pos, Vector2 size);
         Button(Vector2 pos, Vector2 size, std::string text, int Text_Size = 20, float zoom = 1.0f);
@@ -40,5 +41,3 @@ class Button : public Drawable {
         void SetTexturePosition(Vector2 pos);
         void SetTextureSize(Vector2 size);
 };
-
-

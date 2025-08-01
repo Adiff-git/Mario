@@ -16,13 +16,18 @@ protected:
     float blinkingAcumTotal;  
     bool doBlink;              
     bool markedForRemoval;     
-    bool hitByFireball;           
+    bool hitByFireball;
+
+    // Active/Nonactive state
+    bool isActive;
+    float activationDistance;           
 
 public:
     Enemy(Vector2 pos, Vector2 size, Vector2 vel, Color color, float friction, int currFrame, Direction dir);
     virtual ~Enemy() = default;
     virtual void UpdateStateAndPhysic() = 0; // Hàm ảo thuần túy
     void Update() override;
+    void Update(Vector2 player1Pos, Vector2 player2Pos = {-1000, -1000}); // Overloaded version with both player positions
     void UpdateCollisionProbes() override;
     void drawCollisionProbes();
     void SetDirection(Direction dir) { direction = dir; }
@@ -36,7 +41,14 @@ public:
     bool ShouldRender() const;
     bool ShouldBeRemoved() const; 
     bool IsHitByFireball() const { return hitByFireball; }
-    void SetHitByFireball(bool hit) { hitByFireball = hit; } 
+    void SetHitByFireball(bool hit) { hitByFireball = hit; }
+
+    // Active/Nonactive state methods
+    bool IsActive() const { return isActive; }
+    void SetActive(bool active) { isActive = active; }
+    void CheckActivation(Vector2 player1Pos, Vector2 player2Pos = {-1000, -1000});
+    float GetDistanceToPlayer(Vector2 playerPos) const;
+    float GetDistanceToNearestPlayer(Vector2 player1Pos, Vector2 player2Pos) const; 
 };
 
 #endif
