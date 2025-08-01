@@ -14,7 +14,7 @@ interactiveTiles(map.getInteractiveTiles())
     // Trong GameWorld constructor, thêm:
 
     player1 =  new Luigi(Vector2{100, 100}, 3, SMALL, ControlType::ARROWS); // Đặt vị trí cụ thể
-    map.LoadMap(2);
+    map.LoadMap(3);
     camera.offset = Vector2{(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
     camera.target = player1->GetPos();
     camera.rotation = 0.0f;
@@ -407,10 +407,21 @@ void GameWorld::UpdateWorld()
     );
 
     // Enemy update - KIỂM TRA NULL
+    Vector2 player1Pos = {0, 0};
+    Vector2 player2Pos = {-1000, -1000}; // Default invalid position
+    
+    if (player1) {
+        player1Pos = player1->GetPos();
+    }
+    
+    if (isMultiplayer && player2) {
+        player2Pos = player2->GetPos();
+    }
+    
     for (Enemy* enemy : map.GetEnemies())
     {
         if (enemy) {
-            enemy->UpdateStateAndPhysic();
+            enemy->Update(player1Pos, player2Pos); // Use new Update method with both player positions
 
             for (auto const& tile : interactiveTiles)
             {
