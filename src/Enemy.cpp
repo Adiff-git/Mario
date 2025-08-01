@@ -4,7 +4,8 @@
 
 Enemy::Enemy(Vector2 pos, Vector2 size, Vector2 vel, Color color, float friction, int currFrame, Direction dir)
     : Object(pos, size, vel, color, friction, currFrame, dir), maxSpeedX(50.0f), textureIndex(0),
-      isBlinking(false), blinkingAcum(0), blinkingTime(0.1f), blinkingAcumTotal(0), doBlink(false), markedForRemoval(false), hitByFireball(false) {
+      isBlinking(false), blinkingAcum(0), blinkingTime(0.1f), blinkingAcumTotal(0), doBlink(false), 
+      markedForRemoval(false), hitByFireball(false), isActive(false), activationDistance(1000.0f) {
     cpN.setSize(Vector2{size.x/2, 1});
     cpS.setSize(Vector2{size.x/2, 1});
     cpE.setSize(Vector2{5, size.y - 5});
@@ -18,6 +19,15 @@ Enemy::Enemy(Vector2 pos, Vector2 size, Vector2 vel, Color color, float friction
 
 void Enemy::Update() {
     UpdateStateAndPhysic();
+}
+
+void Enemy::Update(Vector2 player1Pos, Vector2 player2Pos) {
+    CheckActivation(player1Pos, player2Pos);
+    
+    // Only update physics if enemy is active
+    if (isActive) {
+        UpdateStateAndPhysic();
+    }
 }
 
 void Enemy::UpdateCollisionProbes() {
@@ -92,4 +102,31 @@ bool Enemy::ShouldRender() const {
 
 bool Enemy::ShouldBeRemoved() const {
     return markedForRemoval;
+}
+
+void Enemy::CheckActivation(Vector2 player1Pos, Vector2 player2Pos) {
+    float distance = GetDistanceToNearestPlayer(player1Pos, player2Pos);
+    
+    if (distance <= activationDistance) {
+        isActive = true;
+    }
+    // Once activated, enemy stays active (you can modify this behavior if needed)
+}
+
+float Enemy::GetDistanceToNearestPlayer(Vector2 player1Pos, Vector2 player2Pos) const {
+    float dist1 = GetDistanceToPlayer(player1Pos);
+    
+    // Check if player2 position is valid (not the default -1000, -1000)
+    if (player2Pos.x > -999 && player2Pos.y > -999) {
+        float dist2 = GetDistanceToPlayer(player2Pos);
+        return (dist1 < dist2) ? dist1 : dist2; // Return the smaller distance
+    }
+    
+    return dist1; // Only player1 is valid
+}
+
+float Enemy::GetDistanceToPlayer(Vector2 playerPos) const {
+    float dx = playerPos.x - (pos.x + size.x / 2);
+    float dy = playerPos.y - (pos.y + size.y / 2);
+    return sqrt(dx * dx + dy * dy);
 }
