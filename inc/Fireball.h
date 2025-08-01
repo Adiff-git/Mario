@@ -1,8 +1,8 @@
 #pragma once
 #include "Object.h"
-#include "Tile.h"
+#include "../inc/World/Tile.h"
 #include "ResrcManager.h"
-#include "GameClock.h"
+#include "../inc/World/GameClock.h"
 
 class Fireball: public Object{
 private:

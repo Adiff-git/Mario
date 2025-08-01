@@ -2,8 +2,8 @@
 
 #include "raylib.h"
 #include "Drawable.h"
-#include "CollisionProbe.h"
-#include "GameClock.h"
+#include "../inc/World/CollisionProbe.h"
+#include "../inc/World/GameClock.h"
 enum ObjectState {
     OBJECT_STATE_IDLE = 0,
     OBJECT_STATE_ACTIVE,

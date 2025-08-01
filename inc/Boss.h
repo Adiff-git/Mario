@@ -1,15 +1,15 @@
 #pragma once
-#include "Enemy.h"
+#include "../inc/Enemy/Enemy.h"
 #include "BossState.h"
 #include "BehaviorTree.h"
 #include <raylib.h> 
 #include <memory>
 #include "Object.h"
-#include "Character.h"
-#include "Mario.h"
+#include "../inc/Character/Character.h"
+#include "../inc/Character/Mario.h"
 #include "ResrcManager.h"
 #include "BossFireball.h"
-#include "GameClock.h"
+#include "../inc/World/GameClock.h"
 #include <cmath>
 #include <list>
 using namespace std;

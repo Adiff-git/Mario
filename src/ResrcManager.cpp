@@ -176,7 +176,7 @@ void ResrcManager::loadTextures() {
     // textures["EXIT_BUTTON"] = LoadTexture("resources/Menu/ExitButton.png");
     // textures["SETTINGS_BUTTON"] = LoadTexture("resources/Menu/SettingsButton.png");
 
-    
+
     // textures["START_BUTTON"] = LoadTexture("../resources/images/Button/StartButton.png");
     textures["PAUSE_BUTTON"] = LoadTexture("../resources/images/Button/PauseButton.png");
     textures["STOP_BUTTON"] = LoadTexture("../resources/images/Button/StopButton.png");

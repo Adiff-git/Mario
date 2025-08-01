@@ -1,13 +1,12 @@
-#include "../inc/Enemy/Bob-omb.h"
+#include "../inc/Enemy/BuzzyBeetle.h"
 #include "../inc/World/GameWorld.h"
 
-Bob_omb::Bob_omb(Vector2 pos) 
-    : Enemy(pos, Vector2{32, 32}, Vector2{20, 0}, BLACK, 0.2f, 0, DIRECTION_RIGHT) {
-    sprite = &ResrcManager::GetInstance().getTexture("Bob-omb_0");
-    
+BuzzyBeetle::BuzzyBeetle(Vector2 pos) 
+    : Enemy(pos, Vector2{32, 32}, Vector2{20, 0}, BLUE, 0.2f, 0, DIRECTION_RIGHT) {
+    sprite = &ResrcManager::GetInstance().getTexture("BuzzyBeetle_0_Right");
 }
 
-void Bob_omb::UpdateStateAndPhysic() {
+void BuzzyBeetle::UpdateStateAndPhysic() {
     const float deltaTime = GetFrameTime();
     if (GetState() != OBJECT_STATE_ON_GROUND) {
         SetVel(Vector2{GetVel().x, GetVel().y + 9.81f * static_cast<float>(GameClock::GetInstance().FIXED_TIME_STEP)});
@@ -27,32 +26,38 @@ void Bob_omb::UpdateStateAndPhysic() {
     }
 
     vel.y += GameWorld::GetGravity() * deltaTime;
-    const int updateThreshold = 50; // Animation chuyển đổi mỗi ~0.83 giây
+    Object::UpdateStateAndPhysic();
+    
+    const int updateThreshold = 50;
 
     if (fabs(GetVel().x) > 0.1f) {
         updateCount++;
         if (updateCount >= updateThreshold) {
             if (GetDirection() == DIRECTION_RIGHT) {
                 if (textureIndex == 0) {
-                    sprite = &ResrcManager::GetInstance().getTexture("Bob-omb_Right_0");
+                    sprite = &ResrcManager::GetInstance().getTexture("BuzzyBeetle_0_Right");
                     textureIndex = 1;
                 } else {
-                    sprite = &ResrcManager::GetInstance().getTexture("Bob-omb_Right_1");
+                    sprite = &ResrcManager::GetInstance().getTexture("BuzzyBeetle_1_Right");
                     textureIndex = 0;
                 }
             } else {
                 if (textureIndex == 0) {
-                    sprite = &ResrcManager::GetInstance().getTexture("Bob-omb_Left_0");
+                    sprite = &ResrcManager::GetInstance().getTexture("BuzzyBeetle_0_Left");
                     textureIndex = 1;
                 } else {
-                    sprite = &ResrcManager::GetInstance().getTexture("Bob-omb_Left_1");
+                    sprite = &ResrcManager::GetInstance().getTexture("BuzzyBeetle_1_Left");
                     textureIndex = 0;
                 }
             }
             updateCount = 0;
         }
     } else {
-        sprite = &ResrcManager::GetInstance().getTexture("Bob-omb_Right_0");
+        if (GetDirection() == DIRECTION_RIGHT) {
+            sprite = &ResrcManager::GetInstance().getTexture("BuzzyBeetleTroopa_0");
+        } else {
+            sprite = &ResrcManager::GetInstance().getTexture("BuzzyBeetleTroopa_1");
+        }
         textureIndex = 0;
         updateCount = 0;
     }

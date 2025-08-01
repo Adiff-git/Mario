@@ -1,10 +1,10 @@
 #include "raylib.h"
 #include "ResrcManager.h"
-#include "GameWorld.h"
-#include "Character.h"
-#include "GameClock.h"
+#include "../inc/World/GameWorld.h"
+#include "../inc/Character/Character.h"
+#include "../inc/World/GameClock.h"
 #include <iostream>
-#include "ScreenController.h"
+#include "../inc/Screen/ScreenController.h"
 
 int main() {
     InitWindow(1600, 900, "Mario Game");

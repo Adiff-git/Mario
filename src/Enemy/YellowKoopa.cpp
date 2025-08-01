@@ -1,13 +1,12 @@
-#include "../inc/Enemy/Bob-omb.h"
+#include "../inc/Enemy/YellowKoopa.h"
 #include "../inc/World/GameWorld.h"
 
-Bob_omb::Bob_omb(Vector2 pos) 
-    : Enemy(pos, Vector2{32, 32}, Vector2{20, 0}, BLACK, 0.2f, 0, DIRECTION_RIGHT) {
-    sprite = &ResrcManager::GetInstance().getTexture("Bob-omb_0");
-    
+YellowKoopa::YellowKoopa(Vector2 pos) 
+    : Enemy(pos, Vector2{32, 48}, Vector2{5, 0}, YELLOW, 0.2f, 0, DIRECTION_RIGHT) {
+    sprite = &ResrcManager::GetInstance().getTexture("YellowKoopaTroopa_0");
 }
 
-void Bob_omb::UpdateStateAndPhysic() {
+void YellowKoopa::UpdateStateAndPhysic() {
     const float deltaTime = GetFrameTime();
     if (GetState() != OBJECT_STATE_ON_GROUND) {
         SetVel(Vector2{GetVel().x, GetVel().y + 9.81f * static_cast<float>(GameClock::GetInstance().FIXED_TIME_STEP)});
@@ -27,32 +26,37 @@ void Bob_omb::UpdateStateAndPhysic() {
     }
 
     vel.y += GameWorld::GetGravity() * deltaTime;
-    const int updateThreshold = 50; // Animation chuyển đổi mỗi ~0.83 giây
+    Object::UpdateStateAndPhysic();
+    const int updateThreshold = 50;
 
     if (fabs(GetVel().x) > 0.1f) {
         updateCount++;
         if (updateCount >= updateThreshold) {
             if (GetDirection() == DIRECTION_RIGHT) {
                 if (textureIndex == 0) {
-                    sprite = &ResrcManager::GetInstance().getTexture("Bob-omb_Right_0");
+                    sprite = &ResrcManager::GetInstance().getTexture("YellowKoopaTroopa_0_RIGHT");
                     textureIndex = 1;
                 } else {
-                    sprite = &ResrcManager::GetInstance().getTexture("Bob-omb_Right_1");
+                    sprite = &ResrcManager::GetInstance().getTexture("YellowKoopaTroopa_1_RIGHT");
                     textureIndex = 0;
                 }
             } else {
                 if (textureIndex == 0) {
-                    sprite = &ResrcManager::GetInstance().getTexture("Bob-omb_Left_0");
+                    sprite = &ResrcManager::GetInstance().getTexture("YellowKoopaTroopa_0_LEFT");
                     textureIndex = 1;
                 } else {
-                    sprite = &ResrcManager::GetInstance().getTexture("Bob-omb_Left_1");
+                    sprite = &ResrcManager::GetInstance().getTexture("YellowKoopaTroopa_1_LEFT");
                     textureIndex = 0;
                 }
             }
             updateCount = 0;
         }
     } else {
-        sprite = &ResrcManager::GetInstance().getTexture("Bob-omb_Right_0");
+        if (GetDirection() == DIRECTION_RIGHT) {
+            sprite = &ResrcManager::GetInstance().getTexture("YellowKoopaTroopa_0_RIGHT");
+        } else {
+            sprite = &ResrcManager::GetInstance().getTexture("YellowKoopaTroopa_0_LEFT");
+        }
         textureIndex = 0;
         updateCount = 0;
     }

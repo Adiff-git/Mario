@@ -1,7 +1,7 @@
 #pragma once
 #include "Object.h"
 #include "ResrcManager.h"
-#include "GameClock.h"
+#include "../inc/World/GameClock.h"
 
 enum class FireType {
     SMALL,

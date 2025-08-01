@@ -1,5 +1,5 @@
 #include "Boss.h"
-#include "GameWorld.h"
+#include "../inc/World/GameWorld.h"
 #include <cmath>
 #include <iostream>
 #include <algorithm>
