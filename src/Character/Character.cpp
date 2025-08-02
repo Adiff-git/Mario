@@ -112,7 +112,7 @@ void Character::jump() {
     state = OBJECT_STATE_JUMPING;
     vel.y = -SpeedY;
     // make sound
-    // PlaySound(ResrcManager::GetInstance().getSound("MARIO_JUMP"));
+    PlaySound(ResrcManager::GetInstance().getSound("MARIO_JUMP"));
 }
 
 void Character::moveLeft() {
@@ -514,6 +514,7 @@ void Character::changeToBig() {
         CharState = BIG;
         SetSize(Vector2{32, 56}); // Update size for BIG Mario
     }
+    PlaySound(ResrcManager::GetInstance().getSound("MARIO_POWERUP"));
 }
 
 void Character::changeToSmall() {
@@ -526,6 +527,7 @@ void Character::changeToSmall() {
         doBlink = false;
         blinkingAcum = 0.0f;
     }
+    PlaySound(ResrcManager::GetInstance().getSound("MARIO_BEING_HIT"));
 }
 void Character::changetoFire()
 {
@@ -534,6 +536,7 @@ void Character::changetoFire()
         SetSize(Vector2{32, 56}); // Update size for FIRE Mario
         sprite = &ResrcManager::GetInstance().getTexture("FIRE_MARIO_0_RIGHT");
     }
+    PlaySound(ResrcManager::GetInstance().getSound("MARIO_POWERUP"));
 }
 
 void Character::UpdateCollisionProbes() {
@@ -552,7 +555,7 @@ void Character::UpdateCollisionProbes() {
 
 void Character::fire() {
     fireballs.push_back(new Fireball(pos, direction));
-    SoundManager::GetInstance().PlaySound("FIREBALL");
+    SoundManager::GetInstance().PlaySound("MARIO_FIREBALL");
 }
 
 void Character::setInvincible(bool value) {
@@ -602,6 +605,7 @@ void Character::NotifyCoinChange() {
     }
 }
 void Character::BeHit() {
+    SoundManager::GetInstance().PlaySound("MARIO_BEING_HIT");
     if (!isInvincible) {
         if (CharState == BIG || CharState == FIRE) {
             changeToSmall();
@@ -624,6 +628,7 @@ void Character::Die() {
     doBlink = false;
     blinkingAcum = 0.0f;
     blinkingAcumTotal = 0.0f;
+    SoundManager::GetInstance().PlaySound("MARIO_DEATH");
     
 }
 

@@ -1,7 +1,8 @@
 #include "../inc/Screen/ScreenController.h"
 #include "../inc/Screen/MenuScreen.h"
+#include "SoundManager.h"
 ScreenController::ScreenController() : currentScreen(new MenuScreen(this)) {
-    // Constructor implementation
+    SoundManager::GetInstance().Update();
 }
 ScreenController::~ScreenController() {
     delete currentScreen; // Clean up the current screen
@@ -27,3 +28,4 @@ void ScreenController::ChangeScreen(Screen* newScreen) {
         currentScreen->screenController = this; // Set the screen controller for the new screen
     }
 }
+

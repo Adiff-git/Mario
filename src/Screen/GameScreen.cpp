@@ -4,7 +4,7 @@
 GameScreen::GameScreen(ScreenController* screenController)
     : Screen(screenController), 
       BackMenu(Vector2{50, 50}, Vector2{50, 50}), 
-      level(3), 
+      level(1), 
       transitionState(TransitionState::NONE), 
       transitionTime(1.0f), 
       transitionTimeAcum(0.0f),

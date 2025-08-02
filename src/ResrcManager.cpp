@@ -391,24 +391,21 @@ void ResrcManager::loadTextures() {
 void ResrcManager::loadSounds(){
     sounds["MARIO_JUMP"] = LoadSound("resources/SFX/smw_jump.wav");
     sounds["MARIO_FIREBALL"] = LoadSound("resources/SFX/smw_fireball.wav");
-    sounds["MARIO_POWERUP"] = LoadSound("resources/SFX/smw_power-up_appears.wav");
 
     sounds["MARIO_POWERUP"] = LoadSound("resources/sfx/smw_power-up.wav");
     sounds["MARIO_BEING_HIT"] = LoadSound("resources/sfx/smw_pipe.wav");
-    sounds["MARIO_DEATH"] = LoadSound("resources/musics/playerDown.wav");
+    sounds["MARIO_DEATH"] = LoadSound("resources/musics/playerDown.mp3");
     sounds["COIN_COLLECTION"] = LoadSound("resources/sfx/smw_coin.wav");
     sounds["POWER_UP_APPEARS"] = LoadSound("resources/sfx/smw_power-up_appears.wav");
-    sounds["POWER_UP"] = LoadSound("resources/sfx/smw_power-up.wav");
-
 }
 
 void ResrcManager::loadMusics(){
-    musics["GAME_OVER"] = LoadMusicStream("resources/musics/gameOver.wav");
-    musics["GAMEWORLD_0"] = LoadMusicStream("resources/musics/music1.wav");
-    musics["GAMEWORLD_1"] = LoadMusicStream("resources/musics/music2.wav");
-    musics["GAMEWORLD_2"] = LoadMusicStream("resources/musics/music3.wav");
-    musics["MENU"] = LoadMusicStream("resources/musics/title.wav");
-    musics["VICTORY"] = LoadMusicStream("resources/musics/courseClear.wav");
+    musics["GAME_OVER"] = LoadMusicStream("resources/musics/gameOver.mp3");
+    musics["GAMEWORLD_1"] = LoadMusicStream("resources/musics/music1.mp3");
+    musics["GAMEWORLD_2"] = LoadMusicStream("resources/musics/music2.mp3");
+    musics["GAMEWORLD_3"] = LoadMusicStream("resources/musics/music3.mp3");
+    musics["MENU"] = LoadMusicStream("resources/musics/title.mp3");
+    musics["VICTORY"] = LoadMusicStream("resources/musics/courseClear.mp3");
 
 }
 

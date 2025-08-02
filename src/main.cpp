@@ -5,6 +5,7 @@
 #include "../inc/World/GameClock.h"
 #include <iostream>
 #include "../inc/Screen/ScreenController.h"
+#include"SoundManager.h"
 
 int main() {
     InitWindow(1600, 900, "Mario Game");
@@ -22,15 +23,17 @@ int main() {
     while(!WindowShouldClose()) {
         GameClock::GetInstance().updateTimeAcum += GetFrameTime();
 
+        // Update game logic TRƯỚC khi vẽ
+        screenController.Update();
+        SoundManager::GetInstance().Update(); // Chuyển lên đây
         
-         // Update game world
+        // Drawing
         BeginDrawing();
         ClearBackground(BLUE);
-        // gameWorld.UpdateWorld();
-        // gameWorld.DrawWorld();
-        screenController.Update();
         screenController.Draw();
-        
         EndDrawing();
     }
+    ResrcManager::GetInstance().unloadResources();
+    CloseAudioDevice();
+    CloseWindow(); // Close the window and exit the application
 }

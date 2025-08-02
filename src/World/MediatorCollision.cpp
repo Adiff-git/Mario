@@ -386,8 +386,6 @@ void MediatorCollision::HandleEnemyWithTile(Enemy *&enemy, Tile *tile, Collision
         enemy->SetPos(Vector2{enemy->GetPos().x, tile->GetPos().y - enemy->GetSize().y});
         enemy->SetState(OBJECT_STATE_ON_GROUND);
         enemy->SetVel(Vector2{enemy->GetVel().x, 0});
-        std::cout << "Enemy collided with ground at position: ("
-                  << enemy->GetPos().x << ", " << enemy->GetPos().y << ")" << std::endl;
         break;
     }
     case COLLISION_TYPE_NORTH:
