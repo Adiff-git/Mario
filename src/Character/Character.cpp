@@ -408,7 +408,7 @@ void Character::UpdateStateAndPhysic() {
             }
         }
     }
-
+    
     
     switch(CharState) { // Corrected from MarioState to marioState
         case SMALL:

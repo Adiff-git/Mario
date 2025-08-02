@@ -8,7 +8,7 @@ void Mario::Update() {
         sprite = nullptr;
         return;
     }
-    if (state == OBJECT_STATE_DYING) {
+    if (state == OBJECT_STATE_DYING || state == OBJECT_STATE_DEAD) {
         sprite = &ResrcManager::GetInstance().getTexture("MARIO_DIE");
         return;
     }

@@ -26,7 +26,7 @@ void ResrcManager::loadTextures() {
         textures["SMALLMARIO_DUCKING_LEFT"] = FlipTextureHorizontal(textures["SMALLMARIO_DUCKING_RIGHT"]);
         textures["SMALLMARIO_FALLING_RIGHT"] = LoadTexture("resources/images/Object/mario/SmallMarioFalling_0.png");
         textures["SMALLMARIO_FALLING_LEFT"] = FlipTextureHorizontal(textures["SMALLMARIO_FALLING_RIGHT"]);
-        textures["MARIO_DIE"] = LoadTexture("resources/images/Object/mario/SmallMario_0.png");
+        textures["MARIO_DIE"] = LoadTexture("resources/images/Object/mario/SmallMarioDying_0.png");
         textures["SMALLMARIO_VICTORY"] = LoadTexture("resources/images/Object/mario/SmallMarioVictory_0.png");
         }
 
@@ -98,7 +98,7 @@ void ResrcManager::loadTextures() {
             textures["SMALLLUIGI_DUCKING_LEFT"] = FlipTextureHorizontal(textures["SMALLLUIGI_DUCKING_RIGHT"]);
             textures["SMALLLUIGI_FALLING_RIGHT"] = LoadTexture("resources/images/Object/luigi/SmallLuigiFalling_0.png");
             textures["SMALLLUIGI_FALLING_LEFT"] = FlipTextureHorizontal(textures["SMALLLUIGI_FALLING_RIGHT"]);
-            textures["LUIGI_DIE"] = LoadTexture("resources/images/Object/luigi/SmallLuigi_0.png");
+            textures["LUIGI_DIE"] = LoadTexture("resources/images/Object/luigi/SmallLuigiDying_0.png");
             textures["SMALLLUIGI_VICTORY"] = LoadTexture("resources/images/Object/luigi/SmallLuigiVictory_0.png");
         }
 
@@ -402,7 +402,7 @@ void ResrcManager::loadSounds(){
 void ResrcManager::loadMusics(){
     musics["GAME_OVER"] = LoadMusicStream("resources/musics/gameOver.mp3");
     musics["GAMEWORLD_1"] = LoadMusicStream("resources/musics/music1.mp3");
-    musics["GAMEWORLD_2"] = LoadMusicStream("resources/musics/music2.mp3");
+    musics["GAMEWORLD_2"] = LoadMusicStream("resources/musics/music5.mp3");
     musics["GAMEWORLD_3"] = LoadMusicStream("resources/musics/music3.mp3");
     musics["MENU"] = LoadMusicStream("resources/musics/title.mp3");
     musics["VICTORY"] = LoadMusicStream("resources/musics/courseClear.mp3");

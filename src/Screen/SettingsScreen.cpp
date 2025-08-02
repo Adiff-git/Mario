@@ -138,41 +138,57 @@ void SettingsScreen::Draw() {
         DrawText("Audio Settings:", screenW/2 - MeasureText("Audio Settings:", 32)/2, audioY, 32, BLACK);
         audioY += 40;
 
-        // Music volume controls
+        // --- MUSIC SLIDER ---
         int sliderW = 180;
         int sliderX = screenW/2 - sliderW/2;
+        int sliderY = audioY + 30;
         DrawText("Music Volume", sliderX, audioY, 22, DARKGRAY);
-        musicMinusButton.SetPosition({ (float)(sliderX - 50), (float)(audioY - 10) });
-        musicPlusButton.SetPosition({ (float)(sliderX + sliderW + 10), (float)(audioY - 10) });
-        musicMinusButton.Draw();
-        musicPlusButton.Draw();
-        DrawRectangle(sliderX, audioY + 30, sliderW, 10, LIGHTGRAY);
-        DrawRectangle(sliderX, audioY + 30, (int)(musicVolume * (sliderW/100.0f)), 10, BLUE);
-        DrawText(TextFormat("%d", musicVolume), sliderX + sliderW + 50, audioY, 22, BLACK);
-        audioY += 50;
 
-        // SFX volume controls
+        // Vẽ thanh slider nền
+        DrawRectangle(sliderX, sliderY, sliderW, 10, LIGHTGRAY);
+        // Vẽ phần volume đã chọn
+        DrawRectangle(sliderX, sliderY, (int)(musicVolume * (sliderW/100.0f)), 10, BLUE);
+        // Vẽ nút tròn kéo
+        int knobX = sliderX + (int)(musicVolume * (sliderW/100.0f));
+        DrawCircle(knobX, sliderY + 5, 10, DARKBLUE);
+
+        // Xử lý kéo chuột cho music
+        Rectangle musicSliderRect = { (float)sliderX, (float)sliderY - 10, (float)sliderW, 30 };
+        if (IsMouseButtonDown(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), musicSliderRect)) {
+            float percent = (GetMousePosition().x - sliderX) / (float)sliderW;
+            percent = std::max(0.0f, std::min(1.0f, percent));
+            musicVolume = (int)(percent * 100);
+            SoundManager::GetInstance().SetMusicVol("MENU", musicVolume / 100.0f);
+        }
+
+        DrawText(TextFormat("%d", musicVolume), sliderX + sliderW + 50, audioY, 22, BLACK);
+        audioY += 60;
+
+        // --- SFX SLIDER ---
         DrawText("Sound Effects Volume", sliderX, audioY, 22, DARKGRAY);
-        sfxMinusButton.SetPosition({ (float)(sliderX - 50), (float)(audioY - 10) });
-        sfxPlusButton.SetPosition({ (float)(sliderX + sliderW + 10), (float)(audioY - 10) });
-        sfxMinusButton.Draw();
-        sfxPlusButton.Draw();
-        DrawRectangle(sliderX, audioY + 30, sliderW, 10, LIGHTGRAY);
-        DrawRectangle(sliderX, audioY + 30, (int)(sfxVolume * (sliderW/100.0f)), 10, ORANGE);
+        int sfxSliderY = audioY + 30;
+        DrawRectangle(sliderX, sfxSliderY, sliderW, 10, LIGHTGRAY);
+        DrawRectangle(sliderX, sfxSliderY, (int)(sfxVolume * (sliderW/100.0f)), 10, ORANGE);
+        int sfxKnobX = sliderX + (int)(sfxVolume * (sliderW/100.0f));
+        DrawCircle(sfxKnobX, sfxSliderY + 5, 10, DARKGRAY);
+
+        // Xử lý kéo chuột cho sfx
+        Rectangle sfxSliderRect = { (float)sliderX, (float)sfxSliderY - 10, (float)sliderW, 30 };
+        if (IsMouseButtonDown(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), sfxSliderRect)) {
+            float percent = (GetMousePosition().x - sliderX) / (float)sliderW;
+            percent = std::max(0.0f, std::min(1.0f, percent));
+            sfxVolume = (int)(percent * 100);
+            SoundManager::GetInstance().SetSoundVol("COIN", sfxVolume / 100.0f); // Ví dụ với sound "COIN"
+        }
+
         DrawText(TextFormat("%d", sfxVolume), sliderX + sliderW + 50, audioY, 22, BLACK);
-        audioY += 50;
+        audioY += 60;
 
         // Mute button
         Vector2 muteBtnSize = muteToggleButton.GetSize();
         muteToggleButton.SetPosition({ (float)(screenW/2 - muteBtnSize.x/2), (float)audioY });
         muteToggleButton.Draw();
         y = audioY + (int)muteBtnSize.y + 40;
-
-        // Pause button
-        // Vector2 pauseBtnSize = pauseButton.GetSize();
-        // pauseButton.SetPosition({ (float)(screenW/2 - pauseBtnSize.x/2), (float)y });
-        // pauseButton.Draw();
-        // y += (int)pauseBtnSize.y + 30;
 
         backButton.SetPosition({30, 30});
         backButton.Draw();

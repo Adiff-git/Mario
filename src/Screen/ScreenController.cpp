@@ -2,7 +2,7 @@
 #include "../inc/Screen/MenuScreen.h"
 #include "SoundManager.h"
 ScreenController::ScreenController() : currentScreen(new MenuScreen(this)) {
-    SoundManager::GetInstance().Update();
+    
 }
 ScreenController::~ScreenController() {
     delete currentScreen; // Clean up the current screen

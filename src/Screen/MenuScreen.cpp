@@ -22,14 +22,12 @@ settingsButton(Vector2{1600/2 - 100,900/2 + 120}, Vector2{200, 50}) {
     settingsButton.SetTexture(ResrcManager::GetInstance().getTexture("SETTINGS_BUTTON"));
     // settingsButton.SetPosition({1600 / 2 - 100, 900 / 2 + 70});
     // settingsButton.SetSize({200, 50});
-    SoundManager::GetInstance().SetMasterVol(1.0f);
-    SoundManager::GetInstance().SetMusicVol("MENU", 1.0f);
     SoundManager::GetInstance().StopAllSounds();
     SoundManager::GetInstance().PlayMusic("MENU");
-    SoundManager::GetInstance().Update();
 }
 
 void MenuScreen::Update() {
+    
     startButton.Update();
     MapEditorButton.Update();
     // exitButton.Update();

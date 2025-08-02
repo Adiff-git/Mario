@@ -311,12 +311,18 @@ void GameWorld::UpdateWorld()
         player1->UpdateStateAndPhysic();
         player1->UpdateCollisionProbes();
         
+
+        
         map.SetMarioPositionForBosses(player1->GetPosPtr());
         
         if (player1->GetState() != OBJECT_STATE_DEAD &&
             player1->GetState() != OBJECT_STATE_DYING &&
             player1->GetState() != OBJECT_STATE_VICTORY)
         {
+            if (player1->GetPos().y > 900) // KIỂM TRA VỊ TRÍ PLAYER 1
+            {
+                player1->Die();
+            }
             // Handle Player 1 collisions
             for (auto const &tile : interactiveTiles)
             {
@@ -363,10 +369,16 @@ void GameWorld::UpdateWorld()
         player2->UpdateStateAndPhysic();
         player2->UpdateCollisionProbes();
         
+
+        
         if (player2->GetState() != OBJECT_STATE_DEAD &&
             player2->GetState() != OBJECT_STATE_DYING &&
             player2->GetState() != OBJECT_STATE_VICTORY)
         {
+            if (player2->GetPos().y > 900) // KIỂM TRA VỊ TRÍ PLAYER 2
+        {
+            player2->Die();
+        }
             // Handle Player 2 collisions
             for (auto const &tile : interactiveTiles)
             {

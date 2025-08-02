@@ -21,7 +21,8 @@ GameScreen::GameScreen(ScreenController* screenController)
     gameHUD = std::make_unique<GameHUD>(gameWorld->player1);
     BackMenu.SetTexture(ResrcManager::GetInstance().getTexture("BACK_BUTTON"));  
     SoundManager::GetInstance().StopAllSounds();
-    SoundManager::GetInstance().PlayMusic("GAMEWORLD_0");
+    string musicKey = "GAMEWORLD_" + std::to_string(level);
+    SoundManager::GetInstance().PlayMusic("musicKey");
 
 }
 
@@ -57,7 +58,8 @@ GameScreen::GameScreen(ScreenController* screenController, bool multiplayer,
 
     BackMenu.SetTexture(ResrcManager::GetInstance().getTexture("BACK_BUTTON"));  
     SoundManager::GetInstance().StopAllSounds();
-    SoundManager::GetInstance().PlayMusic("GAMEWORLD_0");
+    string musicKey = "GAMEWORLD_" + std::to_string(level) ;
+    SoundManager::GetInstance().PlayMusic(musicKey);
 }
 
 void GameScreen::Update() {
@@ -118,6 +120,7 @@ void GameScreen::Update() {
             }
             break;
         case GameState::GAME_OVER:
+            SoundManager::GetInstance().StopAllSounds();
             if (IsKeyPressed(KEY_ENTER)) {
                 ResetGame();
                 BeginTransition(TransitionState::GAME_OVER);
