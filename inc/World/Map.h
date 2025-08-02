@@ -57,7 +57,7 @@ class Map : public Drawable {
         float GetWidth() const;
         void nextMap();
         void LoadMap(int mapIndex);
-        void SetMarioPositionForBosses(Vector2* marioPos);
+        void SetMarioPositionForBosses(Vector2* player1Pos, Vector2* player2Pos = nullptr, bool isMultiplayer = false);
         void Draw() override;
         int ExtractMapIndex(const std::string& filename);
         void LoadFromJsonFile(const std::string& filepath);

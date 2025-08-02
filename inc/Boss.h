@@ -14,14 +14,15 @@
 #include <list>
 using namespace std;
 
-
-class Boss : public Enemy{
+class Boss : public Enemy {
 private:
-    BossState currentState;//FSM
+    BossState currentState; // FSM
 
-    BehaviorTree* behavior;//Behavior tree
+    BehaviorTree* behavior; // Behavior tree
 
-    Vector2* marioPos;
+    Vector2* player1Pos;    // Vị trí của player1
+    Vector2* player2Pos;    // Vị trí của player2 (nullptr nếu không multiplayer)
+    bool isMultiplayer;     // Cờ để xác định chế độ multiplayer
 
     Texture2D* currentTexture;  // Texture hiện tại đang dùng
     
@@ -30,7 +31,6 @@ private:
     vector<Texture2D*> chaseFrames;   
     vector<Texture2D*> attackFrames;
     vector<Texture2D*> skillFlyFrames; 
-    //tự thêm mấy skill kia dô đây  
     
     int skillCurrentFrame;           // Frame hiện tại của skill
     float skillFrameTime;           // Thời gian giữa các skill frame
@@ -46,15 +46,13 @@ private:
     float attackCooldown;   // Thời gian hồi attack
     float attackTimer;      // Đếm ngược hồi attack
 
-    
-
     int attackCount;        // Đếm số lần attack liên tiếp
     int maxAttacks;         // Số attack tối đa trước khi nghỉ
     float skillCooldown;    // Thời gian hồi skill
     float skillTimer;       // Đếm ngược skill
     bool isUsingSkill;      // Đang dùng skill hay không
     
-    bool hasPlayedIdleAnimation = false; // Đã chơi animation idle hay chưa
+    bool hasPlayedIdleAnimation; // Đã chơi animation idle hay chưa
     float patrolTimer;
     int patrolPhase;
     
@@ -95,8 +93,12 @@ private:
     void DrawSprite();
     void DrawHealthBar();
     void DrawDebugInfo();
+
+    // Helper để chọn mục tiêu gần nhất
+    Vector2* GetTargetPos() const;
+
 public:
-    Boss(Vector2 startPos, Vector2* marioPosition);
+    Boss(Vector2 startPos, Vector2* player1Pos, Vector2* player2Pos = nullptr, bool isMultiplayer = false);
     ~Boss();
 
     void Update();
@@ -132,8 +134,7 @@ public:
     
     // ===== Getters & Setters =====
     bool IsSkillReady() const { return skillTimer <= 0 && !isUsingSkill; }
-    void SetMarioPosition(Vector2* marioPosition) { marioPos = marioPosition; }
-    
+    void SetMarioPosition(Vector2* player1Pos, Vector2* player2Pos = nullptr, bool isMultiplayer = false);    
     // ===== Hit counter methods =====
     void OnHitByFireball();
     int GetHitCount() const { return hitCount; }
@@ -141,5 +142,4 @@ public:
     
     // ===== Boss-specific smooth blinking for alpha effect =====
     void UpdateSmoothBlinking();
-
 };
