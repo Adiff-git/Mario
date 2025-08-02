@@ -25,11 +25,15 @@ std::vector<Enemy*>& Map::GetEnemies() {
     return enemies;
 }
 
-void Map::SetMarioPositionForBosses(Vector2* marioPos) {
+void Map::SetMarioPositionForBosses(Vector2* player1Pos, Vector2* player2Pos, bool isMultiplayer) {
     for (Enemy* enemy : enemies) {
         Boss* boss = dynamic_cast<Boss*>(enemy);
         if (boss != nullptr) {
-            boss->SetMarioPosition(marioPos);
+            boss->SetMarioPosition(player1Pos, player2Pos, isMultiplayer);
+            std::cout << "[DEBUG] Map::SetMarioPositionForBosses - Set position for boss, player1Pos: " 
+                      << (player1Pos ? "valid" : "nullptr") << ", player2Pos: " 
+                      << (player2Pos ? "valid" : "nullptr") << ", multiplayer: " 
+                      << (isMultiplayer ? "true" : "false") << std::endl;
         }
     }
 }
