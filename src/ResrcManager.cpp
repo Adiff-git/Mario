@@ -159,7 +159,8 @@ void ResrcManager::loadTextures() {
     textures["BACKGROUND_7"] = LoadTexture("resources/images/backgrounds/background8.png");
     textures["BACKGROUND_8"] = LoadTexture("resources/images/backgrounds/background9.png");
     textures["BACKGROUND_9"] = LoadTexture("resources/images/backgrounds/background10.png");
-    
+    textures["BACKGROUND_10"] = LoadTexture("resources/images/backgrounds/background11.png");
+
     }
     //TILES
     for (int i = 0; i < 104; ++i) {
@@ -167,21 +168,30 @@ void ResrcManager::loadTextures() {
         textures[keyStr] = LoadTexture(("resources/images/tiles/tile_" + std::to_string(i) + ".png").c_str());
     }
     //Button
-    // textures["START_BUTTON"] = LoadTexture("resources/Menu/StartButton.png");
-    textures["START_BUTTON"] = LoadTexture("resources/Menu/StartButton.png");
-    textures["MAP_EDITOR_BUTTON"] = LoadTexture("resources/Menu/MapEditorButton.png");
-    textures["BACK_BUTTON"] = LoadTexture("resources/Menu/BackButton.png");
-    textures["NEW_MAP_BUTTON"] = LoadTexture("resources/Menu/NewMapButton.png");
-    textures["LOAD_MAP_BUTTON"] = LoadTexture("resources/Menu/LoadMapButton.png");
-    // textures["EXIT_BUTTON"] = LoadTexture("resources/Menu/ExitButton.png");
-    // textures["SETTINGS_BUTTON"] = LoadTexture("resources/Menu/SettingsButton.png");
+    
+    textures["START_BUTTON"] = LoadTexture("resources/images/Button/START.png");
+    textures["MAP_EDITOR_BUTTON"] = LoadTexture("resources/images/Button/MAP EDITOR.png");
+    textures["SETTINGS_BUTTON"] = LoadTexture("resources/images/Button/SETTING.png");
+    textures["BACK_BUTTON"] = LoadTexture("resources/images/Button/BACK.png");
+    textures["NEW_MAP_BUTTON"] = LoadTexture("resources/images/Button/NEW MAP.png");
+    textures["LOAD_MAP_BUTTON"] = LoadTexture("resources/images/Button/LOAD MAP.png");
+    textures["1_PLAYER"] = LoadTexture("resources/images/Button/1 PLAYER.png");
+    textures["2_PLAYERS"] = LoadTexture("resources/images/Button/2 PLAYERS.png");
+    textures["MARIO_BUTTON"] = LoadTexture("resources/images/Button/MARIO_BUTTON.png");
+    textures["LUIGI_BUTTON"] = LoadTexture("resources/images/Button/LUIGI_BUTTON.png");
+    textures["CHOOSE PLAYER"] = LoadTexture("resources/images/Button/CHOOSE PLAYER.png");
 
 
+
+    
+    
     // textures["START_BUTTON"] = LoadTexture("../resources/images/Button/StartButton.png");
-    textures["PAUSE_BUTTON"] = LoadTexture("../resources/images/Button/PauseButton.png");
-    textures["STOP_BUTTON"] = LoadTexture("../resources/images/Button/StopButton.png");
-    textures["GREEN_ARROW"] = LoadTexture("../resources/images/Button/GreenArrow.png");
-    textures["YELLOW_ARROW"] = LoadTexture("../resources/images/Button/YellowArrow.png");
+    // textures["PAUSE_BUTTON"] = LoadTexture("../resources/images/Button/PauseButton.png");
+    // textures["STOP_BUTTON"] = LoadTexture("../resources/images/Button/StopButton.png");
+    // textures["GREEN_ARROW"] = LoadTexture("../resources/images/Button/GreenArrow.png");
+    // textures["YELLOW_ARROW"] = LoadTexture("../resources/images/Button/YellowArrow.png");
+    
+
 
 
 

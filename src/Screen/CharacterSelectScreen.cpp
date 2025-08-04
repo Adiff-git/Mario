@@ -16,8 +16,8 @@ CharacterSelectScreen::CharacterSelectScreen(ScreenController* screenController,
       player1Selected(false),
       player2Selected(false)
 {
-    marioButton.SetTexture(ResrcManager::GetInstance().getTexture("MARIO_SELECT"));
-    luigiButton.SetTexture(ResrcManager::GetInstance().getTexture("LUIGI_SELECT"));
+    marioButton.SetTexture(ResrcManager::GetInstance().getTexture("MARIO_BUTTON"));
+    luigiButton.SetTexture(ResrcManager::GetInstance().getTexture("LUIGI_BUTTON"));
     backButton.SetTexture(ResrcManager::GetInstance().getTexture("BACK_BUTTON"));
     startButton.SetTexture(ResrcManager::GetInstance().getTexture("START_BUTTON"));
 }
@@ -90,10 +90,6 @@ void CharacterSelectScreen::Draw() {
     marioButton.Draw();
     luigiButton.Draw();
     
-    // Draw character labels
-    DrawText("MARIO", 220, 420, 20, WHITE);
-    DrawText("LUIGI", 420, 420, 20, WHITE);
-    
     // Draw selection indicators
     if (player1Selected) {
         Color p1Color = (player1Character == CharacterType::MARIO) ? RED : GREEN;
@@ -119,9 +115,7 @@ void CharacterSelectScreen::Draw() {
     // Draw buttons
     if (CanStartGame()) {
         startButton.Draw();
-        DrawText("START", GetScreenWidth()/2 - 25, 520, 20, BLACK);
     }
     
     backButton.Draw();
-    DrawText("BACK", 75, 65, 16, BLACK);
 }

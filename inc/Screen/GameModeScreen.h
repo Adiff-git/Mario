@@ -4,6 +4,8 @@
 
 class GameModeScreen : public Screen {
 private:
+    Texture2D* backgroundTexture;
+    Texture2D* choosePlayerTexture;
     Button singlePlayerButton;
     Button multiPlayerButton;
     Button backButton;
