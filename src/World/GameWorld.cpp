@@ -55,6 +55,7 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
         map.SetMarioPositionForBosses(player1->GetPosPtr(), player2 ? player2->GetPosPtr() : nullptr, multiplayer);
     }
     
+    
     // Set background based on MapID
     switch (MapID)
     {
@@ -134,6 +135,12 @@ void GameWorld::UpdateWorld()
             {
                 player1->Die();
             }
+            if (player1->GetPos().x > 1900) {
+                player1->SetState(OBJECT_STATE_VICTORY);
+                if (player2) {
+                    player2->SetState(OBJECT_STATE_VICTORY); // Ensure both players reach victory state
+                }
+            }
             // Handle Player 1 collisions
             for (auto const &tile : interactiveTiles)
             {
@@ -178,6 +185,10 @@ void GameWorld::UpdateWorld()
             player2->GetState() != OBJECT_STATE_DYING &&
             player2->GetState() != OBJECT_STATE_VICTORY)
         {
+            if (player2->GetPos().x > 1900) {
+                player2->SetState(OBJECT_STATE_VICTORY);
+                player1->SetState(OBJECT_STATE_VICTORY); // Ensure both players reach victory state
+            }
             if (player2->GetPos().y > 900) // KIỂM TRA VỊ TRÍ PLAYER 2
         {
             player2->Die();
@@ -329,7 +340,7 @@ void GameWorld::UpdateWorld()
         }
     } else {
         if (player1Dead) {
-            if (player1 && player1->GetLives() > 0) {
+            if (player1 && player1->GetLives() > 1) {
                 gameState = GameState::GAME_RESET;
             } else {
                 gameState = GameState::GAME_OVER;
@@ -341,6 +352,7 @@ void GameWorld::UpdateWorld()
         (isMultiplayer && player2 && player2->GetState() == OBJECT_STATE_VICTORY)) {
         gameState = GameState::GAME_COMPLETED;
     }
+    cout << player1->GetPos().x ;
 }
 
 void GameWorld::DrawWorld()

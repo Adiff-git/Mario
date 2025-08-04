@@ -4,7 +4,7 @@
 GameScreen::GameScreen(ScreenController* screenController)
     : Screen(screenController), 
       BackMenu(Vector2{50, 50}, Vector2{50, 50}), 
-      level(1), 
+      level(3), 
       transitionState(TransitionState::NONE), 
       transitionTime(1.0f), 
       transitionTimeAcum(0.0f),
@@ -30,7 +30,7 @@ GameScreen::GameScreen(ScreenController* screenController, bool multiplayer,
     CharacterType p1Type, CharacterType p2Type)
         : Screen(screenController), 
         BackMenu(Vector2{50, 50}, Vector2{50, 50}), 
-        level(1), 
+        level(4), 
         transitionState(TransitionState::NONE), 
         transitionTime(1.0f), 
         transitionTimeAcum(0.0f),
@@ -165,12 +165,12 @@ void GameScreen::Draw() {
         } 
     }
     if (isPaused) {
-        Font* SuperMarioFont = &ResrcManager::GetInstance().getFont("SUPER_MARIO_FONT");
+        Font* SuperMarioFont = &ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT");
         DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 0.5f));
         DrawTextEx(*SuperMarioFont, "PAUSED\nPress P to resume", Vector2{(float)GetScreenWidth()/2-120, (float)GetScreenHeight()/2-40}, 32, 2, WHITE);
     }
     Texture *GameOver = &ResrcManager::GetInstance().getTexture("GAME_OVER");
-    Font* SuperMarioFont = &ResrcManager::GetInstance().getFont("SUPER_MARIO_FONT");
+    Font* SuperMarioFont = &ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT");
     Texture *SmallMario = &ResrcManager::GetInstance().getTexture("SMALL_MARIO_0_RIGHT");
     if (gameWorld->GetGameState() == GameState::GAME_OVER && transitionState == TransitionState::NONE) {
         DrawRectangle(0,0, GetScreenWidth(), GetScreenHeight(), BLACK);
@@ -269,15 +269,15 @@ void GameScreen::ResetGame() {
     // Lưu thông tin trước khi xóa gameWorld
     int currentLives1 = gameWorld->player1->GetLives();
     int currentLives2 = gameWorld->player2 ? gameWorld->player2->GetLives() : 0;
-    if (currentLives1 > 0 || (isMultiplayer && currentLives2 > 0)) {
+    if (currentLives1 > 1 || (isMultiplayer && currentLives2 > 0)) {
         gameWorld = std::make_unique<GameWorld>(level, this, isMultiplayer, player1Type, player2Type);
          
         gameWorld->player1->SetLives(currentLives1 - 1);
         if (isMultiplayer && gameWorld->player2) {
-            gameWorld->player2->SetLives(3); // Reset Player 2 lives
+            gameWorld->player2->SetLives(currentLives2  -1); // Reset Player 2 lives
         }
     } else {
-        level = 0;
+        level = 1;
         gameWorld = std::make_unique<GameWorld>(level, this, isMultiplayer, player1Type, player2Type);
         gameWorld->player1->SetLives(3);
         gameWorld->player1->SetCoins(0);
@@ -289,10 +289,10 @@ void GameScreen::ResetGame() {
         }
     }
     if (isMultiplayer) {
-        gameWorld = std::make_unique<GameWorld>(level, this, isMultiplayer, player1Type, player2Type);
+        // gameWorld = std::make_unique<GameWorld>(level, this, isMultiplayer, player1Type, player2Type);
         gameHUD = std::make_unique<GameHUD>(gameWorld->player1, gameWorld->player2);
     } else {
-        gameWorld = std::make_unique<GameWorld>(level, this, isMultiplayer, player1Type, player2Type);
+        // gameWorld = std::make_unique<GameWorld>(level, this, isMultiplayer, player1Type, player2Type);
         gameHUD = std::make_unique<GameHUD>(gameWorld->player1);
     }
 }
@@ -349,8 +349,8 @@ void GameScreen::NextLevel() {
     }
     
     level++;
-    if (level > 2) {
-        level = 0; // Reset to first level if exceeded
+    if (level > 4) {
+        level = 1; // Reset to first level if exceeded
     }
     
     // Tạo GameWorld mới

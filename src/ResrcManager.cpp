@@ -319,6 +319,7 @@ void ResrcManager::loadTextures() {
         textures["GUI_BLOCK"] = LoadTexture("resources/images/gui/guiNextItem.png");
         textures["FIREFLOWER_ICON"] = LoadTexture("resources/images/Object/items/FireFlower_0.png");
         textures["MUSHROOM_ICON"] = LoadTexture("resources/images/Object/items/Mushroom.png");
+        textures["GAME_OVER"] = LoadTexture("resources/images/gui/guiGameOver.png");
     }
     {
         textures["Moving 1"]=LoadTexture("resources/images/Object/Enemy/Moving 1.png");

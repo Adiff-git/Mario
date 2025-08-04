@@ -21,10 +21,10 @@ Boss::Boss(Vector2 startPos, Vector2 *player1Pos, Vector2 *player2Pos, bool isMu
     frameAcumulator = 0.0f;
     currentFrame = 0;
     maxFrames = 4;
-    std::cout << "[DEBUG] Boss initialized at pos: (" << startPos.x << ", " << startPos.y 
-              << "), player1Pos: " << (player1Pos ? "valid" : "nullptr")
-              << ", player2Pos: " << (player2Pos ? "valid" : "nullptr") 
-              << ", multiplayer: " << (isMultiplayer ? "true" : "false") << std::endl;
+    // std::cout << "[DEBUG] Boss initialized at pos: (" << startPos.x << ", " << startPos.y 
+    //           << "), player1Pos: " << (player1Pos ? "valid" : "nullptr")
+    //           << ", player2Pos: " << (player2Pos ? "valid" : "nullptr") 
+    //           << ", multiplayer: " << (isMultiplayer ? "true" : "false") << std::endl;
     LoadTextures();
     UpdateTexture();
     behavior = nullptr;
@@ -216,9 +216,9 @@ void Boss::SetMarioPosition(Vector2* player1Pos, Vector2* player2Pos, bool isMul
     this->player1Pos = player1Pos;
     this->player2Pos = player2Pos;
     this->isMultiplayer = isMultiplayer;
-    std::cout << "[DEBUG] Boss::SetMarioPosition - player1Pos: " << (player1Pos ? "valid" : "nullptr")
-              << ", player2Pos: " << (player2Pos ? "valid" : "nullptr")
-              << ", multiplayer: " << (isMultiplayer ? "true" : "false") << std::endl;
+    // std::cout << "[DEBUG] Boss::SetMarioPosition - player1Pos: " << (player1Pos ? "valid" : "nullptr")
+    //           << ", player2Pos: " << (player2Pos ? "valid" : "nullptr")
+    //           << ", multiplayer: " << (isMultiplayer ? "true" : "false") << std::endl;
 }
 
 void Boss::LoadTextures()
