@@ -639,3 +639,16 @@ void Character::Victory()
     SoundManager::GetInstance().StopAllSounds();
     SoundManager::GetInstance().PlayMusic("VICTORY");
 }
+
+// PlayerSave Character::ToSave() {
+//     PlayerSave s;
+//     s.x = pos.x;
+//     s.y = pos.y;
+//     s.lives = lives;
+//     s.coins = coins;
+//     s.score = score;
+//     s.playerState = CharState;
+//     s.AdditionalState = AdditionalState;
+//     return s;
+// }
+

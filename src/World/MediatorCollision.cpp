@@ -10,6 +10,10 @@
 #include "Boss.h"
 #include <iostream>
 #include <algorithm>
+#include "../inc/Item/Coin.h"
+#include "../inc/Item/Mushroom.h"
+#include "../inc/Item/FireFlower.h"
+#include "SoundManager.h"
 
 
 int MediatorCollision::marioFireballHits = 0;
@@ -193,6 +197,14 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
 
             item->updateMario(*mario);
             item->playCollisionSound();
+            // Thêm sound tùy theo loại item
+            if (dynamic_cast<Mushroom*>(item)) {
+                SoundManager::GetInstance().PlaySound("POWER_UP_APPEARS");
+            } else if (dynamic_cast<FireFlower*>(item)) {
+                SoundManager::GetInstance().PlaySound("POWER_UP_APPEARS");
+            } else {
+                SoundManager::GetInstance().PlaySound("COIN_COLLECTION");
+            } 
         }
     }
     // Mario vs Enemy
@@ -454,6 +466,7 @@ void MediatorCollision::HandleMarioWithEnemy(Character*& mario, Enemy*& enemy, C
     case COLLISION_TYPE_SOUTH:
     {
         mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
+        SoundManager::GetInstance().PlaySound("ENEMY_DEATH");
         Rex *rex = dynamic_cast<Rex *>(enemy);
         if (rex)
         {

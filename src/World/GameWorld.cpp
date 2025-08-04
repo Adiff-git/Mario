@@ -34,17 +34,17 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
     
     // Initialize Player 1
     if (p1Type == CharacterType::MARIO) {
-        player1 = new Mario(Vector2{100, 100}, 3, SMALL, ControlType::ARROWS);
+        player1 = new Mario(Vector2{100, 100}, 3, SMALL, ControlType::WASD);
     } else {
-        player1 = new Luigi(Vector2{100, 100}, 3, SMALL, ControlType::ARROWS);
+        player1 = new Luigi(Vector2{100, 100}, 3, SMALL, ControlType::WASD);
     }
     
     // Initialize Player 2 if multiplayer
     if (multiplayer) {
         if (p2Type == CharacterType::MARIO) {
-            player2 = new Mario(Vector2{150, 100}, 3, SMALL, ControlType::WASD);
+            player2 = new Mario(Vector2{150, 100}, 3, SMALL, ControlType::ARROWS);
         } else {
-            player2 = new Luigi(Vector2{150, 100}, 3, SMALL, ControlType::WASD);
+            player2 = new Luigi(Vector2{150, 100}, 3, SMALL, ControlType::ARROWS);
         }
     }
     
@@ -137,8 +137,10 @@ void GameWorld::UpdateWorld()
             }
             if (player1->GetPos().x > 1900) {
                 player1->SetState(OBJECT_STATE_VICTORY);
+                player1->Victory();
                 if (player2) {
-                    player2->SetState(OBJECT_STATE_VICTORY); // Ensure both players reach victory state
+                    player2->SetState(OBJECT_STATE_VICTORY);
+                    player2->Victory(); // Ensure both players reach victory state
                 }
             }
             // Handle Player 1 collisions
@@ -187,7 +189,9 @@ void GameWorld::UpdateWorld()
         {
             if (player2->GetPos().x > 1900) {
                 player2->SetState(OBJECT_STATE_VICTORY);
-                player1->SetState(OBJECT_STATE_VICTORY); // Ensure both players reach victory state
+                player1->SetState(OBJECT_STATE_VICTORY);
+                player1->Victory();
+                player2->Victory(); // Ensure both players reach victory state
             }
             if (player2->GetPos().y > 900) // KIỂM TRA VỊ TRÍ PLAYER 2
         {

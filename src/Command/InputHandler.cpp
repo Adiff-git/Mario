@@ -41,7 +41,7 @@ void InputHandler::setupWASDControls() {
         keyBindings[KEY_D] = std::make_unique<MoveRightCommand>(character);
         keyBindings[KEY_W] = std::make_unique<JumpCommand>(character);
         keyBindings[KEY_S] = std::make_unique<DuckCommand>(character);
-        keyBindings[KEY_ENTER] = std::make_unique<FireCommand>(character);
+        keyBindings[KEY_J] = std::make_unique<FireCommand>(character);
     }
 }
 
@@ -67,7 +67,7 @@ void InputHandler::handleInput() {
         
         // Action commands - press once
         if ((key == KEY_UP || key == KEY_DOWN || key == KEY_SPACE || 
-             key == KEY_W || key == KEY_S || key == KEY_ENTER) && 
+             key == KEY_W || key == KEY_S || key == KEY_J) && 
             IsKeyPressed(key)) {
             command->execute();
         }

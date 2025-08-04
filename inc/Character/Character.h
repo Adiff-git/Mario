@@ -10,7 +10,7 @@
 #include "Observer.h"
 #include <vector>
 #include "../inc/Command/InputHandler.h"
-
+#include "../inc/SaveData.h"
 class InputHandler;
 
 class Character : public Object
@@ -46,6 +46,8 @@ protected:
     std::unique_ptr<InputHandler> inputHandler;
 
     void Update() override;
+
+   
 
 public:
     Character(Vector2 pos, int lives, ObjectState form, ControlType controlType);
@@ -106,4 +108,8 @@ public:
 
     void UpdateCollisionProbes() override;
     void UpdateStateAndPhysic() override;
+
+
+    // virtual PlayerSave ToSave() ;
+    // virtual void FromSave(const PlayerSave& s) ;
 };

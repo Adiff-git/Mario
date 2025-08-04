@@ -30,7 +30,7 @@ GameScreen::GameScreen(ScreenController* screenController, bool multiplayer,
     CharacterType p1Type, CharacterType p2Type)
         : Screen(screenController), 
         BackMenu(Vector2{50, 50}, Vector2{50, 50}), 
-        level(4), 
+        level(1), 
         transitionState(TransitionState::NONE), 
         transitionTime(1.0f), 
         transitionTimeAcum(0.0f),
@@ -64,13 +64,18 @@ GameScreen::GameScreen(ScreenController* screenController, bool multiplayer,
 
 void GameScreen::Update() {
     BackMenu.Update();
+    if (requestGoHome) {
+        screenController->ChangeScreen(new MenuScreen(screenController));
+        return;
+    }
     // Toggle pause/resume bằng phím P
     if (IsKeyPressed(KEY_P)) {
         isPaused = !isPaused;
+        showPauseMenu = isPaused;
     }
 
-    // Nếu đang pause thì chỉ xử lý menu hoặc vẽ overlay, không update game logic
-    if (isPaused) {
+    if (showPauseMenu) {
+        // Xử lý nút trong pause menu ở đây (xem phần dưới)
         return;
     }
 
@@ -120,11 +125,17 @@ void GameScreen::Update() {
             }
             break;
         case GameState::GAME_OVER:
+        static bool gameOverMusicPlayed = false;
+        if (!gameOverMusicPlayed) {
             SoundManager::GetInstance().StopAllSounds();
-            if (IsKeyPressed(KEY_ENTER)) {
-                ResetGame();
-                BeginTransition(TransitionState::GAME_OVER);
-            }
+            SoundManager::GetInstance().PlayMusic("GAME_OVER");
+            gameOverMusicPlayed = true;
+        }
+        if (IsKeyPressed(KEY_ENTER)) {
+            gameOverMusicPlayed = false; // Reset flag để lần sau có thể phát lại
+            ResetGame();
+            BeginTransition(TransitionState::GAME_OVER);
+        }
             break;
         default:
         break;
@@ -164,11 +175,78 @@ void GameScreen::Draw() {
             DrawEnd();
         } 
     }
-    if (isPaused) {
-        Font* SuperMarioFont = &ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT");
+    // pause menu
+    if (showPauseMenu) {
+        // Overlay mờ
         DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 0.5f));
-        DrawTextEx(*SuperMarioFont, "PAUSED\nPress P to resume", Vector2{(float)GetScreenWidth()/2-120, (float)GetScreenHeight()/2-40}, 32, 2, WHITE);
+
+        // Cửa sổ pause
+        int winW = 400, winH = 350;
+        int winX = GetScreenWidth()/2 - winW/2;
+        int winY = GetScreenHeight()/2 - winH/2;
+        DrawRectangleRounded({(float)winX, (float)winY, (float)winW, (float)winH}, 0.2f, 10, WHITE);
+        DrawText("PAUSED", winX + 140, winY + 20, 32, BLACK);
+
+        // --- MUSIC SLIDER ---
+        int sliderW = 200;
+        int sliderX = winX + 100;
+        int sliderY = winY + 80;
+        DrawText("Music Volume", sliderX, sliderY - 30, 20, DARKGRAY);
+        DrawRectangle(sliderX, sliderY, sliderW, 10, LIGHTGRAY);
+        DrawRectangle(sliderX, sliderY, (int)(pauseMusicVolume * (sliderW/100.0f)), 10, BLUE);
+        int knobX = sliderX + (int)(pauseMusicVolume * (sliderW/100.0f));
+        DrawCircle(knobX, sliderY + 5, 10, DARKBLUE);
+
+        Rectangle musicSliderRect = { (float)sliderX, (float)sliderY - 10, (float)sliderW, 30 };
+        if (IsMouseButtonDown(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), musicSliderRect)) {
+            float percent = (GetMousePosition().x - sliderX) / (float)sliderW;
+            percent = std::max(0.0f, std::min(1.0f, percent));
+            pauseMusicVolume = (int)(percent * 100);
+            SoundManager::GetInstance().SetMusicVol("GAMEWORLD_" + std::to_string(level), pauseMusicVolume / 100.0f);
+        }
+        DrawText(TextFormat("%d", pauseMusicVolume), sliderX + sliderW + 20, sliderY - 10, 20, BLACK);
+
+        // --- SFX SLIDER ---
+        int sfxSliderY = sliderY + 70;
+        DrawText("SFX Volume", sliderX, sfxSliderY - 30, 20, DARKGRAY);
+        DrawRectangle(sliderX, sfxSliderY, sliderW, 10, LIGHTGRAY);
+        DrawRectangle(sliderX, sfxSliderY, (int)(pauseSfxVolume * (sliderW/100.0f)), 10, ORANGE);
+        int sfxKnobX = sliderX + (int)(pauseSfxVolume * (sliderW/100.0f));
+        DrawCircle(sfxKnobX, sfxSliderY + 5, 10, DARKGRAY);
+
+        Rectangle sfxSliderRect = { (float)sliderX, (float)sfxSliderY - 10, (float)sliderW, 30 };
+        if (IsMouseButtonDown(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), sfxSliderRect)) {
+            float percent = (GetMousePosition().x - sliderX) / (float)sliderW;
+            percent = std::max(0.0f, std::min(1.0f, percent));
+            pauseSfxVolume = (int)(percent * 100);
+            // Nếu muốn áp dụng cho tất cả SFX, hãy lặp qua các sound, ở đây ví dụ với "COIN"
+            SoundManager::GetInstance().SetSoundVol("COIN", pauseSfxVolume / 100.0f);
+        }
+        DrawText(TextFormat("%d", pauseSfxVolume), sliderX + sliderW + 20, sfxSliderY - 10, 20, BLACK);
+
+        // --- Nút Resume ---
+        Rectangle resumeBtn = { (float)(winX + 50), (float)(winY + winH - 80), 100, 50 };
+        DrawRectangleRec(resumeBtn, GREEN);
+        DrawText("Play", resumeBtn.x + 25, resumeBtn.y + 15, 24, WHITE);
+
+        // --- Nút Home ---
+        Rectangle homeBtn = { (float)(winX + 250), (float)(winY + winH - 80), 100, 50 };
+        DrawRectangleRec(homeBtn, RED);
+        DrawText("Home", homeBtn.x + 20, homeBtn.y + 15, 24, WHITE);
+
+        // Xử lý click nút
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            Vector2 mouse = GetMousePosition();
+            if (CheckCollisionPointRec(mouse, resumeBtn)) {
+                isPaused = false;
+                showPauseMenu = false;
+            }
+            if (CheckCollisionPointRec(mouse, homeBtn)) {
+                requestGoHome = true;
+            }
+        }
     }
+    // game
     Texture *GameOver = &ResrcManager::GetInstance().getTexture("GAME_OVER");
     Font* SuperMarioFont = &ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT");
     Texture *SmallMario = &ResrcManager::GetInstance().getTexture("SMALL_MARIO_0_RIGHT");

@@ -397,7 +397,9 @@ void ResrcManager::loadSounds(){
     sounds["MARIO_BEING_HIT"] = LoadSound("resources/sfx/smw_pipe.wav");
     sounds["MARIO_DEATH"] = LoadSound("resources/musics/playerDown.mp3");
     sounds["COIN_COLLECTION"] = LoadSound("resources/sfx/smw_coin.wav");
+    sounds["ENEMY_DEATH"] = LoadSound("resources/sfx/smw_stomp.wav");
     sounds["POWER_UP_APPEARS"] = LoadSound("resources/sfx/smw_power-up_appears.wav");
+
 }
 
 void ResrcManager::loadMusics(){

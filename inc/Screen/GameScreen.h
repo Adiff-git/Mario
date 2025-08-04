@@ -20,7 +20,6 @@ enum class TransitionState {
 class GameScreen : public Screen {
     private:
 
-    bool isPaused = false;
 
         Button BackMenu;
         std::unique_ptr<GameWorld> gameWorld;
@@ -34,6 +33,12 @@ class GameScreen : public Screen {
         bool isMultiplayer;
         CharacterType player1Type;
         CharacterType player2Type;
+
+        bool isPaused = false;
+        bool showPauseMenu = false;
+        int pauseMusicVolume = 50;
+        int pauseSfxVolume = 50;
+        bool requestGoHome = false;
         
     public:
         GameScreen(ScreenController* screenController);
