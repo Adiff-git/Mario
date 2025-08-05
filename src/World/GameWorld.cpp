@@ -8,6 +8,11 @@
     #include "../inc/Enemy/EnemyManager.h"
     #include "../inc/World/MediatorCollision.h"
     #include "../inc/Character/Mario.h"
+    #include "../inc/Block/EyesClosedBlock.h"
+    #include "../inc/Block/EyesOpenedBlock.h"
+    #include "../inc/Block/GlassBlock.h"
+    #include "../inc/Block/QuestionBlock.h"
+    #include "../inc/Block/WoodBlock.h"
     #include "Boss.h"
     GameWorld::GameWorld() : player1(nullptr), player2(nullptr), interactiveTiles(map.getInteractiveTiles())
 {
@@ -73,11 +78,35 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
     
     // Add items for MapID == 1
     if (MapID == 1) {
-        map.GetInteractiveItems().push_back(std::make_shared<Coin>(Vector2{150, 800}));
+        map.GetInteractiveItems().push_back(std::static_pointer_cast<Item>(std::make_shared<CloudBlock>(Vector2{150, 800})));
+        map.GetInteractiveItems().push_back(std::make_shared<Coin>(Vector2{200, 800}));
+        map.GetInteractiveItems().push_back(std::make_shared<CourseClearToken>(Vector2{250, 800}));
         map.GetInteractiveItems().push_back(std::make_shared<FireFlower>(Vector2{200, 800}));
+        map.GetInteractiveItems().push_back(std::make_shared<Mushroom>(Vector2{300, 800}));
+        map.GetInteractiveItems().push_back(std::make_shared<OneUpMushroom>(Vector2{350, 800}));
         map.GetInteractiveItems().push_back(std::make_shared<Star>(Vector2{350, 500}));
         map.GetInteractiveItems().push_back(std::make_shared<ThreeUpMoon>(Vector2{400, 500}));
         map.GetInteractiveItems().push_back(std::make_shared<YoshiCoin>(Vector2{450, 800}));
+
+        map.GetEnemies().push_back(new BanzaiBill(Vector2{500, 800}));
+        map.GetEnemies().push_back(new BulletBill(Vector2{600, 800}));
+        map.GetEnemies().push_back(new BuzzyBeetle(Vector2{700, 800}));
+        map.GetEnemies().push_back(new FlyingGoomba(Vector2{800, 800}));
+        map.GetEnemies().push_back(new Goomba(Vector2{900, 800}));
+        map.GetEnemies().push_back(new GreenKoopa(Vector2{1000, 800}));
+        map.GetEnemies().push_back(new JumpingPiranhaPlant(Vector2{1100, 800}));
+        map.GetEnemies().push_back(new RedKoopa(Vector2{1200, 800}));
+        map.GetEnemies().push_back(new Rex(Vector2{1300, 800}));
+        map.GetEnemies().push_back(new YellowKoopa(Vector2{1400, 800}));
+
+        map.getBlocks().push_back(new EyesClosedBlock(Vector2{150, 800}, Vector2{32, 32}, WHITE));
+        map.getBlocks().push_back(new EyesOpenedBlock(Vector2{200, 800}, Vector2{32, 32}, WHITE));
+        map.getBlocks().push_back(new GlassBlock(Vector2{250, 800}, Vector2{32, 32}, WHITE));
+        map.getBlocks().push_back(new QuestionBlock(Vector2{300, 800}, Vector2{32, 32}, WHITE, GIFT_COIN));
+        map.getBlocks().push_back(new WoodBlock(Vector2{350, 800}, Vector2{32, 32}, WHITE));
+
+
+
     }
     
     camera.offset = Vector2{(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
