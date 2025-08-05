@@ -15,8 +15,6 @@
 #include "../inc/Item/FireFlower.h"
 #include "SoundManager.h"
 
-
-int MediatorCollision::marioFireballHits = 0;
 void MediatorCollision::HandleMarioWithTile(Character *&mario, Tile *&tile, CollisionType AtoB)
 {
     if (AtoB == COLLISION_TYPE_NONE)
@@ -53,6 +51,7 @@ void MediatorCollision::HandleMarioWithTile(Character *&mario, Tile *&tile, Coll
         break;
     }
 }
+
 void MediatorCollision::HandleFireballWithTile(Fireball *&fireball, Tile *&tile, CollisionType AtoB)
 {
     if (AtoB == COLLISION_TYPE_NONE)
@@ -97,6 +96,7 @@ void MediatorCollision::HandleFireballWithTile(Fireball *&fireball, Tile *&tile,
     }
     }
 }
+
 void MediatorCollision::HandleItemWithTile(Item *&item, Tile *&tile, CollisionType AtoB)
 {
     if (AtoB == COLLISION_TYPE_NONE)
@@ -143,6 +143,7 @@ void MediatorCollision::HandleItemWithTile(Item *&item, Tile *&tile, CollisionTy
     }
     }
 }
+
 void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
 {
     Character* marioA = dynamic_cast<Character*>(ObjectA);
@@ -165,11 +166,11 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
 
     BossFireball *bossFireballA = dynamic_cast<BossFireball *>(ObjectA);
     BossFireball *bossFireballB = dynamic_cast<BossFireball *>(ObjectB);
+    
     // Mario vs Tile
     if ((marioA && tileB) || (marioB && tileA)) {
         Character* mario = marioA ? marioA : marioB;
         Tile* tile = tileA ? tileA : tileB;
-
         CollisionType type = mario->checkCollisionType(*tile);
         HandleMarioWithTile(mario, tile, type);
     }
@@ -187,17 +188,13 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
         CollisionType type = item->checkCollisionType(*tile);
         HandleItemWithTile(item, tile, type);
     }
-
     // Mario vs Item
     else if ((marioA && itemB) || (marioB && itemA)) {
         Character* mario = marioA ? marioA : marioB;
         Item* item = itemA ? itemA : itemB;
-
         if (item->canBeCollected() && item->checkCollision(*mario) == COLLISION_TYPE_COLLIDED) {
-
             item->updateMario(*mario);
             item->playCollisionSound();
-            // Thêm sound tùy theo loại item
             if (dynamic_cast<Mushroom*>(item)) {
                 SoundManager::GetInstance().PlaySound("POWER_UP_APPEARS");
             } else if (dynamic_cast<FireFlower*>(item)) {
@@ -228,7 +225,6 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
         CollisionType type = enemy->checkCollisionType(*fireball);
         HandleEnemyWithFireball(enemy, fireball, type);
     }
-
     // Mario vs block
     else if((marioA && blockB) || (blockA && marioB)){
         Block* block = blockA ? blockA : blockB;
@@ -244,7 +240,8 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
         HandleMarioWithBossFireball(mario, bossFireball, type);
     }
 }
-void MediatorCollision :: HandleMarioWithBlock(Character* &mario, Block* &block, CollisionType type){
+
+void MediatorCollision::HandleMarioWithBlock(Character* &mario, Block* &block, CollisionType type){
     if(type == COLLISION_TYPE_NONE) return;
     switch(type){
         case COLLISION_TYPE_SOUTH:{
@@ -386,7 +383,8 @@ void MediatorCollision :: HandleMarioWithBlock(Character* &mario, Block* &block,
             break;
         }
     }
-};
+}
+
 void MediatorCollision::HandleEnemyWithTile(Enemy *&enemy, Tile *tile, CollisionType AtoB)
 {
     if (AtoB == COLLISION_TYPE_NONE)
@@ -422,31 +420,26 @@ void MediatorCollision::HandleEnemyWithTile(Enemy *&enemy, Tile *tile, Collision
     }
     }
 }
+
 void MediatorCollision::HandleMarioWithEnemy(Character*& mario, Enemy*& enemy, CollisionType AtoB) {
     if (AtoB == COLLISION_TYPE_NONE) {
-
-        std::cout << "No collision between Mario and Enemy" << std::endl;
         return;
     }
 
     Boss *boss = dynamic_cast<Boss *>(enemy);
     if (boss)
     {
-        std::cout << "Mario vs Boss collision detected! Type: " << AtoB << std::endl;
-        
+        if (boss->IsDead())
+        {
+            return;
+        }
         switch (AtoB)
         {
         case COLLISION_TYPE_SOUTH:
         {
-            std::cout << "Mario jumped on Boss - Boss takes damage from stomping!" << std::endl;
             mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
-            std::cout << "Boss hit by Mario's stomp! Hit count before: " << boss->GetHitCount() << std::endl;
             boss->OnHitByFireball();
-            std::cout << "Boss hit count after: " << boss->GetHitCount() << "/" << 10 << std::endl;
-            if (boss->GetHitCount() >= 10)
-            {
-                std::cout << "Boss defeated after 10 hits (including stomp)!" << std::endl;
-            }
+            std::cout << "[DEBUG] Boss hit by Mario's stomp! Hit count: " << boss->GetHitCount() << "/10" << std::endl;
             break;
         }
         case COLLISION_TYPE_EAST:
@@ -473,19 +466,15 @@ void MediatorCollision::HandleMarioWithEnemy(Character*& mario, Enemy*& enemy, C
             rex->OnHit();
             if (rex->GetHitCount() >= 2)
             {
-                
-                    rex->CreateDeathEffect();
-                    rex->SetState(OBJECT_STATE_DYING);
-                
+                rex->CreateDeathEffect();
+                rex->SetState(OBJECT_STATE_DYING);
             }
         }
         else
         {
-            
-                enemy->CreateDeathEffect();
-                enemy->SetHitByFireball(true);
-                enemy->SetState(OBJECT_STATE_DYING);
-            
+            enemy->CreateDeathEffect();
+            enemy->SetHitByFireball(true);
+            enemy->SetState(OBJECT_STATE_DYING);
             RedKoopa *redKoopa = dynamic_cast<RedKoopa *>(enemy);
             if (redKoopa)
             {
@@ -508,33 +497,25 @@ void MediatorCollision::HandleMarioWithEnemy(Character*& mario, Enemy*& enemy, C
     }
     }
 }
+
 void MediatorCollision::HandleEnemyWithFireball(Enemy *&enemy, Fireball *&fireball, CollisionType AtoB)
 {
-    // std::cout << "[DEBUG] HandleEnemyWithFireball called!" << std::endl;
     if (AtoB == COLLISION_TYPE_NONE)
     {
-        // std::cout << "No collision between Enemy and Fireball" << std::endl;
         return;
     }
 
     Boss *boss = dynamic_cast<Boss *>(enemy);
     if (boss)
     {
-        if (boss->GetHitCount() >= 10 || boss->IsBlinking())
+        if (boss->IsDead())
         {
-            // std::cout << "Boss already defeated or dying - ignoring fireball hit" << std::endl;
             fireball->SetState(OBJECT_STATE_DEAD);
             return;
         }
-        // std::cout << "Boss hit by Mario's Fireball! Hit count before: " << boss->GetHitCount() << std::endl;
         boss->OnHitByFireball();
-        // std::cout << "Boss hit count after: " << boss->GetHitCount() << "/" << 10 << std::endl;
-        if (boss->GetHitCount() >= 10)
-        {
-            // std::cout << "Boss defeated after 10 fireball hits!" << std::endl;
-        }
         fireball->SetState(OBJECT_STATE_DEAD);
-        // std::cout << "Fireball destroyed after hitting Boss" << std::endl;
+        std::cout << "[DEBUG] Boss hit by Mario's Fireball! Hit count: " << boss->GetHitCount() << "/10" << std::endl;
         return;
     }
 
@@ -547,6 +528,7 @@ void MediatorCollision::HandleEnemyWithFireball(Enemy *&enemy, Fireball *&fireba
     enemy->SetState(OBJECT_STATE_DYING);
     std::cout << "Enemy dies by fireball" << std::endl;
 }
+
 void MediatorCollision::HandleMarioWithBossFireball(Character *&mario, BossFireball *&bossFireball, CollisionType AtoB)
 {
     if (AtoB == COLLISION_TYPE_NONE)
@@ -556,17 +538,8 @@ void MediatorCollision::HandleMarioWithBossFireball(Character *&mario, BossFireb
 
     if (AtoB != COLLISION_TYPE_NONE)
     {
-        marioFireballHits++;
-        std::cout << "Mario hit by Boss Fireball! Hits: " << marioFireballHits << "/" << maxFireballHits << std::endl;
-        mario->BeHit();
-        std::cout << "Mario hit by BossFireball - BeHit() called" << std::endl;
-        if (marioFireballHits >= maxFireballHits)
-        {
-            std::cout << "Mario reaches " << maxFireballHits << " Boss Fireball hits - forcing death!" << std::endl;
-            mario->Die();
-            marioFireballHits = 0;
-        }
+        mario->Die();
         bossFireball->SetState(OBJECT_STATE_DEAD);
-        std::cout << "BossFireball destroyed after hitting Mario" << std::endl;
+        std::cout << "Mario hit by BossFireball - dies instantly!" << std::endl;
     }
 }

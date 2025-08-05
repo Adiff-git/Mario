@@ -8,7 +8,8 @@ enum class BossState{
     PATROL,     // Đi tuần
     CHASE,      // Đuổi Mario
     ATTACK,     // Tấn công
-    SKILL       // Skill nhảy
+    SKILL,      // Skill nhảy
+    DIE // Trạng thái chết
 };
 
 //debug

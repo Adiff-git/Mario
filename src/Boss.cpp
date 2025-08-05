@@ -61,8 +61,11 @@ void Boss::BuildBehaviorTree()
     behavior = new BehaviorTree(rootSelector);
 }
 
-void Boss::Update()
+void Boss::Update() 
 {
+    if (currentState == BossState::DIE) {
+        return; // Không cập nhật các logic khác khi chết
+    }
     UpdateStateAndPhysic();
 }
 
@@ -120,6 +123,10 @@ void Boss::UpdateMovement()
         case BossState::SKILL:
             UseSkill(dt);
             break;
+        case BossState::DIE:
+            // Không di chuyển khi chết 
+            vel={0.0f,0.0f};
+            break;
     }
 }
 
@@ -147,6 +154,8 @@ void Boss::UpdateAnimations(float dt)
                 if (!attackFrames.empty()) { currentFrame = (currentFrame + 1) % attackFrames.size(); }
                 break;
             case BossState::IDLE:
+                break;
+            case BossState::DIE:
                 break;
             default:
                 if (!movingFrames.empty()) { currentFrame = (currentFrame + 1) % movingFrames.size(); }
@@ -345,7 +354,9 @@ void Boss::UpdateTexture()
 }
 
 void Boss::Draw()
-{
+{   if (currentState == BossState::DIE) {
+        return;
+    }
     DrawSprite();
     DrawHealthBar();
     DrawDebugInfo();
@@ -660,7 +671,9 @@ void Boss::OnHitByFireball()
     if (hitCooldown > 0) return;
     hitCount++;
     hitCooldown = hitCooldownTime;
-    if (hitCount >= maxHits) { Enemy::StartBlinking(1.5f, 0.1f); }
+    if (hitCount >= maxHits) { UpdateDeathEffect(); 
+        SetState(BossState::DIE); }
+    else { Enemy::StartBlinking(1.5f, 0.1f); }
 }
 
 void Boss::UpdateSmoothBlinking()
