@@ -47,11 +47,12 @@ void GameModeScreen::Draw() {
                    Rectangle{0, 0, (float)backgroundTexture->width, (float)backgroundTexture->height},
                    Rectangle{0, 0, (float)GetScreenWidth(), (float)GetScreenHeight()},
                    Vector2{0, 0}, 0.0f, WHITE);
+    DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 0.3f));
     
     // Draw "CHOOSE PLAYER" background texture (centered perfectly)
     DrawTexturePro(*choosePlayerTexture, 
                    Rectangle{0, 0, (float)choosePlayerTexture->width, (float)choosePlayerTexture->height},
-                   Rectangle{(float)GetScreenWidth()/2 - 500, (float)GetScreenHeight()/2 - 250, 1000, 500},
+                   Rectangle{(float)GetScreenWidth()/2 - 450, (float)GetScreenHeight()/2 - 300, 1000, 500},
                    Vector2{0, 0}, 0.0f, WHITE);
     
     // Draw buttons (these will appear on top of the background)

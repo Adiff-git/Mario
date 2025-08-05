@@ -11,6 +11,7 @@ class MenuScreen : public Screen {
         // Button exitButton;
         Button settingsButton;
         Texture2D* backgroundTexture;
+        Texture2D* logoTexture;
     public:
         MenuScreen(ScreenController* screenController);
         void Update() override;

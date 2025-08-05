@@ -1,95 +1,83 @@
 #include "../inc/Screen/SettingsScreen.h"
-#include "ResrcManager.h"
-#include <raylib.h>
-#include <string>
-#include "../inc/Screen/GameScreen.h"
 #include "../inc/Screen/MenuScreen.h"
-#include "../inc/Screen/Screen.h"
-SettingsScreen::SettingsScreen(ScreenController *controller)
-    : Screen(controller),
-      backButton(Vector2{30, 30}, Vector2{122, 50}, "Back"),
-      tutorialsButton(Vector2{550, 100}, Vector2{240, 40}, "Tutorials"),
-      musicMinusButton(Vector2{600, 300}, Vector2{40, 40}, "-"),
-      musicPlusButton(Vector2{800, 300}, Vector2{40, 40}, "+"),
-      sfxMinusButton(Vector2{600, 370}, Vector2{40, 40}, "-"),
-      sfxPlusButton(Vector2{800, 370}, Vector2{40, 40}, "+"),
-      muteToggleButton(Vector2{600, 440}, Vector2{240, 40}, "Mute All: Off"),
-    //   pauseButton(Vector2{600, 520}, Vector2{240, 50}, "Pause Game"),
+#include "../inc/ResrcManager.h"
+#include "../inc/SoundManager.h"
+
+SettingsScreen::SettingsScreen(ScreenController* screenController)
+    : Screen(screenController),
+      tutorialsButton(Vector2{(float)GetScreenWidth()/2 - 120, 310}, Vector2{240, 60}),
+      audioSettingButton(Vector2{(float)GetScreenWidth()/2 - 120, 390}, Vector2{240, 60}),
+      muteToggleButton(Vector2{(float)GetScreenWidth()/2 - 120, 600}, Vector2{240, 60}),
+      backButton(Vector2{50, 50}, Vector2{80, 80}),
       musicVolume(50),
       sfxVolume(50),
       isMuted(false),
-    //   isPaused(false),
+      showAudioSettings(false),
       showTutorial(false)
 {
     tutorialImage = LoadTexture("../resources/Menu/Tutorials.png"); 
     closeTutorialButton = Button(Vector2{100, 100}, Vector2{40, 40}, "X");
     closeTutorialTexture = LoadTexture("resources/Menu/CloseX.png");
+    
+    backgroundTexture = &ResrcManager::GetInstance().getTexture("BACKGROUND_10");
+    settingInterfaceTexture = &ResrcManager::GetInstance().getTexture("SETTING INTERFACE");
+    tutorialsButton.SetTexture(ResrcManager::GetInstance().getTexture("TUTORIALS"));
+    audioSettingButton.SetTexture(ResrcManager::GetInstance().getTexture("AUDIO SETTING"));
+    muteToggleButton.SetTexture(ResrcManager::GetInstance().getTexture("MUTE ALL ON")); // Không tắt âm → hiển thị ON
+    backButton.SetTexture(ResrcManager::GetInstance().getTexture("BACK_BUTTON"));
 }
 
-SettingsScreen::~SettingsScreen()
-{
+SettingsScreen::~SettingsScreen() {
     UnloadTexture(tutorialImage);
     UnloadTexture(closeTutorialTexture);
 }
 
-void SettingsScreen::Update()
-{
-    if (showTutorial)
-    {
+void SettingsScreen::Update() {
+    if (showTutorial) {
         closeTutorialButton.Update();
-        tutorialsButton.Update();
-        if (closeTutorialButton.IsPressed())
-        {
+        if (closeTutorialButton.IsPressed()) {
             showTutorial = false;
-            tutorialsButton.SetText("Tutorials");
         }
-        // return;
-    }
-    else
-    {
-
-        // backButton.Update();
-        // tutorialsButton.Update();
-        // musicMinusButton.Update();
-        // musicPlusButton.Update();
-        // sfxMinusButton.Update();
-        // sfxPlusButton.Update();
-        // muteToggleButton.Update();
-        // pauseButton.Update();
-
-        if (backButton.IsPressed())
-        {
+    } else {
+        tutorialsButton.Update();
+        audioSettingButton.Update();
+        muteToggleButton.Update();
+        backButton.Update();
+        
+        if (tutorialsButton.IsPressed()) {
+            SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
+            showTutorial = !showTutorial;
+        }
+        
+        if (audioSettingButton.IsPressed()) {
+            SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
+            showAudioSettings = !showAudioSettings;
+        }
+        
+        if (muteToggleButton.IsPressed()) {
+            SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
+            isMuted = !isMuted;
+            muteToggleButton.SetTexture(isMuted ? 
+                ResrcManager::GetInstance().getTexture("MUTE ALL OFF") :  // Tắt âm → hiển thị OFF
+                ResrcManager::GetInstance().getTexture("MUTE ALL ON"));  // Không tắt âm → hiển thị ON
+            
+            // muteToggleButton.SetSize(Vector2{240, 80});
+        }
+        
+        if (backButton.IsPressed()) {
+            SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
             screenController->ChangeScreen(new MenuScreen(screenController));
         }
-        if (tutorialsButton.IsPressed())
-        {
-            showTutorial = !showTutorial;
-            tutorialsButton.SetText(showTutorial ? "Hide Tutorials" : "Tutorials");
-        }
-        if (musicMinusButton.IsPressed() && musicVolume > 0)
-            musicVolume -= 5;
-        if (musicPlusButton.IsPressed() && musicVolume < 100)
-            musicVolume += 5;
-        if (sfxMinusButton.IsPressed() && sfxVolume > 0)
-            sfxVolume -= 5;
-        if (sfxPlusButton.IsPressed() && sfxVolume < 100)
-            sfxVolume += 5;
-        if (muteToggleButton.IsPressed())
-        {
-            isMuted = !isMuted;
-            muteToggleButton.SetText(isMuted ? "Mute All: ON" : "Mute All: OFF");
-        }
-        // if (pauseButton.IsPressed())
-        // {
-        //     isPaused = !isPaused;
-        //     pauseButton.SetText(isPaused ? "Resume Game" : "Pause Game");
-        // }
     }
 }
 
-// Draw the settings screen
 void SettingsScreen::Draw() {
-    ClearBackground(RAYWHITE);
+    // Draw full screen background texture (bottom layer)
+    DrawTexturePro(*backgroundTexture, 
+                   Rectangle{0, 0, (float)backgroundTexture->width, (float)backgroundTexture->height},
+                   Rectangle{0, 0, (float)GetScreenWidth(), (float)GetScreenHeight()},
+                   Vector2{0, 0}, 0.0f, WHITE);
+    DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 0.3f));
 
     if (showTutorial) {
         DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(RAYWHITE, 0.95f));
@@ -119,41 +107,45 @@ void SettingsScreen::Draw() {
         closeTutorialButton.SetPosition({ closeBtnX, closeBtnY });
         closeTutorialButton.Draw();
     } else {
-        // Centered layout
-        int screenW = GetScreenWidth();
-        int y = 60;
-        DrawText("Settings", screenW/2 - MeasureText("Settings", 40)/2, y, 40, BLACK);
-        y += 60;
-
-        // Tutorials button
-        Vector2 tutBtnSize = tutorialsButton.GetSize();
-        tutorialsButton.SetPosition({ (float)(screenW/2 - tutBtnSize.x/2), (float)y });
+        // Draw larger "SETTING INTERFACE" background texture (centered)
+        DrawTexturePro(*settingInterfaceTexture, 
+                       Rectangle{0, 0, (float)settingInterfaceTexture->width, (float)settingInterfaceTexture->height},
+                       Rectangle{(float)GetScreenWidth()/2 - 450, (float)GetScreenHeight()/2 - 300, 1000, 600},
+                       Vector2{0, 0}, 0.0f, WHITE);
+        
+        // Draw buttons
         tutorialsButton.Draw();
-        y += (int)tutBtnSize.y + 40;
-
-        // Audio settings (center all controls)
-        int audioBlockW = 400;
-        int audioBlockX = screenW/2 - audioBlockW/2;
-        int audioY = y;
-        DrawText("Audio Settings:", screenW/2 - MeasureText("Audio Settings:", 32)/2, audioY, 32, BLACK);
-        audioY += 40;
-
+        audioSettingButton.Draw();
+        
+        // Audio settings with sliders (always visible now, perfectly centered between buttons)
+        int screenW = GetScreenWidth();
+        // Calculate center position between audioSettingButton (ends at 450) and muteToggleButton (starts at 600)
+        int centerGap = (450 + 600) / 2; // Center point = 525
+        int sliderStartY = centerGap - 45; // 490 - start first slider 35px above center
+        
         // --- MUSIC SLIDER ---
-        int sliderW = 180;
+        int sliderW = 250;
         int sliderX = screenW/2 - sliderW/2;
-        int sliderY = audioY + 30;
-        DrawText("Music Volume", sliderX, audioY, 22, DARKGRAY);
+        int musicSliderY = sliderStartY;
+        
+        // Music slider background with rounded corners effect
+        DrawRectangle(sliderX - 10, musicSliderY - 15, sliderW + 20, 50, Fade(DARKGRAY, 0.3f));
+        DrawText("Music", sliderX, musicSliderY - 10, 18, WHITE);
+        
+        // Main slider track
+        DrawRectangle(sliderX, musicSliderY + 15, sliderW, 8, LIGHTGRAY);
+        // Active portion
+        DrawRectangle(sliderX, musicSliderY + 15, (int)(musicVolume * (sliderW/100.0f)), 8, SKYBLUE);
+        // Slider knob
+        int musicKnobX = sliderX + (int)(musicVolume * (sliderW/100.0f));
+        DrawCircle(musicKnobX, musicSliderY + 19, 12, WHITE);
+        DrawCircle(musicKnobX, musicSliderY + 19, 10, BLUE);
+        
+        // Volume text
+        DrawText(TextFormat("%d%%", musicVolume), sliderX + sliderW + 20, musicSliderY + 10, 18, WHITE);
 
-        // Vẽ thanh slider nền
-        DrawRectangle(sliderX, sliderY, sliderW, 10, LIGHTGRAY);
-        // Vẽ phần volume đã chọn
-        DrawRectangle(sliderX, sliderY, (int)(musicVolume * (sliderW/100.0f)), 10, BLUE);
-        // Vẽ nút tròn kéo
-        int knobX = sliderX + (int)(musicVolume * (sliderW/100.0f));
-        DrawCircle(knobX, sliderY + 5, 10, DARKBLUE);
-
-        // Xử lý kéo chuột cho music
-        Rectangle musicSliderRect = { (float)sliderX, (float)sliderY - 10, (float)sliderW, 30 };
+        // Mouse interaction for music slider
+        Rectangle musicSliderRect = { (float)sliderX, (float)musicSliderY + 5, (float)sliderW, 25 };
         if (IsMouseButtonDown(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), musicSliderRect)) {
             float percent = (GetMousePosition().x - sliderX) / (float)sliderW;
             percent = std::max(0.0f, std::min(1.0f, percent));
@@ -161,81 +153,36 @@ void SettingsScreen::Draw() {
             SoundManager::GetInstance().SetMusicVol("MENU", musicVolume / 100.0f);
         }
 
-        DrawText(TextFormat("%d", musicVolume), sliderX + sliderW + 50, audioY, 22, BLACK);
-        audioY += 60;
-
         // --- SFX SLIDER ---
-        DrawText("Sound Effects Volume", sliderX, audioY, 22, DARKGRAY);
-        int sfxSliderY = audioY + 30;
-        DrawRectangle(sliderX, sfxSliderY, sliderW, 10, LIGHTGRAY);
-        DrawRectangle(sliderX, sfxSliderY, (int)(sfxVolume * (sliderW/100.0f)), 10, ORANGE);
+        int sfxSliderY = sliderStartY + 70;
+        
+        // SFX slider background with rounded corners effect
+        DrawRectangle(sliderX - 10, sfxSliderY - 15, sliderW + 20, 50, Fade(DARKGRAY, 0.3f));
+        DrawText("Sound Effects", sliderX, sfxSliderY - 10, 18, WHITE);
+        
+        // Main slider track
+        DrawRectangle(sliderX, sfxSliderY + 15, sliderW, 8, LIGHTGRAY);
+        // Active portion
+        DrawRectangle(sliderX, sfxSliderY + 15, (int)(sfxVolume * (sliderW/100.0f)), 8, ORANGE);
+        // Slider knob
         int sfxKnobX = sliderX + (int)(sfxVolume * (sliderW/100.0f));
-        DrawCircle(sfxKnobX, sfxSliderY + 5, 10, DARKGRAY);
+        DrawCircle(sfxKnobX, sfxSliderY + 19, 12, WHITE);
+        // DrawCircle(sfxKnobX, sfxSliderY + 19, 10, DARKORANGE);
+        
+        // Volume text
+        DrawText(TextFormat("%d%%", sfxVolume), sliderX + sliderW + 20, sfxSliderY + 10, 18, WHITE);
 
-        // Xử lý kéo chuột cho sfx
-        Rectangle sfxSliderRect = { (float)sliderX, (float)sfxSliderY - 10, (float)sliderW, 30 };
+        // Mouse interaction for SFX slider
+        Rectangle sfxSliderRect = { (float)sliderX, (float)sfxSliderY + 5, (float)sliderW, 25 };
         if (IsMouseButtonDown(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), sfxSliderRect)) {
             float percent = (GetMousePosition().x - sliderX) / (float)sliderW;
             percent = std::max(0.0f, std::min(1.0f, percent));
             sfxVolume = (int)(percent * 100);
-            SoundManager::GetInstance().SetSoundVol("COIN", sfxVolume / 100.0f); // Ví dụ với sound "COIN"
+            SoundManager::GetInstance().SetSoundVol("COIN", sfxVolume / 100.0f);
         }
-
-        DrawText(TextFormat("%d", sfxVolume), sliderX + sliderW + 50, audioY, 22, BLACK);
-        audioY += 60;
-
-        // Mute button
-        Vector2 muteBtnSize = muteToggleButton.GetSize();
-        muteToggleButton.SetPosition({ (float)(screenW/2 - muteBtnSize.x/2), (float)audioY });
+        
+        // Draw mute button (always positioned below the sliders)
         muteToggleButton.Draw();
-        y = audioY + (int)muteBtnSize.y + 40;
-
-        backButton.SetPosition({30, 30});
         backButton.Draw();
     }
 }
-
-
-void SettingsScreen::DrawTutorials()
-{
-    DrawTexture(tutorialImage, 400, 80, WHITE); 
-    closeTutorialButton.Draw();
-    // Vector2 closeBtnPos = closeTutorialButton.GetPosition({400, 800});
-    // DrawTexture(closeTutorialTexture, closeBtnPos.x, closeBtnPos.y, WHITE);
-}
-
-void SettingsScreen::DrawAudioSettings()
-{
-    DrawText("Audio Settings:", 550, 300, 32, BLACK);
-
-    DrawMusicVolumeControls();
-    DrawSFXVolumeControls();
-
-    muteToggleButton.Draw();
-}
-
-void SettingsScreen::DrawMusicVolumeControls()
-{
-    DrawText("Music Volume", 650, 340, 22, DARKGRAY);
-    musicMinusButton.Draw();
-    musicPlusButton.Draw();
-    DrawRectangle(650, 370, 150, 10, LIGHTGRAY);
-    DrawRectangle(650, 370, musicVolume * 1.5f, 10, BLUE);
-    DrawText(TextFormat("%d", musicVolume), 810, 340, 22, BLACK);
-}
-
-void SettingsScreen::DrawSFXVolumeControls()
-{
-    DrawText("Sound Effects Volume", 650, 410, 22, DARKGRAY);
-    sfxMinusButton.Draw();
-    sfxPlusButton.Draw();
-    DrawRectangle(650, 440, 150, 10, LIGHTGRAY);
-    DrawRectangle(650, 440, sfxVolume * 1.5f, 10, ORANGE);
-    DrawText(TextFormat("%d", sfxVolume), 810, 410, 22, BLACK);
-}
-
-// void SettingsScreen::DrawPauseButton()
-// {
-//     DrawText("Pause Game:", 550, 530, 32, BLACK);
-//     pauseButton.Draw();
-// }

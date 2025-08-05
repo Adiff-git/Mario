@@ -161,6 +161,8 @@ void ResrcManager::loadTextures() {
     textures["BACKGROUND_9"] = LoadTexture("resources/images/backgrounds/background10.png");
     textures["BACKGROUND_10"] = LoadTexture("resources/images/backgrounds/background11.png");
 
+    textures["LOGO"] = LoadTexture("resources/Menu/logo.gif");
+
     }
     //TILES
     for (int i = 0; i < 104; ++i) {
@@ -180,6 +182,13 @@ void ResrcManager::loadTextures() {
     textures["MARIO_BUTTON"] = LoadTexture("resources/images/Button/MARIO_BUTTON.png");
     textures["LUIGI_BUTTON"] = LoadTexture("resources/images/Button/LUIGI_BUTTON.png");
     textures["CHOOSE PLAYER"] = LoadTexture("resources/images/Button/CHOOSE PLAYER.png");
+    textures["CHOOSE CHARACTOR"] = LoadTexture("resources/images/Button/CHOOSE CHARACTOR.png");
+    textures["SETTING INTERFACE"] = LoadTexture("resources/images/Button/SETTING INTERFACE.png");
+    textures["MUTE ALL ON"] = LoadTexture("resources/images/Button/MUTE ALL ON.png");
+    textures["MUTE ALL OFF"] = LoadTexture("resources/images/Button/MUTE ALL OFF.png");
+    textures["TUTORIALS"] = LoadTexture("resources/images/Button/TUTORIALS.png");
+    textures["AUDIO SETTING"] = LoadTexture("resources/images/Button/AUDIO SETTING.png");
+
 
 
 

@@ -41,8 +41,17 @@ void Button::Update() {
     } else {
         zoom = 1.0;
     }
+    
+    // Calculate new size
     CurButton.width = ConstButton.width * zoom;
     CurButton.height = ConstButton.height * zoom;
+    
+    // Center the button by adjusting position based on size difference
+    float widthDiff = CurButton.width - ConstButton.width;
+    float heightDiff = CurButton.height - ConstButton.height;
+    CurButton.x = ConstButton.x - widthDiff / 2;
+    CurButton.y = ConstButton.y - heightDiff / 2;
+    
     size.x = CurButton.width;
     size.y = CurButton.height;
 }
@@ -72,7 +81,7 @@ bool Button::IsPressed() const  {
 Vector2 Button::GetSize() const { return size; }
 bool Button::IsHovered() const {
     Vector2 mousePos = GetMousePosition();
-    return CheckCollisionPointRec(mousePos, ConstButton);
+    return CheckCollisionPointRec(mousePos, CurButton);
 }
 
 void Button::SetPosition(Vector2 pos) {

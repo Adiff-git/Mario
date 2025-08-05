@@ -11,7 +11,8 @@ MenuScreen::MenuScreen(ScreenController* screenController ) : Screen(screenContr
 startButton(Vector2{1600/2 - 150, 900/2 - 100}, Vector2{300, 80}),
 MapEditorButton(Vector2{1600/2 - 150, 900/2 + 10}, Vector2{300, 80}),
 settingsButton(Vector2{1600/2 - 150, 900/2 + 120}, Vector2{300, 80}) {
-    backgroundTexture = &ResrcManager::GetInstance().getTexture("MENU_BACKGROUND");
+    backgroundTexture = &ResrcManager::GetInstance().getTexture("BACKGROUND_10");
+    logoTexture = &ResrcManager::GetInstance().getTexture("LOGO");
     startButton.SetTexture(ResrcManager::GetInstance().getTexture("START_BUTTON"));
     MapEditorButton.SetTexture(ResrcManager::GetInstance().getTexture("MAP_EDITOR_BUTTON"));
     // startButton.SetPosition({1600/2 - 50, 900 / 2 - 50});
@@ -57,7 +58,22 @@ void MenuScreen::Update() {
 
 void MenuScreen::Draw() {
 
-    DrawTexturePro(*backgroundTexture,Rectangle{0, 0, (float)backgroundTexture->width, (float)backgroundTexture->height},Rectangle{0, 0, 1600, 900},Vector2{0, 0}, 0.0f, WHITE);
+    DrawTexturePro(*backgroundTexture, 
+                   Rectangle{0, 0, (float)backgroundTexture->width, (float)backgroundTexture->height},
+                   Rectangle{0, 0, (float)GetScreenWidth(), (float)GetScreenHeight()},
+                   Vector2{0, 0}, 0.0f, WHITE);
+    DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 0.3f));
+    
+    // Draw logo above the buttons
+    float logoWidth = 800;
+    float logoHeight = 300;
+    float logoX = (GetScreenWidth() - logoWidth) / 2;
+    float logoY = GetScreenHeight() / 2 - 400;
+    DrawTexturePro(*logoTexture,
+                   Rectangle{0, 0, (float)logoTexture->width, (float)logoTexture->height},
+                   Rectangle{logoX, logoY, logoWidth, logoHeight},
+                   Vector2{0, 0}, 0.0f, WHITE);
+    
     startButton.Draw();
     MapEditorButton.Draw();
     settingsButton.Draw();

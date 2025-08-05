@@ -9,33 +9,24 @@ private:
     // UI Buttons
     Button backButton;
     Button tutorialsButton;
-    Button musicMinusButton;
-    Button musicPlusButton;
-    Button sfxMinusButton;
-    Button sfxPlusButton;
+    Button audioSettingButton;
     Button muteToggleButton;
-    // Button pauseButton;
 
     // Audio settings
     int musicVolume; 
     int sfxVolume;   
     bool isMuted;
-
-    // Pause/resume state
-    // bool isPaused;
+    bool showAudioSettings;
 
     // Show/hide tutorial
     bool showTutorial;
     Texture2D tutorialImage;
     Button closeTutorialButton;
     Texture2D closeTutorialTexture;
-
-    void DrawTutorials();
-    void DrawAudioSettings();
-    // void DrawPauseButton();
-
-    void DrawMusicVolumeControls();
-    void DrawSFXVolumeControls();
+    
+    // Background textures
+    const Texture2D* backgroundTexture;
+    const Texture2D* settingInterfaceTexture;
 
 public:
     SettingsScreen(ScreenController* controller);

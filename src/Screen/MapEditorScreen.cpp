@@ -13,9 +13,9 @@ MapEditorScreen::MapEditorScreen(ScreenController* screenController)
       //showSaveDialog(false),
       //showLoadDialog(false),
       backToMenuButton2(Vector2{1300, 830}, Vector2{122, 50}),
-      backToMenuButton(Vector2{30, 30}, Vector2{122, 50}),
-      newMapButton(Vector2{200, 30}, Vector2{198, 50}),
-      loadMapButton(Vector2{450, 30}, Vector2{211, 50}),
+      backToMenuButton(Vector2{30, 30}, Vector2{80, 80}),
+      newMapButton(Vector2{130, 30}, Vector2{150, 80}),
+      loadMapButton(Vector2{300, 30}, Vector2{150, 80}),
       saveMapButton(Vector2{1450, 830}, Vector2{130, 50}),
       currentMode(EditorMode::TILE_MODE),
       selectedTileId(105),
@@ -33,7 +33,7 @@ MapEditorScreen::MapEditorScreen(ScreenController* screenController)
         LoadAvailableMaps();
         InitializeTilesets();
         strcpy(mapNameBuffer, "new_map");
-        backgroundTexture = &ResrcManager::GetInstance().getTexture("MENU_BACKGROUND");
+        backgroundTexture = &ResrcManager::GetInstance().getTexture("BACKGROUND_10");
         backToMenuButton.SetTexture(ResrcManager::GetInstance().getTexture("BACK_BUTTON"));
         newMapButton.SetTexture(ResrcManager::GetInstance().getTexture("NEW_MAP_BUTTON"));
         loadMapButton.SetTexture(ResrcManager::GetInstance().getTexture("LOAD_MAP_BUTTON"));
@@ -785,8 +785,13 @@ void MapEditorScreen::DrawToolbar() {
 void MapEditorScreen::Draw() {
    ClearBackground(GRAY);
    if (!editorActive) {
-       DrawTexturePro(*backgroundTexture, Rectangle{0, 0, (float)backgroundTexture->width, (float)backgroundTexture->height},
-                      Rectangle{0, 0, 1600, 900}, Vector2{0, 0}, 0.0f, WHITE);
+       // Draw full screen background texture (bottom layer)
+       DrawTexturePro(*backgroundTexture, 
+                      Rectangle{0, 0, (float)backgroundTexture->width, (float)backgroundTexture->height},
+                      Rectangle{0, 0, (float)GetScreenWidth(), (float)GetScreenHeight()},
+                      Vector2{0, 0}, 0.0f, WHITE);
+       DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 0.3f));
+       
       backToMenuButton.Draw();
       newMapButton.Draw();   
       loadMapButton.Draw();

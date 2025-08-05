@@ -5,6 +5,8 @@
 enum class CharacterType {
     MARIO,
     LUIGI,
+    TOAD,
+    PEACH,
     NONE
 };
 
@@ -12,6 +14,8 @@ class CharacterSelectScreen : public Screen {
 private:
     Button marioButton;
     Button luigiButton;
+    Button toadButton;
+    Button peachButton;
     Button backButton;
     Button startButton;
     
@@ -20,6 +24,9 @@ private:
     CharacterType player2Character;
     bool player1Selected;
     bool player2Selected;
+    
+    Texture2D* backgroundTexture;
+    Texture2D* chooseCharacterTexture;
     
 public:
     CharacterSelectScreen(ScreenController* screenController, bool multiplayer);
