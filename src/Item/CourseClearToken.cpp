@@ -69,7 +69,7 @@ void CourseClearToken::Draw() {
 
 void CourseClearToken::updateMario(Character& mario) {
     mario.Victory();
-    mario.SetState(OBJECT_STATE_VICTORY);
+    // mario.SetState(OBJECT_STATE_VICTORY);
 }
 
 void CourseClearToken::playCollisionSound() {
