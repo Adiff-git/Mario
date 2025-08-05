@@ -8,6 +8,7 @@
     #include "../inc/Enemy/EnemyManager.h"
     #include "../inc/World/MediatorCollision.h"
     #include "../inc/Character/Mario.h"
+    #include "../inc/Block/CloudBlock.h"
     #include "../inc/Block/EyesClosedBlock.h"
     #include "../inc/Block/EyesOpenedBlock.h"
     #include "../inc/Block/GlassBlock.h"
@@ -78,7 +79,6 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
     
     // Add items for MapID == 1
     if (MapID == 1) {
-        map.GetInteractiveItems().push_back(std::static_pointer_cast<Item>(std::make_shared<CloudBlock>(Vector2{150, 800})));
         map.GetInteractiveItems().push_back(std::make_shared<Coin>(Vector2{200, 800}));
         map.GetInteractiveItems().push_back(std::make_shared<CourseClearToken>(Vector2{250, 800}));
         map.GetInteractiveItems().push_back(std::make_shared<FireFlower>(Vector2{200, 800}));
@@ -99,6 +99,7 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
         map.GetEnemies().push_back(new Rex(Vector2{1300, 800}));
         map.GetEnemies().push_back(new YellowKoopa(Vector2{1400, 800}));
 
+        map.getBlocks().push_back(new CloudBlock(Vector2{100, 800}, Vector2{32, 32}, WHITE));
         map.getBlocks().push_back(new EyesClosedBlock(Vector2{150, 800}, Vector2{32, 32}, WHITE));
         map.getBlocks().push_back(new EyesOpenedBlock(Vector2{200, 800}, Vector2{32, 32}, WHITE));
         map.getBlocks().push_back(new GlassBlock(Vector2{250, 800}, Vector2{32, 32}, WHITE));
