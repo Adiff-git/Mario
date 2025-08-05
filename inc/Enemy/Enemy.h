@@ -3,6 +3,7 @@
 #define ENEMY_H
 
 #include "Object.h"
+#include "../inc/SmokeEffect.h"
 class Enemy : public Object {
 protected:
     float maxSpeedX;
@@ -20,7 +21,13 @@ protected:
 
     // Active/Nonactive state
     bool isActive;
-    float activationDistance;           
+    float activationDistance;    
+    
+    SmokeEffect* deathSmoke;
+    bool hasDeathEffect;
+    float dyingTimer;        // Timer cho trạng thái DYING
+    float dyingDuration;   
+
 
 public:
     Enemy(Vector2 pos, Vector2 size, Vector2 vel, Color color, float friction, int currFrame, Direction dir);
@@ -49,6 +56,12 @@ public:
     void CheckActivation(Vector2 player1Pos, Vector2 player2Pos = {-1000, -1000});
     float GetDistanceToPlayer(Vector2 playerPos) const;
     float GetDistanceToNearestPlayer(Vector2 player1Pos, Vector2 player2Pos) const; 
+
+    void CreateDeathEffect();
+    void UpdateDeathEffect();
+    void DrawDeathEffect();
+    bool ShouldRemoveDeathEffect() const;
+    void UpdateDyingState(); 
 };
 
 #endif

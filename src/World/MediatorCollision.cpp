@@ -473,19 +473,19 @@ void MediatorCollision::HandleMarioWithEnemy(Character*& mario, Enemy*& enemy, C
             rex->OnHit();
             if (rex->GetHitCount() >= 2)
             {
-                if (!rex->IsBlinking())
-                {
-                    rex->StartBlinking(2.0f, 0.1f);
-                }
+                
+                    rex->CreateDeathEffect();
+                    rex->SetState(OBJECT_STATE_DYING);
+                
             }
         }
         else
         {
-            if (!enemy->IsBlinking())
-            {
-                enemy->StartBlinking(2.0f, 0.1f);
+            
+                enemy->CreateDeathEffect();
                 enemy->SetHitByFireball(true);
-            }
+                enemy->SetState(OBJECT_STATE_DYING);
+            
             RedKoopa *redKoopa = dynamic_cast<RedKoopa *>(enemy);
             if (redKoopa)
             {
@@ -493,6 +493,8 @@ void MediatorCollision::HandleMarioWithEnemy(Character*& mario, Enemy*& enemy, C
                 float koopaX = redKoopa->GetPos().x;
                 bool fromLeft = (marioX < koopaX);
                 redKoopa->OnHit(fromLeft);
+                redKoopa->CreateDeathEffect();
+                redKoopa->SetState(OBJECT_STATE_DYING);
             }
         }
         break;
@@ -541,8 +543,8 @@ void MediatorCollision::HandleEnemyWithFireball(Enemy *&enemy, Fireball *&fireba
         std::cout << "BuzzyBeetle is immune to fireball!" << std::endl;
         return;
     }
-
-    enemy->SetState(OBJECT_STATE_DEAD);
+    enemy->CreateDeathEffect();
+    enemy->SetState(OBJECT_STATE_DYING);
     std::cout << "Enemy dies by fireball" << std::endl;
 }
 void MediatorCollision::HandleMarioWithBossFireball(Character *&mario, BossFireball *&bossFireball, CollisionType AtoB)

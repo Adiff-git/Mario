@@ -13,6 +13,13 @@ Rex::Rex(Vector2 pos)
 }
 
 void Rex::UpdateStateAndPhysic() {
+    UpdateDyingState();
+    
+    // Nếu đang DYING hoặc DEAD, không xử lý physics
+    if (state == OBJECT_STATE_DYING || state == OBJECT_STATE_DEAD) {
+        UpdateDeathEffect();
+        return;
+    }
     const float deltaTime = GetFrameTime();
 
     if (GetState() == OBJECT_STATE_ON_GROUND) {

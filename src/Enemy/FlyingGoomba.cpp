@@ -16,6 +16,13 @@ FlyingGoomba::FlyingGoomba(Vector2 pos)
 void FlyingGoomba::UpdateStateAndPhysic()
 {
 
+    UpdateDyingState();
+    
+    // Nếu đang DYING hoặc DEAD, không xử lý physics
+    if (state == OBJECT_STATE_DYING || state == OBJECT_STATE_DEAD) {
+        UpdateDeathEffect();
+        return;
+    }
     // Sprite animation
     const int updateThreshold = 15;
     updateCount++;

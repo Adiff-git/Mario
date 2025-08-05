@@ -5,7 +5,11 @@
 Enemy::Enemy(Vector2 pos, Vector2 size, Vector2 vel, Color color, float friction, int currFrame, Direction dir)
     : Object(pos, size, vel, color, friction, currFrame, dir), maxSpeedX(50.0f), textureIndex(0),
       isBlinking(false), blinkingAcum(0), blinkingTime(0.1f), blinkingAcumTotal(0), doBlink(false), 
-      markedForRemoval(false), hitByFireball(false), isActive(false), activationDistance(500.0f) {
+      markedForRemoval(false), hitByFireball(false), isActive(false), activationDistance(500.0f)
+      ,deathSmoke(nullptr),
+      hasDeathEffect(false),
+      dyingTimer(0.0f),
+      dyingDuration(1.0f) {
     cpN.setSize(Vector2{size.x/2, 1});
     cpS.setSize(Vector2{size.x/2, 1});
     cpE.setSize(Vector2{5, size.y - 5});
@@ -38,24 +42,31 @@ void Enemy::UpdateCollisionProbes() {
 }
 
 void Enemy::drawCollisionProbes() {
-    cpN.Draw();
-    cpS.Draw();
-    cpE.Draw();
-    cpW.Draw();
+    // cpN.Draw();
+    // cpS.Draw();
+    // cpE.Draw();
+    // cpW.Draw();
 }
 
 void Enemy::Draw() {
     UpdateBlinking();
+    
+    // Chỉ vẽ enemy sprite khi không DYING/DEAD
+    if (state != OBJECT_STATE_DYING && state != OBJECT_STATE_DEAD) {
+        if (isBlinking && doBlink) return;
 
-    if (isBlinking && doBlink) return;
-
-    if (sprite) {
-        DrawTexture(*sprite, (int)pos.x, (int)pos.y, WHITE);
-    } else {
-        DrawRectangle((int)pos.x, (int)pos.y, (int)size.x, (int)size.y, color);
+        if (sprite) {
+            DrawTexture(*sprite, (int)pos.x, (int)pos.y, WHITE);
+        } else {
+            DrawRectangle((int)pos.x, (int)pos.y, (int)size.x, (int)size.y, color);
+        }
     }
     
+    // Luôn vẽ collision probes (cho debug)
     drawCollisionProbes();
+    
+    // Vẽ death effect nếu đang DYING
+    DrawDeathEffect();
 }
 
 void Enemy::StartBlinking(float duration, float interval) {
@@ -129,4 +140,43 @@ float Enemy::GetDistanceToPlayer(Vector2 playerPos) const {
     float dx = playerPos.x - (pos.x + size.x / 2);
     float dy = playerPos.y - (pos.y + size.y / 2);
     return sqrt(dx * dx + dy * dy);
+}
+
+void Enemy::CreateDeathEffect() {
+    if (!hasDeathEffect && !deathSmoke) {
+        
+        deathSmoke = new SmokeEffect(Vector2{pos.x, pos.y});
+        hasDeathEffect = true;
+        dyingTimer = 0.0f;
+    }
+}
+
+void Enemy::UpdateDeathEffect() {
+    if (deathSmoke && hasDeathEffect) {
+        deathSmoke->Update();
+    }
+}
+
+void Enemy::UpdateDyingState() {
+    if (state == OBJECT_STATE_DYING) {
+        dyingTimer += GameClock::GetInstance().FIXED_TIME_STEP;
+        
+        // Sau 1 giây chuyển sang DEAD
+        if (dyingTimer >= dyingDuration) {
+            state = OBJECT_STATE_DEAD;
+        }
+    }
+}
+void Enemy::DrawDeathEffect() {
+    if (state == OBJECT_STATE_DYING) {
+        
+        
+        if (deathSmoke && hasDeathEffect) {
+            deathSmoke->Draw();
+        }
+    }
+}
+
+bool Enemy::ShouldRemoveDeathEffect() const {
+    return hasDeathEffect && deathSmoke && deathSmoke->ShouldRemove();
 }

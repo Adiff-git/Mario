@@ -8,6 +8,13 @@ BanzaiBill::BanzaiBill(Vector2 pos)
 }
 
 void BanzaiBill::UpdateStateAndPhysic() {
+    UpdateDyingState();
+    
+    // Nếu đang DYING hoặc DEAD, không xử lý physics
+    if (state == OBJECT_STATE_DYING || state == OBJECT_STATE_DEAD) {
+        UpdateDeathEffect();
+        return;
+    }
     const float deltaTime = GetFrameTime();
     // BanzaiBill bay thẳng, không chịu trọng lực
     SetPos(Vector2{(float)(GetPos().x + GetVel().x * GameClock::GetInstance().FIXED_TIME_STEP), GetPos().y});

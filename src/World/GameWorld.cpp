@@ -144,32 +144,43 @@ void GameWorld::UpdateWorld()
                 }
             }
             // Handle Player 1 collisions
-            for (auto const &tile : interactiveTiles)
-            {
+            // Handle Player 1 collisions with tiles
+            for (auto const &tile : interactiveTiles) {
                 if (player1->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
-
                     mediatorCollision.HandleCollision(player1, tile);
             }
+            
+            // Handle Player 1 collisions with items
             for (auto const &item : map.GetInteractiveItems()) {
                 if (item && player1->checkCollisionType(*item) != COLLISION_TYPE_NONE)
                     mediatorCollision.HandleCollision(player1, item.get());
             }
+            
+            // Handle Player 1 collisions with enemies
             for (Enemy* enemy : map.GetEnemies()) {
-                if (enemy && player1->checkCollisionType(*enemy) != COLLISION_TYPE_NONE)
+                if (enemy && enemy->GetState() != OBJECT_STATE_DEAD && 
+                    enemy->GetState() != OBJECT_STATE_TO_BE_REMOVED &&
+                    player1->checkCollisionType(*enemy) != COLLISION_TYPE_NONE) {
                     mediatorCollision.HandleCollision(player1, enemy);
+                }
             }
         }
         
         if (player1->GetFireballs()) {
             for (auto& fireball : *player1->GetFireballs()) {
                 if (fireball) {
+                    // Fireball vs tiles
                     for (auto const &tile : interactiveTiles) {
                         if (tile && fireball->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
                             mediatorCollision.HandleCollision(fireball, tile);
                     }
+                    // Fireball vs enemies
                     for (Enemy* enemy : map.GetEnemies()) {
-                        if (enemy && enemy->checkCollisionType(*fireball) != COLLISION_TYPE_NONE)
+                        if (enemy && enemy->GetState() != OBJECT_STATE_DEAD && 
+                            enemy->GetState() != OBJECT_STATE_TO_BE_REMOVED &&
+                            enemy->checkCollisionType(*fireball) != COLLISION_TYPE_NONE) {
                             mediatorCollision.HandleCollision(enemy, fireball);
+                        }
                     }
                 }
             }
@@ -198,32 +209,43 @@ void GameWorld::UpdateWorld()
             player2->Die();
         }
             // Handle Player 2 collisions
-            for (auto const &tile : interactiveTiles)
-            {
+            // Handle Player 2 collisions with tiles
+            for (auto const &tile : interactiveTiles) {
                 if (player2->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
-
                     mediatorCollision.HandleCollision(player2, tile);
             }
+            
+            // Handle Player 2 collisions with items
             for (auto const &item : map.GetInteractiveItems()) {
                 if (item && player2->checkCollisionType(*item) != COLLISION_TYPE_NONE)
                     mediatorCollision.HandleCollision(player2, item.get());
             }
+            
+            // Handle Player 2 collisions with enemies
             for (Enemy* enemy : map.GetEnemies()) {
-                if (enemy && player2->checkCollisionType(*enemy) != COLLISION_TYPE_NONE)
+                if (enemy && enemy->GetState() != OBJECT_STATE_DEAD && 
+                    enemy->GetState() != OBJECT_STATE_TO_BE_REMOVED &&
+                    player2->checkCollisionType(*enemy) != COLLISION_TYPE_NONE) {
                     mediatorCollision.HandleCollision(player2, enemy);
+                }
             }
         }
         
         if (player2->GetFireballs()) {
             for (auto& fireball : *player2->GetFireballs()) {
                 if (fireball) {
+                    // Fireball vs tiles
                     for (auto const &tile : interactiveTiles) {
                         if (tile && fireball->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
                             mediatorCollision.HandleCollision(fireball, tile);
                     }
+                    // Fireball vs enemies
                     for (Enemy* enemy : map.GetEnemies()) {
-                        if (enemy && enemy->checkCollisionType(*fireball) != COLLISION_TYPE_NONE)
+                        if (enemy && enemy->GetState() != OBJECT_STATE_DEAD && 
+                            enemy->GetState() != OBJECT_STATE_TO_BE_REMOVED &&
+                            enemy->checkCollisionType(*fireball) != COLLISION_TYPE_NONE) {
                             mediatorCollision.HandleCollision(enemy, fireball);
+                        }
                     }
                 }
             }
@@ -233,13 +255,24 @@ void GameWorld::UpdateWorld()
     // Update Boss positions
     map.SetMarioPositionForBosses(player1->GetPosPtr(), player2 ? player2->GetPosPtr() : nullptr, isMultiplayer);
     
-    // Enemy update
+    // Enemy update - AFTER player collision handling
     for (Enemy* enemy : map.GetEnemies()) {
         if (enemy) {
-            enemy->UpdateStateAndPhysic();
-            for (auto const& tile : interactiveTiles) {
-                if (tile && enemy->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
-                    mediatorCollision.HandleCollision(enemy, tile);
+            // Luôn update dying state và death effect
+            enemy->UpdateDyingState();
+            enemy->UpdateDeathEffect();
+            
+            // Chỉ update physics khi không dying/dead
+            if (enemy->GetState() != OBJECT_STATE_DYING && 
+                enemy->GetState() != OBJECT_STATE_DEAD && 
+                enemy->GetState() != OBJECT_STATE_TO_BE_REMOVED) {
+                enemy->UpdateStateAndPhysic();
+                
+                // Enemy vs tile collisions
+                for (auto const& tile : interactiveTiles) {
+                    if (tile && enemy->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
+                        mediatorCollision.HandleCollision(enemy, tile);
+                }
             }
         }
     }
@@ -295,18 +328,59 @@ void GameWorld::UpdateWorld()
     }
     
     // Cleanup
+    // auto& blocks = map.getBlocks();
+    // blocks.erase(
+    //     std::remove_if(
+    //         blocks.begin(),
+    //         blocks.end(),
+    //         [](Block* block) {
+    //             return (!block || block->GetState() == OBJECT_STATE_TO_BE_REMOVED);
+    //         }
+    //     ),
+    //     blocks.end()
+    // );
+    
+    // auto &interactiveItems = map.GetInteractiveItems();
+    // interactiveItems.erase(
+    //     std::remove_if(
+    //         interactiveItems.begin(),
+    //         interactiveItems.end(),
+    //         [](const std::shared_ptr<Item>& item) {
+    //             return (!item || item->GetState() == OBJECT_STATE_TO_BE_REMOVED || item->GetState() == OBJECT_STATE_DEAD);
+    //         }
+    //     ),
+    //     interactiveItems.end()
+    // );
+    
+    // map.GetEnemies().erase(
+    //     std::remove_if(
+    //         map.GetEnemies().begin(),
+    //         map.GetEnemies().end(),
+    //         [](Enemy* enemy) {
+    //             return (!enemy || enemy->GetState() == OBJECT_STATE_DEAD || enemy->GetState() == OBJECT_STATE_TO_BE_REMOVED);
+    //         }
+    //     ),
+    //     map.GetEnemies().end()
+    // );
+
+    // Cleanup blocks
     auto& blocks = map.getBlocks();
     blocks.erase(
         std::remove_if(
             blocks.begin(),
             blocks.end(),
             [](Block* block) {
-                return (!block || block->GetState() == OBJECT_STATE_TO_BE_REMOVED);
+                if (!block || block->GetState() == OBJECT_STATE_TO_BE_REMOVED) {
+                    delete block; // Free memory
+                    return true;
+                }
+                return false;
             }
         ),
         blocks.end()
     );
     
+    // Cleanup items
     auto &interactiveItems = map.GetInteractiveItems();
     interactiveItems.erase(
         std::remove_if(
@@ -319,12 +393,26 @@ void GameWorld::UpdateWorld()
         interactiveItems.end()
     );
     
+    // Cleanup enemies - THÊM DELETE MEMORY
     map.GetEnemies().erase(
         std::remove_if(
             map.GetEnemies().begin(),
             map.GetEnemies().end(),
             [](Enemy* enemy) {
-                return (!enemy || enemy->GetState() == OBJECT_STATE_DEAD || enemy->GetState() == OBJECT_STATE_TO_BE_REMOVED);
+                if (!enemy) {
+                    return true;
+                }
+                
+                // Cập nhật dying state
+                enemy->UpdateDyingState();
+                enemy->UpdateDeathEffect();
+                
+                // Chỉ xóa khi đã ở trạng thái DEAD
+                if (enemy->GetState() == OBJECT_STATE_DEAD || enemy->GetState() == OBJECT_STATE_TO_BE_REMOVED) {
+                    delete enemy;
+                    return true;
+                }
+                return false;
             }
         ),
         map.GetEnemies().end()
@@ -414,6 +502,7 @@ void GameWorld::DrawWorld()
     DrawTextureEx(background, Vector2{BGpos, -200}, 0.0f, 1.3f, WHITE);
     DrawTextureEx(background, Vector2{BGpos + background.width * 1.3f, -200}, 0.0f, 1.3f, WHITE);
     map.Draw();
+    
     if (player1) player1->Draw();
     if (isMultiplayer && player2) player2->Draw();
     EndMode2D();

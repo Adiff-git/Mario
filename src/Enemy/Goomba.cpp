@@ -7,6 +7,13 @@ Goomba::Goomba(Vector2 pos)
 }
 
 void Goomba::UpdateStateAndPhysic() {
+    UpdateDyingState();
+    
+    // Nếu đang DYING hoặc DEAD, không xử lý physics
+    if (state == OBJECT_STATE_DYING || state == OBJECT_STATE_DEAD) {
+        UpdateDeathEffect();
+        return;
+    }
     const float deltaTime = GetFrameTime();
     if (GetState() == OBJECT_STATE_ON_GROUND) {
         float newVelX = GetVel().x;

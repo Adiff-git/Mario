@@ -312,6 +312,14 @@ void ResrcManager::loadTextures() {
         textures["+3UP"] = LoadTexture("resources/images/gui/gui3Up.png");
 
     }
+    // animation effect
+    {
+        textures["SMOKE_0"] = LoadTexture("resources/images/Object/effects/Puft_0.png");
+        textures["SMOKE_1"] = LoadTexture("resources/images/Object/effects/Puft_1.png");
+        textures["SMOKE_2"] = LoadTexture("resources/images/Object/effects/Puft_2.png");
+        textures["SMOKE_3"] = LoadTexture("resources/images/Object/effects/Puft_3.png");
+
+    }
     // GUI
     {
         textures["GUI_COIN"] = LoadTexture("resources/images/gui/guiCoin.png");

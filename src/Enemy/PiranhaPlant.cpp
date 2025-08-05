@@ -13,6 +13,13 @@ PiranhaPlant::PiranhaPlant(Vector2 pos)
 }
 
 void PiranhaPlant::UpdateStateAndPhysic() {
+    UpdateDyingState();
+    
+    // Nếu đang DYING hoặc DEAD, không xử lý physics
+    if (state == OBJECT_STATE_DYING || state == OBJECT_STATE_DEAD) {
+        UpdateDeathEffect();
+        return;
+    }
     const float deltaTime = GetFrameTime();
     animationTimer += deltaTime;
 

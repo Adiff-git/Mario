@@ -7,6 +7,13 @@ YellowKoopa::YellowKoopa(Vector2 pos)
 }
 
 void YellowKoopa::UpdateStateAndPhysic() {
+    UpdateDyingState();
+    
+    // Nếu đang DYING hoặc DEAD, không xử lý physics
+    if (state == OBJECT_STATE_DYING || state == OBJECT_STATE_DEAD) {
+        UpdateDeathEffect();
+        return;
+    }
     const float deltaTime = GetFrameTime();
     if (GetState() != OBJECT_STATE_ON_GROUND) {
         SetVel(Vector2{GetVel().x, GetVel().y + 9.81f * static_cast<float>(GameClock::GetInstance().FIXED_TIME_STEP)});
