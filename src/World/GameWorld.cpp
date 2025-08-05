@@ -99,6 +99,14 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
         map.GetEnemies().push_back(new Rex(Vector2{1300, 800}));
         map.GetEnemies().push_back(new YellowKoopa(Vector2{1400, 800}));
 
+        for (int i = 0; i < 20; i++) {
+            map.getBlocks().push_back(new WoodBlock(Vector2{0, float(600 + i * 32)}, Vector2{32, 32}, WHITE));
+        }
+        
+        for (int i = 0; i < 20; i++) {
+            map.getBlocks().push_back(new WoodBlock(Vector2{1920, float(600 + i * 32)}, Vector2{32, 32}, WHITE));
+        }
+
         map.getBlocks().push_back(new CloudBlock(Vector2{100, 750}, Vector2{32, 32}, WHITE));
         map.getBlocks().push_back(new EyesClosedBlock(Vector2{150, 750}, Vector2{32, 32}, WHITE));
         map.getBlocks().push_back(new EyesOpenedBlock(Vector2{200, 750}, Vector2{32, 32}, WHITE));
