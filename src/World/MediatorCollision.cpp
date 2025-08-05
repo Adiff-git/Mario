@@ -538,7 +538,7 @@ void MediatorCollision::HandleMarioWithBossFireball(Character *&mario, BossFireb
 
     if (AtoB != COLLISION_TYPE_NONE)
     {
-        mario->Die();
+        mario->BeHit();
         bossFireball->SetState(OBJECT_STATE_DEAD);
         std::cout << "Mario hit by BossFireball - dies instantly!" << std::endl;
     }

@@ -166,6 +166,16 @@ void GameWorld::UpdateWorld()
                     }
                     mediatorCollision.HandleCollision(player1, enemy);
                 }
+                // Handle Player 1 collisions with boss fireballs
+                if (Boss* boss = dynamic_cast<Boss*>(enemy)) {
+                    for (BossFireball* fireball : boss->getProjectiles()) {
+                        if (fireball && fireball->GetState() != OBJECT_STATE_DEAD &&
+                            player1->checkCollisionType(*fireball) != COLLISION_TYPE_NONE) {
+                            mediatorCollision.HandleCollision(player1, fireball);
+                            fireball->SetState(OBJECT_STATE_DEAD); // Mark fireball for removal
+                        }
+                    }
+                }
             }
         }
         
@@ -233,11 +243,20 @@ void GameWorld::UpdateWorld()
                 if (enemy && enemy->GetState() != OBJECT_STATE_DEAD && 
                     enemy->GetState() != OBJECT_STATE_TO_BE_REMOVED &&
                     player2->checkCollisionType(*enemy) != COLLISION_TYPE_NONE) {
-                    // Kiểm tra boss
                     if (Boss* boss = dynamic_cast<Boss*>(enemy)) {
                         if (boss->IsDead()) continue; // Bỏ qua nếu boss đã chết
                     }
                     mediatorCollision.HandleCollision(player2, enemy);
+                }
+                // Handle Player 2 collisions with boss fireballs
+                if (Boss* boss = dynamic_cast<Boss*>(enemy)) {
+                    for (BossFireball* fireball : boss->getProjectiles()) {
+                        if (fireball && fireball->GetState() != OBJECT_STATE_DEAD &&
+                            player2->checkCollisionType(*fireball) != COLLISION_TYPE_NONE) {
+                            mediatorCollision.HandleCollision(player2, fireball);
+                            fireball->SetState(OBJECT_STATE_DEAD); // Mark fireball for removal
+                        }
+                    }
                 }
             }
         }
