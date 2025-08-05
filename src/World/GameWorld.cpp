@@ -79,14 +79,14 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
     
     // Add items for MapID == 1
     if (MapID == 1) {
-        map.GetInteractiveItems().push_back(std::make_shared<Coin>(Vector2{200, 800}));
-        map.GetInteractiveItems().push_back(std::make_shared<CourseClearToken>(Vector2{250, 800}));
-        map.GetInteractiveItems().push_back(std::make_shared<FireFlower>(Vector2{200, 800}));
-        map.GetInteractiveItems().push_back(std::make_shared<Mushroom>(Vector2{300, 800}));
-        map.GetInteractiveItems().push_back(std::make_shared<OneUpMushroom>(Vector2{350, 800}));
-        map.GetInteractiveItems().push_back(std::make_shared<Star>(Vector2{350, 500}));
-        map.GetInteractiveItems().push_back(std::make_shared<ThreeUpMoon>(Vector2{400, 500}));
-        map.GetInteractiveItems().push_back(std::make_shared<YoshiCoin>(Vector2{450, 800}));
+        map.GetInteractiveItems().push_back(std::make_shared<Coin>(Vector2{400, 800}));
+        map.GetInteractiveItems().push_back(std::make_shared<FireFlower>(Vector2{450, 800}));
+        map.GetInteractiveItems().push_back(std::make_shared<Star>(Vector2{600, 500}));
+        map.GetInteractiveItems().push_back(std::make_shared<YoshiCoin>(Vector2{700, 800}));
+        map.GetInteractiveItems().push_back(std::make_shared<CourseClearToken>(Vector2{800, 800}));
+        map.GetInteractiveItems().push_back(std::make_shared<Mushroom>(Vector2{200, 800}));
+        map.GetInteractiveItems().push_back(std::make_shared<ThreeUpMoon>(Vector2{200, 500}));
+        map.GetInteractiveItems().push_back(std::make_shared<OneUpMushroom>(Vector2{200, 800}));
 
         map.GetEnemies().push_back(new BanzaiBill(Vector2{500, 800}));
         map.GetEnemies().push_back(new BulletBill(Vector2{600, 800}));
@@ -99,12 +99,12 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
         map.GetEnemies().push_back(new Rex(Vector2{1300, 800}));
         map.GetEnemies().push_back(new YellowKoopa(Vector2{1400, 800}));
 
-        map.getBlocks().push_back(new CloudBlock(Vector2{100, 800}, Vector2{32, 32}, WHITE));
-        map.getBlocks().push_back(new EyesClosedBlock(Vector2{150, 800}, Vector2{32, 32}, WHITE));
-        map.getBlocks().push_back(new EyesOpenedBlock(Vector2{200, 800}, Vector2{32, 32}, WHITE));
-        map.getBlocks().push_back(new GlassBlock(Vector2{250, 800}, Vector2{32, 32}, WHITE));
-        map.getBlocks().push_back(new QuestionBlock(Vector2{300, 800}, Vector2{32, 32}, WHITE, GIFT_COIN));
-        map.getBlocks().push_back(new WoodBlock(Vector2{350, 800}, Vector2{32, 32}, WHITE));
+        map.getBlocks().push_back(new CloudBlock(Vector2{100, 750}, Vector2{32, 32}, WHITE));
+        map.getBlocks().push_back(new EyesClosedBlock(Vector2{150, 750}, Vector2{32, 32}, WHITE));
+        map.getBlocks().push_back(new EyesOpenedBlock(Vector2{200, 750}, Vector2{32, 32}, WHITE));
+        map.getBlocks().push_back(new GlassBlock(Vector2{250, 750}, Vector2{32, 32}, WHITE));
+        map.getBlocks().push_back(new QuestionBlock(Vector2{300, 750}, Vector2{32, 32}, WHITE, GIFT_COIN));
+        map.getBlocks().push_back(new WoodBlock(Vector2{350, 750}, Vector2{32, 32}, WHITE));
 
 
 
