@@ -8,9 +8,9 @@
 
 
 MenuScreen::MenuScreen(ScreenController* screenController ) : Screen(screenController), 
-startButton(Vector2{1600/2 - 100,900/2 - 50}, Vector2{200, 50}),
-MapEditorButton(Vector2{1600/2 - 228/2 ,900/2 + 60}, Vector2{227, 50}),
-settingsButton(Vector2{1600/2 - 100,900/2 + 120}, Vector2{200, 50}) {
+startButton(Vector2{1600/2 - 150, 900/2 - 100}, Vector2{300, 80}),
+MapEditorButton(Vector2{1600/2 - 150, 900/2 + 10}, Vector2{300, 80}),
+settingsButton(Vector2{1600/2 - 150, 900/2 + 120}, Vector2{300, 80}) {
     backgroundTexture = &ResrcManager::GetInstance().getTexture("MENU_BACKGROUND");
     startButton.SetTexture(ResrcManager::GetInstance().getTexture("START_BUTTON"));
     MapEditorButton.SetTexture(ResrcManager::GetInstance().getTexture("MAP_EDITOR_BUTTON"));

@@ -6,12 +6,14 @@
 
 GameModeScreen::GameModeScreen(ScreenController* screenController)
     : Screen(screenController),
-      singlePlayerButton(Vector2{(float)GetScreenWidth()/2 - 100, 250}, Vector2{200, 60}),
-      multiPlayerButton(Vector2{(float)GetScreenWidth()/2 - 100, 350}, Vector2{200, 60}),
-      backButton(Vector2{50, 50}, Vector2{100, 50})
+      singlePlayerButton(Vector2{(float)GetScreenWidth()/2 - 125, 300}, Vector2{250, 70}),
+      multiPlayerButton(Vector2{(float)GetScreenWidth()/2 - 125, 400}, Vector2{250, 70}),
+      backButton(Vector2{50, 50}, Vector2{80, 80})
 {
-    singlePlayerButton.SetTexture(ResrcManager::GetInstance().getTexture("SINGLE_PLAYER_BUTTON"));
-    multiPlayerButton.SetTexture(ResrcManager::GetInstance().getTexture("MULTI_PLAYER_BUTTON"));
+    backgroundTexture = &ResrcManager::GetInstance().getTexture("BACKGROUND_10");
+    choosePlayerTexture = &ResrcManager::GetInstance().getTexture("CHOOSE PLAYER");
+    singlePlayerButton.SetTexture(ResrcManager::GetInstance().getTexture("1_PLAYER"));
+    multiPlayerButton.SetTexture(ResrcManager::GetInstance().getTexture("2_PLAYERS"));
     backButton.SetTexture(ResrcManager::GetInstance().getTexture("BACK_BUTTON"));
 }
 
@@ -40,18 +42,20 @@ void GameModeScreen::Update() {
 }
 
 void GameModeScreen::Draw() {
-    ClearBackground(SKYBLUE);
+    // Draw full screen background texture (bottom layer)
+    DrawTexturePro(*backgroundTexture, 
+                   Rectangle{0, 0, (float)backgroundTexture->width, (float)backgroundTexture->height},
+                   Rectangle{0, 0, (float)GetScreenWidth(), (float)GetScreenHeight()},
+                   Vector2{0, 0}, 0.0f, WHITE);
     
-    // Draw title
-    DrawText("SELECT GAME MODE", GetScreenWidth()/2 - 150, 150, 30, WHITE);
+    // Draw "CHOOSE PLAYER" background texture (centered perfectly)
+    DrawTexturePro(*choosePlayerTexture, 
+                   Rectangle{0, 0, (float)choosePlayerTexture->width, (float)choosePlayerTexture->height},
+                   Rectangle{(float)GetScreenWidth()/2 - 500, (float)GetScreenHeight()/2 - 250, 1000, 500},
+                   Vector2{0, 0}, 0.0f, WHITE);
     
-    // Draw buttons
+    // Draw buttons (these will appear on top of the background)
     singlePlayerButton.Draw();
     multiPlayerButton.Draw();
     backButton.Draw();
-    
-    // Draw button labels
-    DrawText("1 PLAYER", GetScreenWidth()/2 - 50, 270, 20, BLACK);
-    DrawText("2 PLAYERS", GetScreenWidth()/2 - 55, 370, 20, BLACK);
-    DrawText("BACK", 75, 65, 16, BLACK);
 }

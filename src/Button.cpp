@@ -48,11 +48,7 @@ void Button::Update() {
 }
 
 void Button::Draw() {
-    // Draw the button background
-    DrawRectangleRounded(CurButton, 0.5f, 360, WHITE); 
-    DrawRectangleRoundedLinesEx(CurButton, 0.5f, 360, 3.0f, BLACK);
-
-    // Draw the texture if it exists
+    // Draw the texture if it exists (no background rectangle)
     if (texture) {
         TextureButton = {CurButton.x, CurButton.y, CurButton.width, CurButton.height}; // Ensure TextureButton matches CurButton
         DrawTexturePro(*texture, Rectangle{0, 0, (float)texture->width, (float)texture->height}, TextureButton, Vector2{0, 0}, 0.0f, WHITE);
