@@ -18,10 +18,10 @@ Fireball::Fireball(Vector2 pos, Direction direction) : Object(pos, Vector2{16,16
     cpS.setColor(RED);
     cpE.setColor(RED);
     cpW.setColor(RED);
-    cpN.setSize(Vector2{size.x-8, 1});
-    cpS.setSize(Vector2{size.x-8, 1});
-    cpE.setSize(Vector2{1, size.y-8});
-    cpW.setSize(Vector2{1, size.y-8});
+    cpN.setSize(Vector2{size.x-8, 3});
+    cpS.setSize(Vector2{size.x-8, 3});
+    cpE.setSize(Vector2{3, size.y-8});
+    cpW.setSize(Vector2{3, size.y-8});
     UpdateCollisionProbes();
 }
 

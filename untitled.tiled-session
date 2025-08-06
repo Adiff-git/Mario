@@ -3,11 +3,14 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "resources/maps/map2.json",
+    "activeFile": "",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        ":/automap-tiles.tsx": {
+            "scaleInDock": 1
+        },
         "D:/Downloads/untitled.tmx": {
             "scale": 0.5826171875,
             "selectedLayer": 0,
@@ -32,6 +35,14 @@
                 "y": 480.561403508772
             }
         },
+        "resources/maps/map1.json": {
+            "scale": 0.5826171875,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1023.8283607106938,
+                "y": 479.7318136104592
+            }
+        },
         "resources/maps/map2.json": {
             "scale": 0.25,
             "selectedLayer": 0,
@@ -49,7 +60,9 @@
             }
         },
         "resources/maps/map2.tsx": {
-            "scaleInDock": 0.33
+            "dynamicWrapping": false,
+            "scaleInDock": 0.33,
+            "scaleInEditor": 1
         },
         "resources/maps/map4.json": {
             "scale": 0.2375,
@@ -61,17 +74,18 @@
         }
     },
     "last.exportedFilePath": "D:/Downloads/Ref/Gia/Mario/resources/maps",
-    "last.externalTilesetPath": "D:/prj3/Mario",
+    "last.externalTilesetPath": "D:/Downloads/Ref/Gia/Mario",
     "last.imagePath": "D:/Downloads/Ref/Gia/Mario/resources/images/tiles",
-    "map.height": 30,
+    "map.height": 40,
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "tmx",
-    "map.width": 64,
+    "map.width": 80,
     "openFiles": [
-        "resources/maps/map2.json"
     ],
     "project": "untitled.tiled-project",
     "recentFiles": [
+        "resources/maps/map2.tsx",
+        "resources/maps/map1.json",
         "resources/maps/map2.json",
         "map0.tsx",
         "resources/maps/map0.json",
@@ -79,6 +93,7 @@
         "D:/Downloads/untitled.tmx",
         "resources/maps/map2.tmx"
     ],
+    "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
     "tileset.type": 1
 }
