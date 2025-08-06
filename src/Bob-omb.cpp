@@ -1,9 +1,10 @@
+
 #include "../inc/Enemy/Bob-omb.h"
 #include "../inc/World/GameWorld.h"
 
 Bob_omb::Bob_omb(Vector2 pos) 
-    : Enemy(pos, Vector2{32, 32}, Vector2{20, 0}, BLACK, 0.2f, 0, DIRECTION_RIGHT) {
-    sprite = &ResrcManager::GetInstance().getTexture("Bob-omb_Right_0");
+    : Enemy(pos, Vector2{32, 32}, Vector2{-20, 0}, BLACK, 0.2f, 0, DIRECTION_LEFT) {
+    sprite = &ResrcManager::GetInstance().getTexture("Bob-omb_0");
     
 }
 
@@ -25,7 +26,7 @@ void Bob_omb::UpdateStateAndPhysic() {
     if (state == OBJECT_STATE_ON_GROUND) {
         vel.y = 0;
     }
-    Object::UpdateStateAndPhysic();
+
     vel.y += GameWorld::GetGravity() * deltaTime;
     const int updateThreshold = 50; // Animation chuyển đổi mỗi ~0.83 giây
 
