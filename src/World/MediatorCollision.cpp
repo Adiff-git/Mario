@@ -144,6 +144,42 @@ void MediatorCollision::HandleItemWithTile(Item *&item, Tile *&tile, CollisionTy
     }
 }
 
+void HandleEnemyWithBlock(Enemy*& enemy, Block*& block, CollisionType AtoB)
+{
+    if (AtoB == COLLISION_TYPE_NONE)
+        return;
+    switch (AtoB)
+    {
+    case COLLISION_TYPE_SOUTH:
+    {
+        enemy->SetPos(Vector2{enemy->GetPos().x, block->GetPos().y - enemy->GetSize().y});
+        enemy->SetState(OBJECT_STATE_ON_GROUND);
+        enemy->SetVel(Vector2{enemy->GetVel().x, 0});
+        break;
+    }
+    case COLLISION_TYPE_NORTH:
+    {
+        enemy->SetPos(Vector2{enemy->GetPos().x, block->GetPos().y + block->GetSize().y});
+        enemy->SetVel(Vector2{enemy->GetVel().x, 0});
+        break;
+    }
+    case COLLISION_TYPE_EAST:
+    {
+        enemy->SetPos(Vector2{block->GetPos().x - enemy->GetSize().x, enemy->GetPos().y});
+        enemy->SetVel(Vector2{-enemy->GetVel().x, enemy->GetVel().y});
+        enemy->SetDirection(DIRECTION_LEFT);
+        break;
+    }
+    case COLLISION_TYPE_WEST:
+    {
+        enemy->SetPos(Vector2{block->GetPos().x + block->GetSize().x, enemy->GetPos().y});
+        enemy->SetVel(Vector2{-enemy->GetVel().x, enemy->GetVel().y});
+        enemy->SetDirection(DIRECTION_RIGHT);
+        break;
+    }
+    }
+}
+
 void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
 {
     Character* marioA = dynamic_cast<Character*>(ObjectA);
@@ -238,6 +274,13 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
         BossFireball *bossFireball = bossFireballA ? bossFireballA : bossFireballB;
         CollisionType type = mario->checkCollisionType(*bossFireball);
         HandleMarioWithBossFireball(mario, bossFireball, type);
+    }
+    else if((enemyA && blockB) || (blockA && enemyB))
+    {
+        Enemy *enemy = enemyA ? enemyA : enemyB;
+        Block *block = blockA ? blockA : blockB;
+        CollisionType type = enemy->checkCollisionType(*block);
+        HandleEnemyWithBlock(enemy, block, type);
     }
 }
 

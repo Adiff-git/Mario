@@ -1,12 +1,6 @@
 #include "../inc/Enemy/BulletBill.h"
 #include "../inc/World/GameWorld.h"
 
-BulletBill::BulletBill(Vector2 pos) 
-    : Enemy(pos, Vector2{32, 16}, Vector2{1, 0}, GRAY, 0.2f, 0, DIRECTION_RIGHT) {
-    sprite = &ResrcManager::GetInstance().getTexture("bulletbill");
-    maxSpeedX = 1.0f; // Tốc độ tối đa bằng vận tốc ban đầu
-}
-
 void BulletBill::UpdateStateAndPhysic()  {
     UpdateDyingState();
     
@@ -22,4 +16,10 @@ void BulletBill::UpdateStateAndPhysic()  {
     // Dùng texture cố định, không cần animation
     sprite = &ResrcManager::GetInstance().getTexture("BulletBill");
     textureIndex = 0;
+}
+
+BulletBill::BulletBill(Vector2 pos) 
+    : Enemy(pos, Vector2{32, 28}, Vector2{1, 0}, GRAY, 0.2f, 0, DIRECTION_RIGHT) {
+    sprite = &ResrcManager::GetInstance().getTexture("BulletBill");
+    maxSpeedX = 1.0f; // Tốc độ tối đa bằng vận tốc ban đầu
 }

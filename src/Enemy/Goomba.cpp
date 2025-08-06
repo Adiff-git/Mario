@@ -3,7 +3,7 @@
 
 Goomba::Goomba(Vector2 pos) 
     : Enemy(pos, Vector2{32, 32}, Vector2{5, 0}, RED, 0.2f, 0, DIRECTION_RIGHT) {
-    sprite = &ResrcManager::GetInstance().getTexture("GOOMBA_0");
+    sprite = &ResrcManager::GetInstance().getTexture("GOOMBA_0_RIGHT");
 }
 
 void Goomba::UpdateStateAndPhysic() {

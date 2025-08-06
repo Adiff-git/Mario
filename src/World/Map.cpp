@@ -8,7 +8,6 @@ Map::~Map()
         delete tile;
         tile = nullptr;
     }
-    nonInteractiveTiles.clear();
 }
 
 std::vector<Tile *> &Map::getInteractiveTiles()
@@ -66,6 +65,7 @@ void Map::LoadMap(int mapIndex)
     int height = mapJson["height"];
     this->width = (float) width * 32.0f;
     int tilewidth = mapJson["tilewidth"];
+    int tileheight = mapJson["tileheight"];
     std::vector<int> data = mapJson["layers"][0]["data"];
 
     for (int y = 0; y < height; ++y) {
@@ -74,75 +74,89 @@ void Map::LoadMap(int mapIndex)
             if (tileId == 0)
                 continue;
             else if(tileId == 105) {
-                blocks.push_back(new CloudBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE));
-            }
-            else if(tileId == 116) {
-                blocks.push_back(new QuestionBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE, GIFT_NONE));
-            }
-            else if(tileId == 117) {
-                blocks.push_back(new QuestionBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE, GIFT_COIN));
-            }
-            else if(tileId == 118) {
-                blocks.push_back(new QuestionBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE, GIFT_FIRE_FLOWER));
-            }
-
-            else if (tileId == 121) {
-                blocks.push_back(new WoodBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE));
-            }
-            else if (tileId == 112) {
-                blocks.push_back(new GlassBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE));
-            }
-            else if (tileId == 108) {
-                blocks.push_back(new EyesOpenedBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE));
+                blocks.push_back(new CloudBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE));
             }
             else if (tileId == 107) {
-                blocks.push_back(new EyesClosedBlock({(float)x * 32, (float)y * 32}, {32, 32}, WHITE));
+                blocks.push_back(new EyesClosedBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE));
+            }
+            else if (tileId == 108) {
+                blocks.push_back(new EyesOpenedBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE));
+            }
+            else if(tileId == 116) {
+                blocks.push_back(new QuestionBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE, GIFT_NONE));
+            }
+            else if(tileId == 117) {
+                blocks.push_back(new QuestionBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE, GIFT_COIN));
+            }
+            else if(tileId == 118) {
+                blocks.push_back(new QuestionBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE, GIFT_FIRE_FLOWER));
+            }
+            else if (tileId == 120) {
+                blocks.push_back(new WoodBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE));
+            }
+            else if (tileId == 112) {
+                blocks.push_back(new GlassBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE));
+            }
+            else if(tileId == 122) {
+                enemies.push_back(new Bob_omb(Vector2{(float)x * tilewidth , (float)(y * tileheight - 20)}));
             }
             else if(tileId == 135) {
-                enemies.push_back(new Rex(Vector2{(float)x * 32 , (float)(y * 32 - 35)}));
-            }
-            else if(tileId == 128) {
-                enemies.push_back(new GreenKoopa(Vector2{(float)x * 32 , (float)(y * 32 - 20)}));
+                enemies.push_back(new Rex(Vector2{(float)x * tilewidth , (float)(y * tileheight - 35)}));
             }
             else if(tileId == 127) {
-                enemies.push_back(new Goomba(Vector2{(float)x * 32 , (float)(y * 32 - 20)}));
-            }
-            else if(tileId == 125) {
-                enemies.push_back(new BuzzyBeetle(Vector2{(float)x * 32 , (float)(y * 32 - 20)}));
+                enemies.push_back(new GreenKoopa(Vector2{(float)x * tilewidth , (float)(y * tileheight - 20)}));
             }
             else if(tileId == 126) {
-                enemies.push_back(new FlyingGoomba(Vector2{(float)x * 32 , (float)(y * 32 - 20)}));
+                enemies.push_back(new Goomba(Vector2{(float)x * tilewidth , (float)(y * tileheight - 20)}));
+            }
+            else if(tileId == 124) {
+                enemies.push_back(new BuzzyBeetle(Vector2{(float)x * tilewidth , (float)(y * tileheight)}));
+            }
+            else if(tileId == 125) {
+                enemies.push_back(new FlyingGoomba(Vector2{(float)x * tilewidth , (float)(y * tileheight)}));
+            }
+            else if(tileId == 123) {
+                enemies.push_back(new BulletBill(Vector2{(float)x * tilewidth , (float)(y * tileheight )}));
+            }
+            else if(tileId == 129) {
+                enemies.push_back(new RedKoopa(Vector2{(float)x * tilewidth, (float)y * tileheight}));
+            }
+            else if(tileId == 128) {
+                enemies.push_back(new PiranhaPlant(Vector2{(float)x * tilewidth, (float)y * tileheight}));
+            }
+            else if(tileId == 136){
+                enemies.push_back(new YellowKoopa(Vector2{(float)x * tilewidth, (float)y * tileheight}));
             }
             else if (tileId == 138) {
                 // 1UpMushroom
-                interactiveItems.push_back(std::make_shared<OneUpMushroom>(Vector2{(float)x * 32, (float)y * 32}));
+                interactiveItems.push_back(std::make_shared<OneUpMushroom>(Vector2{(float)x * tilewidth, (float)y * tileheight}));
             }
             else if (tileId == 139) {
                 // 3UpMoon
-                interactiveItems.push_back(std::make_shared<ThreeUpMoon>(Vector2{(float)x * 32, (float)y * 32}));
+                interactiveItems.push_back(std::make_shared<ThreeUpMoon>(Vector2{(float)x * tilewidth, (float)y * tileheight}));
             }
             else if (tileId == 140) {
                 // Coin
-                interactiveItems.push_back(std::make_shared<Coin>(Vector2{(float)x * 32, (float)y * 32}));
+                interactiveItems.push_back(std::make_shared<Coin>(Vector2{(float)x * tilewidth, (float)y * tileheight}));
             }
             else if (tileId == 141) {
                 // FireFlower
-                interactiveItems.push_back(std::make_shared<FireFlower>(Vector2{(float)x * 32, (float)y * 32}));
+                interactiveItems.push_back(std::make_shared<FireFlower>(Vector2{(float)x * tilewidth, (float)y * tileheight}));
             }
             else if (tileId == 142) {
                 // Mushroom
-                interactiveItems.push_back(std::make_shared<Mushroom>(Vector2{(float)x * 32, (float)y * 32}));
+                interactiveItems.push_back(std::make_shared<Mushroom>(Vector2{(float)x * tilewidth, (float)y * tileheight}));
             }
             else if (tileId == 143) {
                 // Star
-                interactiveItems.push_back(std::make_shared<Star>(Vector2{(float)x * 32, (float)y * 32}));
+                interactiveItems.push_back(std::make_shared<Star>(Vector2{(float)x * tilewidth, (float)y * tileheight}));
             }
             else if (tileId == 144) {
                 // YoshiCoin
-                interactiveItems.push_back(std::make_shared<YoshiCoin>(Vector2{(float)x * 32, (float)y * 32}));
+                interactiveItems.push_back(std::make_shared<YoshiCoin>(Vector2{(float)x * tilewidth, (float)y * tileheight}));
             }
-            else if(tileId <=104) {
-                interactiveTiles.push_back(new Tile(Vector2{(float) x * 32,(float) y * 32 },mapIndex ,tileId-1));
+            else if(tileId < 105) {
+                interactiveTiles.push_back(new Tile(Vector2{(float) x * tilewidth,(float) y * tileheight},mapIndex ,tileId));
             }else continue;
         }
     }
@@ -182,6 +196,12 @@ void Map :: LoadFromJsonFile(const std::string& filepath){
             else if(tileId == 105) {
                 blocks.push_back(new CloudBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE));
             }
+            else if (tileId == 107) {
+                blocks.push_back(new EyesClosedBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE));
+            }
+            else if (tileId == 108) {
+                blocks.push_back(new EyesOpenedBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE));
+            }
             else if(tileId == 116) {
                 blocks.push_back(new QuestionBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE, GIFT_NONE));
             }
@@ -191,33 +211,41 @@ void Map :: LoadFromJsonFile(const std::string& filepath){
             else if(tileId == 118) {
                 blocks.push_back(new QuestionBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE, GIFT_FIRE_FLOWER));
             }
-
-            else if (tileId == 121) {
+            else if (tileId == 120) {
                 blocks.push_back(new WoodBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE));
             }
             else if (tileId == 112) {
                 blocks.push_back(new GlassBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE));
             }
-            else if (tileId == 108) {
-                blocks.push_back(new EyesOpenedBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE));
-            }
-            else if (tileId == 107) {
-                blocks.push_back(new EyesClosedBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE));
+            else if(tileId == 122) {
+                enemies.push_back(new Bob_omb(Vector2{(float)x * tilewidth , (float)(y * tileheight - 20)}));
             }
             else if(tileId == 135) {
                 enemies.push_back(new Rex(Vector2{(float)x * tilewidth , (float)(y * tileheight - 35)}));
             }
-            else if(tileId == 128) {
+            else if(tileId == 127) {
                 enemies.push_back(new GreenKoopa(Vector2{(float)x * tilewidth , (float)(y * tileheight - 20)}));
             }
-            else if(tileId == 127) {
+            else if(tileId == 126) {
                 enemies.push_back(new Goomba(Vector2{(float)x * tilewidth , (float)(y * tileheight - 20)}));
             }
-            else if(tileId == 125) {
-                enemies.push_back(new BuzzyBeetle(Vector2{(float)x * tilewidth , (float)(y * tileheight - 20)}));
+            else if(tileId == 124) {
+                enemies.push_back(new BuzzyBeetle(Vector2{(float)x * tilewidth , (float)(y * tileheight)}));
             }
-            else if(tileId == 126) {
-                enemies.push_back(new FlyingGoomba(Vector2{(float)x * tilewidth , (float)(y * tileheight - 20)}));
+            else if(tileId == 125) {
+                enemies.push_back(new FlyingGoomba(Vector2{(float)x * tilewidth , (float)(y * tileheight)}));
+            }
+            else if(tileId == 123) {
+                enemies.push_back(new BulletBill(Vector2{(float)x * tilewidth , (float)(y * tileheight )}));
+            }
+            else if(tileId == 129) {
+                enemies.push_back(new RedKoopa(Vector2{(float)x * tilewidth, (float)y * tileheight}));
+            }
+            else if(tileId == 128) {
+                enemies.push_back(new PiranhaPlant(Vector2{(float)x * tilewidth, (float)y * tileheight}));
+            }
+            else if(tileId == 136){
+                enemies.push_back(new YellowKoopa(Vector2{(float)x * tilewidth, (float)y * tileheight}));
             }
             else if (tileId == 138) {
                 // 1UpMushroom
@@ -247,8 +275,8 @@ void Map :: LoadFromJsonFile(const std::string& filepath){
                 // YoshiCoin
                 interactiveItems.push_back(std::make_shared<YoshiCoin>(Vector2{(float)x * tilewidth, (float)y * tileheight}));
             }
-            else if(tileId <=104) {
-                interactiveTiles.push_back(new Tile(Vector2{(float) x * tilewidth,(float) y * tileheight }  ,mapIndex ,tileId-1));
+            else if(tileId < 105) {
+                interactiveTiles.push_back(new Tile(Vector2{(float) x * tilewidth,(float) y * tileheight},mapIndex ,tileId));
             }else continue;
         }
     }
@@ -257,10 +285,6 @@ void Map :: LoadFromJsonFile(const std::string& filepath){
 void Map::Draw()
 {
     for (auto tile : interactiveTiles) {
-        tile->Draw();
-    }
-
-    for (auto tile : nonInteractiveTiles) {
         tile->Draw();
     }
 

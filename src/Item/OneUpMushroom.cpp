@@ -100,7 +100,6 @@ void OneUpMushroom::Update()
 
 void OneUpMushroom::Draw()
 {
-    Update();
     if (state == OBJECT_STATE_TO_BE_REMOVED || state == OBJECT_STATE_DEAD)
         return;
 

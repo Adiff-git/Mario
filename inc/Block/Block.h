@@ -24,7 +24,6 @@ class Block : public Object {
 protected:
     bool hit;
     BlockType blockType = BLOCK_QUESTION;
-    GiftType giftType = GIFT_NONE;
 public:
 
     Block();
@@ -39,6 +38,6 @@ public:
     bool isHit() const { return hit; }
 
     BlockType GetBlockType();
-    GiftType  virtual GetGiftType() { return giftType; }
-
+    GiftType GetGiftType() { return giftType;}
+    GiftType giftType = GIFT_NONE;
 };

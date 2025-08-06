@@ -32,6 +32,10 @@
 #include "../inc/Item/YoshiCoin.h"
 #include "../inc/Item/CourseClearToken.h"
 #include "../inc/Item/FireFlower.h"
+#include "../inc/Enemy/Bob-omb.h"
+#include "../inc/Enemy/BulletBill.h"
+#include "../inc/Enemy/PiranhaPlant.h"
+#include "../inc/Enemy/YellowKoopa.h"
 #include <regex>
 
 class Map : public Drawable {

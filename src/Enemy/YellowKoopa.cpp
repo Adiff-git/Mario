@@ -3,7 +3,7 @@
 
 YellowKoopa::YellowKoopa(Vector2 pos) 
     : Enemy(pos, Vector2{32, 48}, Vector2{5, 0}, YELLOW, 0.2f, 0, DIRECTION_RIGHT) {
-    sprite = &ResrcManager::GetInstance().getTexture("YellowKoopaTroopa_0");
+    sprite = &ResrcManager::GetInstance().getTexture("YellowKoopaTroopa_0_RIGHT");
 }
 
 void YellowKoopa::UpdateStateAndPhysic() {
