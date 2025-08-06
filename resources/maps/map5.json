@@ -56,7 +56,7 @@
         {
          "firstgid":1,
          "source":"map2.tsx"
-<<<<<<< HEAD
+
         }, 
         {
          "columns":0,
@@ -67,8 +67,6 @@
          "tilecount":0,
          "tileheight":1,
          "tilewidth":1
-=======
->>>>>>> 14dc6b25b936d94af17dbb51f5d8bbc1d3f9d824
         }],
  "tilewidth":32,
  "type":"map",
