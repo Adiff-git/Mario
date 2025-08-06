@@ -4,7 +4,7 @@
 #include <iostream> // Thêm để debug
 
 Rex::Rex(Vector2 pos) 
-    : Enemy(pos, Vector2{48, 64}, Vector2{5, 0}, GREEN, 0.3f, 0, DIRECTION_RIGHT) {
+    : Enemy(pos, Vector2{48, 64}, Vector2{-5, 0}, GREEN, 0.3f, 0, DIRECTION_LEFT) {
     sprite = &ResrcManager::GetInstance().getTexture("REX_0_RIGHT");
     jumpCooldown = 0;
     hitCount = 0;

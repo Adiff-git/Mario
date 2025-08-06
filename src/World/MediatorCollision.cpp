@@ -510,12 +510,14 @@ void MediatorCollision::HandleMarioWithEnemy(Character*& mario, Enemy*& enemy, C
             if (rex->GetHitCount() >= 2)
             {
                 rex->CreateDeathEffect();
+                rex->CreateScoreEffect(100); // Thêm dòng này để tạo text cộng điểm
                 rex->SetState(OBJECT_STATE_DYING);
             }
         }
         else
         {
             enemy->CreateDeathEffect();
+            enemy->CreateScoreEffect(100); // Thêm dòng này để tạo text cộng điểm
             enemy->SetHitByFireball(true);
             enemy->SetState(OBJECT_STATE_DYING);
             RedKoopa *redKoopa = dynamic_cast<RedKoopa *>(enemy);
@@ -526,6 +528,7 @@ void MediatorCollision::HandleMarioWithEnemy(Character*& mario, Enemy*& enemy, C
                 bool fromLeft = (marioX < koopaX);
                 redKoopa->OnHit(fromLeft);
                 redKoopa->CreateDeathEffect();
+                redKoopa->CreateScoreEffect(100); // Thêm dòng này để tạo text cộng điểm
                 redKoopa->SetState(OBJECT_STATE_DYING);
             }
         }
@@ -568,6 +571,7 @@ void MediatorCollision::HandleEnemyWithFireball(Enemy *&enemy, Fireball *&fireba
         return;
     }
     enemy->CreateDeathEffect();
+    enemy->CreateScoreEffect(100); // Thêm dòng này để tạo text cộng điểm
     enemy->SetState(OBJECT_STATE_DYING);
     std::cout << "Enemy dies by fireball" << std::endl;
 }

@@ -4,7 +4,8 @@
 #include "Enemy.h"
 #include "ResrcManager.h"
 
-class BuzzyBeetle : public Enemy {
+class BuzzyBeetle : public Enemy
+{
 public:
     BuzzyBeetle(Vector2 pos);
     void UpdateStateAndPhysic() override;

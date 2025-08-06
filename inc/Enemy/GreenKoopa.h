@@ -4,7 +4,8 @@
 #include "Enemy.h"
 #include "ResrcManager.h"
 
-class GreenKoopa : public Enemy {
+class GreenKoopa : public Enemy
+{
 public:
     GreenKoopa(Vector2 pos);
     void UpdateStateAndPhysic() override;

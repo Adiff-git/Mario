@@ -64,6 +64,7 @@ public:
     void SetSprite(Texture2D sprite);
     void SetState(ObjectState state);
     void SetScore(int score);
+    void AddScore(int points); 
 
 
     void SetDucking(bool ducking) {
