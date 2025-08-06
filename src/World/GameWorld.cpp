@@ -18,7 +18,7 @@
     GameWorld::GameWorld() : player1(nullptr), player2(nullptr), interactiveTiles(map.getInteractiveTiles())
 {
     player1 = new Luigi(Vector2{100, 100}, 3, SMALL, ControlType::ARROWS);
-    map.LoadMap(3);
+    map.LoadMap(5);
     camera.offset = Vector2{(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
     camera.target = player1->GetPos();
     camera.rotation = 0.0f;
@@ -83,7 +83,7 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
         map.GetInteractiveItems().push_back(std::make_shared<FireFlower>(Vector2{450, 800}));
         map.GetInteractiveItems().push_back(std::make_shared<Star>(Vector2{600, 500}));
         map.GetInteractiveItems().push_back(std::make_shared<YoshiCoin>(Vector2{700, 800}));
-        map.GetInteractiveItems().push_back(std::make_shared<CourseClearToken>(Vector2{800, 800}));
+        // map.GetInteractiveItems().push_back(std::make_shared<CourseClearToken>(Vector2{800, 800}));
         map.GetInteractiveItems().push_back(std::make_shared<Mushroom>(Vector2{200, 800}));
         map.GetInteractiveItems().push_back(std::make_shared<ThreeUpMoon>(Vector2{200, 500}));
         map.GetInteractiveItems().push_back(std::make_shared<OneUpMushroom>(Vector2{200, 800}));
@@ -169,7 +169,7 @@ void GameWorld::UpdateWorld()
             player1->GetState() != OBJECT_STATE_DYING &&
             player1->GetState() != OBJECT_STATE_VICTORY)
         {
-            if (player1->GetPos().y > 900) // KIỂM TRA VỊ TRÍ PLAYER 1
+            if (player1->GetPos().y > 1000) // KIỂM TRA VỊ TRÍ PLAYER 1
             {
                 player1->Die();
             }
