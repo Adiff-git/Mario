@@ -611,16 +611,16 @@ void GameWorld::UpdateWorld()
             {
                 player1->Die();
             }
-            if (player1->GetPos().x > 1900)
-            {
-                player1->SetState(OBJECT_STATE_VICTORY);
-                player1->Victory();
-                if (player2)
-                {
-                    player2->SetState(OBJECT_STATE_VICTORY);
-                    player2->Victory(); // Ensure both players reach victory state
-                }
-            }
+            // if (player1->GetPos().x > 1900)
+            // {
+            //     player1->SetState(OBJECT_STATE_VICTORY);
+            //     player1->Victory();
+            //     if (player2)
+            //     {
+            //         player2->SetState(OBJECT_STATE_VICTORY);
+            //         player2->Victory(); // Ensure both players reach victory state
+            //     }
+            // }
             // Handle Player 1 collisions
             // Handle Player 1 collisions with tiles
             for (auto const &tile : interactiveTiles)
@@ -709,13 +709,13 @@ void GameWorld::UpdateWorld()
             player2->GetState() != OBJECT_STATE_DYING &&
             player2->GetState() != OBJECT_STATE_VICTORY)
         {
-            if (player2->GetPos().x > 1900)
-            {
-                player2->SetState(OBJECT_STATE_VICTORY);
-                player1->SetState(OBJECT_STATE_VICTORY);
-                player1->Victory();
-                player2->Victory(); // Ensure both players reach victory state
-            }
+            // if (player2->GetPos().x > 1900)
+            // {
+            //     player2->SetState(OBJECT_STATE_VICTORY);
+            //     player1->SetState(OBJECT_STATE_VICTORY);
+            //     player1->Victory();
+            //     player2->Victory(); // Ensure both players reach victory state
+            // }
             if (player2->GetPos().y > 900) // KIỂM TRA VỊ TRÍ PLAYER 2
             {
                 player2->Die();
