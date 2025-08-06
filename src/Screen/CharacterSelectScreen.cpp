@@ -1,6 +1,6 @@
 #include "../inc/Screen/CharacterSelectScreen.h"
 #include "../inc/Screen/GameModeScreen.h"
-#include "../inc/Screen/GameScreen.h"
+#include "../inc/Screen/MapSelectScreen.h"
 #include "ResrcManager.h"
 #include "SoundManager.h"
 
@@ -63,7 +63,7 @@ void CharacterSelectScreen::Update() {
     // Start game if conditions are met
     if (startButton.IsPressed() && CanStartGame()) {
         SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
-        screenController->ChangeScreen(new GameScreen(screenController, isMultiplayer, player1Character, player2Character));
+        screenController->ChangeScreen(new MapSelectScreen(screenController, isMultiplayer, player1Character, player2Character));
     }
     
     if (backButton.IsPressed()) {

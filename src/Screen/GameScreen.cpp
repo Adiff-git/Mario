@@ -1,5 +1,6 @@
 #include "../inc/Screen/GameScreen.h"
 #include "../inc/Screen/MenuScreen.h"
+#include "../inc/Screen/MapSelectScreen.h"
 #include "SoundManager.h"
 GameScreen::GameScreen(ScreenController* screenController)
     : Screen(screenController), 
@@ -59,6 +60,83 @@ GameScreen::GameScreen(ScreenController* screenController, bool multiplayer,
     BackMenu.SetTexture(ResrcManager::GetInstance().getTexture("BACK_BUTTON"));  
     SoundManager::GetInstance().StopAllSounds();
     string musicKey = "GAMEWORLD_" + std::to_string(level) ;
+    SoundManager::GetInstance().PlayMusic(musicKey);
+}
+
+GameScreen::GameScreen(ScreenController* screenController, bool multiplayer, 
+    CharacterType p1Type, CharacterType p2Type, MapType map, DifficultyLevel difficulty)
+        : Screen(screenController), 
+        BackMenu(Vector2{50, 50}, Vector2{50, 50}), 
+        level(1), 
+        transitionState(TransitionState::NONE), 
+        transitionTime(1.0f), 
+        transitionTimeAcum(0.0f),
+        gameHUD(nullptr),
+        isMultiplayer(multiplayer),
+        player1Type(p1Type),
+        player2Type(p2Type),
+        selectedMap(map),
+        selectedDifficulty(difficulty)
+{
+    // Adjust level based on map selection
+    switch(map) {
+        case MapType::MAP_1: level = 1; break;
+        case MapType::MAP_2: level = 2; break;
+        case MapType::MAP_3: level = 3; break;
+        default: level = 1; break;
+    }
+
+    // Calculate enemy speed multiplier based on both map level and difficulty
+    float baseSpeedMultiplier = 1.0f;
+    float levelMultiplier = 1.0f;
+    
+    // Base multiplier from difficulty (more dramatic differences)
+    switch(difficulty) {
+        case DifficultyLevel::EASY: baseSpeedMultiplier = 0.6f; break;    // 40% slower
+        case DifficultyLevel::MEDIUM: baseSpeedMultiplier = 1.0f; break;  // Normal speed
+        case DifficultyLevel::HARD: baseSpeedMultiplier = 1.8f; break;    // 80% faster
+        default: baseSpeedMultiplier = 1.0f; break;
+    }
+    
+    // Additional multiplier from map level (much more dramatic increase)
+    switch(level) {
+        case 1: levelMultiplier = 1.0f; break;   
+        case 2: levelMultiplier = 2.0f; break;   
+        case 3: levelMultiplier = 4.0f; break;   
+        default: levelMultiplier = 1.0f; break;
+    }
+    
+    // Combine both multipliers for dramatic effect
+    float enemySpeedMultiplier = baseSpeedMultiplier * levelMultiplier;
+
+    gameWorld = std::make_unique<GameWorld>(level, this, multiplayer, p1Type, p2Type, enemySpeedMultiplier);
+
+    // Initialize Player 1
+    int initialLives = 3;
+    switch(difficulty) {
+        case DifficultyLevel::EASY: initialLives = 5; break;
+        case DifficultyLevel::MEDIUM: initialLives = 3; break;
+        case DifficultyLevel::HARD: initialLives = 1; break;
+        default: initialLives = 3; break;
+    }
+
+    gameWorld->player1->SetLives(initialLives);
+    gameWorld->player1->SetCoins(0);
+    gameWorld->player1->SetScore(0);
+
+    // Initialize Player 2 if multiplayer
+    if (multiplayer && gameWorld->player2) {
+        gameWorld->player2->SetLives(initialLives);
+        gameWorld->player2->SetCoins(0);
+        gameWorld->player2->SetScore(0);
+        gameHUD = std::make_unique<GameHUD>(gameWorld->player1, gameWorld->player2);
+    } else {
+        gameHUD = std::make_unique<GameHUD>(gameWorld->player1);
+    }
+
+    BackMenu.SetTexture(ResrcManager::GetInstance().getTexture("BACK_BUTTON"));  
+    SoundManager::GetInstance().StopAllSounds();
+    string musicKey = "GAMEWORLD_" + std::to_string(level);
     SoundManager::GetInstance().PlayMusic(musicKey);
 }
 

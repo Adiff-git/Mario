@@ -17,7 +17,9 @@ void BanzaiBill::UpdateStateAndPhysic() {
     }
     const float deltaTime = GetFrameTime();
     // BanzaiBill bay thẳng, không chịu trọng lực
-    SetPos(Vector2{(float)(GetPos().x + GetVel().x * GameClock::GetInstance().FIXED_TIME_STEP), GetPos().y});
+    // Apply speed multiplier to velocity
+    Vector2 adjustedVel = Vector2{vel.x * speedMultiplier, vel.y};
+    SetPos(Vector2{(float)(GetPos().x + adjustedVel.x * GameClock::GetInstance().FIXED_TIME_STEP), GetPos().y});
 
     // Dùng texture cố định, không cần animation
     sprite = &ResrcManager::GetInstance().getTexture("BANZAIBILL");

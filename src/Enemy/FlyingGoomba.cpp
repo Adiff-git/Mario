@@ -35,14 +35,14 @@ void FlyingGoomba::UpdateStateAndPhysic()
         float deltaTime = GetFrameTime();
 
         if (movingLeft) {
-            vel.x = -maxSpeedX;
+            vel.x = -GetAdjustedMaxSpeed();
             direction = DIRECTION_LEFT;
             
             if (pos.x <= startX - moveDistance) {
                 movingLeft = false; 
             }
         } else {
-            vel.x = maxSpeedX;
+            vel.x = GetAdjustedMaxSpeed();
             direction = DIRECTION_RIGHT;
             
             if (pos.x >= startX) {

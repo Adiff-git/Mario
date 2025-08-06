@@ -34,7 +34,9 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
                      gameState(GameState::GAME_PLAYING),
                      isMultiplayer(multiplayer),
                      player1Character(p1Type),
-                     player2Character(p2Type)
+                     player2Character(p2Type),
+                     selectedMapId(MapID),
+                     enemySpeedMultiplier(1.0f)
 {
     map.LoadMap(MapID);
     
@@ -124,12 +126,139 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
     camera.zoom = 1.0f;
 }
 
+GameWorld::GameWorld(int MapID, GameScreen* gameScreen, bool multiplayer,
+                     CharacterType p1Type, CharacterType p2Type, float speedMultiplier) : 
+                     player1(nullptr), player2(nullptr),
+                     interactiveTiles(map.getInteractiveTiles()),
+                     gameScreen(gameScreen),
+                     gameState(GameState::GAME_PLAYING),
+                     isMultiplayer(multiplayer),
+                     player1Character(p1Type),
+                     player2Character(p2Type),
+                     selectedMapId(MapID),
+                     enemySpeedMultiplier(speedMultiplier)
+{
+    map.LoadMap(MapID);
+    
+    // Initialize Player 1
+    if (p1Type == CharacterType::MARIO) {
+        player1 = new Mario(Vector2{100, 100}, 3, SMALL, ControlType::WASD);
+    } else {
+        player1 = new Luigi(Vector2{100, 100}, 3, SMALL, ControlType::WASD);
+    }
+    
+    // Initialize Player 2 if multiplayer
+    if (multiplayer) {
+        if (p2Type == CharacterType::MARIO) {
+            player2 = new Mario(Vector2{150, 100}, 3, SMALL, ControlType::ARROWS);
+        } else {
+            player2 = new Luigi(Vector2{150, 100}, 3, SMALL, ControlType::ARROWS);
+        }
+    }
+    
+    // Initialize Boss for MapID == 1
+    if (MapID == 1) {
+        Boss* boss = new Boss(Vector2{1200, 535}, player1->GetPosPtr(), player2 ? player2->GetPosPtr() : nullptr, multiplayer);
+        map.GetEnemies().push_back(boss);
+        map.SetMarioPositionForBosses(player1->GetPosPtr(), player2 ? player2->GetPosPtr() : nullptr, multiplayer);
+    }
+    
+    // Set background based on MapID
+    switch (MapID)
+    {
+        case 0: background = ResrcManager::GetInstance().getTexture("BACKGROUND_0"); break;
+        case 1: background = ResrcManager::GetInstance().getTexture("BACKGROUND_1"); break;
+        case 2: background = ResrcManager::GetInstance().getTexture("BACKGROUND_2"); break;
+        case 3: background = ResrcManager::GetInstance().getTexture("BACKGROUND_3"); break;
+        case 4: background = ResrcManager::GetInstance().getTexture("BACKGROUND_4"); break;
+        case 5: background = ResrcManager::GetInstance().getTexture("BACKGROUND_5"); break;
+        case 6: background = ResrcManager::GetInstance().getTexture("BACKGROUND_6"); break;
+        case 7: background = ResrcManager::GetInstance().getTexture("BACKGROUND_7"); break;
+        case 8: background = ResrcManager::GetInstance().getTexture("BACKGROUND_8"); break;
+        case 9: background = ResrcManager::GetInstance().getTexture("BACKGROUND_9"); break;
+    }
+    
+    // Add items for MapID == 1
+    if (MapID == 1) {
+        map.GetInteractiveItems().push_back(std::make_shared<Coin>(Vector2{400, 800}));
+        map.GetInteractiveItems().push_back(std::make_shared<FireFlower>(Vector2{450, 800}));
+        map.GetInteractiveItems().push_back(std::make_shared<Star>(Vector2{600, 500}));
+        map.GetInteractiveItems().push_back(std::make_shared<YoshiCoin>(Vector2{700, 800}));
+        map.GetInteractiveItems().push_back(std::make_shared<Mushroom>(Vector2{200, 800}));
+        map.GetInteractiveItems().push_back(std::make_shared<ThreeUpMoon>(Vector2{200, 500}));
+        map.GetInteractiveItems().push_back(std::make_shared<OneUpMushroom>(Vector2{200, 800}));
+
+        // Create enemies with speed multiplier applied
+        BanzaiBill* banzai = new BanzaiBill(Vector2{500, 800});
+        banzai->SetSpeedMultiplier(speedMultiplier);
+        map.GetEnemies().push_back(banzai);
+        
+        BulletBill* bullet = new BulletBill(Vector2{600, 800});
+        bullet->SetSpeedMultiplier(speedMultiplier);
+        map.GetEnemies().push_back(bullet);
+        
+        BuzzyBeetle* buzzy = new BuzzyBeetle(Vector2{700, 800});
+        buzzy->SetSpeedMultiplier(speedMultiplier);
+        map.GetEnemies().push_back(buzzy);
+        
+        FlyingGoomba* flyingGoomba = new FlyingGoomba(Vector2{800, 800});
+        flyingGoomba->SetSpeedMultiplier(speedMultiplier);
+        map.GetEnemies().push_back(flyingGoomba);
+        
+        Goomba* goomba = new Goomba(Vector2{900, 800});
+        goomba->SetSpeedMultiplier(speedMultiplier);
+        map.GetEnemies().push_back(goomba);
+        
+        GreenKoopa* greenKoopa = new GreenKoopa(Vector2{1000, 800});
+        greenKoopa->SetSpeedMultiplier(speedMultiplier);
+        map.GetEnemies().push_back(greenKoopa);
+        
+        JumpingPiranhaPlant* piranha = new JumpingPiranhaPlant(Vector2{1100, 800});
+        piranha->SetSpeedMultiplier(speedMultiplier);
+        map.GetEnemies().push_back(piranha);
+        
+        RedKoopa* redKoopa = new RedKoopa(Vector2{1200, 800});
+        redKoopa->SetSpeedMultiplier(speedMultiplier);
+        map.GetEnemies().push_back(redKoopa);
+        
+        Rex* rex = new Rex(Vector2{1300, 800});
+        rex->SetSpeedMultiplier(speedMultiplier);
+        map.GetEnemies().push_back(rex);
+        
+        YellowKoopa* yellowKoopa = new YellowKoopa(Vector2{1400, 800});
+        yellowKoopa->SetSpeedMultiplier(speedMultiplier);
+        map.GetEnemies().push_back(yellowKoopa);
+
+        for (int i = 0; i < 20; i++) {
+            map.getBlocks().push_back(new WoodBlock(Vector2{0, float(600 + i * 32)}, Vector2{32, 32}, WHITE));
+        }
+        
+        for (int i = 0; i < 20; i++) {
+            map.getBlocks().push_back(new WoodBlock(Vector2{1920, float(600 + i * 32)}, Vector2{32, 32}, WHITE));
+        }
+
+        map.getBlocks().push_back(new CloudBlock(Vector2{100, 750}, Vector2{32, 32}, WHITE));
+        map.getBlocks().push_back(new EyesClosedBlock(Vector2{150, 750}, Vector2{32, 32}, WHITE));
+        map.getBlocks().push_back(new EyesOpenedBlock(Vector2{200, 750}, Vector2{32, 32}, WHITE));
+        map.getBlocks().push_back(new GlassBlock(Vector2{250, 750}, Vector2{32, 32}, WHITE));
+        map.getBlocks().push_back(new QuestionBlock(Vector2{300, 750}, Vector2{32, 32}, WHITE, GIFT_COIN));
+        map.getBlocks().push_back(new WoodBlock(Vector2{350, 750}, Vector2{32, 32}, WHITE));
+    }
+    
+    camera.offset = Vector2{(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
+    camera.target = player1->GetPos();
+    camera.rotation = 0.0f;
+    camera.zoom = 1.0f;
+}
+
 GameWorld::GameWorld(int level, GameScreen* gameScreen) 
     : gameState(GameState::GAME_PLAYING),
       gameScreen(gameScreen),
       isMultiplayer(false),
       player1Character(CharacterType::MARIO),
       player2Character(CharacterType::LUIGI),
+      selectedMapId(level),
+      enemySpeedMultiplier(1.0f),
       player1(nullptr),
       player2(nullptr),
       interactiveTiles(map.getInteractiveTiles())

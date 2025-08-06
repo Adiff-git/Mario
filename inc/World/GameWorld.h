@@ -37,6 +37,10 @@ class GameWorld {
         bool isMultiplayer;
         CharacterType player1Character;
         CharacterType player2Character;
+        
+        // Map and difficulty settings
+        int selectedMapId;
+        float enemySpeedMultiplier;
 
         std::vector<Tile*> &interactiveTiles;
     public:
@@ -47,6 +51,7 @@ class GameWorld {
         GameWorld();
         GameWorld(int level, GameScreen* gameScreen);
         GameWorld(int MapID, GameScreen* gameScreen, bool multiplayer, CharacterType p1Type, CharacterType p2Type); 
+        GameWorld(int MapID, GameScreen* gameScreen, bool multiplayer, CharacterType p1Type, CharacterType p2Type, float speedMultiplier);
         ~GameWorld();
 
         void UpdateWorld();
@@ -63,6 +68,9 @@ class GameWorld {
         Character* GetPlayer1();
         Character* GetPlayer2();
         bool IsMultiplayer() ;
+        
+        // Get enemy speed multiplier
+        float GetEnemySpeedMultiplier() const { return enemySpeedMultiplier; }
 
         friend class GameScreen;
 };

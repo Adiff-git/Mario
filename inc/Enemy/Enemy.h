@@ -12,6 +12,7 @@ class Character;
 class Enemy : public Object {
 protected:
     float maxSpeedX;
+    float speedMultiplier;  // Multiplier for enemy speed based on difficulty
     int textureIndex;
     int updateCount = 0;
 
@@ -78,6 +79,11 @@ public:
     // Static method để truy cập current GameWorld
     static void SetCurrentGameWorld(class GameWorld* world) { currentGameWorld = world; }
     static class GameWorld* GetCurrentGameWorld() { return currentGameWorld; }
+    
+    // Speed multiplier methods
+    void SetSpeedMultiplier(float multiplier) { speedMultiplier = multiplier; }
+    float GetSpeedMultiplier() const { return speedMultiplier; }
+    float GetAdjustedMaxSpeed() const { return maxSpeedX * speedMultiplier; }
     
 private:
     static class GameWorld* currentGameWorld; // Static pointer đến GameWorld hiện tại
