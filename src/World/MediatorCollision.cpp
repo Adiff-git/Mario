@@ -144,7 +144,7 @@ void MediatorCollision::HandleItemWithTile(Item *&item, Tile *&tile, CollisionTy
     }
 }
 
-void HandleEnemyWithBlock(Enemy*& enemy, Block*& block, CollisionType AtoB)
+void MediatorCollision::HandleEnemyWithBlock(Enemy*& enemy, Block*& block, CollisionType AtoB)
 {
     if (AtoB == COLLISION_TYPE_NONE)
         return;

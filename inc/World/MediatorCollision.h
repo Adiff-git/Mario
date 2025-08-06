@@ -34,7 +34,7 @@ class MediatorCollision {
 
         void HandleMarioWithBlock(Character* &mario, Block* &block, CollisionType);
         
-        void HandleEnemyWithBlock(Enemy*& enemy, Block*& block, CollisionType);
+        void HandleEnemyWithBlock(Enemy*& enemy, Block*& block,  CollisionType AtoB);
     public:
         MediatorCollision() = default; // Ensure default constructor exists
         ~MediatorCollision() = default;
