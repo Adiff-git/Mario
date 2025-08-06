@@ -112,7 +112,8 @@ void Character::jump() {
     state = OBJECT_STATE_JUMPING;
     vel.y = -SpeedY;
     // make sound
-    PlaySound(ResrcManager::GetInstance().getSound("MARIO_JUMP"));
+    SoundManager::GetInstance().PlaySound("MARIO_JUMP");
+
 }
 
 void Character::moveLeft() {
@@ -514,7 +515,7 @@ void Character::changeToBig() {
         CharState = BIG;
         SetSize(Vector2{32, 56}); // Update size for BIG Mario
     }
-    PlaySound(ResrcManager::GetInstance().getSound("MARIO_POWERUP"));
+    SoundManager::GetInstance().PlaySound("MARIO_POWERUP");
 }
 
 void Character::changeToSmall() {
@@ -527,7 +528,7 @@ void Character::changeToSmall() {
         doBlink = false;
         blinkingAcum = 0.0f;
     }
-    PlaySound(ResrcManager::GetInstance().getSound("MARIO_BEING_HIT"));
+    SoundManager::GetInstance().PlaySound("MARIO_BEING_HIT");
 }
 void Character::changetoFire()
 {
@@ -536,7 +537,7 @@ void Character::changetoFire()
         SetSize(Vector2{32, 56}); // Update size for FIRE Mario
         sprite = &ResrcManager::GetInstance().getTexture("FIRE_MARIO_0_RIGHT");
     }
-    PlaySound(ResrcManager::GetInstance().getSound("MARIO_POWERUP"));
+    SoundManager::GetInstance().PlaySound("MARIO_POWERUP");
 }
 
 void Character::UpdateCollisionProbes() {
