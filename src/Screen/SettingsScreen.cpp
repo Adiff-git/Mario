@@ -30,8 +30,15 @@ SettingsScreen::SettingsScreen(ScreenController* screenController)
         ResrcManager::GetInstance().getTexture("MUTE ALL ON"));
     backButton.SetTexture(ResrcManager::GetInstance().getTexture("BACK_BUTTON"));
     
-    musicVolume = (int)(SoundManager::GetInstance().GetMusicVol("MENU") * 100.0f);
-    sfxVolume = (int)(SoundManager::GetInstance().GetSoundVol("COIN_COLLECTION") * 100.0f);
+    musicVolume = 50;
+    sfxVolume = 50;
+    SoundManager::GetInstance().SetMusicVol("MENU", musicVolume / 100.0f);
+    SoundManager::GetInstance().SetMusicVol("GAMEWORLD_1", musicVolume / 100.0f);
+    SoundManager::GetInstance().SetSoundVol("COIN_COLLECTION", sfxVolume / 100.0f);
+    SoundManager::GetInstance().SetSoundVol("POWER_UP_APPEARS", sfxVolume / 100.0f);
+    SoundManager::GetInstance().SetSoundVol("ENEMY_DEATH", sfxVolume / 100.0f);
+    SoundManager::GetInstance().SetSoundVol("MARIO_JUMP", sfxVolume / 100.0f);
+    SoundManager::GetInstance().SetSoundVol("BUTTON_CLICK", sfxVolume / 100.0f);
     std::cout << "[SettingsScreen] Initialized with isMuted: " << isMuted 
               << ", musicVolume: " << musicVolume 
               << ", sfxVolume: " << sfxVolume << std::endl;

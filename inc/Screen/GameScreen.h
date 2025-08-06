@@ -36,8 +36,8 @@ class GameScreen : public Screen {
 
         bool isPaused = false;
         bool showPauseMenu = false;
-        int pauseMusicVolume = 50;
-        int pauseSfxVolume = 50;
+        int pauseMusicVolume ;
+        int pauseSfxVolume ;
         bool requestGoHome = false;
         
     public:

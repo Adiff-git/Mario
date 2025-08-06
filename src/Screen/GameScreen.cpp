@@ -9,56 +9,68 @@ GameScreen::GameScreen(ScreenController* screenController)
       transitionTime(1.0f), 
       transitionTimeAcum(0.0f),
       gameHUD(nullptr),
-      isMultiplayer(false),        // Thêm này
-      player1Type(CharacterType::MARIO),   // Thêm này
-      player2Type(CharacterType::LUIGI)// Initialize GameHUD with player{
-    {
-
+      isMultiplayer(false),
+      player1Type(CharacterType::MARIO),
+      player2Type(CharacterType::LUIGI),
+      pauseMusicVolume(0),
+      pauseSfxVolume(0)
+{
     gameWorld = std::make_unique<GameWorld>(level, this);
-    gameWorld->player1->SetLives(3); // Set initial lives
-    gameWorld->player1->SetCoins(0); // Set initial coins
-    gameWorld->player1->SetScore(0); // Set initial score
+    gameWorld->player1->SetLives(3);
+    gameWorld->player1->SetCoins(0);
+    gameWorld->player1->SetScore(0);
     gameHUD = std::make_unique<GameHUD>(gameWorld->player1);
     BackMenu.SetTexture(ResrcManager::GetInstance().getTexture("BACK_BUTTON"));  
+
+    // Lấy giá trị âm lượng từ SoundManager (đồng bộ với SettingsScreen)
+    pauseMusicVolume = (int)(SoundManager::GetInstance().GetMusicVol("MENU") * 100.0f);
+    pauseSfxVolume = (int)(SoundManager::GetInstance().GetSoundVol("COIN_COLLECTION") * 100.0f);
+
     SoundManager::GetInstance().StopAllSounds();
     string musicKey = "GAMEWORLD_" + std::to_string(level);
-    SoundManager::GetInstance().PlayMusic("musicKey");
-
+    SoundManager::GetInstance().SetMusicVol(musicKey, pauseMusicVolume / 100.0f);
+    SoundManager::GetInstance().PlayMusic(musicKey);
 }
 
 GameScreen::GameScreen(ScreenController* screenController, bool multiplayer, 
     CharacterType p1Type, CharacterType p2Type)
-        : Screen(screenController), 
-        BackMenu(Vector2{50, 50}, Vector2{50, 50}), 
-        level(1), 
-        transitionState(TransitionState::NONE), 
-        transitionTime(1.0f), 
-        transitionTimeAcum(0.0f),
-        gameHUD(nullptr),
-        isMultiplayer(multiplayer),
-        player1Type(p1Type),
-        player2Type(p2Type)
+    : Screen(screenController), 
+      BackMenu(Vector2{50, 50}, Vector2{50, 50}), 
+      level(1), 
+      transitionState(TransitionState::NONE), 
+      transitionTime(1.0f), 
+      transitionTimeAcum(0.0f),
+      gameHUD(nullptr),
+      isMultiplayer(multiplayer),
+      player1Type(p1Type),
+      player2Type(p2Type),
+      pauseMusicVolume(0),
+      pauseSfxVolume(0)
 {
     gameWorld = std::make_unique<GameWorld>(level, this, multiplayer, p1Type, p2Type);
 
-    // Initialize Player 1
     gameWorld->player1->SetLives(3);
     gameWorld->player1->SetCoins(0);
     gameWorld->player1->SetScore(0);
 
-    // Initialize Player 2 if multiplayer
     if (multiplayer && gameWorld->player2) {
-    gameWorld->player2->SetLives(3);
-    gameWorld->player2->SetCoins(0);
-    gameWorld->player2->SetScore(0);
-    gameHUD = std::make_unique<GameHUD>(gameWorld->player1, gameWorld->player2);
+        gameWorld->player2->SetLives(3);
+        gameWorld->player2->SetCoins(0);
+        gameWorld->player2->SetScore(0);
+        gameHUD = std::make_unique<GameHUD>(gameWorld->player1, gameWorld->player2);
     } else {
-    gameHUD = std::make_unique<GameHUD>(gameWorld->player1);
+        gameHUD = std::make_unique<GameHUD>(gameWorld->player1);
     }
 
     BackMenu.SetTexture(ResrcManager::GetInstance().getTexture("BACK_BUTTON"));  
+
+    // Lấy giá trị âm lượng từ SoundManager (đồng bộ với SettingsScreen)
+    pauseMusicVolume = (int)(SoundManager::GetInstance().GetMusicVol("MENU") * 100.0f);
+    pauseSfxVolume = (int)(SoundManager::GetInstance().GetSoundVol("COIN_COLLECTION") * 100.0f);
+
     SoundManager::GetInstance().StopAllSounds();
-    string musicKey = "GAMEWORLD_" + std::to_string(level) ;
+    string musicKey = "GAMEWORLD_" + std::to_string(level);
+    SoundManager::GetInstance().SetMusicVol(musicKey, pauseMusicVolume / 100.0f);
     SoundManager::GetInstance().PlayMusic(musicKey);
 }
 
@@ -75,9 +87,122 @@ void GameScreen::Update() {
     }
 
     if (showPauseMenu) {
-        // Xử lý nút trong pause menu ở đây (xem phần dưới)
-        return;
+    // Overlay mờ
+    DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 0.5f));
+
+    // Cửa sổ pause
+    int winW = 400, winH = 400;
+    int winX = GetScreenWidth()/2 - winW/2;
+    int winY = GetScreenHeight()/2 - winH/2;
+    DrawRectangleRounded({(float)winX, (float)winY, (float)winW, (float)winH}, 0.2f, 10, WHITE);
+    DrawText("PAUSED", winX + 140, winY + 20, 32, BLACK);
+
+    // --- MUSIC SLIDER ---
+    int sliderW = 200;
+    int sliderX = winX + 100;
+    int sliderY = winY + 80;
+    // Cập nhật giá trị từ SoundManager nếu không mute
+    if (!SoundManager::GetInstance().IsMuted()) {
+        pauseMusicVolume = (int)(SoundManager::GetInstance().GetMusicVol("MENU") * 100.0f);
     }
+    DrawText("Music Volume", sliderX, sliderY - 30, 20, DARKGRAY);
+    DrawRectangle(sliderX, sliderY, sliderW, 10, LIGHTGRAY);
+    DrawRectangle(sliderX, sliderY, (int)(pauseMusicVolume * (sliderW/100.0f)), 10, BLUE);
+    int knobX = sliderX + (int)(pauseMusicVolume * (sliderW/100.0f));
+    DrawCircle(knobX, sliderY + 5, 10, DARKBLUE);
+
+    Rectangle musicSliderRect = { (float)sliderX, (float)sliderY - 10, (float)sliderW, 30 };
+    if (!SoundManager::GetInstance().IsMuted() && IsMouseButtonDown(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), musicSliderRect)) {
+        float percent = (GetMousePosition().x - sliderX) / (float)sliderW;
+        percent = std::max(0.0f, std::min(1.0f, percent));
+        pauseMusicVolume = (int)(percent * 100);
+        // Cập nhật tất cả music trong SoundManager
+        SoundManager::GetInstance().SetMusicVol("MENU", pauseMusicVolume / 100.0f);
+        SoundManager::GetInstance().SetMusicVol("GAMEWORLD_1", pauseMusicVolume / 100.0f);
+        SoundManager::GetInstance().SetMusicVol("GAMEWORLD_2", pauseMusicVolume / 100.0f);
+        SoundManager::GetInstance().SetMusicVol("GAMEWORLD_3", pauseMusicVolume / 100.0f);
+        SoundManager::GetInstance().SetMusicVol("GAMEWORLD_4", pauseMusicVolume / 100.0f);
+    }
+    DrawText(TextFormat("%d", pauseMusicVolume), sliderX + sliderW + 20, sliderY - 10, 20, BLACK);
+
+    // --- SFX SLIDER ---
+    int sfxSliderY = sliderY + 70;
+    // Cập nhật giá trị từ SoundManager nếu không mute
+    if (!SoundManager::GetInstance().IsMuted()) {
+        pauseSfxVolume = (int)(SoundManager::GetInstance().GetSoundVol("COIN_COLLECTION") * 100.0f);
+    }
+    DrawText("SFX Volume", sliderX, sfxSliderY - 30, 20, DARKGRAY);
+    DrawRectangle(sliderX, sfxSliderY, sliderW, 10, LIGHTGRAY);
+    DrawRectangle(sliderX, sfxSliderY, (int)(pauseSfxVolume * (sliderW/100.0f)), 10, ORANGE);
+    int sfxKnobX = sliderX + (int)(pauseSfxVolume * (sliderW/100.0f));
+    DrawCircle(sfxKnobX, sfxSliderY + 5, 10, DARKGRAY);
+
+    Rectangle sfxSliderRect = { (float)sliderX, (float)sfxSliderY - 10, (float)sliderW, 30 };
+    if (!SoundManager::GetInstance().IsMuted() && IsMouseButtonDown(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), sfxSliderRect)) {
+        float percent = (GetMousePosition().x - sliderX) / (float)sliderW;
+        percent = std::max(0.0f, std::min(1.0f, percent));
+        pauseSfxVolume = (int)(percent * 100);
+        // Cập nhật tất cả SFX trong SoundManager
+        SoundManager::GetInstance().SetSoundVol("COIN", pauseSfxVolume / 100.0f);
+        SoundManager::GetInstance().SetSoundVol("COIN_COLLECTION", pauseSfxVolume / 100.0f);
+        SoundManager::GetInstance().SetSoundVol("POWER_UP_APPEARS", pauseSfxVolume / 100.0f);
+        SoundManager::GetInstance().SetSoundVol("ENEMY_DEATH", pauseSfxVolume / 100.0f);
+        SoundManager::GetInstance().SetSoundVol("MARIO_JUMP", pauseSfxVolume / 100.0f);
+        SoundManager::GetInstance().SetSoundVol("BUTTON_CLICK", pauseSfxVolume / 100.0f);
+    }
+    DrawText(TextFormat("%d", pauseSfxVolume), sliderX + sliderW + 20, sfxSliderY - 10, 20, BLACK);
+
+    // --- MUTE ALL BUTTON ---
+    Rectangle muteAllBtn = { (float)(winX + 150), (float)(winY + winH - 140), 100, 50 };
+    DrawRectangleRec(muteAllBtn, DARKGRAY);
+    DrawText(SoundManager::GetInstance().IsMuted() ? "Unmute All" : "Mute All", muteAllBtn.x + 10, muteAllBtn.y + 15, 24, WHITE);
+
+    // --- Nút Resume ---
+    Rectangle resumeBtn = { (float)(winX + 50), (float)(winY + winH - 80), 100, 50 };
+    DrawRectangleRec(resumeBtn, GREEN);
+    DrawText("Play", resumeBtn.x + 25, resumeBtn.y + 15, 24, WHITE);
+
+    // --- Nút Home ---
+    Rectangle homeBtn = { (float)(winX + 250), (float)(winY + winH - 80), 100, 50 };
+    DrawRectangleRec(homeBtn, RED);
+    DrawText("Home", homeBtn.x + 20, homeBtn.y + 15, 24, WHITE);
+
+    // Xử lý click nút
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        Vector2 mouse = GetMousePosition();
+        if (CheckCollisionPointRec(mouse, muteAllBtn)) {
+            bool isMuted = !SoundManager::GetInstance().IsMuted();
+            SoundManager::GetInstance().SetMuted(isMuted);
+            if (isMuted) {
+                pauseMusicVolume = 0;
+                pauseSfxVolume = 0;
+                // Cập nhật tất cả music và SFX về 0
+                SoundManager::GetInstance().SetMusicVol("MENU", 0.0f);
+                SoundManager::GetInstance().SetMusicVol("GAMEWORLD_1", 0.0f);
+                SoundManager::GetInstance().SetMusicVol("GAMEWORLD_2", 0.0f);
+                SoundManager::GetInstance().SetMusicVol("GAMEWORLD_3", 0.0f);
+                SoundManager::GetInstance().SetMusicVol("GAMEWORLD_4", 0.0f);
+                SoundManager::GetInstance().SetSoundVol("COIN", 0.0f);
+                SoundManager::GetInstance().SetSoundVol("COIN_COLLECTION", 0.0f);
+                SoundManager::GetInstance().SetSoundVol("POWER_UP_APPEARS", 0.0f);
+                SoundManager::GetInstance().SetSoundVol("ENEMY_DEATH", 0.0f);
+                SoundManager::GetInstance().SetSoundVol("MARIO_JUMP", 0.0f);
+                SoundManager::GetInstance().SetSoundVol("BUTTON_CLICK", 0.0f);
+            } else {
+                // Khôi phục giá trị từ SoundManager (được thiết lập bởi SettingsScreen)
+                pauseMusicVolume = (int)(SoundManager::GetInstance().GetMusicVol("MENU") * 100.0f);
+                pauseSfxVolume = (int)(SoundManager::GetInstance().GetSoundVol("COIN_COLLECTION") * 100.0f);
+            }
+        }
+        if (CheckCollisionPointRec(mouse, resumeBtn)) {
+            isPaused = false;
+            showPauseMenu = false;
+        }
+        if (CheckCollisionPointRec(mouse, homeBtn)) {
+            requestGoHome = true;
+        }
+    }
+}
 
     if (BackMenu.IsPressed()) {
         screenController->ChangeScreen(new MenuScreen(screenController));
