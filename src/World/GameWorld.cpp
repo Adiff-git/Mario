@@ -14,6 +14,8 @@
     #include "../inc/Block/GlassBlock.h"
     #include "../inc/Block/QuestionBlock.h"
     #include "../inc/Block/WoodBlock.h"
+    #include "../inc/Character/Toad.h"
+    #include "../inc/Character/Peach.h"
     #include "Boss.h"
     GameWorld::GameWorld() : player1(nullptr), player2(nullptr), interactiveTiles(map.getInteractiveTiles())
 {
@@ -39,10 +41,19 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
     map.LoadMap(MapID);
     
     // Initialize Player 1
-    if (p1Type == CharacterType::MARIO) {
-        player1 = new Mario(Vector2{100, 100}, 3, SMALL, ControlType::WASD);
-    } else {
-        player1 = new Luigi(Vector2{100, 100}, 3, SMALL, ControlType::WASD);
+    switch(p1Type) {
+        case CharacterType::MARIO:
+            player1 = new Mario(Vector2{100, 100}, 3, SMALL, ControlType::WASD);
+            break;
+        case CharacterType::LUIGI:
+            player1 = new Luigi(Vector2{100, 100}, 3, SMALL, ControlType::WASD);
+            break;
+        case CharacterType::TOAD:
+            player1 = new Toad(Vector2{100, 100}, 3, SMALL, ControlType::WASD);
+            break;
+        case CharacterType::PEACH:
+            player1 = new Peach(Vector2{100, 100}, 3, SMALL, ControlType::WASD);
+            break;
     }
     
     // Initialize Player 2 if multiplayer
