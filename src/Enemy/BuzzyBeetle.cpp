@@ -2,8 +2,8 @@
 #include "../inc/World/GameWorld.h"
 
 BuzzyBeetle::BuzzyBeetle(Vector2 pos) 
-    : Enemy(pos, Vector2{32, 32}, Vector2{20, 0}, BLUE, 0.2f, 0, DIRECTION_RIGHT) {
-    sprite = &ResrcManager::GetInstance().getTexture("BuzzyBeetle_0_Right");
+    : Enemy(pos, Vector2{32, 32}, Vector2{-20, 0}, BLUE, 0.2f, 0, DIRECTION_LEFT) {
+    sprite = &ResrcManager::GetInstance().getTexture("BuzzyBeetle_0_Left");
 }
 
 void BuzzyBeetle::UpdateStateAndPhysic() {

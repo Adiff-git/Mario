@@ -4,10 +4,11 @@
 #include "Enemy.h"
 #include "ResrcManager.h"
 
-class Goomba : public Enemy {
+class Goomba : public Enemy
+{
 public:
     Goomba(Vector2 pos);
     void UpdateStateAndPhysic() override;
 };
 
-#endif 
+#endif

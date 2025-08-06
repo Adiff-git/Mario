@@ -2,7 +2,7 @@
 #include "../inc/World/GameWorld.h"
 
 BanzaiBill::BanzaiBill(Vector2 pos) 
-    : Enemy(pos, Vector2{128, 128}, Vector2{1, 0}, GRAY, 0.2f, 0, DIRECTION_RIGHT) {
+    : Enemy(pos, Vector2{128, 128}, Vector2{-1, 0}, GRAY, 0.2f, 0, DIRECTION_LEFT) {
     sprite = &ResrcManager::GetInstance().getTexture("BANZAIBILL");
     maxSpeedX = 1.0f; // Tốc độ tối đa bằng vận tốc ban đầu
 }

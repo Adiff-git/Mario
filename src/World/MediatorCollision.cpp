@@ -222,6 +222,7 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
     {
         Enemy *enemy = enemyA ? enemyA : enemyB;
         Fireball *fireball = fireballA ? fireballA : fireballB;
+        Character *mario = marioA ? marioA : marioB; // ✅ Lấy Mario character
         CollisionType type = enemy->checkCollisionType(*fireball);
         HandleEnemyWithFireball(enemy, fireball, type);
     }
@@ -460,18 +461,33 @@ void MediatorCollision::HandleMarioWithEnemy(Character*& mario, Enemy*& enemy, C
     {
         mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
         SoundManager::GetInstance().PlaySound("ENEMY_DEATH");
+        
         Rex *rex = dynamic_cast<Rex *>(enemy);
         if (rex)
         {
             rex->OnHit();
             if (rex->GetHitCount() >= 2)
             {
+                rex->CreateScoreEffect(800);
                 rex->CreateDeathEffect();
                 rex->SetState(OBJECT_STATE_DYING);
             }
         }
         else
         {
+            // Tạo score effect dựa trên loại enemy
+            if (dynamic_cast<Goomba*>(enemy)) {
+                enemy->CreateScoreEffect(100);
+            } else if (dynamic_cast<GreenKoopa*>(enemy)) {
+                enemy->CreateScoreEffect(200);
+            } else if (dynamic_cast<BuzzyBeetle*>(enemy)) {
+                enemy->CreateScoreEffect(400);
+            } else if (dynamic_cast<FlyingGoomba*>(enemy)) {
+                enemy->CreateScoreEffect(800);
+            } else {
+                enemy->CreateScoreEffect(100); // Default score
+            }
+            
             enemy->CreateDeathEffect();
             enemy->SetHitByFireball(true);
             enemy->SetState(OBJECT_STATE_DYING);

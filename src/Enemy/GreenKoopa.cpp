@@ -3,8 +3,8 @@
 #include "../inc/World/GameClock.h"
 
 GreenKoopa::GreenKoopa(Vector2 pos) 
-    : Enemy(pos, Vector2{32, 48}, Vector2{5, 0}, GREEN, 0.2f, 0, DIRECTION_RIGHT) {
-    sprite = &ResrcManager::GetInstance().getTexture("GreenKoopaTroopa_0_RIGHT");
+    : Enemy(pos, Vector2{32, 48}, Vector2{-5, 0}, GREEN, 0.2f, 0, DIRECTION_LEFT) {
+    sprite = &ResrcManager::GetInstance().getTexture("GreenKoopaTroopa_0_LEFT");
 }
 
 void GreenKoopa::UpdateStateAndPhysic() {

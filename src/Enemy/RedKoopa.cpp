@@ -3,7 +3,7 @@
 #include <iostream>
 
 RedKoopa::RedKoopa(Vector2 pos) 
-    : Enemy(pos, Vector2{32, 48}, Vector2{10, 0}, RED, 100.0f, 0, DIRECTION_RIGHT) {
+    : Enemy(pos, Vector2{32, 48}, Vector2{-10, 0}, RED, 100.0f, 0, DIRECTION_LEFT) {
     sprite = &ResrcManager::GetInstance().getTexture("RedKoopaTroopa_0");
     jumpCooldown = 0;
     hitCount = 0;

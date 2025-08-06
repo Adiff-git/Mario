@@ -4,6 +4,11 @@
 
 #include "Object.h"
 #include "../inc/SmokeEffect.h"
+#include "../inc/ScoreEffect.h"
+
+// Forward declaration
+class Character;
+
 class Enemy : public Object {
 protected:
     float maxSpeedX;
@@ -24,13 +29,14 @@ protected:
     float activationDistance;    
     
     SmokeEffect* deathSmoke;
+    ScoreEffect* scoreEffect;  // Thêm hiệu ứng điểm số
     bool hasDeathEffect;
     float dyingTimer;        // Timer cho trạng thái DYING
     float dyingDuration;   
 
 
 public:
-    Enemy(Vector2 pos, Vector2 size, Vector2 vel, Color color, float friction, int currFrame, Direction dir);
+    Enemy(Vector2 pos, Vector2 size, Vector2 vel, Color color, float friction, int currFrame, Direction dir = DIRECTION_LEFT);
     virtual ~Enemy() = default;
     virtual void UpdateStateAndPhysic() = 0; // Hàm ảo thuần túy
     void Update() override;
@@ -61,7 +67,20 @@ public:
     void UpdateDeathEffect();
     void DrawDeathEffect();
     bool ShouldRemoveDeathEffect() const;
-    void UpdateDyingState(); 
+    void UpdateDyingState();
+    
+    // Score effect methods
+    void CreateScoreEffect(int score);
+    void UpdateScoreEffect();
+    void DrawScoreEffect();
+    bool ShouldRemoveScoreEffect() const;
+    
+    // Static method để truy cập current GameWorld
+    static void SetCurrentGameWorld(class GameWorld* world) { currentGameWorld = world; }
+    static class GameWorld* GetCurrentGameWorld() { return currentGameWorld; }
+    
+private:
+    static class GameWorld* currentGameWorld; // Static pointer đến GameWorld hiện tại
 };
 
 #endif

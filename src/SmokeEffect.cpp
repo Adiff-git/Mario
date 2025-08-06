@@ -34,7 +34,7 @@ void SmokeEffect::Update() {
     frameAcumulator += dt;
     if (frameAcumulator >= frameTime) {
         frameAcumulator = 0.0f;
-        if (currentFrame < maxFrames - 1) { // ✅ Chỉ tăng khi chưa đến frame cuối
+        if (currentFrame < maxFrames - 1) { 
             currentFrame++;
         }
         // Nếu đã ở frame cuối thì giữ nguyên
@@ -61,8 +61,8 @@ void SmokeEffect::Draw() {
     // Thử vẽ texture nếu có
     if (!smokeFrames.empty() && currentFrame < smokeFrames.size()) {
         Texture2D* currentTexture = smokeFrames[currentFrame];
-        if (currentTexture && currentTexture->id != 0) {  // ✅ Kiểm tra cả pointer và ID
-            Color drawColor = WHITE;  // Đổi thành WHITE thay vì YELLOW
+        if (currentTexture && currentTexture->id != 0) { 
+            Color drawColor = WHITE;  
             drawColor.a = (unsigned char)(255 * alpha);
             DrawTextureEx(*currentTexture, pos, 0.0f, 1.0f, drawColor);
             textureDrawn = true;

@@ -652,3 +652,7 @@ void Character::Victory()
 //     return s;
 // }
 
+void Character::AddScore(int points) {
+    this->score += points;
+}
+

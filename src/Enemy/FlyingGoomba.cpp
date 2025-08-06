@@ -4,13 +4,18 @@
 #include "ResrcManager.h"
 
 FlyingGoomba::FlyingGoomba(Vector2 pos)
-    : Enemy(pos, Vector2{48, 32}, Vector2{0, 0}, BROWN, 0.2f, 0, DIRECTION_RIGHT)
+    : Enemy(pos, Vector2{48, 32}, Vector2{0, 0}, BROWN, 0.2f, 0, DIRECTION_LEFT)
 {
     sprite = &ResrcManager::GetInstance().getTexture("FlyingGoomba_Flap_Right");
 
-    vel.x = 5.0f;
-    maxSpeedX = 5.0f;
+    vel.x = -25.0f;  
+    maxSpeedX = 25.0f;  
     textureIndex = 0;
+    
+    // Khởi tạo biến cho chuyển động qua lại
+    startX = pos.x;
+    baseY = pos.y;
+    movingLeft = true;
 }
 
 void FlyingGoomba::UpdateStateAndPhysic()
@@ -18,12 +23,10 @@ void FlyingGoomba::UpdateStateAndPhysic()
 
     UpdateDyingState();
     
-    // Nếu đang DYING hoặc DEAD, không xử lý physics
     if (state == OBJECT_STATE_DYING || state == OBJECT_STATE_DEAD) {
         UpdateDeathEffect();
         return;
     }
-    // Sprite animation
     const int updateThreshold = 15;
     updateCount++;
 
@@ -31,20 +34,24 @@ void FlyingGoomba::UpdateStateAndPhysic()
     {
         float deltaTime = GetFrameTime();
 
-        // Horizontal movement
-        if (vel.x > 0)
-            direction = DIRECTION_RIGHT;
-        else if (vel.x < 0)
-            direction = DIRECTION_LEFT;
-
-        if (vel.x > maxSpeedX)
-            vel.x = maxSpeedX;
-        if (vel.x < -maxSpeedX)
+        if (movingLeft) {
             vel.x = -maxSpeedX;
+            direction = DIRECTION_LEFT;
+            
+            if (pos.x <= startX - moveDistance) {
+                movingLeft = false; 
+            }
+        } else {
+            vel.x = maxSpeedX;
+            direction = DIRECTION_RIGHT;
+            
+            if (pos.x >= startX) {
+                movingLeft = true; 
+            }
+        }
 
-        pos.x += vel.x * deltaTime; // Move forward
+        pos.x += vel.x * deltaTime;
 
-        // Add smooth vertical flap motion
         flyingCycleTime += deltaTime;
         if (flyingCycleTime > flyingCycleDuration)
             flyingCycleTime -= flyingCycleDuration;
@@ -52,7 +59,7 @@ void FlyingGoomba::UpdateStateAndPhysic()
         float phase = (flyingCycleTime / flyingCycleDuration) * 2 * PI;
         pos.y = baseY + sin(phase) * flyingAmplitude;
 
-        std::cerr << updateCount << '\n';
+        // std::cerr << updateCount << '\n';
         if (direction == DIRECTION_RIGHT)
         {
             sprite = &ResrcManager::GetInstance().getTexture(

@@ -14,33 +14,29 @@
 // class Tile; // Forward declaration
 // class Fireball; // Forward declaration
 
-class MediatorCollision {
-    private:
+class MediatorCollision
+{
+private:
+    static int marioFireballHits;
+    static const int maxFireballHits = 3;
 
-        static int marioFireballHits;
-        static const int maxFireballHits = 3;
-        
-        void HandleMarioWithTile(Character*& mario, Tile*& tile, CollisionType AtoB);
-        void HandleFireballWithTile(Fireball*& fireball, Tile*& tile, CollisionType AtoB);
-        void HandleItemWithTile(Item *& item, Tile *& tile, CollisionType AtoB);
-        
-        void HandleMarioWithEnemy(Character*& mario, Enemy*& enemy, CollisionType AtoB);
-        // void HandleMarioWithBoss(Mario*& mario, Boss*& boss, CollisionType AtoB);
-        void HandleEnemyWithFireball(Enemy*& enemy, Fireball*& fireball, CollisionType AtoB);
-        // void HandleBossWithFireball(Boss*& boss, Fireball*& fireball, CollisionType AtoB);
-        void HandleEnemyWithTile(Enemy*& enemy, Tile* tile, CollisionType AtoB);
-        // void HandleBossWithTile(Boss*& boss, Tile*& tile, CollisionType AtoB);
-        void HandleMarioWithBossFireball(Character*& mario, BossFireball*& bossFireball, CollisionType AtoB);
+    void HandleMarioWithTile(Character *&mario, Tile *&tile, CollisionType AtoB);
+    void HandleFireballWithTile(Fireball *&fireball, Tile *&tile, CollisionType AtoB);
+    void HandleItemWithTile(Item *&item, Tile *&tile, CollisionType AtoB);
 
-        void HandleMarioWithBlock(Character* &mario, Block* &block, CollisionType);
-        
+    void HandleMarioWithEnemy(Character *&mario, Enemy *&enemy, CollisionType AtoB);
+    // void HandleMarioWithBoss(Mario*& mario, Boss*& boss, CollisionType AtoB);
+    void HandleEnemyWithFireball(Enemy *&enemy, Fireball *&fireball, CollisionType AtoB);
+    // void HandleBossWithFireball(Boss*& boss, Fireball*& fireball, CollisionType AtoB);
+    void HandleEnemyWithTile(Enemy *&enemy, Tile *tile, CollisionType AtoB);
+    // void HandleBossWithTile(Boss*& boss, Tile*& tile, CollisionType AtoB);
+    void HandleMarioWithBossFireball(Character *&mario, BossFireball *&bossFireball, CollisionType AtoB);
 
-    public:
-        MediatorCollision() = default; // Ensure default constructor exists
-        ~MediatorCollision() = default;
+    void HandleMarioWithBlock(Character *&mario, Block *&block, CollisionType);
 
-        void HandleCollision(Object* ObjectA, Object* ObjectB);
-        
+public:
+    MediatorCollision() = default; // Ensure default constructor exists
+    ~MediatorCollision() = default;
 
-        
+    void HandleCollision(Object *ObjectA, Object *ObjectB);
 };

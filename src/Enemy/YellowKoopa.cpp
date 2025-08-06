@@ -2,7 +2,7 @@
 #include "../inc/World/GameWorld.h"
 
 YellowKoopa::YellowKoopa(Vector2 pos) 
-    : Enemy(pos, Vector2{32, 48}, Vector2{5, 0}, YELLOW, 0.2f, 0, DIRECTION_RIGHT) {
+    : Enemy(pos, Vector2{32, 48}, Vector2{-5, 0}, YELLOW, 0.2f, 0, DIRECTION_LEFT) {
     sprite = &ResrcManager::GetInstance().getTexture("YellowKoopaTroopa_0");
 }
 

@@ -5,7 +5,7 @@
 #include "../inc/World/GameClock.h"
 
 class SmokeEffect : public Object {
-private:
+protected:  // Đổi từ private thành protected để cho phép kế thừa
     std::vector<Texture2D*> smokeFrames;
     int currentFrame;
     int maxFrames;
@@ -15,8 +15,6 @@ private:
     float lifeTimeAcum;
     float alpha;
     bool isActive;
-
-    
 
 public:
     SmokeEffect(Vector2 pos);

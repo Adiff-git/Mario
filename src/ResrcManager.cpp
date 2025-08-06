@@ -264,7 +264,8 @@ void ResrcManager::loadTextures() {
         textures["BuzzyBeetle_0_Left"] = FlipTextureHorizontal(textures["BuzzyBeetle_0_Right"]);
         textures["BuzzyBeetle_1_Left"] = FlipTextureHorizontal(textures["BuzzyBeetle_1_Right"]);
 
-        textures["BulletBill"] = LoadTexture("resources/images/Object/Enemy/BulletBill_0.png");
+        textures["BULLETBILL_RIGHT"] = LoadTexture("resources/images/Object/Enemy/BulletBill_0.png");
+        textures["BULLETBILL_LEFT"] = FlipTextureHorizontal(textures["BULLETBILL_RIGHT"]);
 
         textures["Bob-omb_Right_0"]= LoadTexture("resources/images/Object/Enemy/BobOmb_0.png");
         textures["Bob-omb_Right_1"]= LoadTexture("resources/images/Object/Enemy/BobOmb_1.png");
@@ -284,10 +285,10 @@ void ResrcManager::loadTextures() {
         textures["REX_3_LEFT"]= FlipTextureHorizontal(textures["REX_3_RIGHT"]);
         textures["REX_4_LEFT"]= FlipTextureHorizontal(textures["REX_4_RIGHT"]);
         //Flying Goomba
-        textures["FlyingGoomba_Flap_Center"] = LoadTexture("resources/images/Object/Enemy/FlyingGoomba_0.png");
-        textures["FlyingGoomba_WingDown_Center"] = LoadTexture("resources/images/Object/Enemy/FlyingGoomba_1.png");
         textures["FlyingGoomba_Flap_Right"] = LoadTexture("resources/images/Object/Enemy/FlyingGoomba_2.png");
         textures["FlyingGoomba_WingDown_Right"] = LoadTexture("resources/images/Object/Enemy/FlyingGoomba_3.png");
+        textures["FlyingGoomba_Flap_Center"] = FlipTextureHorizontal(textures["FlyingGoomba_Flap_Right"]);
+        textures["FlyingGoomba_WingDown_Center"] = FlipTextureHorizontal(textures["FlyingGoomba_WingDown_Right"]);
         //piranhaplant
         textures["PiranhaPlant_MouthOpen"] = LoadTexture("resources/images/Object/Enemy/PiranhaPlant_0.png");
         textures["PiranhaPlant_MouthClosed"] = LoadTexture("resources/images/Object/Enemy/PiranhaPlant_1.png");
