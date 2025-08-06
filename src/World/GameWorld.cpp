@@ -348,6 +348,10 @@ void GameWorld::UpdateWorld()
                     if (tile && enemy->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
                         mediatorCollision.HandleCollision(enemy, tile);
                 }
+                for (auto const& block : map.getBlocks()) {
+                    if (block && enemy->checkCollisionType(*block) != COLLISION_TYPE_NONE)
+                        mediatorCollision.HandleCollision(enemy, block);
+                }
             }
         }
     }
