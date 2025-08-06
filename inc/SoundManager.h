@@ -11,6 +11,7 @@ private:
     std::unordered_map<std::string, float> soundVolumes; // Separate map for sound volumes
     
     float masterVolume = 1.0f;
+    bool isMuted = false;
     
     SoundManager() = default; // Private constructor for singleton pattern
     ~SoundManager() = default; // Destructor
@@ -22,6 +23,7 @@ public:
     void PlayMusic(const std::string& name);
     void StopMusic(const std::string& name);
     void StopAllSounds();
+    void SetAllMusicVol(float volume);
     void Update();
     
     // Volume control methods - now public
@@ -31,4 +33,7 @@ public:
     
     float GetMasterVol();
     float GetMusicVol(const std::string& name);
+    float GetSoundVol(const std::string& name); // Thêm hàm GetSoundVol
+    void SetMuted(bool muted);
+    bool IsMuted() const { return isMuted; }
 };
