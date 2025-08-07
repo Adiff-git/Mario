@@ -3,15 +3,8 @@
 #include "raylib.h"
 #include "Object.h"
 #include "../inc/Character/Character.h"
+#include "../inc/Block/BlockType.h"
 class Map;
-enum BlockType {
-    BLOCK_QUESTION = 0,
-    BLOCK_CLOUD = 1,
-    BLOCK_WOOD = 2,
-    BLOCK_GLASS = 3,
-    BLOCK_EYES_OPENED = 4,
-    BLOCK_EYES_CLOSED = 5
-};
 enum GiftType{
     GIFT_NONE,
     GIFT_COIN,
@@ -23,7 +16,7 @@ class Block : public Object {
 
 protected:
     bool hit;
-    BlockType blockType = BLOCK_QUESTION;
+    BlockType blockType =  BlockType::BLOCK_QUESTION;
 public:
 
     Block();

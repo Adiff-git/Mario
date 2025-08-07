@@ -656,3 +656,7 @@ void Character::Victory()
 void Character::AddScore(int points) {
     this->score += points;
 }
+
+ObjectState Character::GetAdditionalState() const {
+    return AdditionalState;
+}   

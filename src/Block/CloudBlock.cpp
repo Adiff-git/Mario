@@ -11,7 +11,7 @@ CloudBlock::CloudBlock( Vector2 pos, Vector2 size, Color color ) :
 
 CloudBlock::CloudBlock( Vector2 pos, Vector2 size, Color color, float frameTime, int maxFrames ) :
     Block( pos, size, color, frameTime, maxFrames ) {
-    this->blockType = BLOCK_CLOUD;
+    this->blockType = BlockType::BLOCK_CLOUD;
     }
 
 CloudBlock::~CloudBlock() = default;

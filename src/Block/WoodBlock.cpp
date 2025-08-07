@@ -10,7 +10,7 @@ WoodBlock::WoodBlock( Vector2 pos, Vector2 dim, Color color ) :
 
 WoodBlock::WoodBlock( Vector2 pos, Vector2 dim, Color color, float frameTime, int maxFrames ) :
     Block( pos, dim, color, frameTime, maxFrames ) {
-        this->blockType = BLOCK_WOOD;
+        this->blockType =  BlockType::BLOCK_WOOD;
     }
 
 WoodBlock::~WoodBlock() = default;

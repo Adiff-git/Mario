@@ -12,7 +12,7 @@ EyesOpenedBlock::EyesOpenedBlock( Vector2 pos, Vector2 dim, Color color ) :
 
 EyesOpenedBlock::EyesOpenedBlock( Vector2 pos, Vector2 dim, Color color, float frameTime, int maxFrames ) :
     Block( pos, dim, color, frameTime, maxFrames ){
-        this->blockType = BLOCK_EYES_OPENED;
+        this->blockType =  BlockType::BLOCK_EYES_OPENED;
     }
 
 EyesOpenedBlock::~EyesOpenedBlock() = default;

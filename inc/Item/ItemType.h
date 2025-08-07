@@ -7,6 +7,6 @@ enum class ItemType {
     MUSHROOM,
     ONEUPMUSHROOM,
     STAR,
-    THREEUPMUSHROOM,
+    THREEUPMOON,
     YOSHICOIN
 };

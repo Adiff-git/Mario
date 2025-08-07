@@ -13,5 +13,6 @@ enum class EnemyType {
     REDKOOPA,
     REX,
     YELLOWKOOPA,
+    BOSS,
     NONE
 };

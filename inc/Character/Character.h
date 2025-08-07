@@ -105,8 +105,12 @@ public:
     bool getInvincible() const;
     int GetLives() const;
     ObjectState GetMarioState() const;
+    ObjectState GetAdditionalState() const;
 
     void SetMarioState(ObjectState state);
+    void SetAdditionalState(ObjectState state) {
+        AdditionalState = state;
+    }
     bool GetIsDucking() const;
     std::list<Fireball *> *GetFireballs();
 

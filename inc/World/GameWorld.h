@@ -64,5 +64,10 @@ class GameWorld {
         Character* GetPlayer2();
         bool IsMultiplayer() ;
 
+
+        void CollectWorldData(GameSaveData& saveData);
+        void ApplyLoadedData(const GameSaveData& saveData);
+        GameSaveData CollectSaveData();
+        
         friend class GameScreen;
 };

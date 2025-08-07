@@ -10,6 +10,10 @@
 #include "ResrcManager.h"
 #include "SoundManager.h"
 #include "../inc/World/GameClock.h"
+#include <chrono>
+#include <iomanip>
+#include <sstream>
+#include "../inc/SaveManager.h"
 
 enum class TransitionState {
     NEXT_LEVEL,
@@ -48,5 +52,11 @@ class GameScreen : public Screen {
         void ResetGame();
         void DrawEnd();
         void BeginTransition(TransitionState transitionState);
+
+        void SaveCurrentGame(int slotIndex);
+        void LoadSavedGame(int slotIndex);
+        std::string GetCurrentDateTime();
+        
+        void HandleSaveLoadInput();
 
 };
