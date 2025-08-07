@@ -657,7 +657,7 @@ void MapEditorScreen::PlaceObject()
     case EditorMode::BLOCK_MODE:
     {
         // Add block to map
-        if (selectedTileId >= 105 && selectedTileId <= 120)
+        if (selectedTileId >= 105 && selectedTileId <= 121)
         {
             RemoveObjectAt(tileX, tileY, currentMode);
 
@@ -676,7 +676,7 @@ void MapEditorScreen::PlaceObject()
     case EditorMode::ENEMY_MODE:
     {
         // Add enemy to map
-        if (selectedTileId >= 121 && selectedTileId <= 137 || selectedTileId == 145)
+        if (selectedTileId >= 122 && selectedTileId <= 137 || selectedTileId == 145)
         {
             RemoveObjectAt(tileX, tileY, currentMode);
 
@@ -697,7 +697,7 @@ void MapEditorScreen::PlaceObject()
     case EditorMode::ITEM_MODE:
     {
         // Add item to map
-        if (selectedTileId >= 137 && selectedTileId <= 145)
+        if (selectedTileId >= 138 && selectedTileId <= 146)
         {
             RemoveObjectAt(tileX, tileY, currentMode);
 
