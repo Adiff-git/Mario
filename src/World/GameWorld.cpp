@@ -621,6 +621,7 @@ void GameWorld::UpdateWorld()
             if (player1->GetPos().y > 900) // KIỂM TRA VỊ TRÍ PLAYER 1
             {
                 player1->Die();
+                return;
             }
             // if (player1->GetPos().x > 1900)
             // {
@@ -638,6 +639,7 @@ void GameWorld::UpdateWorld()
             {
                 if (player1->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
                     mediatorCollision.HandleCollision(player1, tile);
+                
             }
 
             // Handle Player 1 collisions with items
@@ -645,6 +647,7 @@ void GameWorld::UpdateWorld()
             {
                 if (item && player1->checkCollisionType(*item) != COLLISION_TYPE_NONE)
                     mediatorCollision.HandleCollision(player1, item.get());
+                
             }
 
             // Handle Player 1 collisions with enemies
@@ -660,6 +663,7 @@ void GameWorld::UpdateWorld()
                             continue; // Bỏ qua nếu boss đã chết
                     }
                     mediatorCollision.HandleCollision(player1, enemy);
+                     // Nếu player1 đang dying, không cần xử lý tiếp
                 }
                 // Handle Player 1 collisions with boss fireballs
                 if (Boss *boss = dynamic_cast<Boss *>(enemy))
@@ -773,6 +777,8 @@ void GameWorld::UpdateWorld()
                         }
                     }
                 }
+                if (player2->GetState() == OBJECT_STATE_DYING || player2->GetState() == OBJECT_STATE_DEAD || player2->GetState() == OBJECT_STATE_VICTORY || player2->GetState() == OBJECT_STATE_TO_BE_REMOVED)
+                        return;
             }
         }
 

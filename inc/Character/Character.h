@@ -49,7 +49,7 @@ protected:
     void Update() override;
 
 
-    // CharacterType characterType = CharacterType::NONE;
+    CharacterType characterType = CharacterType::NONE;
    
 
 public:
@@ -113,7 +113,9 @@ public:
     void UpdateCollisionProbes() override;
     void UpdateStateAndPhysic() override;
 
-    virtual void GetCharType();
+    virtual CharacterType GetCharType() {
+        return characterType;
+    }
 
 
     // virtual PlayerSave ToSave() ;
