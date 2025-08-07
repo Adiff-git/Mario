@@ -14,7 +14,9 @@ public:
         
     }
 
-    
+    void GetCharType() override {
+        characterType = CharacterType::TOAD;
+    }
 
     ~Toad() override = default;
 

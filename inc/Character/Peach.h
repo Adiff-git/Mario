@@ -13,6 +13,9 @@ public:
         
     }
 
+    void GetCharType() override {
+        characterType = CharacterType::PEACH;
+    }
     
 
     ~Peach() override = default;

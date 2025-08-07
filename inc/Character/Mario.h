@@ -12,6 +12,9 @@ public:
         
     }
 
+    void GetCharType() override {
+        characterType = CharacterType::MARIO;
+    }
     
 
     ~Mario() override = default;

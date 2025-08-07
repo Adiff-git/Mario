@@ -1,0 +1,17 @@
+#pragma once
+
+enum class EnemyType {
+    BANZAIBILL = 0,
+    BOBOMB,
+    BULLETBILL,
+    BUZZYBEETLE,
+    FLYINGGOOMBA,
+    GOOMBA,
+    GREENKOOPA,
+    JUMPINGPIRANHA,
+    PIRANHAPLANT,
+    REDKOOPA,
+    REX,
+    YELLOWKOOPA,
+    NONE
+};

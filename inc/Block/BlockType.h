@@ -1,0 +1,10 @@
+#pragma once
+
+enum class BlockType {
+    CLOUDBLOCK,
+    EYESCLOSEDBLOCK,
+    EYESOPENEDBLOCK,
+    GLASSBLOCK,
+    QUESTIONBLOCK,
+    WOODBLOCK
+};

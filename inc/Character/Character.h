@@ -11,6 +11,7 @@
 #include <vector>
 #include "../inc/Command/InputHandler.h"
 #include "../inc/SaveData.h"
+#include "../inc/Character/CharacterType.h"
 class InputHandler;
 
 class Character : public Object
@@ -47,6 +48,8 @@ protected:
 
     void Update() override;
 
+
+    // CharacterType characterType = CharacterType::NONE;
    
 
 public:
@@ -109,6 +112,8 @@ public:
 
     void UpdateCollisionProbes() override;
     void UpdateStateAndPhysic() override;
+
+    virtual void GetCharType();
 
 
     // virtual PlayerSave ToSave() ;

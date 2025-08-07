@@ -14,7 +14,9 @@ public:
     }
 
     
-
+    void GetCharType() override {
+        characterType = CharacterType::LUIGI;
+    }
     ~Luigi() override = default;
 
     void Update() override;
