@@ -4,7 +4,7 @@
 #include "../inc/World/GameClock.h"
 
 JumpingPiranhaPlant::JumpingPiranhaPlant(Vector2 pos)
-    : Enemy(pos, {32, 48}, {0, 0}, GREEN, 0.0f, 0, DIRECTION_UP),
+    : Enemy(pos, {32, 42}, {0, 0}, GREEN, 0.0f, 0, DIRECTION_UP),
       animationTimer(0.0f),
       animationInterval(0.2f),
       textureIndex(0),

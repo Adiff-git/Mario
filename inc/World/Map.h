@@ -37,6 +37,7 @@
 #include "../inc/Enemy/PiranhaPlant.h"
 #include "../inc/Enemy/YellowKoopa.h"
 #include "../inc/Enemy/BanzaiBill.h"
+#include "../inc/Enemy/JumpingPiranha.h"
 #include <regex>
 
 class Map : public Drawable {

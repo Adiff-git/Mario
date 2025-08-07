@@ -137,7 +137,7 @@ void MapEditorScreen::InitializeTilesets()
             break;
         case 124:
             enemy.sourceRect = {0, 0, 32, 28};
-            enemy.texture = ResrcManager::GetInstance().getTexture("BulletBill");
+            enemy.texture = ResrcManager::GetInstance().getTexture("BULLETBILL_RIGHT");
             break;
         case 125:
             enemy.sourceRect = {0, 0, 32, 32};
@@ -156,8 +156,8 @@ void MapEditorScreen::InitializeTilesets()
             enemy.texture = ResrcManager::GetInstance().getTexture("GreenKoopaTroopa_0_RIGHT");
             break;
         case 129:
-            enemy.sourceRect = {0, 0, 32, 66};
-            enemy.texture = ResrcManager::GetInstance().getTexture("JumpingPiranhaPlant_0");
+            enemy.sourceRect = {0, 0, 32, 42};
+            enemy.texture = ResrcManager::GetInstance().getTexture("PiranhaPlant_0");
             break;
         case 130:
             enemy.sourceRect = {0, 0, 32, 54};
@@ -172,8 +172,8 @@ void MapEditorScreen::InitializeTilesets()
             enemy.texture = ResrcManager::GetInstance().getTexture("Muncher_0");
             break;
         case 133:
-            enemy.sourceRect = {0, 0, 32, 32};
-            enemy.texture = ResrcManager::GetInstance().getTexture("PiranhaPlant_MouthOpen_0");
+            enemy.sourceRect = {0, 0, 32, 66};
+            enemy.texture = ResrcManager::GetInstance().getTexture("PiranhaPlant_MouthOpen");
             break;
         case 134:
             enemy.sourceRect = {0, 0, 32, 54};
@@ -181,7 +181,7 @@ void MapEditorScreen::InitializeTilesets()
             break;
         case 135:
             enemy.sourceRect = {0, 0, 40, 64};
-            enemy.texture = ResrcManager::GetInstance().getTexture("Rex_0_RIGHT");
+            enemy.texture = ResrcManager::GetInstance().getTexture("REX_0_RIGHT");
             break;
         case 136:
             enemy.sourceRect = {0, 0, 40, 64};
@@ -192,8 +192,8 @@ void MapEditorScreen::InitializeTilesets()
             enemy.texture = ResrcManager::GetInstance().getTexture("YellowKoopaTroopa_0_RIGHT");
             break;
         case 145:
-            enemy.sourceRect = {0, 0, 32, 32};
-            enemy.texture = ResrcManager::GetInstance().getTexture("BanzaiBill_0");
+            enemy.sourceRect = {0, 0, 128, 128};
+            enemy.texture = ResrcManager::GetInstance().getTexture("BANZAIBILL");
             break;
         default:
             break;
@@ -528,6 +528,8 @@ int MapEditorScreen::GetEnemyTileId(Enemy *enemy)
         return 127;
     else if (dynamic_cast<GreenKoopa *>(enemy))
         return 128;
+    else if(dynamic_cast<JumpingPiranhaPlant *>(enemy))
+        return 129;
     else if (dynamic_cast<RedKoopa *>(enemy))
         return 134;
     else if (dynamic_cast<Rex *>(enemy))
@@ -873,6 +875,8 @@ Enemy *MapEditorScreen::CreateEnemyByType(int tileId, Vector2 position)
         return new Goomba(position);
     case 128:
         return new GreenKoopa(position);
+    case 129:
+        return new JumpingPiranhaPlant(position);
     case 134:
         return new RedKoopa(position);
     case 135:

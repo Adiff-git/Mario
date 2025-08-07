@@ -675,6 +675,32 @@ void GameWorld::UpdateWorld()
                     }
                 }
             }
+
+            // Handle Player 1 collisions with blocks
+            for (auto &block : map.getBlocks())
+            {
+                if (block)
+                {
+                    CollisionType collision = block->checkCollisionType(*player1);
+                    if (collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_EYES_OPENED)
+                    {
+                        if (!block->isHit())
+                            player1->SetVel(Vector2{player1->GetVel().x, 0});
+                        block->doHit(*player1, this->GetMap());
+                    }
+                    if (collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_QUESTION)
+                    {
+                        block->doHit(*player1, this->GetMap());
+                        player1->SetVel({player1->GetVel().x, 0});
+                    }
+                    if (collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_GLASS)
+                    {
+                        block->doHit(*player1, this->GetMap());
+                        player1->SetVel({player1->GetVel().x, 0});
+                    }
+                    mediatorCollision.HandleCollision(player1, block);
+                }
+            }
         }
 
         if (player1->GetFireballs())
@@ -774,6 +800,32 @@ void GameWorld::UpdateWorld()
                     }
                 }
             }
+
+            // Handle Player 2 collisions with blocks
+            for (auto &block : map.getBlocks())
+            {
+                if (block)
+                {
+                    CollisionType collision2 = block->checkCollisionType(*player2);
+                    if (collision2 == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_EYES_OPENED)
+                    {
+                        if (!block->isHit())
+                            player2->SetVel(Vector2{player2->GetVel().x, 0});
+                        block->doHit(*player2, this->GetMap());
+                    }
+                    if (collision2 == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_QUESTION)
+                    {
+                        block->doHit(*player2, this->GetMap());
+                        player2->SetVel({player2->GetVel().x, 0});
+                    }
+                    if (collision2 == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_GLASS)
+                    {
+                        block->doHit(*player2, this->GetMap());
+                        player2->SetVel({player2->GetVel().x, 0});
+                    }
+                    mediatorCollision.HandleCollision(player2, block);
+                }
+            }
         }
 
         if (player2->GetFireballs())
@@ -857,54 +909,12 @@ void GameWorld::UpdateWorld()
         }
     }
 
-    // Handle blocks
+    // Handle blocks - chỉ update, collision đã xử lý ở trên
     for (auto &block : map.getBlocks())
     {
         if (block)
         {
             block->Update();
-            if (player1)
-            {
-                CollisionType collision = block->checkCollisionType(*player1);
-                if (collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_EYES_OPENED)
-                {
-                    if (!block->isHit())
-                        player1->SetVel(Vector2{player1->GetVel().x, 0});
-                    block->doHit(*player1, this->GetMap());
-                }
-                if (collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_QUESTION)
-                {
-                    block->doHit(*player1, this->GetMap());
-                    player1->SetVel({player1->GetVel().x, 0});
-                }
-                if (collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_GLASS)
-                {
-                    block->doHit(*player1, this->GetMap());
-                    player1->SetVel({player1->GetVel().x, 0});
-                }
-                mediatorCollision.HandleCollision(player1, block);
-            }
-            if (isMultiplayer && player2)
-            {
-                CollisionType collision2 = block->checkCollisionType(*player2);
-                if (collision2 == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_EYES_OPENED)
-                {
-                    if (!block->isHit())
-                        player2->SetVel(Vector2{player2->GetVel().x, 0});
-                    block->doHit(*player2, this->GetMap());
-                }
-                if (collision2 == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_QUESTION)
-                {
-                    block->doHit(*player2, this->GetMap());
-                    player2->SetVel({player2->GetVel().x, 0});
-                }
-                if (collision2 == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_GLASS)
-                {
-                    block->doHit(*player2, this->GetMap());
-                    player2->SetVel({player2->GetVel().x, 0});
-                }
-                mediatorCollision.HandleCollision(player2, block);
-            }
         }
     }
 
@@ -942,7 +952,7 @@ void GameWorld::UpdateWorld()
     //         }
     //     ),
     //     map.GetEnemies().end()
-    // );
+    // )
 
     // Cleanup blocks
     auto &blocks = map.getBlocks();

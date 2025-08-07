@@ -128,7 +128,7 @@ void Map::LoadMap(int mapIndex)
                 enemies.push_back(new GreenKoopa(Vector2{(float)x * tilewidth, (float)y * tileheight}));
             }
             else if(tileId == 129) {
-                //JumpingPiranhaPlant
+                enemies.push_back(new JumpingPiranhaPlant(Vector2{(float)x * tilewidth, (float)y * tileheight}));
             }
             else if(tileId == 130) {
                 // MontyMole
@@ -278,7 +278,7 @@ void Map :: LoadFromJsonFile(const std::string& filepath){
                 enemies.push_back(new GreenKoopa(Vector2{(float)x * tilewidth, (float)y * tileheight}));
             }
             else if(tileId == 129) {
-                //JumpingPiranhaPlant
+                enemies.push_back(new JumpingPiranhaPlant(Vector2{(float)x * tilewidth, (float)y * tileheight}));
             }
             else if(tileId == 130) {
                 // MontyMole

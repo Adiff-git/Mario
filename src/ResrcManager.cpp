@@ -527,7 +527,7 @@ void ResrcManager::loadTextures() {
 
     }
     //TILES
-    for (int i = 0; i < 104; ++i) {
+    for (int i = 1; i <= 104; ++i) {
         std::string keyStr = "tile_" + std::to_string(i);
         textures[keyStr] = LoadTexture(("resources/images/tiles/tile_" + std::to_string(i) + ".png").c_str());
     }
