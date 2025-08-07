@@ -612,6 +612,11 @@ void ResrcManager::loadTextures() {
         textures["RedKoopaTroopa_0_LEFT"] = FlipTextureHorizontal(textures["RedKoopaTroopa_0_RIGHT"]);
         textures["RedKoopaTroopa_1_LEFT"] = FlipTextureHorizontal(textures["RedKoopaTroopa_1_RIGHT"]);
 
+        textures["SHELL_0"] = LoadTexture("resources/images/Object/Enemy/Shell_0.png");
+        textures["SHELL_1"] = LoadTexture("resources/images/Object/Enemy/Shell_1.png");
+        textures["SHELL_2"] = LoadTexture("resources/images/Object/Enemy/Shell_2.png");
+        textures["SHELL_3"] = LoadTexture("resources/images/Object/Enemy/Shell_3.png");
+        
         textures["YellowKoopaTroopa_0_RIGHT"] = LoadTexture("resources/images/Object/Enemy/YellowKoopaTroopa_0.png");
         textures["YellowKoopaTroopa_1_RIGHT"] = LoadTexture("resources/images/Object/Enemy/YellowKoopaTroopa_1.png");
         textures["YellowKoopaTroopa_0_LEFT"] = FlipTextureHorizontal(textures["YellowKoopaTroopa_0_RIGHT"]);

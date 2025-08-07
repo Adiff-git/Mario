@@ -10,7 +10,7 @@
 #include "Boss.h"
 #include <iostream>
 #include <algorithm>
-#include "../inc/Item/Coin.h"
+#include "../inc/Item/Coin.h" 
 #include "../inc/Item/Mushroom.h"
 #include "../inc/Item/FireFlower.h"
 #include "SoundManager.h"
@@ -203,7 +203,6 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
     BossFireball *bossFireballA = dynamic_cast<BossFireball *>(ObjectA);
     BossFireball *bossFireballB = dynamic_cast<BossFireball *>(ObjectB);
     
-    // Mario vs Tile
     if ((marioA && tileB) || (marioB && tileA)) {
         Character* mario = marioA ? marioA : marioB;
         Tile* tile = tileA ? tileA : tileB;
@@ -224,7 +223,6 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
         CollisionType type = item->checkCollisionType(*tile);
         HandleItemWithTile(item, tile, type);
     }
-    // Mario vs Item
     else if ((marioA && itemB) || (marioB && itemA)) {
         Character* mario = marioA ? marioA : marioB;
         Item* item = itemA ? itemA : itemB;
@@ -240,7 +238,6 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
             } 
         }
     }
-    // Mario vs Enemy
     else if ((marioA && enemyB) || (marioB && enemyA)) {
         Character* mario = marioA ? marioA : marioB;
         Enemy* enemy = enemyA ? enemyA : enemyB;
@@ -261,7 +258,6 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
         CollisionType type = enemy->checkCollisionType(*fireball);
         HandleEnemyWithFireball(enemy, fireball, type);
     }
-    // Mario vs block
     else if((marioA && blockB) || (blockA && marioB)){
         Block* block = blockA ? blockA : blockB;
         Character* mario = marioA ? marioA :marioB;
@@ -282,149 +278,35 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
         CollisionType type = enemy->checkCollisionType(*block);
         HandleEnemyWithBlock(enemy, block, type);
     }
+    else if ((enemyA && enemyB)) {
+        CollisionType type = enemyA->checkCollisionType(*enemyB);
+        HandleEnemyWithEnemy(enemyA, enemyB, type);
+    }
 }
-
 void MediatorCollision::HandleMarioWithBlock(Character* &mario, Block* &block, CollisionType type){
     if(type == COLLISION_TYPE_NONE) return;
+    bool canCollide = (block->GetBlockType() != BLOCK_CLOUD || mario->GetState() == OBJECT_STATE_FALLING) &&
+                      (block->GetBlockType() != BLOCK_EYES_OPENED || !block->isHit());
+    if (!canCollide) return;
+
     switch(type){
-        case COLLISION_TYPE_SOUTH:{
-            switch(block->GetBlockType())
-            {
-            case BLOCK_QUESTION:
-                mario->SetPos(Vector2{mario->GetPos().x, block->GetPos().y - mario->GetSize().y});
-                mario->SetState(OBJECT_STATE_ON_GROUND);
-                mario->SetVel(Vector2{mario->GetVel().x, 0});
-                break;
-            case BLOCK_CLOUD:
-                if(mario->GetState() == OBJECT_STATE_FALLING)
-                mario->SetPos(Vector2{mario->GetPos().x, block->GetPos().y - mario->GetSize().y});
-                mario->SetState(OBJECT_STATE_ON_GROUND);
-                mario->SetVel(Vector2{mario->GetVel().x, 0});
-                break;
-            case BLOCK_GLASS:
-                mario->SetPos(Vector2{mario->GetPos().x, block->GetPos().y - mario->GetSize().y});
-                mario->SetState(OBJECT_STATE_ON_GROUND);
-                mario->SetVel(Vector2{mario->GetVel().x, 0});
-                break;
-            case BLOCK_WOOD:
-                mario->SetPos(Vector2{mario->GetPos().x, block->GetPos().y - mario->GetSize().y});
-                mario->SetState(OBJECT_STATE_ON_GROUND);
-                mario->SetVel(Vector2{mario->GetVel().x, 0});
-                break;
-            case BLOCK_EYES_OPENED:
-                if(!block->isHit()){
-                mario->SetPos(Vector2{mario->GetPos().x, block->GetPos().y - mario->GetSize().y});
-                mario->SetState(OBJECT_STATE_ON_GROUND);
-                mario->SetVel(Vector2{mario->GetVel().x, 0});
-                }
-                break;
-            case BLOCK_EYES_CLOSED:
-                mario->SetPos(Vector2{mario->GetPos().x, block->GetPos().y - mario->GetSize().y});
-                mario->SetState(OBJECT_STATE_ON_GROUND);
-                mario->SetVel(Vector2{mario->GetVel().x, 0});
-                break;
-            default:
-                break;
-            };
+        case COLLISION_TYPE_SOUTH:
+            mario->SetPos(Vector2{mario->GetPos().x, block->GetPos().y - mario->GetSize().y});
+            mario->SetState(OBJECT_STATE_ON_GROUND);
+            mario->SetVel(Vector2{mario->GetVel().x, 0});
             break;
-        }
-        case COLLISION_TYPE_NORTH:{
-            switch(block->GetBlockType())
-            {
-            case BLOCK_QUESTION:
-                mario->SetPos(Vector2{mario->GetPos().x, block->GetPos().y + block->GetSize().y});
-                mario->SetVel(Vector2{mario->GetVel().x, 0});
-                break;
-            case BLOCK_CLOUD:
-                break;
-            case BLOCK_GLASS:
-                mario->SetPos(Vector2{mario->GetPos().x, block->GetPos().y + block->GetSize().y});
-                mario->SetVel(Vector2{mario->GetVel().x, 0});
-                break;
-            case BLOCK_WOOD:
-                mario->SetPos(Vector2{mario->GetPos().x, block->GetPos().y + block->GetSize().y});
-                mario->SetVel(Vector2{mario->GetVel().x, 0});
-                break;
-            case BLOCK_EYES_OPENED:
-                if(!block->isHit())
-                {
-                mario->SetPos(Vector2{mario->GetPos().x, block->GetPos().y + block->GetSize().y});
-                mario->SetVel(Vector2{mario->GetVel().x, 0});
-                }
-                break;
-            case BLOCK_EYES_CLOSED:
-                mario->SetPos(Vector2{mario->GetPos().x, block->GetPos().y + block->GetSize().y});
-                mario->SetVel(Vector2{mario->GetVel().x, 0});
-                break;
-            default:
-                break;
-            };
+        case COLLISION_TYPE_NORTH:
+            mario->SetPos(Vector2{mario->GetPos().x, block->GetPos().y + block->GetSize().y});
+            mario->SetVel(Vector2{mario->GetVel().x, 0});
             break;
-        }
-        case COLLISION_TYPE_EAST:{
-            switch(block->GetBlockType())
-            {
-            case BLOCK_QUESTION:
-                mario->SetPos(Vector2{block->GetPos().x - mario->GetSize().x, mario->GetPos().y});
-                mario->SetVel(Vector2{0, mario->GetVel().y});
-                break;
-            case BLOCK_CLOUD:
-                break;
-            case BLOCK_GLASS:
-                mario->SetPos(Vector2{block->GetPos().x - mario->GetSize().x, mario->GetPos().y});
-                mario->SetVel(Vector2{0, mario->GetVel().y});
-                break;
-            case BLOCK_WOOD:
-                mario->SetPos(Vector2{block->GetPos().x - mario->GetSize().x, mario->GetPos().y});
-                mario->SetVel(Vector2{0, mario->GetVel().y});
-                break;
-            case BLOCK_EYES_OPENED:
-                if(!block->isHit()){
-                mario->SetPos(Vector2{block->GetPos().x - mario->GetSize().x, mario->GetPos().y});
-                mario->SetVel(Vector2{0, mario->GetVel().y});
-                }
-                break;
-            case BLOCK_EYES_CLOSED:
-                mario->SetPos(Vector2{block->GetPos().x - mario->GetSize().x, mario->GetPos().y});
-                mario->SetVel(Vector2{0, mario->GetVel().y});
-                break;
-            default:
-                break;
-            };
+        case COLLISION_TYPE_EAST:
+            mario->SetPos(Vector2{block->GetPos().x - mario->GetSize().x, mario->GetPos().y});
+            mario->SetVel(Vector2{0, mario->GetVel().y});
             break;
-        }
-        case COLLISION_TYPE_WEST:{
-            switch(block->GetBlockType())
-            {
-            case BLOCK_QUESTION:
-                mario->SetPos(Vector2{block->GetPos().x + block->GetSize().x, mario->GetPos().y});
-                mario->SetVel(Vector2{0, mario->GetVel().y});
-                break;
-            case BLOCK_CLOUD:
-                break;
-            case BLOCK_GLASS:
-                mario->SetPos(Vector2{block->GetPos().x + block->GetSize().x, mario->GetPos().y});
-                mario->SetVel(Vector2{0, mario->GetVel().y});
-                break;
-            case BLOCK_WOOD:
-                mario->SetPos(Vector2{block->GetPos().x + block->GetSize().x, mario->GetPos().y});
-                mario->SetVel(Vector2{0, mario->GetVel().y});
-                break;
-            case BLOCK_EYES_OPENED:
-                if(!block->isHit()){
-                mario->SetPos(Vector2{block->GetPos().x + block->GetSize().x, mario->GetPos().y});
-                mario->SetVel(Vector2{0, mario->GetVel().y});
-                }
-                break;
-            case BLOCK_EYES_CLOSED:
-                mario->SetPos(Vector2{block->GetPos().x + block->GetSize().x, mario->GetPos().y});
-                mario->SetVel(Vector2{0, mario->GetVel().y});
-                break;
-            default:
-                break;
-            };
+        case COLLISION_TYPE_WEST:
+            mario->SetPos(Vector2{block->GetPos().x + block->GetSize().x, mario->GetPos().y});
+            mario->SetVel(Vector2{0, mario->GetVel().y});
             break;
-        }
     }
 }
 
@@ -470,16 +352,12 @@ void MediatorCollision::HandleMarioWithEnemy(Character*& mario, Enemy*& enemy, C
     }
 
     Boss *boss = dynamic_cast<Boss *>(enemy);
-    if (boss)
-    {
-        if (boss->IsDead())
-        {
+    if (boss) {
+        if (boss->IsDead()) {
             return;
         }
-        switch (AtoB)
-        {
-        case COLLISION_TYPE_SOUTH:
-        {
+        switch (AtoB) {
+        case COLLISION_TYPE_SOUTH: {
             mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
             boss->OnHitByFireball();
             std::cout << "[DEBUG] Boss hit by Mario's stomp! Hit count: " << boss->GetHitCount() << "/10" << std::endl;
@@ -487,9 +365,8 @@ void MediatorCollision::HandleMarioWithEnemy(Character*& mario, Enemy*& enemy, C
         }
         case COLLISION_TYPE_EAST:
         case COLLISION_TYPE_WEST:
-        case COLLISION_TYPE_NORTH:
-        {
-            std::cout << "Boss damages Mario on side collision!" << std::endl;
+        case COLLISION_TYPE_NORTH: {
+            std::cout << "[DEBUG] Boss damages Mario on side collision!" << std::endl;
             mario->BeHit();
             break;
         }
@@ -497,47 +374,74 @@ void MediatorCollision::HandleMarioWithEnemy(Character*& mario, Enemy*& enemy, C
         return;
     }
 
-    switch (AtoB)
-    {
-    case COLLISION_TYPE_SOUTH:
-    {
-        mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
+    RedKoopa *redKoopa = dynamic_cast<RedKoopa *>(enemy);
+    if (redKoopa) {
+        bool isShell = redKoopa->GetState() == OBJECT_STATE_SHELL;
+        bool isMoving = redKoopa->IsMoving();
+        float marioX = mario->GetPos().x + mario->GetSize().x / 2; // Tâm của Mario
+        float koopaX = redKoopa->GetPos().x + redKoopa->GetSize().x / 2; // Tâm của Koopa
+        bool fromLeft = (marioX < koopaX);
+
+        switch (AtoB) {
+        case COLLISION_TYPE_SOUTH: {
+            mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
+            SoundManager::GetInstance().PlaySound("ENEMY_KICK");
+            redKoopa->OnHit(fromLeft);
+            std::cout << "[DEBUG] Mario stomps on RedKoopa, fromLeft: " << fromLeft << ", isShell: " << isShell << ", isMoving: " << isMoving << std::endl;
+            break;
+        }
+        case COLLISION_TYPE_EAST:
+        case COLLISION_TYPE_WEST: {
+            if (isShell && isMoving) {
+                mario->BeHit();
+                std::cout << "[DEBUG] Mario hit by moving RedKoopa shell from " << (AtoB == COLLISION_TYPE_EAST ? "EAST" : "WEST") << std::endl;
+            } else if (isShell && !isMoving) {
+                redKoopa->OnHit(fromLeft);
+                SoundManager::GetInstance().PlaySound("ENEMY_KICK");
+                std::cout << "[DEBUG] Mario kicks stationary RedKoopa shell, fromLeft: " << fromLeft << std::endl;
+            } else {
+                mario->BeHit();
+                std::cout << "[DEBUG] Mario collides with RedKoopa from " << (AtoB == COLLISION_TYPE_EAST ? "EAST" : "WEST") << std::endl;
+            }
+            break;
+        }
+        case COLLISION_TYPE_NORTH: {
+            if (isShell && isMoving) {
+                mario->BeHit();
+                std::cout << "[DEBUG] Mario hit by moving RedKoopa shell from NORTH" << std::endl;
+            } else {
+                mario->BeHit();
+                std::cout << "[DEBUG] Mario collides with RedKoopa from NORTH" << std::endl;
+            }
+            break;
+        }
+        }
+        return;
+    }
+
+    switch (AtoB) {
+    case COLLISION_TYPE_SOUTH: {
+        mario->SetVel(Vector2{mario->GetVel().x, -500.0f});
         SoundManager::GetInstance().PlaySound("ENEMY_DEATH");
         Rex *rex = dynamic_cast<Rex *>(enemy);
-        if (rex)
-        {
+        if (rex) {
             rex->OnHit();
-            if (rex->GetHitCount() >= 2)
-            {
+            if (rex->GetHitCount() >= 2) {
                 rex->CreateDeathEffect();
-                rex->CreateScoreEffect(100); // Thêm dòng này để tạo text cộng điểm
+                rex->CreateScoreEffect(100);
                 rex->SetState(OBJECT_STATE_DYING);
             }
-        }
-        else
-        {
+        } else {
             enemy->CreateDeathEffect();
-            enemy->CreateScoreEffect(100); // Thêm dòng này để tạo text cộng điểm
-            enemy->SetHitByFireball(true);
+            enemy->CreateScoreEffect(100);
             enemy->SetState(OBJECT_STATE_DYING);
-            RedKoopa *redKoopa = dynamic_cast<RedKoopa *>(enemy);
-            if (redKoopa)
-            {
-                float marioX = mario->GetPos().x;
-                float koopaX = redKoopa->GetPos().x;
-                bool fromLeft = (marioX < koopaX);
-                redKoopa->OnHit(fromLeft);
-                redKoopa->CreateDeathEffect();
-                redKoopa->CreateScoreEffect(100); // Thêm dòng này để tạo text cộng điểm
-                redKoopa->SetState(OBJECT_STATE_DYING);
-            }
         }
         break;
     }
     case COLLISION_TYPE_EAST:
     case COLLISION_TYPE_WEST:
-    case COLLISION_TYPE_NORTH:
-    {
+    case COLLISION_TYPE_NORTH: {
+        std::cout << "[DEBUG] Mario collides with enemy from " << (AtoB == COLLISION_TYPE_EAST ? "EAST" : AtoB == COLLISION_TYPE_WEST ? "WEST" : "NORTH") << std::endl;
         mario->BeHit();
         break;
     }
@@ -567,26 +471,59 @@ void MediatorCollision::HandleEnemyWithFireball(Enemy *&enemy, Fireball *&fireba
 
     if (dynamic_cast<BuzzyBeetle *>(enemy))
     {
-        std::cout << "BuzzyBeetle is immune to fireball!" << std::endl;
+        std::cout << "[DEBUG] BuzzyBeetle is immune to fireball!" << std::endl;
         return;
     }
     enemy->CreateDeathEffect();
-    enemy->CreateScoreEffect(100); // Thêm dòng này để tạo text cộng điểm
+    enemy->CreateScoreEffect(100);
     enemy->SetState(OBJECT_STATE_DYING);
-    std::cout << "Enemy dies by fireball" << std::endl;
+    fireball->SetState(OBJECT_STATE_DEAD); // Hủy fireball sau khi trúng
+    std::cout << "[DEBUG] Enemy dies by fireball" << std::endl;
 }
 
 void MediatorCollision::HandleMarioWithBossFireball(Character *&mario, BossFireball *&bossFireball, CollisionType AtoB)
 {
     if (AtoB == COLLISION_TYPE_NONE)
         return;
-
-    std::cout << "BossFireball collision detected! Type: " << AtoB << std::endl;
+    std::cout << "[DEBUG] BossFireball collision detected! Type: " << AtoB << std::endl;
 
     if (AtoB != COLLISION_TYPE_NONE)
     {
         mario->BeHit();
         bossFireball->SetState(OBJECT_STATE_DEAD);
-        std::cout << "Mario hit by BossFireball - dies instantly!" << std::endl;
+        std::cout << "[DEBUG] Mario hit by BossFireball - takes damage!" << std::endl;
+    }
+}
+void MediatorCollision::HandleEnemyWithEnemy(Enemy*& enemyA, Enemy*& enemyB, CollisionType AtoB) {
+    if (AtoB == COLLISION_TYPE_NONE) {
+        return;
+    }
+
+    RedKoopa* redKoopaA = dynamic_cast<RedKoopa*>(enemyA);
+    RedKoopa* redKoopaB = dynamic_cast<RedKoopa*>(enemyB);
+
+    // Trường hợp: RedKoopa ở trạng thái mai di chuyển va chạm với enemy khác
+    if (redKoopaA && redKoopaA->GetState() == OBJECT_STATE_SHELL && redKoopaA->IsMoving()) {
+        if (!dynamic_cast<Boss*>(enemyB) && enemyB->GetState() != OBJECT_STATE_DYING && enemyB->GetState() != OBJECT_STATE_DEAD) {
+            // RedKoopa mai di chuyển giết enemyB
+            enemyB->CreateDeathEffect();
+            enemyB->CreateScoreEffect(100);
+            enemyB->SetState(OBJECT_STATE_DYING);
+            SoundManager::GetInstance().PlaySound("ENEMY_DEATH");
+            std::cout << "[DEBUG] Moving RedKoopa shell (enemyA) kills enemyB" << std::endl;
+        }
+        return;
+    }
+
+    if (redKoopaB && redKoopaB->GetState() == OBJECT_STATE_SHELL && redKoopaB->IsMoving()) {
+        if (!dynamic_cast<Boss*>(enemyA) && enemyA->GetState() != OBJECT_STATE_DYING && enemyA->GetState() != OBJECT_STATE_DEAD) {
+            // RedKoopa mai di chuyển giết enemyA
+            enemyA->CreateDeathEffect();
+            enemyA->CreateScoreEffect(100);
+            enemyA->SetState(OBJECT_STATE_DYING);
+            SoundManager::GetInstance().PlaySound("ENEMY_DEATH");
+            std::cout << "[DEBUG] Moving RedKoopa shell (enemyB) kills enemyA" << std::endl;
+        }
+        return;
     }
 }
