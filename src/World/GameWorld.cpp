@@ -1,4 +1,4 @@
-    #include "../inc/World/GameWorld.h"
+#include "../inc/World/GameWorld.h"
     #include "../inc/Item/Mushroom.h"
     #include "../inc/Item/OneUpMushroom.h"
     #include "../inc/Item/Star.h"
@@ -67,9 +67,9 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
     
     // Initialize Boss for MapID == 1
     if (MapID == 1) {
-        Boss* boss = new Boss(Vector2{1200, 535}, player1->GetPosPtr(), player2 ? player2->GetPosPtr() : nullptr, multiplayer);
-        map.GetEnemies().push_back(boss);
-        map.SetMarioPositionForBosses(player1->GetPosPtr(), player2 ? player2->GetPosPtr() : nullptr, multiplayer);
+        // Boss* boss = new Boss(Vector2{1200, 535}, player1->GetPosPtr(), player2 ? player2->GetPosPtr() : nullptr, multiplayer);
+        // map.GetEnemies().push_back(boss);
+        // map.SetMarioPositionForBosses(player1->GetPosPtr(), player2 ? player2->GetPosPtr() : nullptr, multiplayer);
     }
     
     
@@ -90,40 +90,40 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
     
     // Add items for MapID == 1
     if (MapID == 1) {
-        map.GetInteractiveItems().push_back(std::make_shared<Coin>(Vector2{400, 800}));
-        map.GetInteractiveItems().push_back(std::make_shared<FireFlower>(Vector2{450, 800}));
-        map.GetInteractiveItems().push_back(std::make_shared<Star>(Vector2{600, 500}));
-        map.GetInteractiveItems().push_back(std::make_shared<YoshiCoin>(Vector2{700, 800}));
-        // map.GetInteractiveItems().push_back(std::make_shared<CourseClearToken>(Vector2{800, 800}));
-        map.GetInteractiveItems().push_back(std::make_shared<Mushroom>(Vector2{200, 800}));
-        map.GetInteractiveItems().push_back(std::make_shared<ThreeUpMoon>(Vector2{200, 500}));
-        map.GetInteractiveItems().push_back(std::make_shared<OneUpMushroom>(Vector2{200, 800}));
+        // map.GetInteractiveItems().push_back(std::make_shared<Coin>(Vector2{400, 800}));
+        // map.GetInteractiveItems().push_back(std::make_shared<FireFlower>(Vector2{450, 800}));
+        // map.GetInteractiveItems().push_back(std::make_shared<Star>(Vector2{600, 500}));
+        // map.GetInteractiveItems().push_back(std::make_shared<YoshiCoin>(Vector2{700, 800}));
+        // // map.GetInteractiveItems().push_back(std::make_shared<CourseClearToken>(Vector2{800, 800}));
+        // map.GetInteractiveItems().push_back(std::make_shared<Mushroom>(Vector2{200, 800}));
+        // map.GetInteractiveItems().push_back(std::make_shared<ThreeUpMoon>(Vector2{200, 500}));
+        // map.GetInteractiveItems().push_back(std::make_shared<OneUpMushroom>(Vector2{200, 800}));
 
-        map.GetEnemies().push_back(new BanzaiBill(Vector2{500, 800}));
-        map.GetEnemies().push_back(new BulletBill(Vector2{600, 800}));
-        map.GetEnemies().push_back(new BuzzyBeetle(Vector2{700, 800}));
-        map.GetEnemies().push_back(new FlyingGoomba(Vector2{800, 800}));
-        map.GetEnemies().push_back(new Goomba(Vector2{900, 800}));
-        map.GetEnemies().push_back(new GreenKoopa(Vector2{1000, 800}));
-        map.GetEnemies().push_back(new JumpingPiranhaPlant(Vector2{1100, 800}));
-        map.GetEnemies().push_back(new RedKoopa(Vector2{1200, 800}));
-        map.GetEnemies().push_back(new Rex(Vector2{1300, 800}));
-        map.GetEnemies().push_back(new YellowKoopa(Vector2{1400, 800}));
+        // map.GetEnemies().push_back(new BanzaiBill(Vector2{500, 800}));
+        // map.GetEnemies().push_back(new BulletBill(Vector2{600, 800}));
+        // map.GetEnemies().push_back(new BuzzyBeetle(Vector2{700, 800}));
+        // map.GetEnemies().push_back(new FlyingGoomba(Vector2{800, 800}));
+        // map.GetEnemies().push_back(new Goomba(Vector2{900, 800}));
+        // map.GetEnemies().push_back(new GreenKoopa(Vector2{1000, 800}));
+        // map.GetEnemies().push_back(new JumpingPiranhaPlant(Vector2{1100, 800}));
+        // map.GetEnemies().push_back(new RedKoopa(Vector2{1200, 800}));
+        // map.GetEnemies().push_back(new Rex(Vector2{1300, 800}));
+        // map.GetEnemies().push_back(new YellowKoopa(Vector2{1400, 800}));
 
-        for (int i = 0; i < 20; i++) {
-            map.getBlocks().push_back(new WoodBlock(Vector2{0, float(600 + i * 32)}, Vector2{32, 32}, WHITE));
-        }
+        // for (int i = 0; i < 20; i++) {
+        //     map.getBlocks().push_back(new WoodBlock(Vector2{0, float(600 + i * 32)}, Vector2{32, 32}, WHITE));
+        // }
         
-        for (int i = 0; i < 20; i++) {
-            map.getBlocks().push_back(new WoodBlock(Vector2{1920, float(600 + i * 32)}, Vector2{32, 32}, WHITE));
-        }
+        // for (int i = 0; i < 20; i++) {
+        //     map.getBlocks().push_back(new WoodBlock(Vector2{1920, float(600 + i * 32)}, Vector2{32, 32}, WHITE));
+        // }
 
-        map.getBlocks().push_back(new CloudBlock(Vector2{100, 750}, Vector2{32, 32}, WHITE));
-        map.getBlocks().push_back(new EyesClosedBlock(Vector2{150, 750}, Vector2{32, 32}, WHITE));
-        map.getBlocks().push_back(new EyesOpenedBlock(Vector2{200, 750}, Vector2{32, 32}, WHITE));
-        map.getBlocks().push_back(new GlassBlock(Vector2{250, 750}, Vector2{32, 32}, WHITE));
-        map.getBlocks().push_back(new QuestionBlock(Vector2{300, 750}, Vector2{32, 32}, WHITE, GIFT_COIN));
-        map.getBlocks().push_back(new WoodBlock(Vector2{350, 750}, Vector2{32, 32}, WHITE));
+        // map.getBlocks().push_back(new CloudBlock(Vector2{100, 750}, Vector2{32, 32}, WHITE));
+        // map.getBlocks().push_back(new EyesClosedBlock(Vector2{150, 750}, Vector2{32, 32}, WHITE));
+        // map.getBlocks().push_back(new EyesOpenedBlock(Vector2{200, 750}, Vector2{32, 32}, WHITE));
+        // map.getBlocks().push_back(new GlassBlock(Vector2{250, 750}, Vector2{32, 32}, WHITE));
+        // map.getBlocks().push_back(new QuestionBlock(Vector2{300, 750}, Vector2{32, 32}, WHITE, GIFT_COIN));
+        // map.getBlocks().push_back(new WoodBlock(Vector2{350, 750}, Vector2{32, 32}, WHITE));
 
 
 
@@ -621,7 +621,6 @@ void GameWorld::UpdateWorld()
             if (player1->GetPos().y > 900) // KIỂM TRA VỊ TRÍ PLAYER 1
             {
                 player1->Die();
-                return;
             }
             // if (player1->GetPos().x > 1900)
             // {
@@ -639,7 +638,6 @@ void GameWorld::UpdateWorld()
             {
                 if (player1->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
                     mediatorCollision.HandleCollision(player1, tile);
-                
             }
 
             // Handle Player 1 collisions with items
@@ -647,7 +645,6 @@ void GameWorld::UpdateWorld()
             {
                 if (item && player1->checkCollisionType(*item) != COLLISION_TYPE_NONE)
                     mediatorCollision.HandleCollision(player1, item.get());
-                
             }
 
             // Handle Player 1 collisions with enemies
@@ -663,7 +660,6 @@ void GameWorld::UpdateWorld()
                             continue; // Bỏ qua nếu boss đã chết
                     }
                     mediatorCollision.HandleCollision(player1, enemy);
-                     // Nếu player1 đang dying, không cần xử lý tiếp
                 }
                 // Handle Player 1 collisions with boss fireballs
                 if (Boss *boss = dynamic_cast<Boss *>(enemy))
@@ -677,6 +673,32 @@ void GameWorld::UpdateWorld()
                             fireball->SetState(OBJECT_STATE_DEAD); // Mark fireball for removal
                         }
                     }
+                }
+            }
+
+            // Handle Player 1 collisions with blocks
+            for (auto &block : map.getBlocks())
+            {
+                if (block)
+                {
+                    CollisionType collision = block->checkCollisionType(*player1);
+                    if (collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_EYES_OPENED)
+                    {
+                        if (!block->isHit())
+                            player1->SetVel(Vector2{player1->GetVel().x, 0});
+                        block->doHit(*player1, this->GetMap());
+                    }
+                    if (collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_QUESTION)
+                    {
+                        block->doHit(*player1, this->GetMap());
+                        player1->SetVel({player1->GetVel().x, 0});
+                    }
+                    if (collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_GLASS)
+                    {
+                        block->doHit(*player1, this->GetMap());
+                        player1->SetVel({player1->GetVel().x, 0});
+                    }
+                    mediatorCollision.HandleCollision(player1, block);
                 }
             }
         }
@@ -777,8 +799,32 @@ void GameWorld::UpdateWorld()
                         }
                     }
                 }
-                if (player2->GetState() == OBJECT_STATE_DYING || player2->GetState() == OBJECT_STATE_DEAD || player2->GetState() == OBJECT_STATE_VICTORY || player2->GetState() == OBJECT_STATE_TO_BE_REMOVED)
-                        return;
+            }
+
+            // Handle Player 2 collisions with blocks
+            for (auto &block : map.getBlocks())
+            {
+                if (block)
+                {
+                    CollisionType collision2 = block->checkCollisionType(*player2);
+                    if (collision2 == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_EYES_OPENED)
+                    {
+                        if (!block->isHit())
+                            player2->SetVel(Vector2{player2->GetVel().x, 0});
+                        block->doHit(*player2, this->GetMap());
+                    }
+                    if (collision2 == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_QUESTION)
+                    {
+                        block->doHit(*player2, this->GetMap());
+                        player2->SetVel({player2->GetVel().x, 0});
+                    }
+                    if (collision2 == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_GLASS)
+                    {
+                        block->doHit(*player2, this->GetMap());
+                        player2->SetVel({player2->GetVel().x, 0});
+                    }
+                    mediatorCollision.HandleCollision(player2, block);
+                }
             }
         }
 
@@ -863,54 +909,12 @@ void GameWorld::UpdateWorld()
         }
     }
 
-    // Handle blocks
+    // Handle blocks - chỉ update, collision đã xử lý ở trên
     for (auto &block : map.getBlocks())
     {
         if (block)
         {
             block->Update();
-            if (player1)
-            {
-                CollisionType collision = block->checkCollisionType(*player1);
-                if (collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_EYES_OPENED)
-                {
-                    if (!block->isHit())
-                        player1->SetVel(Vector2{player1->GetVel().x, 0});
-                    block->doHit(*player1, this->GetMap());
-                }
-                if (collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_QUESTION)
-                {
-                    block->doHit(*player1, this->GetMap());
-                    player1->SetVel({player1->GetVel().x, 0});
-                }
-                if (collision == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_GLASS)
-                {
-                    block->doHit(*player1, this->GetMap());
-                    player1->SetVel({player1->GetVel().x, 0});
-                }
-                mediatorCollision.HandleCollision(player1, block);
-            }
-            if (isMultiplayer && player2)
-            {
-                CollisionType collision2 = block->checkCollisionType(*player2);
-                if (collision2 == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_EYES_OPENED)
-                {
-                    if (!block->isHit())
-                        player2->SetVel(Vector2{player2->GetVel().x, 0});
-                    block->doHit(*player2, this->GetMap());
-                }
-                if (collision2 == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_QUESTION)
-                {
-                    block->doHit(*player2, this->GetMap());
-                    player2->SetVel({player2->GetVel().x, 0});
-                }
-                if (collision2 == COLLISION_TYPE_SOUTH && block->GetBlockType() == BLOCK_GLASS)
-                {
-                    block->doHit(*player2, this->GetMap());
-                    player2->SetVel({player2->GetVel().x, 0});
-                }
-                mediatorCollision.HandleCollision(player2, block);
-            }
         }
     }
 
@@ -948,7 +952,7 @@ void GameWorld::UpdateWorld()
     //         }
     //     ),
     //     map.GetEnemies().end()
-    // );
+    // )
 
     // Cleanup blocks
     auto &blocks = map.getBlocks();

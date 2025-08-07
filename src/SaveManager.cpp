@@ -1,4 +1,4 @@
-// #include "../inc/SaveSystem/SaveManager.h"
+// #include "../inc/SaveManager.h"
 // #include <iostream>
 // #include <fstream>
 // #include <filesystem>
@@ -6,7 +6,7 @@
 // #include "raylib.h"
 
 // // JSON library - bạn cần thêm nlohmann/json
-// #include <nlohmann/json.hpp>
+// #include "json.hpp"
 // using json = nlohmann::json;
 
 // SaveManager* SaveManager::instance = nullptr;
@@ -56,8 +56,6 @@
 //         j["player1"]["score"] = data.player1.score;
 //         j["player1"]["playerState"] = data.player1.playerState;
 //         j["player1"]["additionalState"] = data.player1.additionalState;
-//         j["player1"]["isInvincible"] = data.player1.isInvincible;
-//         j["player1"]["invincibleTimer"] = data.player1.invincibleTimer;
         
 //         // Player 2 data (if multiplayer)
 //         if (data.isMultiplayer) {
@@ -71,8 +69,6 @@
 //             j["player2"]["score"] = data.player2.score;
 //             j["player2"]["playerState"] = data.player2.playerState;
 //             j["player2"]["additionalState"] = data.player2.additionalState;
-//             j["player2"]["isInvincible"] = data.player2.isInvincible;
-//             j["player2"]["invincibleTimer"] = data.player2.invincibleTimer;
 //         }
         
 //         // Enemies
@@ -84,9 +80,7 @@
 //             enemyJson["y"] = enemy.y;
 //             enemyJson["velX"] = enemy.velX;
 //             enemyJson["velY"] = enemy.velY;
-//             enemyJson["alive"] = enemy.alive;
 //             enemyJson["state"] = enemy.state;
-//             enemyJson["hasBeenHit"] = enemy.hasBeenHit;
 //             j["enemies"].push_back(enemyJson);
 //         }
         
@@ -100,7 +94,6 @@
 //             itemJson["velX"] = item.velX;
 //             itemJson["velY"] = item.velY;
 //             itemJson["isCollected"] = item.isCollected;
-//             itemJson["state"] = item.state;
 //             j["items"].push_back(itemJson);
 //         }
         
@@ -111,11 +104,19 @@
 //             blockJson["blockType"] = block.blockType;
 //             blockJson["x"] = block.x;
 //             blockJson["y"] = block.y;
-//             blockJson["isActive"] = block.isActive;
 //             blockJson["state"] = block.state;
 //             blockJson["hasBeenHit"] = block.hasBeenHit;
-//             blockJson["remainingItems"] = block.remainingItems;
+//             blockJson["giftType"] = block.giftType;
 //             j["blocks"].push_back(blockJson);
+//         }
+
+//         j["tiles"] = json::array();
+//         for (const auto& tile : data.tiles) {
+//             json tileJson;
+//             tileJson["tileType"] = tile.tileType;
+//             tileJson["x"] = tile.x;
+//             tileJson["y"] = tile.y;
+//             j["tiles"].push_back(tileJson);
 //         }
         
 //         // Write to file
@@ -137,123 +138,123 @@
 //     }
 // }
 
-// bool SaveManager::LoadGame(GameSaveData& data, int slotIndex) {
-//     if (slotIndex < 1 || slotIndex > 3) {
-//         std::cout << "Invalid save slot: " << slotIndex << std::endl;
-//         return false;
-//     }
+// // bool SaveManager::LoadGame(GameSaveData& data, int slotIndex) {
+// //     if (slotIndex < 1 || slotIndex > 3) {
+// //         std::cout << "Invalid save slot: " << slotIndex << std::endl;
+// //         return false;
+// //     }
     
-//     try {
-//         std::ifstream file(GetSaveFilePath(slotIndex));
-//         if (!file.is_open()) {
-//             std::cout << "Save file not found for slot " << slotIndex << std::endl;
-//             return false;
-//         }
+// //     try {
+// //         std::ifstream file(GetSaveFilePath(slotIndex));
+// //         if (!file.is_open()) {
+// //             std::cout << "Save file not found for slot " << slotIndex << std::endl;
+// //             return false;
+// //         }
         
-//         json j;
-//         file >> j;
-//         file.close();
+// //         json j;
+// //         file >> j;
+// //         file.close();
         
-//         // Load basic data
-//         data.saveDateTime = j["saveDateTime"];
-//         data.isMultiplayer = j["isMultiplayer"];
-//         data.currentLevel = j["currentLevel"];
-//         data.gameTime = j["gameTime"];
+// //         // Load basic data
+// //         data.saveDateTime = j["saveDateTime"];
+// //         data.isMultiplayer = j["isMultiplayer"];
+// //         data.currentLevel = j["currentLevel"];
+// //         data.gameTime = j["gameTime"];
         
-//         // Load player 1
-//         data.player1.characterType = j["player1"]["characterType"];
-//         data.player1.x = j["player1"]["x"];
-//         data.player1.y = j["player1"]["y"];
-//         data.player1.velX = j["player1"]["velX"];
-//         data.player1.velY = j["player1"]["velY"];
-//         data.player1.lives = j["player1"]["lives"];
-//         data.player1.coins = j["player1"]["coins"];
-//         data.player1.score = j["player1"]["score"];
-//         data.player1.playerState = j["player1"]["playerState"];
-//         data.player1.additionalState = j["player1"]["additionalState"];
-//         data.player1.isInvincible = j["player1"]["isInvincible"];
-//         data.player1.invincibleTimer = j["player1"]["invincibleTimer"];
+// //         // Load player 1
+// //         data.player1.characterType = j["player1"]["characterType"];
+// //         data.player1.x = j["player1"]["x"];
+// //         data.player1.y = j["player1"]["y"];
+// //         data.player1.velX = j["player1"]["velX"];
+// //         data.player1.velY = j["player1"]["velY"];
+// //         data.player1.lives = j["player1"]["lives"];
+// //         data.player1.coins = j["player1"]["coins"];
+// //         data.player1.score = j["player1"]["score"];
+// //         data.player1.playerState = j["player1"]["playerState"];
+// //         data.player1.additionalState = j["player1"]["additionalState"];
+// //         data.player1.isInvincible = j["player1"]["isInvincible"];
+// //         data.player1.invincibleTimer = j["player1"]["invincibleTimer"];
         
-//         // Load player 2 if multiplayer
-//         if (data.isMultiplayer && j.contains("player2")) {
-//             data.player2.characterType = j["player2"]["characterType"];
-//             data.player2.x = j["player2"]["x"];
-//             data.player2.y = j["player2"]["y"];
-//             data.player2.velX = j["player2"]["velX"];
-//             data.player2.velY = j["player2"]["velY"];
-//             data.player2.lives = j["player2"]["lives"];
-//             data.player2.coins = j["player2"]["coins"];
-//             data.player2.score = j["player2"]["score"];
-//             data.player2.playerState = j["player2"]["playerState"];
-//             data.player2.additionalState = j["player2"]["additionalState"];
-//             data.player2.isInvincible = j["player2"]["isInvincible"];
-//             data.player2.invincibleTimer = j["player2"]["invincibleTimer"];
-//         }
+// //         // Load player 2 if multiplayer
+// //         if (data.isMultiplayer && j.contains("player2")) {
+// //             data.player2.characterType = j["player2"]["characterType"];
+// //             data.player2.x = j["player2"]["x"];
+// //             data.player2.y = j["player2"]["y"];
+// //             data.player2.velX = j["player2"]["velX"];
+// //             data.player2.velY = j["player2"]["velY"];
+// //             data.player2.lives = j["player2"]["lives"];
+// //             data.player2.coins = j["player2"]["coins"];
+// //             data.player2.score = j["player2"]["score"];
+// //             data.player2.playerState = j["player2"]["playerState"];
+// //             data.player2.additionalState = j["player2"]["additionalState"];
+// //             data.player2.isInvincible = j["player2"]["isInvincible"];
+// //             data.player2.invincibleTimer = j["player2"]["invincibleTimer"];
+// //         }
         
-//         // Load enemies
-//         data.enemies.clear();
-//         for (const auto& enemyJson : j["enemies"]) {
-//             EnemySave enemy;
-//             enemy.enemyType = enemyJson["enemyType"];
-//             enemy.x = enemyJson["x"];
-//             enemy.y = enemyJson["y"];
-//             enemy.velX = enemyJson["velX"];
-//             enemy.velY = enemyJson["velY"];
-//             enemy.alive = enemyJson["alive"];
-//             enemy.state = enemyJson["state"];
-//             enemy.hasBeenHit = enemyJson["hasBeenHit"];
-//             data.enemies.push_back(enemy);
-//         }
+// //         // Load enemies
+// //         data.enemies.clear();
+// //         for (const auto& enemyJson : j["enemies"]) {
+// //             EnemySave enemy;
+// //             enemy.enemyType = enemyJson["enemyType"];
+// //             enemy.x = enemyJson["x"];
+// //             enemy.y = enemyJson["y"];
+// //             enemy.velX = enemyJson["velX"];
+// //             enemy.velY = enemyJson["velY"];
+// //             enemy.alive = enemyJson["alive"];
+// //             enemy.state = enemyJson["state"];
+// //             enemy.hasBeenHit = enemyJson["hasBeenHit"];
+// //             data.enemies.push_back(enemy);
+// //         }
         
-//         // Load items
-//         data.items.clear();
-//         for (const auto& itemJson : j["items"]) {
-//             ItemSave item;
-//             item.itemType = itemJson["itemType"];
-//             item.x = itemJson["x"];
-//             item.y = itemJson["y"];
-//             item.velX = itemJson["velX"];
-//             item.velY = itemJson["velY"];
-//             item.isCollected = itemJson["isCollected"];
-//             item.state = itemJson["state"];
-//             data.items.push_back(item);
-//         }
+// //         // Load items
+// //         data.items.clear();
+// //         for (const auto& itemJson : j["items"]) {
+// //             ItemSave item;
+// //             item.itemType = itemJson["itemType"];
+// //             item.x = itemJson["x"];
+// //             item.y = itemJson["y"];
+// //             item.velX = itemJson["velX"];
+// //             item.velY = itemJson["velY"];
+// //             item.isCollected = itemJson["isCollected"];
+// //             item.state = itemJson["state"];
+// //             data.items.push_back(item);
+// //         }
         
-//         // Load blocks
-//         data.blocks.clear();
-//         for (const auto& blockJson : j["blocks"]) {
-//             BlockSave block;
-//             block.blockType = blockJson["blockType"];
-//             block.x = blockJson["x"];
-//             block.y = blockJson["y"];
-//             block.isActive = blockJson["isActive"];
-//             block.state = blockJson["state"];
-//             block.hasBeenHit = blockJson["hasBeenHit"];
-//             block.remainingItems = blockJson["remainingItems"];
-//             data.blocks.push_back(block);
-//         }
+// //         // Load blocks
+// //         data.blocks.clear();
+// //         for (const auto& blockJson : j["blocks"]) {
+// //             BlockSave block;
+// //             block.blockType = blockJson["blockType"];
+// //             block.x = blockJson["x"];
+// //             block.y = blockJson["y"];
+// //             block.isActive = blockJson["isActive"];
+// //             block.state = blockJson["state"];
+// //             block.hasBeenHit = blockJson["hasBeenHit"];
+// //             block.remainingItems = blockJson["remainingItems"];
+// //             data.blocks.push_back(block);
+// //         }
         
-//         std::cout << "Game loaded successfully from slot " << slotIndex << std::endl;
-//         return true;
+// //         std::cout << "Game loaded successfully from slot " << slotIndex << std::endl;
+// //         return true;
         
-//     } catch (const std::exception& e) {
-//         std::cout << "Error loading game: " << e.what() << std::endl;
-//         return false;
-//     }
-// }
+// //     } catch (const std::exception& e) {
+// //         std::cout << "Error loading game: " << e.what() << std::endl;
+// //         return false;
+// //     }
+// // }
 
-// bool SaveManager::HasSaveData(int slotIndex) {
-//     return std::filesystem::exists(GetSaveFilePath(slotIndex));
-// }
+// // bool SaveManager::HasSaveData(int slotIndex) {
+// //     return std::filesystem::exists(GetSaveFilePath(slotIndex));
+// // }
 
-// bool SaveManager::DeleteSave(int slotIndex) {
-//     try {
-//         return std::filesystem::remove(GetSaveFilePath(slotIndex));
-//     } catch (const std::exception& e) {
-//         std::cout << "Error deleting save: " << e.what() << std::endl;
-//         return false;
-//     }
-// }
+// // bool SaveManager::DeleteSave(int slotIndex) {
+// //     try {
+// //         return std::filesystem::remove(GetSaveFilePath(slotIndex));
+// //     } catch (const std::exception& e) {
+// //         std::cout << "Error deleting save: " << e.what() << std::endl;
+// //         return false;
+// //     }
+// // }
 
 
 
