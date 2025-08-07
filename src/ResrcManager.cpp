@@ -177,10 +177,10 @@ void ResrcManager::loadTextures() {
     textures["BACK_BUTTON"] = LoadTexture("resources/images/Button/BACK.png");
     textures["NEW_MAP_BUTTON"] = LoadTexture("resources/images/Button/NEW MAP.png");
     textures["LOAD_MAP_BUTTON"] = LoadTexture("resources/images/Button/LOAD MAP.png");
-    textures["1_PLAYER"] = LoadTexture("resources/images/Button/1 PLAYER.png");
-    textures["2_PLAYERS"] = LoadTexture("resources/images/Button/2 PLAYERS.png");
-    textures["MARIO_BUTTON"] = LoadTexture("resources/images/Button/MARIO_BUTTON.png");
-    textures["LUIGI_BUTTON"] = LoadTexture("resources/images/Button/LUIGI_BUTTON.png");
+    textures["1_PLAYER"] = LoadTexture("resources/images/Button/ONE PLAYER.png");
+    textures["2_PLAYERS"] = LoadTexture("resources/images/Button/TWO PLAYERS.png");
+    textures["MARIO_BUTTON"] = LoadTexture("resources/images/Button/MARIO-NEW.png");
+    textures["LUIGI_BUTTON"] = LoadTexture("resources/images/Button/LUIGI-NEW.png");
     textures["CHOOSE PLAYER"] = LoadTexture("resources/images/Button/CHOOSE PLAYER.png");
     textures["CHOOSE CHARACTOR"] = LoadTexture("resources/images/Button/CHOOSE CHARACTOR.png");
     textures["SETTING INTERFACE"] = LoadTexture("resources/images/Button/SETTING INTERFACE.png");
@@ -188,6 +188,10 @@ void ResrcManager::loadTextures() {
     textures["MUTE ALL OFF"] = LoadTexture("resources/images/Button/MUTE ALL OFF.png");
     textures["TUTORIALS"] = LoadTexture("resources/images/Button/TUTORIALS.png");
     textures["AUDIO SETTING"] = LoadTexture("resources/images/Button/AUDIO SETTING.png");
+
+    textures["LEVEL 1"] = LoadTexture("resources/images/Button/LEVEL 1.png");
+    textures["LEVEL 2"] = LoadTexture("resources/images/Button/LEVEL 2.png");
+    textures["LEVEL 3"] = LoadTexture("resources/images/Button/LEVEL 3.png");
 
 
 

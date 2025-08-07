@@ -48,6 +48,9 @@ private:
     Texture2D* selectMapTexture;
     Texture2D* selectDifficultyTexture;
     
+    // Font
+    Font* pixelFont;
+    
 public:
     MapSelectScreen(ScreenController* screenController, bool multiplayer, 
                    CharacterType p1Character, CharacterType p2Character);

@@ -6,9 +6,11 @@
 
 GameModeScreen::GameModeScreen(ScreenController* screenController)
     : Screen(screenController),
-      singlePlayerButton(Vector2{(float)GetScreenWidth()/2 - 125, 300}, Vector2{250, 70}),
-      multiPlayerButton(Vector2{(float)GetScreenWidth()/2 - 125, 400}, Vector2{250, 70}),
-      backButton(Vector2{50, 50}, Vector2{80, 80})
+      singlePlayerButton(Vector2{(float)GetScreenWidth()/2 - 225, 290}, Vector2{200, 267}),
+      multiPlayerButton(Vector2{(float)GetScreenWidth()/2 + 25, 290}, Vector2{200, 267}),
+      backButton(Vector2{50, 50}, Vector2{80, 80}),
+      singlePlayerHovered(false),
+      multiPlayerHovered(false)
 {
     backgroundTexture = &ResrcManager::GetInstance().getTexture("BACKGROUND_10");
     choosePlayerTexture = &ResrcManager::GetInstance().getTexture("CHOOSE PLAYER");
@@ -24,6 +26,10 @@ void GameModeScreen::Update() {
     singlePlayerButton.Update();
     multiPlayerButton.Update();
     backButton.Update();
+    
+    // Update hover states
+    singlePlayerHovered = singlePlayerButton.IsHovered();
+    multiPlayerHovered = multiPlayerButton.IsHovered();
     
     if (singlePlayerButton.IsPressed()) {
         SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
@@ -59,4 +65,19 @@ void GameModeScreen::Draw() {
     singlePlayerButton.Draw();
     multiPlayerButton.Draw();
     backButton.Draw();
+    
+    // Draw hover text effects
+    if (singlePlayerHovered) {
+        DrawText("1 PLAYER", (float)GetScreenWidth()/2 - 225 + 50, 290 + 280, 24, YELLOW);
+        // Draw background rectangle for better readability
+        DrawRectangle((float)GetScreenWidth()/2 - 225 + 45, 290 + 275, 120, 35, Fade(BLACK, 0.7f));
+        DrawText("1 PLAYER", (float)GetScreenWidth()/2 - 225 + 50, 290 + 280, 24, YELLOW);
+    }
+    
+    if (multiPlayerHovered) {
+        DrawText("2 PLAYERS", (float)GetScreenWidth()/2 + 25 + 40, 290 + 280, 24, YELLOW);
+        // Draw background rectangle for better readability
+        DrawRectangle((float)GetScreenWidth()/2 + 25 + 35, 290 + 275, 145, 35, Fade(BLACK, 0.7f));
+        DrawText("2 PLAYERS", (float)GetScreenWidth()/2 + 25 + 40, 290 + 280, 24, YELLOW);
+    }
 }
