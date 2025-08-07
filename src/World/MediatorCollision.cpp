@@ -180,6 +180,53 @@ void MediatorCollision::HandleEnemyWithBlock(Enemy*& enemy, Block*& block, Colli
     }
 }
 
+void MediatorCollision::HandleItemWithBlock(Item*& item, Block*& block, CollisionType AtoB)
+{
+    if (AtoB == COLLISION_TYPE_NONE)
+        return;
+    switch (AtoB)
+    {
+    case COLLISION_TYPE_SOUTH:
+    {
+        item->SetPos(Vector2{item->GetPos().x, block->GetPos().y - item->GetSize().y});
+        item->SetVel(Vector2{item->GetVel().x, 0});
+        break;
+    }
+    case COLLISION_TYPE_NORTH:
+    {
+        item->SetPos(Vector2{item->GetPos().x, block->GetPos().y + block->GetSize().y});
+        item->SetVel(Vector2{item->GetVel().x, 0});
+        break;
+    }
+    case COLLISION_TYPE_EAST:
+    {
+        item->SetPos(Vector2{block->GetPos().x - item->GetSize().x, item->GetPos().y});
+        Vector2 vel = item->GetVel();
+        vel.x = -abs(vel.x);
+        item->SetVel(vel);
+        item->SetDirection(DIRECTION_LEFT);
+        if (item->GetCurrFrame() == 0)
+            item->setCurrFrame(3);
+        else
+            item->setCurrFrame(item->GetCurrFrame() - 1);
+        break;
+    }
+    case COLLISION_TYPE_WEST:
+    {
+        item->SetPos(Vector2{block->GetPos().x + block->GetSize().x, item->GetPos().y});
+        Vector2 vel = item->GetVel();
+        vel.x = abs(vel.x);
+        item->SetVel(vel);
+        item->SetDirection(DIRECTION_RIGHT);
+        if (item->GetCurrFrame() == 0)
+            item->setCurrFrame(3);
+        else
+            item->setCurrFrame(item->GetCurrFrame() - 1);
+        break;
+    }
+    }
+}
+
 void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
 {
     Character* marioA = dynamic_cast<Character*>(ObjectA);
@@ -281,6 +328,13 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
         Block *block = blockA ? blockA : blockB;
         CollisionType type = enemy->checkCollisionType(*block);
         HandleEnemyWithBlock(enemy, block, type);
+    }
+    else if((itemA && blockB) || (blockA && itemB))
+    {
+        Item *item = itemA ? itemA : itemB;
+        Block *block = blockA ? blockA : blockB;
+        CollisionType type = item->checkCollisionType(*block);
+        HandleItemWithBlock(item, block, type);
     }
 }
 
