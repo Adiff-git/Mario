@@ -72,7 +72,7 @@ void MapEditorScreen::InitializeTilesets()
     }
 
     // BLOCKS (104-120): Interactive blocks
-    std::vector<int> blockIds = {105, 106, 107, 111, 114, 115, 116, 117, 119, 120};
+    std::vector<int> blockIds = {105, 106, 107, 108, 112, 115, 116, 117, 118, 120, 121};
     for (int blockId : blockIds)
     {
         TilesetTile block;
@@ -84,30 +84,33 @@ void MapEditorScreen::InitializeTilesets()
             block.texture = ResrcManager::GetInstance().getTexture("BLOCK_CLOUD");
             break;
         case 106:
-            block.texture = ResrcManager::GetInstance().getTexture("BLOCK_EYE_OPEN_0");
+            block.texture = ResrcManager::GetInstance().getTexture("");
             break;
         case 107:
             block.texture = ResrcManager::GetInstance().getTexture("BLOCK_EYE_CLOSED");
             break;
-        case 111:
+        case 108:
+            block.texture = ResrcManager::GetInstance().getTexture("BLOCK_EYE_OPEN_0");
+            break;
+        case 112:
             block.texture = ResrcManager::GetInstance().getTexture("BLOCK_GLASS");
             break;
-        case 114:
-            block.texture = ResrcManager::GetInstance().getTexture("");
-            break;
         case 115:
-            block.texture = ResrcManager::GetInstance().getTexture("BLOCK_QUESTION_0");
+            block.texture = ResrcManager::GetInstance().getTexture("");
             break;
         case 116:
-            block.texture = ResrcManager::GetInstance().getTexture("BLOCK_QUESTION_1");
+            block.texture = ResrcManager::GetInstance().getTexture("BLOCK_QUESTION_0");
             break;
         case 117:
+            block.texture = ResrcManager::GetInstance().getTexture("BLOCK_QUESTION_1");
+            break;
+        case 118:
             block.texture = ResrcManager::GetInstance().getTexture("BLOCK_QUESTION_2");
             break;
-        case 119:
+        case 120:
             block.texture = ResrcManager::GetInstance().getTexture("");
             break;
-        case 120:
+        case 121:
             block.texture = ResrcManager::GetInstance().getTexture("BLOCK_WOOD");
             break;
         default:
@@ -117,76 +120,80 @@ void MapEditorScreen::InitializeTilesets()
     }
 
     // ENEMIES (121-136): All enemy types
-    std::vector<int> enemyIds = {121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136};
+    std::vector<int> enemyIds = {122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 145};
     for (int enemyId : enemyIds)
     {
         TilesetTile enemy;
         enemy.tileId = enemyId;
         switch (enemyId)
         {
-        case 121:
+        case 122:
             enemy.sourceRect = {0, 0, 32, 54};
             enemy.texture = ResrcManager::GetInstance().getTexture("BlueKoopaTroopa_0_RIGHT");
             break;
-        case 122:
+        case 123:
             enemy.sourceRect = {0, 0, 24, 30};
             enemy.texture = ResrcManager::GetInstance().getTexture("Bob-omb_Right_0");
             break;
-        case 123:
+        case 124:
             enemy.sourceRect = {0, 0, 32, 28};
             enemy.texture = ResrcManager::GetInstance().getTexture("BulletBill");
             break;
-        case 124:
+        case 125:
             enemy.sourceRect = {0, 0, 32, 32};
             enemy.texture = ResrcManager::GetInstance().getTexture("BuzzyBeetle_0_Right");
             break;
-        case 125:
+        case 126:
             enemy.sourceRect = {0, 0, 66, 50};
             enemy.texture = ResrcManager::GetInstance().getTexture("FlyingGoomba_Flap_Center");
             break;
-        case 126:
+        case 127:
             enemy.sourceRect = {0, 0, 32, 32};
             enemy.texture = ResrcManager::GetInstance().getTexture("GOOMBA_0_RIGHT");
             break;
-        case 127:
+        case 128:
             enemy.sourceRect = {0, 0, 32, 54};
             enemy.texture = ResrcManager::GetInstance().getTexture("GreenKoopaTroopa_0_RIGHT");
             break;
-        case 128:
-            enemy.sourceRect = {0, 0, 32, 66};
-            enemy.texture = ResrcManager::GetInstance().getTexture("PiranhaPlant_MouthOpen");
-            break;
         case 129:
-            enemy.sourceRect = {0, 0, 32, 54};
-            enemy.texture = ResrcManager::GetInstance().getTexture("RedKoopaTroopa_0_RIGHT");
+            enemy.sourceRect = {0, 0, 32, 66};
+            enemy.texture = ResrcManager::GetInstance().getTexture("JumpingPiranhaPlant_0");
             break;
         case 130:
-            enemy.sourceRect = {0, 0, 32, 32};
-            enemy.texture = ResrcManager::GetInstance().getTexture("");
+            enemy.sourceRect = {0, 0, 32, 54};
+            enemy.texture = ResrcManager::GetInstance().getTexture("MontyMole_0");
             break;
         case 131:
             enemy.sourceRect = {0, 0, 32, 32};
-            enemy.texture = ResrcManager::GetInstance().getTexture("");
+            enemy.texture = ResrcManager::GetInstance().getTexture("MummyBeetle_0");
             break;
         case 132:
             enemy.sourceRect = {0, 0, 32, 32};
-            enemy.texture = ResrcManager::GetInstance().getTexture("");
+            enemy.texture = ResrcManager::GetInstance().getTexture("Muncher_0");
             break;
         case 133:
-            enemy.sourceRect = {0, 0, 32, 54};
-            enemy.texture = ResrcManager::GetInstance().getTexture("");
+            enemy.sourceRect = {0, 0, 32, 32};
+            enemy.texture = ResrcManager::GetInstance().getTexture("PiranhaPlant_MouthOpen_0");
             break;
         case 134:
-            enemy.sourceRect = {0, 0, 40, 64};
-            enemy.texture = ResrcManager::GetInstance().getTexture("");
+            enemy.sourceRect = {0, 0, 32, 54};
+            enemy.texture = ResrcManager::GetInstance().getTexture("RedKoopaTroopa_0_RIGHT");
             break;
         case 135:
             enemy.sourceRect = {0, 0, 40, 64};
-            enemy.texture = ResrcManager::GetInstance().getTexture("REX_0_RIGHT");
+            enemy.texture = ResrcManager::GetInstance().getTexture("Rex_0_RIGHT");
             break;
         case 136:
+            enemy.sourceRect = {0, 0, 40, 64};
+            enemy.texture = ResrcManager::GetInstance().getTexture("");
+            break;
+        case 137:
             enemy.sourceRect = {0, 0, 32, 54};
             enemy.texture = ResrcManager::GetInstance().getTexture("YellowKoopaTroopa_0_RIGHT");
+            break;
+        case 145:
+            enemy.sourceRect = {0, 0, 32, 32};
+            enemy.texture = ResrcManager::GetInstance().getTexture("BanzaiBill_0");
             break;
         default:
             break;
@@ -195,46 +202,48 @@ void MapEditorScreen::InitializeTilesets()
     }
 
     // ITEMS (137-143): Power-ups and collectibles
-    std::vector<int> itemIds = {137, 138, 139, 140, 141, 142, 143};
+    std::vector<int> itemIds = {138, 139, 140, 141, 142, 143, 144, 146};
     for (int itemId : itemIds)
     {
         TilesetTile item;
         item.tileId = itemId;
         switch (itemId)
         {
-        case 137:
+        case 138:
             item.sourceRect = {0, 0, 32, 32};
             item.texture = ResrcManager::GetInstance().getTexture("1UpMushroom");
             break;
-        case 138:
+        case 139:
             item.sourceRect = {0, 0, 30, 32};
             item.texture = ResrcManager::GetInstance().getTexture("3UpMoon");
             break;
-        case 139:
+        case 140:
             item.sourceRect = {0, 0, 24, 32};
             item.texture = ResrcManager::GetInstance().getTexture("COIN_2");
             break;
-        case 140:
+        case 141:
             item.sourceRect = {0, 0, 32, 32};
             item.texture = ResrcManager::GetInstance().getTexture("FIRE FLOWER_0");
             break;
-        case 141:
+        case 142:
             item.sourceRect = {0, 0, 32, 32};
             item.texture = ResrcManager::GetInstance().getTexture("Mushroom");
             break;
-        case 142:
+        case 143:
             item.sourceRect = {0, 0, 30, 32};
             item.texture = ResrcManager::GetInstance().getTexture("star");
             break;
-        case 143:
+        case 144:
             item.sourceRect = {0, 0, 32, 50};
             item.texture = ResrcManager::GetInstance().getTexture("YoshiCoin_0");
             break;
+        case 146:
+            item.sourceRect = {0, 0, 64, 32};
+            item.texture = ResrcManager::GetInstance().getTexture("COURSE_CLEAR_TOKEN");
+            break;
         }
-
         availableItems.push_back(item);
     }
-
     std::cout << "Initialized tilesets: "
               << availableTiles.size() << " tiles, "
               << availableBlocks.size() << " blocks, "
@@ -516,25 +525,27 @@ int MapEditorScreen::GetEnemyTileId(Enemy *enemy)
 {
 
     if (dynamic_cast<Goomba *>(enemy))
-        return 126;
-    else if (dynamic_cast<GreenKoopa *>(enemy))
         return 127;
+    else if (dynamic_cast<GreenKoopa *>(enemy))
+        return 128;
     else if (dynamic_cast<RedKoopa *>(enemy))
-        return 129;
+        return 134;
     else if (dynamic_cast<Rex *>(enemy))
         return 135;
     else if (dynamic_cast<Bob_omb *>(enemy))
-        return 122;
-    else if (dynamic_cast<BuzzyBeetle *>(enemy))
-        return 124;
-    else if (dynamic_cast<FlyingGoomba *>(enemy))
-        return 125;
-    else if (dynamic_cast<BulletBill *>(enemy))
         return 123;
+    else if (dynamic_cast<BuzzyBeetle *>(enemy))
+        return 125;
+    else if (dynamic_cast<FlyingGoomba *>(enemy))
+        return 126;
+    else if (dynamic_cast<BulletBill *>(enemy))
+        return 124;
     else if (dynamic_cast<PiranhaPlant *>(enemy))
-        return 128;
+        return 133;
     else if (dynamic_cast<YellowKoopa *>(enemy))
-        return 136;
+        return 137;
+    else if(dynamic_cast<BanzaiBill *>(enemy))
+        return 145;
     return 0;
 }
 
@@ -555,7 +566,8 @@ int MapEditorScreen::GetItemTileId(Item *item)
         return 139;
     else if (dynamic_cast<YoshiCoin *>(item))
         return 144;
-
+    else if( dynamic_cast<CourseClearToken *>(item))
+        return 146;
     return 0;
 }
 
@@ -664,7 +676,7 @@ void MapEditorScreen::PlaceObject()
     case EditorMode::ENEMY_MODE:
     {
         // Add enemy to map
-        if (selectedTileId >= 121 && selectedTileId <= 136)
+        if (selectedTileId >= 121 && selectedTileId <= 137 || selectedTileId == 145)
         {
             RemoveObjectAt(tileX, tileY, currentMode);
 
@@ -685,7 +697,7 @@ void MapEditorScreen::PlaceObject()
     case EditorMode::ITEM_MODE:
     {
         // Add item to map
-        if (selectedTileId >= 137 && selectedTileId <= 143)
+        if (selectedTileId >= 137 && selectedTileId <= 145)
         {
             RemoveObjectAt(tileX, tileY, currentMode);
 
@@ -819,25 +831,25 @@ Block* MapEditorScreen::CreateBlockByType(int tileId, Vector2 position)
     case 105:
         return new CloudBlock(position, {32, 32}, WHITE);
         break;
-    case 106:
+    case 108:
         return new EyesOpenedBlock(position, {32, 32}, WHITE);
         break;
     case 107:
         return new EyesClosedBlock(position, {32, 32}, WHITE);
         break;
-    case 111:
+    case 112:
         return new GlassBlock(position, {32, 32}, WHITE);
         break;
-    case 115:
+    case 116:
         return new QuestionBlock(position, {32, 32}, WHITE, GIFT_NONE);
         break;
-    case 116:
+    case 117:
         return  new QuestionBlock(position, {32, 32}, WHITE, GIFT_COIN);
         break;
-    case 117:
+    case 118:
         return new QuestionBlock(position, {32, 32}, WHITE, GIFT_FIRE_FLOWER);
         break;
-    case 120:
+    case 121:
         return new WoodBlock(position, {32, 32}, WHITE);
         break;
     default:
@@ -849,26 +861,28 @@ Enemy *MapEditorScreen::CreateEnemyByType(int tileId, Vector2 position)
 {
     switch (tileId)
     {
-    case 122:
-        return new Bob_omb(position);
     case 123:
-        return new BulletBill(position);
+        return new Bob_omb(position);
     case 124:
-        return new BuzzyBeetle(position);
+        return new BulletBill(position);
     case 125:
-        return new FlyingGoomba(position);
+        return new BuzzyBeetle(position);
     case 126:
-        return new Goomba(position);
+        return new FlyingGoomba(position);
     case 127:
+        return new Goomba(position);
+    case 128:
         return new GreenKoopa(position);
-    case 129:
+    case 134:
         return new RedKoopa(position);
     case 135:
         return new Rex(position);
-    case 128:
+    case 133:
         return new PiranhaPlant(position);
-    case 136 :
+    case 137 :
         return new YellowKoopa(position);
+    case 145:
+        return new BanzaiBill(position);
     default:
         return nullptr;
     }
@@ -878,20 +892,22 @@ std::shared_ptr<Item> MapEditorScreen::CreateItemByType(int tileId, Vector2 posi
 {
     switch (tileId)
     {
-    case 137:
-        return std::make_shared<OneUpMushroom>(position);
     case 138:
-        return std::make_shared<ThreeUpMoon>(position);
+        return std::make_shared<OneUpMushroom>(position);
     case 139:
-        return std::make_shared<Coin>(position);
+        return std::make_shared<ThreeUpMoon>(position);
     case 140:
-        return std::make_shared<FireFlower>(position);
+        return std::make_shared<Coin>(position);
     case 141:
-        return std::make_shared<Mushroom>(position);
+        return std::make_shared<FireFlower>(position);
     case 142:
-        return std::make_shared<Star>(position);
+        return std::make_shared<Mushroom>(position);
     case 143:
+        return std::make_shared<Star>(position);
+    case 144:
         return std::make_shared<YoshiCoin>(position);
+    case 146:
+        return std::make_shared<CourseClearToken>(position);
     default:
         return nullptr;
     }

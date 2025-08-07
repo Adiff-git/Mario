@@ -56,9 +56,9 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
     
     // Initialize Boss for MapID == 1
     if (MapID == 1) {
-        Boss* boss = new Boss(Vector2{1200, 535}, player1->GetPosPtr(), player2 ? player2->GetPosPtr() : nullptr, multiplayer);
-        map.GetEnemies().push_back(boss);
-        map.SetMarioPositionForBosses(player1->GetPosPtr(), player2 ? player2->GetPosPtr() : nullptr, multiplayer);
+        // Boss* boss = new Boss(Vector2{1200, 535}, player1->GetPosPtr(), player2 ? player2->GetPosPtr() : nullptr, multiplayer);
+        // map.GetEnemies().push_back(boss);
+        // map.SetMarioPositionForBosses(player1->GetPosPtr(), player2 ? player2->GetPosPtr() : nullptr, multiplayer);
     }
     
     
@@ -79,40 +79,40 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
     
     // Add items for MapID == 1
     if (MapID == 1) {
-        map.GetInteractiveItems().push_back(std::make_shared<Coin>(Vector2{400, 800}));
-        map.GetInteractiveItems().push_back(std::make_shared<FireFlower>(Vector2{450, 800}));
-        map.GetInteractiveItems().push_back(std::make_shared<Star>(Vector2{600, 500}));
-        map.GetInteractiveItems().push_back(std::make_shared<YoshiCoin>(Vector2{700, 800}));
-        // map.GetInteractiveItems().push_back(std::make_shared<CourseClearToken>(Vector2{800, 800}));
-        map.GetInteractiveItems().push_back(std::make_shared<Mushroom>(Vector2{200, 800}));
-        map.GetInteractiveItems().push_back(std::make_shared<ThreeUpMoon>(Vector2{200, 500}));
-        map.GetInteractiveItems().push_back(std::make_shared<OneUpMushroom>(Vector2{200, 800}));
+        // map.GetInteractiveItems().push_back(std::make_shared<Coin>(Vector2{400, 800}));
+        // map.GetInteractiveItems().push_back(std::make_shared<FireFlower>(Vector2{450, 800}));
+        // map.GetInteractiveItems().push_back(std::make_shared<Star>(Vector2{600, 500}));
+        // map.GetInteractiveItems().push_back(std::make_shared<YoshiCoin>(Vector2{700, 800}));
+        // // map.GetInteractiveItems().push_back(std::make_shared<CourseClearToken>(Vector2{800, 800}));
+        // map.GetInteractiveItems().push_back(std::make_shared<Mushroom>(Vector2{200, 800}));
+        // map.GetInteractiveItems().push_back(std::make_shared<ThreeUpMoon>(Vector2{200, 500}));
+        // map.GetInteractiveItems().push_back(std::make_shared<OneUpMushroom>(Vector2{200, 800}));
 
-        map.GetEnemies().push_back(new BanzaiBill(Vector2{500, 800}));
-        map.GetEnemies().push_back(new BulletBill(Vector2{600, 800}));
-        map.GetEnemies().push_back(new BuzzyBeetle(Vector2{700, 800}));
-        map.GetEnemies().push_back(new FlyingGoomba(Vector2{800, 800}));
-        map.GetEnemies().push_back(new Goomba(Vector2{900, 800}));
-        map.GetEnemies().push_back(new GreenKoopa(Vector2{1000, 800}));
-        map.GetEnemies().push_back(new JumpingPiranhaPlant(Vector2{1100, 800}));
-        map.GetEnemies().push_back(new RedKoopa(Vector2{1200, 800}));
-        map.GetEnemies().push_back(new Rex(Vector2{1300, 800}));
-        map.GetEnemies().push_back(new YellowKoopa(Vector2{1400, 800}));
+        // map.GetEnemies().push_back(new BanzaiBill(Vector2{500, 800}));
+        // map.GetEnemies().push_back(new BulletBill(Vector2{600, 800}));
+        // map.GetEnemies().push_back(new BuzzyBeetle(Vector2{700, 800}));
+        // map.GetEnemies().push_back(new FlyingGoomba(Vector2{800, 800}));
+        // map.GetEnemies().push_back(new Goomba(Vector2{900, 800}));
+        // map.GetEnemies().push_back(new GreenKoopa(Vector2{1000, 800}));
+        // map.GetEnemies().push_back(new JumpingPiranhaPlant(Vector2{1100, 800}));
+        // map.GetEnemies().push_back(new RedKoopa(Vector2{1200, 800}));
+        // map.GetEnemies().push_back(new Rex(Vector2{1300, 800}));
+        // map.GetEnemies().push_back(new YellowKoopa(Vector2{1400, 800}));
 
-        for (int i = 0; i < 20; i++) {
-            map.getBlocks().push_back(new WoodBlock(Vector2{0, float(600 + i * 32)}, Vector2{32, 32}, WHITE));
-        }
+        // for (int i = 0; i < 20; i++) {
+        //     map.getBlocks().push_back(new WoodBlock(Vector2{0, float(600 + i * 32)}, Vector2{32, 32}, WHITE));
+        // }
         
-        for (int i = 0; i < 20; i++) {
-            map.getBlocks().push_back(new WoodBlock(Vector2{1920, float(600 + i * 32)}, Vector2{32, 32}, WHITE));
-        }
+        // for (int i = 0; i < 20; i++) {
+        //     map.getBlocks().push_back(new WoodBlock(Vector2{1920, float(600 + i * 32)}, Vector2{32, 32}, WHITE));
+        // }
 
-        map.getBlocks().push_back(new CloudBlock(Vector2{100, 750}, Vector2{32, 32}, WHITE));
-        map.getBlocks().push_back(new EyesClosedBlock(Vector2{150, 750}, Vector2{32, 32}, WHITE));
-        map.getBlocks().push_back(new EyesOpenedBlock(Vector2{200, 750}, Vector2{32, 32}, WHITE));
-        map.getBlocks().push_back(new GlassBlock(Vector2{250, 750}, Vector2{32, 32}, WHITE));
-        map.getBlocks().push_back(new QuestionBlock(Vector2{300, 750}, Vector2{32, 32}, WHITE, GIFT_COIN));
-        map.getBlocks().push_back(new WoodBlock(Vector2{350, 750}, Vector2{32, 32}, WHITE));
+        // map.getBlocks().push_back(new CloudBlock(Vector2{100, 750}, Vector2{32, 32}, WHITE));
+        // map.getBlocks().push_back(new EyesClosedBlock(Vector2{150, 750}, Vector2{32, 32}, WHITE));
+        // map.getBlocks().push_back(new EyesOpenedBlock(Vector2{200, 750}, Vector2{32, 32}, WHITE));
+        // map.getBlocks().push_back(new GlassBlock(Vector2{250, 750}, Vector2{32, 32}, WHITE));
+        // map.getBlocks().push_back(new QuestionBlock(Vector2{300, 750}, Vector2{32, 32}, WHITE, GIFT_COIN));
+        // map.getBlocks().push_back(new WoodBlock(Vector2{350, 750}, Vector2{32, 32}, WHITE));
 
 
 

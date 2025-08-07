@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.11.2" name="map2" tilewidth="128" tileheight="128" tilecount="140" columns="0">
+<tileset version="1.10" tiledversion="1.11.2" name="tile1" tilewidth="128" tileheight="128" tilecount="140" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0">
   <image source="../images/tiles/tile_1.png" width="32" height="32"/>
@@ -325,100 +325,100 @@
  <tile id="107">
   <image source="../images/Object/blocks/EyesOpened_0.png" width="32" height="32"/>
  </tile>
- <tile id="111">
+ <tile id="108">
   <image source="../images/Object/blocks/Glass_0.png" width="32" height="32"/>
  </tile>
- <tile id="114">
+ <tile id="109">
   <image source="../images/Object/blocks/Message_0.png" width="32" height="32"/>
  </tile>
- <tile id="115">
+ <tile id="110">
   <image source="../images/Object/blocks/Question_0.png" width="32" height="32"/>
  </tile>
- <tile id="116">
+ <tile id="111">
   <image source="../images/Object/blocks/Question_1.png" width="32" height="32"/>
  </tile>
- <tile id="117">
+ <tile id="112">
   <image source="../images/Object/blocks/Question_2.png" width="32" height="32"/>
  </tile>
- <tile id="119">
+ <tile id="113">
   <image source="../images/Object/blocks/Stone_0.png" width="32" height="32"/>
  </tile>
- <tile id="120">
+ <tile id="114">
   <image source="../images/Object/blocks/Wood_0.png" width="32" height="32"/>
  </tile>
- <tile id="121">
+ <tile id="115">
   <image source="../images/Object/Enemy/BlueKoopaTroopa_0.png" width="32" height="54"/>
  </tile>
- <tile id="122">
+ <tile id="116">
   <image source="../images/Object/Enemy/BobOmb_0.png" width="24" height="30"/>
  </tile>
- <tile id="123">
+ <tile id="117">
   <image source="../images/Object/Enemy/BulletBill_0.png" width="32" height="28"/>
  </tile>
- <tile id="124">
+ <tile id="118">
   <image source="../images/Object/Enemy/BuzzyBeetle_0.png" width="32" height="32"/>
  </tile>
- <tile id="125">
+ <tile id="119">
   <image source="../images/Object/Enemy/FlyingGoomba_0.png" width="66" height="50"/>
  </tile>
- <tile id="126">
+ <tile id="110">
   <image source="../images/Object/Enemy/Goomba_0.png" width="32" height="32"/>
  </tile>
- <tile id="127">
+ <tile id="122">
   <image source="../images/Object/Enemy/GreenKoopaTroopa_0.png" width="32" height="54"/>
  </tile>
- <tile id="128">
+ <tile id="123">
   <image source="../images/Object/Enemy/JumpingPiranhaPlant_0.png" width="32" height="42"/>
  </tile>
- <tile id="129">
+ <tile id="134">
   <image source="../images/Object/Enemy/MontyMole_0.png" width="32" height="32"/>
  </tile>
- <tile id="130">
+ <tile id="125">
   <image source="../images/Object/Enemy/MummyBeetle_0.png" width="32" height="32"/>
  </tile>
- <tile id="131">
+ <tile id="126">
   <image source="../images/Object/Enemy/Muncher_0.png" width="32" height="30"/>
  </tile>
- <tile id="132">
+ <tile id="127">
   <image source="../images/Object/Enemy/PiranhaPlant_0.png" width="32" height="66"/>
  </tile>
- <tile id="133">
+ <tile id="128">
   <image source="../images/Object/Enemy/RedKoopaTroopa_0.png" width="32" height="54"/>
  </tile>
- <tile id="134">
-  <image source="../images/Object/Enemy/Rex_2_0.png" width="40" height="64"/>
+ <tile id="129">
+  <image source="../images/Object/Enemy/Rex_2_1.png" width="40" height="64"/>
  </tile>
- <tile id="135">
+ <tile id="133">
   <image source="../images/Object/Enemy/Swooper_0.png" width="32" height="34"/>
  </tile>
- <tile id="136">
+ <tile id="130">
   <image source="../images/Object/Enemy/YellowKoopaTroopa_0.png" width="32" height="54"/>
  </tile>
- <tile id="137">
+ <tile id="135">
   <image source="../images/Object/items/1UpMushroom.png" width="32" height="32"/>
  </tile>
- <tile id="138">
+ <tile id="136">
   <image source="../images/Object/items/3UpMoon.png" width="30" height="32"/>
  </tile>
- <tile id="139">
+ <tile id="137">
   <image source="../images/Object/items/Coin_2.png" width="24" height="32"/>
  </tile>
- <tile id="140">
+ <tile id="138">
   <image source="../images/Object/items/FireFlower_0.png" width="32" height="32"/>
  </tile>
- <tile id="141">
+ <tile id="139">
   <image source="../images/Object/items/Mushroom.png" width="32" height="32"/>
  </tile>
- <tile id="142">
+ <tile id="140">
   <image source="../images/Object/items/Star.png" width="30" height="32"/>
  </tile>
- <tile id="143">
+ <tile id="141">
   <image source="../images/Object/items/YoshiCoin_0.png" width="32" height="50"/>
  </tile>
- <tile id="144">
+ <tile id="132">
   <image source="../images/Object/Enemy/BanzaiBill_0.png" width="128" height="128"/>
  </tile>
- <tile id="145">
+ <tile id="142">
   <image source="../images/Object/items/CourseClearToken.png" width="64" height="32"/>
  </tile>
 </tileset>
