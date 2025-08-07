@@ -46,6 +46,7 @@ GameScreen::GameScreen(ScreenController* screenController, bool multiplayer,
       player2Type(p2Type),
       pauseMusicVolume(0),
       pauseSfxVolume(0)
+
 {
     gameWorld = std::make_unique<GameWorld>(level, this, multiplayer, p1Type, p2Type);
 

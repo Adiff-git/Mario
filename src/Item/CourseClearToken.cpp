@@ -6,7 +6,7 @@
 CourseClearToken::CourseClearToken(Vector2 pos)
     : Item(
         pos,
-        {32, 32},           // Kích thước
+        {64, 32},           // Kích thước
         {0, 0},             // Không di chuyển
         WHITE,              // Màu vẽ
         0.0f,               // Không dùng frame animation
@@ -17,7 +17,7 @@ CourseClearToken::CourseClearToken(Vector2 pos)
     )
 {
     // Lấy texture từ ResrcManager
-    sprite = &ResrcManager::GetInstance().getTexture("COURSE CLEAR TOKEN");
+    sprite = &ResrcManager::GetInstance().getTexture("COURSE_CLEAR_TOKEN");
 
     if (!sprite || sprite->id == 0 || sprite->width == 0 || sprite->height == 0) {
         TraceLog(LOG_ERROR, "[CourseClearToken] Texture 'COURSE CLEAR TOKEN' failed to load or not initialized!");
