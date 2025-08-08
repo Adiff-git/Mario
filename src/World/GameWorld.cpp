@@ -582,7 +582,6 @@ void GameWorld::UpdateWorld()
     {
         gameState = GameState::GAME_COMPLETED;
     }
-    cout << player1->GetPos().x;
 }
 
 void GameWorld::DrawWorld()
