@@ -4,7 +4,7 @@
 GameScreen::GameScreen(ScreenController* screenController)
     : Screen(screenController), 
       BackMenu(Vector2{50, 50}, Vector2{50, 50}), 
-      level(3), 
+      level(5), 
       transitionState(TransitionState::NONE), 
       transitionTime(1.0f), 
       transitionTimeAcum(0.0f),
@@ -573,3 +573,99 @@ void GameScreen::NextLevel() {
         gameHUD = std::make_unique<GameHUD>(gameWorld->player1, gameWorld->player2);
     } else gameHUD = std::make_unique<GameHUD>(gameWorld->player1);
 }
+
+void GameScreen::SaveCurrentGame(int slotIndex) {
+    GameSaveData saveData;
+
+    saveData.saveDateTime = GetCurrentDateTime();
+    saveData.currentLevel = level;
+    saveData.isMultiplayer = isMultiplayer;
+    // saveData.gameTime = GetGameTime();
+
+    saveData.player1.characterType = static_cast<int>(player1Type);
+    saveData.player1.lives = gameWorld->player1->GetLives();
+    saveData.player1.coins = gameWorld->player1->GetCoins();
+    saveData.player1.score = gameWorld->player1->GetScore();
+    saveData.player1.x = gameWorld->player1->GetPos().x;
+    saveData.player1.y = gameWorld->player1->GetPos().y;
+    saveData.player1.velX = gameWorld->player1->GetVel().x;
+    saveData.player1.velY = gameWorld->player1->GetVel().y;
+    saveData.player1.playerState = static_cast<int>(gameWorld->player1->GetMarioState());
+    saveData.player1.additionalState = static_cast<int>(gameWorld->player1->GetAdditionalState());
+
+    if (isMultiplayer && gameWorld->player2) {
+        saveData.player2.characterType = static_cast<int>(player2Type);
+        saveData.player2.lives = gameWorld->player2->GetLives();
+        saveData.player2.coins = gameWorld->player2->GetCoins();
+        saveData.player2.score = gameWorld->player2->GetScore();
+        saveData.player2.x = gameWorld->player2->GetPos().x;
+        saveData.player2.y = gameWorld->player2->GetPos().y;
+        saveData.player2.velX = gameWorld->player2->GetVel().x;
+        saveData.player2.velY = gameWorld->player2->GetVel().y;
+        saveData.player2.playerState = static_cast<int>(gameWorld->player2->GetMarioState());
+        saveData.player2.additionalState = static_cast<int>(gameWorld->player2->GetAdditionalState());
+    }
+
+    gameWorld->CollectWorldData(saveData);
+    if (SaveManager::GetInstance().SaveGame(saveData, slotIndex)) {
+        std::cout << "Game saved successfully to slot " << slotIndex << std::endl;
+    } else {
+        std::cerr << "Failed to save game to slot " << slotIndex << std::endl;
+    }
+
+}
+
+void GameScreen::LoadSavedGame(int slotIndex) {
+    GameSaveData saveData;
+    if (SaveManager::GetInstance().LoadGame(saveData, slotIndex)) {
+        std::cout << "Game loaded successfully from slot " << slotIndex << std::endl;
+
+        level = saveData.currentLevel;
+        isMultiplayer = saveData.isMultiplayer;
+        
+        gameWorld = std::make_unique<GameWorld>(level, this, isMultiplayer, 
+                                                static_cast<CharacterType>(saveData.player1.characterType),
+                                                static_cast<CharacterType>(saveData.player2.characterType));
+
+        gameWorld->player1->SetLives(saveData.player1.lives);
+        gameWorld->player1->SetCoins(saveData.player1.coins);
+        gameWorld->player1->SetScore(saveData.player1.score);
+        gameWorld->player1->SetPos({saveData.player1.x, saveData.player1.y});
+        gameWorld->player1->SetVel({saveData.player1.velX, saveData.player1.velY});
+        gameWorld->player1->SetMarioState(static_cast<ObjectState>(saveData.player1.playerState));
+        gameWorld->player1->SetAdditionalState(static_cast<ObjectState>(saveData.player1.additionalState));
+
+        if (isMultiplayer && gameWorld->player2) {
+            gameWorld->player2->SetLives(saveData.player2.lives);
+            gameWorld->player2->SetCoins(saveData.player2.coins);
+            gameWorld->player2->SetScore(saveData.player2.score);
+            gameWorld->player2->SetPos({saveData.player2.x, saveData.player2.y});
+            gameWorld->player2->SetVel({saveData.player2.velX, saveData.player2.velY});
+            gameWorld->player2->SetMarioState(static_cast<ObjectState>(saveData.player2.playerState));
+            gameWorld->player2->SetAdditionalState(static_cast<ObjectState>(saveData.player2.additionalState));
+            gameHUD = std::make_unique<GameHUD>(gameWorld->player1, gameWorld->player2);
+        } else {
+            gameHUD = std::make_unique<GameHUD>(gameWorld->player1);
+        }
+    } else {
+        std::cerr << "Failed to load game from slot " << slotIndex << std::endl;
+    }
+}
+
+std::string GameScreen::GetCurrentDateTime() {
+    auto now = std::chrono::system_clock::now();
+    auto time_t = std::chrono::system_clock::to_time_t(now);
+    std::stringstream ss;
+    ss << std::put_time(std::localtime(&time_t), "%Y-%m-%d %H:%M:%S");
+    return ss.str();
+}
+
+void GameScreen::HandleSaveLoadInput() {
+    if (IsKeyPressed(KEY_U)) {
+        SaveCurrentGame(1); // Quick save to slot 1
+    }
+    if (IsKeyPressed(KEY_I)) {
+        LoadSavedGame(1); // Quick load from slot 1
+    }
+}
+

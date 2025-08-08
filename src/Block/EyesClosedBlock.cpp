@@ -10,7 +10,7 @@ EyesClosedBlock::EyesClosedBlock( Vector2 pos, Vector2 dim, Color color ) :
 
 EyesClosedBlock::EyesClosedBlock( Vector2 pos, Vector2 dim, Color color, float frameTime, int maxFrames ) :
     Block( pos, dim, color, frameTime, maxFrames ) {
-        this->blockType = BLOCK_EYES_CLOSED;
+        this->blockType = BlockType::BLOCK_EYES_CLOSED;
     }
 
 EyesClosedBlock::~EyesClosedBlock() = default;

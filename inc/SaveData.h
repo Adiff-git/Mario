@@ -1,53 +1,59 @@
-// #pragma once
+#pragma once
+#include <vector>
+#include <string>
+#include <memory>
+#include "raylib.h"
+#include "../inc/Character/CharacterType.h"
 
-// #include <vector>
-// #include <string>
-// #include "raylib.h"
-// #include "Object.h"
 
-// class PlayerSave {
-//     public: 
-//     float x, y;
-//     int lives,
-//         coins,
-//         score;
-//     ObjectState playerState;
-//     ObjectState AdditionalState;
-//     int type;
-// };
+// Save data structures
+struct PlayerSave {
+    int characterType;  // CharacterType as int
+    float x, y;
+    float velX, velY;
+    int lives;
+    int coins;
+    int score;
+    int playerState;
+    int additionalState;
+};
 
-// class EnemySave {
-//     public: 
-//     std::string type;
-//     float x, y;
-//     bool  alive;
-//     ObjectState state;
-// };
+struct EnemySave {
+    int enemyType;  // EnemyType as int
+    float x, y;
+    float velX, velY;
+    int state;
+};
 
-// class BlockSave {
-//     public: 
-//     std::string type;
-//     float x, y;
-//     bool isActive;
-//     ObjectState state;
-// };
+struct ItemSave {
+    int itemType;  // ItemType as int
+    float x, y;
+    float velX, velY;
+    int state;
+};
 
-// class ItemSave {
-//     public: 
-//     std::string type;
-//     float x, y;
-//     bool isActive;
-//     ObjectState state;
-// };
+struct BlockSave {
+    int blockType;  // BlockType as int
+    int giftType;
+    float x, y;
+    int state;
+    bool hasBeenHit;
+};
 
-// class SaveData {
-// public: 
-//     int level;
-//     float time;
-//     std::vector<EnemySave> enemies;
-//     std::vector<BlockSave> blocks;
-//     std::vector<ItemSave> items;
-//     PlayerSave player1;
-//     PlayerSave player2; // Chỉ khi multiplayer
-//     bool isMultiplayer;
-// };
+struct TileSave {
+    int tileType; 
+    float x, y;
+};
+
+struct GameSaveData {
+    std::string saveDateTime;
+    PlayerSave player1;
+    PlayerSave player2;  // For multiplayer
+    bool isMultiplayer;
+    std::vector<EnemySave> enemies;
+    std::vector<ItemSave> items;
+    std::vector<BlockSave> blocks;
+    std::vector<TileSave> tiles;
+    int currentLevel;
+    float gameTime;
+};

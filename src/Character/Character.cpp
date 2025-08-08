@@ -620,7 +620,7 @@ void Character::BeHit() {
 void Character::Die() {
     if (state == OBJECT_STATE_DYING || state == OBJECT_STATE_DEAD || state == OBJECT_STATE_TO_BE_REMOVED) return;
     
-    state = OBJECT_STATE_DYING;
+      state = OBJECT_STATE_DYING;
     vel = Vector2{0, -200};
     // this->SetLives(this->GetLives() - 1);
     this->SetCoins(0);
@@ -656,3 +656,7 @@ void Character::Victory()
 void Character::AddScore(int points) {
     this->score += points;
 }
+
+ObjectState Character::GetAdditionalState() const {
+    return AdditionalState;
+}   

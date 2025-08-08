@@ -11,6 +11,7 @@
 #include <vector>
 #include "../inc/Command/InputHandler.h"
 #include "../inc/SaveData.h"
+#include "../inc/Character/CharacterType.h"
 class InputHandler;
 
 class Character : public Object
@@ -47,6 +48,8 @@ protected:
 
     void Update() override;
 
+
+    CharacterType characterType = CharacterType::NONE;
    
 
 public:
@@ -102,13 +105,21 @@ public:
     bool getInvincible() const;
     int GetLives() const;
     ObjectState GetMarioState() const;
+    ObjectState GetAdditionalState() const;
 
     void SetMarioState(ObjectState state);
+    void SetAdditionalState(ObjectState state) {
+        AdditionalState = state;
+    }
     bool GetIsDucking() const;
     std::list<Fireball *> *GetFireballs();
 
     void UpdateCollisionProbes() override;
     void UpdateStateAndPhysic() override;
+
+    virtual CharacterType GetCharType() {
+        return characterType;
+    }
 
 
     // virtual PlayerSave ToSave() ;

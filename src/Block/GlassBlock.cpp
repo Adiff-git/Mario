@@ -12,7 +12,7 @@ GlassBlock::GlassBlock( Vector2 pos, Vector2 dim, Color color ) :
 
 GlassBlock::GlassBlock( Vector2 pos, Vector2 dim, Color color, float frameTime, int maxFrames ) :
     Block( pos, dim, color, frameTime, maxFrames ) {
-        this-> blockType = BLOCK_GLASS;
+        this-> blockType =  BlockType::BLOCK_GLASS;
     }
 
 GlassBlock::~GlassBlock() = default;

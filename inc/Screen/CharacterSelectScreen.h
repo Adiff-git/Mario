@@ -1,14 +1,9 @@
 #pragma once
 #include "Screen.h"
 #include "Button.h"
+#include "../inc/Character/CharacterType.h"
 
-enum class CharacterType {
-    MARIO,
-    LUIGI,
-    TOAD,
-    PEACH,
-    NONE
-};
+
 
 class CharacterSelectScreen : public Screen {
 private:

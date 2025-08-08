@@ -1,6 +1,7 @@
 #pragma once
 #include "Character.h"
 #include "../inc/Command/InputHandler.h"
+#include "../inc/Character/CharacterType.h"
 
 class Mario : public Character {
 private:
@@ -9,9 +10,14 @@ private:
 public:
     Mario(Vector2 pos, int lives, ObjectState form, ControlType controlType)
         : Character(pos, lives, form, controlType) {
+            
+        characterType = CharacterType::MARIO;
         
     }
 
+    CharacterType GetCharType() override {
+        return characterType;
+    }
     
 
     ~Mario() override = default;
