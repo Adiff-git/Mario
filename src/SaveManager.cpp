@@ -93,7 +93,7 @@ bool SaveManager::SaveGame(const GameSaveData& data, int slotIndex) {
             itemJson["y"] = item.y;
             itemJson["velX"] = item.velX;
             itemJson["velY"] = item.velY;
-            itemJson["isCollected"] = item.isCollected;
+            itemJson["state"] = item.state;  
             j["items"].push_back(itemJson);
         }
         
@@ -209,7 +209,7 @@ bool SaveManager::LoadGame(GameSaveData& data, int slotIndex) {
             item.y = itemJson["y"];
             item.velX = itemJson["velX"];
             item.velY = itemJson["velY"];
-            item.isCollected = itemJson["isCollected"];
+            item.state = itemJson["state"];
             data.items.push_back(item);
         }
         

@@ -29,7 +29,7 @@ struct ItemSave {
     int itemType;  // ItemType as int
     float x, y;
     float velX, velY;
-    bool isCollected;
+    int state;
 };
 
 struct BlockSave {

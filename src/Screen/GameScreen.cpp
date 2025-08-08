@@ -4,7 +4,7 @@
 GameScreen::GameScreen(ScreenController* screenController)
     : Screen(screenController), 
       BackMenu(Vector2{50, 50}, Vector2{50, 50}), 
-      level(3), 
+      level(5), 
       transitionState(TransitionState::NONE), 
       transitionTime(1.0f), 
       transitionTimeAcum(0.0f),
@@ -36,7 +36,7 @@ GameScreen::GameScreen(ScreenController* screenController, bool multiplayer,
     CharacterType p1Type, CharacterType p2Type)
     : Screen(screenController), 
       BackMenu(Vector2{50, 50}, Vector2{50, 50}), 
-      level(1), 
+      level(5), 
       transitionState(TransitionState::NONE), 
       transitionTime(1.0f), 
       transitionTimeAcum(0.0f),
@@ -660,10 +660,10 @@ std::string GameScreen::GetCurrentDateTime() {
 }
 
 void GameScreen::HandleSaveLoadInput() {
-    if (IsKeyPressed(KEY_F5)) {
+    if (IsKeyPressed(KEY_U)) {
         SaveCurrentGame(1); // Quick save to slot 1
     }
-    if (IsKeyPressed(KEY_F9)) {
+    if (IsKeyPressed(KEY_I)) {
         LoadSavedGame(1); // Quick load from slot 1
     }
 }
