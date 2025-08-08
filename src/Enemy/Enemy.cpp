@@ -6,7 +6,7 @@
 GameWorld* Enemy::currentGameWorld = nullptr;
 
 Enemy::Enemy(Vector2 pos, Vector2 size, Vector2 vel, Color color, float friction, int currFrame, Direction dir)
-    : Object(pos, size, vel, color, friction, currFrame, dir), maxSpeedX(50.0f), textureIndex(0),
+    : Object(pos, size, vel, color, friction, currFrame, dir), maxSpeedX(50.0f), speedMultiplier(1.0f), textureIndex(0),
       isBlinking(false), blinkingAcum(0), blinkingTime(0.1f), blinkingAcumTotal(0), doBlink(false),
       markedForRemoval(false), hitByFireball(false), isActive(false), activationDistance(1000.0f), deathSmoke(nullptr), scoreEffect(nullptr),
       hasDeathEffect(false),

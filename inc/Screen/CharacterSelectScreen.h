@@ -22,6 +22,22 @@ private:
     
     Texture2D* backgroundTexture;
     Texture2D* chooseCharacterTexture;
+    Font* pixelFont;
+    
+    // Hover state tracking
+    bool marioHovered;
+    bool luigiHovered;
+    bool toadHovered;
+    bool peachHovered;
+    
+    // Scale for selected characters
+    float marioScale;
+    float luigiScale;
+    float toadScale;
+    float peachScale;
+    
+    // Track which player is making the next selection
+    bool nextSelectionForPlayer1;
     
 public:
     CharacterSelectScreen(ScreenController* screenController, bool multiplayer);

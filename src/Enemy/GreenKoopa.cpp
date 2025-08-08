@@ -21,8 +21,9 @@ void GreenKoopa::UpdateStateAndPhysic() {
     }
     if (GetState() == OBJECT_STATE_ON_GROUND) {
         float newVelX = GetVel().x;
-        if (newVelX > 0 && newVelX > maxSpeedX) newVelX = maxSpeedX;
-        if (newVelX < 0 && newVelX < -maxSpeedX) newVelX = -maxSpeedX;
+        float adjustedMaxSpeed = GetAdjustedMaxSpeed();
+        if (newVelX > 0 && newVelX > adjustedMaxSpeed) newVelX = adjustedMaxSpeed;
+        if (newVelX < 0 && newVelX < -adjustedMaxSpeed) newVelX = -adjustedMaxSpeed;
         SetVel(Vector2{newVelX, GetVel().y});
         SetPos(Vector2{(float)(GetPos().x + GetVel().x * GameClock::GetInstance().FIXED_TIME_STEP), GetPos().y});
     }

@@ -10,6 +10,10 @@ private:
     Button multiPlayerButton;
     Button backButton;
     
+    // Hover state tracking
+    bool singlePlayerHovered;
+    bool multiPlayerHovered;
+    
 public:
     GameModeScreen(ScreenController* screenController);
     virtual ~GameModeScreen();

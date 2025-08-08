@@ -6,6 +6,8 @@
 #include "../inc/Enemy/Rex.h"
 #include "../inc/Enemy/FlyingGoomba.h"
 #include "../inc/Enemy/PiranhaPlant.h"
+#include "../inc/Enemy/BanzaiBill.h"
+#include "../inc/Enemy/BulletBill.h"
 #include "BossFireball.h"
 #include "Boss.h"
 #include <iostream>
@@ -148,6 +150,14 @@ void MediatorCollision::HandleEnemyWithBlock(Enemy*& enemy, Block*& block, Colli
 {
     if (AtoB == COLLISION_TYPE_NONE)
         return;
+    
+    // Skip collision handling for specific enemy types
+    if (dynamic_cast<BanzaiBill*>(enemy) || 
+        dynamic_cast<BulletBill*>(enemy) || 
+        dynamic_cast<PiranhaPlant*>(enemy)) {
+        return;
+    }
+    
     switch (AtoB)
     {
     case COLLISION_TYPE_SOUTH:
@@ -483,9 +493,17 @@ void MediatorCollision::HandleMarioWithBlock(Character* &mario, Block* &block, C
 }
 
 void MediatorCollision::HandleEnemyWithTile(Enemy *&enemy, Tile *tile, CollisionType AtoB)
-{
+{   
     if (AtoB == COLLISION_TYPE_NONE)
         return;
+    
+    // Skip collision handling for specific enemy types
+    if (dynamic_cast<BanzaiBill*>(enemy) || 
+        dynamic_cast<BulletBill*>(enemy) || 
+        dynamic_cast<PiranhaPlant*>(enemy)) {
+        return;
+    }
+    
     switch (AtoB)
     {
     case COLLISION_TYPE_SOUTH:

@@ -15,6 +15,10 @@
 #include <sstream>
 #include "../inc/SaveManager.h"
 
+// Forward declarations to avoid circular includes
+enum class MapType;
+enum class DifficultyLevel;
+
 enum class TransitionState {
     NEXT_LEVEL,
     GAME_OVER,
@@ -37,6 +41,8 @@ class GameScreen : public Screen {
         bool isMultiplayer;
         CharacterType player1Type;
         CharacterType player2Type;
+        MapType selectedMap;
+        DifficultyLevel selectedDifficulty;
 
         bool isPaused = false;
         bool showPauseMenu = false;
@@ -47,6 +53,8 @@ class GameScreen : public Screen {
     public:
         GameScreen(ScreenController* screenController);
         GameScreen(ScreenController* screenController, bool multiplayer, CharacterType p1Type, CharacterType p2Type);
+        GameScreen(ScreenController* screenController, bool multiplayer, CharacterType p1Type, CharacterType p2Type, 
+                  MapType map, DifficultyLevel difficulty);
         void Update() override;
         void Draw() override;
         void ResetGame();

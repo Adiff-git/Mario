@@ -15,7 +15,10 @@ void BulletBill::UpdateStateAndPhysic()  {
         return;
     }
     const float deltaTime = GetFrameTime();
-    SetPos(Vector2{(float)(GetPos().x + GetVel().x * GameClock::GetInstance().FIXED_TIME_STEP), GetPos().y});
+    
+    // Apply speed multiplier to velocity
+    Vector2 adjustedVel = Vector2{vel.x * speedMultiplier, vel.y};
+    SetPos(Vector2{(float)(GetPos().x + adjustedVel.x * GameClock::GetInstance().FIXED_TIME_STEP), GetPos().y});
 
     sprite = &ResrcManager::GetInstance().getTexture("BULLETBILL_LEFT");
     textureIndex = 0;
