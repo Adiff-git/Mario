@@ -1,6 +1,7 @@
 #include "../inc/Command/CharacterCommands.h"
 #include "../inc/Character/Character.h"
-
+#include <iostream>
+#include <cmath>
 // MoveLeftCommand
 void MoveLeftCommand::execute() {
     if (canExecute()) {
@@ -44,8 +45,11 @@ void DuckCommand::execute() {
 }
 
 bool DuckCommand::canExecute() {
-    return character && character->GetState() == OBJECT_STATE_ON_GROUND && 
-           character->GetMarioState() != SMALL;
+    if (!character) return false;
+    if (character->GetState() != OBJECT_STATE_ON_GROUND) return false;
+    if (character->GetMarioState() == SMALL) return false;
+    // Thêm kiểm tra vận tốc đứng yên theo trục Y
+    return std::fabs(character->GetVel().y) < 0.01f;
 }
 
 // FireCommand
