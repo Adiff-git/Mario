@@ -78,4 +78,29 @@ class GameWorld {
         GameSaveData CollectSaveData();
         
         friend class GameScreen;
+
+        
+        struct SpatialCell {
+            std::vector<Block*> blocks;
+            std::vector<Enemy*> enemies;
+            std::vector<std::shared_ptr<Item>> items;
+            std::vector<Tile*> tiles;
+        };
+    
+        static constexpr int CELL_SIZE = 256;
+        static constexpr int ACTIVE_MARGIN = 160; // mở rộng quanh viewport
+        int gridCols = 0;
+        int gridRows = 0;
+        std::vector<std::vector<SpatialCell>> spatialGrid;
+        
+        void InitializeSpatialIndex();
+        void RebuildSpatialIndex();
+        void ClearSpatialGrid();
+        template<typename TObj, typename FnPos>
+        void InsertObjectToGrid(TObj* obj, FnPos getPosFn);
+    
+        void CollectActiveEntities(std::vector<Block*>& outBlocks,
+                                   std::vector<Enemy*>& outEnemies,
+                                   std::vector<std::shared_ptr<Item>>& outItems,
+                                   std::vector<Tile*>& outTiles);
 };
