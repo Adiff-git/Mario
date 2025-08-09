@@ -626,7 +626,22 @@ void ResrcManager::loadTextures() {
         textures["BlueKoopaTroopa_0_LEFT"] = FlipTextureHorizontal(textures["BlueKoopaTroopa_0_RIGHT"]);
         textures["BlueKoopaTroopa_1_LEFT"] = FlipTextureHorizontal(textures["BlueKoopaTroopa_1_RIGHT"]);
 
-
+                //Red Shell
+        textures["SHELL_0"] = LoadTexture("resources/images/Object/Enemy/Shell_0.png");
+        textures["SHELL_1"] = LoadTexture("resources/images/Object/Enemy/Shell_1.png");
+        textures["SHELL_2"] = LoadTexture("resources/images/Object/Enemy/Shell_2.png");
+        textures["SHELL_3"] = LoadTexture("resources/images/Object/Enemy/Shell_3.png");
+        // Green Shell
+        textures["SHELL_4"]=LoadTexture("resources/images/Object/Enemy/Shell_4.png");
+        textures["SHELL_5"]=LoadTexture("resources/images/Object/Enemy/Shell_5.png");
+        textures["SHELL_6"]=LoadTexture("resources/images/Object/Enemy/Shell_6.png");
+        textures["SHELL_7"]=LoadTexture("resources/images/Object/Enemy/Shell_7.png");
+        //Yellow Shell
+        textures["SHELL_8"]=LoadTexture("resources/images/Object/Enemy/Shell_8.png");
+        textures["SHELL_9"]=LoadTexture("resources/images/Object/Enemy/Shell_9.png");
+        textures["SHELL_10"]=LoadTexture("resources/images/Object/Enemy/Shell_10.png");
+        textures["SHELL_11"]=LoadTexture("resources/images/Object/Enemy/Shell_11.png");
+        
         textures["BuzzyBeetle_0_Right"] = LoadTexture("resources/images/Object/Enemy/BuzzyBeetle_0.png");
         textures["BuzzyBeetle_1_Right"] = LoadTexture("resources/images/Object/Enemy/BuzzyBeetle_1.png");
         textures["BuzzyBeetle_0_Left"] = FlipTextureHorizontal(textures["BuzzyBeetle_0_Right"]);

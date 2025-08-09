@@ -545,6 +545,25 @@ void GameWorld::UpdateWorld()
             }
         }
     }
+    // Enemy vs Enemy collisions
+    auto& enemies = map.GetEnemies();
+    for (size_t i = 0; i < enemies.size(); ++i)
+    {
+        for (size_t j = i + 1; j < enemies.size(); ++j)
+        {
+            Enemy* enemyA = enemies[i];
+            Enemy* enemyB = enemies[j];
+            if (enemyA && enemyB &&
+                enemyA->GetState() != OBJECT_STATE_DEAD &&
+                enemyA->GetState() != OBJECT_STATE_TO_BE_REMOVED &&
+                enemyB->GetState() != OBJECT_STATE_DEAD &&
+                enemyB->GetState() != OBJECT_STATE_TO_BE_REMOVED &&
+                enemyA->checkCollisionType(*enemyB) != COLLISION_TYPE_NONE)
+            {
+                mediatorCollision.HandleCollision(enemyA, enemyB);
+            }
+        }
+    }
 
     // Item update (only active)
     for (auto &item : activeItems)
