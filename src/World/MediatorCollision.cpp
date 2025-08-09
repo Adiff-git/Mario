@@ -2,6 +2,8 @@
 #include "../inc/Enemy/Enemy.h"
 #include "../inc/Enemy/Goomba.h"
 #include "../inc/Enemy/GreenKoopa.h"
+#include "../inc/Enemy/RedKoopa.h"
+#include "../inc/Enemy/YellowKoopa.h"
 #include "../inc/Enemy/BuzzyBeetle.h"
 #include "../inc/Enemy/Rex.h"
 #include "../inc/Enemy/FlyingGoomba.h"
@@ -283,6 +285,7 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
         HandleEnemyWithEnemy(enemyA, enemyB, type);
     }
 }
+
 void MediatorCollision::HandleMarioWithBlock(Character* &mario, Block* &block, CollisionType type){
     if(type == COLLISION_TYPE_NONE) return;
     bool canCollide = (block->GetBlockType() != BLOCK_CLOUD || mario->GetState() == OBJECT_STATE_FALLING) &&
@@ -375,43 +378,61 @@ void MediatorCollision::HandleMarioWithEnemy(Character*& mario, Enemy*& enemy, C
     }
 
     RedKoopa *redKoopa = dynamic_cast<RedKoopa *>(enemy);
-    if (redKoopa) {
-        bool isShell = redKoopa->GetState() == OBJECT_STATE_SHELL;
-        bool isMoving = redKoopa->IsMoving();
+    GreenKoopa *greenKoopa = dynamic_cast<GreenKoopa *>(enemy);
+    YellowKoopa *yellowKoopa = dynamic_cast<YellowKoopa *>(enemy);
+    if (redKoopa || greenKoopa || yellowKoopa) {
+        Enemy *koopa = redKoopa ? static_cast<Enemy*>(redKoopa) : greenKoopa ? static_cast<Enemy*>(greenKoopa) : static_cast<Enemy*>(yellowKoopa);
+        bool isShell = koopa->GetState() == OBJECT_STATE_SHELL;
+        bool isMoving = redKoopa ? redKoopa->IsMoving() : greenKoopa ? greenKoopa->IsMoving() : yellowKoopa->IsMoving();
         float marioX = mario->GetPos().x + mario->GetSize().x / 2; // Tâm của Mario
-        float koopaX = redKoopa->GetPos().x + redKoopa->GetSize().x / 2; // Tâm của Koopa
+        float koopaX = koopa->GetPos().x + koopa->GetSize().x / 2; // Tâm của Koopa
         bool fromLeft = (marioX < koopaX);
 
         switch (AtoB) {
         case COLLISION_TYPE_SOUTH: {
             mario->SetVel(Vector2{mario->GetVel().x, -300.0f});
             SoundManager::GetInstance().PlaySound("ENEMY_KICK");
-            redKoopa->OnHit(fromLeft);
-            std::cout << "[DEBUG] Mario stomps on RedKoopa, fromLeft: " << fromLeft << ", isShell: " << isShell << ", isMoving: " << isMoving << std::endl;
+            if (redKoopa) {
+                redKoopa->OnHit(fromLeft);
+                std::cout << "[DEBUG] Mario stomps on RedKoopa, fromLeft: " << fromLeft << ", isShell: " << isShell << ", isMoving: " << isMoving << std::endl;
+            } else if (greenKoopa) {
+                greenKoopa->OnHit(fromLeft);
+                std::cout << "[DEBUG] Mario stomps on GreenKoopa, fromLeft: " << fromLeft << ", isShell: " << isShell << ", isMoving: " << isMoving << std::endl;
+            } else {
+                yellowKoopa->OnHit(fromLeft);
+            }
             break;
         }
         case COLLISION_TYPE_EAST:
         case COLLISION_TYPE_WEST: {
             if (isShell && isMoving) {
                 mario->BeHit();
-                std::cout << "[DEBUG] Mario hit by moving RedKoopa shell from " << (AtoB == COLLISION_TYPE_EAST ? "EAST" : "WEST") << std::endl;
+                std::cout << "[DEBUG] Mario hit by moving " << (redKoopa ? "RedKoopa" : greenKoopa ? "GreenKoopa" : "YellowKoopa") << " shell from " << (AtoB == COLLISION_TYPE_EAST ? "EAST" : "WEST") << std::endl;
             } else if (isShell && !isMoving) {
-                redKoopa->OnHit(fromLeft);
+                if (redKoopa) {
+                    redKoopa->OnHit(fromLeft);
+                    std::cout << "[DEBUG] Mario kicks stationary RedKoopa shell, fromLeft: " << fromLeft << std::endl;
+                } else if (greenKoopa) {
+                    greenKoopa->OnHit(fromLeft);
+                    std::cout << "[DEBUG] Mario kicks stationary GreenKoopa shell, fromLeft: " << fromLeft << std::endl;
+                } else {
+                    yellowKoopa->OnHit(fromLeft);
+                    std::cout << "[DEBUG] Mario kicks stationary YellowKoopa shell, fromLeft: " << fromLeft << std::endl;
+                }
                 SoundManager::GetInstance().PlaySound("ENEMY_KICK");
-                std::cout << "[DEBUG] Mario kicks stationary RedKoopa shell, fromLeft: " << fromLeft << std::endl;
             } else {
                 mario->BeHit();
-                std::cout << "[DEBUG] Mario collides with RedKoopa from " << (AtoB == COLLISION_TYPE_EAST ? "EAST" : "WEST") << std::endl;
+                std::cout << "[DEBUG] Mario collides with " << (redKoopa ? "RedKoopa" : greenKoopa ? "GreenKoopa" : "YellowKoopa") << " from " << (AtoB == COLLISION_TYPE_EAST ? "EAST" : "WEST") << std::endl;
             }
             break;
         }
         case COLLISION_TYPE_NORTH: {
             if (isShell && isMoving) {
                 mario->BeHit();
-                std::cout << "[DEBUG] Mario hit by moving RedKoopa shell from NORTH" << std::endl;
+                std::cout << "[DEBUG] Mario hit by moving " << (redKoopa ? "RedKoopa" : greenKoopa ? "GreenKoopa" : "YellowKoopa") << " shell from NORTH" << std::endl;
             } else {
                 mario->BeHit();
-                std::cout << "[DEBUG] Mario collides with RedKoopa from NORTH" << std::endl;
+                std::cout << "[DEBUG] Mario collides with " << (redKoopa ? "RedKoopa" : greenKoopa ? "GreenKoopa" : "YellowKoopa") << " from NORTH" << std::endl;
             }
             break;
         }
@@ -494,6 +515,7 @@ void MediatorCollision::HandleMarioWithBossFireball(Character *&mario, BossFireb
         std::cout << "[DEBUG] Mario hit by BossFireball - takes damage!" << std::endl;
     }
 }
+
 void MediatorCollision::HandleEnemyWithEnemy(Enemy*& enemyA, Enemy*& enemyB, CollisionType AtoB) {
     if (AtoB == COLLISION_TYPE_NONE) {
         return;
@@ -501,28 +523,36 @@ void MediatorCollision::HandleEnemyWithEnemy(Enemy*& enemyA, Enemy*& enemyB, Col
 
     RedKoopa* redKoopaA = dynamic_cast<RedKoopa*>(enemyA);
     RedKoopa* redKoopaB = dynamic_cast<RedKoopa*>(enemyB);
+    GreenKoopa* greenKoopaA = dynamic_cast<GreenKoopa*>(enemyA);
+    GreenKoopa* greenKoopaB = dynamic_cast<GreenKoopa*>(enemyB);
+    YellowKoopa* yellowKoopaA = dynamic_cast<YellowKoopa*>(enemyA);
+    YellowKoopa* yellowKoopaB = dynamic_cast<YellowKoopa*>(enemyB);
 
-    // Trường hợp: RedKoopa ở trạng thái mai di chuyển va chạm với enemy khác
-    if (redKoopaA && redKoopaA->GetState() == OBJECT_STATE_SHELL && redKoopaA->IsMoving()) {
+    // Trường hợp: RedKoopa, GreenKoopa hoặc YellowKoopa ở trạng thái mai di chuyển va chạm với enemy khác
+    if ((redKoopaA && redKoopaA->GetState() == OBJECT_STATE_SHELL && redKoopaA->IsMoving()) ||
+        (greenKoopaA && greenKoopaA->GetState() == OBJECT_STATE_SHELL && greenKoopaA->IsMoving()) ||
+        (yellowKoopaA && yellowKoopaA->GetState() == OBJECT_STATE_SHELL && yellowKoopaA->IsMoving())) {
         if (!dynamic_cast<Boss*>(enemyB) && enemyB->GetState() != OBJECT_STATE_DYING && enemyB->GetState() != OBJECT_STATE_DEAD) {
-            // RedKoopa mai di chuyển giết enemyB
+            // RedKoopa, GreenKoopa hoặc YellowKoopa mai di chuyển giết enemyB
             enemyB->CreateDeathEffect();
             enemyB->CreateScoreEffect(100);
             enemyB->SetState(OBJECT_STATE_DYING);
             SoundManager::GetInstance().PlaySound("ENEMY_DEATH");
-            std::cout << "[DEBUG] Moving RedKoopa shell (enemyA) kills enemyB" << std::endl;
+            std::cout << "[DEBUG] Moving " << (redKoopaA ? "RedKoopa" : greenKoopaA ? "GreenKoopa" : "YellowKoopa") << " shell (enemyA) kills enemyB" << std::endl;
         }
         return;
     }
 
-    if (redKoopaB && redKoopaB->GetState() == OBJECT_STATE_SHELL && redKoopaB->IsMoving()) {
+    if ((redKoopaB && redKoopaB->GetState() == OBJECT_STATE_SHELL && redKoopaB->IsMoving()) ||
+        (greenKoopaB && greenKoopaB->GetState() == OBJECT_STATE_SHELL && greenKoopaB->IsMoving()) ||
+        (yellowKoopaB && yellowKoopaB->GetState() == OBJECT_STATE_SHELL && yellowKoopaB->IsMoving())) {
         if (!dynamic_cast<Boss*>(enemyA) && enemyA->GetState() != OBJECT_STATE_DYING && enemyA->GetState() != OBJECT_STATE_DEAD) {
-            // RedKoopa mai di chuyển giết enemyA
+            // RedKoopa, GreenKoopa hoặc YellowKoopa mai di chuyển giết enemyA
             enemyA->CreateDeathEffect();
             enemyA->CreateScoreEffect(100);
             enemyA->SetState(OBJECT_STATE_DYING);
             SoundManager::GetInstance().PlaySound("ENEMY_DEATH");
-            std::cout << "[DEBUG] Moving RedKoopa shell (enemyB) kills enemyA" << std::endl;
+            std::cout << "[DEBUG] Moving " << (redKoopaB ? "RedKoopa" : greenKoopaB ? "GreenKoopa" : "YellowKoopa") << " shell (enemyB) kills enemyA" << std::endl;
         }
         return;
     }

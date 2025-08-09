@@ -1,10 +1,11 @@
 #include "../inc/Enemy/RedKoopa.h"
 #include "../inc/World/GameWorld.h"
+#include "../inc/World/GameClock.h"
 #include <iostream>
 
 RedKoopa::RedKoopa(Vector2 pos) 
-    : Enemy(pos, Vector2{32, 48}, Vector2{-10, 0}, RED, 100.0f, 0, DIRECTION_LEFT) {
-    sprite = &ResrcManager::GetInstance().getTexture("RedKoopaTroopa_0");
+    : Enemy(pos, Vector2{32, 48}, Vector2{-5, 0}, RED, 0.2f, 0, DIRECTION_LEFT) {
+    sprite = &ResrcManager::GetInstance().getTexture("RedKoopaTroopa_0_LEFT");
     jumpCooldown = 0;
     hitCount = 0;
     updateCount = 0;
@@ -17,7 +18,7 @@ void RedKoopa::EnterShell() {
     if (state != OBJECT_STATE_SHELL) {
         state = OBJECT_STATE_SHELL;
         SetVel(Vector2{0, GetVel().y});
-        sprite = &ResrcManager::GetInstance().getTexture("SHELL_1");
+        sprite = &ResrcManager::GetInstance().getTexture("SHELL_0");
         SetSize(Vector2{32, 32});
         textureIndex = 0;
         isMoving = false;
@@ -28,7 +29,7 @@ void RedKoopa::EnterShell() {
 void RedKoopa::EnterShellWithVelocity(float velX) {
     if (state == OBJECT_STATE_SHELL && !isMoving) {
         SetVel(Vector2{velX, 0});
-        sprite = &ResrcManager::GetInstance().getTexture("SHELL_1");
+        sprite = &ResrcManager::GetInstance().getTexture("SHELL_0");
         SetSize(Vector2{32, 32});
         textureIndex = 0;
         isMoving = true;
@@ -50,7 +51,7 @@ void RedKoopa::OnHit(bool fromLeft) {
 
 void RedKoopa::UpdateStateAndPhysic() {
     UpdateDyingState();
-
+    
     if (state == OBJECT_STATE_DYING || state == OBJECT_STATE_DEAD) {
         UpdateDeathEffect();
         return;
@@ -61,9 +62,9 @@ void RedKoopa::UpdateStateAndPhysic() {
         // Thay đổi texture khi shell di chuyển
         if (isMoving) {
             updateCount++;
-            const int updateThreshold = 10; // Điều chỉnh để thay đổi tốc độ animation
+            const int updateThreshold = 10; // Tốc độ animation của shell
             if (updateCount >= updateThreshold) {
-                textureIndex = (textureIndex + 1) % 4; // Chuyển từ 0 đến 3
+                textureIndex = 0 + ((textureIndex + 1 - 0) % 4); // Chuyển đổi giữa 0, 1, 2, 3
                 std::string textureName = "SHELL_" + std::to_string(textureIndex);
                 sprite = &ResrcManager::GetInstance().getTexture(textureName);
                 updateCount = 0;
@@ -77,6 +78,7 @@ void RedKoopa::UpdateStateAndPhysic() {
             // Texture tĩnh khi shell không di chuyển
             sprite = &ResrcManager::GetInstance().getTexture("SHELL_0");
             SetVel(Vector2{0, GetVel().y});
+            textureIndex = 0;
         }
 
         // Áp dụng trọng lực nhưng giữ trạng thái OBJECT_STATE_SHELL
@@ -89,7 +91,10 @@ void RedKoopa::UpdateStateAndPhysic() {
         return;
     }
 
-    // Phần còn lại của phương thức giữ nguyên
+    // Logic gốc cho trạng thái không phải shell
+    if (GetState() != OBJECT_STATE_ON_GROUND) {
+        SetVel(Vector2{GetVel().x, GetVel().y + 9.81f * static_cast<float>(GameClock::GetInstance().FIXED_TIME_STEP)});
+    }
     if (GetState() == OBJECT_STATE_ON_GROUND) {
         float newVelX = GetVel().x;
         if (newVelX > 0 && newVelX > maxSpeedX) newVelX = maxSpeedX;
@@ -97,12 +102,15 @@ void RedKoopa::UpdateStateAndPhysic() {
         SetVel(Vector2{newVelX, GetVel().y});
         SetPos(Vector2{(float)(GetPos().x + GetVel().x * GameClock::GetInstance().FIXED_TIME_STEP), GetPos().y});
     }
-    if (vel.y == 0 && state != OBJECT_STATE_SHELL) {
+    if (vel.y > 0) {
         state = OBJECT_STATE_FALLING;
     }
     if (state == OBJECT_STATE_ON_GROUND) {
-        SetVel(Vector2{GetVel().x, 0});
+        vel.y = 0;
     }
+
+    vel.y += GameWorld::GetGravity() * deltaTime;
+    Object::UpdateStateAndPhysic();
 
     const int updateThreshold = 50;
     if (fabs(GetVel().x) > 0.1f && state != OBJECT_STATE_SHELL) {
@@ -131,7 +139,7 @@ void RedKoopa::UpdateStateAndPhysic() {
         if (GetDirection() == DIRECTION_RIGHT) {
             sprite = &ResrcManager::GetInstance().getTexture("RedKoopaTroopa_0_RIGHT");
         } else {
-            sprite = &ResrcManager::GetInstance().getTexture("RedKoopaTroopa_1_LEFT");
+            sprite = &ResrcManager::GetInstance().getTexture("RedKoopaTroopa_0_LEFT");
         }
         textureIndex = 0;
         updateCount = 0;

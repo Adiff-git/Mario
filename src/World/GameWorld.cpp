@@ -71,7 +71,9 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
         // Boss* boss = new Boss(Vector2{1200, 535}, player1->GetPosPtr(), player2 ? player2->GetPosPtr() : nullptr, multiplayer);
         // map.GetEnemies().push_back(boss);
         // map.SetMarioPositionForBosses(player1->GetPosPtr(), player2 ? player2->GetPosPtr() : nullptr, multiplayer);
-        map.GetEnemies().push_back(new RedKoopa(Vector2{200, 820}));
+        map.GetEnemies().push_back(new RedKoopa(Vector2{200, 620}));
+        // map.GetEnemies().push_back(new GreenKoopa(Vector2{300, 520}));
+        map.GetEnemies().push_back(new YellowKoopa(Vector2{400, 620}));
     }
     
     // Set background based on MapID
