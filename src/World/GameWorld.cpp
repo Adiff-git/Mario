@@ -20,6 +20,7 @@
     #include "../inc/Item/ItemType.h"
     #include "../inc/Block/BlockType.h"
     #include "../inc/Enemy/EnemyType.h"
+    
     GameWorld::GameWorld() : player1(nullptr), player2(nullptr), interactiveTiles(map.getInteractiveTiles())
 {
     player1 = new Luigi(Vector2{100, 100}, 3, SMALL, ControlType::ARROWS);
@@ -352,7 +353,7 @@ void GameWorld::UpdateWorld()
             // Enemies
             for (Enemy *enemy : activeEnemies)
             {
-                if (enemy && enemy->GetState() != OBJECT_STATE_DEAD &&
+                if (enemy && enemy->GetState() != OBJECT_STATE_DEAD && enemy->GetState() != OBJECT_STATE_DYING &&
                     enemy->GetState() != OBJECT_STATE_TO_BE_REMOVED &&
                     player1->checkCollisionType(*enemy) != COLLISION_TYPE_NONE)
                 {
@@ -412,7 +413,7 @@ void GameWorld::UpdateWorld()
                 }
                 for (Enemy *enemy : activeEnemies)
                 {
-                    if (enemy && enemy->GetState() != OBJECT_STATE_DEAD &&
+                    if (enemy && enemy->GetState() != OBJECT_STATE_DEAD && enemy->GetState() != OBJECT_STATE_DYING &&
                         enemy->GetState() != OBJECT_STATE_TO_BE_REMOVED &&
                         enemy->checkCollisionType(*fireball) != COLLISION_TYPE_NONE)
                     {
@@ -448,7 +449,7 @@ void GameWorld::UpdateWorld()
             }
             for (Enemy *enemy : activeEnemies)
             {
-                if (enemy && enemy->GetState() != OBJECT_STATE_DEAD &&
+                if (enemy && enemy->GetState() != OBJECT_STATE_DEAD && enemy->GetState() != OBJECT_STATE_DYING &&
                     enemy->GetState() != OBJECT_STATE_TO_BE_REMOVED &&
                     player2->checkCollisionType(*enemy) != COLLISION_TYPE_NONE)
                 {
@@ -506,7 +507,7 @@ void GameWorld::UpdateWorld()
                 }
                 for (Enemy *enemy : activeEnemies)
                 {
-                    if (enemy && enemy->GetState() != OBJECT_STATE_DEAD &&
+                    if (enemy && enemy->GetState() != OBJECT_STATE_DEAD && enemy->GetState() != OBJECT_STATE_DYING &&
                         enemy->GetState() != OBJECT_STATE_TO_BE_REMOVED &&
                         enemy->checkCollisionType(*fireball) != COLLISION_TYPE_NONE)
                     {
