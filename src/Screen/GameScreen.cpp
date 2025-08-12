@@ -93,9 +93,11 @@ GameScreen::GameScreen(ScreenController* screenController, bool multiplayer,
 {
     // Adjust level based on map selection
     switch(map) {
+        case MapType::MAP_TUTORIAL: level = 0; break;
         case MapType::MAP_1: level = 1; break;
         case MapType::MAP_2: level = 2; break;
         case MapType::MAP_3: level = 3; break;
+        case MapType::MAP_BOSS: level = 4; break;
         default: level = 1; break;
     }
 
@@ -630,12 +632,51 @@ void GameScreen::NextLevel() {
         currentPlayerState2 =  gameWorld->player2->GetMarioState();
     }
     
-    level++;
-    if (level > 4) {
-        level = 1; // Reset to first level if exceeded
+    // Xác định map và độ khó tiếp theo
+    MapType nextMap = selectedMap;
+    DifficultyLevel nextDifficulty = selectedDifficulty;
+
+    if (selectedMap == MapType::MAP_TUTORIAL) {
+        nextMap = MapType::MAP_1;
+        nextDifficulty = selectedDifficulty;
+    } else if (selectedMap == MapType::MAP_1) {
+        nextMap = MapType::MAP_2;
+        nextDifficulty = selectedDifficulty;
+    } else if (selectedMap == MapType::MAP_2) {
+        nextMap = MapType::MAP_3;
+        nextDifficulty = selectedDifficulty;
+    } else if (selectedMap == MapType::MAP_3) {
+        // Nếu đang ở map 3 và độ khó chưa phải HARD thì tăng độ khó
+        if (selectedDifficulty == DifficultyLevel::EASY) {
+            nextMap = MapType::MAP_3;
+            nextDifficulty = DifficultyLevel::MEDIUM;
+        } else if (selectedDifficulty == DifficultyLevel::MEDIUM) {
+            nextMap = MapType::MAP_3;
+            nextDifficulty = DifficultyLevel::HARD;
+        } else {
+            // Nếu đang ở map 3 và độ khó HARD thì chuyển sang map boss
+            nextMap = MapType::MAP_BOSS;
+            nextDifficulty = DifficultyLevel::EASY;
+        }
+    } else if (selectedMap == MapType::MAP_BOSS) {
+        // Nếu thắng map boss thì kết thúc game (chuyển về menu)
+        screenController->ChangeScreen(new MenuScreen(screenController));
+        return;
     }
-    
-    // Tạo GameWorld mới
+
+    // Tạo GameWorld mới với map và độ khó mới
+    int nextLevel = 1;
+    switch (nextMap) {
+        case MapType::MAP_TUTORIAL: nextLevel = 0; break;
+        case MapType::MAP_1: nextLevel = 1; break;
+        case MapType::MAP_2: nextLevel = 2; break;
+        case MapType::MAP_3: nextLevel = 3; break;
+        case MapType::MAP_BOSS: nextLevel = 4; break;
+        default: nextLevel = 1; break;
+    }
+    selectedMap = nextMap;
+    selectedDifficulty = nextDifficulty;
+    level = nextLevel;
     gameWorld = std::make_unique<GameWorld>(level, this, isMultiplayer, player1Type, player2Type);
     
     // Khôi phục thông tin Mario

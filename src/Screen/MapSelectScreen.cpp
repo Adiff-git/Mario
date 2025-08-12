@@ -15,10 +15,12 @@ MapSelectScreen::MapSelectScreen(ScreenController *screenController, bool multip
       selectedDifficulty(DifficultyLevel::NONE),
       mapSelected(false),
       difficultySelected(false),
-      // Map selection buttons (horizontal layout)
-      map1Button(Vector2{(float)GetScreenWidth() / 2 - 400, (float)GetScreenHeight() / 2 - 200}, Vector2{200, 150}),
-      map2Button(Vector2{(float)GetScreenWidth() / 2 - 100, (float)GetScreenHeight() / 2 - 200}, Vector2{200, 150}),
-      map3Button(Vector2{(float)GetScreenWidth() / 2 + 200, (float)GetScreenHeight() / 2 - 200}, Vector2{200, 150}),
+    // Map selection buttons (horizontal layout)
+    mapTutorialButton(Vector2{(float)GetScreenWidth() / 2 - 650, (float)GetScreenHeight() / 2 - 200}, Vector2{200, 150}),
+    map1Button(Vector2{(float)GetScreenWidth() / 2 - 400, (float)GetScreenHeight() / 2 - 200}, Vector2{200, 150}),
+    map2Button(Vector2{(float)GetScreenWidth() / 2 - 100, (float)GetScreenHeight() / 2 - 200}, Vector2{200, 150}),
+    map3Button(Vector2{(float)GetScreenWidth() / 2 + 200, (float)GetScreenHeight() / 2 - 200}, Vector2{200, 150}),
+    mapBossButton(Vector2{(float)GetScreenWidth() / 2 + 450, (float)GetScreenHeight() / 2 - 200}, Vector2{200, 150}),
       // Difficulty buttons for Map 1
       easyButton1(Vector2{(float)GetScreenWidth() / 2 - 450, (float)GetScreenHeight() / 2 + 50}, Vector2{30, 20}),
       mediumButton1(Vector2{(float)GetScreenWidth() / 2 - 350, (float)GetScreenHeight() / 2 + 50}, Vector2{60, 40}),
@@ -44,9 +46,11 @@ MapSelectScreen::MapSelectScreen(ScreenController *screenController, bool multip
     pixelFont = &ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT");
 
     // Set map button textures
+    mapTutorialButton.SetTexture(ResrcManager::GetInstance().getTexture("MAP_TUTORIAL"));
     map1Button.SetTexture(ResrcManager::GetInstance().getTexture("MAP_1"));
     map2Button.SetTexture(ResrcManager::GetInstance().getTexture("MAP_2"));
     map3Button.SetTexture(ResrcManager::GetInstance().getTexture("MAP_3"));
+    mapBossButton.SetTexture(ResrcManager::GetInstance().getTexture("MAP_BOSS"));
 
     // Set difficulty button textures
     easyButton1.SetTexture(ResrcManager::GetInstance().getTexture("LEVEL 1"));
@@ -73,9 +77,11 @@ MapSelectScreen::~MapSelectScreen()
 void MapSelectScreen::Update()
 {
     // Update all buttons
+    mapTutorialButton.Update();
     map1Button.Update();
     map2Button.Update();
     map3Button.Update();
+    mapBossButton.Update();
 
     UpdateDifficultyButtons();
 
@@ -83,91 +89,72 @@ void MapSelectScreen::Update()
     startButton.Update();
 
     // Map selection logic
-    if (map1Button.IsPressed())
-    {
+    if (mapTutorialButton.IsPressed()) {
+        SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
+        SelectMap(MapType::MAP_TUTORIAL);
+    }
+    if (map1Button.IsPressed()) {
         SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
         SelectMap(MapType::MAP_1);
     }
-
-    if (map2Button.IsPressed())
-    {
+    if (map2Button.IsPressed()) {
         SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
         SelectMap(MapType::MAP_2);
     }
-
-    if (map3Button.IsPressed())
-    {
+    if (map3Button.IsPressed()) {
         SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
         SelectMap(MapType::MAP_3);
     }
+    if (mapBossButton.IsPressed()) {
+        SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
+        SelectMap(MapType::MAP_BOSS);
+    }
 
     // Difficulty selection logic (only if map is selected)
-    if (mapSelected && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-    {
+    if (mapSelected && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
         Vector2 mousePos = GetMousePosition();
-
-        if (selectedMap == MapType::MAP_1)
-        {
+        if (selectedMap == MapType::MAP_TUTORIAL || selectedMap == MapType::MAP_BOSS) {
+            // Tutorial và Boss không có chọn độ khó
+            SelectDifficulty(DifficultyLevel::EASY);
+        } else if (selectedMap == MapType::MAP_1) {
             Rectangle easyRect = {(float)GetScreenWidth() / 2 - 450 + 25, (float)GetScreenHeight() / 2 + 30 + (60-20), 30, 20};
             Rectangle mediumRect = {(float)GetScreenWidth() / 2 - 350 + 25, (float)GetScreenHeight() / 2 + 30 + (60-40), 60, 40};
             Rectangle hardRect = {(float)GetScreenWidth() / 2 - 250 + 25, (float)GetScreenHeight() / 2 + 30, 100, 60};
-
-            if (CheckCollisionPointRec(mousePos, easyRect))
-            {
+            if (CheckCollisionPointRec(mousePos, easyRect)) {
                 SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
                 SelectDifficulty(DifficultyLevel::EASY);
-            }
-            else if (CheckCollisionPointRec(mousePos, mediumRect))
-            {
+            } else if (CheckCollisionPointRec(mousePos, mediumRect)) {
                 SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
                 SelectDifficulty(DifficultyLevel::MEDIUM);
-            }
-            else if (CheckCollisionPointRec(mousePos, hardRect))
-            {
+            } else if (CheckCollisionPointRec(mousePos, hardRect)) {
                 SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
                 SelectDifficulty(DifficultyLevel::HARD);
             }
-        }
-        else if (selectedMap == MapType::MAP_2)
-        {
+        } else if (selectedMap == MapType::MAP_2) {
             Rectangle easyRect = {(float)GetScreenWidth() / 2 - 150 + 25, (float)GetScreenHeight() / 2 + 30 + (60-20), 30, 20};
             Rectangle mediumRect = {(float)GetScreenWidth() / 2 - 50 + 25, (float)GetScreenHeight() / 2 + 30 + (60-40), 60, 40};
             Rectangle hardRect = {(float)GetScreenWidth() / 2 + 50 + 25, (float)GetScreenHeight() / 2 + 30, 100, 60};
-
-            if (CheckCollisionPointRec(mousePos, easyRect))
-            {
+            if (CheckCollisionPointRec(mousePos, easyRect)) {
                 SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
                 SelectDifficulty(DifficultyLevel::EASY);
-            }
-            else if (CheckCollisionPointRec(mousePos, mediumRect))
-            {
+            } else if (CheckCollisionPointRec(mousePos, mediumRect)) {
                 SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
                 SelectDifficulty(DifficultyLevel::MEDIUM);
-            }
-            else if (CheckCollisionPointRec(mousePos, hardRect))
-            {
+            } else if (CheckCollisionPointRec(mousePos, hardRect)) {
                 SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
                 SelectDifficulty(DifficultyLevel::HARD);
             }
-        }
-        else if (selectedMap == MapType::MAP_3)
-        {
+        } else if (selectedMap == MapType::MAP_3) {
             Rectangle easyRect = {(float)GetScreenWidth() / 2 + 150 + 25, (float)GetScreenHeight() / 2 + 30 + (60-20), 30, 20};
             Rectangle mediumRect = {(float)GetScreenWidth() / 2 + 250 + 25, (float)GetScreenHeight() / 2 + 30 + (60-40), 60, 40};
             Rectangle hardRect = {(float)GetScreenWidth() / 2 + 350 + 25, (float)GetScreenHeight() / 2 + 30, 100, 60};
-
-            if (CheckCollisionPointRec(mousePos, easyRect))
-            {
+            if (CheckCollisionPointRec(mousePos, easyRect)) {
                 SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
                 SelectDifficulty(DifficultyLevel::EASY);
-            }
-            else if (CheckCollisionPointRec(mousePos, mediumRect))
-            {
+            } else if (CheckCollisionPointRec(mousePos, mediumRect)) {
                 SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
                 SelectDifficulty(DifficultyLevel::MEDIUM);
-            }
-            else if (CheckCollisionPointRec(mousePos, hardRect))
-            {
+            } else if (CheckCollisionPointRec(mousePos, hardRect)) {
                 SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
                 SelectDifficulty(DifficultyLevel::HARD);
             }
@@ -241,18 +228,27 @@ void MapSelectScreen::Draw()
                24, 2, YELLOW);
 
     // Draw map buttons
+    mapTutorialButton.Draw();
     map1Button.Draw();
     map2Button.Draw();
     map3Button.Draw();
+    mapBossButton.Draw();
 
     // Draw map names - centered under each button
+    const char *mapTutorialText = "Tutorial";
     const char *map1Text = "Map 1";
     const char *map2Text = "Map 2";
     const char *map3Text = "Map 3";
+    const char *mapBossText = "Boss";
+    Vector2 mapTutorialSize = MeasureTextEx(*pixelFont, mapTutorialText, 18, 1);
     Vector2 map1Size = MeasureTextEx(*pixelFont, map1Text, 18, 1);
     Vector2 map2Size = MeasureTextEx(*pixelFont, map2Text, 18, 1);
     Vector2 map3Size = MeasureTextEx(*pixelFont, map3Text, 18, 1);
+    Vector2 mapBossSize = MeasureTextEx(*pixelFont, mapBossText, 18, 1);
 
+    DrawTextEx(*pixelFont, mapTutorialText,
+               Vector2{(float)GetScreenWidth() / 2 - 650 + 100 - mapTutorialSize.x / 2, (float)GetScreenHeight() / 2 - 30},
+               18, 1, WHITE);
     DrawTextEx(*pixelFont, map1Text,
                Vector2{(float)GetScreenWidth() / 2 - 400 + 100 - map1Size.x / 2, (float)GetScreenHeight() / 2 - 30},
                18, 1, WHITE);
@@ -262,6 +258,9 @@ void MapSelectScreen::Draw()
     DrawTextEx(*pixelFont, map3Text,
                Vector2{(float)GetScreenWidth() / 2 + 200 + 100 - map3Size.x / 2, (float)GetScreenHeight() / 2 - 30},
                18, 1, WHITE);
+    DrawTextEx(*pixelFont, mapBossText,
+               Vector2{(float)GetScreenWidth() / 2 + 450 + 100 - mapBossSize.x / 2, (float)GetScreenHeight() / 2 - 30},
+               18, 1, WHITE);
 
     // Draw map selection indicator
     if (mapSelected)
@@ -270,6 +269,9 @@ void MapSelectScreen::Draw()
         float selectionX = 0;
         switch (selectedMap)
         {
+        case MapType::MAP_TUTORIAL:
+            selectionX = (float)GetScreenWidth() / 2 - 650;
+            break;
         case MapType::MAP_1:
             selectionX = (float)GetScreenWidth() / 2 - 400;
             break;
@@ -278,6 +280,9 @@ void MapSelectScreen::Draw()
             break;
         case MapType::MAP_3:
             selectionX = (float)GetScreenWidth() / 2 + 200;
+            break;
+        case MapType::MAP_BOSS:
+            selectionX = (float)GetScreenWidth() / 2 + 450;
             break;
         }
         DrawRectangleLines(selectionX - 5, (float)GetScreenHeight() / 2 - 205, 210, 160, selectionColor);
