@@ -121,7 +121,6 @@ GameScreen::GameScreen(ScreenController* screenController, bool multiplayer,
         default: levelMultiplier = 1.0f; break;
     }
 
-    // Hiển thị màn hình WIN khi thắng boss
     if (showWinScreen) {
         if (IsKeyPressed(KEY_ENTER)) {
             showWinScreen = false;
@@ -137,13 +136,6 @@ GameScreen::GameScreen(ScreenController* screenController, bool multiplayer,
 
     // Initialize Player 1
     int initialLives = 3;
-    switch(difficulty) {
-        case DifficultyLevel::EASY: initialLives = 5; break;
-        case DifficultyLevel::MEDIUM: initialLives = 3; break;
-        case DifficultyLevel::HARD: initialLives = 1; break;
-        default: initialLives = 3; break;
-    }
-
     gameWorld->player1->SetLives(initialLives);
     gameWorld->player1->SetCoins(0);
     gameWorld->player1->SetScore(0);
