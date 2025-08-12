@@ -168,15 +168,6 @@ GameWorld::GameWorld(int MapID, GameScreen* gameScreen, bool multiplayer,
         }
     }
     
-    // Initialize Boss for MapID == 1
-    if (MapID == 1) {
-        // Chỉ khởi tạo boss nếu cần, không thêm item/enemy/block cứng
-        Boss* boss = new Boss(Vector2{1200, 535}, player1->GetPosPtr(), player2 ? player2->GetPosPtr() : nullptr, multiplayer);
-        map.GetEnemies().push_back(boss);
-        map.SetMarioPositionForBosses(player1->GetPosPtr(), player2 ? player2->GetPosPtr() : nullptr, multiplayer);
-    }
-    
-    // Set background based on MapID
     switch (MapID)
     {
         case 0: background = ResrcManager::GetInstance().getTexture("BACKGROUND_0"); break;
@@ -258,7 +249,6 @@ void GameWorld::UpdateWorld()
 
     // -------- Thay interactiveTiles / map collections bằng active* --------
 
-    // Update Player 1
     if (player1)
     {
         player1->UpdateStateAndPhysic();
@@ -848,6 +838,11 @@ void GameWorld::ApplyLoadedData(const GameSaveData& saveData) {
     map.GetEnemies().clear();
     map.GetInteractiveItems().clear();
     map.getBlocks().clear();
+
+    // ...existing code...
+    // Đảm bảo player1 và player2 luôn có 3 mạng khi load map (đặt ở cuối cùng)
+    if (player1) player1->SetLives(3);
+    if (player2) player2->SetLives(3);
 
     for (const auto& enemyData : saveData.enemies) {
         Enemy* enemy = nullptr;
