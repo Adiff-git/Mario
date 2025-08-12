@@ -66,13 +66,22 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
     }
     
     // Initialize Player 2 if multiplayer
-    if (multiplayer) {
-        if (p2Type == CharacterType::MARIO) {
-            player2 = new Mario(Vector2{150, 100}, 3, SMALL, ControlType::ARROWS);
-        } else {
-            player2 = new Luigi(Vector2{150, 100}, 3, SMALL, ControlType::ARROWS);
+        if (multiplayer) {
+            switch(p2Type) {
+                case CharacterType::MARIO:
+                    player2 = new Mario(Vector2{150, 100}, 3, SMALL, ControlType::ARROWS);
+                    break;
+                case CharacterType::LUIGI:
+                    player2 = new Luigi(Vector2{150, 100}, 3, SMALL, ControlType::ARROWS);
+                    break;
+                case CharacterType::TOAD:
+                    player2 = new Toad(Vector2{150, 100}, 3, SMALL, ControlType::ARROWS);
+                    break;
+                case CharacterType::PEACH:
+                    player2 = new Peach(Vector2{150, 100}, 3, SMALL, ControlType::ARROWS);
+                    break;
+            }
         }
-    }
     
     // Initialize Boss for MapID == 1
     if (MapID == 1) {
@@ -159,18 +168,36 @@ GameWorld::GameWorld(int MapID, GameScreen* gameScreen, bool multiplayer,
     map.LoadMap(MapID);
     
     // Initialize Player 1
-    if (p1Type == CharacterType::MARIO) {
-        player1 = new Mario(Vector2{100, 100}, 3, SMALL, ControlType::WASD);
-    } else {
-        player1 = new Luigi(Vector2{100, 100}, 3, SMALL, ControlType::WASD);
+    switch(p1Type) {
+        case CharacterType::MARIO:
+            player1 = new Mario(Vector2{100, 100}, 3, SMALL, ControlType::WASD);
+            break;
+        case CharacterType::LUIGI:
+            player1 = new Luigi(Vector2{100, 100}, 3, SMALL, ControlType::WASD);
+            break;
+        case CharacterType::TOAD:
+            player1 = new Toad(Vector2{100, 100}, 3, SMALL, ControlType::WASD);
+            break;
+        case CharacterType::PEACH:
+            player1 = new Peach(Vector2{100, 100}, 3, SMALL, ControlType::WASD);
+            break;
     }
     
     // Initialize Player 2 if multiplayer
     if (multiplayer) {
-        if (p2Type == CharacterType::MARIO) {
-            player2 = new Mario(Vector2{150, 100}, 3, SMALL, ControlType::ARROWS);
-        } else {
-            player2 = new Luigi(Vector2{150, 100}, 3, SMALL, ControlType::ARROWS);
+        switch(p2Type) {
+            case CharacterType::MARIO:
+                player2 = new Mario(Vector2{150, 100}, 3, SMALL, ControlType::ARROWS);
+                break;
+            case CharacterType::LUIGI:
+                player2 = new Luigi(Vector2{150, 100}, 3, SMALL, ControlType::ARROWS);
+                break;
+            case CharacterType::TOAD:
+                player2 = new Toad(Vector2{150, 100}, 3, SMALL, ControlType::ARROWS);
+                break;
+            case CharacterType::PEACH:
+                player2 = new Peach(Vector2{150, 100}, 3, SMALL, ControlType::ARROWS);
+                break;
         }
     }
     

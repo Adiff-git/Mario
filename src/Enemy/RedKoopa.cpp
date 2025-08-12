@@ -1,7 +1,6 @@
 #include "../inc/Enemy/RedKoopa.h"
 #include "../inc/World/GameWorld.h"
 #include "../inc/World/GameClock.h"
-#include <iostream>
 
 RedKoopa::RedKoopa(Vector2 pos) 
     : Enemy(pos, Vector2{32, 48}, Vector2{-5, 0}, RED, 0.2f, 0, DIRECTION_LEFT) {
@@ -22,7 +21,6 @@ void RedKoopa::EnterShell() {
         SetSize(Vector2{32, 32});
         textureIndex = 0;
         isMoving = false;
-        std::cout << "[DEBUG] RedKoopa entered shell, state: " << state << ", vel.x: " << GetVel().x << ", hitCount: " << hitCount << ", isMoving: " << isMoving << std::endl;
     }
 }
 
@@ -33,7 +31,6 @@ void RedKoopa::EnterShellWithVelocity(float velX) {
         SetSize(Vector2{32, 32});
         textureIndex = 0;
         isMoving = true;
-        std::cout << "[DEBUG] RedKoopa shell moving, vel.x: " << GetVel().x << ", hitCount: " << hitCount << ", isMoving: " << isMoving << std::endl;
     }
 }
 
@@ -41,11 +38,9 @@ void RedKoopa::OnHit(bool fromLeft) {
     hitCount++;
     if (hitCount == 1) {
         EnterShell();
-        std::cout << "[DEBUG] Hit 1: Pos (" << GetPos().x << ", " << GetPos().y << "), Size (" << GetSize().x << ", " << GetSize().y << ")" << std::endl;
     } else if (hitCount == 2) {
         float shellSpeed = -150.0f;
         EnterShellWithVelocity(fromLeft ? -shellSpeed : shellSpeed);
-        std::cout << "[DEBUG] Hit 2: Pos (" << GetPos().x << ", " << GetPos().y << "), Vel (" << GetVel().x << ", " << GetVel().y << ")" << std::endl;
     }
 }
 
@@ -59,39 +54,32 @@ void RedKoopa::UpdateStateAndPhysic() {
 
     const float deltaTime = GetFrameTime();
     if (state == OBJECT_STATE_SHELL) {
-        // Thay đổi texture khi shell di chuyển
         if (isMoving) {
             updateCount++;
-            const int updateThreshold = 10; // Tốc độ animation của shell
+            const int updateThreshold = 10;
             if (updateCount >= updateThreshold) {
-                textureIndex = 0 + ((textureIndex + 1 - 0) % 4); // Chuyển đổi giữa 0, 1, 2, 3
+                textureIndex = 0 + ((textureIndex + 1 - 0) % 4);
                 std::string textureName = "SHELL_" + std::to_string(textureIndex);
                 sprite = &ResrcManager::GetInstance().getTexture(textureName);
                 updateCount = 0;
-                std::cout << "[DEBUG] Cập nhật texture shell thành: " << textureName << ", textureIndex: " << textureIndex << std::endl;
             }
 
             Vector2 newPos = Vector2{(double)(GetPos().x + GetVel().x * GameClock::GetInstance().FIXED_TIME_STEP), (double)(GetPos().y)};
             SetPos(newPos);
-            std::cout << "[DEBUG] Shell di chuyển, pos.x: " << newPos.x << ", vel.x: " << GetVel().x << ", isMoving: " << isMoving << std::endl;
         } else {
-            // Texture tĩnh khi shell không di chuyển
             sprite = &ResrcManager::GetInstance().getTexture("SHELL_0");
             SetVel(Vector2{0, GetVel().y});
             textureIndex = 0;
         }
 
-        // Áp dụng trọng lực nhưng giữ trạng thái OBJECT_STATE_SHELL
         if (GetState() != OBJECT_STATE_ON_GROUND) {
             SetVel(Vector2{GetVel().x, GetVel().y + GameWorld::GetGravity() * deltaTime});
         } else {
             SetVel(Vector2{GetVel().x, 0});
         }
-        std::cout << "[DEBUG] Cập nhật: state=" << state << ", pos.x=" << GetPos().x << ", vel.x=" << GetVel().x << ", vel.y=" << GetVel().y << ", hitCount=" << hitCount << ", isMoving=" << isMoving << std::endl;
         return;
     }
 
-    // Logic gốc cho trạng thái không phải shell
     if (GetState() != OBJECT_STATE_ON_GROUND) {
         SetVel(Vector2{GetVel().x, GetVel().y + 9.81f * static_cast<float>(GameClock::GetInstance().FIXED_TIME_STEP)});
     }
