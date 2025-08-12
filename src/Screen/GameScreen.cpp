@@ -120,6 +120,15 @@ GameScreen::GameScreen(ScreenController* screenController, bool multiplayer,
         case 3: levelMultiplier = 4.0f; break;   
         default: levelMultiplier = 1.0f; break;
     }
+
+    // Hiển thị màn hình WIN khi thắng boss
+    if (showWinScreen) {
+        if (IsKeyPressed(KEY_ENTER)) {
+            showWinScreen = false;
+            screenController->ChangeScreen(new MenuScreen(screenController));
+        }
+        return;
+    }
     
     // Combine both multipliers for dramatic effect
     float enemySpeedMultiplier = baseSpeedMultiplier * levelMultiplier;
@@ -374,6 +383,19 @@ void GameScreen::BeginTransition(TransitionState transitionState) {
 }
 
 void GameScreen::Draw() {
+    if (showWinScreen) {
+        Texture2D& winTex = ResrcManager::GetInstance().getTexture("WIN");
+        DrawTexturePro(
+            winTex,
+            { 0, 0, (float)winTex.width, (float)winTex.height },
+            { 0, 0, (float)GetScreenWidth(), (float)GetScreenHeight() },
+            { 0, 0 },
+            0.0f,
+            WHITE
+        );
+        DrawText("Press ENTER to return to menu", GetScreenWidth()/2-200, GetScreenHeight()-100, 32, BLACK);
+        return;
+    }
     gameWorld->DrawWorld();
     gameHUD->Draw();
     if (gameWorld->IsCompleted()) {
