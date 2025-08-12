@@ -16,10 +16,9 @@ int main() {
     ResrcManager::GetInstance().loadResources();
     ScreenController screenController; // Create a screen controller instance
     // // Create a Mario instance
-    // Mario mario(Vector2{100, 100}, 3, SMALL);
     Texture2D *backgroundTexture = &ResrcManager::GetInstance().getTexture("MENU_BACKGROUND");
-    GameWorld::Init(); // Initialize game world resources   
-    GameWorld gameWorld; // Create a game world instance
+    // GameWorld::Init(); // Initialize game world resources   
+    // GameWorld gameWorld; // Create a game world instance
     while(!WindowShouldClose()) {
         GameClock::GetInstance().updateTimeAcum += 1/60;
         // Update game logic TRƯỚC khi vẽ

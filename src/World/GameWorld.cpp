@@ -198,69 +198,69 @@ GameWorld::GameWorld(int MapID, GameScreen* gameScreen, bool multiplayer,
     
     // Add items for MapID == 1
     if (MapID == 1) {
-        map.GetInteractiveItems().push_back(std::make_shared<Coin>(Vector2{400, 800}));
-        map.GetInteractiveItems().push_back(std::make_shared<FireFlower>(Vector2{450, 800}));
-        map.GetInteractiveItems().push_back(std::make_shared<Star>(Vector2{600, 500}));
-        map.GetInteractiveItems().push_back(std::make_shared<YoshiCoin>(Vector2{700, 800}));
-        map.GetInteractiveItems().push_back(std::make_shared<Mushroom>(Vector2{200, 800}));
-        map.GetInteractiveItems().push_back(std::make_shared<ThreeUpMoon>(Vector2{200, 500}));
-        map.GetInteractiveItems().push_back(std::make_shared<OneUpMushroom>(Vector2{200, 800}));
+        // map.GetInteractiveItems().push_back(std::make_shared<Coin>(Vector2{400, 800}));
+        // map.GetInteractiveItems().push_back(std::make_shared<FireFlower>(Vector2{450, 800}));
+        // map.GetInteractiveItems().push_back(std::make_shared<Star>(Vector2{600, 500}));
+        // map.GetInteractiveItems().push_back(std::make_shared<YoshiCoin>(Vector2{700, 800}));
+        // map.GetInteractiveItems().push_back(std::make_shared<Mushroom>(Vector2{200, 800}));
+        // map.GetInteractiveItems().push_back(std::make_shared<ThreeUpMoon>(Vector2{200, 500}));
+        // map.GetInteractiveItems().push_back(std::make_shared<OneUpMushroom>(Vector2{200, 800}));
 
-        // Create enemies with speed multiplier applied
-        BanzaiBill* banzai = new BanzaiBill(Vector2{500, 800});
-        banzai->SetSpeedMultiplier(speedMultiplier);
-        map.GetEnemies().push_back(banzai);
+        // // Create enemies with speed multiplier applied
+        // BanzaiBill* banzai = new BanzaiBill(Vector2{500, 800});
+        // banzai->SetSpeedMultiplier(speedMultiplier);
+        // map.GetEnemies().push_back(banzai);
         
-        BulletBill* bullet = new BulletBill(Vector2{600, 800});
-        bullet->SetSpeedMultiplier(speedMultiplier);
-        map.GetEnemies().push_back(bullet);
+        // BulletBill* bullet = new BulletBill(Vector2{600, 800});
+        // bullet->SetSpeedMultiplier(speedMultiplier);
+        // map.GetEnemies().push_back(bullet);
         
-        BuzzyBeetle* buzzy = new BuzzyBeetle(Vector2{700, 800});
-        buzzy->SetSpeedMultiplier(speedMultiplier);
-        map.GetEnemies().push_back(buzzy);
+        // BuzzyBeetle* buzzy = new BuzzyBeetle(Vector2{700, 800});
+        // buzzy->SetSpeedMultiplier(speedMultiplier);
+        // map.GetEnemies().push_back(buzzy);
         
-        FlyingGoomba* flyingGoomba = new FlyingGoomba(Vector2{800, 800});
-        flyingGoomba->SetSpeedMultiplier(speedMultiplier);
-        map.GetEnemies().push_back(flyingGoomba);
+        // FlyingGoomba* flyingGoomba = new FlyingGoomba(Vector2{800, 800});
+        // flyingGoomba->SetSpeedMultiplier(speedMultiplier);
+        // map.GetEnemies().push_back(flyingGoomba);
         
-        Goomba* goomba = new Goomba(Vector2{900, 800});
-        goomba->SetSpeedMultiplier(speedMultiplier);
-        map.GetEnemies().push_back(goomba);
+        // Goomba* goomba = new Goomba(Vector2{900, 800});
+        // goomba->SetSpeedMultiplier(speedMultiplier);
+        // map.GetEnemies().push_back(goomba);
         
-        GreenKoopa* greenKoopa = new GreenKoopa(Vector2{1000, 800});
-        greenKoopa->SetSpeedMultiplier(speedMultiplier);
-        map.GetEnemies().push_back(greenKoopa);
+        // GreenKoopa* greenKoopa = new GreenKoopa(Vector2{1000, 800});
+        // greenKoopa->SetSpeedMultiplier(speedMultiplier);
+        // map.GetEnemies().push_back(greenKoopa);
         
-        JumpingPiranhaPlant* piranha = new JumpingPiranhaPlant(Vector2{1100, 800});
-        piranha->SetSpeedMultiplier(speedMultiplier);
-        map.GetEnemies().push_back(piranha);
+        // JumpingPiranhaPlant* piranha = new JumpingPiranhaPlant(Vector2{1100, 800});
+        // piranha->SetSpeedMultiplier(speedMultiplier);
+        // map.GetEnemies().push_back(piranha);
         
-        RedKoopa* redKoopa = new RedKoopa(Vector2{1200, 800});
-        redKoopa->SetSpeedMultiplier(speedMultiplier);
-        map.GetEnemies().push_back(redKoopa);
+        // RedKoopa* redKoopa = new RedKoopa(Vector2{1200, 800});
+        // redKoopa->SetSpeedMultiplier(speedMultiplier);
+        // map.GetEnemies().push_back(redKoopa);
         
-        Rex* rex = new Rex(Vector2{1300, 800});
-        rex->SetSpeedMultiplier(speedMultiplier);
-        map.GetEnemies().push_back(rex);
+        // Rex* rex = new Rex(Vector2{1300, 800});
+        // rex->SetSpeedMultiplier(speedMultiplier);
+        // map.GetEnemies().push_back(rex);
         
-        YellowKoopa* yellowKoopa = new YellowKoopa(Vector2{1400, 800});
-        yellowKoopa->SetSpeedMultiplier(speedMultiplier);
-        map.GetEnemies().push_back(yellowKoopa);
+        // YellowKoopa* yellowKoopa = new YellowKoopa(Vector2{1400, 800});
+        // yellowKoopa->SetSpeedMultiplier(speedMultiplier);
+        // map.GetEnemies().push_back(yellowKoopa);
 
-        for (int i = 0; i < 20; i++) {
-            map.getBlocks().push_back(new WoodBlock(Vector2{0, float(600 + i * 32)}, Vector2{32, 32}, WHITE));
-        }
+        // for (int i = 0; i < 20; i++) {
+        //     map.getBlocks().push_back(new WoodBlock(Vector2{0, float(600 + i * 32)}, Vector2{32, 32}, WHITE));
+        // }
         
-        for (int i = 0; i < 20; i++) {
-            map.getBlocks().push_back(new WoodBlock(Vector2{1920, float(600 + i * 32)}, Vector2{32, 32}, WHITE));
-        }
+        // for (int i = 0; i < 20; i++) {
+        //     map.getBlocks().push_back(new WoodBlock(Vector2{1920, float(600 + i * 32)}, Vector2{32, 32}, WHITE));
+        // }
 
-        map.getBlocks().push_back(new CloudBlock(Vector2{100, 750}, Vector2{32, 32}, WHITE));
-        map.getBlocks().push_back(new EyesClosedBlock(Vector2{150, 750}, Vector2{32, 32}, WHITE));
-        map.getBlocks().push_back(new EyesOpenedBlock(Vector2{200, 750}, Vector2{32, 32}, WHITE));
-        map.getBlocks().push_back(new GlassBlock(Vector2{250, 750}, Vector2{32, 32}, WHITE));
-        map.getBlocks().push_back(new QuestionBlock(Vector2{300, 750}, Vector2{32, 32}, WHITE, GIFT_COIN));
-        map.getBlocks().push_back(new WoodBlock(Vector2{350, 750}, Vector2{32, 32}, WHITE));
+        // map.getBlocks().push_back(new CloudBlock(Vector2{100, 750}, Vector2{32, 32}, WHITE));
+        // map.getBlocks().push_back(new EyesClosedBlock(Vector2{150, 750}, Vector2{32, 32}, WHITE));
+        // map.getBlocks().push_back(new EyesOpenedBlock(Vector2{200, 750}, Vector2{32, 32}, WHITE));
+        // map.getBlocks().push_back(new GlassBlock(Vector2{250, 750}, Vector2{32, 32}, WHITE));
+        // map.getBlocks().push_back(new QuestionBlock(Vector2{300, 750}, Vector2{32, 32}, WHITE, GIFT_COIN));
+        // map.getBlocks().push_back(new WoodBlock(Vector2{350, 750}, Vector2{32, 32}, WHITE));
     }
     
     camera.offset = Vector2{(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
