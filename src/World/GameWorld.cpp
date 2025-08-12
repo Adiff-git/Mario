@@ -1,27 +1,27 @@
 #include "../inc/World/GameWorld.h"
-    #include "../inc/Item/Mushroom.h"
-    #include "../inc/Item/OneUpMushroom.h"
-    #include "../inc/Item/Star.h"
-    #include "../inc/Item/ThreeUpMoon.h"
-    #include "../inc/Character/Luigi.h"
-    #include "../inc/Item/YoshiCoin.h"
-    #include "../inc/Enemy/EnemyManager.h"
-    #include "../inc/World/MediatorCollision.h"
-    #include "../inc/Character/Mario.h"
-    #include "../inc/Block/CloudBlock.h"
-    #include "../inc/Block/EyesClosedBlock.h"
-    #include "../inc/Block/EyesOpenedBlock.h"
-    #include "../inc/Block/GlassBlock.h"
-    #include "../inc/Block/QuestionBlock.h"
-    #include "../inc/Block/WoodBlock.h"
-    #include "../inc/Character/Toad.h"
-    #include "../inc/Character/Peach.h"
-    #include "Boss.h"
-    #include "../inc/Item/ItemType.h"
-    #include "../inc/Block/BlockType.h"
-    #include "../inc/Enemy/EnemyType.h"
-    
-    GameWorld::GameWorld() : player1(nullptr), player2(nullptr), interactiveTiles(map.getInteractiveTiles())
+#include "../inc/Item/Mushroom.h"
+#include "../inc/Item/OneUpMushroom.h"
+#include "../inc/Item/Star.h"
+#include "../inc/Item/ThreeUpMoon.h"
+#include "../inc/Character/Luigi.h"
+#include "../inc/Item/YoshiCoin.h"
+#include "../inc/Enemy/EnemyManager.h"
+#include "../inc/World/MediatorCollision.h"
+#include "../inc/Character/Mario.h"
+#include "../inc/Block/CloudBlock.h"
+#include "../inc/Block/EyesClosedBlock.h"
+#include "../inc/Block/EyesOpenedBlock.h"
+#include "../inc/Block/GlassBlock.h"
+#include "../inc/Block/QuestionBlock.h"
+#include "../inc/Block/WoodBlock.h"
+#include "../inc/Character/Toad.h"
+#include "../inc/Character/Peach.h"
+#include "Boss.h"
+#include "../inc/Item/ItemType.h"
+#include "../inc/Block/BlockType.h"
+#include "../inc/Enemy/EnemyType.h"
+
+GameWorld::GameWorld() : player1(nullptr), player2(nullptr), interactiveTiles(map.getInteractiveTiles())
 {
     player1 = new Luigi(Vector2{100, 100}, 3, SMALL, ControlType::ARROWS);
     map.LoadMap(5);
@@ -49,7 +49,6 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
 {
     map.LoadMap(MapID);
     
-    // Initialize Player 1
     switch(p1Type) {
         case CharacterType::MARIO:
             player1 = new Mario(Vector2{100, 100}, 3, SMALL, ControlType::WASD);
@@ -65,24 +64,27 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
             break;
     }
     
-    // Initialize Player 2 if multiplayer
     if (multiplayer) {
-        if (p2Type == CharacterType::MARIO) {
-            player2 = new Mario(Vector2{150, 100}, 3, SMALL, ControlType::ARROWS);
-        } else {
-            player2 = new Luigi(Vector2{150, 100}, 3, SMALL, ControlType::ARROWS);
+        switch(p2Type) {
+            case CharacterType::MARIO:
+                player2 = new Mario(Vector2{150, 100}, 3, SMALL, ControlType::ARROWS);
+                break;
+            case CharacterType::LUIGI:
+                player2 = new Luigi(Vector2{150, 100}, 3, SMALL, ControlType::ARROWS);
+                break;
+            case CharacterType::TOAD:
+                player2 = new Toad(Vector2{150, 100}, 3, SMALL, ControlType::ARROWS);
+                break;
+            case CharacterType::PEACH:
+                player2 = new Peach(Vector2{150, 100}, 3, SMALL, ControlType::ARROWS);
+                break;
         }
     }
     
-    // Initialize Boss for MapID == 1
     if (MapID == 1) {
-        // Boss* boss = new Boss(Vector2{1200, 535}, player1->GetPosPtr(), player2 ? player2->GetPosPtr() : nullptr, multiplayer);
-        // map.GetEnemies().push_back(boss);
-        // map.SetMarioPositionForBosses(player1->GetPosPtr(), player2 ? player2->GetPosPtr() : nullptr, multiplayer);
     }
     
     
-    // Set background based on MapID
     switch (MapID)
     {
         case 0: background = ResrcManager::GetInstance().getTexture("BACKGROUND_0"); break;
@@ -97,45 +99,7 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
         case 9: background = ResrcManager::GetInstance().getTexture("BACKGROUND_9"); break;
     }
     
-    // Add items for MapID == 1
     if (MapID == 1) {
-        // map.GetInteractiveItems().push_back(std::make_shared<Coin>(Vector2{400, 800}));
-        // map.GetInteractiveItems().push_back(std::make_shared<FireFlower>(Vector2{450, 800}));
-        // map.GetInteractiveItems().push_back(std::make_shared<Star>(Vector2{600, 500}));
-        // map.GetInteractiveItems().push_back(std::make_shared<YoshiCoin>(Vector2{700, 800}));
-        // // map.GetInteractiveItems().push_back(std::make_shared<CourseClearToken>(Vector2{800, 800}));
-        // map.GetInteractiveItems().push_back(std::make_shared<Mushroom>(Vector2{200, 800}));
-        // map.GetInteractiveItems().push_back(std::make_shared<ThreeUpMoon>(Vector2{200, 500}));
-        // map.GetInteractiveItems().push_back(std::make_shared<OneUpMushroom>(Vector2{200, 800}));
-
-        // map.GetEnemies().push_back(new BanzaiBill(Vector2{500, 800}));
-        // map.GetEnemies().push_back(new BulletBill(Vector2{600, 800}));
-        // map.GetEnemies().push_back(new BuzzyBeetle(Vector2{700, 800}));
-        // map.GetEnemies().push_back(new FlyingGoomba(Vector2{800, 800}));
-        // map.GetEnemies().push_back(new Goomba(Vector2{900, 800}));
-        // map.GetEnemies().push_back(new GreenKoopa(Vector2{1000, 800}));
-        // map.GetEnemies().push_back(new JumpingPiranhaPlant(Vector2{1100, 800}));
-        // map.GetEnemies().push_back(new RedKoopa(Vector2{1200, 800}));
-        // map.GetEnemies().push_back(new Rex(Vector2{1300, 800}));
-        // map.GetEnemies().push_back(new YellowKoopa(Vector2{1400, 800}));
-
-        // for (int i = 0; i < 20; i++) {
-        //     map.getBlocks().push_back(new WoodBlock(Vector2{0, float(600 + i * 32)}, Vector2{32, 32}, WHITE));
-        // }
-        
-        // for (int i = 0; i < 20; i++) {
-        //     map.getBlocks().push_back(new WoodBlock(Vector2{1920, float(600 + i * 32)}, Vector2{32, 32}, WHITE));
-        // }
-
-        // map.getBlocks().push_back(new CloudBlock(Vector2{100, 750}, Vector2{32, 32}, WHITE));
-        // map.getBlocks().push_back(new EyesClosedBlock(Vector2{150, 750}, Vector2{32, 32}, WHITE));
-        // map.getBlocks().push_back(new EyesOpenedBlock(Vector2{200, 750}, Vector2{32, 32}, WHITE));
-        // map.getBlocks().push_back(new GlassBlock(Vector2{250, 750}, Vector2{32, 32}, WHITE));
-        // map.getBlocks().push_back(new QuestionBlock(Vector2{300, 750}, Vector2{32, 32}, WHITE, GIFT_COIN));
-        // map.getBlocks().push_back(new WoodBlock(Vector2{350, 750}, Vector2{32, 32}, WHITE));
-
-
-
     }
     
     camera.offset = Vector2{(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
@@ -158,30 +122,44 @@ GameWorld::GameWorld(int MapID, GameScreen* gameScreen, bool multiplayer,
 {
     map.LoadMap(MapID);
     
-    // Initialize Player 1
-    if (p1Type == CharacterType::MARIO) {
-        player1 = new Mario(Vector2{100, 100}, 3, SMALL, ControlType::WASD);
-    } else {
-        player1 = new Luigi(Vector2{100, 100}, 3, SMALL, ControlType::WASD);
+    switch(p1Type) {
+        case CharacterType::MARIO:
+            player1 = new Mario(Vector2{100, 100}, 3, SMALL, ControlType::WASD);
+            break;
+        case CharacterType::LUIGI:
+            player1 = new Luigi(Vector2{100, 100}, 3, SMALL, ControlType::WASD);
+            break;
+        case CharacterType::TOAD:
+            player1 = new Toad(Vector2{100, 100}, 3, SMALL, ControlType::WASD);
+            break;
+        case CharacterType::PEACH:
+            player1 = new Peach(Vector2{100, 100}, 3, SMALL, ControlType::WASD);
+            break;
     }
     
-    // Initialize Player 2 if multiplayer
     if (multiplayer) {
-        if (p2Type == CharacterType::MARIO) {
-            player2 = new Mario(Vector2{150, 100}, 3, SMALL, ControlType::ARROWS);
-        } else {
-            player2 = new Luigi(Vector2{150, 100}, 3, SMALL, ControlType::ARROWS);
+        switch(p2Type) {
+            case CharacterType::MARIO:
+                player2 = new Mario(Vector2{150, 100}, 3, SMALL, ControlType::ARROWS);
+                break;
+            case CharacterType::LUIGI:
+                player2 = new Luigi(Vector2{150, 100}, 3, SMALL, ControlType::ARROWS);
+                break;
+            case CharacterType::TOAD:
+                player2 = new Toad(Vector2{150, 100}, 3, SMALL, ControlType::ARROWS);
+                break;
+            case CharacterType::PEACH:
+                player2 = new Peach(Vector2{150, 100}, 3, SMALL, ControlType::ARROWS);
+                break;
         }
     }
     
-    // Initialize Boss for MapID == 1
     if (MapID == 1) {
         Boss* boss = new Boss(Vector2{1200, 535}, player1->GetPosPtr(), player2 ? player2->GetPosPtr() : nullptr, multiplayer);
         map.GetEnemies().push_back(boss);
         map.SetMarioPositionForBosses(player1->GetPosPtr(), player2 ? player2->GetPosPtr() : nullptr, multiplayer);
     }
     
-    // Set background based on MapID
     switch (MapID)
     {
         case 0: background = ResrcManager::GetInstance().getTexture("BACKGROUND_0"); break;
@@ -196,7 +174,6 @@ GameWorld::GameWorld(int MapID, GameScreen* gameScreen, bool multiplayer,
         case 9: background = ResrcManager::GetInstance().getTexture("BACKGROUND_9"); break;
     }
     
-    // Add items for MapID == 1
     if (MapID == 1) {
         // map.GetInteractiveItems().push_back(std::make_shared<Coin>(Vector2{400, 800}));
         // map.GetInteractiveItems().push_back(std::make_shared<FireFlower>(Vector2{450, 800}));
@@ -206,10 +183,16 @@ GameWorld::GameWorld(int MapID, GameScreen* gameScreen, bool multiplayer,
         // map.GetInteractiveItems().push_back(std::make_shared<ThreeUpMoon>(Vector2{200, 500}));
         // map.GetInteractiveItems().push_back(std::make_shared<OneUpMushroom>(Vector2{200, 800}));
 
+<<<<<<< HEAD
         // // Create enemies with speed multiplier applied
         // BanzaiBill* banzai = new BanzaiBill(Vector2{500, 800});
         // banzai->SetSpeedMultiplier(speedMultiplier);
         // map.GetEnemies().push_back(banzai);
+=======
+        BanzaiBill* banzai = new BanzaiBill(Vector2{500, 800});
+        banzai->SetSpeedMultiplier(speedMultiplier);
+        map.GetEnemies().push_back(banzai);
+>>>>>>> a9d01fea9b0fd490c782fdcf26b604a8227ec09f
         
         // BulletBill* bullet = new BulletBill(Vector2{600, 800});
         // bullet->SetSpeedMultiplier(speedMultiplier);
@@ -312,8 +295,6 @@ GameWorld::~GameWorld()
     }
 }
 
-
-
 void GameWorld::UpdateWorld()
 {
     RebuildSpatialIndex();
@@ -324,9 +305,6 @@ void GameWorld::UpdateWorld()
     std::vector<Tile*> activeTiles;
     CollectActiveEntities(activeBlocks, activeEnemies, activeItems, activeTiles);
 
-    // -------- Thay interactiveTiles / map collections bằng active* --------
-
-    // Update Player 1
     if (player1)
     {
         player1->UpdateStateAndPhysic();
@@ -338,19 +316,16 @@ void GameWorld::UpdateWorld()
         {
             if (player1->GetPos().y > 900) player1->Die();
 
-            // Tiles
             for (auto const &tile : activeTiles)
             {
                 if (player1->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
                     mediatorCollision.HandleCollision(player1, tile);
             }
-            // Items
             for (auto const &item : activeItems)
             {
                 if (item && player1->checkCollisionType(*item) != COLLISION_TYPE_NONE)
                     mediatorCollision.HandleCollision(player1, item.get());
             }
-            // Enemies
             for (Enemy *enemy : activeEnemies)
             {
                 if (enemy && enemy->GetState() != OBJECT_STATE_DEAD && enemy->GetState() != OBJECT_STATE_DYING &&
@@ -374,7 +349,6 @@ void GameWorld::UpdateWorld()
                     }
                 }
             }
-            // Blocks
             for (auto &block : activeBlocks)
             {
                 if (block)
@@ -400,7 +374,6 @@ void GameWorld::UpdateWorld()
             }
         }
 
-        // Player1 fireballs
         if (player1->GetFireballs())
         {
             for (auto &fireball : *player1->GetFireballs())
@@ -426,7 +399,6 @@ void GameWorld::UpdateWorld()
         }
     }
 
-    // Player 2 (multiplayer)
     if (isMultiplayer && player2)
     {
         player2->UpdateStateAndPhysic();
@@ -520,10 +492,8 @@ void GameWorld::UpdateWorld()
         }
     }
 
-    // Boss follow players
     map.SetMarioPositionForBosses(player1->GetPosPtr(), player2 ? player2->GetPosPtr() : nullptr, isMultiplayer);
 
-    // Enemy update (only active)
     for (Enemy *enemy : activeEnemies)
     {
         if (!enemy) continue;
@@ -545,7 +515,6 @@ void GameWorld::UpdateWorld()
             }
         }
     }
-    // Enemy vs Enemy collisions
     auto& enemies = map.GetEnemies();
     for (size_t i = 0; i < enemies.size(); ++i)
     {
@@ -565,7 +534,6 @@ void GameWorld::UpdateWorld()
         }
     }
 
-    // Item update (only active)
     for (auto &item : activeItems)
     {
         if (!item) continue;
@@ -577,15 +545,11 @@ void GameWorld::UpdateWorld()
         }
     }
 
-    // Blocks update (only active)
     for (auto &block : activeBlocks)
     {
         if (block) block->Update();
     }
 
-    
-
-    // Cleanup blocks
     auto &blocks = map.getBlocks();
     blocks.erase(
         std::remove_if(
@@ -595,14 +559,13 @@ void GameWorld::UpdateWorld()
             {
                 if (!block || block->GetState() == OBJECT_STATE_TO_BE_REMOVED)
                 {
-                    delete block; // Free memory
+                    delete block;
                     return true;
                 }
                 return false;
             }),
         blocks.end());
 
-    // Cleanup items
     auto &interactiveItems = map.GetInteractiveItems();
     interactiveItems.erase(
         std::remove_if(
@@ -614,7 +577,6 @@ void GameWorld::UpdateWorld()
             }),
         interactiveItems.end());
 
-    // Cleanup enemies - THÊM DELETE MEMORY
     map.GetEnemies().erase(
         std::remove_if(
             map.GetEnemies().begin(),
@@ -625,7 +587,6 @@ void GameWorld::UpdateWorld()
                 {
                     return true;
                 }
-                // Kiểm tra boss
                 if (Boss *boss = dynamic_cast<Boss *>(enemy))
                 {
                     if (boss->IsDead())
@@ -634,11 +595,9 @@ void GameWorld::UpdateWorld()
                         return true;
                     }
                 }
-                // Cập nhật dying state
                 enemy->UpdateDyingState();
                 enemy->UpdateDeathEffect();
 
-                // Chỉ xóa khi đã ở trạng thái DEAD
                 if (enemy->GetState() == OBJECT_STATE_DEAD || enemy->GetState() == OBJECT_STATE_TO_BE_REMOVED)
                 {
                     delete enemy;
@@ -648,7 +607,6 @@ void GameWorld::UpdateWorld()
             }),
         map.GetEnemies().end());
 
-    // Game state logic
     bool player1Dead = (player1 && player1->GetState() == OBJECT_STATE_DEAD);
     bool player2Dead = (isMultiplayer && player2 && player2->GetState() == OBJECT_STATE_DEAD);
 
@@ -764,7 +722,6 @@ void GameWorld::DrawWorld()
     EndMode2D();
 }
 
-
 bool GameWorld::IsCompleted()
 {
     return gameState == GameState::GAME_COMPLETED;
@@ -804,13 +761,11 @@ bool GameWorld::IsMultiplayer()
 {
     return isMultiplayer;
 }
-// ===========================================================================================================
+
 void GameWorld::CollectWorldData(GameSaveData& saveData) {
-    // Thu thập enemies từ map
     for (const auto& enemy : map.GetEnemies()) {
         if (enemy) {
             EnemySave enemyData;
-            // Determine enemy type
             if (dynamic_cast<Goomba*>(enemy)) {
                 enemyData.enemyType = static_cast<int>(EnemyType::GOOMBA);
             } else if (dynamic_cast<GreenKoopa*>(enemy)) {
@@ -834,7 +789,7 @@ void GameWorld::CollectWorldData(GameSaveData& saveData) {
             } else if (dynamic_cast<PiranhaPlant*>(enemy)) {
                 enemyData.enemyType = static_cast<int>(EnemyType::PIRANHAPLANT);
             } else if (dynamic_cast<Boss*>(enemy)) {
-                enemyData.enemyType = 99; // Special ID for Boss
+                enemyData.enemyType = 99;
             }
             
             enemyData.x = enemy->GetPos().x;
@@ -846,7 +801,6 @@ void GameWorld::CollectWorldData(GameSaveData& saveData) {
         }
     }
 
-    // Thu thập items
     for (const auto& item : map.GetInteractiveItems()) {
         if (item) {
             ItemSave itemData;
@@ -870,12 +824,10 @@ void GameWorld::CollectWorldData(GameSaveData& saveData) {
 
             itemData.x = item->GetPos().x;
             itemData.y = item->GetPos().y;
-            // itemData.isCollected = item->IsCollected();
             saveData.items.push_back(itemData);
         }
     }
 
-    // Thu thập blocks
     for (const auto& block : map.getBlocks()) {
         if (block) {
             BlockSave blockData;
@@ -900,7 +852,6 @@ void GameWorld::CollectWorldData(GameSaveData& saveData) {
         }
     }
 
-    // Thu thập tiles
     for (const auto& tile : map.getInteractiveTiles()) {
         if (tile) {
             TileSave tileData;
@@ -953,9 +904,8 @@ void GameWorld::ApplyLoadedData(const GameSaveData& saveData) {
             case EnemyType::PIRANHAPLANT:
                 enemy = new PiranhaPlant(Vector2{enemyData.x, enemyData.y});
                 break;
-            case EnemyType::BOSS: // Special ID for Boss
-                // Handle boss initialization here if needed
-                continue; // Skip boss for now
+            case EnemyType::BOSS:
+                continue;
         }
         if (enemy) {
             enemy->SetPos(Vector2{enemyData.x, enemyData.y});
@@ -993,7 +943,6 @@ void GameWorld::ApplyLoadedData(const GameSaveData& saveData) {
                 break;
         }
         if (item) {
-            // item->SetCollected(itemData.isCollected); // Assuming you have a method to set collected state
             map.GetInteractiveItems().push_back(item);
         }
     }
@@ -1021,19 +970,11 @@ void GameWorld::ApplyLoadedData(const GameSaveData& saveData) {
         }
         if (block) {
             if (block->GetBlockType() == BlockType::BLOCK_EYES_OPENED && !blockData.hasBeenHit) {
-                // block->setHit(false); // Assuming you have a method to set hit state
             }
             map.getBlocks().push_back(block);
         }
     }
 }
-
-// GameSaveData GameWorld::CreateSaveData() {
-//     GameSaveData saveData;
-//     CollectSaveData(saveData);
-//     return saveData;
-// }
-// ===========================================================================================================
 
 void GameWorld::InitializeSpatialIndex() {
     int mapW = map.GetWidth();
@@ -1062,14 +1003,12 @@ void GameWorld::InsertObjectToGrid(TObj* obj, FnPos getPosFn) {
     int cx = (int)(p.x) / CELL_SIZE;
     int cy = (int)(p.y) / CELL_SIZE;
     if (cx < 0 || cy < 0 || cx >= gridCols || cy >= gridRows) return;
-    // phân loại theo kiểu
     if constexpr (std::is_same_v<TObj, Block>)
         spatialGrid[cy][cx].blocks.push_back(static_cast<Block*>(obj));
     else if constexpr (std::is_same_v<TObj, Enemy>)
         spatialGrid[cy][cx].enemies.push_back(static_cast<Enemy*>(obj));
     else if constexpr (std::is_same_v<TObj, Tile>)
         spatialGrid[cy][cx].tiles.push_back(static_cast<Tile*>(obj));
-    // Item dùng shared_ptr -> xử lý riêng trong Rebuild
 }
 
 void GameWorld::RebuildSpatialIndex() {
@@ -1078,22 +1017,18 @@ void GameWorld::RebuildSpatialIndex() {
 
     ClearSpatialGrid();
 
-    // Tiles (interactiveTiles là static)
     for (auto* tile : interactiveTiles) {
         InsertObjectToGrid<Tile>(tile, [](Tile* t){ return t->GetPos(); });
     }
 
-    // Blocks
     for (auto* blk : map.getBlocks()) {
         InsertObjectToGrid<Block>(blk, [](Block* b){ return b->GetPos(); });
     }
 
-    // Enemies
     for (auto* e : map.GetEnemies()) {
         InsertObjectToGrid<Enemy>(e, [](Enemy* en){ return en->GetPos(); });
     }
 
-    // Items (shared_ptr)
     for (auto &it : map.GetInteractiveItems()) {
         if (!it) continue;
         Vector2 p = it->GetPos();
@@ -1126,7 +1061,6 @@ void GameWorld::CollectActiveEntities(std::vector<Block*>& outBlocks,
     int c1 = std::min(gridCols - 1, (int)floor(right / CELL_SIZE));
     int r1 = std::min(gridRows - 1, (int)floor(bottom / CELL_SIZE));
 
-    // Tránh duplicate (object có thể nằm trùng cell nếu to) – ở đây object point duy nhất -> bỏ qua set để nhẹ.
     for (int r = r0; r <= r1; ++r) {
         for (int c = c0; c <= c1; ++c) {
             auto &cell = spatialGrid[r][c];

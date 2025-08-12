@@ -4,9 +4,11 @@
 #include "CharacterSelectScreen.h"
 
 enum class MapType {
+    MAP_TUTORIAL,
     MAP_1,
     MAP_2,
     MAP_3,
+    MAP_BOSS,
     NONE
 };
 
@@ -20,9 +22,11 @@ enum class DifficultyLevel {
 class MapSelectScreen : public Screen {
 private:
     // Map selection buttons
+    Button mapTutorialButton;
     Button map1Button;
     Button map2Button;
     Button map3Button;
+    Button mapBossButton;
     
     // Difficulty buttons for each map
     Button easyButton1, mediumButton1, hardButton1;    // For Map 1

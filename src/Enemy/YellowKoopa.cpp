@@ -22,7 +22,6 @@ void YellowKoopa::EnterShell() {
         SetSize(Vector2{32, 32});
         textureIndex = 8;
         isMoving = false;
-        std::cout << "[DEBUG] YellowKoopa entered shell, state: " << state << ", vel.x: " << GetVel().x << ", hitCount: " << hitCount << ", isMoving: " << isMoving << std::endl;
     }
 }
 
@@ -33,7 +32,6 @@ void YellowKoopa::EnterShellWithVelocity(float velX) {
         SetSize(Vector2{32, 32});
         textureIndex = 8;
         isMoving = true;
-        std::cout << "[DEBUG] YellowKoopa shell moving, vel.x: " << GetVel().x << ", hitCount: " << hitCount << ", isMoving: " << isMoving << std::endl;
     }
 }
 
@@ -41,11 +39,9 @@ void YellowKoopa::OnHit(bool fromLeft) {
     hitCount++;
     if (hitCount == 1) {
         EnterShell();
-        std::cout << "[DEBUG] Hit 1: Pos (" << GetPos().x << ", " << GetPos().y << "), Size (" << GetSize().x << ", " << GetSize().y << ")" << std::endl;
     } else if (hitCount == 2) {
         float shellSpeed = -150.0f;
         EnterShellWithVelocity(fromLeft ? -shellSpeed : shellSpeed);
-        std::cout << "[DEBUG] Hit 2: Pos (" << GetPos().x << ", " << GetPos().y << "), Vel (" << GetVel().x << ", " << GetVel().y << ")" << std::endl;
     }
 }
 
@@ -68,12 +64,10 @@ void YellowKoopa::UpdateStateAndPhysic() {
                 std::string textureName = "SHELL_" + std::to_string(textureIndex);
                 sprite = &ResrcManager::GetInstance().getTexture(textureName);
                 updateCount = 0;
-                std::cout << "[DEBUG] Cập nhật texture shell thành: " << textureName << ", textureIndex: " << textureIndex << std::endl;
             }
 
             Vector2 newPos = Vector2{(double)(GetPos().x + GetVel().x * GameClock::GetInstance().FIXED_TIME_STEP), (double)(GetPos().y)};
             SetPos(newPos);
-            std::cout << "[DEBUG] Shell di chuyển, pos.x: " << newPos.x << ", vel.x: " << GetVel().x << ", isMoving: " << isMoving << std::endl;
         } else {
             // Texture tĩnh khi shell không di chuyển
             sprite = &ResrcManager::GetInstance().getTexture("SHELL_8");
@@ -87,7 +81,6 @@ void YellowKoopa::UpdateStateAndPhysic() {
         } else {
             SetVel(Vector2{GetVel().x, 0});
         }
-        std::cout << "[DEBUG] Cập nhật: state=" << state << ", pos.x=" << GetPos().x << ", vel.x=" << GetVel().x << ", vel.y=" << GetVel().y << ", hitCount=" << hitCount << ", isMoving=" << isMoving << std::endl;
         return;
     }
 
