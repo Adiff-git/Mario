@@ -183,16 +183,11 @@ GameWorld::GameWorld(int MapID, GameScreen* gameScreen, bool multiplayer,
         // map.GetInteractiveItems().push_back(std::make_shared<ThreeUpMoon>(Vector2{200, 500}));
         // map.GetInteractiveItems().push_back(std::make_shared<OneUpMushroom>(Vector2{200, 800}));
 
-<<<<<<< HEAD
         // // Create enemies with speed multiplier applied
         // BanzaiBill* banzai = new BanzaiBill(Vector2{500, 800});
         // banzai->SetSpeedMultiplier(speedMultiplier);
         // map.GetEnemies().push_back(banzai);
-=======
-        BanzaiBill* banzai = new BanzaiBill(Vector2{500, 800});
-        banzai->SetSpeedMultiplier(speedMultiplier);
-        map.GetEnemies().push_back(banzai);
->>>>>>> a9d01fea9b0fd490c782fdcf26b604a8227ec09f
+
         
         // BulletBill* bullet = new BulletBill(Vector2{600, 800});
         // bullet->SetSpeedMultiplier(speedMultiplier);
