@@ -120,6 +120,14 @@ GameScreen::GameScreen(ScreenController* screenController, bool multiplayer,
         case 3: levelMultiplier = 4.0f; break;   
         default: levelMultiplier = 1.0f; break;
     }
+
+    if (showWinScreen) {
+        if (IsKeyPressed(KEY_ENTER)) {
+            showWinScreen = false;
+            screenController->ChangeScreen(new MenuScreen(screenController));
+        }
+        return;
+    }
     
     // Combine both multipliers for dramatic effect
     float enemySpeedMultiplier = baseSpeedMultiplier * levelMultiplier;
@@ -128,13 +136,6 @@ GameScreen::GameScreen(ScreenController* screenController, bool multiplayer,
 
     // Initialize Player 1
     int initialLives = 3;
-    switch(difficulty) {
-        case DifficultyLevel::EASY: initialLives = 5; break;
-        case DifficultyLevel::MEDIUM: initialLives = 3; break;
-        case DifficultyLevel::HARD: initialLives = 1; break;
-        default: initialLives = 3; break;
-    }
-
     gameWorld->player1->SetLives(initialLives);
     gameWorld->player1->SetCoins(0);
     gameWorld->player1->SetScore(0);
@@ -374,6 +375,19 @@ void GameScreen::BeginTransition(TransitionState transitionState) {
 }
 
 void GameScreen::Draw() {
+    if (showWinScreen) {
+        Texture2D& winTex = ResrcManager::GetInstance().getTexture("WIN");
+        DrawTexturePro(
+            winTex,
+            { 0, 0, (float)winTex.width, (float)winTex.height },
+            { 0, 0, (float)GetScreenWidth(), (float)GetScreenHeight() },
+            { 0, 0 },
+            0.0f,
+            WHITE
+        );
+        DrawText("Press ENTER to return to menu", GetScreenWidth()/2-200, GetScreenHeight()-100, 32, BLACK);
+        return;
+    }
     gameWorld->DrawWorld();
     gameHUD->Draw();
     if (gameWorld->IsCompleted()) {

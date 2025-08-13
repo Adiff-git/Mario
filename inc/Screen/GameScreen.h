@@ -27,6 +27,7 @@ enum class TransitionState {
 };
 class GameScreen : public Screen {
     private:
+        bool showWinScreen = false;
 
 
         Button BackMenu;
