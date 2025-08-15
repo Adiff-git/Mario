@@ -10,8 +10,6 @@ Character::Character(Vector2 pos, int lives, ObjectState form, ControlType contr
       accelerationX(660.5f), 
       maxSpeedX(500.0f), 
       SpeedY(600.0f),
-      CharState(form), 
-      AdditionalState(SMALL),
       isDucking(false),
       blinking(false), 
       doBlink(false), 
@@ -22,6 +20,9 @@ Character::Character(Vector2 pos, int lives, ObjectState form, ControlType contr
       invincibleTimer(0.0f), // Thời gian còn lại của bất tử
       invincibleDuration(30.0f) // Thời gian bất tử 
       { // Removed direction initialization
+
+    state = OBJECT_STATE_ON_GROUND;
+    AdditionalState = form;
     inputHandler = std::make_unique<InputHandler>(this, controlType);
     sprite = &ResrcManager::GetInstance().getTexture("SMALLMARIO_0_RIGHT");
     if ( form == SMALL)
@@ -45,7 +46,9 @@ Character::Character(Vector2 pos, int lives, ObjectState form, ControlType contr
 
 }
 
-Character::Character() : lives(3), accelerationX(0), maxSpeedX(0), SpeedY(600), isDucking(false), CharState(SMALL), AdditionalState(SMALL) {
+Character::Character() : lives(3), accelerationX(0), maxSpeedX(0), SpeedY(600), isDucking(false) {
+    AdditionalState = SMALL;
+    state = OBJECT_STATE_ON_GROUND;
     coins = 0;
     score = 0;  
 }
@@ -79,12 +82,12 @@ int Character::GetLives() const
 
 ObjectState Character::GetMarioState() const
 {
-    return CharState;
+    return AdditionalState;
 }
 
 void Character::SetMarioState(ObjectState state)
 {
-    this->CharState = state;
+    this->AdditionalState = state;
     if (state == SMALL) {
         SetSize(Vector2{32, 40});
         sprite = &ResrcManager::GetInstance().getTexture("SMALLMARIO_0_RIGHT");
@@ -158,32 +161,7 @@ void Character::Duck()
 
 void Character::HandleInput()
 {
-    // const float deltaTime = GameClock::GetInstance().FIXED_TIME_STEP;
-
-    // if (IsKeyDown(KEY_RIGHT)) moveRight();
-    // else if(IsKeyDown(KEY_LEFT)) moveLeft();
-    // else stopMoving();
     
-    // if(state == OBJECT_STATE_ON_GROUND) {
-    //     if( IsKeyPressed(KEY_UP)) {
-    //         jump();
-    //     }
-    //     if (IsKeyPressed(KEY_DOWN) && CharState != SMALL) {
-    //         Duck();
-    //     } else isDucking = false; // Reset ducking state if not pressing down
-    // }
-    // if(IsKeyPressed(KEY_SPACE)){
-    //     changeToBig();
-    // }
-
-    // if(IsKeyPressed(KEY_F)){
-    //     changetoFire();
-    // }
-    // if (CharState == FIRE) {
-    //     if ( IsKeyPressed(KEY_Z)) {
-    //         fire();
-    //     }
-    // }
     if (inputHandler) {
         inputHandler->handleInput();
     }
@@ -200,7 +178,7 @@ void Character::Update() {
         return;
     }
 
-    switch(CharState) { // Corrected from MarioState to marioState
+    switch(AdditionalState) { // Corrected from MarioState to marioState
         case SMALL:
         {
             if(state == OBJECT_STATE_ON_GROUND) {
@@ -391,6 +369,7 @@ void Character::UpdateStateAndPhysic() {
         vel = Vector2{0, 0};
         return;
     }
+    
 
     
     if (isInvincible) {
@@ -411,7 +390,7 @@ void Character::UpdateStateAndPhysic() {
     }
     
     
-    switch(CharState) { // Corrected from MarioState to marioState
+    switch(AdditionalState) { // Corrected from MarioState to marioState
         case SMALL:
         {
             if (state == OBJECT_STATE_ON_GROUND) {
@@ -511,16 +490,16 @@ void Character::Draw() {
 
 
 void Character::changeToBig() {
-    if (CharState == SMALL) {
-        CharState = BIG;
+    if (AdditionalState == SMALL) {
+        AdditionalState = BIG;
         SetSize(Vector2{32, 56}); // Update size for BIG Mario
     }
     SoundManager::GetInstance().PlaySound("MARIO_POWERUP");
 }
 
 void Character::changeToSmall() {
-    if (CharState == BIG || CharState == FIRE) {
-        CharState = SMALL;
+    if (AdditionalState == BIG || AdditionalState == FIRE) {
+        AdditionalState = SMALL;
         SetSize(Vector2{32, 40});
         isInvincible = true;
         invincibleTimer = invincibleDuration;
@@ -532,8 +511,8 @@ void Character::changeToSmall() {
 }
 void Character::changetoFire()
 {
-    if (CharState == SMALL || CharState == BIG) {
-        CharState = FIRE;
+    if (AdditionalState == SMALL || AdditionalState == BIG) {
+        AdditionalState = FIRE;
         SetSize(Vector2{32, 56}); // Update size for FIRE Mario
         sprite = &ResrcManager::GetInstance().getTexture("FIRE_MARIO_0_RIGHT");
     }
@@ -557,6 +536,7 @@ void Character::UpdateCollisionProbes() {
 void Character::fire() {
     fireballs.push_back(new Fireball(pos, direction));
     SoundManager::GetInstance().PlaySound("MARIO_FIREBALL");
+    firingAnimTimer = 0.15;
 }
 
 void Character::setInvincible(bool value) {
@@ -608,7 +588,7 @@ void Character::NotifyCoinChange() {
 void Character::BeHit() {
     SoundManager::GetInstance().PlaySound("MARIO_BEING_HIT");
     if (!isInvincible) {
-        if (CharState == BIG || CharState == FIRE) {
+        if (AdditionalState == BIG || AdditionalState == FIRE) {
             changeToSmall();
             
         } else {
@@ -648,7 +628,7 @@ void Character::Victory()
 //     s.lives = lives;
 //     s.coins = coins;
 //     s.score = score;
-//     s.playerState = CharState;
+//     s.playerState = AdditionalState;
 //     s.AdditionalState = AdditionalState;
 //     return s;
 // }

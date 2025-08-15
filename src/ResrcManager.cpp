@@ -71,6 +71,9 @@ void ResrcManager::loadTextures() {
         textures["FIRE_MARIO_DUCKING_0_LEFT"] = FlipTextureHorizontal(textures["FIRE_MARIO_DUCKING_0_RIGHT"]);
         textures["FIRE_MARIO_VICTORY"] = LoadTexture("resources/images/Object/mario/FireMarioVictory.png");
 
+        textures["FIRE_MARIO_FIRING_0_RIGHT"] = LoadTexture("resources/images/Object/mario/FireMarioFiring_0.png");
+        textures["FIRE_MARIO_FIRING_0_LEFT"] = FlipTextureHorizontal(textures["FIRE_MARIO_FIRING_0_RIGHT"]);
+
         {
         textures["FIRE_BALL_0_RIGHT"] = LoadTexture("resources/images/Object/mario/FlowerMarioFireball_0.png");
         textures["FIRE_BALL_1_RIGHT"] = LoadTexture("resources/images/Object/mario/FlowerMarioFireball_1.png");
@@ -142,6 +145,9 @@ void ResrcManager::loadTextures() {
         textures["FIRE_LUIGI_DUCKING_0_RIGHT"] = LoadTexture("resources/images/Object/luigi/FlowerLuigi_Ducking_0.png");
         textures["FIRE_LUIGI_DUCKING_0_LEFT"] = FlipTextureHorizontal(textures["FIRE_LUIGI_DUCKING_0_RIGHT"]);
         textures["FIRE_LUIGI_VICTORY"] = LoadTexture("resources/images/Object/luigi/FlowerLuigiVictory.png");
+
+        textures["FIRE_LUIGI_FIRING_0_RIGHT"] = LoadTexture("resources/images/Object/luigi/FireLuigiFiring_0.png");
+        textures["FIRE_LUIGI_FIRING_0_LEFT"] = FlipTextureHorizontal(textures["FIRE_LUIGI_FIRING_0_RIGHT"]);
     }
     
     // PEACH TEXTURES
@@ -324,6 +330,9 @@ void ResrcManager::loadTextures() {
 
         textures["FIRE_PEACH_VICTORY"] = LoadTexture("resources/images/Object/peach/FirePeachVictory_0.png");
 
+        textures["FIRE_PEACH_FIRING_0_RIGHT"] = LoadTexture("resources/images/Object/peach/FirePeachFiring_0.png");
+        textures["FIRE_PEACH_FIRING_0_LEFT"] = FlipTextureHorizontal(textures["FIRE_PEACH_FIRING_0_RIGHT"]);
+
 
     }
 
@@ -504,6 +513,9 @@ void ResrcManager::loadTextures() {
 
 
         textures["FIRE_TOAD_VICTORY"] = LoadTexture("resources/images/Object/toad/FireToadVictory_0.png");
+
+        textures["FIRE_TOAD_FIRING_0_RIGHT"] = LoadTexture("resources/images/Object/toad/FireToadFiring_0.png");
+        textures["FIRE_TOAD_FIRING_0_LEFT"] = FlipTextureHorizontal(textures["FIRE_TOAD_FIRING_0_RIGHT"]);
 
 
     }

@@ -13,7 +13,7 @@ void Luigi::Update() {
         return;
     }
 
-    switch(CharState) { // Corrected from LUIGIState to LUIGIState
+    switch(AdditionalState) { // Corrected from LUIGIState to LUIGIState
         case SMALL:
         {
             if(state == OBJECT_STATE_ON_GROUND) {
@@ -174,6 +174,7 @@ void Luigi::Update() {
             if (state == OBJECT_STATE_VICTORY) {
                 sprite = &ResrcManager::GetInstance().getTexture("FIRE_LUIGI_VICTORY");
             }
+            
             break;
         }
     }

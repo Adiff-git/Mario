@@ -36,8 +36,10 @@ protected:
     float blinkingTime;
     float blinkingAcumTotal;
 
-    ObjectState CharState;
-    ObjectState AdditionalState;
+    float firingAnimTimer = 0;
+
+    // ObjectState AdditionalState;
+    // ObjectState AdditionalState;
 
     
     std::list<Fireball *> fireballs;

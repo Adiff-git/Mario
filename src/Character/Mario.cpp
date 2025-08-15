@@ -13,7 +13,7 @@ void Mario::Update() {
         return;
     }
 
-    switch(CharState) { // Corrected from MarioState to marioState
+    switch(AdditionalState) { // Corrected from MarioState to marioState
         case SMALL:
         {
             if(state == OBJECT_STATE_ON_GROUND) {
@@ -174,6 +174,7 @@ void Mario::Update() {
             if (state == OBJECT_STATE_VICTORY) {
                 sprite = &ResrcManager::GetInstance().getTexture("FIRE_MARIO_VICTORY");
             }
+            
             break;
         }
     }

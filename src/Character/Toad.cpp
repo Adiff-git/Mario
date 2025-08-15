@@ -13,7 +13,7 @@ void Toad::Update() {
         return;
     }
 
-    switch(CharState) { // Corrected from TOADState to TOADState
+    switch(AdditionalState) { // Corrected from TOADState to TOADState
         case SMALL:
         {
             if(state == OBJECT_STATE_ON_GROUND) {

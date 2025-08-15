@@ -13,7 +13,7 @@ void Peach::Update() {
         return;
     }
 
-    switch(CharState) { // Corrected from PEACHState to PEACHState
+    switch(AdditionalState) { // Corrected from PEACHState to PEACHState
         case SMALL:
         {
             if(state == OBJECT_STATE_ON_GROUND) {
