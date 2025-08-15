@@ -552,6 +552,7 @@ void ResrcManager::loadTextures() {
     textures["AUDIO SETTING"] = LoadTexture("resources/images/Button/AUDIO SETTING.png");
     textures["TOAD_BUTTON"] = LoadTexture("resources/images/toad/SmallToad_0.png");
     textures["PEACH_BUTTON"] = LoadTexture("resources/images/peach/SmallPeach_0.png");
+    textures["SAVE MAP"] = LoadTexture("resources/images/Button/SaveMap.png");
 
     textures["LEVEL 1"] = LoadTexture("resources/images/Button/LEVEL 1.png");
     textures["LEVEL 2"] = LoadTexture("resources/images/Button/LEVEL 2.png");
