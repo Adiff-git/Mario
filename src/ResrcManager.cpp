@@ -562,8 +562,9 @@ void ResrcManager::loadTextures() {
     textures["MUTE ALL OFF"] = LoadTexture("resources/images/Button/MUTE ALL OFF.png");
     textures["TUTORIALS"] = LoadTexture("resources/images/Button/TUTORIALS.png");
     textures["AUDIO SETTING"] = LoadTexture("resources/images/Button/AUDIO SETTING.png");
-    textures["TOAD_BUTTON"] = LoadTexture("resources/images/toad/SmallToad_0.png");
-    textures["PEACH_BUTTON"] = LoadTexture("resources/images/peach/SmallPeach_0.png");
+    textures["TOAD_BUTTON"] = LoadTexture("resources/images/Button/Toad.png");
+    textures["PEACH_BUTTON"] = LoadTexture("resources/images/Button/Peach.png");
+    textures["SAVE MAP"] = LoadTexture("resources/images/Button/SaveMap.png");
 
     textures["LEVEL 1"] = LoadTexture("resources/images/Button/LEVEL 1.png");
     textures["LEVEL 2"] = LoadTexture("resources/images/Button/LEVEL 2.png");
@@ -668,8 +669,8 @@ void ResrcManager::loadTextures() {
         textures["Bob-omb_Left_1"]= FlipTextureHorizontal(textures["Bob-omb_Right_1"]);
         textures["Bob-omb_Explosion"] = LoadTexture("resources/images/Object/Enemy/BobOmbExplosion_0.png");
 
-        textures["BANZAIBILL"]= LoadTexture("resources/images/Object/Enemy/BanzaiBill_0.png");
-
+        textures["BANZAIBILL_0"]= LoadTexture("resources/images/Object/Enemy/BanzaiBill_0.png");
+        textures["BANZAIBILL"] = FlipTextureHorizontal(textures["BANZAIBILL_0"]);
         textures["REX_0_RIGHT"] = LoadTexture("resources/images/Object/Enemy/Rex_2_0.png");
         textures["REX_1_RIGHT"] = LoadTexture("resources/images/Object/Enemy/Rex_2_1.png");
         textures["REX_0_LEFT"] = FlipTextureHorizontal(textures["REX_0_RIGHT"]);

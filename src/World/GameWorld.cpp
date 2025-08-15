@@ -172,9 +172,9 @@ GameWorld::GameWorld(int MapID, GameScreen* gameScreen, bool multiplayer,
     {
         case 0: background = ResrcManager::GetInstance().getTexture("BACKGROUND_0"); break;
         case 1: background = ResrcManager::GetInstance().getTexture("BACKGROUND_1"); break;
-        case 2: background = ResrcManager::GetInstance().getTexture("BACKGROUND_2"); break;
-        case 3: background = ResrcManager::GetInstance().getTexture("BACKGROUND_3"); break;
-        case 4: background = ResrcManager::GetInstance().getTexture("BACKGROUND_4"); break;
+        case 2: background = ResrcManager::GetInstance().getTexture("BACKGROUND_6"); break;
+        case 3: background = ResrcManager::GetInstance().getTexture("BACKGROUND_9"); break;
+        case 4: background = ResrcManager::GetInstance().getTexture("BACKGROUND_8"); break;
         case 5: background = ResrcManager::GetInstance().getTexture("BACKGROUND_5"); break;
         case 6: background = ResrcManager::GetInstance().getTexture("BACKGROUND_6"); break;
         case 7: background = ResrcManager::GetInstance().getTexture("BACKGROUND_7"); break;

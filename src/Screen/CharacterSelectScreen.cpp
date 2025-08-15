@@ -340,39 +340,83 @@ void CharacterSelectScreen::Draw() {
     
     // Draw hover effects with character names
     if (marioHovered) {
-        const char* marioText = "MARIO";
-        Vector2 marioSize = MeasureTextEx(*pixelFont, marioText, 20, 1);
-        DrawRectangle((float)GetScreenWidth()/2 - 417.5f + 75 - marioSize.x/2 - 10, (float)GetScreenHeight()/2 + 120, marioSize.x + 20, 30, Fade(BLACK, 0.8f));
-        DrawTextEx(*pixelFont, marioText, 
-                   Vector2{(float)GetScreenWidth()/2 - 417.5f + 75 - marioSize.x/2, (float)GetScreenHeight()/2 + 125}, 
-                   20, 1, YELLOW);
+        const char* marioText = "Mario";
+        const char* jumpStat = "Jump: normal";
+        const char* speedStat = "Speed: normal";
+        Vector2 marioSize = MeasureTextEx(*pixelFont, marioText, 22, 2);
+        float jumpWidth = (float)MeasureTextEx(*pixelFont, jumpStat, 16, 1).x;
+        float speedWidth = (float)MeasureTextEx(*pixelFont, speedStat, 16, 1).x;
+        float boxWidth = marioSize.x;
+        if (jumpWidth > boxWidth) boxWidth = jumpWidth;
+        if (speedWidth > boxWidth) boxWidth = speedWidth;
+        boxWidth += 32;
+        float boxHeight = 80;
+        float boxX = (float)GetScreenWidth()/2 - 417.5f + 75 - boxWidth/2;
+        float boxY = (float)GetScreenHeight()/2 + 120;
+        DrawRectangleRounded((Rectangle){boxX, boxY, boxWidth, boxHeight}, 0.25f, 12, Fade(BLACK, 0.85f));
+        DrawTextEx(*pixelFont, marioText, Vector2{boxX + 16, boxY + 10}, 22, 2, RED);
+        DrawTextEx(*pixelFont, jumpStat, Vector2{boxX + 16, boxY + 36}, 16, 1, WHITE);
+        DrawTextEx(*pixelFont, speedStat, Vector2{boxX + 16, boxY + 56}, 16, 1, WHITE);
     }
-    
+
     if (luigiHovered) {
-        const char* luigiText = "LUIGI";
-        Vector2 luigiSize = MeasureTextEx(*pixelFont, luigiText, 20, 1);
-        DrawRectangle((float)GetScreenWidth()/2 - 192.5f + 75 - luigiSize.x/2 - 10, (float)GetScreenHeight()/2 + 120, luigiSize.x + 20, 30, Fade(BLACK, 0.8f));
-        DrawTextEx(*pixelFont, luigiText, 
-                   Vector2{(float)GetScreenWidth()/2 - 192.5f + 75 - luigiSize.x/2, (float)GetScreenHeight()/2 + 125}, 
-                   20, 1, YELLOW);
+        const char* luigiText = "Luigi";
+        const char* jumpStat = "Jump: high";
+        const char* speedStat = "Speed: slow";
+        Vector2 luigiSize = MeasureTextEx(*pixelFont, luigiText, 22, 2);
+        float jumpWidth = (float)MeasureTextEx(*pixelFont, jumpStat, 16, 1).x;
+        float speedWidth = (float)MeasureTextEx(*pixelFont, speedStat, 16, 1).x;
+        float boxWidth = luigiSize.x;
+        if (jumpWidth > boxWidth) boxWidth = jumpWidth;
+        if (speedWidth > boxWidth) boxWidth = speedWidth;
+        boxWidth += 32;
+        float boxHeight = 80;
+        float boxX = (float)GetScreenWidth()/2 - 192.5f + 75 - boxWidth/2;
+        float boxY = (float)GetScreenHeight()/2 + 120;
+        DrawRectangleRounded((Rectangle){boxX, boxY, boxWidth, boxHeight}, 0.25f, 12, Fade(BLACK, 0.85f));
+        DrawTextEx(*pixelFont, luigiText, Vector2{boxX + 16, boxY + 10}, 22, 2, GREEN);
+        DrawTextEx(*pixelFont, jumpStat, Vector2{boxX + 16, boxY + 36}, 16, 1, WHITE);
+        DrawTextEx(*pixelFont, speedStat, Vector2{boxX + 16, boxY + 56}, 16, 1, WHITE);
     }
-    
+
     if (toadHovered) {
-        const char* toadText = "TOAD";
-        Vector2 toadSize = MeasureTextEx(*pixelFont, toadText, 20, 1);
-        DrawRectangle((float)GetScreenWidth()/2 + 32.5f + 75 - toadSize.x/2 - 10, (float)GetScreenHeight()/2 + 120, toadSize.x + 20, 30, Fade(BLACK, 0.8f));
-        DrawTextEx(*pixelFont, toadText, 
-                   Vector2{(float)GetScreenWidth()/2 + 32.5f + 75 - toadSize.x/2, (float)GetScreenHeight()/2 + 125}, 
-                   20, 1, YELLOW);
+        const char* toadText = "Toad";
+        const char* jumpStat = "Jump: high";
+        const char* speedStat = "Speed: fast";
+        Vector2 toadSize = MeasureTextEx(*pixelFont, toadText, 22, 2);
+        float jumpWidth = (float)MeasureTextEx(*pixelFont, jumpStat, 16, 1).x;
+        float speedWidth = (float)MeasureTextEx(*pixelFont, speedStat, 16, 1).x;
+        float boxWidth = toadSize.x;
+        if (jumpWidth > boxWidth) boxWidth = jumpWidth;
+        if (speedWidth > boxWidth) boxWidth = speedWidth;
+        boxWidth += 32;
+        float boxHeight = 80;
+        float boxX = (float)GetScreenWidth()/2 + 32.5f + 75 - boxWidth/2;
+        float boxY = (float)GetScreenHeight()/2 + 120;
+        DrawRectangleRounded((Rectangle){boxX, boxY, boxWidth, boxHeight}, 0.25f, 12, Fade(BLACK, 0.85f));
+        DrawTextEx(*pixelFont, toadText, Vector2{boxX + 16, boxY + 10}, 22, 2, BLUE);
+        DrawTextEx(*pixelFont, jumpStat, Vector2{boxX + 16, boxY + 36}, 16, 1, WHITE);
+        DrawTextEx(*pixelFont, speedStat, Vector2{boxX + 16, boxY + 56}, 16, 1, WHITE);
     }
-    
+
     if (peachHovered) {
-        const char* peachText = "PEACH";
-        Vector2 peachSize = MeasureTextEx(*pixelFont, peachText, 20, 1);
-        DrawRectangle((float)GetScreenWidth()/2 + 257.5f + 75 - peachSize.x/2 - 10, (float)GetScreenHeight()/2 + 120, peachSize.x + 20, 30, Fade(BLACK, 0.8f));
-        DrawTextEx(*pixelFont, peachText, 
-                   Vector2{(float)GetScreenWidth()/2 + 257.5f + 75 - peachSize.x/2, (float)GetScreenHeight()/2 + 125}, 
-                   20, 1, YELLOW);
+        const char* peachText = "Peach";
+        const char* jumpStat = "Jump: low";
+        const char* speedStat = "Speed: fast";
+        Vector2 peachSize = MeasureTextEx(*pixelFont, peachText, 22, 2);
+        float jumpWidth = (float)MeasureTextEx(*pixelFont, jumpStat, 16, 1).x;
+        float speedWidth = (float)MeasureTextEx(*pixelFont, speedStat, 16, 1).x;
+        float boxWidth = peachSize.x;
+        if (jumpWidth > boxWidth) boxWidth = jumpWidth;
+        if (speedWidth > boxWidth) boxWidth = speedWidth;
+        boxWidth += 32;
+        float boxHeight = 80;
+        float boxX = (float)GetScreenWidth()/2 + 257.5f + 75 - boxWidth/2;
+        float boxY = (float)GetScreenHeight()/2 + 120;
+        DrawRectangleRounded((Rectangle){boxX, boxY, boxWidth, boxHeight}, 0.25f, 12, Fade(BLACK, 0.85f));
+        DrawTextEx(*pixelFont, peachText, Vector2{boxX + 16, boxY + 10}, 22, 2, PINK);
+        DrawTextEx(*pixelFont, jumpStat, Vector2{boxX + 16, boxY + 36}, 16, 1, WHITE);
+        DrawTextEx(*pixelFont, speedStat, Vector2{boxX + 16, boxY + 56}, 16, 1, WHITE);
     }
     
     // Draw selection indicators

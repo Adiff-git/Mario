@@ -43,7 +43,6 @@ private:
     Vector2 mouseWorldPos;
     Button backToMenuButton2;
     Button backToMenuButton;
-    Button newMapButton;
     Button loadMapButton;
     Button saveMapButton;
     Texture2D* backgroundTexture;

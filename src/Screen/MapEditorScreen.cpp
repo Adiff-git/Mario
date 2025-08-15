@@ -12,11 +12,10 @@ MapEditorScreen::MapEditorScreen(ScreenController *screenController)
       // selectedTileId(105),
       // showSaveDialog(false),
       // showLoadDialog(false),
-      backToMenuButton2(Vector2{1300, 830}, Vector2{122, 50}),
-      backToMenuButton(Vector2{30, 30}, Vector2{122, 50}),
-      newMapButton(Vector2{200, 30}, Vector2{198, 50}),
-      loadMapButton(Vector2{450, 30}, Vector2{211, 50}),
-      saveMapButton(Vector2{1450, 830}, Vector2{130, 50}),
+      backToMenuButton2(Vector2{1350, 800}, Vector2{90, 90}),
+      backToMenuButton(Vector2{30, 30}, Vector2{90, 90}),
+      loadMapButton(Vector2{30 + 90 + 20, 30}, Vector2{225, 90}),
+    saveMapButton(Vector2{1450, 800}, Vector2{90, 90}),
       currentMode(EditorMode::TILE_MODE),
       selectedTileId(105),
       showLoadDialog(false),
@@ -33,11 +32,12 @@ MapEditorScreen::MapEditorScreen(ScreenController *screenController)
     LoadAvailableMaps();
     InitializeTilesets();
     strcpy(mapNameBuffer, "new_map");
-    backgroundTexture = &ResrcManager::GetInstance().getTexture("MENU_BACKGROUND");
+    backgroundTexture = &ResrcManager::GetInstance().getTexture("BACKGROUND_10");
     backToMenuButton.SetTexture(ResrcManager::GetInstance().getTexture("BACK_BUTTON"));
-    newMapButton.SetTexture(ResrcManager::GetInstance().getTexture("NEW_MAP_BUTTON"));
+    // newMapButton.SetTexture(ResrcManager::GetInstance().getTexture("NEW_MAP_BUTTON"));
     loadMapButton.SetTexture(ResrcManager::GetInstance().getTexture("LOAD_MAP_BUTTON"));
     backToMenuButton2.SetTexture(ResrcManager::GetInstance().getTexture("BACK_BUTTON"));
+    saveMapButton.SetTexture(ResrcManager::GetInstance().getTexture("SAVE MAP"));
 }
 
 MapEditorScreen::~MapEditorScreen() = default;
@@ -254,7 +254,6 @@ void MapEditorScreen::InitializeTilesets()
 void MapEditorScreen::Update()
 {
     backToMenuButton.Update();
-    newMapButton.Update();
     loadMapButton.Update();
     saveMapButton.Update();
 
@@ -271,29 +270,22 @@ void MapEditorScreen::Update()
     if (editorActive)
     {
         HandleMapInput();
+        if (saveMapButton.IsPressed()) {
+            std::cout << "Save Map button pressed!" << std::endl;
+            SaveMap(mapNameBuffer);
+            showSaveDialog = true;
+            strcpy(mapNameBuffer, "new_map");
+        }
     }
     if (backToMenuButton.IsPressed() || backToMenuButton2.IsPressed())
     {
         screenController->ChangeScreen(new MenuScreen(screenController));
-    }
-    else if (newMapButton.IsPressed())
-    {
-        std::cout << "New Map button pressed!" << std::endl;
-        // Logic to create a new map
-        // currentMap->LoadMap(0); // Load the first map or create a new one
     }
     else if (loadMapButton.IsPressed())
     {
         std::cout << "Load Map button pressed!" << std::endl;
         showLoadDialog = true;
         selectedMapIndex = -1;
-    }
-    else if (saveMapButton.IsPressed())
-    {
-        std::cout << "Save Map button pressed!" << std::endl;
-        SaveMap(mapNameBuffer);
-        showSaveDialog = true;
-        strcpy(mapNameBuffer, "new_map");
     }
 };
 
@@ -500,12 +492,13 @@ void MapEditorScreen::SaveMap(const std::string &mapName)
 // Helper functions to get tile IDs
 int MapEditorScreen::GetBlockTileId(Block *block)
 {
-    if (dynamic_cast<QuestionBlock *>(block)){
-        if(dynamic_cast<QuestionBlock *>(block)->GetGiftType() == GIFT_COIN)
+    if (dynamic_cast<QuestionBlock *>(block))
+    {
+        if (dynamic_cast<QuestionBlock *>(block)->GetGiftType() == GIFT_COIN)
             return 117; // Coin block
-        if(dynamic_cast<QuestionBlock *>(block)->GetGiftType() == GIFT_FIRE_FLOWER)
+        if (dynamic_cast<QuestionBlock *>(block)->GetGiftType() == GIFT_FIRE_FLOWER)
             return 118; // Fire flower block
-        return 116; // Default question block
+        return 116;     // Default question block
     }
     else if (dynamic_cast<WoodBlock *>(block))
         return 121;
@@ -528,7 +521,7 @@ int MapEditorScreen::GetEnemyTileId(Enemy *enemy)
         return 127;
     else if (dynamic_cast<GreenKoopa *>(enemy))
         return 128;
-    else if(dynamic_cast<JumpingPiranhaPlant *>(enemy))
+    else if (dynamic_cast<JumpingPiranhaPlant *>(enemy))
         return 129;
     else if (dynamic_cast<RedKoopa *>(enemy))
         return 134;
@@ -546,7 +539,7 @@ int MapEditorScreen::GetEnemyTileId(Enemy *enemy)
         return 133;
     else if (dynamic_cast<YellowKoopa *>(enemy))
         return 137;
-    else if(dynamic_cast<BanzaiBill *>(enemy))
+    else if (dynamic_cast<BanzaiBill *>(enemy))
         return 145;
     return 0;
 }
@@ -568,7 +561,7 @@ int MapEditorScreen::GetItemTileId(Item *item)
         return 139;
     else if (dynamic_cast<YoshiCoin *>(item))
         return 144;
-    else if( dynamic_cast<CourseClearToken *>(item))
+    else if (dynamic_cast<CourseClearToken *>(item))
         return 146;
     return 0;
 }
@@ -775,7 +768,7 @@ void MapEditorScreen::RemoveObjectAt(int tileX, int tileY, EditorMode mode)
         for (auto it = enemies.begin(); it != enemies.end(); ++it)
         {
             if (*it && fabs((*it)->GetPos().x - worldPos.x) < TOLERANCE &&
-                fabs((*it)->GetPos().y - worldPos.y ) < TOLERANCE)
+                fabs((*it)->GetPos().y - worldPos.y) < TOLERANCE)
             {
                 delete *it;
                 enemies.erase(it);
@@ -826,8 +819,8 @@ bool MapEditorScreen::IsMouseInMainViewport() const
 }
 
 // Factory functions để tạo objects
-Block* MapEditorScreen::CreateBlockByType(int tileId, Vector2 position)
-{   
+Block *MapEditorScreen::CreateBlockByType(int tileId, Vector2 position)
+{
     switch (tileId)
     {
     case 105:
@@ -846,7 +839,7 @@ Block* MapEditorScreen::CreateBlockByType(int tileId, Vector2 position)
         return new QuestionBlock(position, {32, 32}, WHITE, GIFT_NONE);
         break;
     case 117:
-        return  new QuestionBlock(position, {32, 32}, WHITE, GIFT_COIN);
+        return new QuestionBlock(position, {32, 32}, WHITE, GIFT_COIN);
         break;
     case 118:
         return new QuestionBlock(position, {32, 32}, WHITE, GIFT_FIRE_FLOWER);
@@ -883,7 +876,7 @@ Enemy *MapEditorScreen::CreateEnemyByType(int tileId, Vector2 position)
         return new Rex(position);
     case 133:
         return new PiranhaPlant(position);
-    case 137 :
+    case 137:
         return new YellowKoopa(position);
     case 145:
         return new BanzaiBill(position);
@@ -993,9 +986,10 @@ void MapEditorScreen::Draw()
     {
         DrawTexturePro(*backgroundTexture, Rectangle{0, 0, (float)backgroundTexture->width, (float)backgroundTexture->height},
                        Rectangle{0, 0, 1600, 900}, Vector2{0, 0}, 0.0f, WHITE);
+        DrawRectangle(0, 0, 1600, 900, Fade(BLACK, 0.3f)); 
         backToMenuButton.Draw();
-        newMapButton.Draw();
         loadMapButton.Draw();
+
         if (showLoadDialog)
             DrawLoadDialog();
     }
@@ -1472,4 +1466,3 @@ void MapEditorScreen::HandleUIEvents()
         }
     }
 }
-
