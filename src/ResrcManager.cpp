@@ -656,8 +656,8 @@ void ResrcManager::loadTextures() {
         textures["Bob-omb_Left_1"]= FlipTextureHorizontal(textures["Bob-omb_Right_1"]);
         textures["Bob-omb_Explosion"] = LoadTexture("resources/images/Object/Enemy/BobOmbExplosion_0.png");
 
-        textures["BANZAIBILL"]= LoadTexture("resources/images/Object/Enemy/BanzaiBill_0.png");
-
+        textures["BANZAIBILL_0"]= LoadTexture("resources/images/Object/Enemy/BanzaiBill_0.png");
+        textures["BANZAIBILL"] = FlipTextureHorizontal(textures["BANZAIBILL_0"]);
         textures["REX_0_RIGHT"] = LoadTexture("resources/images/Object/Enemy/Rex_2_0.png");
         textures["REX_1_RIGHT"] = LoadTexture("resources/images/Object/Enemy/Rex_2_1.png");
         textures["REX_0_LEFT"] = FlipTextureHorizontal(textures["REX_0_RIGHT"]);
