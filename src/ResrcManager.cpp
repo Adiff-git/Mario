@@ -569,8 +569,11 @@ void ResrcManager::loadTextures() {
     textures["LEVEL 1"] = LoadTexture("resources/images/Button/LEVEL 1.png");
     textures["LEVEL 2"] = LoadTexture("resources/images/Button/LEVEL 2.png");
     textures["LEVEL 3"] = LoadTexture("resources/images/Button/LEVEL 3.png");
-
-
+    textures["MAP_1"] = LoadTexture("resources/images/Button/MAP1.png");
+    textures["MAP_2"] = LoadTexture("resources/images/Button/MAP2.png");
+    textures["MAP_3"] = LoadTexture("resources/images/Button/MAP3.png");
+    textures["MAP_TUTORIAL"] = LoadTexture("resources/images/Button/TUTORIAL.png");
+    textures["MAP_BOSS"] = LoadTexture("resources/images/Button/BOSS.png");
 
 
     

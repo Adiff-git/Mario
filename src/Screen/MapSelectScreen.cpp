@@ -4,6 +4,18 @@
 #include "ResrcManager.h"
 #include "SoundManager.h"
 #include <cstdio>
+// Hover states for map buttons
+bool mapTutorialHovered = false;
+bool map1Hovered = false;
+bool map2Hovered = false;
+bool map3Hovered = false;
+bool mapBossHovered = false;
+// Scale for map buttons
+float mapTutorialScale = 1.0f;
+float map1Scale = 1.0f;
+float map2Scale = 1.0f;
+float map3Scale = 1.0f;
+float mapBossScale = 1.0f;
 
 MapSelectScreen::MapSelectScreen(ScreenController *screenController, bool multiplayer,
                                  CharacterType p1Character, CharacterType p2Character)
@@ -83,10 +95,12 @@ void MapSelectScreen::Update()
     map3Button.Update();
     mapBossButton.Update();
 
-    UpdateDifficultyButtons();
-
-    backButton.Update();
-    startButton.Update();
+    // Update hover states
+    mapTutorialHovered = mapTutorialButton.IsHovered();
+    map1Hovered = map1Button.IsHovered();
+    map2Hovered = map2Button.IsHovered();
+    map3Hovered = map3Button.IsHovered();
+    mapBossHovered = mapBossButton.IsHovered();
 
     // Map selection logic
     if (mapTutorialButton.IsPressed()) {
@@ -108,6 +122,23 @@ void MapSelectScreen::Update()
     if (mapBossButton.IsPressed()) {
         SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
         SelectMap(MapType::MAP_BOSS);
+    }
+
+    // Scale logic: reset all, then scale hovered and selected
+    mapTutorialScale = map1Scale = map2Scale = map3Scale = mapBossScale = 1.0f;
+    if (mapTutorialHovered) mapTutorialScale = 1.15f;
+    if (map1Hovered) map1Scale = 1.15f;
+    if (map2Hovered) map2Scale = 1.15f;
+    if (map3Hovered) map3Scale = 1.15f;
+    if (mapBossHovered) mapBossScale = 1.15f;
+    // Scale up selected map
+    switch (selectedMap) {
+        case MapType::MAP_TUTORIAL: mapTutorialScale = 1.2f; break;
+        case MapType::MAP_1: map1Scale = 1.2f; break;
+        case MapType::MAP_2: map2Scale = 1.2f; break;
+        case MapType::MAP_3: map3Scale = 1.2f; break;
+        case MapType::MAP_BOSS: mapBossScale = 1.2f; break;
+        default: break;
     }
 
     // Difficulty selection logic (only if map is selected)
@@ -227,12 +258,21 @@ void MapSelectScreen::Draw()
                Vector2{(float)GetScreenWidth() / 2 - mapTitleSize.x / 2, (float)GetScreenHeight() / 2 - 280},
                24, 2, YELLOW);
 
-    // Draw map buttons
-    mapTutorialButton.Draw();
-    map1Button.Draw();
-    map2Button.Draw();
-    map3Button.Draw();
-    mapBossButton.Draw();
+    // Draw map buttons with scale and frame
+    auto drawMapButton = [&](Button& btn, float x, float y, float scale, Texture2D& tex, Color frameColor) {
+        float w = 200 * scale;
+        float h = 150 * scale;
+        float fx = x - (w - 200) / 2;
+        float fy = y - (h - 150) / 2;
+        DrawRectangleLines(fx - 5, fy - 5, w + 10, h + 10, frameColor);
+        DrawRectangleLines(fx - 3, fy - 3, w + 6, h + 6, frameColor);
+        DrawTexturePro(tex, Rectangle{0,0,(float)tex.width,(float)tex.height}, Rectangle{fx, fy, w, h}, Vector2{0,0}, 0.0f, WHITE);
+    };
+    drawMapButton(mapTutorialButton, (float)GetScreenWidth() / 2 - 650, (float)GetScreenHeight() / 2 - 200, mapTutorialScale, ResrcManager::GetInstance().getTexture("MAP_TUTORIAL"), mapTutorialScale > 1.0f ? ORANGE : BLACK);
+    drawMapButton(map1Button, (float)GetScreenWidth() / 2 - 400, (float)GetScreenHeight() / 2 - 200, map1Scale, ResrcManager::GetInstance().getTexture("MAP_1"), map1Scale > 1.0f ? ORANGE : BLACK);
+    drawMapButton(map2Button, (float)GetScreenWidth() / 2 - 100, (float)GetScreenHeight() / 2 - 200, map2Scale, ResrcManager::GetInstance().getTexture("MAP_2"), map2Scale > 1.0f ? ORANGE : BLACK);
+    drawMapButton(map3Button, (float)GetScreenWidth() / 2 + 200, (float)GetScreenHeight() / 2 - 200, map3Scale, ResrcManager::GetInstance().getTexture("MAP_3"), map3Scale > 1.0f ? ORANGE : BLACK);
+    drawMapButton(mapBossButton, (float)GetScreenWidth() / 2 + 450, (float)GetScreenHeight() / 2 - 200, mapBossScale, ResrcManager::GetInstance().getTexture("MAP_BOSS"), mapBossScale > 1.0f ? ORANGE : BLACK);
 
     // Draw map names - centered under each button
     const char *mapTutorialText = "Tutorial";
@@ -265,7 +305,7 @@ void MapSelectScreen::Draw()
     // Draw map selection indicator
     if (mapSelected)
     {
-        Color selectionColor = GREEN;
+        // Color selectionColor = GREEN;
         float selectionX = 0;
         switch (selectedMap)
         {
@@ -285,8 +325,8 @@ void MapSelectScreen::Draw()
             selectionX = (float)GetScreenWidth() / 2 + 450;
             break;
         }
-        DrawRectangleLines(selectionX - 5, (float)GetScreenHeight() / 2 - 205, 210, 160, selectionColor);
-        DrawRectangleLines(selectionX - 3, (float)GetScreenHeight() / 2 - 203, 206, 156, selectionColor);
+    // DrawRectangleLines(selectionX - 15, (float)GetScreenHeight() / 2 - 215, 230, 180, selectionColor);
+    // DrawRectangleLines(selectionX - 11, (float)GetScreenHeight() / 2 - 211, 222, 172, selectionColor);
 
         // Draw difficulty selection title - centered
         const char *difficultyTitle = "Choose Difficulty:";
