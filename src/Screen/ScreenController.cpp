@@ -12,7 +12,7 @@ void ScreenController::Update() {
     if (currentScreen) {
         currentScreen->Update();
     }
-}
+} 
 void ScreenController::Draw() {
     if (currentScreen) {
         currentScreen->Draw();

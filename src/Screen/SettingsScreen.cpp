@@ -11,27 +11,27 @@ SettingsScreen::SettingsScreen(ScreenController* screenController)
       audioSettingButton(Vector2{(float)GetScreenWidth()/2 - 120, 390}, Vector2{240, 60}),
       muteToggleButton(Vector2{(float)GetScreenWidth()/2 - 120, 600}, Vector2{240, 60}),
       backButton(Vector2{50, 50}, Vector2{80, 80}),
-      musicVolume(50),
-      sfxVolume(50),
+      musicVolume(0), 
+      sfxVolume(0),  
       isMuted(SoundManager::GetInstance().IsMuted()),
       showAudioSettings(false),
       showTutorial(false)
 {
-    tutorialImage = LoadTexture("../resources/Menu/Tutorials.png"); 
+    // tutorialImage = LoadTexture("../resources/Menu/Tutorials.png"); 
     closeTutorialButton = Button(Vector2{100, 100}, Vector2{40, 40}, "X");
     closeTutorialTexture = LoadTexture("resources/Menu/CloseX.png");
     
     backgroundTexture = &ResrcManager::GetInstance().getTexture("BACKGROUND_10");
     settingInterfaceTexture = &ResrcManager::GetInstance().getTexture("SETTING INTERFACE");
-    tutorialsButton.SetTexture(ResrcManager::GetInstance().getTexture("TUTORIALS"));
+    // tutorialsButton.SetTexture(ResrcManager::GetInstance().getTexture("TUTORIALS"));
     audioSettingButton.SetTexture(ResrcManager::GetInstance().getTexture("AUDIO SETTING"));
     muteToggleButton.SetTexture(isMuted ? 
         ResrcManager::GetInstance().getTexture("MUTE ALL OFF") : 
         ResrcManager::GetInstance().getTexture("MUTE ALL ON"));
     backButton.SetTexture(ResrcManager::GetInstance().getTexture("BACK_BUTTON"));
     
-    musicVolume = 50;
-    sfxVolume = 50;
+    musicVolume = (int)(SoundManager::GetInstance().GetMusicVol("MENU") * 100.0f);
+    sfxVolume = (int)(SoundManager::GetInstance().GetSoundVol("COIN_COLLECTION") * 100.0f);
     SoundManager::GetInstance().SetMusicVol("MENU", musicVolume / 100.0f);
     SoundManager::GetInstance().SetMusicVol("GAMEWORLD_1", musicVolume / 100.0f);
     SoundManager::GetInstance().SetSoundVol("COIN_COLLECTION", sfxVolume / 100.0f);
@@ -45,7 +45,7 @@ SettingsScreen::SettingsScreen(ScreenController* screenController)
 }
 
 SettingsScreen::~SettingsScreen() {
-    UnloadTexture(tutorialImage);
+    // UnloadTexture(tutorialImage);
     UnloadTexture(closeTutorialTexture);
 }
 
@@ -68,10 +68,8 @@ void SettingsScreen::Update() {
             float percent = (GetMousePosition().x - sliderX) / (float)sliderW;
             percent = std::max(0.0f, std::min(1.0f, percent));
             musicVolume = (int)(percent * 100);
-            // Cập nhật volume cho tất cả music
             SoundManager::GetInstance().SetMusicVol("MENU", musicVolume / 100.0f);
             SoundManager::GetInstance().SetMusicVol("GAMEWORLD_1", musicVolume / 100.0f);
-            std::cout << "[SettingsScreen] Music volume set to: " << musicVolume << std::endl;
         }
 
         int sfxSliderY = sliderStartY + 70;
@@ -85,7 +83,6 @@ void SettingsScreen::Update() {
             SoundManager::GetInstance().SetSoundVol("ENEMY_DEATH", sfxVolume / 100.0f);
             SoundManager::GetInstance().SetSoundVol("MARIO_JUMP", sfxVolume / 100.0f);
             SoundManager::GetInstance().SetSoundVol("BUTTON_CLICK", sfxVolume / 100.0f);
-            std::cout << "[SettingsScreen] SFX volume set to: " << sfxVolume << std::endl;
         }
 
         tutorialsButton.Update();
@@ -121,7 +118,6 @@ void SettingsScreen::Update() {
                 // Set both sliders to 0 when muted
                 musicVolume = 0;
                 sfxVolume = 0;
-                // Update SoundManager to set all music and SFX volumes to 0
                 SoundManager::GetInstance().SetMusicVol("MENU", 0.0f);
                 SoundManager::GetInstance().SetMusicVol("GAMEWORLD_1", 0.0f);
                 SoundManager::GetInstance().SetSoundVol("COIN_COLLECTION", 0.0f);
@@ -131,9 +127,8 @@ void SettingsScreen::Update() {
                 SoundManager::GetInstance().SetSoundVol("BUTTON_CLICK", 0.0f);
                 std::cout << "[SettingsScreen] Muted: musicVolume and sfxVolume set to 0" << std::endl;
             } else {
-                // Restore default volumes when unmuted (optional, adjust as needed)
-                musicVolume = 50;
-                sfxVolume = 50;
+                musicVolume = (int)(SoundManager::GetInstance().GetMusicVol("MENU") * 100.0f);
+                sfxVolume = (int)(SoundManager::GetInstance().GetSoundVol("COIN_COLLECTION") * 100.0f);
                 SoundManager::GetInstance().SetMusicVol("MENU", musicVolume / 100.0f);
                 SoundManager::GetInstance().SetMusicVol("GAMEWORLD_1", musicVolume / 100.0f);
                 SoundManager::GetInstance().SetSoundVol("COIN_COLLECTION", sfxVolume / 100.0f);
@@ -141,7 +136,7 @@ void SettingsScreen::Update() {
                 SoundManager::GetInstance().SetSoundVol("ENEMY_DEATH", sfxVolume / 100.0f);
                 SoundManager::GetInstance().SetSoundVol("MARIO_JUMP", sfxVolume / 100.0f);
                 SoundManager::GetInstance().SetSoundVol("BUTTON_CLICK", sfxVolume / 100.0f);
-                std::cout << "[SettingsScreen] Unmuted: musicVolume and sfxVolume restored to 50" << std::endl;
+                
             }
         }
         

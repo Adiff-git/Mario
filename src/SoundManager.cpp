@@ -7,7 +7,7 @@ using namespace std;
 SoundManager& SoundManager::GetInstance() {
     static SoundManager instance;
     return instance;
-}
+} 
 
 void SoundManager::PlaySound(const std::string& name) {
     try {
