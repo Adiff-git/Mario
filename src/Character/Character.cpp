@@ -524,7 +524,7 @@ void Character::changetoFire()
 }
 
 void Character::UpdateCollisionProbes() {
-    if(isDucking) {
+    if(isDucking && state == OBJECT_STATE_ON_GROUND) {
         cpN.setPos({pos.x + size.x/2 - cpN.getSize().x/2, pos.y + size.y/2 - cpN.getSize().y});
         cpE.setSize({5,size.y/2});
         cpE.setPos({pos.x + size.x - cpE.getSize().x, pos.y + size.y*3/4 - cpE.getSize().y/2});
