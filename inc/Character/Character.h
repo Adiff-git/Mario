@@ -52,7 +52,8 @@ protected:
 
 
     CharacterType characterType = CharacterType::NONE;
-   
+
+    float jumpCutImpulse = 250.0f;
 
 public:
     Character(Vector2 pos, int lives, ObjectState form, ControlType controlType);
@@ -122,7 +123,7 @@ public:
     virtual CharacterType GetCharType() {
         return characterType;
     }
-
+    void OnJumpKeyReleased();
 
     // virtual PlayerSave ToSave() ;
     // virtual void FromSave(const PlayerSave& s) ;

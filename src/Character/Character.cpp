@@ -165,6 +165,10 @@ void Character::HandleInput()
     if (inputHandler) {
         inputHandler->handleInput();
     }
+    if (IsKeyReleased(KEY_UP) || IsKeyReleased(KEY_W) ||
+        IsGamepadButtonReleased(0, GAMEPAD_BUTTON_RIGHT_FACE_DOWN)) {
+        OnJumpKeyReleased();
+    }
 }
 
 void Character::Update() {
@@ -640,3 +644,10 @@ void Character::AddScore(int points) {
 ObjectState Character::GetAdditionalState() const {
     return AdditionalState;
 }   
+
+void Character::OnJumpKeyReleased() {
+    // Chỉ cắt khi đang nhảy và còn đi lên
+    if (state == OBJECT_STATE_JUMPING && vel.y < 0.0f) {
+        vel.y += jumpCutImpulse; // ví dụ: +250 => nhảy thấp hơn khi thả sớm
+    }
+}
