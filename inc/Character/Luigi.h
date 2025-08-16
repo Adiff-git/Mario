@@ -14,6 +14,8 @@ public:
         : Character(pos, lives, form,  controlType) {
             
         characterType = CharacterType::LUIGI;
+        SetSpeedY(GetSpeedY() * 1.2f); 
+        SetSpeedX(GetSpeedX() * 0.8f); // Luigi is slightly faster than Mario
         
     }
 

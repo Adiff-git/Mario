@@ -13,6 +13,8 @@ public:
         : Character(pos, lives, form,  controlType) {
             
         characterType = CharacterType::PEACH;
+        SetSpeedY(GetSpeedY() * 0.9f); // Peach is slightly faster than Mario
+        SetSpeedX(GetSpeedX() * 1.2f); // Peach is slightly faster than Mario
         
     }
 

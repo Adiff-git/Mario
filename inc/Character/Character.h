@@ -71,7 +71,18 @@ public:
     void SetState(ObjectState state);
     void SetScore(int score);
     void AddScore(int points); 
-
+    void SetSpeedY(float speedY) {
+        SpeedY = speedY;
+    }
+    float GetSpeedY() const {
+        return SpeedY;
+    }
+    void SetSpeedX(float speedX) {
+        maxSpeedX = speedX;
+    }
+    float GetSpeedX() const {
+        return maxSpeedX;
+    }
 
     void SetDucking(bool ducking) {
         isDucking = ducking;
