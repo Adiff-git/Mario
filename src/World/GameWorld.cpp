@@ -23,6 +23,7 @@
     
     GameWorld::GameWorld() : player1(nullptr), player2(nullptr), interactiveTiles(map.getInteractiveTiles())
 {
+    printf("[GameWorld] Default constructor called\n");
     player1 = new Luigi(Vector2{100, 100}, 3, SMALL, ControlType::ARROWS);
     map.LoadMap(5);
     camera.offset = Vector2{(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
@@ -47,6 +48,7 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
                      selectedMapId(MapID),
                      enemySpeedMultiplier(1.0f)
 {
+    printf("[GameWorld] Constructor called: MapID=%d, multiplayer=%d\n", MapID, multiplayer);
     map.LoadMap(MapID);
     
     // Initialize Player 1
@@ -84,14 +86,16 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
         }
     
     // Initialize Boss for MapID == 1
-    // if (MapID == 1) {
-    //     // Boss* boss = new Boss(Vector2{1200, 535}, player1->GetPosPtr(), player2 ? player2->GetPosPtr() : nullptr, multiplayer);
-    //     // map.GetEnemies().push_back(boss);
-    //     // map.SetMarioPositionForBosses(player1->GetPosPtr(), player2 ? player2->GetPosPtr() : nullptr, multiplayer);
-    // }
+    if (selectedMapId == 4) {
+        // Đặt boss gần player để dễ kiểm tra
+        Boss* boss = new Boss(Vector2{150, 120}, player1->GetPosPtr(), player2 ? player2->GetPosPtr() : nullptr, multiplayer);
+        map.GetEnemies().push_back(boss);
+        printf("[GameWorld] Boss pushed to enemy list at (%.1f, %.1f)\n", boss->GetPos().x, boss->GetPos().y);
+        map.SetMarioPositionForBosses(player1->GetPosPtr(), player2 ? player2->GetPosPtr() : nullptr, multiplayer);
+    }
     
     
-    // Set background based on MapID
+    // Set background based on MapIDz
     switch (MapID)
     {
         case 0: background = ResrcManager::GetInstance().getTexture("BACKGROUND_0"); break;
@@ -132,6 +136,7 @@ GameWorld::GameWorld(int MapID, GameScreen* gameScreen, bool multiplayer,
                      selectedMapId(MapID),
                      enemySpeedMultiplier(speedMultiplier)
 {
+    printf("[GameWorld] Constructor called (speedMultiplier): MapID=%d, multiplayer=%d, speedMultiplier=%.2f\n", MapID, multiplayer, speedMultiplier);
     map.LoadMap(MapID);
     
     // Initialize Player 1
@@ -180,6 +185,13 @@ GameWorld::GameWorld(int MapID, GameScreen* gameScreen, bool multiplayer,
         case 7: background = ResrcManager::GetInstance().getTexture("BACKGROUND_7"); break;
         case 8: background = ResrcManager::GetInstance().getTexture("BACKGROUND_8"); break;
         case 9: background = ResrcManager::GetInstance().getTexture("BACKGROUND_9"); break;
+    }
+
+    if (MapID == 4) {
+        Boss* boss = new Boss(Vector2{150, 800}, player1->GetPosPtr(), player2 ? player2->GetPosPtr() : nullptr, multiplayer);
+        map.GetEnemies().push_back(boss);
+        printf("[GameWorld] Boss pushed to enemy list at (%.1f, %.1f)\n", boss->GetPos().x, boss->GetPos().y);
+        map.SetMarioPositionForBosses(player1->GetPosPtr(), player2 ? player2->GetPosPtr() : nullptr, multiplayer);
     }
     
     // Add items for MapID == 1
@@ -272,6 +284,7 @@ GameWorld::GameWorld(int level, GameScreen* gameScreen)
       player2(nullptr),
       interactiveTiles(map.getInteractiveTiles())
 {
+    printf("[GameWorld] Constructor called (level): level=%d\n", level);
     map.LoadMap(level);
     
     player1 = new Mario(Vector2{100, 100}, 3, SMALL, ControlType::ARROWS);
@@ -606,7 +619,7 @@ void GameWorld::UpdateWorld()
         std::remove_if(
             map.GetEnemies().begin(),
             map.GetEnemies().end(),
-            [](Enemy *enemy)
+            [this](Enemy *enemy)
             {
                 if (!enemy)
                 {
@@ -617,6 +630,10 @@ void GameWorld::UpdateWorld()
                 {
                     if (boss->IsDead())
                     {
+                        printf("[GameWorld] Cleanup: Boss deleted at (%.1f, %.1f)\n", boss->GetPos().x, boss->GetPos().y);
+                            // Spawn CourseClearToken at boss position
+                            auto &items = map.GetInteractiveItems();
+                            items.push_back(std::make_shared<CourseClearToken>(boss->GetPos()));
                         delete boss;
                         return true;
                     }
@@ -628,6 +645,9 @@ void GameWorld::UpdateWorld()
                 // Chỉ xóa khi đã ở trạng thái DEAD
                 if (enemy->GetState() == OBJECT_STATE_DEAD || enemy->GetState() == OBJECT_STATE_TO_BE_REMOVED)
                 {
+                    if (dynamic_cast<Boss*>(enemy)) {
+                        printf("[GameWorld] Cleanup: Boss deleted (DEAD/TO_BE_REMOVED) at (%.1f, %.1f)\n", enemy->GetPos().x, enemy->GetPos().y);
+                    }
                     delete enemy;
                     return true;
                 }
@@ -743,6 +763,16 @@ void GameWorld::DrawWorld()
     DrawTextureEx(background, Vector2{BGpos, -200}, 0.0f, 1.3f, WHITE);
     DrawTextureEx(background, Vector2{BGpos + background.width * 1.3f, -200}, 0.0f, 1.3f, WHITE);
     map.Draw();
+
+    // Vẽ tất cả enemy (bao gồm boss)
+    for (Enemy* enemy : map.GetEnemies()) {
+        if (enemy) {
+            if (dynamic_cast<Boss*>(enemy)) {
+                printf("[GameWorld] DrawWorld: Boss found in enemy list at (%.1f, %.1f)\n", enemy->GetPos().x, enemy->GetPos().y);
+            }
+            enemy->Draw();
+        }
+    }
 
     if (player1)
         player1->Draw();
