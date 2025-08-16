@@ -109,6 +109,11 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
         case 8: background = ResrcManager::GetInstance().getTexture("BACKGROUND_8"); break;
         case 9: background = ResrcManager::GetInstance().getTexture("BACKGROUND_9"); break;
     }
+    if (selectedMapId == 4) {
+          Boss* boss = new Boss(Vector2{200, 535}, player1->GetPosPtr(), player2 ? player2->GetPosPtr() : nullptr, multiplayer);
+          map.GetEnemies().push_back(boss);
+          map.SetMarioPositionForBosses(player1->GetPosPtr(), player2 ? player2->GetPosPtr() : nullptr, multiplayer);
+     }
     
     // Add items for MapID == 1
     // if (MapID == 1) {

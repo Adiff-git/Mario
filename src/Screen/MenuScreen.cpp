@@ -5,7 +5,7 @@
 #include "../inc/Screen/GameScreen.h"
 #include "../inc/Screen/GameModeScreen.h"
 #include "../inc/Screen/MapEditorScreen.h"
-
+ 
 
 MenuScreen::MenuScreen(ScreenController* screenController ) : Screen(screenController), 
 startButton(Vector2{1600/2 - 150, 900/2 - 100}, Vector2{300, 80}),

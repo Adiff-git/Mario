@@ -2,6 +2,12 @@
 #include "../inc/Screen/MenuScreen.h"
 #include "../inc/Screen/MapSelectScreen.h"
 #include "SoundManager.h"
+#include <raylib.h>
+#include <iostream>
+#include <chrono>
+#include <sstream>
+#include <iomanip>
+
 GameScreen::GameScreen(ScreenController* screenController)
     : Screen(screenController), 
       BackMenu(Vector2{50, 50}, Vector2{50, 50}), 
@@ -47,7 +53,6 @@ GameScreen::GameScreen(ScreenController* screenController, bool multiplayer,
       player2Type(p2Type),
       pauseMusicVolume(0),
       pauseSfxVolume(0)
-
 {
     gameWorld = std::make_unique<GameWorld>(level, this, multiplayer, p1Type, p2Type);
 
@@ -89,7 +94,9 @@ GameScreen::GameScreen(ScreenController* screenController, bool multiplayer,
         player1Type(p1Type),
         player2Type(p2Type),
         selectedMap(map),
-        selectedDifficulty(difficulty)
+        selectedDifficulty(difficulty),
+        pauseMusicVolume(0),
+        pauseSfxVolume(0)
 {
     // Adjust level based on map selection
     switch(map) {
@@ -105,31 +112,23 @@ GameScreen::GameScreen(ScreenController* screenController, bool multiplayer,
     float baseSpeedMultiplier = 1.0f;
     float levelMultiplier = 1.0f;
     
-    // Base multiplier from difficulty (more dramatic differences)
+    // Base multiplier from difficulty
     switch(difficulty) {
-        case DifficultyLevel::EASY: baseSpeedMultiplier = 0.6f; break;    // 40% slower
-        case DifficultyLevel::MEDIUM: baseSpeedMultiplier = 1.0f; break;  // Normal speed
-        case DifficultyLevel::HARD: baseSpeedMultiplier = 1.8f; break;    // 80% faster
+        case DifficultyLevel::EASY: baseSpeedMultiplier = 0.6f; break;
+        case DifficultyLevel::MEDIUM: baseSpeedMultiplier = 1.0f; break;
+        case DifficultyLevel::HARD: baseSpeedMultiplier = 1.8f; break;
         default: baseSpeedMultiplier = 1.0f; break;
     }
     
-    // Additional multiplier from map level (much more dramatic increase)
+    // Additional multiplier from map level
     switch(level) {
         case 1: levelMultiplier = 1.0f; break;   
         case 2: levelMultiplier = 2.0f; break;   
         case 3: levelMultiplier = 4.0f; break;   
         default: levelMultiplier = 1.0f; break;
     }
-
-    if (showWinScreen) {
-        if (IsKeyPressed(KEY_ENTER)) {
-            showWinScreen = false;
-            screenController->ChangeScreen(new MenuScreen(screenController));
-        }
-        return;
-    }
     
-    // Combine both multipliers for dramatic effect
+    // Combine both multipliers
     float enemySpeedMultiplier = baseSpeedMultiplier * levelMultiplier;
 
     gameWorld = std::make_unique<GameWorld>(level, this, multiplayer, p1Type, p2Type, enemySpeedMultiplier);
@@ -151,17 +150,36 @@ GameScreen::GameScreen(ScreenController* screenController, bool multiplayer,
     }
 
     BackMenu.SetTexture(ResrcManager::GetInstance().getTexture("BACK_BUTTON"));  
+
+    // Lấy giá trị âm lượng từ SoundManager
+    pauseMusicVolume = (int)(SoundManager::GetInstance().GetMusicVol("MENU") * 100.0f);
+    pauseSfxVolume = (int)(SoundManager::GetInstance().GetSoundVol("COIN_COLLECTION") * 100.0f);
+
     SoundManager::GetInstance().StopAllSounds();
     string musicKey = "GAMEWORLD_" + std::to_string(level);
+    SoundManager::GetInstance().SetMusicVol(musicKey, pauseMusicVolume / 100.0f);
     SoundManager::GetInstance().PlayMusic(musicKey);
 }
 
 void GameScreen::Update() {
+    // Kiểm tra nút BackMenu trước để đảm bảo nó hoạt động ở mọi trạng thái
     BackMenu.Update();
-    if (requestGoHome) {
+    if (BackMenu.IsPressed()) {
+        if (!SoundManager::GetInstance().IsMuted()) {
+            SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
+        }
         screenController->ChangeScreen(new MenuScreen(screenController));
         return;
     }
+
+    if (requestGoHome) {
+        if (!SoundManager::GetInstance().IsMuted()) {
+            SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
+        }
+        screenController->ChangeScreen(new MenuScreen(screenController));
+        return;
+    }
+
     // Toggle pause/resume bằng phím P
     if (IsKeyPressed(KEY_P)) {
         isPaused = !isPaused;
@@ -169,128 +187,95 @@ void GameScreen::Update() {
     }
 
     if (showPauseMenu) {
-    // Overlay mờ
-    DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 0.5f));
+        // Cửa sổ pause
+        int winW = 400, winH = 350;
+        int winX = GetScreenWidth()/2 - winW/2;
+        int winY = GetScreenHeight()/2 - winH/2;
+        int sliderW = 200;
+        int sliderX = winX + 100;
+        int sliderY = winY + 80;
 
-    // Cửa sổ pause
-    int winW = 400, winH = 400;
-    int winX = GetScreenWidth()/2 - winW/2;
-    int winY = GetScreenHeight()/2 - winH/2;
-    DrawRectangleRounded({(float)winX, (float)winY, (float)winW, (float)winH}, 0.2f, 10, WHITE);
-    DrawText("PAUSED", winX + 140, winY + 20, 32, BLACK);
+        // --- MUSIC SLIDER ---
+        Rectangle musicSliderRect = { (float)sliderX, (float)sliderY - 10, (float)sliderW, 30 };
+        if (IsMouseButtonDown(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), musicSliderRect)) {
+            // Tự động unmute khi kéo thanh trượt
+            if (SoundManager::GetInstance().IsMuted()) {
+                SoundManager::GetInstance().SetMuted(false);
+                std::cout << "[GameScreen] Unmuted by Music slider" << std::endl;
+            }
+            float percent = (GetMousePosition().x - sliderX) / (float)sliderW;
+            percent = std::max(0.0f, std::min(1.0f, percent));
+            pauseMusicVolume = (int)(percent * 100);
+            string musicKey = "GAMEWORLD_" + std::to_string(level);
+            SoundManager::GetInstance().SetMusicVol("MENU", pauseMusicVolume / 100.0f);
+            SoundManager::GetInstance().SetMusicVol(musicKey, pauseMusicVolume / 100.0f);
+            std::cout << "[GameScreen] Music volume set to: " << pauseMusicVolume << std::endl;
+        }
 
-    // --- MUSIC SLIDER ---
-    int sliderW = 200;
-    int sliderX = winX + 100;
-    int sliderY = winY + 80;
-    // Cập nhật giá trị từ SoundManager nếu không mute
-    if (!SoundManager::GetInstance().IsMuted()) {
-        pauseMusicVolume = (int)(SoundManager::GetInstance().GetMusicVol("MENU") * 100.0f);
-    }
-    DrawText("Music Volume", sliderX, sliderY - 30, 20, DARKGRAY);
-    DrawRectangle(sliderX, sliderY, sliderW, 10, LIGHTGRAY);
-    DrawRectangle(sliderX, sliderY, (int)(pauseMusicVolume * (sliderW/100.0f)), 10, BLUE);
-    int knobX = sliderX + (int)(pauseMusicVolume * (sliderW/100.0f));
-    DrawCircle(knobX, sliderY + 5, 10, DARKBLUE);
+        // --- SFX SLIDER ---
+        int sfxSliderY = sliderY + 70;
+        Rectangle sfxSliderRect = { (float)sliderX, (float)sfxSliderY - 10, (float)sliderW, 30 };
+        if (IsMouseButtonDown(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), sfxSliderRect)) {
+            // Tự động unmute khi kéo thanh trượt
+            if (SoundManager::GetInstance().IsMuted()) {
+                SoundManager::GetInstance().SetMuted(false);
+                std::cout << "[GameScreen] Unmuted by SFX slider" << std::endl;
+            }
+            float percent = (GetMousePosition().x - sliderX) / (float)sliderW;
+            percent = std::max(0.0f, std::min(1.0f, percent));
+            pauseSfxVolume = (int)(percent * 100);
+            SoundManager::GetInstance().SetSoundVol("COIN", pauseSfxVolume / 100.0f);
+            SoundManager::GetInstance().SetSoundVol("COIN_COLLECTION", pauseSfxVolume / 100.0f);
+            SoundManager::GetInstance().SetSoundVol("POWER_UP_APPEARS", pauseSfxVolume / 100.0f);
+            SoundManager::GetInstance().SetSoundVol("ENEMY_DEATH", pauseSfxVolume / 100.0f);
+            SoundManager::GetInstance().SetSoundVol("MARIO_JUMP", pauseSfxVolume / 100.0f);
+            SoundManager::GetInstance().SetSoundVol("BUTTON_CLICK", pauseSfxVolume / 100.0f);
+            std::cout << "[GameScreen] SFX volume set to: " << pauseSfxVolume << std::endl;
+        }
 
-    Rectangle musicSliderRect = { (float)sliderX, (float)sliderY - 10, (float)sliderW, 30 };
-    if (!SoundManager::GetInstance().IsMuted() && IsMouseButtonDown(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), musicSliderRect)) {
-        float percent = (GetMousePosition().x - sliderX) / (float)sliderW;
-        percent = std::max(0.0f, std::min(1.0f, percent));
-        pauseMusicVolume = (int)(percent * 100);
-        // Cập nhật tất cả music trong SoundManager
-        SoundManager::GetInstance().SetMusicVol("MENU", pauseMusicVolume / 100.0f);
-        SoundManager::GetInstance().SetMusicVol("GAMEWORLD_1", pauseMusicVolume / 100.0f);
-        SoundManager::GetInstance().SetMusicVol("GAMEWORLD_2", pauseMusicVolume / 100.0f);
-        SoundManager::GetInstance().SetMusicVol("GAMEWORLD_3", pauseMusicVolume / 100.0f);
-        SoundManager::GetInstance().SetMusicVol("GAMEWORLD_4", pauseMusicVolume / 100.0f);
-    }
-    DrawText(TextFormat("%d", pauseMusicVolume), sliderX + sliderW + 20, sliderY - 10, 20, BLACK);
-
-    // --- SFX SLIDER ---
-    int sfxSliderY = sliderY + 70;
-    // Cập nhật giá trị từ SoundManager nếu không mute
-    if (!SoundManager::GetInstance().IsMuted()) {
-        pauseSfxVolume = (int)(SoundManager::GetInstance().GetSoundVol("COIN_COLLECTION") * 100.0f);
-    }
-    DrawText("SFX Volume", sliderX, sfxSliderY - 30, 20, DARKGRAY);
-    DrawRectangle(sliderX, sfxSliderY, sliderW, 10, LIGHTGRAY);
-    DrawRectangle(sliderX, sfxSliderY, (int)(pauseSfxVolume * (sliderW/100.0f)), 10, ORANGE);
-    int sfxKnobX = sliderX + (int)(pauseSfxVolume * (sliderW/100.0f));
-    DrawCircle(sfxKnobX, sfxSliderY + 5, 10, DARKGRAY);
-
-    Rectangle sfxSliderRect = { (float)sliderX, (float)sfxSliderY - 10, (float)sliderW, 30 };
-    if (!SoundManager::GetInstance().IsMuted() && IsMouseButtonDown(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), sfxSliderRect)) {
-        float percent = (GetMousePosition().x - sliderX) / (float)sliderW;
-        percent = std::max(0.0f, std::min(1.0f, percent));
-        pauseSfxVolume = (int)(percent * 100);
-        // Cập nhật tất cả SFX trong SoundManager
-        SoundManager::GetInstance().SetSoundVol("COIN", pauseSfxVolume / 100.0f);
-        SoundManager::GetInstance().SetSoundVol("COIN_COLLECTION", pauseSfxVolume / 100.0f);
-        SoundManager::GetInstance().SetSoundVol("POWER_UP_APPEARS", pauseSfxVolume / 100.0f);
-        SoundManager::GetInstance().SetSoundVol("ENEMY_DEATH", pauseSfxVolume / 100.0f);
-        SoundManager::GetInstance().SetSoundVol("MARIO_JUMP", pauseSfxVolume / 100.0f);
-        SoundManager::GetInstance().SetSoundVol("BUTTON_CLICK", pauseSfxVolume / 100.0f);
-    }
-    DrawText(TextFormat("%d", pauseSfxVolume), sliderX + sliderW + 20, sfxSliderY - 10, 20, BLACK);
-
-    // --- MUTE ALL BUTTON ---
-    Rectangle muteAllBtn = { (float)(winX + 150), (float)(winY + winH - 140), 100, 50 };
-    DrawRectangleRec(muteAllBtn, DARKGRAY);
-    DrawText(SoundManager::GetInstance().IsMuted() ? "Unmute All" : "Mute All", muteAllBtn.x + 10, muteAllBtn.y + 15, 24, WHITE);
-
-    // --- Nút Resume ---
-    Rectangle resumeBtn = { (float)(winX + 50), (float)(winY + winH - 80), 100, 50 };
-    DrawRectangleRec(resumeBtn, GREEN);
-    DrawText("Play", resumeBtn.x + 25, resumeBtn.y + 15, 24, WHITE);
-
-    // --- Nút Home ---
-    Rectangle homeBtn = { (float)(winX + 250), (float)(winY + winH - 80), 100, 50 };
-    DrawRectangleRec(homeBtn, RED);
-    DrawText("Home", homeBtn.x + 20, homeBtn.y + 15, 24, WHITE);
-
-    // Xử lý click nút
-    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-        Vector2 mouse = GetMousePosition();
-        if (CheckCollisionPointRec(mouse, muteAllBtn)) {
-            bool isMuted = !SoundManager::GetInstance().IsMuted();
-            SoundManager::GetInstance().SetMuted(isMuted);
-            if (isMuted) {
-                pauseMusicVolume = 0;
-                pauseSfxVolume = 0;
-                // Cập nhật tất cả music và SFX về 0
-                SoundManager::GetInstance().SetMusicVol("MENU", 0.0f);
-                SoundManager::GetInstance().SetMusicVol("GAMEWORLD_1", 0.0f);
-                SoundManager::GetInstance().SetMusicVol("GAMEWORLD_2", 0.0f);
-                SoundManager::GetInstance().SetMusicVol("GAMEWORLD_3", 0.0f);
-                SoundManager::GetInstance().SetMusicVol("GAMEWORLD_4", 0.0f);
-                SoundManager::GetInstance().SetSoundVol("COIN", 0.0f);
-                SoundManager::GetInstance().SetSoundVol("COIN_COLLECTION", 0.0f);
-                SoundManager::GetInstance().SetSoundVol("POWER_UP_APPEARS", 0.0f);
-                SoundManager::GetInstance().SetSoundVol("ENEMY_DEATH", 0.0f);
-                SoundManager::GetInstance().SetSoundVol("MARIO_JUMP", 0.0f);
-                SoundManager::GetInstance().SetSoundVol("BUTTON_CLICK", 0.0f);
-            } else {
-                // Khôi phục giá trị từ SoundManager (được thiết lập bởi SettingsScreen)
-                pauseMusicVolume = (int)(SoundManager::GetInstance().GetMusicVol("MENU") * 100.0f);
-                pauseSfxVolume = (int)(SoundManager::GetInstance().GetSoundVol("COIN_COLLECTION") * 100.0f);
+        // --- Nút Resume và Home ---
+        Rectangle resumeBtn = { (float)(winX + 50), (float)(winY + winH - 80), 100, 50 };
+        Rectangle homeBtn = { (float)(winX + 250), (float)(winY + winH - 80), 100, 50 };
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            Vector2 mouse = GetMousePosition();
+            if (CheckCollisionPointRec(mouse, resumeBtn)) {
+                if (!SoundManager::GetInstance().IsMuted()) {
+                    SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
+                }
+                isPaused = false;
+                showPauseMenu = false;
+            }
+            if (CheckCollisionPointRec(mouse, homeBtn)) {
+                if (!SoundManager::GetInstance().IsMuted()) {
+                    SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
+                }
+                requestGoHome = true;
             }
         }
-        if (CheckCollisionPointRec(mouse, resumeBtn)) {
-            isPaused = false;
-            showPauseMenu = false;
-        }
-        if (CheckCollisionPointRec(mouse, homeBtn)) {
-            requestGoHome = true;
-        }
-    }
-}
 
-    if (BackMenu.IsPressed()) {
-        screenController->ChangeScreen(new MenuScreen(screenController));
+        // Debug log
+        if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
+            Vector2 mousePos = GetMousePosition();
+            std::cout << "[GameScreen Debug] Mouse pos: (" << mousePos.x << ", " << mousePos.y 
+                      << "), sfxSliderRect: (" << sfxSliderRect.x << ", " << sfxSliderRect.y 
+                      << ", " << sfxSliderRect.width << ", " << sfxSliderRect.height << ")" 
+                      << ", collision: " << CheckCollisionPointRec(GetMousePosition(), sfxSliderRect) << std::endl;
+        }
         return;
     }
-    switch ( transitionState ) {
+
+    if (showWinScreen) {
+        if (IsKeyPressed(KEY_ENTER)) {
+            if (!SoundManager::GetInstance().IsMuted()) {
+                SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
+            }
+            showWinScreen = false;
+            screenController->ChangeScreen(new MenuScreen(screenController));
+        }
+        return;
+    }
+
+    switch (transitionState) {
         case TransitionState::NEXT_LEVEL:
             transitionTimeAcum += GameClock::GetInstance().FIXED_TIME_STEP;
             if (transitionTimeAcum >= transitionTime) {
@@ -309,67 +294,53 @@ void GameScreen::Update() {
                 BeginTransition(TransitionState::NONE);
             }
             break;
+        default:
+            break;
     }
+
     if (transitionState != TransitionState::NONE) {
         return;
     }
 
-    switch ( gameWorld->GetGameState()) {
-
+    switch (gameWorld->GetGameState()) {
         case GameState::GAME_PLAYING:
             gameWorld->UpdateWorld();
             break;
         case GameState::GAME_COMPLETED:
             if (IsKeyPressed(KEY_ENTER)) {
+                if (!SoundManager::GetInstance().IsMuted()) {
+                    SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
+                }
                 NextLevel();
                 BeginTransition(TransitionState::NEXT_LEVEL);
             }
             break;
         case GameState::GAME_RESET:
             if (IsKeyPressed(KEY_ENTER)) {
+                if (!SoundManager::GetInstance().IsMuted()) {
+                    SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
+                }
                 ResetGame();
                 BeginTransition(TransitionState::GAME_RESET);
             }
             break;
         case GameState::GAME_OVER:
-        static bool gameOverMusicPlayed = false;
-        if (!gameOverMusicPlayed) {
-            SoundManager::GetInstance().StopAllSounds();
-            SoundManager::GetInstance().PlayMusic("GAME_OVER");
-            gameOverMusicPlayed = true;
-        }
-        if (IsKeyPressed(KEY_ENTER)) {
-            gameOverMusicPlayed = false; // Reset flag để lần sau có thể phát lại
-            ResetGame();
-            BeginTransition(TransitionState::GAME_OVER);
-        }
+            static bool gameOverMusicPlayed = false;
+            if (!gameOverMusicPlayed) {
+                SoundManager::GetInstance().StopAllSounds();
+                SoundManager::GetInstance().PlayMusic("GAME_OVER");
+                gameOverMusicPlayed = true;
+            }
+            if (IsKeyPressed(KEY_ENTER)) {
+                if (!SoundManager::GetInstance().IsMuted()) {
+                    SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
+                }
+                gameOverMusicPlayed = false;
+                ResetGame();
+                BeginTransition(TransitionState::GAME_OVER);
+            }
             break;
         default:
-        break;
-    }
-}
-
-
-void GameScreen::BeginTransition(TransitionState transitionState) {
-    this->transitionState = transitionState;
-    transitionTimeAcum = 0.0f; // Reset the transition time accumulator
-    switch (transitionState) {
-        case TransitionState::NEXT_LEVEL:
-            transitionTime = 3;
-            SoundManager::GetInstance().StopAllSounds();
-            break;
-        case TransitionState::GAME_OVER:
-            transitionTime = 3;
-            SoundManager::GetInstance().StopAllSounds();
-            break;
-        case TransitionState::GAME_RESET:
-            transitionTime = 3;
-            SoundManager::GetInstance().StopAllSounds();
-            break;
-        case TransitionState::NONE:
-            transitionTime = 3;
-            SoundManager::GetInstance().StopAllSounds();
-            SoundManager::GetInstance().PlayMusic("GAMEWORLD_" + std::to_string(level));
             break;
     }
 }
@@ -388,6 +359,7 @@ void GameScreen::Draw() {
         DrawText("Press ENTER to return to menu", GetScreenWidth()/2-200, GetScreenHeight()-100, 32, BLACK);
         return;
     }
+
     gameWorld->DrawWorld();
     gameHUD->Draw();
     if (gameWorld->IsCompleted()) {
@@ -395,7 +367,8 @@ void GameScreen::Draw() {
             DrawEnd();
         } 
     }
-    // pause menu
+
+    // Pause menu
     if (showPauseMenu) {
         // Overlay mờ
         DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 0.5f));
@@ -416,15 +389,7 @@ void GameScreen::Draw() {
         DrawRectangle(sliderX, sliderY, (int)(pauseMusicVolume * (sliderW/100.0f)), 10, BLUE);
         int knobX = sliderX + (int)(pauseMusicVolume * (sliderW/100.0f));
         DrawCircle(knobX, sliderY + 5, 10, DARKBLUE);
-
-        Rectangle musicSliderRect = { (float)sliderX, (float)sliderY - 10, (float)sliderW, 30 };
-        if (IsMouseButtonDown(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), musicSliderRect)) {
-            float percent = (GetMousePosition().x - sliderX) / (float)sliderW;
-            percent = std::max(0.0f, std::min(1.0f, percent));
-            pauseMusicVolume = (int)(percent * 100);
-            SoundManager::GetInstance().SetMusicVol("GAMEWORLD_" + std::to_string(level), pauseMusicVolume / 100.0f);
-        }
-        DrawText(TextFormat("%d", pauseMusicVolume), sliderX + sliderW + 20, sliderY - 10, 20, BLACK);
+        DrawText(TextFormat("%d%%", pauseMusicVolume), sliderX + sliderW + 20, sliderY - 10, 20, BLACK);
 
         // --- SFX SLIDER ---
         int sfxSliderY = sliderY + 70;
@@ -433,16 +398,7 @@ void GameScreen::Draw() {
         DrawRectangle(sliderX, sfxSliderY, (int)(pauseSfxVolume * (sliderW/100.0f)), 10, ORANGE);
         int sfxKnobX = sliderX + (int)(pauseSfxVolume * (sliderW/100.0f));
         DrawCircle(sfxKnobX, sfxSliderY + 5, 10, DARKGRAY);
-
-        Rectangle sfxSliderRect = { (float)sliderX, (float)sfxSliderY - 10, (float)sliderW, 30 };
-        if (IsMouseButtonDown(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), sfxSliderRect)) {
-            float percent = (GetMousePosition().x - sliderX) / (float)sliderW;
-            percent = std::max(0.0f, std::min(1.0f, percent));
-            pauseSfxVolume = (int)(percent * 100);
-            // Nếu muốn áp dụng cho tất cả SFX, hãy lặp qua các sound, ở đây ví dụ với "COIN"
-            SoundManager::GetInstance().SetSoundVol("COIN", pauseSfxVolume / 100.0f);
-        }
-        DrawText(TextFormat("%d", pauseSfxVolume), sliderX + sliderW + 20, sfxSliderY - 10, 20, BLACK);
+        DrawText(TextFormat("%d%%", pauseSfxVolume), sliderX + sliderW + 20, sfxSliderY - 10, 20, BLACK);
 
         // --- Nút Resume ---
         Rectangle resumeBtn = { (float)(winX + 50), (float)(winY + winH - 80), 100, 50 };
@@ -453,20 +409,9 @@ void GameScreen::Draw() {
         Rectangle homeBtn = { (float)(winX + 250), (float)(winY + winH - 80), 100, 50 };
         DrawRectangleRec(homeBtn, RED);
         DrawText("Home", homeBtn.x + 20, homeBtn.y + 15, 24, WHITE);
-
-        // Xử lý click nút
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-            Vector2 mouse = GetMousePosition();
-            if (CheckCollisionPointRec(mouse, resumeBtn)) {
-                isPaused = false;
-                showPauseMenu = false;
-            }
-            if (CheckCollisionPointRec(mouse, homeBtn)) {
-                requestGoHome = true;
-            }
-        }
     }
-    // game
+
+    // Game over and reset screens
     Texture *GameOver = &ResrcManager::GetInstance().getTexture("GAME_OVER");
     Font* SuperMarioFont = &ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT");
     Texture *SmallMario = &ResrcManager::GetInstance().getTexture("SMALL_MARIO_0_RIGHT");
@@ -476,7 +421,6 @@ void GameScreen::Draw() {
         DrawTextEx(*SuperMarioFont, "Press ENTER to restart", Vector2{(float)GetScreenWidth() / 2 - 200, (float)GetScreenHeight() / 2 + 100}, 20, 7, WHITE);
     }
     if (gameWorld->GetGameState() == GameState::GAME_RESET && transitionState == TransitionState::NONE) {
-       
         DrawTextEx(*SuperMarioFont, 
             "Press ENTER to restart",
              Vector2{(float)GetScreenWidth() / 2 - 200, 
@@ -490,13 +434,11 @@ void GameScreen::Draw() {
             DrawTextEx(*SuperMarioFont, ("Level " + std::to_string(level )).c_str(),
                 Vector2{(float)GetScreenWidth() / 2 - MeasureTextEx(
                 *SuperMarioFont,
-                ("Level " + std::to_string(level )).c_str(),//fgdgdfgdf
-                20,7).x/2,// thisssbad
-                (float)GetScreenHeight() / 2 -100}, //dvsvsv
+                ("Level " + std::to_string(level )).c_str(), 20,7).x/2,
+                (float)GetScreenHeight() / 2 -100}, 
                 20, 7, WHITE);
-            DrawTextureNPatch(*SmallMario,//fbdb
-                NPatchInfo{Rectangle{0, 0, (float)(*SmallMario).width,
-                                    24}, 0, 0, 0, 0},
+            DrawTextureNPatch(*SmallMario,
+                NPatchInfo{Rectangle{0, 0, (float)(*SmallMario).width, 24}, 0, 0, 0, 0},
                 Rectangle{(float)GetScreenWidth() / 2 -100, (float)GetScreenHeight() / 2-16, 43, 32}, Vector2{0, 0}, 0.0f, WHITE);
                 
                 Vector2 size = MeasureTextEx(*SuperMarioFont,
@@ -572,7 +514,7 @@ void GameScreen::ResetGame() {
          
         gameWorld->player1->SetLives(currentLives1 - 1);
         if (isMultiplayer && gameWorld->player2) {
-            gameWorld->player2->SetLives(currentLives2  -1); // Reset Player 2 lives
+            gameWorld->player2->SetLives(currentLives2  -1);
         }
     } else {
         level = 1;
@@ -587,10 +529,8 @@ void GameScreen::ResetGame() {
         }
     }
     if (isMultiplayer) {
-        // gameWorld = std::make_unique<GameWorld>(level, this, isMultiplayer, player1Type, player2Type);
         gameHUD = std::make_unique<GameHUD>(gameWorld->player1, gameWorld->player2);
     } else {
-        // gameWorld = std::make_unique<GameWorld>(level, this, isMultiplayer, player1Type, player2Type);
         gameHUD = std::make_unique<GameHUD>(gameWorld->player1);
     }
 }
@@ -598,41 +538,36 @@ void GameScreen::ResetGame() {
 void GameScreen::DrawEnd() {
     static const Texture2D *LevelEndCongratulation = &ResrcManager::GetInstance().getTexture("LEVEL_END_CONGRATULATIONS");
     static const Texture2D *LevelEndEnter = &ResrcManager::GetInstance().getTexture("LEVEL_END_ENTER");
-    DrawRectangleRounded(Rectangle{(float)GetScreenWidth() / 2 - 400, (float)GetScreenHeight() / 2 - 350, 800, 700}, 0.2f, 180, Color{255, 245, 137, 220}); // Semi-transparent background
-      DrawRectangleRoundedLinesEx(Rectangle{(float)GetScreenWidth() / 2 - 400, (float)GetScreenHeight() / 2 - 350, 800, 700}, 0.2f, 180, 10.0f, Color{234,136,65,255}); // Border around the rectangle
+    DrawRectangleRounded(Rectangle{(float)GetScreenWidth() / 2 - 400, (float)GetScreenHeight() / 2 - 350, 800, 700}, 0.2f, 180, Color{255, 245, 137, 220});
+    DrawRectangleRoundedLinesEx(Rectangle{(float)GetScreenWidth() / 2 - 400, (float)GetScreenHeight() / 2 - 350, 800, 700}, 0.2f, 180, 10.0f, Color{234,136,65,255});
 
-    // Display summary or transition effects
     DrawTextureNPatch((*LevelEndCongratulation),
                        NPatchInfo{Rectangle{0, 0, (float)(*LevelEndCongratulation).width,
                                            (float)(*LevelEndCongratulation).height}, 0, 0, 0, 0},
                        Rectangle{(float)GetScreenWidth() / 2 - 400, (float)GetScreenHeight() / 2 - 300, 800, 120}, Vector2{0, 0}, 0.0f, WHITE);
 
-    // Display the level completion message
-      std::string summarry = "Level " + std::to_string(level) + " Complete!";
-      DrawTextEx(ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT"), summarry.c_str(),
+    std::string summarry = "Level " + std::to_string(level) + " Complete!";
+    DrawTextEx(ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT"), summarry.c_str(),
                        Vector2{(float)GetScreenWidth() / 2 - MeasureTextEx(ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT"),(summarry).c_str(),40,2).x / 2, (float)GetScreenHeight() / 2 - 150}, 40, 2, WHITE);
 
-    // Display the player's score
-                        std::string score = "Score: " + std::to_string(gameWorld->player1->GetScore() );
+    std::string score = "Score: " + std::to_string(gameWorld->player1->GetScore() );
     DrawTextEx(ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT"), score.c_str(),
             Vector2{(float)GetScreenWidth() / 2 - MeasureTextEx(ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT"),(score).c_str(),60,2).x / 2, (float)GetScreenHeight() / 2 }, 60, 2, WHITE);
       
-      //Display level end enter message
-      DrawTextureNPatch(*LevelEndEnter,
+    DrawTextureNPatch(*LevelEndEnter,
                        NPatchInfo{Rectangle{0, 0, (float)(*LevelEndEnter).width,
                                            (float)(*LevelEndEnter).height}, 0, 0, 0, 0},
                        Rectangle{(float)GetScreenWidth() / 2 -700, (float)GetScreenHeight() / 2+100 , 1400, 400}, Vector2{0, 0}, 0.0f, WHITE);
-      DrawTextureNPatch(ResrcManager::GetInstance().getTexture("HUD_COINS"),
+    DrawTextureNPatch(ResrcManager::GetInstance().getTexture("HUD_COINS"),
                        NPatchInfo{Rectangle{0, 0, (float)ResrcManager::GetInstance().getTexture("HUD_COINS").width,
                                            (float)ResrcManager::GetInstance().getTexture("HUD_COINS").height}, 0, 0, 0, 0},
                        Rectangle{(float)GetScreenWidth() / 2 - 200, (float)GetScreenHeight() / 2 + 100, 70, 70}, Vector2{0, 0}, 0.0f, WHITE);
-        std::string coins = "X " + std::to_string(gameWorld->player1->GetCoins());
-        DrawTextEx(ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT"), coins.c_str(),
+    std::string coins = "X " + std::to_string(gameWorld->player1->GetCoins());
+    DrawTextEx(ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT"), coins.c_str(),
                          Vector2{(float)GetScreenWidth() / 2+50 - MeasureTextEx(ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT"),(coins).c_str(),70,2).x / 2, (float)GetScreenHeight() / 2 + 105}, 70, 2, WHITE);
 }
 
 void GameScreen::NextLevel() {
-    // Lưu thông tin trước khi chuyển level
     int currentLives1 = gameWorld->player1->GetLives();
     int currentCoins1 = gameWorld->player1->GetCoins();
     int currentScore1 = gameWorld->player1->GetScore();
@@ -646,7 +581,6 @@ void GameScreen::NextLevel() {
         currentPlayerState2 =  gameWorld->player2->GetMarioState();
     }
     
-    // Xác định map và độ khó tiếp theo
     MapType nextMap = selectedMap;
     DifficultyLevel nextDifficulty = selectedDifficulty;
 
@@ -660,7 +594,6 @@ void GameScreen::NextLevel() {
         nextMap = MapType::MAP_3;
         nextDifficulty = selectedDifficulty;
     } else if (selectedMap == MapType::MAP_3) {
-        // Nếu đang ở map 3 và độ khó chưa phải HARD thì tăng độ khó
         if (selectedDifficulty == DifficultyLevel::EASY) {
             nextMap = MapType::MAP_3;
             nextDifficulty = DifficultyLevel::MEDIUM;
@@ -668,17 +601,14 @@ void GameScreen::NextLevel() {
             nextMap = MapType::MAP_3;
             nextDifficulty = DifficultyLevel::HARD;
         } else {
-            // Nếu đang ở map 3 và độ khó HARD thì chuyển sang map boss
             nextMap = MapType::MAP_BOSS;
             nextDifficulty = DifficultyLevel::EASY;
         }
     } else if (selectedMap == MapType::MAP_BOSS) {
-        // Nếu thắng map boss thì kết thúc game (chuyển về menu)
         screenController->ChangeScreen(new MenuScreen(screenController));
         return;
     }
 
-    // Tạo GameWorld mới với map và độ khó mới
     int nextLevel = 1;
     switch (nextMap) {
         case MapType::MAP_TUTORIAL: nextLevel = 0; break;
@@ -693,7 +623,6 @@ void GameScreen::NextLevel() {
     level = nextLevel;
     gameWorld = std::make_unique<GameWorld>(level, this, isMultiplayer, player1Type, player2Type);
     
-    // Khôi phục thông tin Mario
     gameWorld->player1->SetLives(currentLives1);
     gameWorld->player1->SetCoins(currentCoins1);
     gameWorld->player1->SetScore(currentScore1);
@@ -707,13 +636,38 @@ void GameScreen::NextLevel() {
     } else gameHUD = std::make_unique<GameHUD>(gameWorld->player1);
 }
 
+void GameScreen::BeginTransition(TransitionState transitionState) {
+    this->transitionState = transitionState;
+    transitionTimeAcum = 0.0f;
+    switch (transitionState) {
+        case TransitionState::NEXT_LEVEL:
+            transitionTime = 3;
+            SoundManager::GetInstance().StopAllSounds();
+            break;
+        case TransitionState::GAME_OVER:
+            transitionTime = 3;
+            SoundManager::GetInstance().StopAllSounds();
+            break;
+        case TransitionState::GAME_RESET:
+            transitionTime = 3;
+            SoundManager::GetInstance().StopAllSounds();
+            break;
+        case TransitionState::NONE:
+            transitionTime = 3;
+            SoundManager::GetInstance().StopAllSounds();
+            string musicKey = "GAMEWORLD_" + std::to_string(level);
+            SoundManager::GetInstance().SetMusicVol(musicKey, pauseMusicVolume / 100.0f);
+            SoundManager::GetInstance().PlayMusic(musicKey);
+            break;
+    }
+}
+
 void GameScreen::SaveCurrentGame(int slotIndex) {
     GameSaveData saveData;
 
     saveData.saveDateTime = GetCurrentDateTime();
     saveData.currentLevel = level;
     saveData.isMultiplayer = isMultiplayer;
-    // saveData.gameTime = GetGameTime();
 
     saveData.player1.characterType = static_cast<int>(player1Type);
     saveData.player1.lives = gameWorld->player1->GetLives();
@@ -745,7 +699,6 @@ void GameScreen::SaveCurrentGame(int slotIndex) {
     } else {
         std::cerr << "Failed to save game to slot " << slotIndex << std::endl;
     }
-
 }
 
 void GameScreen::LoadSavedGame(int slotIndex) {
@@ -795,9 +748,9 @@ std::string GameScreen::GetCurrentDateTime() {
 
 void GameScreen::HandleSaveLoadInput() {
     if (IsKeyPressed(KEY_U)) {
-        SaveCurrentGame(1); // Quick save to slot 1
+        SaveCurrentGame(1);
     }
     if (IsKeyPressed(KEY_I)) {
-        LoadSavedGame(1); // Quick load from slot 1
+        LoadSavedGame(1);
     }
 }
