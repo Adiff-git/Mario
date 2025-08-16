@@ -675,82 +675,216 @@ void GameWorld::UpdateWorld()
     }
 }
 
+// void GameWorld::DrawWorld()
+// {
+//     // Camera state: hysteresis zoom
+//     static bool  camInit     = false;
+//     static float camZoom     = 1.1f;   // current zoom (MP)
+//     static float targetZoom  = 1.1f;   // desired zoom (MP)
+//     // Zoom limits
+//     const float minZoom      = 1.0f;   // zoom out tối đa
+//     const float maxZoom      = 1.25f;  // zoom in tối đa
+//     // Hysteresis theo khoảng cách giữa 2 người chơi
+//     const float nearDist     = 420.0f; // < nearDist => zoom in
+//     const float farDist      = 760.0f; // > farDist  => zoom out
+//     const float zoomSmooth   = 0.12f;  // 0..1
+
+//     auto clampf = [](float v, float lo, float hi){ return v < lo ? lo : (v > hi ? hi : v); };
+
+//     if (!camInit) {
+//         camZoom    = clampf(camera.zoom, minZoom, maxZoom);
+//         targetZoom = camZoom;
+//         // Lọc texture nền để giảm rung hình khi zoom
+//         SetTextureFilter(background, TEXTURE_FILTER_BILINEAR);
+//         camInit    = true;
+//     }
+
+//     camera.offset = {(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
+
+//     if (isMultiplayer && player1 && player2)
+//     {
+//         Vector2 p1 = player1->GetPos();
+//         Vector2 p2 = player2->GetPos();
+
+//         // Khoảng cách dùng cho hysteresis
+//         float dx = fabsf(p1.x - p2.x);
+//         float dy = fabsf(p1.y - p2.y);
+//         float dist = sqrtf(dx * dx + dy * dy);
+
+//         if (dist > farDist)       targetZoom = minZoom;
+//         else if (dist < nearDist) targetZoom = maxZoom;
+
+//         camZoom = camZoom + (targetZoom - camZoom) * zoomSmooth;
+//         camera.zoom = clampf(camZoom, minZoom, maxZoom);
+
+//         // Tâm camera là tâm 2 người chơi (không khóa trục dọc)
+//         Vector2 center{ (p1.x + p2.x) * 0.5f, (p1.y + p2.y) * 0.5f };
+//         camera.target = center;
+
+//         // Clamp trong biên map theo world-units (có xét zoom)
+//         float halfW = (GetScreenWidth()  * 0.5f) / camera.zoom;
+//         float halfH = (GetScreenHeight() * 0.5f) / camera.zoom;
+//         float mapW  = (float)map.GetWidth();
+//         float mapH  = (float)map.getHeight();
+
+//         if (camera.target.x - halfW < 0)    camera.target.x = halfW;
+//         if (camera.target.x + halfW > mapW) camera.target.x = mapW - halfW;
+//         if (camera.target.y - halfH < 0)    camera.target.y = halfH;
+//         if (camera.target.y + halfH > mapH) camera.target.y = mapH - halfH;
+//     }
+//     else if (player1)
+//     {
+//         // Single player: zoom cố định, theo dõi cả trục dọc
+//         camera.zoom = 1.3f;
+
+//         Vector2 center = player1->GetPos();
+//         camera.target  = center;
+
+//         float halfW = (GetScreenWidth()  * 0.5f) / camera.zoom;
+//         float halfH = (GetScreenHeight() * 0.5f) / camera.zoom;
+//         float mapW  = (float)map.GetWidth();
+//         float mapH  = (float)map.getHeight();
+
+//         if (camera.target.x - halfW < 0)    camera.target.x = halfW;
+//         if (camera.target.x + halfW > mapW) camera.target.x = mapW - halfW;
+//         if (camera.target.y - halfH < 0)    camera.target.y = halfH;
+//         if (camera.target.y + halfH > mapH) camera.target.y = mapH - halfH;
+//     }
+
+//     // Parallax background wrap theo world-units (có xét zoom) để tránh lỗi khi zoom dọc
+//     float halfW = (GetScreenWidth() * 0.5f) / camera.zoom;
+//     float tileW = background.width * 1.3f;
+
+//     // Dịch BGpos theo hướng camera di chuyển, dùng while để phòng trường hợp nhảy xa
+//     while (camera.target.x - halfW >= BGpos + tileW) BGpos += tileW;
+//     while (camera.target.x + halfW <= BGpos)         BGpos -= tileW;
+
+//     BeginMode2D(camera);
+//     DrawTextureEx(background, Vector2{BGpos - tileW, -200}, 0.0f, 1.3f, WHITE);
+//     DrawTextureEx(background, Vector2{BGpos,         -200}, 0.0f, 1.3f, WHITE);
+//     DrawTextureEx(background, Vector2{BGpos + tileW, -200}, 0.0f, 1.3f, WHITE);
+//     map.Draw();
+
+//     if (player1) player1->Draw();
+//     if (isMultiplayer && player2) player2->Draw();
+//     EndMode2D();
+// }
+
+
 void GameWorld::DrawWorld()
 {
+    // Camera state: hysteresis zoom
+    static bool  camInit     = false;
+    static float camZoom     = 1.1f;   // current zoom (MP)
+    static float targetZoom  = 1.1f;   // desired zoom (MP)
+    // Zoom limits
+    const float minZoom      = 1.0f;   // zoom out tối đa
+    const float maxZoom      = 1.25f;  // zoom in tối đa
+    // Hysteresis theo khoảng cách giữa 2 người chơi
+    const float nearDist     = 420.0f; // < nearDist => zoom in
+    const float farDist      = 760.0f; // > farDist  => zoom out
+    const float zoomSmooth   = 0.12f;  // 0..1
+
+    auto clampf = [](float v, float lo, float hi){ return v < lo ? lo : (v > hi ? hi : v); };
+    auto isAlive = [](Character* p){
+        if (!p) return false;
+        auto s = p->GetState();
+        return s != OBJECT_STATE_DEAD && s != OBJECT_STATE_DYING;
+    };
+
+    if (!camInit) {
+        camZoom    = clampf(camera.zoom, minZoom, maxZoom);
+        targetZoom = camZoom;
+        // Lọc texture nền để giảm rung hình khi zoom
+        SetTextureFilter(background, TEXTURE_FILTER_BILINEAR);
+        camInit    = true;
+    }
+
+    camera.offset = {(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
+
     if (isMultiplayer && player1 && player2)
     {
-        Vector2 p1 = player1->GetPos();
-        Vector2 p2 = player2->GetPos();
-        float avgX = (p1.x + p2.x) / 2.0f;
-        float avgY = (p1.y + p2.y) / 2.0f;
-        float dx = fabsf(p1.x - p2.x);
-        float dy = fabsf(p1.y - p2.y);
-        float maxDist = 700.0f;
-        float minZoom = 0.7f;
-        float maxZoom = 1.3f;
-        float dist = sqrtf(dx * dx + dy * dy);
-        float zoom = maxZoom - (dist / maxDist) * (maxZoom - minZoom);
-        if (zoom < minZoom)
-            zoom = minZoom;
-        if (zoom > maxZoom)
-            zoom = maxZoom;
-        camera.target = {avgX, avgY};
-        camera.offset = {(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
-        camera.zoom = zoom;
+        bool p1Alive = isAlive(player1);
+        bool p2Alive = isAlive(player2);
 
-        float camLeft = camera.target.x - (GetScreenWidth() / 2) / camera.zoom;
-        float camRight = camera.target.x + (GetScreenWidth() / 2) / camera.zoom;
-        float camTop = camera.target.y - (GetScreenHeight() / 2) / camera.zoom;
-        float camBottom = camera.target.y + (GetScreenHeight() / 2) / camera.zoom;
+        if (p1Alive && p2Alive)
+        {
+            Vector2 p1 = player1->GetPos();
+            Vector2 p2 = player2->GetPos();
 
-        if (camLeft < 0)
-            camera.target.x = (GetScreenWidth() / 2) / camera.zoom;
-        if (camRight > map.GetWidth())
-            camera.target.x = map.GetWidth() - (GetScreenWidth() / 2) / camera.zoom;
-        if (camTop < 0)
-            camera.target.y = (GetScreenHeight() / 2) / camera.zoom;
-        if (camBottom > map.getHeight())
-            camera.target.y = map.getHeight() - (GetScreenHeight() / 2) / camera.zoom;
+            // Khoảng cách dùng cho hysteresis
+            float dx = fabsf(p1.x - p2.x);
+            float dy = fabsf(p1.y - p2.y);
+            float dist = sqrtf(dx * dx + dy * dy);
+
+            if (dist > farDist)       targetZoom = minZoom;
+            else if (dist < nearDist) targetZoom = maxZoom;
+
+            camZoom = camZoom + (targetZoom - camZoom) * zoomSmooth;
+            camera.zoom = clampf(camZoom, minZoom, maxZoom);
+
+            // Tâm camera là tâm 2 người chơi
+            Vector2 center{ (p1.x + p2.x) * 0.5f, (p1.y + p2.y) * 0.5f };
+            camera.target = center;
+        }
+        else
+        {
+            // Chỉ còn 1 người sống: focus vào người còn lại và zoom-in nhẹ để ổn định khung hình
+            Character* focus = p1Alive ? player1 : (p2Alive ? player2 : player1);
+            targetZoom = maxZoom; // zoom gần để tránh cộng hưởng zoom dọc khi chỉ còn 1 nhân vật
+            camZoom = camZoom + (targetZoom - camZoom) * zoomSmooth;
+            camera.zoom = clampf(camZoom, minZoom, maxZoom);
+
+            camera.target = focus->GetPos();
+        }
+
+        // Clamp trong biên map theo world-units (có xét zoom)
+        float halfW = (GetScreenWidth()  * 0.5f) / camera.zoom;
+        float halfH = (GetScreenHeight() * 0.5f) / camera.zoom;
+        float mapW  = (float)map.GetWidth();
+        float mapH  = (float)map.getHeight();
+
+        if (camera.target.x - halfW < 0)    camera.target.x = halfW;
+        if (camera.target.x + halfW > mapW) camera.target.x = mapW - halfW;
+        if (camera.target.y - halfH < 0)    camera.target.y = halfH;
+        if (camera.target.y + halfH > mapH) camera.target.y = mapH - halfH;
     }
     else if (player1)
     {
-        camera.target = player1->GetPos();
-        camera.offset = {(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
+        // Single player: zoom cố định, theo dõi cả trục dọc
         camera.zoom = 1.3f;
 
-        float camLeft = camera.target.x - (GetScreenWidth() / 2) / camera.zoom;
-        float camRight = camera.target.x + (GetScreenWidth() / 2) / camera.zoom;
-        float camTop = camera.target.y - (GetScreenHeight() / 2) / camera.zoom;
-        float camBottom = camera.target.y + (GetScreenHeight() / 2) / camera.zoom;
+        Vector2 center = player1->GetPos();
+        camera.target  = center;
 
-        if (camLeft < 0)
-            camera.target.x = (GetScreenWidth() / 2) / camera.zoom;
-        if (camRight > map.GetWidth())
-            camera.target.x = map.GetWidth() - (GetScreenWidth() / 2) / camera.zoom;
-        if (camTop < 0)
-            camera.target.y = (GetScreenHeight() / 2) / camera.zoom;
-        if (camBottom > map.getHeight())
-            camera.target.y = map.getHeight() - (GetScreenHeight() / 2) / camera.zoom;
+        float halfW = (GetScreenWidth()  * 0.5f) / camera.zoom;
+        float halfH = (GetScreenHeight() * 0.5f) / camera.zoom;
+        float mapW  = (float)map.GetWidth();
+        float mapH  = (float)map.getHeight();
+
+        if (camera.target.x - halfW < 0)    camera.target.x = halfW;
+        if (camera.target.x + halfW > mapW) camera.target.x = mapW - halfW;
+        if (camera.target.y - halfH < 0)    camera.target.y = halfH;
+        if (camera.target.y + halfH > mapH) camera.target.y = mapH - halfH;
     }
 
-    if (camera.target.x - GetScreenWidth() / 2 >= BGpos)
-        BGpos = BGpos + background.width * 1.3f;
-    if (camera.target.x + GetScreenWidth() / 2 <= BGpos + background.width * 1.3f)
-        BGpos = BGpos - background.width * 1.3f;
+    // Parallax background wrap theo world-units (có xét zoom)
+    float halfW = (GetScreenWidth() * 0.5f) / camera.zoom;
+    float tileW = background.width * 1.3f;
+
+    while (camera.target.x - halfW >= BGpos + tileW) BGpos += tileW;
+    while (camera.target.x + halfW <= BGpos)         BGpos -= tileW;
 
     BeginMode2D(camera);
-    DrawTextureEx(background, Vector2{BGpos - background.width * 1.3f, -200}, 0.0f, 1.3f, WHITE);
-    DrawTextureEx(background, Vector2{BGpos, -200}, 0.0f, 1.3f, WHITE);
-    DrawTextureEx(background, Vector2{BGpos + background.width * 1.3f, -200}, 0.0f, 1.3f, WHITE);
+    DrawTextureEx(background, Vector2{BGpos - tileW, -200}, 0.0f, 1.3f, WHITE);
+    DrawTextureEx(background, Vector2{BGpos,         -200}, 0.0f, 1.3f, WHITE);
+    DrawTextureEx(background, Vector2{BGpos + tileW, -200}, 0.0f, 1.3f, WHITE);
     map.Draw();
 
-    if (player1)
-        player1->Draw();
-    if (isMultiplayer && player2)
-        player2->Draw();
+    if (player1) player1->Draw();
+    if (isMultiplayer && player2) player2->Draw();
     EndMode2D();
 }
-
 
 bool GameWorld::IsCompleted()
 {
