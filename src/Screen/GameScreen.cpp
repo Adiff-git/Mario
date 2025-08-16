@@ -536,35 +536,34 @@ void GameScreen::ResetGame() {
 }
 
 void GameScreen::DrawEnd() {
-    static const Texture2D *LevelEndCongratulation = &ResrcManager::GetInstance().getTexture("LEVEL_END_CONGRATULATIONS");
-    static const Texture2D *LevelEndEnter = &ResrcManager::GetInstance().getTexture("LEVEL_END_ENTER");
-    DrawRectangleRounded(Rectangle{(float)GetScreenWidth() / 2 - 400, (float)GetScreenHeight() / 2 - 350, 800, 700}, 0.2f, 180, Color{255, 245, 137, 220});
-    DrawRectangleRoundedLinesEx(Rectangle{(float)GetScreenWidth() / 2 - 400, (float)GetScreenHeight() / 2 - 350, 800, 700}, 0.2f, 180, 10.0f, Color{234,136,65,255});
+    // Vẽ texture WIN (Course Cleared.png)
+    Texture2D& winTex = ResrcManager::GetInstance().getTexture("WIN");
+    DrawTexturePro(
+        winTex,
+        {0, 0, (float)winTex.width, (float)winTex.height},
+        {(float)GetScreenWidth() / 2 - 400, (float)GetScreenHeight() / 2 - 300, 800, 600},
+        {0, 0}, 0.0f, WHITE);
 
-    DrawTextureNPatch((*LevelEndCongratulation),
-                       NPatchInfo{Rectangle{0, 0, (float)(*LevelEndCongratulation).width,
-                                           (float)(*LevelEndCongratulation).height}, 0, 0, 0, 0},
-                       Rectangle{(float)GetScreenWidth() / 2 - 400, (float)GetScreenHeight() / 2 - 300, 800, 120}, Vector2{0, 0}, 0.0f, WHITE);
+    Rectangle backBtn = {(float)GetScreenWidth() / 2 - 100, (float)GetScreenHeight() / 2 + 250, 200, 60};
+    DrawRectangleRounded(backBtn, 0.3f, 20, Color{234,136,65,255});
+    DrawText("Back to Menu", (int)backBtn.x + 20, (int)backBtn.y + 15, 32, WHITE);
 
-    std::string summarry = "Level " + std::to_string(level) + " Complete!";
-    DrawTextEx(ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT"), summarry.c_str(),
-                       Vector2{(float)GetScreenWidth() / 2 - MeasureTextEx(ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT"),(summarry).c_str(),40,2).x / 2, (float)GetScreenHeight() / 2 - 150}, 40, 2, WHITE);
-
-    std::string score = "Score: " + std::to_string(gameWorld->player1->GetScore() );
-    DrawTextEx(ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT"), score.c_str(),
-            Vector2{(float)GetScreenWidth() / 2 - MeasureTextEx(ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT"),(score).c_str(),60,2).x / 2, (float)GetScreenHeight() / 2 }, 60, 2, WHITE);
-      
-    DrawTextureNPatch(*LevelEndEnter,
-                       NPatchInfo{Rectangle{0, 0, (float)(*LevelEndEnter).width,
-                                           (float)(*LevelEndEnter).height}, 0, 0, 0, 0},
-                       Rectangle{(float)GetScreenWidth() / 2 -700, (float)GetScreenHeight() / 2+100 , 1400, 400}, Vector2{0, 0}, 0.0f, WHITE);
-    DrawTextureNPatch(ResrcManager::GetInstance().getTexture("HUD_COINS"),
-                       NPatchInfo{Rectangle{0, 0, (float)ResrcManager::GetInstance().getTexture("HUD_COINS").width,
-                                           (float)ResrcManager::GetInstance().getTexture("HUD_COINS").height}, 0, 0, 0, 0},
-                       Rectangle{(float)GetScreenWidth() / 2 - 200, (float)GetScreenHeight() / 2 + 100, 70, 70}, Vector2{0, 0}, 0.0f, WHITE);
-    std::string coins = "X " + std::to_string(gameWorld->player1->GetCoins());
-    DrawTextEx(ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT"), coins.c_str(),
-                         Vector2{(float)GetScreenWidth() / 2+50 - MeasureTextEx(ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT"),(coins).c_str(),70,2).x / 2, (float)GetScreenHeight() / 2 + 105}, 70, 2, WHITE);
+    bool backPressed = false;
+    // if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+    //     Vector2 mouse = GetMousePosition();
+    //     if (mouse.x >= backBtn.x && mouse.x <= backBtn.x + backBtn.width &&
+    //         mouse.y >= backBtn.y && mouse.y <= backBtn.y + backBtn.height) {
+    //         backPressed = true;
+    //     }
+    // }
+    if (IsKeyPressed(KEY_ENTER)) {
+        backPressed = true;
+    }
+    if (backPressed) {
+        screenController->ChangeScreen(new MenuScreen(screenController));
+    }
+    
+    
 }
 
 void GameScreen::NextLevel() {
