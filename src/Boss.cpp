@@ -582,7 +582,7 @@ void Boss::Idle(float dt)
     static int idleCurrentFrame = 0;
     const float idleFrameTime = 0.55f;
     const float jumpVelocity = -150.0f;
-    const float leftVelocity = -30.0f;
+    const float leftVelocity = -110.0f;
     static bool hasJumped = false;
 
     if (hasPlayedIdleAnimation) {
