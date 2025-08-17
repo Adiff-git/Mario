@@ -82,23 +82,37 @@ void Map::LoadMap(int mapIndex)
             else if (tileId == 107) {
                 blocks.push_back(new EyesClosedBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE));
             }
-            else if (tileId == 108) {
-                blocks.push_back(new EyesOpenedBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE));
+            else if (tileId == 108 || tileId == 152) {
+                auto eob = new EyesOpenedBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE);
+                if(tileId == 152) eob->SetHit(true);
+                blocks.push_back(eob);
             }
-            else if (tileId == 112) {
-                blocks.push_back(new GlassBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE));
+            else if (tileId == 112 || tileId == 149 || tileId == 150) {
+                auto gb = new GlassBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE);
+                if(tileId == 149) gb->SetState(OBJECT_STATE_TRANSITIONING_1);
+                else if(tileId == 150) gb->SetState(OBJECT_STATE_TRANSITIONING_2);
+                blocks.push_back(gb);
+            }
+            else if (tileId == 151) {
+                // Glass block already removed: skip spawning
             }
             else if(tileId == 115){
                 // Massageblock
             }
-            else if(tileId == 116) {
-                blocks.push_back(new QuestionBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE, GIFT_NONE));
+            else if(tileId == 116 || tileId == 170) { // unused / used empty
+                auto qb = new QuestionBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE, GIFT_NONE);
+                if(tileId == 170) qb->SetHit(true);
+                blocks.push_back(qb);
             }
-            else if(tileId == 117) {
-                blocks.push_back(new QuestionBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE, GIFT_COIN));
+            else if(tileId == 117 || tileId == 171) { // unused / used coin
+                auto qb = new QuestionBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE, GIFT_COIN);
+                if(tileId == 171) qb->SetHit(true);
+                blocks.push_back(qb);
             }
-            else if(tileId == 118) {
-                blocks.push_back(new QuestionBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE, GIFT_FIRE_FLOWER));
+            else if(tileId == 118 || tileId == 172) { // unused / used fire flower
+                auto qb = new QuestionBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE, GIFT_FIRE_FLOWER);
+                if(tileId == 172) qb->SetHit(true);
+                blocks.push_back(qb);
             }
             else if(tileId == 120) {
                 //StoneBlock
@@ -145,8 +159,12 @@ void Map::LoadMap(int mapIndex)
             else if(tileId == 134) {
                 enemies.push_back(new RedKoopa(Vector2{(float)x * tilewidth, (float)y * tileheight}));
             }
-            else if(tileId == 135){
-                enemies.push_back(new Rex(Vector2{(float)x * tilewidth, (float)y * tileheight}));
+            else if(tileId == 135 || tileId == 173){
+                auto rex = new Rex(Vector2{(float)x * tilewidth, (float)y * tileheight});
+                if(tileId == 173){
+                    rex->OnHit(); // apply first squash state
+                }
+                enemies.push_back(rex);
             }
             else if(tileId == 136){
                 //enemies.push_back(new Swooper(Vector2{(float)x * tilewidth, (float)y * tileheight}));
@@ -202,7 +220,7 @@ int Map :: ExtractMapIndex(const std::string& filename) {
 }
 
 void Map :: LoadFromJsonFile(const std::string& filepath){
-     std::ifstream file(filepath);
+    std::ifstream file(filepath);
     if (!file) {
         std::cerr << "Could not open json file " << filepath << std::endl;
         return;
@@ -232,23 +250,35 @@ void Map :: LoadFromJsonFile(const std::string& filepath){
             else if (tileId == 107) {
                 blocks.push_back(new EyesClosedBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE));
             }
-            else if (tileId == 108) {
-                blocks.push_back(new EyesOpenedBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE));
+            else if (tileId == 108 || tileId == 152) { // EyesOpened normal / hit
+                auto eob = new EyesOpenedBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE);
+                if(tileId == 152) eob->SetHit(true);
+                blocks.push_back(eob);
             }
-            else if (tileId == 112) {
-                blocks.push_back(new GlassBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE));
+            else if (tileId == 112 || tileId == 149 || tileId == 150) { // Glass states
+                auto gb = new GlassBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE);
+                if(tileId == 149) gb->SetState(OBJECT_STATE_TRANSITIONING_1);
+                else if(tileId == 150) gb->SetState(OBJECT_STATE_TRANSITIONING_2);
+                blocks.push_back(gb);
             }
+            else if (tileId == 151) { /* removed glass, skip */ }
             else if(tileId == 115){
                 // Massageblock
             }
-            else if(tileId == 116) {
-                blocks.push_back(new QuestionBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE, GIFT_NONE));
+            else if(tileId == 116 || tileId == 170) { // unused / used empty
+                auto qb = new QuestionBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE, GIFT_NONE);
+                if(tileId == 170) qb->SetHit(true);
+                blocks.push_back(qb);
             }
-            else if(tileId == 117) {
-                blocks.push_back(new QuestionBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE, GIFT_COIN));
+            else if(tileId == 117 || tileId == 171) { // unused / used coin
+                auto qb = new QuestionBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE, GIFT_COIN);
+                if(tileId == 171) qb->SetHit(true);
+                blocks.push_back(qb);
             }
-            else if(tileId == 118) {
-                blocks.push_back(new QuestionBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE, GIFT_FIRE_FLOWER));
+            else if(tileId == 118 || tileId == 172) { // unused / used fire flower
+                auto qb = new QuestionBlock({(float)x * tilewidth, (float)y * tileheight}, {32, 32}, WHITE, GIFT_FIRE_FLOWER);
+                if(tileId == 172) qb->SetHit(true);
+                blocks.push_back(qb);
             }
             else if(tileId == 120) {
                 //StoneBlock
@@ -368,4 +398,26 @@ Map::Map()
     // Coin coin({200, 800});
     
 
+}
+
+void Map::Clear(){
+    for (auto tile : interactiveTiles) {
+        delete tile;
+    }
+    interactiveTiles.clear();
+
+    for (auto block : blocks) {
+        delete block;
+    }
+    blocks.clear();
+
+    for (auto enemy : enemies) {
+        delete enemy;
+    }
+    enemies.clear();
+
+    for (auto item : interactiveItems) {
+        item.reset();
+    }
+    interactiveItems.clear();
 }

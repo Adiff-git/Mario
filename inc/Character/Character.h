@@ -10,7 +10,6 @@
 #include "Observer.h"
 #include <vector>
 #include "../inc/Command/InputHandler.h"
-#include "../inc/SaveData.h"
 #include "../inc/Character/CharacterType.h"
 class InputHandler;
 

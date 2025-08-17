@@ -70,6 +70,7 @@ void SettingsScreen::Update() {
             musicVolume = (int)(percent * 100);
             SoundManager::GetInstance().SetMusicVol("MENU", musicVolume / 100.0f);
             SoundManager::GetInstance().SetMusicVol("GAMEWORLD_1", musicVolume / 100.0f);
+
         }
 
         int sfxSliderY = sliderStartY + 70;
@@ -83,6 +84,7 @@ void SettingsScreen::Update() {
             SoundManager::GetInstance().SetSoundVol("ENEMY_DEATH", sfxVolume / 100.0f);
             SoundManager::GetInstance().SetSoundVol("MARIO_JUMP", sfxVolume / 100.0f);
             SoundManager::GetInstance().SetSoundVol("BUTTON_CLICK", sfxVolume / 100.0f);
+
         }
 
         tutorialsButton.Update();

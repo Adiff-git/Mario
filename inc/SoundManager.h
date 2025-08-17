@@ -24,6 +24,7 @@ public:
     void StopMusic(const std::string& name);
     void StopAllSounds();
     void SetAllMusicVol(float volume);
+    void SetAllSoundVol(float volume);
     void Update();
     
     // Volume control methods - now public
