@@ -127,6 +127,21 @@ void SoundManager::SetSoundVol(const std::string& name, float volume) {
     }
 }
 
+void SoundManager::SetAllSoundVol(float volume) {
+    volume = std::max(0.0f, std::min(1.0f, volume));
+    for (auto& soundItem : soundVolumes) {
+        soundItem.second = volume;
+        if (sounds.find(soundItem.first) != sounds.end()) {
+            float finalVolume = isMuted ? 0.0f : volume * masterVolume;
+            SetSoundVolume(*sounds[soundItem.first], finalVolume);
+            if (isMuted) {
+                StopSound(*sounds[soundItem.first]);
+            }
+            std::cout << "[SoundManager] Sound '" << soundItem.first << "' volume set to: " << finalVolume << ", muted: " << isMuted << std::endl;
+        }
+    }
+}
+
 float SoundManager::GetMasterVol() {
     return masterVolume;
 }

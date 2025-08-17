@@ -5,16 +5,19 @@
 #include "../inc/Screen/GameScreen.h"
 #include "../inc/Screen/GameModeScreen.h"
 #include "../inc/Screen/MapEditorScreen.h"
- 
+#include "../inc/Screen/SaveScreen.h"
 
 MenuScreen::MenuScreen(ScreenController* screenController ) : Screen(screenController), 
 startButton(Vector2{1600/2 - 150, 900/2 - 100}, Vector2{300, 80}),
 MapEditorButton(Vector2{1600/2 - 150, 900/2 + 10}, Vector2{300, 80}),
-settingsButton(Vector2{1600/2 - 150, 900/2 + 120}, Vector2{300, 80}) {
+settingsButton(Vector2{1600/2 - 150, 900/2 + 120}, Vector2{300, 80}),
+ContinueButton(Vector2{1600/2 - 150, 900/2 + 230}, Vector2{300, 80})
+{
     backgroundTexture = &ResrcManager::GetInstance().getTexture("BACKGROUND_10");
     logoTexture = &ResrcManager::GetInstance().getTexture("LOGO");
     startButton.SetTexture(ResrcManager::GetInstance().getTexture("START_BUTTON"));
     MapEditorButton.SetTexture(ResrcManager::GetInstance().getTexture("MAP_EDITOR_BUTTON"));
+    ContinueButton.SetTexture(ResrcManager::GetInstance().getTexture("START_BUTTON"));
     // startButton.SetPosition({1600/2 - 50, 900 / 2 - 50});
     // startButton.SetSize({200, 50});
     // exitButton.SetTexture(ResrcManager::GetInstance().getTexture("EXIT_BUTTON"));
@@ -33,6 +36,7 @@ void MenuScreen::Update() {
     MapEditorButton.Update();
     // exitButton.Update();
     settingsButton.Update();
+    ContinueButton.Update();
 
     if (startButton.IsPressed()) {
         std::cout << "Start button pressed!" << std::endl;
@@ -46,6 +50,11 @@ void MenuScreen::Update() {
     else if (settingsButton.IsPressed()) {
         std::cout << "Settings button pressed!" << std::endl;
         screenController->ChangeScreen(new SettingsScreen(screenController));
+    }
+    else if (ContinueButton.IsPressed()) {
+        std::cout << "Continue button pressed!" << std::endl;
+        // Open save selection screen
+        screenController->ChangeScreen(new SaveScreen(screenController));
     }
     // } else if (exitButton.IsPressed()) {
     //     CloseWindow(); // Close the window and exit the application
@@ -77,6 +86,7 @@ void MenuScreen::Draw() {
     startButton.Draw();
     MapEditorButton.Draw();
     settingsButton.Draw();
+    ContinueButton.Draw();
     // exitButton.Draw();
 }
 

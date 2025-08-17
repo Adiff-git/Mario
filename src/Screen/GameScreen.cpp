@@ -7,6 +7,8 @@
 #include <chrono>
 #include <sstream>
 #include <iomanip>
+#include <filesystem>
+#include "json.hpp"
 
 GameScreen::GameScreen(ScreenController *screenController)
     : Screen(screenController),
@@ -17,6 +19,9 @@ GameScreen::GameScreen(ScreenController *screenController)
       transitionTimeAcum(0.0f),
       gameHUD(nullptr),
       isMultiplayer(false),
+      PlayButton(Vector2{(float)PauseScreenPosX + 50, (float)PauseScreenPosY + 300}, Vector2{100, 50}, "PLAY", 20, 1),
+      MenuButton(Vector2{(float)PauseScreenPosX + 200, (float)PauseScreenPosY + 300}, Vector2{100, 50}, "MENU", 20, 1),
+      SaveButton(Vector2{(float)PauseScreenPosX + 350, (float)PauseScreenPosY + 300}, Vector2{100, 50}, "SAVE", 20, 1),
       player1Type(CharacterType::MARIO),
       player2Type(CharacterType::LUIGI),
       pauseMusicVolume(0),
@@ -48,6 +53,9 @@ GameScreen::GameScreen(ScreenController *screenController, bool multiplayer,
       transitionTime(1.0f),
       transitionTimeAcum(0.0f),
       gameHUD(nullptr),
+      PlayButton(Vector2{(float)PauseScreenPosX + 50, (float)PauseScreenPosY + 300}, Vector2{100, 50}, "PLAY", 20, 1),
+      MenuButton(Vector2{(float)PauseScreenPosX + 200, (float)PauseScreenPosY + 300}, Vector2{100, 50}, "MENU", 20, 1),
+      SaveButton(Vector2{(float)PauseScreenPosX + 350, (float)PauseScreenPosY + 300}, Vector2{100, 50}, "SAVE", 20, 1),
       isMultiplayer(multiplayer),
       player1Type(p1Type),
       player2Type(p2Type),
@@ -91,6 +99,9 @@ GameScreen::GameScreen(ScreenController *screenController, bool multiplayer,
       level(1),
       transitionState(TransitionState::NONE),
       transitionTime(1.0f),
+      PlayButton(Vector2{(float)PauseScreenPosX + 50, (float)PauseScreenPosY + 300}, Vector2{100, 50}, "PLAY", 20, 1),
+      MenuButton(Vector2{(float)PauseScreenPosX + 200, (float)PauseScreenPosY + 300}, Vector2{100, 50}, "MENU", 20, 1),
+      SaveButton(Vector2{(float)PauseScreenPosX + 350, (float)PauseScreenPosY + 300}, Vector2{100, 50}, "SAVE", 20, 1),
       transitionTimeAcum(0.0f),
       gameHUD(nullptr),
       isMultiplayer(multiplayer),
@@ -128,7 +139,6 @@ GameScreen::GameScreen(ScreenController *screenController, bool multiplayer,
     float baseSpeedMultiplier = 1.0f;
     float levelMultiplier = 1.0f;
 
-    // Base multiplier from difficulty
     switch (difficulty)
     {
     case DifficultyLevel::EASY:
@@ -144,8 +154,6 @@ GameScreen::GameScreen(ScreenController *screenController, bool multiplayer,
         baseSpeedMultiplier = 1.0f;
         break;
     }
-
-    // Additional multiplier from map level
     switch (level)
     {
     case 1:
@@ -161,8 +169,6 @@ GameScreen::GameScreen(ScreenController *screenController, bool multiplayer,
         levelMultiplier = 1.0f;
         break;
     }
-
-    // Combine both multipliers
     float enemySpeedMultiplier = baseSpeedMultiplier * levelMultiplier;
 
     gameWorld = std::make_unique<GameWorld>(level, this, multiplayer, p1Type, p2Type, enemySpeedMultiplier);
@@ -187,11 +193,154 @@ GameScreen::GameScreen(ScreenController *screenController, bool multiplayer,
     }
 
     BackMenu.SetTexture(ResrcManager::GetInstance().getTexture("BACK_BUTTON"));
-
     // Lấy giá trị âm lượng từ SoundManager
     pauseMusicVolume = (int)(SoundManager::GetInstance().GetMusicVol("MENU") * 100.0f);
     pauseSfxVolume = (int)(SoundManager::GetInstance().GetSoundVol("COIN_COLLECTION") * 100.0f);
+    SoundManager::GetInstance().StopAllSounds();
+    string musicKey = "GAMEWORLD_" + std::to_string(level);
+    SoundManager::GetInstance().SetMusicVol(musicKey, pauseMusicVolume / 100.0f);
+    SoundManager::GetInstance().PlayMusic(musicKey);
+}
 
+// New constructor to load from a saved map JSON path (resources/save/*.json)
+GameScreen::GameScreen(ScreenController *screenController, const std::string &savedMapPath)
+    : Screen(screenController),
+      BackMenu(Vector2{50, 50}, Vector2{50, 50}),
+      level(1),
+      transitionState(TransitionState::NONE),
+      transitionTime(1.0f),
+      PlayButton(Vector2{(float)PauseScreenPosX + 50, (float)PauseScreenPosY + 300}, Vector2{100, 50}, "PLAY", 20, 1),
+      MenuButton(Vector2{(float)PauseScreenPosX + 200, (float)PauseScreenPosY + 300}, Vector2{100, 50}, "MENU", 20, 1),
+      SaveButton(Vector2{(float)PauseScreenPosX + 350, (float)PauseScreenPosY + 300}, Vector2{100, 50}, "SAVE", 20, 1),
+      transitionTimeAcum(0.0f),
+      gameHUD(nullptr),
+      isMultiplayer(false),
+      player1Type(CharacterType::MARIO),
+      player2Type(CharacterType::LUIGI),
+      loadedSavePath(savedMapPath)
+{
+    nlohmann::json j;
+    bool parsed = false;
+    if (std::filesystem::exists(savedMapPath))
+    {
+        std::ifstream f(savedMapPath);
+        try
+        {
+            f >> j;
+            parsed = true;
+        }
+        catch (...)
+        {
+            std::cout << "[SaveLoad] Failed to parse json: " << savedMapPath << std::endl;
+        }
+    }
+    else
+    {
+        std::cout << "[SaveLoad] Saved map path not found: " << savedMapPath << std::endl;
+    }
+
+    // Detect saved level & multiplayer before constructing GameWorld so background matches
+    if (parsed)
+    {
+        if (j.contains("level"))
+        {
+            int savedLevel = j.value("level", 1);
+            if (savedLevel >= 0 && savedLevel <= 9)
+            {
+                level = savedLevel; // overwrite default so constructor picks correct background
+            }
+        }
+        if (j.contains("player2"))
+        {
+            isMultiplayer = true;
+        }
+    }
+
+    // If json includes characterType, override defaults before constructing world
+    if (parsed && j.contains("player1") && j["player1"].contains("characterType"))
+    {
+        player1Type = static_cast<CharacterType>(j["player1"].value("characterType", (int)CharacterType::MARIO));
+    }
+    if (parsed && isMultiplayer && j.contains("player2") && j["player2"].contains("characterType"))
+    {
+        player2Type = static_cast<CharacterType>(j["player2"].value("characterType", (int)CharacterType::LUIGI));
+    }
+    // Construct world with correct multiplayer + character choices
+    gameWorld = std::make_unique<GameWorld>(level, this, isMultiplayer, player1Type, player2Type);
+
+    if (parsed)
+    {
+        if (j.contains("layers"))
+        {
+            std::filesystem::path tempPath = std::filesystem::temp_directory_path() / "_temp_saved_map_load.json";
+            try
+            {
+                std::ofstream tmp(tempPath);
+                tmp << j.dump();
+                tmp.close();
+                gameWorld->map.Clear();
+                gameWorld->map.LoadFromJsonFile(tempPath.string());
+            }
+            catch (...)
+            {
+                std::cout << "[SaveLoad] Could not rebuild map from saved data" << std::endl;
+            }
+        }
+        if (j.contains("player1"))
+        {
+            auto &p = j["player1"];
+            float px = p.value("x", 100.0f);
+            float py = p.value("y", 100.0f);
+            gameWorld->player1->SetPos(Vector2{px, py});
+            gameWorld->player1->SetLives(p.value("lives", 3));
+            gameWorld->player1->SetCoins(p.value("coins", 0));
+            gameWorld->player1->SetScore(p.value("score", 0));
+            gameWorld->player1->SetMarioState(static_cast<ObjectState>(p.value("state", (int)SMALL)));
+            if (p.contains("additionalState"))
+                gameWorld->player1->SetAdditionalState(static_cast<ObjectState>(p.value("additionalState", 0)));
+        }
+        if (isMultiplayer && gameWorld->player2 && j.contains("player2"))
+        {
+            auto &p = j["player2"];
+            float px = p.value("x", 120.0f);
+            float py = p.value("y", 100.0f);
+            gameWorld->player2->SetPos(Vector2{px, py});
+            gameWorld->player2->SetLives(p.value("lives", 3));
+            gameWorld->player2->SetCoins(p.value("coins", 0));
+            gameWorld->player2->SetScore(p.value("score", 0));
+            gameWorld->player2->SetMarioState(static_cast<ObjectState>(p.value("state", (int)SMALL)));
+            if (p.contains("additionalState"))
+                gameWorld->player2->SetAdditionalState(static_cast<ObjectState>(p.value("additionalState", 0)));
+        }
+        std::cout << "[SaveLoad] Loaded saved map & player data: " << savedMapPath << std::endl;
+    }
+    else
+    {
+        // Defaults if not parsed
+        gameWorld->player1->SetLives(3);
+        gameWorld->player1->SetCoins(0);
+        gameWorld->player1->SetScore(0);
+        if (isMultiplayer && gameWorld->player2)
+        {
+            gameWorld->player2->SetLives(3);
+            gameWorld->player2->SetCoins(0);
+            gameWorld->player2->SetScore(0);
+        }
+    }
+
+    // HUD depends on multiplayer
+    if (isMultiplayer && gameWorld->player2)
+    {
+        gameHUD = std::make_unique<GameHUD>(gameWorld->player1, gameWorld->player2);
+    }
+    else
+    {
+        gameHUD = std::make_unique<GameHUD>(gameWorld->player1);
+    }
+
+    BackMenu.SetTexture(ResrcManager::GetInstance().getTexture("BACK_BUTTON"));
+    pauseMusicVolume = (int)(SoundManager::GetInstance().GetMusicVol("MENU") * 100.0f);
+    pauseSfxVolume = (int)(SoundManager::GetInstance().GetSoundVol("COIN_COLLECTION") * 100.0f);
     SoundManager::GetInstance().StopAllSounds();
     string musicKey = "GAMEWORLD_" + std::to_string(level);
     SoundManager::GetInstance().SetMusicVol(musicKey, pauseMusicVolume / 100.0f);
@@ -200,8 +349,9 @@ GameScreen::GameScreen(ScreenController *screenController, bool multiplayer,
 
 void GameScreen::Update()
 {
-    // Kiểm tra nút BackMenu trước để đảm bảo nó hoạt động ở mọi trạng thái
+    // Cập nhật nút Back
     BackMenu.Update();
+
     if (BackMenu.IsPressed())
     {
         if (!SoundManager::GetInstance().IsMuted())
@@ -229,7 +379,7 @@ void GameScreen::Update()
         showPauseMenu = isPaused;
     }
 
-    if (showPauseMenu)
+    if (showPauseMenu && !showSaveDialog)
     {
         // Cửa sổ pause
         int winW = 400, winH = 350;
@@ -239,11 +389,15 @@ void GameScreen::Update()
         int sliderX = winX + 100;
         int sliderY = winY + 80;
 
+        // Cập nhật các nút trong pause menu
+        PlayButton.Update();
+        MenuButton.Update();
+        SaveButton.Update();
+
         // --- MUSIC SLIDER ---
         Rectangle musicSliderRect = {(float)sliderX, (float)sliderY - 10, (float)sliderW, 30};
         if (IsMouseButtonDown(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), musicSliderRect))
         {
-            // Tự động unmute khi kéo thanh trượt
             if (SoundManager::GetInstance().IsMuted())
             {
                 SoundManager::GetInstance().SetMuted(false);
@@ -263,7 +417,6 @@ void GameScreen::Update()
         Rectangle sfxSliderRect = {(float)sliderX, (float)sfxSliderY - 10, (float)sliderW, 30};
         if (IsMouseButtonDown(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), sfxSliderRect))
         {
-            // Tự động unmute khi kéo thanh trượt
             if (SoundManager::GetInstance().IsMuted())
             {
                 SoundManager::GetInstance().SetMuted(false);
@@ -281,28 +434,44 @@ void GameScreen::Update()
             std::cout << "[GameScreen] SFX volume set to: " << pauseSfxVolume << std::endl;
         }
 
-        // --- Nút Resume và Home ---
-        Rectangle resumeBtn = {(float)(winX + 50), (float)(winY + winH - 80), 100, 50};
-        Rectangle homeBtn = {(float)(winX + 250), (float)(winY + winH - 80), 100, 50};
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        // --- Nút Play, Menu, Save ---
+        if (PlayButton.IsPressed())
         {
-            Vector2 mouse = GetMousePosition();
-            if (CheckCollisionPointRec(mouse, resumeBtn))
+            if (!SoundManager::GetInstance().IsMuted())
             {
-                if (!SoundManager::GetInstance().IsMuted())
-                {
-                    SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
-                }
-                isPaused = false;
-                showPauseMenu = false;
+                SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
             }
-            if (CheckCollisionPointRec(mouse, homeBtn))
+            isPaused = false;
+            showPauseMenu = false;
+        }
+        if (MenuButton.IsPressed())
+        {
+            if (!SoundManager::GetInstance().IsMuted())
             {
-                if (!SoundManager::GetInstance().IsMuted())
+                SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
+            }
+            requestGoHome = true;
+        }
+        if (SaveButton.IsPressed())
+        {
+            showSaveDialog = true;
+            memset(saveFileName, 0, sizeof(saveFileName));
+            saveNameLength = 0;
+            if (!loadedSavePath.empty())
+            {
+                try
                 {
-                    SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
+                    std::filesystem::path p(loadedSavePath);
+                    std::string stem = p.stem().string();
+                    if (!stem.empty() && stem.size() < sizeof(saveFileName))
+                    {
+                        std::strncpy(saveFileName, stem.c_str(), sizeof(saveFileName) - 1);
+                        saveNameLength = (int)stem.size();
+                    }
                 }
-                requestGoHome = true;
+                catch (...)
+                { /* ignore */
+                }
             }
         }
 
@@ -315,6 +484,60 @@ void GameScreen::Update()
                       << ", " << sfxSliderRect.width << ", " << sfxSliderRect.height << ")"
                       << ", collision: " << CheckCollisionPointRec(GetMousePosition(), sfxSliderRect) << std::endl;
         }
+        if(!showSaveDialog) return;
+    }
+
+    if (showSaveDialog)
+    {
+        // Handle text input
+        int key = GetCharPressed();
+        while (key > 0)
+        {
+            if (key >= 32 && key <= 125 && saveNameLength < 63)
+            {
+                saveFileName[saveNameLength] = (char)key;
+                saveNameLength++;
+            }
+            key = GetCharPressed();
+        }
+
+        // Handle backspace
+        if (IsKeyPressed(KEY_BACKSPACE) && saveNameLength > 0)
+        {
+            saveNameLength--;
+            saveFileName[saveNameLength] = '\0';
+        }
+
+        // Handle Enter - save with the entered name
+        if (IsKeyPressed(KEY_ENTER) && saveNameLength > 0)
+        {
+            std::string typedName(saveFileName);
+            if (!loadedSavePath.empty())
+            {
+                std::filesystem::path p(loadedSavePath);
+                std::string original = p.stem().string();
+                if (_stricmp(original.c_str(), typedName.c_str()) == 0)
+                {
+                    SaveMapInSettings(original);
+                }
+                else
+                {
+                    SaveMapInSettings(typedName);
+                }
+            }
+            else
+            {
+                SaveMapInSettings(typedName);
+            }
+            showSaveDialog = false;
+        }
+
+        // Handle Escape - cancel save dialog
+        if (IsKeyPressed(KEY_ESCAPE))
+        {
+            showSaveDialog = false;
+        }
+
         return;
     }
 
@@ -355,8 +578,6 @@ void GameScreen::Update()
             BeginTransition(TransitionState::NONE);
         }
         break;
-    default:
-        break;
     }
 
     if (transitionState != TransitionState::NONE)
@@ -367,6 +588,8 @@ void GameScreen::Update()
     switch (gameWorld->GetGameState())
     {
     case GameState::GAME_PLAYING:
+        if (isPaused)
+            break;
         gameWorld->UpdateWorld();
         break;
     case GameState::GAME_COMPLETED:
@@ -440,8 +663,6 @@ void GameScreen::Draw()
             DrawEnd();
         }
     }
-
-    // Pause menu
     if (showPauseMenu)
     {
         // Overlay mờ
@@ -474,15 +695,58 @@ void GameScreen::Draw()
         DrawCircle(sfxKnobX, sfxSliderY + 5, 10, DARKGRAY);
         DrawText(TextFormat("%d%%", pauseSfxVolume), sliderX + sliderW + 20, sfxSliderY - 10, 20, BLACK);
 
-        // --- Nút Resume ---
-        Rectangle resumeBtn = {(float)(winX + 50), (float)(winY + winH - 80), 100, 50};
-        DrawRectangleRec(resumeBtn, GREEN);
-        DrawText("Play", resumeBtn.x + 25, resumeBtn.y + 15, 24, WHITE);
+        // Vẽ các nút Play, Menu, Save
+        PlayButton.Draw();
+        MenuButton.Draw();
+        SaveButton.Draw();
+    }
 
-        // --- Nút Home ---
-        Rectangle homeBtn = {(float)(winX + 250), (float)(winY + winH - 80), 100, 50};
-        DrawRectangleRec(homeBtn, RED);
-        DrawText("Home", homeBtn.x + 20, homeBtn.y + 15, 24, WHITE);
+    // Draw save dialog
+    if (showSaveDialog)
+    {
+        // Draw overlay
+        DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 0.6f));
+
+        // Dialog box
+        int dialogW = 400;
+        int dialogH = 200;
+        int dialogX = GetScreenWidth() / 2 - dialogW / 2;
+        int dialogY = GetScreenHeight() / 2 - dialogH / 2;
+
+        DrawRectangle(dialogX, dialogY, dialogW, dialogH, WHITE);
+        DrawRectangleLines(dialogX, dialogY, dialogW, dialogH, BLACK);
+
+        // Title
+        const char *title = "Enter Save Name";
+        int titleW = MeasureText(title, 24);
+        DrawText(title, dialogX + dialogW / 2 - titleW / 2, dialogY + 20, 24, BLACK);
+
+        // Input box
+        int inputX = dialogX + 20;
+        int inputY = dialogY + 70;
+        int inputW = dialogW - 40;
+        int inputH = 40;
+
+        DrawRectangle(inputX, inputY, inputW, inputH, LIGHTGRAY);
+        DrawRectangleLines(inputX, inputY, inputW, inputH, DARKGRAY);
+
+        // Display current text
+        DrawText(saveFileName, inputX + 5, inputY + 10, 20, BLACK);
+
+        // Cursor blink
+        if (((int)(GetTime() * 2)) % 2 == 0)
+        {
+            int textW = MeasureText(saveFileName, 20);
+            DrawText("_", inputX + 5 + textW, inputY + 10, 20, BLACK);
+        }
+
+        // Instructions
+        const char *instruction1 = "Press ENTER to save";
+        const char *instruction2 = "Press ESC to cancel";
+        int inst1W = MeasureText(instruction1, 16);
+        int inst2W = MeasureText(instruction2, 16);
+        DrawText(instruction1, dialogX + dialogW / 2 - inst1W / 2, dialogY + 130, 16, DARKGRAY);
+        DrawText(instruction2, dialogX + dialogW / 2 - inst2W / 2, dialogY + 150, 16, DARKGRAY);
     }
 
     // Game over and reset screens
@@ -532,7 +796,6 @@ void GameScreen::Draw()
     case TransitionState::GAME_RESET:
     {
         DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), BLACK);
-
         DrawTextEx(*SuperMarioFont, ("Level " + std::to_string(level)).c_str(),
                    Vector2{(float)GetScreenWidth() / 2 - MeasureTextEx(
                                                              *SuperMarioFont,
@@ -542,16 +805,13 @@ void GameScreen::Draw()
                                                              2,
                            (float)GetScreenHeight() / 2 - 100},
                    20, 7, WHITE);
-
         DrawTextureNPatch(*SmallMario,
                           NPatchInfo{Rectangle{0, 0, (float)(*SmallMario).width,
                                                24},
                                      0, 0, 0, 0},
                           Rectangle{(float)GetScreenWidth() / 2 - 100, (float)GetScreenHeight() / 2 - 16, 43, 32}, Vector2{0, 0}, 0.0f, WHITE);
-
         Vector2 size = MeasureTextEx(*SuperMarioFont,
                                      ("X " + std::to_string(level + 1)).c_str(), 20, 7);
-
         DrawTextEx(*SuperMarioFont, ("X " + std::to_string(gameWorld->player1->GetLives())).c_str(),
                    Vector2{(float)GetScreenWidth() / 2 - size.x / 2,
                            (float)GetScreenHeight() / 2 - size.y / 2},
@@ -561,7 +821,6 @@ void GameScreen::Draw()
     case TransitionState::GAME_OVER:
     {
         DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), BLACK);
-
         DrawTextEx(*SuperMarioFont, ("Level " + std::to_string(level)).c_str(),
                    Vector2{(float)GetScreenWidth() / 2 - MeasureTextEx(
                                                              *SuperMarioFont,
@@ -571,16 +830,13 @@ void GameScreen::Draw()
                                                              2,
                            (float)GetScreenHeight() / 2 - 100},
                    20, 7, WHITE);
-
         DrawTextureNPatch(*SmallMario,
                           NPatchInfo{Rectangle{0, 0, (float)(*SmallMario).width,
                                                24},
                                      0, 0, 0, 0},
                           Rectangle{(float)GetScreenWidth() / 2 - 100, (float)GetScreenHeight() / 2 - 16, 43, 32}, Vector2{0, 0}, 0.0f, WHITE);
-
         Vector2 size = MeasureTextEx(*SuperMarioFont,
                                      ("X " + std::to_string(level + 1)).c_str(), 20, 7);
-
         DrawTextEx(*SuperMarioFont, ("X " + std::to_string(gameWorld->player1->GetLives())).c_str(),
                    Vector2{(float)GetScreenWidth() / 2 - size.x / 2,
                            (float)GetScreenHeight() / 2 - size.y / 2},
@@ -599,7 +855,6 @@ void GameScreen::ResetGame()
     if (currentLives1 > 1 || (isMultiplayer && currentLives2 > 0))
     {
         gameWorld = std::make_unique<GameWorld>(level, this, isMultiplayer, player1Type, player2Type);
-
         gameWorld->player1->SetLives(currentLives1 - 1);
         if (isMultiplayer && gameWorld->player2)
         {
@@ -642,7 +897,6 @@ void GameScreen::DrawEnd()
                                            (float)(*LevelEndCongratulation).height},
                                  0, 0, 0, 0},
                       Rectangle{(float)GetScreenWidth() / 2 - 400, (float)GetScreenHeight() / 2 - 300, 800, 120}, Vector2{0, 0}, 0.0f, WHITE);
-
     std::string summarry = "Level " + std::to_string(level) + " Complete!";
     DrawTextEx(ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT"), summarry.c_str(),
                Vector2{(float)GetScreenWidth() / 2 - MeasureTextEx(ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT"), (summarry).c_str(), 40, 2).x / 2, (float)GetScreenHeight() / 2 - 150}, 40, 2, WHITE);
@@ -681,7 +935,6 @@ void GameScreen::NextLevel()
     {
         currentPlayerState2 = gameWorld->player2->GetMarioState();
     }
-
     MapType nextMap = selectedMap;
     DifficultyLevel nextDifficulty = selectedDifficulty;
 
@@ -812,94 +1065,6 @@ void GameScreen::BeginTransition(TransitionState transitionState)
     }
 }
 
-void GameScreen::SaveCurrentGame(int slotIndex)
-{
-    GameSaveData saveData;
-
-    saveData.saveDateTime = GetCurrentDateTime();
-    saveData.currentLevel = level;
-    saveData.isMultiplayer = isMultiplayer;
-
-    saveData.player1.characterType = static_cast<int>(player1Type);
-    saveData.player1.lives = gameWorld->player1->GetLives();
-    saveData.player1.coins = gameWorld->player1->GetCoins();
-    saveData.player1.score = gameWorld->player1->GetScore();
-    saveData.player1.x = gameWorld->player1->GetPos().x;
-    saveData.player1.y = gameWorld->player1->GetPos().y;
-    saveData.player1.velX = gameWorld->player1->GetVel().x;
-    saveData.player1.velY = gameWorld->player1->GetVel().y;
-    saveData.player1.playerState = static_cast<int>(gameWorld->player1->GetMarioState());
-    saveData.player1.additionalState = static_cast<int>(gameWorld->player1->GetAdditionalState());
-
-    if (isMultiplayer && gameWorld->player2)
-    {
-        saveData.player2.characterType = static_cast<int>(player2Type);
-        saveData.player2.lives = gameWorld->player2->GetLives();
-        saveData.player2.coins = gameWorld->player2->GetCoins();
-        saveData.player2.score = gameWorld->player2->GetScore();
-        saveData.player2.x = gameWorld->player2->GetPos().x;
-        saveData.player2.y = gameWorld->player2->GetPos().y;
-        saveData.player2.velX = gameWorld->player2->GetVel().x;
-        saveData.player2.velY = gameWorld->player2->GetVel().y;
-        saveData.player2.playerState = static_cast<int>(gameWorld->player2->GetMarioState());
-        saveData.player2.additionalState = static_cast<int>(gameWorld->player2->GetAdditionalState());
-    }
-
-    gameWorld->CollectWorldData(saveData);
-    if (SaveManager::GetInstance().SaveGame(saveData, slotIndex))
-    {
-        std::cout << "Game saved successfully to slot " << slotIndex << std::endl;
-    }
-    else
-    {
-        std::cerr << "Failed to save game to slot " << slotIndex << std::endl;
-    }
-}
-
-void GameScreen::LoadSavedGame(int slotIndex)
-{
-    GameSaveData saveData;
-    if (SaveManager::GetInstance().LoadGame(saveData, slotIndex))
-    {
-        std::cout << "Game loaded successfully from slot " << slotIndex << std::endl;
-
-        level = saveData.currentLevel;
-        isMultiplayer = saveData.isMultiplayer;
-
-        gameWorld = std::make_unique<GameWorld>(level, this, isMultiplayer,
-                                                static_cast<CharacterType>(saveData.player1.characterType),
-                                                static_cast<CharacterType>(saveData.player2.characterType));
-
-        gameWorld->player1->SetLives(saveData.player1.lives);
-        gameWorld->player1->SetCoins(saveData.player1.coins);
-        gameWorld->player1->SetScore(saveData.player1.score);
-        gameWorld->player1->SetPos({saveData.player1.x, saveData.player1.y});
-        gameWorld->player1->SetVel({saveData.player1.velX, saveData.player1.velY});
-        gameWorld->player1->SetMarioState(static_cast<ObjectState>(saveData.player1.playerState));
-        gameWorld->player1->SetAdditionalState(static_cast<ObjectState>(saveData.player1.additionalState));
-
-        if (isMultiplayer && gameWorld->player2)
-        {
-            gameWorld->player2->SetLives(saveData.player2.lives);
-            gameWorld->player2->SetCoins(saveData.player2.coins);
-            gameWorld->player2->SetScore(saveData.player2.score);
-            gameWorld->player2->SetPos({saveData.player2.x, saveData.player2.y});
-            gameWorld->player2->SetVel({saveData.player2.velX, saveData.player2.velY});
-            gameWorld->player2->SetMarioState(static_cast<ObjectState>(saveData.player2.playerState));
-            gameWorld->player2->SetAdditionalState(static_cast<ObjectState>(saveData.player2.additionalState));
-            gameHUD = std::make_unique<GameHUD>(gameWorld->player1, gameWorld->player2);
-        }
-        else
-        {
-            gameHUD = std::make_unique<GameHUD>(gameWorld->player1);
-        }
-    }
-    else
-    {
-        std::cerr << "Failed to load game from slot " << slotIndex << std::endl;
-    }
-}
-
 std::string GameScreen::GetCurrentDateTime()
 {
     auto now = std::chrono::system_clock::now();
@@ -909,14 +1074,275 @@ std::string GameScreen::GetCurrentDateTime()
     return ss.str();
 }
 
-void GameScreen::HandleSaveLoadInput()
+void GameScreen::SaveMapInSettings(const std::string &fileName)
 {
-    if (IsKeyPressed(KEY_U))
+    std::string mapName = fileName.empty() ? "autosave" : fileName;
+    std::filesystem::path dir = "resources/save";
+    std::error_code ec;
+    std::filesystem::create_directories(dir, ec);
+    if (ec)
     {
-        SaveCurrentGame(1);
+        std::cout << "[Save] Cannot create directory resources/save : " << ec.message() << std::endl;
     }
-    if (IsKeyPressed(KEY_I))
+    std::filesystem::path fullPath = dir / (mapName + ".json");
+
+    try
     {
-        LoadSavedGame(1);
+        nlohmann::json mapData;
+
+        // Basic map info
+        mapData["compressionlevel"] = -1;
+        mapData["height"] = 30;
+        mapData["infinite"] = false;
+        mapData["orientation"] = "orthogonal";
+        mapData["renderorder"] = "right-down";
+        mapData["tiledversion"] = "1.11.2";
+        mapData["tileheight"] = 32;
+        mapData["tilewidth"] = 32;
+        mapData["type"] = "map";
+        mapData["version"] = "1.10";
+        mapData["width"] = 150;
+        mapData["nextlayerid"] = 2;
+        mapData["nextobjectid"] = 1;
+        mapData["level"] = level;
+        // Create tileset reference
+        mapData["tilesets"] = nlohmann::json::array();
+        mapData["tilesets"].push_back({{"firstgid", 1},
+                                       {"source", mapName + ".tsx"}});
+
+        // Create layer data array (150 x 30 = 4500 tiles)
+        std::vector<int> layerData(150 * 30, 0);
+
+        // Add tiles to layer data
+        for (auto &tile : gameWorld->GetMap()->getInteractiveTiles())
+        {
+            if (tile)
+            {
+                int x = (int)(tile->GetPos().x / 32);
+                int y = (int)(tile->GetPos().y / 32);
+                if (x >= 0 && x < 150 && y >= 0 && y < 30)
+                {
+                    layerData[y * 150 + x] = tile->GetKey();
+                }
+            }
+        }
+
+        // Add blocks to layer data
+        for (auto &block : gameWorld->GetMap()->getBlocks())
+        {
+            if (block)
+            {
+                int x = (int)(block->GetPos().x / 32);
+                int y = (int)(block->GetPos().y / 32);
+                if (x >= 0 && x < 150 && y >= 0 && y < 30)
+                {
+                    int tileId = GetBlockTileId(block);
+                    // Encode hit state for question blocks with separate IDs (avoid collisions with items)
+                    // Base IDs: 116 empty, 117 coin, 118 fire
+                    // Used versions: 170 (used empty), 171 (used coin), 172 (used fire)
+                    if (block->isHit())
+                    {
+                        if (tileId == 116)
+                            tileId = 170; // used empty
+                        else if (tileId == 117)
+                            tileId = 171; // used coin
+                        else if (tileId == 118)
+                            tileId = 172; // used fire
+                    }
+                    if (tileId > 0)
+                    {
+                        layerData[y * 150 + x] = tileId;
+                    }
+                }
+            }
+        }
+
+        // Add enemies to layer data
+        for (auto &enemy : gameWorld->GetMap()->GetEnemies())
+        {
+            if (enemy)
+            {
+                int x = (int)(enemy->GetPos().x / 32);
+                int y = (int)((enemy->GetPos().y + 20) / 32); // Adjust for enemy positioning
+                if (x >= 0 && x < 150 && y >= 0 && y < 30)
+                {
+                    int tileId = GetEnemyTileId(enemy);
+                    if (tileId > 0)
+                    {
+                        layerData[y * 150 + x] = tileId;
+                    }
+                }
+            }
+        }
+
+        // Add items to layer data
+        for (auto &item : gameWorld->GetMap()->GetInteractiveItems())
+        {
+            if (item)
+            {
+                int x = (int)(item->GetPos().x / 32);
+                int y = (int)(item->GetPos().y / 32);
+                if (x >= 0 && x < 150 && y >= 0 && y < 30)
+                {
+                    int tileId = GetItemTileId(item.get());
+                    if (tileId > 0)
+                    {
+                        layerData[y * 150 + x] = tileId;
+                    }
+                }
+            }
+        }
+
+        // Create layer
+        mapData["layers"] = nlohmann::json::array();
+        mapData["layers"].push_back({{"data", layerData},
+                                     {"height", 30},
+                                     {"id", 1},
+                                     {"name", "Tile Layer 1"},
+                                     {"opacity", 1},
+                                     {"type", "tilelayer"},
+                                     {"visible", true},
+                                     {"width", 150},
+                                     {"x", 0},
+                                     {"y", 0}});
+
+        // Player data (player1 always, player2 if multiplayer)
+        nlohmann::json p1;
+        p1["x"] = gameWorld->player1->GetPos().x;
+        p1["y"] = gameWorld->player1->GetPos().y;
+        p1["lives"] = gameWorld->player1->GetLives();
+        p1["coins"] = gameWorld->player1->GetCoins();
+        p1["score"] = gameWorld->player1->GetScore();
+        p1["state"] = (int)gameWorld->player1->GetMarioState();
+        p1["additionalState"] = (int)gameWorld->player1->GetAdditionalState();
+        p1["characterType"] = (int)player1Type; // persist chosen character
+        mapData["player1"] = p1;
+
+        if (isMultiplayer && gameWorld->player2)
+        {
+            nlohmann::json p2;
+            p2["x"] = gameWorld->player2->GetPos().x;
+            p2["y"] = gameWorld->player2->GetPos().y;
+            p2["lives"] = gameWorld->player2->GetLives();
+            p2["coins"] = gameWorld->player2->GetCoins();
+            p2["score"] = gameWorld->player2->GetScore();
+            p2["state"] = (int)gameWorld->player2->GetMarioState();
+            p2["additionalState"] = (int)gameWorld->player2->GetAdditionalState();
+            p2["characterType"] = (int)player2Type;
+            mapData["player2"] = p2;
+        }
+
+        // Write to file
+        std::ofstream file(fullPath, std::ios::out | std::ios::trunc);
+        if (!file.is_open())
+        {
+            std::cout << "[Save] Failed to open file: " << std::filesystem::absolute(fullPath) << std::endl;
+            return;
+        }
+        file << mapData.dump(4); // Pretty print
+        file.close();
+        std::cout << "Map successfully saved to: " << std::filesystem::absolute(fullPath) << std::endl;
+        std::cout << "Current working dir: " << std::filesystem::current_path() << std::endl;
     }
+    catch (const std::exception &e)
+    {
+        std::cout << "Error saving map: " << e.what() << std::endl;
+    }
+}
+
+int GameScreen::GetBlockTileId(Block *block)
+{
+    if (dynamic_cast<QuestionBlock *>(block))
+    {
+        if (dynamic_cast<QuestionBlock *>(block)->GetGiftType() == GIFT_COIN)
+            return 117; // Coin block
+        if (dynamic_cast<QuestionBlock *>(block)->GetGiftType() == GIFT_FIRE_FLOWER)
+            return 118; // Fire flower block
+        return 116;     // Default question block
+    }
+    else if (dynamic_cast<WoodBlock *>(block))
+        return 121;
+    else if (auto gb = dynamic_cast<GlassBlock *>(block))
+    {
+        // 112 = intact, 149 = transitioning_1, 150 = transitioning_2, 151 = to be removed (skip saving?)
+        switch (gb->GetState())
+        {
+        case OBJECT_STATE_TRANSITIONING_1:
+            return 149;
+        case OBJECT_STATE_TRANSITIONING_2:
+            return 150;
+        case OBJECT_STATE_TO_BE_REMOVED:
+            return 151; // will not recreate block
+        default:
+            return 112;
+        }
+    }
+    else if (dynamic_cast<CloudBlock *>(block))
+        return 105;
+    else if (dynamic_cast<EyesClosedBlock *>(block))
+        return 107; // Closed eye
+    else if (auto eob = dynamic_cast<EyesOpenedBlock *>(block))
+    {
+        // 108 normal, 152 = hit (active animation state)
+        if (eob->isHit())
+            return 152;
+        return 108; // Open eye
+    }
+    // Add more mappings as needed
+    return 0;
+}
+
+int GameScreen::GetEnemyTileId(Enemy *enemy)
+{
+    if (dynamic_cast<Goomba *>(enemy))
+        return 127;
+    else if (dynamic_cast<GreenKoopa *>(enemy))
+        return 128;
+    else if (dynamic_cast<JumpingPiranhaPlant *>(enemy))
+        return 129;
+    else if (dynamic_cast<RedKoopa *>(enemy))
+        return 134;
+    else if (auto rex = dynamic_cast<Rex *>(enemy))
+    {
+        // 135 normal Rex, 173 = Rex after first hit (squashed once)
+        if (rex->GetHitCount() >= 1)
+            return 173;
+        return 135;
+    }
+    else if (dynamic_cast<Bob_omb *>(enemy))
+        return 123;
+    else if (dynamic_cast<BuzzyBeetle *>(enemy))
+        return 125;
+    else if (dynamic_cast<FlyingGoomba *>(enemy))
+        return 126;
+    else if (dynamic_cast<BulletBill *>(enemy))
+        return 124;
+    else if (dynamic_cast<PiranhaPlant *>(enemy))
+        return 133;
+    else if (dynamic_cast<YellowKoopa *>(enemy))
+        return 137;
+    else if (dynamic_cast<BanzaiBill *>(enemy))
+        return 145;
+    return 0;
+}
+
+int GameScreen::GetItemTileId(Item *item)
+{
+    if (dynamic_cast<Coin *>(item))
+        return 140;
+    else if (dynamic_cast<Mushroom *>(item))
+        return 142;
+    else if (dynamic_cast<FireFlower *>(item))
+        return 141;
+    else if (dynamic_cast<Star *>(item))
+        return 143;
+    else if (dynamic_cast<OneUpMushroom *>(item))
+        return 138;
+    else if (dynamic_cast<ThreeUpMoon *>(item))
+        return 139;
+    else if (dynamic_cast<YoshiCoin *>(item))
+        return 144;
+    else if (dynamic_cast<CourseClearToken *>(item))
+        return 146;
+    return 0;
 }

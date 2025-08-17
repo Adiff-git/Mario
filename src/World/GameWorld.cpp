@@ -365,6 +365,13 @@ void GameWorld::UpdateWorld()
                     if (tile && fireball->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
                         mediatorCollision.HandleCollision(fireball, tile);
                 }
+                for (auto const &block : activeBlocks)
+                {
+                    if (block && fireball->checkCollisionType(*block) != COLLISION_TYPE_NONE)
+                    {
+                        mediatorCollision.HandleCollision(fireball, block);
+                    }
+                }
                 for (Enemy *enemy : activeEnemies)
                 {
                     if (enemy && enemy->GetState() != OBJECT_STATE_DEAD && enemy->GetState() != OBJECT_STATE_DYING &&
@@ -465,6 +472,13 @@ void GameWorld::UpdateWorld()
                 {
                     if (tile && fireball->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
                         mediatorCollision.HandleCollision(fireball, tile);
+                }
+                for (auto const &block : activeBlocks)
+                {
+                    if (block && fireball->checkCollisionType(*block) != COLLISION_TYPE_NONE)
+                    {
+                        mediatorCollision.HandleCollision(fireball, block);
+                    }
                 }
                 for (Enemy *enemy : activeEnemies)
                 {
@@ -918,240 +932,8 @@ bool GameWorld::IsMultiplayer()
 {
     return isMultiplayer;
 }
-// ===========================================================================================================
-void GameWorld::CollectWorldData(GameSaveData& saveData) {
-    // Thu thập enemies từ map
-    for (const auto& enemy : map.GetEnemies()) {
-        if (enemy) {
-            EnemySave enemyData;
-            // Determine enemy type
-            if (dynamic_cast<Goomba*>(enemy)) {
-                enemyData.enemyType = static_cast<int>(EnemyType::GOOMBA);
-            } else if (dynamic_cast<GreenKoopa*>(enemy)) {
-                enemyData.enemyType = static_cast<int>(EnemyType::GREENKOOPA);
-            } else if (dynamic_cast<RedKoopa*>(enemy)) {
-                enemyData.enemyType = static_cast<int>(EnemyType::REDKOOPA);
-            } else if (dynamic_cast<Rex*>(enemy)) {
-                enemyData.enemyType = static_cast<int>(EnemyType::REX);
-            } else if (dynamic_cast<YellowKoopa*>(enemy)) {
-                enemyData.enemyType = static_cast<int>(EnemyType::YELLOWKOOPA);
-            } else if (dynamic_cast<BuzzyBeetle*>(enemy)) {
-                enemyData.enemyType = static_cast<int>(EnemyType::BUZZYBEETLE);
-            } else if (dynamic_cast<FlyingGoomba*>(enemy)) {
-                enemyData.enemyType = static_cast<int>(EnemyType::FLYINGGOOMBA);
-            } else if (dynamic_cast<BulletBill*>(enemy)) {
-                enemyData.enemyType = static_cast<int>(EnemyType::BULLETBILL);
-            } else if (dynamic_cast<BanzaiBill*>(enemy)) {
-                enemyData.enemyType = static_cast<int>(EnemyType::BANZAIBILL);
-            } else if (dynamic_cast<JumpingPiranhaPlant*>(enemy)) {
-                enemyData.enemyType = static_cast<int>(EnemyType::JUMPINGPIRANHA);
-            } else if (dynamic_cast<PiranhaPlant*>(enemy)) {
-                enemyData.enemyType = static_cast<int>(EnemyType::PIRANHAPLANT);
-            } else if (dynamic_cast<Boss*>(enemy)) {
-                enemyData.enemyType = 99; // Special ID for Boss
-            }
+
             
-            enemyData.x = enemy->GetPos().x;
-            enemyData.y = enemy->GetPos().y;
-            enemyData.velX = enemy->GetVel().x;
-            enemyData.velY = enemy->GetVel().y;
-            enemyData.state = static_cast<int>(enemy->GetState());
-            saveData.enemies.push_back(enemyData);
-        }
-    }
-
-    // Thu thập items
-    for (const auto& item : map.GetInteractiveItems()) {
-        if (item) {
-            ItemSave itemData;
-            if (dynamic_cast<Coin*>(item.get())) {
-                itemData.itemType = static_cast<int>(ItemType::COIN);
-            } else if (dynamic_cast<FireFlower*>(item.get())) {
-                itemData.itemType = static_cast<int>(ItemType::FIREFLOWER);
-            } else if (dynamic_cast<Star*>(item.get())) {
-                itemData.itemType = static_cast<int>(ItemType::STAR);
-            } else if (dynamic_cast<YoshiCoin*>(item.get())) {
-                itemData.itemType = static_cast<int>(ItemType::YOSHICOIN);
-            } else if (dynamic_cast<Mushroom*>(item.get())) {
-                itemData.itemType = static_cast<int>(ItemType::MUSHROOM);
-            } else if (dynamic_cast<ThreeUpMoon*>(item.get())) {
-                itemData.itemType = static_cast<int>(ItemType::THREEUPMOON);
-            } else if (dynamic_cast<OneUpMushroom*>(item.get())) {
-                itemData.itemType = static_cast<int>(ItemType::ONEUPMUSHROOM);
-            } else if (dynamic_cast<CourseClearToken*>(item.get())) {
-                itemData.itemType = static_cast<int>(ItemType::COURSECLEARTOKEN);
-            }
-
-            itemData.x = item->GetPos().x;
-            itemData.y = item->GetPos().y;
-            // itemData.isCollected = item->IsCollected();
-            saveData.items.push_back(itemData);
-        }
-    }
-
-    // Thu thập blocks
-    for (const auto& block : map.getBlocks()) {
-        if (block) {
-            BlockSave blockData;
-            if (dynamic_cast<CloudBlock*>(block)) {
-                blockData.blockType = static_cast<int>(BlockType::BLOCK_CLOUD);
-            } else if (dynamic_cast<EyesClosedBlock*>(block)) {
-                blockData.blockType = static_cast<int>(BlockType::BLOCK_EYES_CLOSED);
-            } else if (dynamic_cast<EyesOpenedBlock*>(block)) {
-                blockData.blockType = static_cast<int>(BlockType::BLOCK_EYES_OPENED);
-            } else if (dynamic_cast<GlassBlock*>(block)) {
-                blockData.blockType = static_cast<int>(BlockType::BLOCK_GLASS);
-            } else if (dynamic_cast<QuestionBlock*>(block)) {
-                blockData.blockType = static_cast<int>(BlockType::BLOCK_QUESTION);
-            } else if (dynamic_cast<WoodBlock*>(block)) {
-                blockData.blockType = static_cast<int>(BlockType::BLOCK_WOOD);
-            }
-
-            blockData.x = block->GetPos().x;
-            blockData.y = block->GetPos().y;
-            blockData.hasBeenHit = block->isHit();
-            saveData.blocks.push_back(blockData);
-        }
-    }
-
-    // Thu thập tiles
-    for (const auto& tile : map.getInteractiveTiles()) {
-        if (tile) {
-            TileSave tileData;
-            tileData.x = tile->GetPos().x;
-            tileData.y = tile->GetPos().y;
-            tileData.tileType = tile->GetKey();
-            saveData.tiles.push_back(tileData);
-        }
-    }
-}
-
-void GameWorld::ApplyLoadedData(const GameSaveData& saveData) {
-    map.GetEnemies().clear();
-    map.GetInteractiveItems().clear();
-    map.getBlocks().clear();
-
-    // ...existing code...
-    // Đảm bảo player1 và player2 luôn có 3 mạng khi load map (đặt ở cuối cùng)
-    if (player1) player1->SetLives(3);
-    if (player2) player2->SetLives(3);
-
-    for (const auto& enemyData : saveData.enemies) {
-        Enemy* enemy = nullptr;
-        switch (static_cast<EnemyType>(enemyData.enemyType)) {
-            case EnemyType::GOOMBA:
-                enemy = new Goomba(Vector2{enemyData.x, enemyData.y});
-                break;
-            case EnemyType::GREENKOOPA:
-                enemy = new GreenKoopa(Vector2{enemyData.x, enemyData.y});
-                break;
-            case EnemyType::REDKOOPA:
-                enemy = new RedKoopa(Vector2{enemyData.x, enemyData.y});
-                break;
-            case EnemyType::REX:
-                enemy = new Rex(Vector2{enemyData.x, enemyData.y});
-                break;
-            case EnemyType::YELLOWKOOPA:
-                enemy = new YellowKoopa(Vector2{enemyData.x, enemyData.y});
-                break;
-            case EnemyType::BUZZYBEETLE:
-                enemy = new BuzzyBeetle(Vector2{enemyData.x, enemyData.y});
-                break;
-            case EnemyType::FLYINGGOOMBA:
-                enemy = new FlyingGoomba(Vector2{enemyData.x, enemyData.y});
-                break;
-            case EnemyType::BULLETBILL:
-                enemy = new BulletBill(Vector2{enemyData.x, enemyData.y});
-                break;
-            case EnemyType::BANZAIBILL:
-                enemy = new BanzaiBill(Vector2{enemyData.x, enemyData.y});
-                break;
-            case EnemyType::JUMPINGPIRANHA:
-                enemy = new JumpingPiranhaPlant(Vector2{enemyData.x, enemyData.y});
-                break;
-            case EnemyType::PIRANHAPLANT:
-                enemy = new PiranhaPlant(Vector2{enemyData.x, enemyData.y});
-                break;
-            case EnemyType::BOSS: // Special ID for Boss
-                // Handle boss initialization here if needed
-                continue; // Skip boss for now
-        }
-        if (enemy) {
-            enemy->SetPos(Vector2{enemyData.x, enemyData.y});
-            enemy->SetVel(Vector2{enemyData.velX, enemyData.velY});
-            enemy->SetState(static_cast<ObjectState>(enemyData.state));
-            map.GetEnemies().push_back(enemy);
-        }
-    }
-    for (const auto& itemData : saveData.items) {
-        std::shared_ptr<Item> item = nullptr;
-        switch (static_cast<ItemType>(itemData.itemType)) {
-            case ItemType::COIN:
-                item = std::make_shared<Coin>(Vector2{itemData.x, itemData.y});
-                break;
-            case ItemType::FIREFLOWER:
-                item = std::make_shared<FireFlower>(Vector2{itemData.x, itemData.y});
-                break;
-            case ItemType::STAR:
-                item = std::make_shared<Star>(Vector2{itemData.x, itemData.y});
-                break;
-            case ItemType::YOSHICOIN:
-                item = std::make_shared<YoshiCoin>(Vector2{itemData.x, itemData.y});
-                break;
-            case ItemType::MUSHROOM:
-                item = std::make_shared<Mushroom>(Vector2{itemData.x, itemData.y});
-                break;
-            case ItemType::THREEUPMOON:
-                item = std::make_shared<ThreeUpMoon>(Vector2{itemData.x, itemData.y});
-                break;
-            case ItemType::ONEUPMUSHROOM:
-                item = std::make_shared<OneUpMushroom>(Vector2{itemData.x, itemData.y});
-                break;
-            case ItemType::COURSECLEARTOKEN:
-                item = std::make_shared<CourseClearToken>(Vector2{itemData.x, itemData.y});
-                break;
-        }
-        if (item) {
-            // item->SetCollected(itemData.isCollected); // Assuming you have a method to set collected state
-            map.GetInteractiveItems().push_back(item);
-        }
-    }
-    for (const auto& blockData : saveData.blocks) {
-        Block* block = nullptr;
-        switch (static_cast<BlockType>(blockData.blockType)) {
-            case BlockType::BLOCK_CLOUD:
-                block = new CloudBlock(Vector2{blockData.x, blockData.y}, Vector2{32, 32}, WHITE);
-                break;
-            case BlockType::BLOCK_EYES_CLOSED:
-                block = new EyesClosedBlock(Vector2{blockData.x, blockData.y}, Vector2{32, 32}, WHITE);
-                break;
-            case BlockType::BLOCK_EYES_OPENED:
-                block = new EyesOpenedBlock(Vector2{blockData.x, blockData.y}, Vector2{32, 32}, WHITE);
-                break;
-            case BlockType::BLOCK_GLASS:
-                block = new GlassBlock(Vector2{blockData.x, blockData.y}, Vector2{32, 32}, WHITE);
-                break;
-            case BlockType::BLOCK_QUESTION:
-                block = new QuestionBlock(Vector2{blockData.x, blockData.y}, Vector2{32, 32}, WHITE, GIFT_COIN);
-                break;
-            case BlockType::BLOCK_WOOD:
-                block = new WoodBlock(Vector2{blockData.x, blockData.y}, Vector2{32, 32}, WHITE);
-                break;
-        }
-        if (block) {
-            if (block->GetBlockType() == BlockType::BLOCK_EYES_OPENED && !blockData.hasBeenHit) {
-                // block->setHit(false); // Assuming you have a method to set hit state
-            }
-            map.getBlocks().push_back(block);
-        }
-    }
-}
-
-// GameSaveData GameWorld::CreateSaveData() {
-//     GameSaveData saveData;
-//     CollectSaveData(saveData);
-//     return saveData;
-// }
 // ===========================================================================================================
 
 void GameWorld::InitializeSpatialIndex() {
@@ -1256,3 +1038,4 @@ void GameWorld::CollectActiveEntities(std::vector<Block*>& outBlocks,
         }
     }
 }
+

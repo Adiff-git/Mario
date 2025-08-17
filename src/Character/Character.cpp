@@ -5,7 +5,7 @@
 #include "../inc/Command/InputHandler.h"
 // full constructor
 Character::Character(Vector2 pos, int lives, ObjectState form, ControlType controlType)
-    : Object(pos, Vector2{32, 40}, Vector2{0, 0}, WHITE, 0.1f, 2, DIRECTION_RIGHT),
+    : Object(pos, Vector2{32, 40}, Vector2{0, 0}, WHITE, 0.18f, 2, DIRECTION_RIGHT),
       lives(lives), 
       accelerationX(660.5f), 
       maxSpeedX(500.0f), 

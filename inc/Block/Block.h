@@ -29,6 +29,7 @@ public:
     virtual void doHit( Character &mario, Map* map ) = 0;
     void resetHit();
     bool isHit() const { return hit; }
+    void SetHit(bool h){ hit = h; }
 
     BlockType GetBlockType();
     GiftType GetGiftType() { return giftType;}
