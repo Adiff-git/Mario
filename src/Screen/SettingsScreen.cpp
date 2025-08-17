@@ -69,8 +69,7 @@ void SettingsScreen::Update() {
             percent = std::max(0.0f, std::min(1.0f, percent));
             musicVolume = (int)(percent * 100);
             // Cập nhật volume cho tất cả music
-            SoundManager::GetInstance().SetMusicVol("MENU", musicVolume / 100.0f);
-            SoundManager::GetInstance().SetMusicVol("GAMEWORLD_1", musicVolume / 100.0f);
+            SoundManager::GetInstance().SetAllMusicVol(musicVolume / 100.0f);
             std::cout << "[SettingsScreen] Music volume set to: " << musicVolume << std::endl;
         }
 
@@ -80,11 +79,8 @@ void SettingsScreen::Update() {
             float percent = (GetMousePosition().x - sliderX) / (float)sliderW;
             percent = std::max(0.0f, std::min(1.0f, percent));
             sfxVolume = (int)(percent * 100);
-            SoundManager::GetInstance().SetSoundVol("COIN_COLLECTION", sfxVolume / 100.0f);
-            SoundManager::GetInstance().SetSoundVol("POWER_UP_APPEARS", sfxVolume / 100.0f);
-            SoundManager::GetInstance().SetSoundVol("ENEMY_DEATH", sfxVolume / 100.0f);
-            SoundManager::GetInstance().SetSoundVol("MARIO_JUMP", sfxVolume / 100.0f);
-            SoundManager::GetInstance().SetSoundVol("BUTTON_CLICK", sfxVolume / 100.0f);
+            // Cập nhật volume cho tất cả SFX
+            SoundManager::GetInstance().SetAllSoundVol(sfxVolume / 100.0f);
             std::cout << "[SettingsScreen] SFX volume set to: " << sfxVolume << std::endl;
         }
 
@@ -122,13 +118,7 @@ void SettingsScreen::Update() {
                 musicVolume = 0;
                 sfxVolume = 0;
                 // Update SoundManager to set all music and SFX volumes to 0
-                SoundManager::GetInstance().SetMusicVol("MENU", 0.0f);
-                SoundManager::GetInstance().SetMusicVol("GAMEWORLD_1", 0.0f);
-                SoundManager::GetInstance().SetSoundVol("COIN_COLLECTION", 0.0f);
-                SoundManager::GetInstance().SetSoundVol("POWER_UP_APPEARS", 0.0f);
-                SoundManager::GetInstance().SetSoundVol("ENEMY_DEATH", 0.0f);
-                SoundManager::GetInstance().SetSoundVol("MARIO_JUMP", 0.0f);
-                SoundManager::GetInstance().SetSoundVol("BUTTON_CLICK", 0.0f);
+                SoundManager::GetInstance().SetMasterVol(0.0f);
                 std::cout << "[SettingsScreen] Muted: musicVolume and sfxVolume set to 0" << std::endl;
             } else {
                 // Restore default volumes when unmuted (optional, adjust as needed)

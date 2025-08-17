@@ -72,10 +72,6 @@ class GameWorld {
         // Get enemy speed multiplier
         float GetEnemySpeedMultiplier() const { return enemySpeedMultiplier; }
 
-
-        void CollectWorldData(GameSaveData& saveData);
-        void ApplyLoadedData(const GameSaveData& saveData);
-        GameSaveData CollectSaveData();
         
         friend class GameScreen;
 };

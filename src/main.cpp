@@ -11,7 +11,7 @@ int main() {
     InitWindow(1600, 900, "Mario Game");
     InitAudioDevice();
 
-    SetTargetFPS(144);
+    SetTargetFPS(60);
     bool isPaused = false;
     ResrcManager::GetInstance().loadResources();
     ScreenController screenController; // Create a screen controller instance
@@ -21,7 +21,7 @@ int main() {
     GameWorld::Init(); // Initialize game world resources   
     GameWorld gameWorld; // Create a game world instance
     while(!WindowShouldClose()) {
-        GameClock::GetInstance().updateTimeAcum += GetFrameTime();
+        GameClock::GetInstance().updateTimeAcum += 1/60;
 
         // Update game logic TRƯỚC khi vẽ
         screenController.Update();

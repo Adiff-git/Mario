@@ -69,6 +69,7 @@ class Map : public Drawable {
         void LoadFromJsonFile(const std::string& filepath);
         int getHeight() const { return 960; };
         int getWidth() const { return width; };
+        void Clear();
         // void AddTile(int x, int y, int tileId);
         // void RemoveTile(int x, int y);
         // void AddBlock(int x, int y, int blockType);
