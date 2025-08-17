@@ -365,6 +365,13 @@ void GameWorld::UpdateWorld()
                     if (tile && fireball->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
                         mediatorCollision.HandleCollision(fireball, tile);
                 }
+                for (auto const &block : activeBlocks)
+                {
+                    if (block && fireball->checkCollisionType(*block) != COLLISION_TYPE_NONE)
+                    {
+                        mediatorCollision.HandleCollision(fireball, block);
+                    }
+                }
                 for (Enemy *enemy : activeEnemies)
                 {
                     if (enemy && enemy->GetState() != OBJECT_STATE_DEAD && enemy->GetState() != OBJECT_STATE_DYING &&
@@ -465,6 +472,13 @@ void GameWorld::UpdateWorld()
                 {
                     if (tile && fireball->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
                         mediatorCollision.HandleCollision(fireball, tile);
+                }
+                for (auto const &block : activeBlocks)
+                {
+                    if (block && fireball->checkCollisionType(*block) != COLLISION_TYPE_NONE)
+                    {
+                        mediatorCollision.HandleCollision(fireball, block);
+                    }
                 }
                 for (Enemy *enemy : activeEnemies)
                 {

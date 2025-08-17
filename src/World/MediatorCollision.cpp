@@ -55,6 +55,8 @@ void MediatorCollision::HandleMarioWithTile(Character *&mario, Tile *&tile, Coll
     }
 }
 
+
+
 void MediatorCollision::HandleFireballWithTile(Fireball *&fireball, Tile *&tile, CollisionType AtoB)
 {
     if (AtoB == COLLISION_TYPE_NONE)
@@ -88,6 +90,51 @@ void MediatorCollision::HandleFireballWithTile(Fireball *&fireball, Tile *&tile,
     case COLLISION_TYPE_WEST:
     {
         fireball->SetPos(Vector2{tile->GetPos().x + fireball->GetSize().x + tile->GetSize().x, fireball->GetPos().y});
+        fireball->SetVel(Vector2{-fireball->GetVel().x, fireball->GetVel().y});
+        if (fireball->GetCurrFrame() == 0)
+        {
+            fireball->setCurrFrame(3);
+        }
+        else
+            fireball->setCurrFrame(fireball->GetCurrFrame() - 1);
+        break;
+    }
+    }
+}
+
+void MediatorCollision::HandleFireballWithBlock(Fireball *&fireball, Block *&block, CollisionType AtoB)
+{
+    if (AtoB == COLLISION_TYPE_NONE)
+        return;
+    switch (AtoB)
+    {
+    case COLLISION_TYPE_SOUTH:
+    {
+        fireball->SetPos(Vector2{fireball->GetPos().x, block->GetPos().y - fireball->GetSize().y});
+        fireball->SetVel(Vector2{fireball->GetVel().x, -500});
+        break;
+    }
+    case COLLISION_TYPE_NORTH:
+    {
+        fireball->SetPos(Vector2{fireball->GetPos().x, block->GetPos().y + block->GetSize().y});
+        fireball->SetVel(Vector2{fireball->GetVel().x, 0});
+        break;
+    }
+    case COLLISION_TYPE_EAST:
+    {
+        fireball->SetPos(Vector2{block->GetPos().x - fireball->GetSize().x, fireball->GetPos().y});
+        fireball->SetVel(Vector2{-fireball->GetVel().x, fireball->GetVel().y});
+        if (fireball->GetCurrFrame() == 0)
+        {
+            fireball->setCurrFrame(3);
+        }
+        else
+            fireball->setCurrFrame(fireball->GetCurrFrame() - 1);
+        break;
+    }
+    case COLLISION_TYPE_WEST:
+    {
+        fireball->SetPos(Vector2{block->GetPos().x + fireball->GetSize().x, fireball->GetPos().y});
         fireball->SetVel(Vector2{-fireball->GetVel().x, fireball->GetVel().y});
         if (fireball->GetCurrFrame() == 0)
         {
@@ -328,6 +375,13 @@ void MediatorCollision::HandleCollision(Object *ObjectA, Object *ObjectB)
         Fireball *fireball = fireballA ? fireballA : fireballB;
         CollisionType type = enemy->checkCollisionType(*fireball);
         HandleEnemyWithFireball(enemy, fireball, type);
+    }
+    else if ((fireballA && blockB) || (fireballB && blockA))
+    {
+        Fireball *fireball = fireballA ? fireballA : fireballB;
+        Block *block = blockA ? blockA : blockB;
+        CollisionType type = fireball->checkCollisionType(*block);
+        HandleFireballWithBlock(fireball, block, type);
     }
     // Mario vs block
     else if ((marioA && blockB) || (blockA && marioB))
