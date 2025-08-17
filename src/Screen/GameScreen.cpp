@@ -7,9 +7,9 @@
 #include <chrono>
 #include <sstream>
 #include <iomanip>
-#include <fstream>
 #include <filesystem>
 #include "json.hpp"
+
 GameScreen::GameScreen(ScreenController *screenController)
     : Screen(screenController),
       BackMenu(Vector2{50, 50}, Vector2{50, 50}),
@@ -349,10 +349,15 @@ GameScreen::GameScreen(ScreenController *screenController, const std::string &sa
 
 void GameScreen::Update()
 {
+    // Cập nhật nút Back
     BackMenu.Update();
 
-    if (requestGoHome)
+    if (BackMenu.IsPressed())
     {
+        if (!SoundManager::GetInstance().IsMuted())
+        {
+            SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
+        }
         screenController->ChangeScreen(new MenuScreen(screenController));
         return;
     }
@@ -384,11 +389,15 @@ void GameScreen::Update()
         int sliderX = winX + 100;
         int sliderY = winY + 80;
 
+        // Cập nhật các nút trong pause menu
+        PlayButton.Update();
+        MenuButton.Update();
+        SaveButton.Update();
+
         // --- MUSIC SLIDER ---
         Rectangle musicSliderRect = {(float)sliderX, (float)sliderY - 10, (float)sliderW, 30};
         if (IsMouseButtonDown(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), musicSliderRect))
         {
-            // Tự động unmute khi kéo thanh trượt
             if (SoundManager::GetInstance().IsMuted())
             {
                 SoundManager::GetInstance().SetMuted(false);
@@ -408,7 +417,6 @@ void GameScreen::Update()
         Rectangle sfxSliderRect = {(float)sliderX, (float)sfxSliderY - 10, (float)sliderW, 30};
         if (IsMouseButtonDown(MOUSE_LEFT_BUTTON) && CheckCollisionPointRec(GetMousePosition(), sfxSliderRect))
         {
-            // Tự động unmute khi kéo thanh trượt
             if (SoundManager::GetInstance().IsMuted())
             {
                 SoundManager::GetInstance().SetMuted(false);
@@ -426,63 +434,29 @@ void GameScreen::Update()
             std::cout << "[GameScreen] SFX volume set to: " << pauseSfxVolume << std::endl;
         }
 
-        // --- Nút Resume và Home ---
-        Rectangle resumeBtn = {(float)(winX + 50), (float)(winY + winH - 80), 100, 50};
-        Rectangle homeBtn = {(float)(winX + 250), (float)(winY + winH - 80), 100, 50};
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-        {
-            Vector2 mouse = GetMousePosition();
-            if (CheckCollisionPointRec(mouse, resumeBtn))
-            {
-                if (!SoundManager::GetInstance().IsMuted())
-                {
-                    SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
-                }
-                isPaused = false;
-                showPauseMenu = false;
-            }
-            if (CheckCollisionPointRec(mouse, homeBtn))
-            {
-                if (!SoundManager::GetInstance().IsMuted())
-                {
-                    SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
-                }
-                requestGoHome = true;
-            }
-        }
-
-        // Debug log
-        if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
-        {
-            Vector2 mousePos = GetMousePosition();
-            std::cout << "[GameScreen Debug] Mouse pos: (" << mousePos.x << ", " << mousePos.y
-                      << "), sfxSliderRect: (" << sfxSliderRect.x << ", " << sfxSliderRect.y
-                      << ", " << sfxSliderRect.width << ", " << sfxSliderRect.height << ")"
-                      << ", collision: " << CheckCollisionPointRec(GetMousePosition(), sfxSliderRect) << std::endl;
-        }
-        return;
-    }
-
-    if (showWinScreen)
-    {
-        if (IsKeyPressed(KEY_ENTER))
+        // --- Nút Play, Menu, Save ---
+        if (PlayButton.IsPressed())
         {
             if (!SoundManager::GetInstance().IsMuted())
             {
                 SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
             }
-            showWinScreen = false;
-            screenController->ChangeScreen(new MenuScreen(screenController));
+            isPaused = false;
+            showPauseMenu = false;
         }
-        return;
-    }
-        
-    if (SaveButton.IsPressed())
+        if (MenuButton.IsPressed())
+        {
+            if (!SoundManager::GetInstance().IsMuted())
+            {
+                SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
+            }
+            requestGoHome = true;
+        }
+        if (SaveButton.IsPressed())
         {
             showSaveDialog = true;
             memset(saveFileName, 0, sizeof(saveFileName));
             saveNameLength = 0;
-            // Prefill with existing save name if we loaded from a file
             if (!loadedSavePath.empty())
             {
                 try
@@ -500,7 +474,19 @@ void GameScreen::Update()
                 }
             }
         }
-    // Handle save dialog input
+
+        // Debug log
+        if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
+        {
+            Vector2 mousePos = GetMousePosition();
+            std::cout << "[GameScreen Debug] Mouse pos: (" << mousePos.x << ", " << mousePos.y
+                      << "), sfxSliderRect: (" << sfxSliderRect.x << ", " << sfxSliderRect.y
+                      << ", " << sfxSliderRect.width << ", " << sfxSliderRect.height << ")"
+                      << ", collision: " << CheckCollisionPointRec(GetMousePosition(), sfxSliderRect) << std::endl;
+        }
+        return;
+    }
+
     if (showSaveDialog)
     {
         // Handle text input
@@ -532,7 +518,6 @@ void GameScreen::Update()
                 std::string original = p.stem().string();
                 if (_stricmp(original.c_str(), typedName.c_str()) == 0)
                 {
-                    // overwrite original
                     SaveMapInSettings(original);
                 }
                 else
@@ -553,8 +538,23 @@ void GameScreen::Update()
             showSaveDialog = false;
         }
 
-        return; // Don't process other inputs when dialog is open
+        return;
     }
+
+    if (showWinScreen)
+    {
+        if (IsKeyPressed(KEY_ENTER))
+        {
+            if (!SoundManager::GetInstance().IsMuted())
+            {
+                SoundManager::GetInstance().PlaySound("BUTTON_CLICK");
+            }
+            showWinScreen = false;
+            screenController->ChangeScreen(new MenuScreen(screenController));
+        }
+        return;
+    }
+
     switch (transitionState)
     {
     case TransitionState::NEXT_LEVEL:
@@ -579,6 +579,7 @@ void GameScreen::Update()
         }
         break;
     }
+
     if (transitionState != TransitionState::NONE)
     {
         return;
@@ -586,7 +587,6 @@ void GameScreen::Update()
 
     switch (gameWorld->GetGameState())
     {
-
     case GameState::GAME_PLAYING:
         if (isPaused)
             break;
@@ -652,9 +652,7 @@ void GameScreen::Draw()
             WHITE);
         DrawText("Press ENTER to return to menu", GetScreenWidth() / 2 - 200, GetScreenHeight() - 100, 32, BLACK);
         return;
-
     }
-
 
     gameWorld->DrawWorld();
     gameHUD->Draw();
@@ -697,16 +695,9 @@ void GameScreen::Draw()
         DrawCircle(sfxKnobX, sfxSliderY + 5, 10, DARKGRAY);
         DrawText(TextFormat("%d%%", pauseSfxVolume), sliderX + sliderW + 20, sfxSliderY - 10, 20, BLACK);
 
-        // --- Nút Resume ---
-        Rectangle resumeBtn = {(float)(winX + 50), (float)(winY + winH - 80), 100, 50};
-        DrawRectangleRec(resumeBtn, GREEN);
-        DrawText("Play", resumeBtn.x + 25, resumeBtn.y + 15, 24, WHITE);
-
-        // --- Nút Home ---
-        Rectangle homeBtn = {(float)(winX + 250), (float)(winY + winH - 80), 100, 50};
-        DrawRectangleRec(homeBtn, RED);
-        DrawText("Home", homeBtn.x + 20, homeBtn.y + 15, 24, WHITE);
-
+        // Vẽ các nút Play, Menu, Save
+        PlayButton.Draw();
+        MenuButton.Draw();
         SaveButton.Draw();
     }
 
@@ -792,7 +783,6 @@ void GameScreen::Draw()
                    20, 7, WHITE);
         DrawTextureNPatch(*SmallMario,
                           NPatchInfo{Rectangle{0, 0, (float)(*SmallMario).width, 24}, 0, 0, 0, 0},
-
                           Rectangle{(float)GetScreenWidth() / 2 - 100, (float)GetScreenHeight() / 2 - 16, 43, 32}, Vector2{0, 0}, 0.0f, WHITE);
 
         Vector2 size = MeasureTextEx(*SuperMarioFont,
@@ -806,7 +796,6 @@ void GameScreen::Draw()
     case TransitionState::GAME_RESET:
     {
         DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), BLACK);
-
         DrawTextEx(*SuperMarioFont, ("Level " + std::to_string(level)).c_str(),
                    Vector2{(float)GetScreenWidth() / 2 - MeasureTextEx(
                                                              *SuperMarioFont,
@@ -816,16 +805,13 @@ void GameScreen::Draw()
                                                              2,
                            (float)GetScreenHeight() / 2 - 100},
                    20, 7, WHITE);
-
         DrawTextureNPatch(*SmallMario,
                           NPatchInfo{Rectangle{0, 0, (float)(*SmallMario).width,
                                                24},
                                      0, 0, 0, 0},
                           Rectangle{(float)GetScreenWidth() / 2 - 100, (float)GetScreenHeight() / 2 - 16, 43, 32}, Vector2{0, 0}, 0.0f, WHITE);
-
         Vector2 size = MeasureTextEx(*SuperMarioFont,
                                      ("X " + std::to_string(level + 1)).c_str(), 20, 7);
-
         DrawTextEx(*SuperMarioFont, ("X " + std::to_string(gameWorld->player1->GetLives())).c_str(),
                    Vector2{(float)GetScreenWidth() / 2 - size.x / 2,
                            (float)GetScreenHeight() / 2 - size.y / 2},
@@ -835,7 +821,6 @@ void GameScreen::Draw()
     case TransitionState::GAME_OVER:
     {
         DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), BLACK);
-
         DrawTextEx(*SuperMarioFont, ("Level " + std::to_string(level)).c_str(),
                    Vector2{(float)GetScreenWidth() / 2 - MeasureTextEx(
                                                              *SuperMarioFont,
@@ -845,16 +830,13 @@ void GameScreen::Draw()
                                                              2,
                            (float)GetScreenHeight() / 2 - 100},
                    20, 7, WHITE);
-
         DrawTextureNPatch(*SmallMario,
                           NPatchInfo{Rectangle{0, 0, (float)(*SmallMario).width,
                                                24},
                                      0, 0, 0, 0},
                           Rectangle{(float)GetScreenWidth() / 2 - 100, (float)GetScreenHeight() / 2 - 16, 43, 32}, Vector2{0, 0}, 0.0f, WHITE);
-
         Vector2 size = MeasureTextEx(*SuperMarioFont,
                                      ("X " + std::to_string(level + 1)).c_str(), 20, 7);
-
         DrawTextEx(*SuperMarioFont, ("X " + std::to_string(gameWorld->player1->GetLives())).c_str(),
                    Vector2{(float)GetScreenWidth() / 2 - size.x / 2,
                            (float)GetScreenHeight() / 2 - size.y / 2},
@@ -873,7 +855,6 @@ void GameScreen::ResetGame()
     if (currentLives1 > 1 || (isMultiplayer && currentLives2 > 0))
     {
         gameWorld = std::make_unique<GameWorld>(level, this, isMultiplayer, player1Type, player2Type);
-
         gameWorld->player1->SetLives(currentLives1 - 1);
         if (isMultiplayer && gameWorld->player2)
         {
@@ -911,7 +892,6 @@ void GameScreen::DrawEnd()
     DrawRectangleRounded(Rectangle{(float)GetScreenWidth() / 2 - 400, (float)GetScreenHeight() / 2 - 350, 800, 700}, 0.2f, 180, Color{255, 245, 137, 220});
     DrawRectangleRoundedLinesEx(Rectangle{(float)GetScreenWidth() / 2 - 400, (float)GetScreenHeight() / 2 - 350, 800, 700}, 0.2f, 180, 10.0f, Color{234, 136, 65, 255});
 
-
     DrawTextureNPatch((*LevelEndCongratulation),
                       NPatchInfo{Rectangle{0, 0, (float)(*LevelEndCongratulation).width,
                                            (float)(*LevelEndCongratulation).height},
@@ -924,7 +904,6 @@ void GameScreen::DrawEnd()
     std::string score = "Score: " + std::to_string(gameWorld->player1->GetScore());
     DrawTextEx(ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT"), score.c_str(),
                Vector2{(float)GetScreenWidth() / 2 - MeasureTextEx(ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT"), (score).c_str(), 60, 2).x / 2, (float)GetScreenHeight() / 2}, 60, 2, WHITE);
-
 
     DrawTextureNPatch(*LevelEndEnter,
                       NPatchInfo{Rectangle{0, 0, (float)(*LevelEndEnter).width,
@@ -1042,7 +1021,6 @@ void GameScreen::NextLevel()
     level = nextLevel;
     gameWorld = std::make_unique<GameWorld>(level, this, isMultiplayer, player1Type, player2Type);
 
-
     gameWorld->player1->SetLives(currentLives1);
     gameWorld->player1->SetCoins(currentCoins1);
     gameWorld->player1->SetScore(currentScore1);
@@ -1086,11 +1064,6 @@ void GameScreen::BeginTransition(TransitionState transitionState)
         break;
     }
 }
-
-
-
-
-
 
 std::string GameScreen::GetCurrentDateTime()
 {
@@ -1321,7 +1294,6 @@ int GameScreen::GetBlockTileId(Block *block)
 
 int GameScreen::GetEnemyTileId(Enemy *enemy)
 {
-
     if (dynamic_cast<Goomba *>(enemy))
         return 127;
     else if (dynamic_cast<GreenKoopa *>(enemy))
@@ -1356,7 +1328,6 @@ int GameScreen::GetEnemyTileId(Enemy *enemy)
 
 int GameScreen::GetItemTileId(Item *item)
 {
-
     if (dynamic_cast<Coin *>(item))
         return 140;
     else if (dynamic_cast<Mushroom *>(item))
