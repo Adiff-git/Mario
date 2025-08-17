@@ -156,7 +156,7 @@ Vector2 Object::GetVel() const{
 }
 
 float Object::GetFrameTime() const {
-    return frameTime;
+    return frameTime; // Assuming a fixed frame rate of 60 FPS
 }
 float Object::GetFrameAcum() const {
     return frameAcumulator;

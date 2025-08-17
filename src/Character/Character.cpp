@@ -16,9 +16,9 @@ Character::Character(Vector2 pos, int lives, ObjectState form, ControlType contr
       blinkingAcum(0.0f), 
       blinkingTime(2.0f), 
       blinkingAcumTotal(0.0f),
-      isInvincible(false), // Khởi tạo trạng thái bất tử
-      invincibleTimer(0.0f), // Thời gian còn lại của bất tử
-      invincibleDuration(30.0f) // Thời gian bất tử 
+      isInvincible(false), 
+      invincibleTimer(0.0f),
+      invincibleDuration(30.0f) 
       { // Removed direction initialization
 
     state = OBJECT_STATE_ON_GROUND;
@@ -350,7 +350,7 @@ void Character::Update() {
 
 void Character::UpdateStateAndPhysic() {
     HandleInput();
-    const float deltaTime = GetFrameTime();
+    const float deltaTime = ::GetFrameTime();
     if (state == OBJECT_STATE_DYING) {
         
         
@@ -399,7 +399,7 @@ void Character::UpdateStateAndPhysic() {
         {
             if (state == OBJECT_STATE_ON_GROUND) {
                 if(vel.x != 0 && !isDucking) {
-                    frameTime = 0.1;
+                    frameTime = 0.1 ;
                     frameAcumulator += deltaTime;
                     maxFrames = 1;
                     if (frameAcumulator > frameTime) {
@@ -458,7 +458,7 @@ void Character::UpdateStateAndPhysic() {
         vel.y = 0;
     }
 
-    vel.y += GameWorld::GetGravity() * deltaTime; // Apply gravity
+    vel.y += GameWorld::GetGravity() * 0.1f; // Apply gravity
 
     Object::UpdateStateAndPhysic(); // Call the base class method to handle position updates and collision checks
     // // because Object::UpdateStateAndPhysic() will update the position based on velocity
