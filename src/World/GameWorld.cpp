@@ -666,7 +666,7 @@ void GameWorld::UpdateWorld()
                             }
                         }
                         if (!tokenExists) {
-                            items.push_back(std::make_shared<CourseClearToken>(boss->GetPos()));
+                                items.push_back(std::make_shared<CourseClearToken>(Vector2{2000, 800}));
                         }
                         delete boss;
                         return true;

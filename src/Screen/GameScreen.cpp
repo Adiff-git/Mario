@@ -736,7 +736,8 @@ void GameScreen::NextLevel()
     }
     else if (selectedMap == MapType::MAP_BOSS)
     {
-        screenController->ChangeScreen(new MenuScreen(screenController));
+        // Hiển thị màn hình Course Cleared với texture WIN và nút về menu
+        showWinScreen = true;
         return;
     }
 
