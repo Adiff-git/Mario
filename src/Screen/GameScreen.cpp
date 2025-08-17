@@ -379,7 +379,7 @@ void GameScreen::Update()
         showPauseMenu = isPaused;
     }
 
-    if (showPauseMenu)
+    if (showPauseMenu && !showSaveDialog)
     {
         // Cửa sổ pause
         int winW = 400, winH = 350;
@@ -484,7 +484,7 @@ void GameScreen::Update()
                       << ", " << sfxSliderRect.width << ", " << sfxSliderRect.height << ")"
                       << ", collision: " << CheckCollisionPointRec(GetMousePosition(), sfxSliderRect) << std::endl;
         }
-        return;
+        if(!showSaveDialog) return;
     }
 
     if (showSaveDialog)
