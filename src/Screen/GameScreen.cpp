@@ -246,7 +246,14 @@ GameScreen::GameScreen(ScreenController *screenController, const std::string& sa
         }
     }
 
-    // Construct world with correct multiplayer setting to keep control schemes
+    // If json includes characterType, override defaults before constructing world
+    if(parsed && j.contains("player1") && j["player1"].contains("characterType")){
+        player1Type = static_cast<CharacterType>(j["player1"].value("characterType", (int)CharacterType::MARIO));
+    }
+    if(parsed && isMultiplayer && j.contains("player2") && j["player2"].contains("characterType")){
+        player2Type = static_cast<CharacterType>(j["player2"].value("characterType", (int)CharacterType::LUIGI));
+    }
+    // Construct world with correct multiplayer + character choices
     gameWorld = std::make_unique<GameWorld>(level, this, isMultiplayer, player1Type, player2Type);
 
     if(parsed){
@@ -995,6 +1002,7 @@ void GameScreen::SaveMapInSettings(const std::string& fileName)
     p1["score"] = gameWorld->player1->GetScore();
     p1["state"] = (int)gameWorld->player1->GetMarioState();
     p1["additionalState"] = (int)gameWorld->player1->GetAdditionalState();
+    p1["characterType"] = (int)player1Type; // persist chosen character
     mapData["player1"] = p1;
 
     if(isMultiplayer && gameWorld->player2){
@@ -1006,6 +1014,7 @@ void GameScreen::SaveMapInSettings(const std::string& fileName)
         p2["score"] = gameWorld->player2->GetScore();
         p2["state"] = (int)gameWorld->player2->GetMarioState();
         p2["additionalState"] = (int)gameWorld->player2->GetAdditionalState();
+    p2["characterType"] = (int)player2Type;
         mapData["player2"] = p2;
     }
 
