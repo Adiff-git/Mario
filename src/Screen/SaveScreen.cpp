@@ -19,7 +19,7 @@ SaveScreen::SaveScreen(ScreenController* controller)
     int idx = 0;
     for(const auto& entry : saves){
         Button btn(Vector2{ 200.0f, (float)(startY + idx * 70) }, Vector2{600, 60}, entry.name, 24, 1);
-        btn.SetTexture(ResrcManager::GetInstance().getTexture("START_BUTTON"));
+        btn.SetTexture(ResrcManager::GetInstance().getTexture("MEM"));
         saveButtons.push_back(std::move(btn));
         idx++;
         if(idx>=8) break; // simple first page

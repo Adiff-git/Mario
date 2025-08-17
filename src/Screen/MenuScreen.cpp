@@ -17,7 +17,7 @@ ContinueButton(Vector2{1600/2 - 150, 900/2 + 230}, Vector2{300, 80})
     logoTexture = &ResrcManager::GetInstance().getTexture("LOGO");
     startButton.SetTexture(ResrcManager::GetInstance().getTexture("START_BUTTON"));
     MapEditorButton.SetTexture(ResrcManager::GetInstance().getTexture("MAP_EDITOR_BUTTON"));
-    ContinueButton.SetTexture(ResrcManager::GetInstance().getTexture("START_BUTTON"));
+    ContinueButton.SetTexture(ResrcManager::GetInstance().getTexture("SAVE_BUTTON"));
     // startButton.SetPosition({1600/2 - 50, 900 / 2 - 50});
     // startButton.SetSize({200, 50});
     // exitButton.SetTexture(ResrcManager::GetInstance().getTexture("EXIT_BUTTON"));
