@@ -12,7 +12,7 @@ public:
         : Character(pos, lives, form, controlType) {
             
         characterType = CharacterType::MARIO;
-        SetSpeedY(GetSpeedY() * 0.95f);
+        SetSpeedX(GetSpeedX() * 0.9f);
         
     }
 
