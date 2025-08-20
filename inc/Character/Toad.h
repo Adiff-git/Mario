@@ -15,8 +15,7 @@ public:
         : Character(pos, lives, form,  controlType) {
             
         characterType = CharacterType::TOAD;
-        SetSpeedY(GetSpeedY() * 1.2f);
-        SetSpeedX(GetSpeedX() * 1.2f); // Toad is slightly faster than Mario
+        SetSpeedY(GetSpeedY() * 1.2f);// Toad is slightly faster than Mario
         
     }
 
