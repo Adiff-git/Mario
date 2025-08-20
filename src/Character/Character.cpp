@@ -18,7 +18,7 @@ Character::Character(Vector2 pos, int lives, ObjectState form, ControlType contr
       blinkingAcumTotal(0.0f),
       isInvincible(false), 
       invincibleTimer(0.0f),
-      invincibleDuration(30.0f) 
+      invincibleDuration(1.5f) 
       { // Removed direction initialization
 
     state = OBJECT_STATE_ON_GROUND;
