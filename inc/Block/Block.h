@@ -5,7 +5,7 @@
 #include "../inc/Character/Character.h"
 #include "../inc/Block/BlockType.h"
 class Map;
-enum GiftType{
+enum GiftType{//đsv
     GIFT_NONE,
     GIFT_COIN,
     GIFT_STAR_DUST,
