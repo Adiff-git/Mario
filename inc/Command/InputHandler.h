@@ -29,8 +29,6 @@ public:
     // Delete copy constructor và copy assignment
     InputHandler(const InputHandler&) = delete;
     InputHandler& operator=(const InputHandler&) = delete;
-    
-    // Delete move constructor và move assignment để tránh lỗi
     InputHandler(InputHandler&&) = delete;
     InputHandler& operator=(InputHandler&&) = delete;
 
