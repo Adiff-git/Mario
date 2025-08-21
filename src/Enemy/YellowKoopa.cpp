@@ -15,35 +15,23 @@ YellowKoopa::YellowKoopa(Vector2 pos)
 }
 
 void YellowKoopa::EnterShell() {
-    if (AdditionalState != OBJECT_STATE_SHELL) {
-        AdditionalState = OBJECT_STATE_SHELL;
-        state = OBJECT_STATE_SHELL; // đồng bộ với MediatorCollision
-        // Reset vận tốc để tránh “bắn” đi
-        SetVel(Vector2{0, 0});
-
+    if (state != OBJECT_STATE_SHELL) {
+        state = OBJECT_STATE_SHELL;
+        SetVel(Vector2{0, GetVel().y});
         sprite = &ResrcManager::GetInstance().getTexture("SHELL_8");
-
-        // Thu nhỏ và dời Y theo chênh lệch chiều cao (pos là tâm)
-        const float newH = 32.0f;
-        const float oldH = GetSize().y; // 48 hiện tại
         SetSize(Vector2{32, 32});
-        const float dy = (oldH - newH) * 0.5f; // bỏ +3 để tránh chui nền/đội nền
-        SetPos(Vector2{GetPos().x, GetPos().y + dy});
-
         textureIndex = 8;
         isMoving = false;
-        std::cout << "[DEBUG] YellowKoopa entered shell, state: " << state << ", vel.x: " << GetVel().x << ", pos.y: " << GetPos().y << ", hitCount: " << hitCount << ", isMoving: " << isMoving << std::endl;
     }
 }
 
 void YellowKoopa::EnterShellWithVelocity(float velX) {
-    if (AdditionalState == OBJECT_STATE_SHELL && !isMoving) {
-        // velX theo px/s
+    if (state == OBJECT_STATE_SHELL && !isMoving) {
         SetVel(Vector2{velX, 0});
         sprite = &ResrcManager::GetInstance().getTexture("SHELL_8");
+        SetSize(Vector2{32, 32});
         textureIndex = 8;
         isMoving = true;
-        std::cout << "[DEBUG] YellowKoopa shell moving, vel.x: " << GetVel().x << ", hitCount: " << hitCount << ", isMoving: " << isMoving << std::endl;
     }
 }
 
@@ -67,37 +55,38 @@ void YellowKoopa::UpdateStateAndPhysic() {
 
     const float deltaTime = GetFrameTime();
     if (state == OBJECT_STATE_SHELL) {
+        // Thay đổi texture khi shell di chuyển
         if (isMoving) {
             updateCount++;
-            const int updateThreshold = 10;
+            const int updateThreshold = 10; // Tốc độ animation của shell
             if (updateCount >= updateThreshold) {
                 textureIndex = 8 + ((textureIndex + 1 - 8) % 4); // Chuyển đổi giữa 8, 9, 10, 11
                 std::string textureName = "SHELL_" + std::to_string(textureIndex);
                 sprite = &ResrcManager::GetInstance().getTexture(textureName);
                 updateCount = 0;
-                std::cout << "[DEBUG] Cập nhật texture shell thành: " << textureName << ", textureIndex: " << textureIndex << std::endl;
             }
 
             Vector2 newPos = Vector2{(double)(GetPos().x + GetVel().x * GameClock::GetInstance().FIXED_TIME_STEP), (double)(GetPos().y)};
             SetPos(newPos);
-            std::cout << "[DEBUG] Shell di chuyển, pos.x: " << newPos.x << ", vel.x: " << GetVel().x << ", isMoving: " << isMoving << std::endl;
         } else {
+            // Texture tĩnh khi shell không di chuyển
             sprite = &ResrcManager::GetInstance().getTexture("SHELL_8");
             SetVel(Vector2{0, GetVel().y});
             textureIndex = 8;
         }
 
+        // Áp dụng trọng lực nhưng giữ trạng thái OBJECT_STATE_SHELL
         if (GetState() != OBJECT_STATE_ON_GROUND) {
             SetVel(Vector2{GetVel().x, GetVel().y + GameWorld::GetGravity() * deltaTime});
         } else {
             SetVel(Vector2{GetVel().x, 0});
         }
-        std::cout << "[DEBUG] Cập nhật: state=" << state << ", pos.x=" << GetPos().x << ", vel.x=" << GetVel().x << ", vel.y=" << GetVel().y << ", hitCount=" << hitCount << ", isMoving=" << isMoving << std::endl;
         return;
     }
 
+    // Logic gốc cho trạng thái không phải shell
     if (GetState() != OBJECT_STATE_ON_GROUND) {
-        SetVel(Vector2{GetVel().x, GetVel().y + GameWorld::GetGravity() * static_cast<float>(GameClock::GetInstance().FIXED_TIME_STEP)});
+        SetVel(Vector2{GetVel().x, GetVel().y + 9.81f * static_cast<float>(GameClock::GetInstance().FIXED_TIME_STEP)});
     }
     if (GetState() == OBJECT_STATE_ON_GROUND) {
         float newVelX = GetVel().x;
@@ -148,4 +137,4 @@ void YellowKoopa::UpdateStateAndPhysic() {
         textureIndex = 0;
         updateCount = 0;
     }
-}// asd
+}// commit 
