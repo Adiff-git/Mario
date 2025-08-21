@@ -1,0 +1,533 @@
+{
+	"globsDependent" : 
+	[
+		{
+			"expression" : "D:/Downloads/Ref/Gia/Mario/src/*.cpp",
+			"paths" : 
+			[
+				"D:/Downloads/Ref/Gia/Mario/src/BTNodes.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/BehaviorTree.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Block/Block.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Block/CloudBlock.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Block/EyesClosedBlock.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Block/EyesOpenedBlock.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Block/GlassBlock.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Block/QuestionBlock.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Block/WoodBlock.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Bob-omb.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Boss.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/BossFireball.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/BossState.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Button.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Character/Character.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Character/Luigi.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Character/Mario.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Character/Peach.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Character/Toad.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Command/CharacterCommands.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Command/Command.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Command/InputHandler.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Enemy/BanzaiBill.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Enemy/BulletBill.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Enemy/BuzzyBeetle.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Enemy/Enemy.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Enemy/FlyingGoomba.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Enemy/Goomba.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Enemy/GreenKoopa.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Enemy/JumpingPiranha.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Enemy/PiranhaPlant.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Enemy/RedKoopa.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Enemy/Rex.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Enemy/YellowKoopa.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Fireball.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Item/Coin.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Item/CourseClearToken.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Item/FireFlower.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Item/Item.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Item/Mushroom.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Item/OneUpMushroom.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Item/Star.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Item/ThreeUpMoon.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Item/YoshiCoin.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Object.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/ResrcManager.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/SaveManager.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/ScoreEffect.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Screen/CharacterSelectScreen.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Screen/GameModeScreen.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Screen/GameScreen.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Screen/MapEditorScreen.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Screen/MapSelectScreen.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Screen/MenuScreen.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Screen/Screen.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Screen/ScreenController.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/Screen/SettingsScreen.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/SmokeEffect.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/SoundManager.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/World/CollisionProbe.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/World/GameClock.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/World/GameHUD.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/World/GameWorld.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/World/Map.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/World/MediatorCollision.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/World/Tile.cpp",
+				"D:/Downloads/Ref/Gia/Mario/src/main.cpp"
+			],
+			"recurse" : true
+		}
+	],
+	"inputs" : 
+	[
+		{
+			"path" : "CMakeLists.txt"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/CMakeFiles/3.31.5/CMakeSystem.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeSystemSpecificInitialize.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Platform/Windows-Initialize.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/CMakeFiles/3.31.5/CMakeCCompiler.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/CMakeFiles/3.31.5/CMakeCXXCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeSystemSpecificInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeGenericSystem.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeInitializeConfigs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Platform/Windows.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Platform/WindowsPaths.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeCInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeLanguageInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Compiler/GNU-C.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Compiler/GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Compiler/CMakeCommonCompilerMacros.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Platform/Windows-GNU-C.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Platform/Windows-GNU.cmake"
+		},
+		{
+			"isGenerated" : true,
+			"path" : "build/CMakeFiles/3.31.5/CMakeRCCompiler.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeRCInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Platform/Windows-windres.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Platform/Windows-GNU-C-ABI.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeCommonLanguageInclude.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CMakeCLinkerInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CMakeCommonLinkerInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Linker/GNU-C.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Linker/GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Platform/Linker/Windows-GNU-C.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Platform/Linker/Windows-GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Platform/Linker/GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeCXXInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeLanguageInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Compiler/GNU-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Compiler/GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Platform/Windows-GNU-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Platform/Windows-GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Platform/Windows-GNU-CXX-ABI.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeCommonLanguageInclude.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CMakeCXXLinkerInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CMakeCommonLinkerInformation.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Linker/GNU-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Linker/GNU.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Platform/Linker/Windows-GNU-CXX.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Platform/Linker/Windows-GNU.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/raylib/raylib/CMakeLists.txt"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/raylib/raylib/cmake/CompilerFlags.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/raylib/raylib/cmake/AddIfFlagCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCCompilerFlag.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckCompilerFlag.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckFlagCommonConfig.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/Internal/CheckSourceCompiles.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/raylib/raylib/CMakeOptions.txt"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDependentOption.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/raylib/raylib/cmake/EnumOption.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/raylib/raylib/cmake/ParseConfigHeader.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/raylib/raylib/cmake/Uninstall.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/raylib/raylib/src/CMakeLists.txt"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/GNUInstallDirs.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/raylib/raylib/cmake/JoinPaths.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/raylib/raylib/cmake/GlfwImport.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/raylib/raylib/cmake/LibraryConfigurations.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/FindOpenGL.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/raylib/raylib/cmake/CompileDefinitions.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/raylib/raylib/cmake/InstallConfigurations.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/raylib/raylib/cmake/LibraryPathToLinkerFlags.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/raylib/raylib/raylib.pc.in"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/raylib/raylib/cmake/raylib-config-version.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/raylib/raylib/cmake/PopulateConfigVariablesLocally.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/raylib/raylib/cmake/PackConfigurations.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/CPack.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/CPackComponent.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Templates/CPackConfig.cmake.in"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Templates/CPackConfig.cmake.in"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/raylib/raylib/src/external/glfw/CMakeLists.txt"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/GNUInstallDirs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakeDependentOption.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/FindThreads.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckLibraryExists.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckIncludeFile.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckCSourceCompiles.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/FindPackageHandleStandardArgs.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/FindPackageMessage.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/CMakePackageConfigHelpers.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/WriteBasicConfigVersionFile.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/raylib/raylib/src/external/glfw/CMake/glfw3Config.cmake.in"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/BasicConfigVersion-SameMajorVersion.cmake.in"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/raylib/raylib/src/external/glfw/src/CMakeLists.txt"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
+			"path" : "C:/Program Files/CMake/share/cmake-3.31/Modules/CheckIncludeFile.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/raylib/raylib/src/external/glfw/CMake/glfw3.pc.in"
+		}
+	],
+	"kind" : "cmakeFiles",
+	"paths" : 
+	{
+		"build" : "D:/Downloads/Ref/Gia/Mario/build",
+		"source" : "D:/Downloads/Ref/Gia/Mario"
+	},
+	"version" : 
+	{
+		"major" : 1,
+		"minor" : 1
+	}
+}
