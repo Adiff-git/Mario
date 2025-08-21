@@ -19,7 +19,9 @@ public:
 
     void Update() override;
 
-    
+
     void Draw() override;
     void doHit( Character& mario, Map* map ) override;
 };
+
+
