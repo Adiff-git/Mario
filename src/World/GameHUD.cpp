@@ -5,11 +5,11 @@
 GameHUD::GameHUD(Character *mario) : player1(mario), player2(nullptr)
 {
 
-    coinsPosition1 = {1500, 100};
+    coinsPosition1 = {1400, 100};
     coinsSize1 = {30, 30};
     coinTexture1 = &ResrcManager::GetInstance().getTexture("GUI_COIN"); // Load your coin texture here
 
-    scorePosition1 = {1500, 120};
+    scorePosition1 = {1400, 120};
     scoreSize1 = {200, 50};
     MarioHUD1 = &ResrcManager::GetInstance().getTexture("GUI_MARIO"); // Load your HUD texture here
 

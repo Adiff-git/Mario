@@ -41,11 +41,11 @@ void GreenKoopa::OnHit(bool fromLeft) {
     hitCount++;
     if (hitCount == 1) {
         EnterShell();
-        std::cout << "[DEBUG] Hit 1: Pos (" << GetPos().x << ", " << GetPos().y << "), Size (" << GetSize().x << ", " << GetSize().y << ")" << std::endl;
+        
     } else if (hitCount == 2) {
         float shellSpeed = -150.0f;
         EnterShellWithVelocity(fromLeft ? -shellSpeed : shellSpeed);
-        std::cout << "[DEBUG] Hit 2: Pos (" << GetPos().x << ", " << GetPos().y << "), Vel (" << GetVel().x << ", " << GetVel().y << ")" << std::endl;
+        
     }
 }
 

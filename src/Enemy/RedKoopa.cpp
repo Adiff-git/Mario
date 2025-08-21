@@ -14,21 +14,31 @@ RedKoopa::RedKoopa(Vector2 pos)
 }
 
 void RedKoopa::EnterShell() {
-    if (state != OBJECT_STATE_SHELL) {
-        state = OBJECT_STATE_SHELL;
-        SetVel(Vector2{0, GetVel().y});
+    if (AdditionalState != OBJECT_STATE_SHELL) {
+        AdditionalState = OBJECT_STATE_SHELL;
+        state = OBJECT_STATE_SHELL; // đồng bộ với MediatorCollision
+        // Reset vận tốc để tránh “bắn” đi
+        SetVel(Vector2{0, 0});
+
         sprite = &ResrcManager::GetInstance().getTexture("SHELL_0");
+
+        // Thu nhỏ và dời Y theo chênh lệch chiều cao (pos là tâm)
+        const float newH = 32.0f;
+        const float oldH = GetSize().y; // 48 hiện tại
         SetSize(Vector2{32, 32});
+        const float dy = (oldH - newH) * 0.5f; // bỏ +3 để tránh chui nền/đội nền
+        SetPos(Vector2{GetPos().x, GetPos().y + dy});
+
         textureIndex = 0;
         isMoving = false;
     }
 }
 
 void RedKoopa::EnterShellWithVelocity(float velX) {
-    if (state == OBJECT_STATE_SHELL && !isMoving) {
+    if (AdditionalState == OBJECT_STATE_SHELL && !isMoving) {
+        // velX theo px/s
         SetVel(Vector2{velX, 0});
         sprite = &ResrcManager::GetInstance().getTexture("SHELL_0");
-        SetSize(Vector2{32, 32});
         textureIndex = 0;
         isMoving = true;
     }
