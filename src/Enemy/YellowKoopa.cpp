@@ -148,4 +148,4 @@ void YellowKoopa::UpdateStateAndPhysic() {
         textureIndex = 0;
         updateCount = 0;
     }
-}
+}// asd
