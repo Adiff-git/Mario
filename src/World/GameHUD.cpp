@@ -21,6 +21,9 @@ GameHUD::GameHUD(Character *mario) : player1(mario), player2(nullptr)
     Player1StateSize = {30, 30};
     Player1StateTexture = nullptr;
 
+
+
+    
     font = &ResrcManager::GetInstance().getFont("SUPER_MARIO_WORLD_FONT"); // Initialize font if needed
 }
 
