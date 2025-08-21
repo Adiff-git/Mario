@@ -26,24 +26,24 @@ SaveScreen::SaveScreen(ScreenController* controller)
     }
 }
 
-void SaveScreen::ScanSaves(){
-    saves.clear();
-    std::filesystem::path dir = "resources/save";
-    if(!std::filesystem::exists(dir)){
-        std::cout << "[SaveScreen] No save directory yet (resources/save)." << std::endl;
-        return;
-    }
-    for(auto& p : std::filesystem::directory_iterator(dir)){
-        if(p.is_regular_file() && p.path().extension() == ".json"){
-            SaveEntry e;
-            e.path = p.path().string();
-            e.name = p.path().stem().string();
-            std::error_code ec; e.time = std::filesystem::last_write_time(p, ec);
-            saves.push_back(std::move(e));
-        }
-    }
-    std::sort(saves.begin(), saves.end(), [](const SaveEntry& a, const SaveEntry& b){return a.time > b.time;});
-}
+// void SaveScreen::ScanSaves(){
+//     saves.clear();
+//     std::filesystem::path dir = "resources/save";
+//     if(!std::filesystem::exists(dir)){
+//         std::cout << "[SaveScreen] No save directory yet (resources/save)." << std::endl;
+//         return;
+//     }
+//     for(auto& p : std::filesystem::directory_iterator(dir)){
+//         if(p.is_regular_file() && p.path().extension() == ".json"){
+//             SaveEntry e;
+//             e.path = p.path().string();
+//             e.name = p.path().stem().string();
+//             std::error_code ec; e.time = std::filesystem::last_write_time(p, ec);
+//             saves.push_back(std::move(e));
+//         }
+//     }
+//     std::sort(saves.begin(), saves.end(), [](const SaveEntry& a, const SaveEntry& b){return a.time > b.time;});
+// }
 
 void SaveScreen::Update(){
     backButton.Update();
