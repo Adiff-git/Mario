@@ -12,5 +12,4 @@ enum class BossState{
     DIE // Trạng thái chết
 };
 
-//debug
 string BossStateToString(BossState state);
