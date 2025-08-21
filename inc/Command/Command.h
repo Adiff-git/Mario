@@ -1,7 +1,6 @@
 #pragma once
 #include "raylib.h"
 
-// Base Command interface
 class Command {
 public:
     virtual ~Command() = default;
