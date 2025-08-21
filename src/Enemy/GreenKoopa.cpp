@@ -148,4 +148,4 @@ void GreenKoopa::UpdateStateAndPhysic() {
         textureIndex = 0;
         updateCount = 0;
     }
-}//aaahskafh
+}//aaahsk
