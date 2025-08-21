@@ -102,50 +102,50 @@ void MediatorCollision::HandleFireballWithTile(Fireball *&fireball, Tile *&tile,
     }
 }
 
-// void MediatorCollision::HandleFireballWithBlock(Fireball *&fireball, Block *&block, CollisionType AtoB)
-// {
-//     if (AtoB == COLLISION_TYPE_NONE)
-//         return;
-//     switch (AtoB)
-//     {
-//     case COLLISION_TYPE_SOUTH:
-//     {
-//         fireball->SetPos(Vector2{fireball->GetPos().x, block->GetPos().y - fireball->GetSize().y});
-//         fireball->SetVel(Vector2{fireball->GetVel().x, -500});
-//         break;
-//     }
-//     case COLLISION_TYPE_NORTH:
-//     {
-//         fireball->SetPos(Vector2{fireball->GetPos().x, block->GetPos().y + block->GetSize().y});
-//         fireball->SetVel(Vector2{fireball->GetVel().x, 0});
-//         break;
-//     }
-//     case COLLISION_TYPE_EAST:
-//     {
-//         fireball->SetPos(Vector2{block->GetPos().x - fireball->GetSize().x, fireball->GetPos().y});
-//         fireball->SetVel(Vector2{-fireball->GetVel().x, fireball->GetVel().y});
-//         if (fireball->GetCurrFrame() == 0)
-//         {
-//             fireball->setCurrFrame(3);
-//         }
-//         else
-//             fireball->setCurrFrame(fireball->GetCurrFrame() - 1);
-//         break;
-//     }
-//     case COLLISION_TYPE_WEST:
-//     {
-//         fireball->SetPos(Vector2{block->GetPos().x + fireball->GetSize().x, fireball->GetPos().y});
-//         fireball->SetVel(Vector2{-fireball->GetVel().x, fireball->GetVel().y});
-//         if (fireball->GetCurrFrame() == 0)
-//         {
-//             fireball->setCurrFrame(3);
-//         }
-//         else
-//             fireball->setCurrFrame(fireball->GetCurrFrame() - 1);
-//         break;
-//     }
-//     }
-// }
+void MediatorCollision::HandleFireballWithBlock(Fireball *&fireball, Block *&block, CollisionType AtoB)
+{
+    if (AtoB == COLLISION_TYPE_NONE)
+        return;
+    switch (AtoB)
+    {
+    case COLLISION_TYPE_SOUTH:
+    {
+        fireball->SetPos(Vector2{fireball->GetPos().x, block->GetPos().y - fireball->GetSize().y});
+        fireball->SetVel(Vector2{fireball->GetVel().x, -500});
+        break;
+    }
+    case COLLISION_TYPE_NORTH:
+    {
+        fireball->SetPos(Vector2{fireball->GetPos().x, block->GetPos().y + block->GetSize().y});
+        fireball->SetVel(Vector2{fireball->GetVel().x, 0});
+        break;
+    }
+    case COLLISION_TYPE_EAST:
+    {
+        fireball->SetPos(Vector2{block->GetPos().x - fireball->GetSize().x, fireball->GetPos().y});
+        fireball->SetVel(Vector2{-fireball->GetVel().x, fireball->GetVel().y});
+        if (fireball->GetCurrFrame() == 0)
+        {
+            fireball->setCurrFrame(3);
+        }
+        else
+            fireball->setCurrFrame(fireball->GetCurrFrame() - 1);
+        break;
+    }
+    case COLLISION_TYPE_WEST:
+    {
+        fireball->SetPos(Vector2{block->GetPos().x + fireball->GetSize().x, fireball->GetPos().y});
+        fireball->SetVel(Vector2{-fireball->GetVel().x, fireball->GetVel().y});
+        if (fireball->GetCurrFrame() == 0)
+        {
+            fireball->setCurrFrame(3);
+        }
+        else
+            fireball->setCurrFrame(fireball->GetCurrFrame() - 1);
+        break;
+    }
+    }
+}
 
 void MediatorCollision::HandleItemWithTile(Item *&item, Tile *&tile, CollisionType AtoB)
 {
