@@ -6,7 +6,7 @@ class Command {
 public:
     virtual ~Command() = default;
     virtual void execute() = 0;
-    virtual bool canExecute() = 0; // Kiểm tra điều kiện có thể thực thi
+    virtual bool canExecute() = 0; 
 };
 
 // Null Object Pattern cho trường hợp không có command
