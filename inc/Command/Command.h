@@ -11,6 +11,8 @@ public:
 
 
 
+
+
 // Null Object Pattern cho trường hợp không có command
 class NullCommand : public Command {
 public:
