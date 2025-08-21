@@ -21,7 +21,7 @@ void GreenKoopa::EnterShell() {
         // Reset vận tốc để tránh “bắn” đi
         SetVel(Vector2{0, 0});
 
-        sprite = &ResrcManager::GetInstance().getTexture("SHELL_4");
+        sprite = &ResrcManager::GetInstance().getTexture("SHELL_0");
 
         // Thu nhỏ và dời Y theo chênh lệch chiều cao (pos là tâm)
         const float newH = 32.0f;
@@ -30,7 +30,7 @@ void GreenKoopa::EnterShell() {
         const float dy = (oldH - newH) * 0.5f; // bỏ +3 để tránh chui nền/đội nền
         SetPos(Vector2{GetPos().x, GetPos().y + dy});
 
-        textureIndex = 4;
+        textureIndex = 0;
         isMoving = false;
         std::cout << "[DEBUG] GreenKoopa entered shell, state: " << state << ", vel.x: " << GetVel().x << ", pos.y: " << GetPos().y << ", hitCount: " << hitCount << ", isMoving: " << isMoving << std::endl;
     }
@@ -40,8 +40,8 @@ void GreenKoopa::EnterShellWithVelocity(float velX) {
     if (AdditionalState == OBJECT_STATE_SHELL && !isMoving) {
         // velX theo px/s
         SetVel(Vector2{velX, 0});
-        sprite = &ResrcManager::GetInstance().getTexture("SHELL_4");
-        textureIndex = 4;
+        sprite = &ResrcManager::GetInstance().getTexture("SHELL_0");
+        textureIndex = 0;
         isMoving = true;
         std::cout << "[DEBUG] GreenKoopa shell moving, vel.x: " << GetVel().x << ", hitCount: " << hitCount << ", isMoving: " << isMoving << std::endl;
     }
@@ -71,7 +71,7 @@ void GreenKoopa::UpdateStateAndPhysic() {
             updateCount++;
             const int updateThreshold = 10;
             if (updateCount >= updateThreshold) {
-                textureIndex = 4 + ((textureIndex + 1 - 4) % 4); // Chuyển đổi giữa 4, 5, 6, 7
+                textureIndex = 0 + ((textureIndex + 1 - 0) % 4); // Chuyển đổi giữa 0, 1, 2, 3
                 std::string textureName = "SHELL_" + std::to_string(textureIndex);
                 sprite = &ResrcManager::GetInstance().getTexture(textureName);
                 updateCount = 0;
@@ -82,9 +82,9 @@ void GreenKoopa::UpdateStateAndPhysic() {
             SetPos(newPos);
             std::cout << "[DEBUG] Shell di chuyển, pos.x: " << newPos.x << ", vel.x: " << GetVel().x << ", isMoving: " << isMoving << std::endl;
         } else {
-            sprite = &ResrcManager::GetInstance().getTexture("SHELL_4");
+            sprite = &ResrcManager::GetInstance().getTexture("SHELL_0");
             SetVel(Vector2{0, GetVel().y});
-            textureIndex = 4;
+            textureIndex = 0;
         }
 
         if (GetState() != OBJECT_STATE_ON_GROUND) {
@@ -148,4 +148,4 @@ void GreenKoopa::UpdateStateAndPhysic() {
         textureIndex = 0;
         updateCount = 0;
     }
-}
+}// aas
