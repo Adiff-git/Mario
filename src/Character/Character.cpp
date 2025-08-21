@@ -488,10 +488,10 @@ void Character::Draw() {
     }
    
     DrawTexture(*sprite, pos.x, pos.y, WHITE);
-    cpE.Draw();
-    cpW.Draw();
-    cpN.Draw();
-    cpS.Draw();
+    // cpE.Draw();
+    // cpW.Draw();
+    // cpN.Draw();
+    // cpS.Draw();
 
 }
 
