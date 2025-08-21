@@ -13,8 +13,8 @@ private:
     int updateCounter;
     int updateThreshold;
 
-    int minY = pos.y - 30;       // starting (bottom) position
-    int maxY = pos.y - 100; // peak (top) position — adjust as needed
+    int minY = pos.y - 30;       
+    int maxY = pos.y - 100; 
     bool direction = false;
 public:
     JumpingPiranhaPlant(Vector2 pos);
