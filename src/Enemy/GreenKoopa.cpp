@@ -15,22 +15,32 @@ GreenKoopa::GreenKoopa(Vector2 pos)
 }
 
 void GreenKoopa::EnterShell() {
-    if (state != OBJECT_STATE_SHELL) {
-        state = OBJECT_STATE_SHELL;
-        SetVel(Vector2{0, GetVel().y});
+    if (AdditionalState != OBJECT_STATE_SHELL) {
+        AdditionalState = OBJECT_STATE_SHELL;
+        state = OBJECT_STATE_SHELL; // đồng bộ với MediatorCollision
+        // Reset vận tốc để tránh “bắn” đi
+        SetVel(Vector2{0, 0});
+
         sprite = &ResrcManager::GetInstance().getTexture("SHELL_4");
+
+        // Thu nhỏ và dời Y theo chênh lệch chiều cao (pos là tâm)
+        const float newH = 32.0f;
+        const float oldH = GetSize().y; // 48 hiện tại
         SetSize(Vector2{32, 32});
+        const float dy = (oldH - newH) * 0.5f; // bỏ +3 để tránh chui nền/đội nền
+        SetPos(Vector2{GetPos().x, GetPos().y + dy});
+
         textureIndex = 4;
         isMoving = false;
-        std::cout << "[DEBUG] GreenKoopa entered shell, state: " << state << ", vel.x: " << GetVel().x << ", hitCount: " << hitCount << ", isMoving: " << isMoving << std::endl;
+        std::cout << "[DEBUG] GreenKoopa entered shell, state: " << state << ", vel.x: " << GetVel().x << ", pos.y: " << GetPos().y << ", hitCount: " << hitCount << ", isMoving: " << isMoving << std::endl;
     }
 }
 
 void GreenKoopa::EnterShellWithVelocity(float velX) {
-    if (state == OBJECT_STATE_SHELL && !isMoving) {
+    if (AdditionalState == OBJECT_STATE_SHELL && !isMoving) {
+        // velX theo px/s
         SetVel(Vector2{velX, 0});
         sprite = &ResrcManager::GetInstance().getTexture("SHELL_4");
-        SetSize(Vector2{32, 32});
         textureIndex = 4;
         isMoving = true;
         std::cout << "[DEBUG] GreenKoopa shell moving, vel.x: " << GetVel().x << ", hitCount: " << hitCount << ", isMoving: " << isMoving << std::endl;
@@ -41,11 +51,9 @@ void GreenKoopa::OnHit(bool fromLeft) {
     hitCount++;
     if (hitCount == 1) {
         EnterShell();
-        
     } else if (hitCount == 2) {
         float shellSpeed = -150.0f;
         EnterShellWithVelocity(fromLeft ? -shellSpeed : shellSpeed);
-        
     }
 }
 
@@ -59,10 +67,9 @@ void GreenKoopa::UpdateStateAndPhysic() {
 
     const float deltaTime = GetFrameTime();
     if (state == OBJECT_STATE_SHELL) {
-        // Thay đổi texture khi shell di chuyển
         if (isMoving) {
             updateCount++;
-            const int updateThreshold = 10; // Tốc độ animation của shell
+            const int updateThreshold = 10;
             if (updateCount >= updateThreshold) {
                 textureIndex = 4 + ((textureIndex + 1 - 4) % 4); // Chuyển đổi giữa 4, 5, 6, 7
                 std::string textureName = "SHELL_" + std::to_string(textureIndex);
@@ -75,13 +82,11 @@ void GreenKoopa::UpdateStateAndPhysic() {
             SetPos(newPos);
             std::cout << "[DEBUG] Shell di chuyển, pos.x: " << newPos.x << ", vel.x: " << GetVel().x << ", isMoving: " << isMoving << std::endl;
         } else {
-            // Texture tĩnh khi shell không di chuyển
             sprite = &ResrcManager::GetInstance().getTexture("SHELL_4");
             SetVel(Vector2{0, GetVel().y});
             textureIndex = 4;
         }
 
-        // Áp dụng trọng lực nhưng giữ trạng thái OBJECT_STATE_SHELL
         if (GetState() != OBJECT_STATE_ON_GROUND) {
             SetVel(Vector2{GetVel().x, GetVel().y + GameWorld::GetGravity() * deltaTime});
         } else {
@@ -91,9 +96,8 @@ void GreenKoopa::UpdateStateAndPhysic() {
         return;
     }
 
-    // Logic gốc cho trạng thái không phải shell
     if (GetState() != OBJECT_STATE_ON_GROUND) {
-        SetVel(Vector2{GetVel().x, GetVel().y + 9.81f * static_cast<float>(GameClock::GetInstance().FIXED_TIME_STEP)});
+        SetVel(Vector2{GetVel().x, GetVel().y + GameWorld::GetGravity() * static_cast<float>(GameClock::GetInstance().FIXED_TIME_STEP)});
     }
     if (GetState() == OBJECT_STATE_ON_GROUND) {
         float newVelX = GetVel().x;
