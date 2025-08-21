@@ -8,7 +8,7 @@ class Command;
 class Character;
 
 enum class ControlType {
-    ARROWS = 1,    // Mũi tên + Space/Z
+    ARROWS = 1,    
     WASD = 2       
 };
 
