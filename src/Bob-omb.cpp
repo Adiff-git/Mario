@@ -59,3 +59,4 @@ void Bob_omb::UpdateStateAndPhysic() {
         updateCount = 0;
     }
 }
+//hg
