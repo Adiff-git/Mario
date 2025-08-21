@@ -9,7 +9,7 @@ enum class BossState{
     CHASE,      // Đuổi Mario
     ATTACK,     // Tấn công
     SKILL,      // Skill nhảy
-    DIE // Trạng thái chết
+    DIE 
 };
 
 string BossStateToString(BossState state);
