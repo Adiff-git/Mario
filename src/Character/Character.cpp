@@ -653,4 +653,6 @@ void Character::OnJumpKeyReleased() {
     if (state == OBJECT_STATE_JUMPING && vel.y < 0.0f) {
         vel.y += jumpCutImpulse; // ví dụ: +250 => nhảy thấp hơn khi thả sớm
     }
-}//
+}//////gghfdghdfgh
+// 32234
+// charracter.cpp
