@@ -652,9 +652,9 @@ void MediatorCollision::HandleMarioWithEnemy(Character *&mario, Enemy *&enemy, C
     }
 
         JumpingPiranhaPlant *plant = dynamic_cast<JumpingPiranhaPlant *>(enemy);
-        if (plant && AtoB == COLLISION_TYPE_SOUTH) {
+        if ((plant || dynamic_cast<PiranhaPlant *>(enemy)) && AtoB == COLLISION_TYPE_SOUTH) {
             mario->BeHit();
-            return; 
+            return;
         }
 
     RedKoopa *redKoopa = dynamic_cast<RedKoopa *>(enemy);
