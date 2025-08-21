@@ -13,13 +13,5 @@ public:
 class NullCommand : public Command {
 public:
     void execute() override {}
-    bool canExecute() override { return false; }//gdfghdfghdfgh
-
-
-
-   
-
-
-
-
+    bool canExecute() override { return false; }
 };
