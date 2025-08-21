@@ -8,8 +8,6 @@ public:
     virtual void execute() = 0;
     virtual bool canExecute() = 0; 
 };
-
-// Null Object Pattern cho trường hợp không có command
 class NullCommand : public Command {
 public:
     void execute() override {}
