@@ -10,30 +10,33 @@ PiranhaPlant::PiranhaPlant(Vector2 pos)
       animationTimer(0.0f),
       animationInterval(0.2f),
       isMouthOpen(true),
-      originalPos(pos),
+      originalPos({pos.x, pos.y + 32}),   // dịch xuống 32px
       moveTimer(0.0f),
-      moveSpeed(50.0f),      
-      maxHeight(64.0f),      
-      isMovingUp(false),     
+      moveSpeed(50.0f),
+      maxHeight(64.0f),
+      isMovingUp(false),
       isVisible(true)
 {
+    // Spawn ở vị trí cao nhất (cũng đã dịch xuống 32px)
+    this->pos = { pos.x, originalPos.y - maxHeight };
+
     sprite = &ResrcManager::GetInstance().getTexture("PiranhaPlant_MouthOpen");
-    this->pos = pos;
 }
 
 void PiranhaPlant::UpdateStateAndPhysic() {
     UpdateDyingState();
-    
+
     if (state == OBJECT_STATE_DYING || state == OBJECT_STATE_DEAD) {
         UpdateDeathEffect();
         return;
     }
-    
+
     const float deltaTime = 0.016f;
     animationTimer += deltaTime;
     moveTimer += deltaTime;
 
-    const int updateThreshold = 17;  
+    // --- Animation miệng há / đóng ---
+    const int updateThreshold = 17;
     updateCount++;
     if (updateCount >= updateThreshold) {
         isMouthOpen = !isMouthOpen;
@@ -43,34 +46,35 @@ void PiranhaPlant::UpdateStateAndPhysic() {
         updateCount = 0;
     }
 
-    const float cycleDuration = 4.0f;
-    const float moveUpDuration = 1.5f;
-    const float pauseDuration = 1.0f;
+    // --- Chu kỳ chuyển động ---
     const float moveDownDuration = 1.5f;
-    
+    const float pauseDuration    = 1.0f;
+    const float moveUpDuration   = 1.5f;
+    const float cycleDuration    = moveDownDuration + pauseDuration + moveUpDuration;
+
     if (moveTimer >= cycleDuration) {
         moveTimer = 0.0f;
     }
-    
-    if (moveTimer < moveUpDuration) {
-        isMovingUp = true;
-        vel.y = -moveSpeed;
-    } else if (moveTimer < moveUpDuration + pauseDuration) {
-        vel.y = 0;
-    } else {
+
+    // Xuống -> dừng -> lên
+    if (moveTimer < moveDownDuration) {
         isMovingUp = false;
-        vel.y = moveSpeed;
+        vel.y = moveSpeed; // đi xuống
+    } else if (moveTimer < moveDownDuration + pauseDuration) {
+        vel.y = 0;         // dừng lại
+    } else {
+        isMovingUp = true;
+        vel.y = -moveSpeed; // đi lên
     }
-    
+
+    // --- Cập nhật vị trí ---
     pos.x += vel.x * deltaTime;
     pos.y += vel.y * deltaTime;
-    
-    static int debugCounter = 0;
-    debugCounter++;
-    
-    float minY = originalPos.y - maxHeight;
-    float maxY = originalPos.y + maxHeight;
-    
+
+    // --- Giới hạn trên/dưới (đã dịch xuống 32px nhờ originalPos) ---
+    float minY = originalPos.y - maxHeight; // cao nhất
+    float maxY = originalPos.y;             // thấp nhất (gốc pipe + 32)
+
     if (pos.y <= minY) {
         pos.y = minY;
         vel.y = 0;
@@ -82,4 +86,3 @@ void PiranhaPlant::UpdateStateAndPhysic() {
 
     UpdateCollisionProbes();
 }
-
