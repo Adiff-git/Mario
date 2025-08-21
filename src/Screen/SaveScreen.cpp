@@ -45,24 +45,24 @@ void SaveScreen::ScanSaves(){
     std::sort(saves.begin(), saves.end(), [](const SaveEntry& a, const SaveEntry& b){return a.time > b.time;});
 }
 
-void SaveScreen::Update(){
-    backButton.Update();
-    if(backButton.IsPressed()){
-        screenController->ChangeScreen(new MenuScreen(screenController));
-        return;
-    }
-    for(size_t i=0;i<saveButtons.size();++i){
-        saveButtons[i].Update();
-        if(saveButtons[i].IsPressed()){
-            selectedIndex = (int)i;
-            // Launch GameScreen with selected save path
-            if(selectedIndex >=0 && selectedIndex < (int)saves.size()){
-                screenController->ChangeScreen(new GameScreen(screenController, saves[selectedIndex].path));
-                return;
-            }
-        }
-    }
-}
+// void SaveScreen::Update(){
+//     backButton.Update();
+//     if(backButton.IsPressed()){
+//         screenController->ChangeScreen(new MenuScreen(screenController));
+//         return;
+//     }
+//     for(size_t i=0;i<saveButtons.size();++i){
+//         saveButtons[i].Update();
+//         if(saveButtons[i].IsPressed()){
+//             selectedIndex = (int)i;
+//             // Launch GameScreen with selected save path
+//             if(selectedIndex >=0 && selectedIndex < (int)saves.size()){
+//                 screenController->ChangeScreen(new GameScreen(screenController, saves[selectedIndex].path));
+//                 return;
+//             }
+//         }
+//     }
+// }
 
 void SaveScreen::Draw(){
     ClearBackground(RAYWHITE);
