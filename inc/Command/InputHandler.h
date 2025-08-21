@@ -9,7 +9,7 @@ class Character;
 
 enum class ControlType {
     ARROWS = 1,    // Mũi tên + Space/Z
-    WASD = 2       // WASD + Enter/X
+    WASD = 2       
 };
 
 class InputHandler {
