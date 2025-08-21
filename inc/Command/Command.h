@@ -9,6 +9,8 @@ public:
     virtual bool canExecute() = 0; // Kiểm tra điều kiện có thể thực thi
 };
 
+
+
 // Null Object Pattern cho trường hợp không có command
 class NullCommand : public Command {
 public:
@@ -19,7 +21,7 @@ public:
 
    
 
-    
+
 
 
 };
