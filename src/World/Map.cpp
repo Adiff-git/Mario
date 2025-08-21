@@ -375,17 +375,19 @@ void Map :: LoadFromJsonFile(const std::string& filepath){
 
 void Map::Draw()
 {
+    
+    for(auto enemy : enemies) {
+        enemy->Draw();
+    }
     for (auto tile : interactiveTiles) {
         tile->Draw();
     }
-
+    
     for (auto block : blocks) {
         block->Draw();
     }
 
-    for(auto enemy : enemies) {
-        enemy->Draw();
-    }
+    
     for(auto const &item : interactiveItems) {
         item->Draw();
     }
