@@ -147,52 +147,52 @@ void MediatorCollision::HandleFireballWithBlock(Fireball *&fireball, Block *&blo
     }
 }
 
-void MediatorCollision::HandleItemWithTile(Item *&item, Tile *&tile, CollisionType AtoB)
-{
-    if (AtoB == COLLISION_TYPE_NONE)
-        return;
-    switch (AtoB)
-    {
-    case COLLISION_TYPE_SOUTH:
-    {
-        item->SetPos(Vector2{item->GetPos().x, tile->GetPos().y - item->GetSize().y});
-        item->SetVel(Vector2{item->GetVel().x, 0});
-        break;
-    }
-    case COLLISION_TYPE_NORTH:
-    {
-        item->SetPos(Vector2{item->GetPos().x, tile->GetPos().y + tile->GetSize().y});
-        item->SetVel(Vector2{item->GetVel().x, 0});
-        break;
-    }
-    case COLLISION_TYPE_EAST:
-    {
-        item->SetPos(Vector2{tile->GetPos().x - item->GetSize().x, item->GetPos().y});
-        Vector2 vel = item->GetVel();
-        vel.x = -abs(vel.x);
-        item->SetVel(vel);
-        item->SetDirection(DIRECTION_LEFT);
-        if (item->GetCurrFrame() == 0)
-            item->setCurrFrame(3);
-        else
-            item->setCurrFrame(item->GetCurrFrame() - 1);
-        break;
-    }
-    case COLLISION_TYPE_WEST:
-    {
-        item->SetPos(Vector2{tile->GetPos().x + tile->GetSize().x, item->GetPos().y});
-        Vector2 vel = item->GetVel();
-        vel.x = abs(vel.x);
-        item->SetVel(vel);
-        item->SetDirection(DIRECTION_RIGHT);
-        if (item->GetCurrFrame() == 0)
-            item->setCurrFrame(3);
-        else
-            item->setCurrFrame(item->GetCurrFrame() - 1);
-        break;
-    }
-    }
-}
+// void MediatorCollision::HandleItemWithTile(Item *&item, Tile *&tile, CollisionType AtoB)
+// {
+//     if (AtoB == COLLISION_TYPE_NONE)
+//         return;
+//     switch (AtoB)
+//     {
+//     case COLLISION_TYPE_SOUTH:
+//     {
+//         item->SetPos(Vector2{item->GetPos().x, tile->GetPos().y - item->GetSize().y});
+//         item->SetVel(Vector2{item->GetVel().x, 0});
+//         break;
+//     }
+//     case COLLISION_TYPE_NORTH:
+//     {
+//         item->SetPos(Vector2{item->GetPos().x, tile->GetPos().y + tile->GetSize().y});
+//         item->SetVel(Vector2{item->GetVel().x, 0});
+//         break;
+//     }
+//     case COLLISION_TYPE_EAST:
+//     {
+//         item->SetPos(Vector2{tile->GetPos().x - item->GetSize().x, item->GetPos().y});
+//         Vector2 vel = item->GetVel();
+//         vel.x = -abs(vel.x);
+//         item->SetVel(vel);
+//         item->SetDirection(DIRECTION_LEFT);
+//         if (item->GetCurrFrame() == 0)
+//             item->setCurrFrame(3);
+//         else
+//             item->setCurrFrame(item->GetCurrFrame() - 1);
+//         break;
+//     }
+//     case COLLISION_TYPE_WEST:
+//     {
+//         item->SetPos(Vector2{tile->GetPos().x + tile->GetSize().x, item->GetPos().y});
+//         Vector2 vel = item->GetVel();
+//         vel.x = abs(vel.x);
+//         item->SetVel(vel);
+//         item->SetDirection(DIRECTION_RIGHT);
+//         if (item->GetCurrFrame() == 0)
+//             item->setCurrFrame(3);
+//         else
+//             item->setCurrFrame(item->GetCurrFrame() - 1);
+//         break;
+//     }
+//     }
+// }
 
 void MediatorCollision::HandleEnemyWithBlock(Enemy *&enemy, Block *&block, CollisionType AtoB)
 {
