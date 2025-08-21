@@ -64,3 +64,4 @@ void Bob_omb::UpdateStateAndPhysic() {
 //ttydfhg
 //àghsfsahfaf
 //gdghfh
+//dsfdtyuujhghf
