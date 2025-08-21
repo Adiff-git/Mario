@@ -14,10 +14,11 @@ enum GiftType{//đsv
 };
 class Block : public Object {
 
-protected:
+protected://fds
     bool hit;
     BlockType blockType =  BlockType::BLOCK_QUESTION;
 public:
+//
 
     Block();
     Block( Vector2 pos, Vector2 dim, Color color );
