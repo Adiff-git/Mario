@@ -654,3 +654,4 @@ void Character::OnJumpKeyReleased() {
         vel.y += jumpCutImpulse; // ví dụ: +250 => nhảy thấp hơn khi thả sớm
     }
 }//////gghfdghdfgh
+// 32234
