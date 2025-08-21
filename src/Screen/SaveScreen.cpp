@@ -64,14 +64,14 @@ void SaveScreen::Update(){
     }
 }
 
-// void SaveScreen::Draw(){
-//     ClearBackground(RAYWHITE);
-//     DrawText("Select a Saved Map", 200, 80, 40, BLACK);
-//     backButton.Draw();
-//     for(auto& b : saveButtons){
-//         b.Draw();
-//     }
-//     if(saveButtons.empty()){
-//         DrawText("(No saves found)", 200, 160, 24, DARKGRAY);
-//     }
-// }
+void SaveScreen::Draw(){
+    ClearBackground(RAYWHITE);
+    DrawText("Select a Saved Map", 200, 80, 40, BLACK);
+    backButton.Draw();
+    for(auto& b : saveButtons){
+        b.Draw();
+    }
+    if(saveButtons.empty()){
+        DrawText("(No saves found)", 200, 160, 24, DARKGRAY);
+    }
+}
