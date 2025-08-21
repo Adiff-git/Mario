@@ -11,7 +11,7 @@ ResrcManager::~ResrcManager() {
 
 void ResrcManager::loadTextures() {
     
-    {
+    {//
         // SMall Mario textures
         {
         textures["SMALLMARIO_0_RIGHT"] = LoadTexture("resources/images/Object/mario/SmallMario_0.png");
