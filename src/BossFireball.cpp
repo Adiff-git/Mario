@@ -160,7 +160,7 @@ void BossFireball::Draw() {
                        " Angle: " + std::to_string((int)actualAngle) + "°" +
                        " Rot: " + std::to_string((int)rotationAngle) + "°" +
                        " Dist: " + std::to_string((int)distanceLeft);
-    DrawText(debugInfo.c_str(), pos.x - 40, pos.y - 15, 8, YELLOW);
+    // ...existing code...
 }
 
 void BossFireball::UpdateStateAndPhysic() {

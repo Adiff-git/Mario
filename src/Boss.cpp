@@ -168,7 +168,7 @@ float Boss::GetDistanceToMario() const
 {
     Vector2* targetPos = GetTargetPos();
     if (!targetPos) {
-        std::cout << "[DEBUG] Boss::GetDistanceToMario - targetPos is nullptr" << std::endl;
+        // std::cout << "[DEBUG] Boss::GetDistanceToMario - targetPos is nullptr" << std::endl;
         return 999999.0f;
     }
     float bossCenterX = pos.x + size.x / 2, bossCenterY = pos.y + size.y / 2;
@@ -206,7 +206,7 @@ Vector2 Boss::GetPredictedDirectionToMario() const
 Vector2* Boss::GetTargetPos() const
 {
     if (!player1Pos) {
-        std::cout << "[DEBUG] Boss::GetTargetPos - player1Pos is nullptr" << std::endl;
+        // std::cout << "[DEBUG] Boss::GetTargetPos - player1Pos is nullptr" << std::endl;
         return nullptr;
     }
     if (!isMultiplayer || !player2Pos) {
@@ -380,7 +380,7 @@ void Boss::DrawSprite()
         DrawRectangle(pos.x, pos.y, size.x, size.y, rectColor);
         Color textColor = WHITE;
         if (IsBlinking()) { textColor.a = (unsigned char)(255 * blinkingAlpha); }
-        DrawText("BOSS", pos.x + 10, pos.y + 20, 12, textColor);
+        // DrawText("BOSS", pos.x + 10, pos.y + 20, 12, textColor);
     }
 }
 
@@ -401,22 +401,20 @@ void Boss::DrawHealthBar()
 
 void Boss::DrawDebugInfo()
 {
-    std::string stateText = BossStateToString(currentState);
+    // ...existing code...
     std::string frameInfo = "Frame: " + std::to_string(currentFrame);
     if (currentState == BossState::CHASE) { frameInfo += "/" + std::to_string(chaseFrames.size()) + " Chase"; }
     else if (currentState == BossState::PATROL) { frameInfo += "/" + std::to_string(movingFrames.size()) + " Patrol"; }
     float dist = GetDistanceToMario();
-    std::string debugInfo = "Dist: " + std::to_string((int)dist) + " | AtkCnt: " + std::to_string(attackCount) +
-                           " | AtkTimer: " + std::to_string(attackTimer) + " | SkillTimer: " + std::to_string(skillTimer);
+    // std::string debugInfo = "Dist: " + std::to_string((int)dist) + " | AtkCnt: " + std::to_string(attackCount) +
+    //                        " | AtkTimer: " + std::to_string(attackTimer) + " | SkillTimer: " + std::to_string(skillTimer);
     Color textColor = YELLOW, textColor2 = GREEN, textColor3 = WHITE;
     if (IsBlinking()) {
         textColor.a = (unsigned char)(255 * blinkingAlpha);
         textColor2.a = (unsigned char)(255 * blinkingAlpha);
         textColor3.a = (unsigned char)(255 * blinkingAlpha);
     }
-    DrawText(stateText.c_str(), pos.x, pos.y - 60, 12, textColor);
-    DrawText(frameInfo.c_str(), pos.x, pos.y - 45, 10, textColor2);
-    DrawText(debugInfo.c_str(), pos.x, pos.y - 40, 8, textColor3);
+    // ...existing code...
 }
 
 void Boss::FireProjectile(Vector2 direction)
@@ -433,7 +431,7 @@ void Boss::FireProjectile(Vector2 direction)
     Vector2 accurateDirection = GetPredictedDirectionToMario();
     BossFireball *projectile = new BossFireball(projectilePos, accurateDirection, projectileType);
     projectiles.push_back(projectile);
-    std::cout << "[DEBUG] Boss fired projectile at target: (" << GetTargetPos()->x << ", " << GetTargetPos()->y << ")" << std::endl;
+    // std::cout << "[DEBUG] Boss fired projectile at target: (" << GetTargetPos()->x << ", " << GetTargetPos()->y << ")" << std::endl;
 }
 
 void Boss::OnStateEnter(BossState newState)
@@ -468,7 +466,7 @@ void Boss::SetState(BossState newState)
     if (currentState != newState) {
         OnStateEnter(newState);
         currentState = newState;
-        std::cout << "[DEBUG] Boss state changed to: " << static_cast<int>(newState) << std::endl;
+        // std::cout << "[DEBUG] Boss state changed to: " << static_cast<int>(newState) << std::endl;
     }
 }
 
@@ -542,7 +540,7 @@ void Boss::Attack(float dt)
         attackTimer = attackCooldown;
         attackCount++;
         int currentAttackInCycle = (attackCount - 1) % maxAttacks + 1;
-        std::cout << "[DEBUG] Boss fired projectile at target: (" << GetTargetPos()->x << ", " << GetTargetPos()->y << ")" << std::endl;
+        // std::cout << "[DEBUG] Boss fired projectile at target: (" << GetTargetPos()->x << ", " << GetTargetPos()->y << ")" << std::endl;
     }
 }
 
