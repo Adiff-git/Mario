@@ -834,9 +834,11 @@ void ResrcManager::loadSounds(){
 
 void ResrcManager::loadMusics(){
     musics["GAME_OVER"] = LoadMusicStream("resources/musics/gameOver.mp3");
+    musics["GAMEWORLD_0"] = LoadMusicStream("resources/musics/music4.mp3");
     musics["GAMEWORLD_1"] = LoadMusicStream("resources/musics/music1.mp3");
     musics["GAMEWORLD_2"] = LoadMusicStream("resources/musics/music5.mp3");
     musics["GAMEWORLD_3"] = LoadMusicStream("resources/musics/music3.mp3");
+    musics["GAMEWORLD_4"] = LoadMusicStream("resources/musics/music6.mp3");
     musics["MENU"] = LoadMusicStream("resources/musics/title.mp3");
     musics["VICTORY"] = LoadMusicStream("resources/musics/courseClear.mp3");
 
