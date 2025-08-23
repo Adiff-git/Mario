@@ -130,6 +130,8 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
     camera.zoom = 1.0f;
 }
 // anh iu em nhiều lắm
+// và anh sẽ nói cho em nghe là
+
 
 GameWorld::GameWorld(int MapID, GameScreen* gameScreen, bool multiplayer,
                      CharacterType p1Type, CharacterType p2Type, float speedMultiplier) : 
