@@ -38,7 +38,6 @@ class MediatorCollision {
         void HandleEnemyWithBlock(Enemy*& enemy, Block*& block,  CollisionType AtoB);
         void HandleItemWithBlock(Item*& item, Block*& block, CollisionType AtoB);
         void HandleEnemyWithEnemy(Enemy*& enemyA, Enemy*& enemyB, CollisionType AtoB);
-
     public:
         MediatorCollision() = default; // Ensure default constructor exists
         ~MediatorCollision() = default;
