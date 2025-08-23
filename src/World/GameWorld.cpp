@@ -129,6 +129,12 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
     camera.rotation = 0.0f;
     camera.zoom = 1.0f;
 }
+// anh iu em nhiều lắm
+// và anh sẽ nói cho em nghe là
+// bao iu thương say đắm
+// không như gió mây thoáng qua 
+// xe chốt và pháo
+// là những thứ mà em tao săm mình
 
 GameWorld::GameWorld(int MapID, GameScreen* gameScreen, bool multiplayer,
                      CharacterType p1Type, CharacterType p2Type, float speedMultiplier) : 
