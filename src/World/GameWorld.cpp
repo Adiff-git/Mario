@@ -133,6 +133,7 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
 // và anh sẽ nói cho em nghe là
 // bao iu thương say đắm
 // không như gió mây thoáng qua 
+// xe chốt và pháo
 
 GameWorld::GameWorld(int MapID, GameScreen* gameScreen, bool multiplayer,
                      CharacterType p1Type, CharacterType p2Type, float speedMultiplier) : 
