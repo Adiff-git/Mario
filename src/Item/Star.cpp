@@ -33,6 +33,7 @@ void Star::updateMario(Character& mario)
     scoreAlpha = 1.0f;
     scoreScale = 0.5f;
 }//afhgjsjkaf
+//hsfhfjhsfhjfs
 
 void Star::playCollisionSound()
 {
