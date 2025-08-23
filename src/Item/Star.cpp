@@ -30,7 +30,7 @@ void Star::updateMario(Character& mario)
     collected = true;
     scoreDisplayTimer = 1.5f;
     scoreYOffset = 0.0f;
-    scoreAlpha = 1.0f;
+    scoreAlpha = 1.0f;//agfhafjaf
     scoreScale = 0.5f;
 }
 
