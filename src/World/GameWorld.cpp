@@ -131,7 +131,7 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
 }
 // anh iu em nhiều lắm
 // và anh sẽ nói cho em nghe là
-
+// bao iu thương say đắm
 
 GameWorld::GameWorld(int MapID, GameScreen* gameScreen, bool multiplayer,
                      CharacterType p1Type, CharacterType p2Type, float speedMultiplier) : 
