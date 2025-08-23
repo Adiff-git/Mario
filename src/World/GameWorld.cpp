@@ -550,6 +550,11 @@ void GameWorld::UpdateWorld()
             if (tile && item->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
                 mediatorCollision.HandleCollision(item.get(), tile);
         }
+        for (auto const &block : activeBlocks)
+        {
+            if (block && item->checkCollisionType(*block) != COLLISION_TYPE_NONE)
+                mediatorCollision.HandleCollision(item.get(), block);
+        }
     }
 
     // Blocks update (only active)

@@ -4,7 +4,7 @@
 
 Bob_omb::Bob_omb(Vector2 pos) 
     : Enemy(pos, Vector2{32, 32}, Vector2{-20, 0}, BLACK, 0.2f, 0, DIRECTION_LEFT) {
-    sprite = &ResrcManager::GetInstance().getTexture("Bob-omb_0");
+    sprite = &ResrcManager::GetInstance().getTexture("Bob-omb_Right_0");
     
 }
 
