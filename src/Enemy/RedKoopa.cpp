@@ -3,7 +3,7 @@
 #include "../inc/World/GameClock.h"
 
 RedKoopa::RedKoopa(Vector2 pos) 
-    : Enemy(pos, Vector2{32, 48}, Vector2{-5, 0}, RED, 0.2f, 0, DIRECTION_LEFT) {
+    : Enemy(pos, Vector2{32, 48}, Vector2{-20, 0}, RED, 0.2f, 0, DIRECTION_LEFT) {
     sprite = &ResrcManager::GetInstance().getTexture("RedKoopaTroopa_0_LEFT");
     jumpCooldown = 0;
     hitCount = 0;

@@ -4,7 +4,7 @@
 #include <iostream>
 
 GreenKoopa::GreenKoopa(Vector2 pos) 
-    : Enemy(pos, Vector2{32, 48}, Vector2{-5, 0}, GREEN, 0.2f, 0, DIRECTION_LEFT) {
+    : Enemy(pos, Vector2{32, 48}, Vector2{-10, 0}, GREEN, 0.2f, 0, DIRECTION_LEFT) {
     sprite = &ResrcManager::GetInstance().getTexture("GreenKoopaTroopa_0_LEFT");
     jumpCooldown = 0;
     hitCount = 0;

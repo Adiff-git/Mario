@@ -128,6 +128,9 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
     camera.target = player1->GetPos();
     camera.rotation = 0.0f;
     camera.zoom = 1.0f;
+    for (Enemy* enemy : map.GetEnemies()) {
+        enemy->SetVel({enemy->GetVel().x * enemySpeedMultiplier, enemy->GetVel().y}); // Cập nhật vận tốc ban đầu với hệ số nhân
+    }
 }
 
 GameWorld::GameWorld(int MapID, GameScreen* gameScreen, bool multiplayer,
@@ -217,6 +220,9 @@ GameWorld::GameWorld(int MapID, GameScreen* gameScreen, bool multiplayer,
 
     InitializeSpatialIndex();
     RebuildSpatialIndex();
+    for (Enemy* enemy : map.GetEnemies()) {
+        enemy->SetVel({enemy->GetVel().x * enemySpeedMultiplier, enemy->GetVel().y}); // Cập nhật vận tốc ban đầu với hệ số nhân
+    }
 }
 
 GameWorld::GameWorld(int level, GameScreen* gameScreen) 
