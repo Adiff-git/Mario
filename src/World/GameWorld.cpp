@@ -518,6 +518,11 @@ void GameWorld::UpdateWorld()
                 if (tile && enemy->checkCollisionType(*tile) != COLLISION_TYPE_NONE)
                     mediatorCollision.HandleCollision(enemy, tile);
             }
+            for (auto const &block : activeBlocks)
+            {
+                if (block && enemy->checkCollisionType(*block) != COLLISION_TYPE_NONE)
+                    mediatorCollision.HandleCollision(enemy, block);
+            }
         }
     }
     // Enemy vs Enemy collisions
@@ -561,6 +566,7 @@ void GameWorld::UpdateWorld()
     for (auto &block : activeBlocks)
     {
         if (block) block->Update();
+        
     }
 
     
