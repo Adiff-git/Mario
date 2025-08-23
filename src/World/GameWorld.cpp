@@ -129,6 +129,7 @@ GameWorld::GameWorld(int MapID, GameScreen *gameScreen, bool multiplayer,
     camera.rotation = 0.0f;
     camera.zoom = 1.0f;
 }
+// anh iu em nhiều lắm
 
 GameWorld::GameWorld(int MapID, GameScreen* gameScreen, bool multiplayer,
                      CharacterType p1Type, CharacterType p2Type, float speedMultiplier) : 
