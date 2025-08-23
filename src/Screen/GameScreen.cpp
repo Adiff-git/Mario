@@ -852,7 +852,7 @@ void GameScreen::ResetGame()
     // Lưu thông tin trước khi xóa gameWorld
     int currentLives1 = gameWorld->player1->GetLives();
     int currentLives2 = gameWorld->player2 ? gameWorld->player2->GetLives() : 0;
-    if (currentLives1 > 1 || (isMultiplayer && currentLives2 > 0))
+    if (currentLives1 > 1 || (isMultiplayer && currentLives2 > 1))
     {
         gameWorld = std::make_unique<GameWorld>(level, this, isMultiplayer, player1Type, player2Type);
         gameWorld->player1->SetLives(currentLives1 - 1);

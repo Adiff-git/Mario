@@ -643,7 +643,7 @@ void GameWorld::UpdateWorld()
     {
         if (player1Dead && player2Dead)
         {
-            if ((player1 && player1->GetLives() > 0) || (player2 && player2->GetLives() > 0))
+            if ((player1 && player1->GetLives() > 1) || (player2 && player2->GetLives() > 1))
             {
                 gameState = GameState::GAME_RESET;
             }
